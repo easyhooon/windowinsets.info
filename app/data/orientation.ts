@@ -25,7 +25,7 @@ const swapSize = <T extends { width: number; height: number } | null | undefined
 const NOT_MEASURED: Record<NavMode, null> = { gesture: null, threeButton: null };
 
 export type OrientedScreen = Screen & {
-  /** The recorded orientation, or one with its own capture. False: insets are not measured here. */
+  /** The recorded rotation, or one with its own capture (a nav mode may still be missing). */
   orientationMeasured: boolean;
 };
 
@@ -40,17 +40,18 @@ export function orientScreen(screen: Screen, turns: Quarter): OrientedScreen {
   const rotation = quarter((screen.captureRotation ?? 0) + turns);
   const swap = turns % 2 === 1;
   const flipOrientation = screen.captureOrientation === "portrait" ? "landscape" : screen.captureOrientation === "landscape" ? "portrait" : null;
+  const captured = screen.rotations?.[rotation];
   return {
     ...screen,
     captureRotation: rotation,
     captureOrientation: swap ? flipOrientation : screen.captureOrientation,
     resolutionPx: swapSize(screen.resolutionPx, swap),
-    logicalSizeDp: swapSize(screen.logicalSizeDp, swap),
-    logicalSizePx: swapSize(screen.logicalSizePx, swap),
+    logicalSizeDp: captured?.logicalSizeDp ?? swapSize(screen.logicalSizeDp, swap),
+    logicalSizePx: captured?.logicalSizePx ?? swapSize(screen.logicalSizePx, swap),
     cornerRadiiDp: rotateCorners(screen.cornerRadiiDp, turns),
     cornerRadiiPx: rotateCorners(screen.cornerRadiiPx, turns),
-    insets: NOT_MEASURED,
-    orientationMeasured: false,
+    insets: captured?.insets ?? NOT_MEASURED,
+    orientationMeasured: !!captured,
   };
 }
 

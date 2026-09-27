@@ -203,6 +203,8 @@ export function DeviceView({ device }: { device: Device }) {
   const flatTurns = foldable && skins[`${device.slug}/main`] ? 0 : viewQuarter(rotation);
   const screen = orientScreen(baseScreen, flatTurns);
   const measurement = screen.insets[navMode];
+  // A turned flat device without a capture for this rotation and nav mode.
+  const rotationPending = flatTurns !== 0 && !measurement;
   const rtl = getRtlAvailability(device.slug);
   const skin = skins[`${device.slug}/${screen.id}`];
   const safe = measurement ? safeInsets(measurement) : null;
@@ -397,8 +399,8 @@ export function DeviceView({ device }: { device: Device }) {
             <Row label="One UI" value={measurement ? measurement.condition.oneUi : PENDING} />
             <Row label="Android" value={measurement ? measurement.condition.android : PENDING} />
           </dl>
-          <p className="mb-3 text-xs text-muted">{device.name} · {screen.label} · {!screen.orientationMeasured
-            ? `${orientationName(screen)} insets are not measured yet. Size and corners follow the display; insets are never rotated from another orientation.`
+          <p className="mb-3 text-xs text-muted">{device.name} · {screen.label} · {rotationPending
+            ? `${orientationName(screen)} insets are not measured yet${screen.orientationMeasured ? " for this navigation mode" : ""}. Size and corners follow the display; insets are never rotated from another orientation.`
             : measurement ? `Captured ${screen.captureOrientation ?? "orientation unknown"}.${useFold ? " Rotation changes the view, not the recorded Android insets." : ""}` : "Official artwork preview. Android insets have not been measured for this navigation mode."}</p>
           {triFold && <p className="mb-3 text-xs text-muted">Two-hinge animation is illustrative. Partial poses do not represent measured Android window states.</p>}
           {measurement?.condition.note && <p className="mb-3 text-xs text-muted">{measurement.condition.note}</p>}
@@ -440,11 +442,11 @@ export function DeviceView({ device }: { device: Device }) {
             return viewport.current?.effectiveZoom();
           }}
           onTransitionEnd={() => { viewport.current?.refitFold(); if (transitionTarget) { setScreenId(transitionTarget); setTransitionTarget(null); } }} />
-          : <InsetsDiagram screen={screen} measurement={measurement} pendingOrientation={screen.orientationMeasured ? undefined : orientationName(screen)} zoom={zoom} showFrame={showFrame} showRegions={showRegions} showDimensions={showDimensions} units={units} layers={layers} appPreview={appPreview} skin={skin} />}
+          : <InsetsDiagram screen={screen} measurement={measurement} pendingOrientation={rotationPending ? orientationName(screen) : undefined} zoom={zoom} showFrame={showFrame} showRegions={showRegions} showDimensions={showDimensions} units={units} layers={layers} appPreview={appPreview} skin={skin} />}
       </DiagramViewport>
       </div>
       <footer className="canvas-footer">
-      {useFold ? <div className="fold-measurement-notice">{!measurement && <p className="pending-notice">{rtl.previewNotice}</p>}</div> : !screen.orientationMeasured ? <p className="pending-notice">{orientationName(screen)} insets are not measured yet.</p> : !measurement && <p className="pending-notice">{rtl.previewNotice}</p>}
+      {useFold ? <div className="fold-measurement-notice">{!measurement && <p className="pending-notice">{rtl.previewNotice}</p>}</div> : rotationPending ? <p className="pending-notice">{orientationName(screen)} insets are not measured yet.</p> : !measurement && <p className="pending-notice">{rtl.previewNotice}</p>}
       {(measurement || screen.cornerRadiiDp || useFold) && <div className="region-legend" aria-label="Region legend">
         {([{ key: "safe", label: "Safe Area", color: "#ade7bc" }, { key: "insets", label: "Insets", color: "#ffdab0" }, { key: "cutout", label: "Display Cutout", color: "#c4a0f1" }, { key: "corners", label: "Corner Radius", color: "#e4a6cc" }] as const).map(item => <button key={item.key} disabled={item.key === "corners" ? !screen.cornerRadiiDp : item.key === "cutout" ? !measurement?.cutoutShape : !measurement} aria-pressed={layers[item.key]} onClick={() => setLayers(v => ({ ...v, [item.key]: !v[item.key] }))}><i style={{ background: item.color }} />{item.label}</button>)}
       </div>}
