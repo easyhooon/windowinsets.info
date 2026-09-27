@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-3ehvin61s5bsg",
+  "deviceModelId": "tangorpro",
+  "deviceName": "Pixel Tablet",
+  "androidApi": 36,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/8103305516082310900",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_00:29:02.103613_vYUV/tangorpro-36-en-portrait/",
+  "note": "Physical portrait gesture capture at 1600x2560. The published API 37 AVD capture is landscape 2560x1600; rounded-corner values are not directly comparable without matching orientation and OS conditions.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "4c2afede6912894eef390900bd49550eb63f0ea4124730b612ef7cb80bb486e2"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "fa07ae5057f96aa5bfbe3a665a471f296a2a4e686e6323696c3e9d666a253d8f"
+    }
+  ]
+}

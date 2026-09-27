@@ -1,0 +1,384 @@
+{
+  "events": [{
+    "sourceScreenId": "0",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 11.102,
+    "endTimeSeconds": 12.824,
+    "executionResult": "SUCCESS",
+    "launch": {
+    }
+  }, {
+    "sequence": 1,
+    "sourceScreenId": "1",
+    "destinationScreenId": "0",
+    "startTimeSeconds": 13.199,
+    "endTimeSeconds": 14.25,
+    "executionResult": "SUCCESS",
+    "isRoboscriptActive": true,
+    "adbCommandEvent": {
+      "command": "am force-stop info.windowinsets.probe"
+    }
+  }, {
+    "sequence": 2,
+    "sourceScreenId": "0",
+    "destinationScreenId": "0",
+    "startTimeSeconds": 15.272,
+    "endTimeSeconds": 15.84,
+    "executionResult": "SUCCESS",
+    "isRoboscriptActive": true,
+    "adbCommandEvent": {
+      "command": "rm -f /sdcard/Android/data/info.windowinsets.probe/files/*.json"
+    }
+  }, {
+    "sequence": 3,
+    "sourceScreenId": "0",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 16.466,
+    "endTimeSeconds": 17.454,
+    "executionResult": "SUCCESS",
+    "isRoboscriptActive": true,
+    "adbCommandEvent": {
+      "command": "am start -W -n info.windowinsets.probe/.MainActivity --es screen phone --ez export true"
+    }
+  }, {
+    "sequence": 4,
+    "sourceScreenId": "1",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 17.85,
+    "endTimeSeconds": 22.927,
+    "executionResult": "SUCCESS",
+    "isRoboscriptActive": true,
+    "wait": {
+      "durationSeconds": 5.0
+    }
+  }, {
+    "sequence": 5,
+    "sourceScreenId": "1",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 23.338,
+    "endTimeSeconds": 23.491,
+    "executionResult": "SUCCESS",
+    "isRoboscriptActive": true,
+    "adbCommandEvent": {
+      "command": "ls /sdcard/Android/data/info.windowinsets.probe/files/*.json"
+    }
+  }, {
+    "startTimeSeconds": 23.491,
+    "endTimeSeconds": 23.491,
+    "roboscriptFinished": {
+      "reason": "ACTION_FAILED"
+    }
+  }, {
+    "sequence": 6,
+    "sourceScreenId": "1",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 23.989,
+    "endTimeSeconds": 27.504,
+    "executionResult": "SUCCESS",
+    "isRoboscriptActive": true,
+    "target": {
+      "type": "SWIPE",
+      "childSequence": "0.0.0.0.7",
+      "targetDetails": {
+        "className": "android.widget.ScrollView",
+        "androidClassName": "android.widget.ScrollView"
+      }
+    }
+  }, {
+    "sequence": 7,
+    "sourceScreenId": "1",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 28.044,
+    "endTimeSeconds": 31.605,
+    "executionResult": "SUCCESS",
+    "target": {
+      "type": "SWIPE",
+      "childSequence": "0.0.0.0.7",
+      "targetDetails": {
+        "className": "android.widget.ScrollView",
+        "androidClassName": "android.widget.ScrollView"
+      }
+    }
+  }, {
+    "sequence": 8,
+    "sourceScreenId": "1",
+    "destinationScreenId": "2",
+    "startTimeSeconds": 32.159,
+    "endTimeSeconds": 33.153,
+    "executionResult": "SUCCESS",
+    "target": {
+      "type": "TAP",
+      "childSequence": "0.0.0.0.5",
+      "targetDetails": {
+        "componentType": "BUTTON",
+        "className": "android.widget.Button",
+        "androidClassName": "android.widget.Button",
+        "textLabel": "Rotate \u0026 measure all orientations"
+      }
+    }
+  }, {
+    "sequence": 9,
+    "sourceScreenId": "2",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 34.27,
+    "endTimeSeconds": 36.791,
+    "executionResult": "SUCCESS",
+    "target": {
+      "type": "TAP",
+      "childSequence": "0.0.0.0.6.1",
+      "targetDetails": {
+        "componentType": "BUTTON",
+        "className": "android.widget.Button",
+        "androidClassName": "android.widget.Button",
+        "textLabel": "Copy JSON"
+      }
+    }
+  }, {
+    "sequence": 10,
+    "sourceScreenId": "1",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 37.395,
+    "endTimeSeconds": 38.809,
+    "executionResult": "SUCCESS",
+    "target": {
+      "type": "TAP",
+      "childSequence": "0.0.0.0.6.1",
+      "targetDetails": {
+        "componentType": "BUTTON",
+        "className": "android.widget.Button",
+        "androidClassName": "android.widget.Button",
+        "textLabel": "Copy JSON"
+      }
+    }
+  }, {
+    "sequence": 11,
+    "sourceScreenId": "1",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 40.171,
+    "endTimeSeconds": 42.118,
+    "executionResult": "SUCCESS",
+    "target": {
+      "type": "TAP",
+      "childSequence": "0.0.0.0.2.0",
+      "targetDetails": {
+        "componentType": "BUTTON",
+        "className": "android.widget.RadioButton",
+        "androidClassName": "android.widget.RadioButton",
+        "textLabel": "Phone"
+      }
+    }
+  }, {
+    "sequence": 12,
+    "sourceScreenId": "1",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 42.77,
+    "endTimeSeconds": 44.171,
+    "executionResult": "SUCCESS",
+    "target": {
+      "type": "TAP",
+      "childSequence": "0.0.0.0.2.1",
+      "targetDetails": {
+        "componentType": "BUTTON",
+        "className": "android.widget.RadioButton",
+        "androidClassName": "android.widget.RadioButton",
+        "textLabel": "Cover"
+      }
+    }
+  }, {
+    "sequence": 13,
+    "sourceScreenId": "1",
+    "destinationScreenId": "0",
+    "startTimeSeconds": 44.717,
+    "endTimeSeconds": 46.072,
+    "executionResult": "SUCCESS",
+    "target": {
+      "type": "TAP",
+      "childSequence": "0.0.0.0.0.1",
+      "targetDetails": {
+        "componentType": "BUTTON",
+        "className": "android.widget.Button",
+        "androidClassName": "android.widget.Button",
+        "textLabel": "×",
+        "contentDescription": "Close InsetsProbe"
+      }
+    }
+  }, {
+    "sequence": 14,
+    "sourceScreenId": "0",
+    "destinationScreenId": "0",
+    "startTimeSeconds": 47.123,
+    "endTimeSeconds": 61.173,
+    "executionResult": "SUCCESS",
+    "wait": {
+      "durationSeconds": 10.0
+    }
+  }, {
+    "sequence": 19,
+    "sourceScreenId": "0",
+    "destinationScreenId": "3",
+    "startTimeSeconds": 62.096,
+    "endTimeSeconds": 63.358,
+    "executionResult": "SUCCESS",
+    "system": {
+      "type": "BACK"
+    }
+  }, {
+    "sequence": 20,
+    "sourceScreenId": "3",
+    "destinationScreenId": "3",
+    "startTimeSeconds": 64.631,
+    "endTimeSeconds": 66.851,
+    "executionResult": "SUCCESS",
+    "system": {
+      "type": "HOME"
+    }
+  }, {
+    "sequence": 21,
+    "sourceScreenId": "3",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 68.186,
+    "endTimeSeconds": 68.91,
+    "executionResult": "SUCCESS",
+    "launch": {
+    }
+  }, {
+    "sequence": 22,
+    "sourceScreenId": "1",
+    "destinationScreenId": "4",
+    "startTimeSeconds": 69.418,
+    "endTimeSeconds": 70.831,
+    "executionResult": "SUCCESS",
+    "target": {
+      "type": "TAP",
+      "childSequence": "0.0.0.0.6.3",
+      "targetDetails": {
+        "componentType": "BUTTON",
+        "className": "android.widget.Button",
+        "androidClassName": "android.widget.Button",
+        "textLabel": "Share"
+      }
+    }
+  }, {
+    "sequence": 23,
+    "sourceScreenId": "4",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 71.611,
+    "endTimeSeconds": 72.295,
+    "executionResult": "SUCCESS",
+    "system": {
+      "type": "BACK"
+    }
+  }, {
+    "sequence": 24,
+    "sourceScreenId": "1",
+    "destinationScreenId": "5",
+    "startTimeSeconds": 72.731,
+    "endTimeSeconds": 74.098,
+    "executionResult": "SUCCESS",
+    "target": {
+      "type": "TAP",
+      "childSequence": "0.0.0.0.4",
+      "targetDetails": {
+        "componentType": "BUTTON",
+        "className": "android.widget.Button",
+        "androidClassName": "android.widget.Button",
+        "textLabel": "Display / navigation settings"
+      }
+    }
+  }, {
+    "startTimeSeconds": 74.098,
+    "endTimeSeconds": 74.098,
+    "roboscriptFinished": {
+      "reason": "END_OF_SCRIPT"
+    }
+  }, {
+    "sequence": 25,
+    "sourceScreenId": "5",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 74.723,
+    "endTimeSeconds": 75.513,
+    "executionResult": "SUCCESS",
+    "isRoboscriptActive": true,
+    "system": {
+      "type": "BACK"
+    }
+  }, {
+    "sequence": 26,
+    "sourceScreenId": "1",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 76.077,
+    "endTimeSeconds": 77.452,
+    "executionResult": "SUCCESS",
+    "target": {
+      "type": "TAP",
+      "childSequence": "0.0.0.0.6.0",
+      "targetDetails": {
+        "componentType": "BUTTON",
+        "className": "android.widget.Button",
+        "androidClassName": "android.widget.Button",
+        "textLabel": "Measure"
+      }
+    }
+  }, {
+    "sequence": 27,
+    "sourceScreenId": "1",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 77.949,
+    "endTimeSeconds": 79.331,
+    "executionResult": "SUCCESS",
+    "target": {
+      "type": "TAP",
+      "childSequence": "0.0.0.0.6.2",
+      "targetDetails": {
+        "componentType": "BUTTON",
+        "className": "android.widget.Button",
+        "androidClassName": "android.widget.Button",
+        "textLabel": "Upload"
+      }
+    }
+  }, {
+    "sequence": 28,
+    "sourceScreenId": "1",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 79.909,
+    "endTimeSeconds": 80.852,
+    "executionResult": "SUCCESS",
+    "target": {
+      "type": "TAP",
+      "childSequence": "0.0.0.0.2.2",
+      "targetDetails": {
+        "componentType": "BUTTON",
+        "className": "android.widget.RadioButton",
+        "androidClassName": "android.widget.RadioButton",
+        "textLabel": "Main"
+      }
+    }
+  }, {
+    "sequence": 29,
+    "sourceScreenId": "1",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 81.414,
+    "endTimeSeconds": 82.32,
+    "executionResult": "SUCCESS",
+    "target": {
+      "type": "TAP",
+      "childSequence": "0.0.0.0.5",
+      "targetDetails": {
+        "componentType": "BUTTON",
+        "className": "android.widget.Button",
+        "androidClassName": "android.widget.Button",
+        "textLabel": "Rotate \u0026 measure all orientations"
+      }
+    }
+  }, {
+    "sequence": 30,
+    "sourceScreenId": "1",
+    "destinationScreenId": "3",
+    "startTimeSeconds": 87.978,
+    "endTimeSeconds": 89.2,
+    "executionResult": "SUCCESS",
+    "system": {
+      "type": "BACK"
+    }
+  }]
+}
