@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-3qe6bitme0p6b",
+  "deviceModelId": "panther",
+  "deviceName": "Pixel 7",
+  "androidApi": 33,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/5423514632819986165",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_01:21:48.393279_wMuy/panther-33-en-portrait/",
+  "note": "Physical device, portrait, existing navigation mode; compare with the API 37 emulator with the OS difference noted.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "410a63cda6e9023b7feebeefa1a79bdc992ccce42f1b897ec4b25eced02be0b9"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "bca6bb3fd7a38978c1d3bf31e0fdfaf48c6ef18a68e1c54c7fd92088a7b8157f"
+    }
+  ]
+}

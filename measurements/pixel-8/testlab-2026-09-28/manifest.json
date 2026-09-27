@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-3qe6bitme0p6b",
+  "deviceModelId": "shiba",
+  "deviceName": "Pixel 8",
+  "androidApi": 36,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/5423514632819986165",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_01:21:48.393279_wMuy/shiba-36-en-portrait/",
+  "note": "Physical device, portrait, existing navigation mode; compare with the API 37 emulator with the OS difference noted.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "2a649787c03035699aed0597e56ce51c6d0cc630f6c2a26f733944e7ea0b04f6"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "fbdfcb53df184672d4b989d02a454989b5b8854561f2ca4b2082fda1a58b4f1c"
+    }
+  ]
+}
