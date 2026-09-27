@@ -117,6 +117,25 @@ export const aospSkins: Record<string, DeviceSkin> = {
       "radius": 60
     }
   },
+  "pixel-10-pro-xl/main": {
+    "image": "/skins/pixel-10-pro-xl/main/back.webp",
+    "foreground": "/skins/pixel-10-pro-xl/main/mask.webp",
+    "width": 1472,
+    "height": 3111,
+    "screen": {
+      "x": 60,
+      "y": 55,
+      "width": 1344,
+      "height": 2992
+    },
+    "body": {
+      "x": 0,
+      "y": 0,
+      "width": 1472,
+      "height": 3101,
+      "radius": 225
+    }
+  },
   "pixel-10-pro/main": {
     "image": "/skins/pixel-10-pro/main/back.webp",
     "foreground": "/skins/pixel-10-pro/main/mask.webp",
@@ -229,6 +248,215 @@ export const aospSkins: Record<string, DeviceSkin> = {
       "width": 1224,
       "height": 2570,
       "radius": 225
+    }
+  },
+  "pixel-8-pro/main": {
+    "image": "/skins/pixel-8-pro/main/back.webp",
+    "foreground": "/skins/pixel-8-pro/main/mask.webp",
+    "width": 1469,
+    "height": 3104,
+    "screen": {
+      "x": 58,
+      "y": 58,
+      "width": 1344,
+      "height": 2992
+    },
+    "body": {
+      "x": 0,
+      "y": 0,
+      "width": 1469,
+      "height": 3104,
+      "radius": 150
+    }
+  },
+  "pixel-8/main": {
+    "image": "/skins/pixel-8/main/back.webp",
+    "foreground": "/skins/pixel-8/main/mask.webp",
+    "width": 1187,
+    "height": 2513,
+    "screen": {
+      "x": 49,
+      "y": 55,
+      "width": 1080,
+      "height": 2400
+    },
+    "body": {
+      "x": 0,
+      "y": 0,
+      "width": 1187,
+      "height": 2513,
+      "radius": 161
+    }
+  },
+  "pixel-8a/main": {
+    "image": "/skins/pixel-8a/main/back.webp",
+    "foreground": "/skins/pixel-8a/main/mask.webp",
+    "width": 1198,
+    "height": 2539,
+    "screen": {
+      "x": 57,
+      "y": 57,
+      "width": 1080,
+      "height": 2400
+    },
+    "body": {
+      "x": 0,
+      "y": 0,
+      "width": 1197,
+      "height": 2538,
+      "radius": 106
+    }
+  },
+  "pixel-7-pro/main": {
+    "image": "/skins/pixel-7-pro/main/back.webp",
+    "foreground": "/skins/pixel-7-pro/main/mask.webp",
+    "width": 1547,
+    "height": 3272,
+    "screen": {
+      "x": 48,
+      "y": 66,
+      "width": 1440,
+      "height": 3120
+    },
+    "body": {
+      "x": 0,
+      "y": 1,
+      "width": 1546,
+      "height": 3268,
+      "radius": 127
+    }
+  },
+  "pixel-7/main": {
+    "image": "/skins/pixel-7/main/back.webp",
+    "foreground": "/skins/pixel-7/main/mask.webp",
+    "width": 1200,
+    "height": 2541,
+    "screen": {
+      "x": 59,
+      "y": 58,
+      "width": 1080,
+      "height": 2400
+    },
+    "body": {
+      "x": 1,
+      "y": 1,
+      "width": 1198,
+      "height": 2539,
+      "radius": 104
+    }
+  },
+  "pixel-7a/main": {
+    "image": "/skins/pixel-7a/main/back.webp",
+    "foreground": "/skins/pixel-7a/main/mask.webp",
+    "width": 1226,
+    "height": 2559,
+    "screen": {
+      "x": 69,
+      "y": 69,
+      "width": 1080,
+      "height": 2400
+    },
+    "body": {
+      "x": 0,
+      "y": 0,
+      "width": 1226,
+      "height": 2559,
+      "radius": 87
+    }
+  },
+  "pixel-6-pro/main": {
+    "image": "/skins/pixel-6-pro/main/back.webp",
+    "foreground": "/skins/pixel-6-pro/main/mask.webp",
+    "width": 1527,
+    "height": 3289,
+    "screen": {
+      "x": 41,
+      "y": 72,
+      "width": 1440,
+      "height": 3120
+    },
+    "body": {
+      "x": 0,
+      "y": 0,
+      "width": 1527,
+      "height": 3289,
+      "radius": 97
+    }
+  },
+  "pixel-6/main": {
+    "image": "/skins/pixel-6/main/back.webp",
+    "foreground": "/skins/pixel-6/main/mask.webp",
+    "width": 1209,
+    "height": 2553,
+    "screen": {
+      "x": 60,
+      "y": 69,
+      "width": 1080,
+      "height": 2400
+    },
+    "body": {
+      "x": 0,
+      "y": 0,
+      "width": 1203,
+      "height": 2553,
+      "radius": 76
+    }
+  },
+  "pixel-6a/main": {
+    "image": "/skins/pixel-6a/main/back.webp",
+    "foreground": "/skins/pixel-6a/main/mask.webp",
+    "width": 1207,
+    "height": 2555,
+    "screen": {
+      "x": 57,
+      "y": 69,
+      "width": 1080,
+      "height": 2400
+    },
+    "body": {
+      "x": 0,
+      "y": 0,
+      "width": 1202,
+      "height": 2555,
+      "radius": 81
+    }
+  },
+  "pixel-5/main": {
+    "image": "/skins/pixel-5/main/back.webp",
+    "foreground": "/skins/pixel-5/main/mask.webp",
+    "width": 1211,
+    "height": 2474,
+    "screen": {
+      "x": 60,
+      "y": 65,
+      "width": 1080,
+      "height": 2340
+    },
+    "body": {
+      "x": 1,
+      "y": 0,
+      "width": 1208,
+      "height": 2474,
+      "radius": 234
+    }
+  },
+  "pixel-4a/main": {
+    "image": "/skins/pixel-4a/main/back.webp",
+    "foreground": "/skins/pixel-4a/main/mask.webp",
+    "width": 1204,
+    "height": 2491,
+    "screen": {
+      "x": 62,
+      "y": 68,
+      "width": 1080,
+      "height": 2340
+    },
+    "body": {
+      "x": 1,
+      "y": 2,
+      "width": 1195,
+      "height": 2487,
+      "radius": 138
     }
   },
   "pixel-tablet/main": {

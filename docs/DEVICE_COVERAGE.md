@@ -123,9 +123,10 @@ not real hardware, and stay labelled as such (source kind `emulator`, export
 evidence `emulator`). Skin attribution is in
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-Registered on 2026-09-27 (first checkpoint): Pixel 10 Pro Fold, Pixel 9 Pro
-Fold, Pixel Fold, Pixel 10 Pro, Pixel 10, Pixel 9 Pro XL, Pixel 9 Pro, Pixel 9,
-Pixel 9a and Pixel Tablet. Pending: Pixel 10 Pro XL (incomplete run, recapture
-needed), Pixel 8 Pro, 8, 8a, 7 Pro, 7, 7a, 6 Pro, 6, 6a, 5 and 4a.
+Registered on 2026-09-27: Pixel 10 Pro Fold, Pixel 9 Pro Fold, Pixel Fold,
+Pixel 10 Pro XL, Pixel 10 Pro, Pixel 10, Pixel 9 Pro XL, Pixel 9 Pro, Pixel 9,
+Pixel 9a, Pixel 8 Pro, Pixel 8, Pixel 8a, Pixel 7 Pro, Pixel 7, Pixel 7a,
+Pixel 6 Pro, Pixel 6, Pixel 6a, Pixel 5, Pixel 4a and Pixel Tablet. No
+in-scope models with SDK emulator skins are pending capture.
 `scripts/pixel-devices.json` lists every in-scope model with its Google spec
 source.

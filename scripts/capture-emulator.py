@@ -156,6 +156,19 @@ def assert_keyless(apk: Path) -> None:
         raise SystemExit(f"{apk} carries the upload key; build with -PinsetsProbeUploadKey= and pass --apk")
 
 
+def install_probe(apk: Path) -> None:
+    for attempt in range(3):
+        try:
+            adb("install", "-r", str(apk))
+            return
+        except subprocess.CalledProcessError as error:
+            if "device offline" not in error.stderr.lower() or attempt == 2:
+                raise
+            adb("wait-for-device")
+            wait_until(lambda: adb("shell", "getprop sys.boot_completed", check=False) == "1",
+                       timeout=60, message="boot after offline install")
+
+
 def emulator_provenance() -> dict:
     avd = adb("emu", "avd", "name").splitlines()[0].strip()
     config = {}
@@ -190,7 +203,7 @@ def main() -> None:
     wait_until(lambda: adb("shell", "getprop sys.boot_completed", check=False) == "1", timeout=300, message="boot")
     if not args.no_install:
         assert_keyless(args.apk)
-        adb("install", "-r", str(args.apk))
+        install_probe(args.apk)
     shell(f"rm -rf {EXPORT_DIR}")
     shell(f"mkdir -p {EXPORT_DIR}")
     shell("settings put system screen_off_timeout 2147483647")
