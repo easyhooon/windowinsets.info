@@ -539,6 +539,18 @@ gesture capture is confirmed by secure navigation mode 2,
 inset-only heuristic reports threeButton. The equal gesture and 3-button bottom
 inset matches the One UI 5.1 Tab S7 FE pattern.
 
+### Galaxy Tab A11 — 2026-09-27
+
+InsetsProbe 1.3.0 captured Samsung RTL Galaxy Tab A11 (SM-X135F, Russia),
+Android 16 / One UI 8.0, build `BP2A.250605.031.A3.X135FXXS3BZA3`, landscape at
+rotation 1, 1340×800 px, 213 dpi, font scale 1. Gesture bars are 40/20 px
+(30.05/15.02 dp) and 3-button bars are 40/64 px (30.05/48.08 dp). Neither capture
+reports a display cutout; corner radii are 17 px (12.77 dp). The gesture capture
+is confirmed by secure navigation mode 2, `config_navBarInteractionMode=2` and
+39 px side system-gesture insets; the inset-only heuristic reports threeButton.
+The small gesture bottom inset matches the One UI 8 Tab S10 FE and Tab S10 Lite
+pattern.
+
 ## Galaxy Note20 and Galaxy Tab S9+/S8 series measured on 2026-09-25
 
 Samsung RTL produced paired full-screen Main captures for Galaxy Note20 5G
