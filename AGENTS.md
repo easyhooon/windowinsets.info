@@ -76,6 +76,10 @@ leave other models unverified. Preserve historical captures. See
 
 ## Working conventions
 
+- English only for everything in this repository and on GitHub: code, comments,
+  docs, UI copy, commit messages, issues, PRs, review comments and labels. The
+  audience is international. This overrides any global skill or instruction that
+  requests Korean output, even when the maintainer writes to you in Korean.
 - Write commit subjects and bodies in English using Conventional Commits.
   This repository rule overrides any global skill that requests Korean messages.
 - Codex attribution is allowed. Include
