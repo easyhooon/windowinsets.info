@@ -220,7 +220,17 @@ removes a model from its catalog.
   heuristic reports threeButton. Both modes report 48.08 dp / 64 px bottom
   system bars; preserve the measured values.
 - Fold8 cover and inner were both
-  recaptured from a live reservation in 3-button and gesture modes. Fold7 cover
+  recaptured from a live reservation in 3-button and gesture modes. On
+  2026-09-27, SM-F971N_KR11 on Android 17 / One UI 9.0 supplied rotations 0, 1
+  and 3 for both screens and navigation modes
+  (`measurements/galaxy-z-fold8/recapture-2026-09-27-rotation/`). The inner
+  display's natural rotation is landscape; its rotations 1 and 3 were set with
+  the RTL Rotate control because the Probe's orientation request was ignored.
+  The main Taskbar was off for both modes. Continue apps on cover screen was
+  set to Always before the cover gesture sweep so Probe stayed on the active
+  display when folded. All four natural-rotation inset
+  objects match the earlier published recaptures; the new Probe also recorded
+  the cover cutout path without changing its safe insets or bounds. Fold7 cover
   and inner are also measured in both modes from the same SM-F966U software
   build. On 2026-09-27 InsetsProbe 1.5.0 captured cover and
   inner at rotations 0, 1 and 3 in both modes (`recapture-2026-09-27-rotation/`);

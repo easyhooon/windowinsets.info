@@ -517,7 +517,7 @@ fill them.
 | Galaxy Z Fold7 | SM-F966U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold7/recapture-2026-09-27-rotation/`) | None |
 | Galaxy Z Fold8 Ultra | SM-F976U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/`) | None |
 | Galaxy S23+ | SM-S916U | Main: 3-button rotation 1 and 3; gesture rotation 1 (pilot, captured by hand rotation) | Main gesture rotation 3 |
-| Galaxy Z Fold8 | SM-F971N | Cover: 3-button rotation 1 and 3 (pilot, `_inbox/SM-F971N/2026-09-27T11-55-09-931Z/`, not yet imported) | Cover gesture sweep; inner sweep in both modes |
+| Galaxy Z Fold8 | SM-F971N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold8/recapture-2026-09-27-rotation/`) | None |
 | Galaxy Z Flip8 | SM-F776B | Main: 3-button rotation 1 and 3 (pilot, `_inbox/SM-F776B/2026-09-27T12-08-11-853Z/`, not yet imported) | Main gesture sweep; cover gesture capture. The cover did not rotate, so its other rotations stay pending |
 
 ### Natural rotation only — full sweep needed
