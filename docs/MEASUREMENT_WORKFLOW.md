@@ -525,6 +525,7 @@ fill them.
 | Galaxy Z TriFold | SM-F968N | Cover and inner: natural, rotation 1 and 3 in both modes (`capture-inbox`, not yet imported) | Import and register verified captures |
 | Galaxy Z Flip8 | SM-F776B | Main: natural, rotation 1 and 3 in both modes (`capture-inbox`, not yet imported). Cover: natural in both modes on display 1 at 948×1048 px | Import and register verified captures. Cover rotation 1 and 3 remain pending because this RTL cover did not rotate |
 | Galaxy Z Flip7 | SM-F766N | Main: natural, rotation 1 and 3 in both modes (`capture-inbox`, not yet imported) | Cover sweeps in both modes; import and register verified captures |
+| Galaxy Z Flip6 | SM-F741U | Main: natural, rotation 1 and 3 in both modes (`capture-inbox`, not yet imported) | Import and register verified captures |
 
 ### Natural rotation only — full sweep needed
 
@@ -535,7 +536,7 @@ Note and A.
 | Series | Devices | Screens |
 | --- | --- | --- |
 | Galaxy Z Fold | Fold2 (user device) | Cover + inner |
-| Galaxy Z Flip | Flip7 FE, Flip6, Flip5, Flip4, Flip3, original Z Flip | Main (no cover skin) |
+| Galaxy Z Flip | Flip7 FE, Flip5, Flip4, Flip3, original Z Flip | Main (no cover skin) |
 | Galaxy S | S26 Ultra, S26+, S26, S25 Ultra, S25+ (user device), S25 Edge, S25 FE, S25, S24 Ultra, S24+, S24 FE, S24, S23 Ultra, S23 FE, S23, S22 Ultra, S22+, S22, S21 Ultra, S21+, S21 FE, S21, S20 Ultra, S20 FE | Main |
 | Galaxy Tab | Tab S11 Ultra, S11, S10 Ultra, S10+, S10 FE+, S10 FE, S10 Lite, S9 Ultra, S9+, S9 FE+, S9 FE, S9, S8 Ultra, S8+, S8, S7+, S7 FE, A11, A9+, A7 Lite | Main (natural rotation is landscape on most tablets) |
 | Galaxy Note | Note20 Ultra, Note20 | Main |
