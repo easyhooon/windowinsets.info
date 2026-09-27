@@ -22,9 +22,9 @@ The full write-up lives on the site at [/methodology](https://windowinsets.info/
 
 - **Three source tiers.** Every value is `official` (published by Samsung/Google), `measured` (captured with InsetsProbe on a real device or Samsung Remote Test Lab, raw JSON committed here) or `community` (not yet reproduced). Each source shows the date it was checked.
 - **Insets are measured, not published.** Samsung documents resolution and density, but not status/navigation bar heights, cutouts or corner radii, so I read them from Android itself with [InsetsProbe](tools/insets-probe).
-- **Conditions are part of the data.** Full screen, the recorded capture orientation (phones and cover screens in portrait; most tablets and the Fold8 and TriFold inner displays in landscape), default Display size / Font size / Screen resolution, one navigation mode (gesture or 3-button) per capture, and the One UI + Android version are all recorded. A value is only valid for those conditions.
+- **Conditions are part of the data.** Full screen, the recorded display rotation (natural orientation first: phones and cover screens in portrait; most tablets and the Fold8 and TriFold inner displays in landscape; other rotations as separate captures), default Display size / Font size / Screen resolution, one navigation mode (gesture or 3-button) per capture, and the One UI + Android version are all recorded. A value is only valid for those conditions.
 - **Never estimated.** Nothing is interpolated from another device or derived from resolution alone. Unverified values are `null` and shown as **pending**.
-- **Known limits.** One UI updates can change values; each screen is captured in one orientation, so other rotations and multi-window are not covered yet; a real app may see different insets if it adds its own padding or window flags.
+- **Known limits.** One UI updates can change values; each rotation is its own capture (InsetsProbe's orientation sweep records them), and rotations not captured yet show as not measured rather than being derived; multi-window is not covered yet; a real app may see different insets if it adds its own padding or window flags.
 
 Found a mistake or have a capture that differs from mine? Open an issue or pull request with your InsetsProbe JSON — a reproduction is as valuable as a new device.
 

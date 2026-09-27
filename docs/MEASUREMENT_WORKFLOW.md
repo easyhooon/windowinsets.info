@@ -386,34 +386,49 @@ Android's `screenWidthDp`/`screenHeightDp` reflect whatever rotation the app hap
 
 ### Step 3: Capture Measurements
 
-Do not use Measure All. Capture each active display and navigation mode explicitly:
+Do not use Measure All (removed in 1.1.0). Capture each active display and
+navigation mode explicitly; InsetsProbe 1.4.0+ captures every rotation of that
+display in one step:
 
 1. Confirm the physical RTL state and Probe active-window size. On Fold8, the
    WebClient's middle Folded option produced the 1248×1972 cover; Unfolded produced
    the 2448×1848 inner display.
-2. Select the matching Probe radio label and tap **Measure**. Accept the capture
-   only when the toast filename matches the intended screen and actual nav mode.
+2. Select the matching Probe radio label and tap **Rotate & measure all
+   orientations**. The app turns itself to portrait, landscape and reverse
+   landscape, waits for each rotated window to settle and saves one file per
+   rotation; do not rotate the RTL device by hand. Check the summary line: saved
+   file names and any skipped step (a display that did not rotate, or a rotation
+   already recorded). Accept the captures only when the file names match the
+   intended screen and actual nav mode. **Measure** still captures the current
+   rotation only.
 3. Use **Display / navigation settings**, scroll to **Navigation bar**, select
    **Swipe gestures**, then use the left-edge back gesture twice to return to Probe.
-4. Tap **Measure** again and verify the `*-gesture.json` toast.
+4. Run **Rotate & measure all orientations** again and verify the `*-gesture*`
+   file names in the summary.
 5. For foldables, repeat after physically switching the WebClient display. Verify
    resolution after every switch; the label does not change the display.
-6. Optional bar-phone landscape (issue #22): rotate so the side button faces up,
-   which is display rotation 1 (cutout on the left). Capture both navigation
-   modes and store them as `landscape-1-{gesture,threeButton}.json` beside the
-   portrait `main-*` files. Rotation 3 is not collected; leave it unmeasured
-   rather than mirroring rotation 1. (A one-off Galaxy S23+ 3-button check
-   confirmed rotation 3 mirrors rotation 1 there, which is evidence for that
-   unit only, not a license to mirror other models.)
+6. File names (issues #22, #24): the natural rotation keeps `main-*` /
+   `cover-*`; other rotations are saved beside them as
+   `landscape-<rotation>-<nav>.json` on phones (rotation 1 = side button up,
+   cutout on the left; rotation 3 = the reverse) and with a screen prefix on
+   foldables (`cover-landscape-1-gesture.json`, `main-portrait-1-gesture.json`).
+   Keep both rotation 1 and 3: never mirror one into the other. (A one-off Galaxy
+   S23+ 3-button check found rotation 3 mirrors rotation 1 on that unit; #24 decides
+   from pilot devices whether a documented mirroring exception is acceptable.)
+   Earlier landscape captures were taken by rotating the RTL device by hand; they
+   remain valid evidence.
 
 ### Step 4: Export & Commit Data
 
 1. Open WebClient **File Browser** and navigate to
    `Android/data/info.windowinsets.probe/files`.
 2. Hover each JSON row to reveal its download icon. RTL downloads them as
-   `content`, `content (1)`, etc.; do not trust those browser filenames.
-3. Inspect `screen`, `navigation.mode`, `display.currentWindowPx`, model and
-   timestamp inside every download before assigning an evidence path.
+   `content`, `content (1)`, etc.; do not trust those browser filenames. A sweep
+   adds up to three files per navigation mode. (Direct upload from the probe is
+   planned in #28 and would replace this step.)
+3. Inspect `screen`, `navigation.mode`, `display.rotation`,
+   `display.currentWindowPx`, model and timestamp inside every download before
+   assigning an evidence path; the rotation decides the file name.
 4. Preserve superseded raw evidence. If canonical filenames already exist, add a
    dated recapture directory instead of overwriting them.
 5. Register only accepted values, update coverage/workflow docs, then run

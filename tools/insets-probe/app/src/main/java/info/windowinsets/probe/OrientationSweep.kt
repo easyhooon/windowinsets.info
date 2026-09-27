@@ -24,14 +24,16 @@ object OrientationSweep {
     const val TIMEOUT_MS = 6000L
 
     /**
-     * Natural rotation keeps the legacy name (`main-gesture.json`), so existing
-     * captures stay valid. Other rotations get a degree suffix (`main-gesture-rot90.json`).
+     * Natural rotation keeps the legacy name (`main-gesture.json`, `cover-gesture.json`).
+     * Other rotations follow the repository's `landscape-<rotation>` convention (issue #22):
+     * phone `landscape-1-gesture.json`; foldable screens are prefixed, e.g.
+     * `main-portrait-1-gesture.json` for a landscape-natural inner display turned upright.
      * [rotation] is `Display.getRotation()` (Surface.ROTATION_0..3).
      */
-    fun fileName(screen: String, navMode: String, rotation: Int?): String {
-        val base = if (screen == "phone") "main" else screen
-        val suffix = if (rotation == null || rotation == 0) "" else "-rot${rotation * 90}"
-        return "$base-$navMode$suffix.json"
+    fun fileName(screen: String, navMode: String, rotation: Int?, landscape: Boolean): String {
+        if (rotation == null || rotation == 0) return "${if (screen == "phone") "main" else screen}-$navMode.json"
+        val prefix = if (screen == "phone") "" else "$screen-"
+        return "$prefix${if (landscape) "landscape" else "portrait"}-$rotation-$navMode.json"
     }
 
     /** The window has the requested shape. Square windows cannot prove either. */

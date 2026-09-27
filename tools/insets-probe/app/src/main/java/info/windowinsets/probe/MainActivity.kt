@@ -217,7 +217,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
         output.text = lastJson
         val nav = json.getJSONObject("navigation").getString("mode")
         val screen = json.getString("screen")
-        val name = OrientationSweep.fileName(screen, nav, display?.rotation)
+        val name = OrientationSweep.fileName(screen, nav, display?.rotation, bounds.width() > bounds.height())
         val file = File(getExternalFilesDir(null), name).apply { writeText(lastJson) }
         lastJson.lines().chunked(60).forEach { Log.i(TAG, it.joinToString("\n")) }
         return file

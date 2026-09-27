@@ -78,9 +78,11 @@ adb pull /sdcard/Android/data/info.windowinsets.probe/files/
 - Values are always what Android reports in that rotation. A display that does not
   rotate within 6 s (for example a locked cover screen), or that stays at a rotation
   already recorded, is skipped and listed; nothing is derived or relabeled.
-- File names include the display rotation: natural rotation keeps the legacy name
-  (`main-gesture.json`); others get a suffix (`main-gesture-rot90.json`,
-  `main-gesture-rot270.json`). This also applies to a single **Measure**.
+- File names include the display rotation, following the existing `landscape-<rotation>`
+  convention (issue #22): natural rotation keeps the legacy name (`main-gesture.json`);
+  a phone turned sideways saves `landscape-1-gesture.json` / `landscape-3-gesture.json`;
+  foldable screens are prefixed (`cover-landscape-1-gesture.json`,
+  `main-portrait-1-gesture.json`). This also applies to a single **Measure**.
 - Larger buttons (the sweep button is full width) because RTL shows a scaled-down screen.
 - Automation: `adb shell am start -n info.windowinsets.probe/.MainActivity --es screen main --ez sweep true`.
 

@@ -11,11 +11,13 @@ class OrientationSweepTest {
     private val portrait = OrientationSweep.steps[0]
     private val landscape = OrientationSweep.steps[1]
 
-    @Test fun naturalRotationKeepsLegacyFileNames() {
-        assertEquals("main-gesture.json", OrientationSweep.fileName("phone", "gesture", 0))
-        assertEquals("cover-threeButton.json", OrientationSweep.fileName("cover", "threeButton", null))
-        assertEquals("main-gesture-rot90.json", OrientationSweep.fileName("phone", "gesture", 1))
-        assertEquals("main-threeButton-rot270.json", OrientationSweep.fileName("main", "threeButton", 3))
+    @Test fun fileNamesFollowTheLandscapeRotationConvention() {
+        assertEquals("main-gesture.json", OrientationSweep.fileName("phone", "gesture", 0, false))
+        assertEquals("cover-threeButton.json", OrientationSweep.fileName("cover", "threeButton", null, false))
+        assertEquals("landscape-1-gesture.json", OrientationSweep.fileName("phone", "gesture", 1, true))
+        assertEquals("landscape-3-threeButton.json", OrientationSweep.fileName("phone", "threeButton", 3, true))
+        assertEquals("main-portrait-1-gesture.json", OrientationSweep.fileName("main", "gesture", 1, false))
+        assertEquals("cover-landscape-3-gesture.json", OrientationSweep.fileName("cover", "gesture", 3, true))
     }
 
     @Test fun waitsForTheRequestedWindowShape() {
