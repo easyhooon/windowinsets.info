@@ -198,4 +198,4 @@ Models without captures remain static previews with pending insets.
 
 ## Development
 
-See the [reference parity notes](docs/REFERENCE_PARITY.md) for design decisions and implementation details. Official Samsung artwork and layout coordinates are stored in `public/skins/` and `app/data/skins.ts`. Run geometry and asset tests with `node --test tests/rendering.test.mjs`.
+See the [reference parity notes](docs/REFERENCE_PARITY.md) for design decisions and implementation details. Official Samsung artwork and layout coordinates are stored in `public/skins/` and `app/data/skins.ts`; Pixel artwork comes from AOSP emulator skins (Apache 2.0, see [third-party notices](docs/THIRD_PARTY_NOTICES.md)) and `app/data/aospSkins.ts`. Run geometry and asset tests with `node --test tests/rendering.test.mjs`.

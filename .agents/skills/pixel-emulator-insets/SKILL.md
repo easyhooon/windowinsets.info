@@ -51,9 +51,12 @@ Completion criterion: name the AVD, the screens (`main,cover` for foldables,
   (cd tools/insets-probe && ./gradlew :app:assembleDebug -PinsetsProbeUploadKey=)
   ```
 
-  Confirm `BuildConfig.UPLOAD_KEY` is empty. A keyed build uploads a sweep
-  automatically; on 2026-09-27 one emulator landscape capture reached the
-  capture-inbox PR this way.
+  Copy the APK out of the build directory right away and pass that copy with
+  `--apk`; physical-device work rebuilds the same path with the key from
+  `~/.gradle/gradle.properties`. The script refuses an APK containing that key.
+  A keyed build uploads a sweep automatically; on 2026-09-27 one emulator
+  landscape capture reached the capture-inbox PR this way, and a later batch
+  was stopped when a keyed rebuild replaced the APK mid-run.
 - Create the AVD with the newest installed system image and attach its skin:
 
   ```bash
@@ -68,7 +71,7 @@ Completion criterion: name the AVD, the screens (`main,cover` for foldables,
 
 ```bash
 ~/Library/Android/sdk/emulator/emulator -avd wi_<profile> -no-window -no-audio -no-snapshot -no-boot-anim   # background
-python3 scripts/capture-emulator.py --out <scratchpad>/pixel-captures                                       # add --screens phone for bar phones
+python3 scripts/capture-emulator.py --apk <keyless.apk> --out <scratchpad>/pixel-captures                                    # add --screens phone for bar phones
 ```
 
 The script waits for boot, installs the keyless APK, clears the export folder
@@ -123,13 +126,15 @@ rejected evidence.
 
 ## 5. Stage and document
 
-Until the site models emulator provenance (brand, a non-Samsung source kind,
-Apache 2.0 skin attribution), keep captures out of `measurements/` and out of
-the capture inbox. When registering, add a dated `emulator-<date>/` directory
-per device with `manifest.json` beside the raw JSON, never mix it with
-real-device files, and update the Pixel sections of `docs/DEVICE_COVERAGE.md`
-and `docs/MEASUREMENT_WORKFLOW.md`. Skins come from AOSP (Apache 2.0); record
-the source path and licence with the assets.
+Keep emulator captures out of the capture inbox. To register, copy a
+validated run to `measurements/<slug>/emulator-<date>/` (raw JSON beside
+`manifest.json`, never mixed with real-device files) and run
+`python3 scripts/import-emulator-captures.py <slug>`. It validates the files,
+copies the AOSP skin with `source.json` (Apache 2.0) and regenerates the device
+module, `app/data/aospSkins.ts` and `app/data/devices/pixel.ts`. New models need
+an entry in `scripts/pixel-devices.json` with a Google spec source first. Then
+update the registered/pending lists in the Pixel section of
+`docs/DEVICE_COVERAGE.md`.
 
 ## 6. Improve this skill
 
