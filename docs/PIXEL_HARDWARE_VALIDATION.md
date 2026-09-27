@@ -160,12 +160,22 @@ deciding whether to change published values. Both report no display cutout.
 Five physical test runs were used on the Spark plan on 2026-09-28 (Pixel 10
 Pro XL, Pixel 10 Pro Fold, Pixel 9 Pro Fold, Pixel 8 Pro, Pixel Tablet). The
 project has no billing account (`billingEnabled=False`). More physical tests
-must wait for the free daily quota to renew or for a separately approved Blaze
-upgrade. As of 2026-09-28, Blaze includes 30 physical-device test minutes per
-project per day, then charges $5 per device-hour, rounded up to a minute.
-Budget alerts notify but do not cap charges. Do not infer verification for the
-remaining Pixel models or for the unmeasured navigation/rotation/Fold states
-from these spot checks.
+must wait for the free daily quota to renew. The maintainer chose to remain on
+Spark and use up to five physical-device runs on each of the next two quota
+days. Fifteen catalog-listed Pixel models remain after the first five runs, so
+the two additional days cover up to ten of them; a further quota day would be
+needed for the final five. Re-run Pixel 10 Pro XL and compare Pixel Tablet in
+the matching orientation within that budget if they take priority over new
+models. Check the live quota before each batch; do not infer a reset time from
+the local calendar day.
+
+Blaze is not needed for this schedule. As of 2026-09-28, it includes 30
+physical-device test minutes per project per day, then charges $5 per device
+hour, rounded up to a minute. Enabling it requires a linked billing account;
+budget alerts notify but do not cap charges. Issue #35 is a website artwork
+contrast problem and cannot be resolved by either FTL plan. Do not infer
+verification for the remaining Pixel models or for the unmeasured navigation,
+rotation or Fold states from these spot checks.
 
 References: [FTL device catalog](https://firebase.google.com/docs/test-lab/android/available-testing-devices),
 [Robo script commands](https://firebase.google.com/docs/test-lab/android/robo-scripts-reference),
