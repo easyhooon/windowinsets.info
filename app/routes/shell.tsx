@@ -3,7 +3,7 @@ import { NavLink, Outlet, useLocation, useParams } from "react-router";
 import { devices, featuredDevice, REPO_URL } from "../data/devices";
 import { ResizeHandle } from "../components/ResizeHandle";
 import { Icon } from "../components/Icon";
-import { trackDeviceSelection } from "../lib/analytics";
+import { trackDeviceSelection, trackSupportClick } from "../lib/analytics";
 
 type Device = typeof devices[number];
 type Brand = "Galaxy" | "Pixel";
@@ -117,7 +117,9 @@ export default function Shell() {
             <a href={`${REPO_URL}/issues/new/choose`} target="_blank" rel="noreferrer" aria-label="Send feedback or report an issue on GitHub (opens in a new tab)">Send feedback ↗</a>
           </span>
           <p className="sidebar-footer-support">
-            Found this useful? <a href={REPO_URL} target="_blank" rel="noreferrer" aria-label="Star windowinsets.info on GitHub (opens in a new tab)">★ Star it on GitHub</a>
+            <span>Found this useful?</span>
+            <a href={REPO_URL} target="_blank" rel="noreferrer" aria-label="Star windowinsets.info on GitHub (opens in a new tab)">★ Star it on GitHub</a>
+            <a href="https://ko-fi.com/easyhooon" target="_blank" rel="noopener noreferrer" onClick={trackSupportClick} onAuxClick={e => { if (e.button === 1) trackSupportClick(); }} aria-label="Support windowinsets.info on Ko-fi (opens in a new tab)">☕ Support on Ko-fi ↗</a>
           </p>
           <a href="https://safearea.info" target="_blank" rel="noreferrer">Inspired by safearea.info ↗</a>
         </nav>

@@ -58,6 +58,14 @@ export function trackJsonExport(device: Device) {
   window.gtag?.("event", "json_export", deviceParameters(device));
 }
 
+export function trackSupportClick() {
+  if (!ready) return;
+  window.gtag?.("event", "support_click", {
+    support_platform: "ko_fi",
+    link_location: "sidebar_footer",
+  });
+}
+
 export function trackUnitChange(device: Device, unit: "dp" | "px") {
   if (!ready) return;
   window.gtag?.("event", "unit_change", {
