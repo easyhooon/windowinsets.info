@@ -259,6 +259,34 @@ test("screen content and measurement numbers stay upright while the frame turns"
     const wrap = document.querySelector("[data-orientation-turn]")!;
     const content = wrap.querySelector("[data-screen-content]")!;
     const badge = wrap.querySelector("[data-ruler-label]")!;
+    const rulers = wrap.querySelector("[data-measurement-rulers]")!;
+    for (const animation of document.getAnimations()) {
+      animation.pause();
+      animation.currentTime = 150;
+    }
+    const angle = (element: Element) => {
+      const m = new DOMMatrix(getComputedStyle(element).transform);
+      return Math.atan2(m.b, m.a) * 180 / Math.PI;
+    };
+    return { frame: angle(wrap), content: angle(content), badge: angle(badge), rulersOpacity: Number(getComputedStyle(rulers).opacity) };
+  });
+  expect(Math.abs(angles.frame)).toBeGreaterThan(10);
+  expect(Math.abs(angles.frame + angles.content)).toBeLessThan(2);
+  expect(Math.abs(angles.frame + angles.badge)).toBeLessThan(2);
+  expect(angles.rulersOpacity).toBeLessThan(.1);
+  await expect(page.locator(".canvas-panel")).toHaveScreenshot("galaxy-s23-plus-mid-turn-upright.png", { animations: "allow" });
+});
+
+test("screen content and every measurement number stay upright when returning to portrait", async ({ page }) => {
+  await page.goto("/galaxy-s23-plus");
+  await chooseDropdown(page, "Orientation", "Landscape Left");
+  await expect(page.locator("[data-ruler-label]").filter({ hasText: "832" })).toBeVisible();
+  await page.waitForTimeout(350);
+  await chooseDropdown(page, "Orientation", "Portrait");
+  const angles = await page.evaluate(() => {
+    const wrap = document.querySelector("[data-orientation-turn]")!;
+    const content = wrap.querySelector("[data-screen-content]")!;
+    const badges = [...wrap.querySelectorAll("[data-ruler-label]")];
     for (const animation of wrap.getAnimations({ subtree: true })) {
       animation.pause();
       animation.currentTime = 150;
@@ -267,13 +295,13 @@ test("screen content and measurement numbers stay upright while the frame turns"
       const m = new DOMMatrix(getComputedStyle(element).transform);
       return Math.atan2(m.b, m.a) * 180 / Math.PI;
     };
-    return { frame: angle(wrap), content: angle(content), badge: angle(badge) };
+    return { frame: angle(wrap), content: angle(content), badges: badges.map(angle) };
   });
   expect(Math.abs(angles.frame)).toBeGreaterThan(10);
   expect(Math.abs(angles.frame + angles.content)).toBeLessThan(2);
-  expect(Math.abs(angles.frame + angles.badge)).toBeLessThan(2);
-  await page.waitForTimeout(300);
-  await expect(page.locator(".canvas-panel")).toHaveScreenshot("galaxy-s23-plus-mid-turn-upright.png", { animations: "allow" });
+  expect(angles.badges.length).toBeGreaterThan(0);
+  for (const badge of angles.badges) expect(Math.abs(angles.frame + badge)).toBeLessThan(2);
+  await expect(page.locator("[data-ruler-label]").filter({ hasText: "384" })).toBeVisible();
 });
 
 test("Fold7 animation switches from measured cover to measured inner display", async ({ page }) => {

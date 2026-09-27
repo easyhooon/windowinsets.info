@@ -156,6 +156,11 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
         const fit = sideways ? Number(content.dataset.turnScale ?? 1) : 1;
         content.animate([{ transform: `rotate(${deltaDeg}deg) scale(${fit})` }, { transform: "none" }], timing);
       }
+      // The reference briefly clears external annotations while the device turns.
+      wrap.querySelector("[data-measurement-rulers]")?.animate(
+        [{ opacity: 0, offset: 0 }, { opacity: 0, offset: .7 }, { opacity: 1, offset: 1 }],
+        { duration: ROTATION_MS },
+      );
       for (const label of wrap.querySelectorAll<SVGGElement>("[data-ruler-label]")) {
         label.animate([{ transform: `rotate(${deltaDeg}deg)` }, { transform: "none" }], timing);
       }
