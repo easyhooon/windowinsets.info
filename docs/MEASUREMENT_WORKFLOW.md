@@ -524,7 +524,7 @@ fill them.
 | Galaxy Z Fold3 | SM-F926B | Cover and inner: natural, rotation 1 and 3 in both modes (`capture-inbox`, not yet imported) | Import and register verified captures |
 | Galaxy Z TriFold | SM-F968N | Cover and inner: natural, rotation 1 and 3 in both modes (`capture-inbox`, not yet imported) | Import and register verified captures |
 | Galaxy Z Flip8 | SM-F776B | Main: natural, rotation 1 and 3 in both modes (`capture-inbox`, not yet imported). Cover: natural in both modes on display 1 at 948×1048 px | Import and register verified captures. Cover rotation 1 and 3 remain pending because this RTL cover did not rotate |
-| Galaxy Z Flip7 | SM-F766N | Main: natural, rotation 1 and 3 in 3-button mode (`capture-inbox`, not yet imported) | Main gesture sweep and cover sweeps in both modes; import and register verified captures |
+| Galaxy Z Flip7 | SM-F766N | Main: natural, rotation 1 and 3 in both modes (`capture-inbox`, not yet imported) | Cover sweeps in both modes; import and register verified captures |
 
 ### Natural rotation only — full sweep needed
 
