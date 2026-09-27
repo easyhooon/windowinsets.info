@@ -89,6 +89,5 @@ leave other models unverified. Preserve historical captures. See
   requested, and use an explicit `--force-with-lease` to protect remote changes.
 - Check the session service tier once; use Standard, never enable Fast unasked.
 - Batch independent reads and representative validation. Avoid speculative guards.
-- Korean frontend references in work artifacts use `프론트`.
 - Documentation-only changes go directly to the requested branch rather than PR.
 - No new device reservations or measurement claims without actual captures.
