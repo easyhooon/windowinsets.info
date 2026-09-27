@@ -5,9 +5,11 @@ export type NavMode = "gesture" | "threeButton";
 /**
  * official  – published by the manufacturer / Google
  * measured  – measured on a real device or Samsung Remote Test Lab, with a log in /measurements
+ * emulator  – reported by the Android Emulator for a device profile, with a log in /measurements;
+ *             never evidence about the physical device
  * community – submitted by a contributor, not yet independently verified
  */
-export type SourceKind = "official" | "measured" | "community";
+export type SourceKind = "official" | "measured" | "emulator" | "community";
 
 export interface Source {
   kind: SourceKind;
@@ -25,12 +27,29 @@ export interface Insets {
   left: number;
 }
 
+/** The Android Emulator run that produced a capture. */
+export interface EmulatorProvenance {
+  /** Android Studio device profile, e.g. "pixel_9". */
+  deviceProfile: string;
+  /** Emulator skin directory the AVD used. */
+  skin: string;
+  /** SDK system image path. */
+  systemImage: string;
+  buildFingerprint: string;
+  emulatorVersion: string;
+  /** Capture manifest listing every file of the run. */
+  manifestUrl: string;
+}
+
 /** Software conditions an inset measurement is only valid for. */
 export interface MeasurementCondition {
-  oneUi: string;
+  /** Samsung One UI version; absent for other brands. */
+  oneUi?: string;
   android: string;
   /** e.g. "Settings > Display > Navigation bar" defaults */
   note?: string;
+  /** Present only for emulator captures. */
+  emulator?: EmulatorProvenance;
 }
 
 /** The cutout's own bounding rectangle in dp, as reported by
@@ -101,10 +120,12 @@ export interface Screen {
 
 export type FormFactor = "bar" | "tablet" | "foldable-book" | "foldable-flip" | "foldable-trifold";
 
+export type Brand = "Samsung" | "Google";
+
 export interface Device {
   slug: string;
   name: string;
-  brand: "Samsung";
+  brand: Brand;
   series: string;
   formFactor: FormFactor;
   /** Manufacturer dimensions; 3D side silhouette still uses illustrative geometry. */
