@@ -258,10 +258,14 @@ export function DeviceView({ device }: { device: Device }) {
   };
   const recordedSize = baseScreen.logicalSizeDp ?? (skin ? { width: skin.screen.width, height: skin.screen.height } : null);
   const size = screen.logicalSizeDp ?? (skin ? skinDp(skin, screen.captureRotation) : null);
-  const orientationOptions = recordedSize && recordedSize.width > recordedSize.height ? [
+  // Android phones leave 180° out of auto-rotation by default, so apps do not turn
+  // upside down there; tablets and book-style inner displays do (REFERENCE_PARITY.md).
+  const allowsUpsideDown = device.formFactor === "tablet" || device.formFactor === "foldable-book" || device.formFactor === "foldable-trifold";
+  const allOrientationOptions = recordedSize && recordedSize.width > recordedSize.height ? [
     { value: "0", label: "Landscape Left" }, { value: "90", label: "Portrait" },
     { value: "-90", label: "Portrait Upside Down" }, { value: "180", label: "Landscape Right" },
   ] : orientations;
+  const orientationOptions = allowsUpsideDown ? allOrientationOptions : allOrientationOptions.filter(o => o.label !== "Portrait Upside Down");
 
   const diagramWidth = useFold
     ? 700
