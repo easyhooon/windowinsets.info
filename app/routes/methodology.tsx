@@ -133,7 +133,11 @@ export default function Methodology() {
 
       <Section title="4. Conditions a measurement is valid for">
         <ul>
-          <li>Portrait orientation, app in full screen (no split-screen or pop-up window).</li>
+          <li>
+            A recorded display rotation, app in full screen (no split-screen or pop-up window).
+            Each rotation is its own capture; InsetsProbe turns itself through portrait,
+            landscape and reverse landscape.
+          </li>
           <li>
             Default <b>Display size</b>, <b>Font size</b> and, on Samsung, default{" "}
             <b>Screen resolution</b>. Changing them changes pixels and density, so dp values
@@ -170,7 +174,10 @@ export default function Methodology() {
             One UI and Android version.
           </li>
           <li>Each capture comes from a specific unit and firmware, recorded by model number.</li>
-          <li>Landscape and multi-window modes are not covered yet.</li>
+          <li>
+            Rotations without their own capture show as not measured. Insets are never
+            rotated from another orientation. Multi-window modes are not covered yet.
+          </li>
           <li>
             Apps can add their own padding or use different window flags, so a real app may
             see different insets than the raw platform values shown here.

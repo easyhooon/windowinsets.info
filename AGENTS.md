@@ -53,7 +53,7 @@ leave other models unverified. Preserve historical captures. See
 - Skin foregrounds depict physical cameras; DisplayCutout bounds describe an OS
   exclusion rectangle. Do not replace the artwork's camera with the bounds.
 - Orientation never invents WindowInsets. Flat devices show a rotation's insets
-  only from a capture of that rotation (`-rotNN` probe files); otherwise window
+  only from a capture of that rotation (`landscape-<rotation>-*` probe files); otherwise window
   size and corners follow the display geometry and insets read "not measured
   yet". 3D foldables still rotate the recorded view.
 
