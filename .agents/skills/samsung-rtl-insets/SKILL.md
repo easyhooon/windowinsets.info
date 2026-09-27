@@ -98,14 +98,17 @@ of a session: Samsung's published 20-credit daily policy conflicts with a live
 header balance, not the published maximum.
 Prepare the APK and capture checklist before reserving. Prioritize complete,
 settled captures, downloads and validation. Once all required captures are
-uploaded and validated, return the reservation before reserving another device.
-Open the device's quit/return flow in WebClient and confirm that Reservations no
-longer lists the device. The upper-left **Exit** only ends the current test and
-can leave the reservation running while the device restarts. If WebClient offers
+uploaded and validated, use the device tab's **close** control in WebClient,
+confirm the **Exit** dialog, and check Reservations. If WebClient offers
 **Return this device to get back 1 credit(s)**, select it and verify the balance
-increased. The offer, not elapsed time, establishes refund eligibility.
-Reservation removal and balance verification are the final completion criterion
-for each device.
+increased. The visible offer establishes refund eligibility; use the remaining
+time as a deadline, not a reason to retry a missing offer. When
+no return is offered, **Exit** can end the test while the paid reservation
+remains listed until its timer expires. Do not report that reservation as
+returned. Record the balance and reservation state before moving to the next
+device. Once the remaining time is 15 minutes or less, the unused 15-minute
+block is gone: confirm **Exit** and continue with the next target immediately.
+Do not wait for the timer to expire or retry the return flow.
 Validate captures promptly so an offered refund can still be claimed; keep
 collecting while evidence is incomplete. Preserve unresolved captures and their
 limitations. Do not extend or renew automatically. Confirm the
@@ -211,6 +214,8 @@ step to the user.
    the user instead of repeating the same browser call. For a native
    macOS file chooser, press **Cmd+Shift+G**, paste the absolute path to
    `tools/insets-probe/app/build/outputs/apk/debug/app-debug.apk`, and choose Open.
+   On 2026-09-28 the Chrome `filechooser` listener and `setFiles` succeeded for
+   Fold3; use this direct path first, then verify the installed app row appears.
 5. Wait for `InsetsProbe info.windowinsets.probe` to appear. Select the application
    row itself, then click the Start/play control.
 6. Do not enable Remote Debug Bridge or grant Chrome access to other apps/services
