@@ -454,11 +454,14 @@ reports threeButton.
 The 3-button capture is preserved as rejected evidence because both
 `navigationBars` and `systemBars` report a 1 px bottom inset, including when
 ignoring visibility, despite `tappableElement` and mandatory-gesture bottom
-insets of 84 px. It does not provide a settled 3-button system-bar measurement;
-recapture that mode before publishing it. Font scale 1.08 is non-default and is
+insets of 84 px. It does not provide a settled 3-button system-bar measurement.
+The 2026-09-27 recapture on the same build and font scale is registered: 53/84 px
+system bars (48 dp bottom), with Settings, configuration and InsetsProbe all
+reporting 3-button mode. Font scale 1.08 is non-default and is
 recorded as captured; recapture at 1.0 if a normalized baseline is needed.
 
 Accepted raw file: `measurements/galaxy-tab-s9-fe/main-gesture.json`.
+Accepted 3-button recapture: `measurements/galaxy-tab-s9-fe/recapture-2026-09-27/main-threeButton.json`.
 Rejected raw file: `measurements/galaxy-tab-s9-fe/rejected-2026-09-25/main-threeButton.json`.
 
 

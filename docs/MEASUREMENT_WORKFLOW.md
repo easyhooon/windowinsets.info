@@ -31,7 +31,9 @@ the registered A13 5G skin's 720×1600 display. Raw capture files remain unchang
 For four tablets, Settings and configuration plus side system-gesture insets
 confirm gesture mode even when InsetsProbe's inset-only heuristic reports
 threeButton. Galaxy A37's accepted 3-button recapture has a 135 px bottom bar;
-its initial 1 px attempt remains rejected evidence. See
+its initial 1 px attempt remains rejected evidence. Galaxy Tab S9 FE had the
+same 1 px failure; its 2026-09-27 recapture supplies an 84 px (48 dp) 3-button
+bar at the same font scale. See
 [RTL_COVERAGE.md](RTL_COVERAGE.md) for per-model details and variant evidence.
 
 ## Correction from official skins (2026-09-22)
