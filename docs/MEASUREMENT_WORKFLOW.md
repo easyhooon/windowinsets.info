@@ -69,10 +69,12 @@ Consequences:
 
 - The site offers **Portrait Upside Down** only for tablets (`DeviceView.tsx`,
   documented in `REFERENCE_PARITY.md`).
-- The probe sweep still ends with reverse portrait. It only produces a file where the
-  display actually turns (tablets); elsewhere the step is skipped after the timeout.
-  An app may be able to force 180° on a phone, but that is not what apps see through
-  auto-rotation, so such captures are kept as evidence and not published.
+- In InsetsProbe, select **Tablet: include upside-down portrait** for Galaxy Tab
+  sweeps. This adds a reverse-portrait request after the standard three steps.
+  Verify four distinct `display.rotation` values in each navigation mode; the
+  number for reverse portrait depends on the display's natural orientation.
+  Leave this option off on phones and foldables. An app may be able to force
+  180° on a phone, but that is not what ordinary auto-rotation offers.
 - Where it does apply, reverse portrait is its own capture: the cutout moves to the
   bottom edge (an earlier Flip5 rotation-2 capture had a bottom inset of 139 px
   versus 45 px in portrait).
@@ -510,10 +512,12 @@ display in one step:
 
 ## Device Status & Progress
 
-Rotation requirement (2026-09-27, issues #22/#24): a screen is complete only when
-both navigation modes have separate captures at the natural rotation and at
-rotations 1 and 3, usually six files per screen from **Rotate & measure all
-orientations**. Natural-rotation captures stay published and valid. Devices
+Rotation requirement (2026-09-27, issues #22/#24): a phone or foldable screen
+needs natural, rotation 1 and rotation 3 captures in both navigation modes,
+usually six files per screen. A Galaxy Tab needs four distinct rotations per
+mode, including reverse portrait, usually eight files per screen. Use the
+probe's tablet option and check each capture's actual `display.rotation` and
+window orientation. Natural-rotation captures stay published and valid. Devices
 that only have those captures need the full sweep again on the same screens.
 Missing rotations stay pending; never mirror or rotate existing captures to
 fill them.
@@ -540,7 +544,7 @@ Note and A.
 | Galaxy Z Flip | Flip7 | Cover + main |
 | Galaxy Z Flip | Flip7 FE, Flip6, Flip5, Flip4, Flip3, original Z Flip | Main (no cover skin) |
 | Galaxy S | S26 Ultra, S26+, S26, S25 Ultra, S25+ (user device), S25 Edge, S25 FE, S25, S24 Ultra, S24+, S24 FE, S24, S23 Ultra, S23 FE, S23, S22 Ultra, S22+, S22, S21 Ultra, S21+, S21 FE, S21, S20 Ultra, S20 FE | Main |
-| Galaxy Tab | Tab S11 Ultra, S11, S10 Ultra, S10+, S10 FE+, S10 FE, S10 Lite, S9 Ultra, S9+, S9 FE+, S9 FE, S9, S8 Ultra, S8+, S8, S7+, S7 FE, A11, A9+, A7 Lite | Main (natural rotation is landscape on most tablets) |
+| Galaxy Tab | Tab S11 Ultra, S11, S10 Ultra, S10+, S10 FE+, S10 FE, S10 Lite, S9 Ultra, S9+, S9 FE+, S9 FE, S9, S8 Ultra, S8+, S8, S7+, S7 FE, A11, A9+, A7 Lite | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
 | Galaxy Note | Note20 Ultra, Note20 | Main |
 | Galaxy A | A73, A57, A56, A55, A53, A52s, A37, A36, A35, A34, A33, A32 5G, A32, A27, A25, A24, A23, A17, A16, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
 

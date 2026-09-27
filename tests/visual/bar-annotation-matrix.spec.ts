@@ -11,11 +11,16 @@ for (const slug of ['galaxy-s25-plus', 'galaxy-s25-ultra']) {
   for(const nav of ['3-button','Gesture']) {
    await choose('Navigation',nav);
    for(const unit of ['dp','px']) {
+    await choose('Orientation','Portrait');
     await page.getByRole('button',{name:'View settings'}).click();
     await page.getByRole('radio',{name:unit,exact:true}).click();
     await page.getByRole('button',{name:'View settings'}).click();
-    for(const orientation of ['Portrait','Landscape Left','Landscape Right','Portrait Upside Down']) {
+    for(const orientation of ['Portrait','Landscape Left','Landscape Right']) {
      await choose('Orientation',orientation);
+     if (orientation !== 'Portrait') {
+      await expect(page.locator('.canvas-footer .pending-notice')).toContainText('insets are not measured yet.');
+      continue;
+     }
      await expect(page.locator('[aria-label="Measurement rulers"] [role="button"]').first()).toBeVisible();
      await expect.poll(()=>page.evaluate(()=>{
       const viewport=document.querySelector('#device-canvas')!.getBoundingClientRect();
