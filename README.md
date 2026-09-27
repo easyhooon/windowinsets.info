@@ -4,6 +4,8 @@ Window insets, display cutouts, corner radii and foldable hinge states for Samsu
 
 Its interface is inspired by [safearea.info](https://safearea.info), adapted for Android data and foldables.
 
+> ☕ **Found this useful?** [Support the project on Ko-fi](https://ko-fi.com/easyhooon) to help keep the site and device measurements going.
+
 ## Fold it. Measure it.
 
 Explore Galaxy Fold, Flip and TriFold hinge states in **real-time 3D, built with Three.js and WebGL**. Rigid housings and articulated hinges show the folded depth, while official Samsung display artwork and exterior SVG rulers follow the fold.

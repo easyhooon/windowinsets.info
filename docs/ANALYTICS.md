@@ -23,11 +23,11 @@ Without that ID the site works normally and analytics remains disabled.
 4. In Admin → Custom definitions, create **event-scoped** custom dimensions
    for `device_slug`, `device_name`, `device_series`, `form_factor`,
    `view_source`, `selection_source`, `dimension_unit`, `fold_pose`, and
-   `control_source`. Register these before collecting
-   production data; reports can take 24–48 hours to populate.
+   `control_source`, `support_platform`, and `link_location`. Register these
+   before collecting production data; reports can take 24–48 hours to populate.
 5. Open the production site and select a model. Check Realtime for `page_view`,
    `device_view`, `device_select`, `json_export`, `unit_change`, and
-   `fold_pose_change`. In browser Network, filter `collect`
+   `fold_pose_change`, and `support_click`. In browser Network, filter `collect`
    and inspect `en` and `ep.*`. Ad blockers can prevent collection.
 
 ## Event contract
@@ -40,6 +40,7 @@ Without that ID the site works normally and analytics remains disabled.
 | `json_export` | Export JSON click after the browser download action returns without error | Device parameters; does not confirm the file was saved to disk |
 | `unit_change` | User changes the Metrics dimension unit | Device parameters plus `dimension_unit=dp` or `px`; automatic fallback to dp is excluded |
 | `fold_pose_change` | User changes a foldable's display tab or pose menu, or finishes a hinge-slider adjustment | Device parameters plus `fold_pose=closed`, `partially_open`, or `open`, and `control_source=display_tab`, `pose_menu`, or `hinge_slider`; unchanged selections are excluded |
+| `support_click` | User activates the Ko-fi link in the sidebar footer | `support_platform=ko_fi`, `link_location=sidebar_footer`; counts an outbound click, not a completed donation |
 
 `form_factor` is the **viewed model's** category: `bar`, `foldable-book`,
 `foldable-flip`, `foldable-trifold`, or `tablet`. It is not the visitor's hardware.
@@ -67,6 +68,9 @@ every intermediate angle. No precise hinge angle is sent.
 - **Feature use:** Filter Event name by `json_export`, `unit_change`, or
   `fold_pose_change`. Break down unit changes by `dimension_unit` and pose
   changes by `fold_pose` or `control_source`; these are actions, not unique users.
+- **Support interest:** Filter Event name to `support_click`. This counts link
+  activations on the site; Ko-fi handles donation completion separately. The
+  README link is outside site analytics.
 
 ## Collection scope
 
