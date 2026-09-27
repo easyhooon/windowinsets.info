@@ -1,6 +1,6 @@
 # windowinsets.info
 
-Window insets, display cutouts, corner radii and foldable hinge states for Samsung Galaxy and Google Pixel devices. Every number has a source.
+Window insets, display cutouts, corner radii and foldable hinge states for Samsung Galaxy and Google Pixel devices. The site shows where its measurements came from.
 
 Its interface is inspired by [safearea.info](https://safearea.info), adapted for Android data and foldables.
 
