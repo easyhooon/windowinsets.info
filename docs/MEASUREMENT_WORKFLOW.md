@@ -33,6 +33,32 @@ lessons live in the `pixel-emulator-insets` skill
 - These captures are not registered. They stay outside `measurements/` until the
   site models emulator provenance.
 
+## Orientation support by form factor (2026-09-27, #24)
+
+Only tablets turn upside down. Galaxy phones and foldables leave 180° out of
+auto-rotation, so ordinary apps never see reverse portrait there.
+
+| Form factor | Portrait | Landscape (rotation 1 and 3) | Reverse portrait (rotation 2) | Evidence |
+| --- | --- | --- | --- | --- |
+| Bar phone | ✓ | ✓ | ✗ | Android/One UI default auto-rotation excludes 180° on phones |
+| Flip (main) | ✓ | ✓ | ✗ | Same as phones; the Flip8 cover screen did not rotate at all in the #30 sweep |
+| Fold (cover and inner) | ✓ | ✓ | ✗ | Owner check on a real Galaxy Fold, folded and unfolded |
+| TriFold | ✓ | ✓ | ✗ (assumed) | Not checked yet; treated like Fold |
+| Tablet | ✓ | ✓ | ✓ | Confirmed on a Galaxy Tab |
+
+Consequences:
+
+- The site offers **Portrait Upside Down** only for tablets (`DeviceView.tsx`,
+  documented in `REFERENCE_PARITY.md`).
+- The probe sweep still ends with reverse portrait. It only produces a file where the
+  display actually turns (tablets); elsewhere the step is skipped after the timeout.
+  An app may be able to force 180° on a phone, but that is not what apps see through
+  auto-rotation, so such captures are kept as evidence and not published.
+- Where it does apply, reverse portrait is its own capture: the cutout moves to the
+  bottom edge (an earlier Flip5 rotation-2 capture had a bottom inset of 139 px
+  versus 45 px in portrait).
+- Non-Samsung devices (#23) are unverified; check before exposing 180°.
+
 ## Latest registered batch (2026-09-25)
 
 The 2026-09-25 batch adds paired main-display captures for Galaxy A07, A55, A53,
