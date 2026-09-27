@@ -174,6 +174,11 @@ step to the user.
 1. Build before spending reservation time:
    `cd tools/insets-probe && ./gradlew :app:testDebugUnitTest :app:assembleDebug`.
    Record the APK checksum when traceability matters.
+   When using Probe 1.5.0 direct uploads, confirm `insetsProbeUploadKey` is
+   configured and that its exact value occurs in the built APK's DEX bytes.
+   Report only a Boolean result, never the key. Rebuild and repeat this check
+   before reserving if the APK lacks the key; a keyless build saves files on the
+   device but cannot send them to the Vercel capture inbox.
 2. On a Chrome setup that has returned `Not allowed`, check file selection **before
    reserving**. Use a temporary local page with a plain `input[type=file]` and no
    upload endpoint, in the same Chrome browser session used for RTL. Start
@@ -395,6 +400,13 @@ are available, or the remaining human step is explicit.
 Raw files under `measurements/` are immutable evidence. Copy downloads under explicit
 `<screen>-<threeButton|gesture>.json` names only after checking them; never repair or
 normalize the JSON by hand.
+
+For direct uploads, confirm Probe reports `Uploaded ... inbox PR #...`, then read
+the capture-inbox branch while the reservation is active. Match every expected
+filename to its fresh timestamp, model, screen, actual rotation, navigation
+setting, window dimensions and density. `Sweep done` only proves local files
+were saved; it does not prove that the API received them. Recover any missing
+upload or export its file through File Browser before the reservation expires.
 
 Check every file for:
 
