@@ -100,6 +100,9 @@ export default function Shell() {
             <a href={REPO_URL} target="_blank" rel="noreferrer">GitHub ↗</a>
             <a href={`${REPO_URL}/issues/new/choose`} target="_blank" rel="noreferrer" aria-label="Send feedback or report an issue on GitHub (opens in a new tab)">Send feedback ↗</a>
           </span>
+          <p className="sidebar-footer-support">
+            Found this useful? <a href={REPO_URL} target="_blank" rel="noreferrer" aria-label="Star windowinsets.info on GitHub (opens in a new tab)">★ Star it on GitHub</a>
+          </p>
           <a href="https://safearea.info" target="_blank" rel="noreferrer">Inspired by safearea.info ↗</a>
         </nav>
       </aside>
