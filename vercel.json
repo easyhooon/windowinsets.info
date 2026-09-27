@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "pnpm build",
+  "outputDirectory": "build/client",
+  "git": {
+    "deploymentEnabled": {
+      "capture-inbox": false
+    }
+  }
+}

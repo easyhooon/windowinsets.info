@@ -47,6 +47,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .device-family-tabs button { min-height:30px; border-radius:5px; color:#59636e; font-size:11px; font-weight:600; }
 .device-family-tabs button:hover { background:#eaeef2; color:#1f2328; }
 .device-family-tabs button[aria-pressed="true"] { background:#ddf4ff; color:#0969da; }
+.device-brand-tabs { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); margin:0 4px 6px; padding:2px; border:1px solid #d1d9e0; border-radius:6px; }
+.device-brand-tabs button { min-height:28px; border-radius:4px; color:#59636e; font-size:12px; font-weight:600; }
+.device-brand-tabs button:hover { color:#1f2328; }
+.device-brand-tabs button[aria-pressed="true"] { background:#1f2328; color:#fff; }
 .device-list { flex:1; min-height:0; overflow:auto; }
 .device-list h2 { margin:8px 0 2px; }
 .device-list section:first-child h2 { margin-top:6px; }
@@ -98,6 +102,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .rtl-status a { font-weight:600; text-decoration:underline; }
 .rtl-status p { margin:6px 0; color:#59636e; }
 .rtl-status small { color:#59636e; font-size:11px; }
+.emulator-status { border-style:dashed; }
+.emulator-status strong { font-weight:600; }
+.source-kind.is-emulator { outline:1px dashed #59636e; outline-offset:-1px; }
 .sources-details summary { font-weight:600; padding:8px 0; }
 .sources-details ul,.sources-details p { font-size:11px; line-height:1.6; }
 .canvas-panel { position:relative; min-width:0; min-height:0; display:flex; flex-direction:column; }

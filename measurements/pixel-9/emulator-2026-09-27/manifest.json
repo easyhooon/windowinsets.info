@@ -1,0 +1,50 @@
+{
+  "capturedAt": "2026-09-27T14-05-03Z",
+  "provenance": {
+    "source": "android-emulator",
+    "avd": "wi_pixel_9",
+    "hwDevice": "pixel_9",
+    "skin": "pixel_9",
+    "systemImage": "system-images/android-37.0/google_apis_playstore/arm64-v8a/",
+    "installedEmulatorVersion": "37.1.11.0",
+    "buildFingerprint": "google/sdk_gphone64_arm64/emu64a:17/CE2A.260420.019/15611780:user/release-keys"
+  },
+  "captures": [
+    {
+      "file": "landscape-1-gesture.json",
+      "screen": "phone",
+      "navMode": "gesture",
+      "method": "probeSweep"
+    },
+    {
+      "file": "landscape-3-gesture.json",
+      "screen": "phone",
+      "navMode": "gesture",
+      "method": "probeSweep"
+    },
+    {
+      "file": "main-gesture.json",
+      "screen": "phone",
+      "navMode": "gesture",
+      "method": "probeSweep"
+    },
+    {
+      "file": "landscape-1-threeButton.json",
+      "screen": "phone",
+      "navMode": "threeButton",
+      "method": "probeSweep"
+    },
+    {
+      "file": "landscape-3-threeButton.json",
+      "screen": "phone",
+      "navMode": "threeButton",
+      "method": "probeSweep"
+    },
+    {
+      "file": "main-threeButton.json",
+      "screen": "phone",
+      "navMode": "threeButton",
+      "method": "probeSweep"
+    }
+  ]
+}

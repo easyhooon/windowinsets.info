@@ -25,6 +25,29 @@ registered official skin. TriFold is supported; apply the same RTL-availability
 and capture-evidence rules when collecting its measurements. Missing measurements
 remain pending.
 
+Since 2026-09-27 a phone or foldable screen counts as measured only with its
+natural, rotation 1 and rotation 3 captures in both navigation modes. A Galaxy
+Tab needs all four distinct display rotations, including reverse portrait, in
+both modes. The rotation number for reverse portrait depends on the tablet's
+natural orientation; verify the JSON orientation and size instead of assuming
+it is always rotation 2. A device with natural-rotation captures only needs the
+full sweep again.
+Read the rotation status in `docs/MEASUREMENT_WORKFLOW.md` ("Device Status &
+Progress") and update it after each device.
+
+For Galaxy Tab, check **Tablet: include upside-down portrait** in InsetsProbe
+before each sweep. Confirm four distinct rotations and eight files across both
+navigation modes. If the sweep cannot turn the display, use the RTL Rotate
+control for the missing state and press Measure; keep a missing reverse portrait
+pending until its own raw capture exists. Leave the tablet option off for phones
+and foldables, whose ordinary auto-rotation does not offer reverse portrait.
+
+Large inner displays (for example Fold7 inner on Android 16) can ignore the
+probe's orientation request, so the sweep reports "display did not rotate" and
+skips landscape. Rotate with the WebClient Rotate control instead, then press
+Measure and Upload at rotations 1 and 3, and return the device to rotation 0.
+Uploads keep a separate inbox timestamp directory per capture.
+
 For Galaxy Z Flip cover work, the supported collection scope starts at Flip5.
 Treat covers on Flip, Flip3 and Flip4 as unsupported and do not reserve or capture
 them. For Flip5 and later, collect cover measurements only when the registered

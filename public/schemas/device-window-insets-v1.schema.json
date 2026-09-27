@@ -106,7 +106,7 @@
       "additionalProperties": false,
       "required": ["kind", "label", "url", "retrievedAt", "note"],
       "properties": {
-        "kind": { "enum": ["official", "measured", "community"] },
+        "kind": { "enum": ["official", "measured", "emulator", "community"] },
         "label": { "type": "string" },
         "url": { "type": ["string", "null"] },
         "retrievedAt": { "type": "string", "format": "date" },
@@ -120,7 +120,7 @@
       "properties": {
         "slug": { "type": "string" },
         "name": { "type": "string" },
-        "brand": { "const": "Samsung" },
+        "brand": { "enum": ["Samsung", "Google"] },
         "series": { "type": "string" },
         "formFactor": { "enum": ["bar", "tablet", "foldable-book", "foldable-flip", "foldable-trifold"] },
         "foldAnimation": { "type": "boolean" },
@@ -195,7 +195,7 @@
       "additionalProperties": false,
       "required": ["evidence", "logicalSize", "densityDpi", "orientation", "displayRotation", "cornerRadii"],
       "properties": {
-        "evidence": { "const": "measured" },
+        "evidence": { "enum": ["measured", "emulator"] },
         "logicalSize": { "$ref": "#/$defs/measuredSizePair" },
         "densityDpi": { "type": "number", "exclusiveMinimum": 0 },
         "orientation": { "enum": ["portrait", "landscape", null] },
@@ -246,7 +246,7 @@
       "additionalProperties": false,
       "required": ["evidence", "raw", "derived", "condition", "sources"],
       "properties": {
-        "evidence": { "const": "measured" },
+        "evidence": { "enum": ["measured", "emulator"] },
         "raw": {
           "type": "object",
           "additionalProperties": false,
@@ -269,11 +269,29 @@
         "condition": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["oneUi", "android", "note"],
+          "required": ["oneUi", "android", "note", "emulator"],
           "properties": {
-            "oneUi": { "type": "string" },
+            "oneUi": { "type": ["string", "null"] },
             "android": { "type": "string" },
-            "note": { "type": ["string", "null"] }
+            "note": { "type": ["string", "null"] },
+            "emulator": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["deviceProfile", "skin", "systemImage", "buildFingerprint", "emulatorVersion", "manifestUrl"],
+                  "properties": {
+                    "deviceProfile": { "type": "string" },
+                    "skin": { "type": "string" },
+                    "systemImage": { "type": "string" },
+                    "buildFingerprint": { "type": "string" },
+                    "emulatorVersion": { "type": "string" },
+                    "manifestUrl": { "type": "string", "format": "uri" }
+                  }
+                },
+                { "type": "null" }
+              ]
+            }
           }
         },
         "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } }

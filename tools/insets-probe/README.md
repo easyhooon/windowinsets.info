@@ -17,7 +17,7 @@ Dumps everything [windowinsets.info](https://windowinsets.info) needs for one sc
 1. Build and install: `./gradlew :app:installDebug` (needs `sdk.dir` in `local.properties`), or install the APK on Samsung Remote Test Lab.
 2. Set the device to its **default** Display size, Font size and, on Samsung, **Screen resolution** (HD+/FHD+/WQHD+). Screen resolution changes the pixel size and Display size changes `densityDpi`, so both change the dp values. The JSON records `widthPx`/`heightPx`, `densityDpi` and `defaultDensityDpi` so a non-default setting is visible.
 3. Choose the navigation mode you are recording (Settings → Display → Navigation bar).
-4. Hold the device in **portrait**, app in full screen (not split-screen / pop-up).
+4. App in full screen (not split-screen / pop-up). On a Galaxy Tab, check **Tablet: include upside-down portrait**. Tap **Rotate & measure all orientations** to capture the supported orientations, or hold the device in **portrait** and tap **Measure** for one.
 5. Foldables: physically open/close the device (or use a verified RTL device-state control), then pick **Cover** or **Main** to label the active screen. These buttons do not switch displays. Check the visible active-window pixel size and hinge reading before saving. A portrait/landscape rotation is not a cover/main switch.
 6. Tap **Copy JSON**. The file is also saved to the app's external files dir and logged under the `InsetsProbe` tag:
 
@@ -26,7 +26,7 @@ Dumps everything [windowinsets.info](https://windowinsets.info) needs for one sc
    adb pull /sdcard/Android/data/info.windowinsets.probe/files/
    ```
 
-7. Save it as `measurements/<device-slug>/<screen>-<navMode>.json` at the repo root.
+7. Tap **Upload** (automatic after a sweep when the build has an upload key), or save the file as `measurements/<device-slug>/<screen>-<navMode>.json` at the repo root.
 
 Repeat for every screen × navigation mode. Do not edit the JSON by hand.
 
@@ -66,6 +66,46 @@ adb pull /sdcard/Android/data/info.windowinsets.probe/files/
 ```
 
 `--es screen` accepts `cover` or `main` (default `phone`); `--ez export true` saves the JSON one second after launch. See [sample-output](sample-output) for a real capture.
+
+## Version 1.5.0: direct upload
+
+- **Upload** sends the last Measure or sweep to `windowinsets.info/api/captures`
+  (issue #28). A sweep uploads automatically when the build has an upload key. No
+  more RTL File Browser round trip.
+- Uploads land on the rolling `capture-inbox` branch under
+  `measurements/_inbox/<model>/<timestamp>/`, one commit per upload. One open
+  inbox PR accumulates a batch; the user decides when to squash-merge it as one
+  commit on `main`. No separate PR or manual validation is required for each
+  capture. Files are stored exactly as captured.
+- Build with the key: `./gradlew :app:assembleDebug -PinsetsProbeUploadKey=<key>`
+  (or put `insetsProbeUploadKey=<key>` in `~/.gradle/gradle.properties`; never in
+  the repository). Without a key, Upload is disabled and downloading still works.
+- Server setup: [`docs/CAPTURE_UPLOAD.md`](../../docs/CAPTURE_UPLOAD.md).
+
+## Version 1.4.0: orientation sweep
+
+- **Rotate & measure all orientations** requests portrait, landscape and reverse
+  landscape from inside the app (`setRequestedOrientation`). The tablet checkbox
+  adds reverse portrait as a fourth step, so nobody has to rotate
+  the RTL device. Each step waits until the window really has the requested shape and
+  no insets/configuration callback has arrived for 700 ms, then captures fresh
+  root-window insets exactly like **Measure**. The app returns to unspecified
+  orientation when done.
+- Values are always what Android reports in that rotation. A display that does not
+  rotate within 6 s (for example a locked cover screen), or that stays at a rotation
+  already recorded, is skipped and listed; nothing is derived or relabeled.
+- File names include the display rotation, following the existing `landscape-<rotation>`
+  convention (issue #22): natural rotation keeps the legacy name (`main-gesture.json`);
+  a phone turned sideways saves `landscape-1-gesture.json` / `landscape-3-gesture.json`;
+  foldable screens are prefixed (`cover-landscape-1-gesture.json`,
+  `main-portrait-1-gesture.json`). This also applies to a single **Measure**.
+- A tablet sweep must produce four distinct display rotations per navigation
+  mode. Reverse portrait's rotation number depends on the natural display
+  orientation; check the JSON dimensions and rotation before accepting a file.
+- Larger buttons (the sweep button is full width) because RTL shows a scaled-down screen.
+- Automation: `adb shell am start -n info.windowinsets.probe/.MainActivity --es screen main --ez sweep true`. Add `--ez tablet true` for a verified tablet.
+
+Run one sweep per screen × navigation mode.
 
 ## Version 1.1.1: verified on Galaxy Z Fold2
 

@@ -111,3 +111,22 @@ eligibility.
 Artwork-only models continue to show pending measurements. A supported release
 year or an official skin does not establish WindowInsets values or measured 3D
 geometry. Raw captures and downloaded originals remain unchanged.
+
+## Google Pixel (issue #23)
+
+Pixel coverage starts with the Android Emulator device profiles and AOSP
+emulator skins (Apache 2.0) installed with the SDK. Foldables come first, newest
+first (Pixel 10 Pro Fold, Pixel 9 Pro Fold, Pixel Fold), then phones and the
+Pixel Tablet. Scope: every Pixel released in 2020 or later with an SDK
+emulator skin, and every Pixel Fold. Emulator values describe an AVD profile,
+not real hardware, and stay labelled as such (source kind `emulator`, export
+evidence `emulator`). Skin attribution is in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+Registered on 2026-09-27: Pixel 10 Pro Fold, Pixel 9 Pro Fold, Pixel Fold,
+Pixel 10 Pro XL, Pixel 10 Pro, Pixel 10, Pixel 9 Pro XL, Pixel 9 Pro, Pixel 9,
+Pixel 9a, Pixel 8 Pro, Pixel 8, Pixel 8a, Pixel 7 Pro, Pixel 7, Pixel 7a,
+Pixel 6 Pro, Pixel 6, Pixel 6a, Pixel 5, Pixel 4a and Pixel Tablet. No
+in-scope models with SDK emulator skins are pending capture.
+`scripts/pixel-devices.json` lists every in-scope model with its Google spec
+source.

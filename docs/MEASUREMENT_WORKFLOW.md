@@ -10,6 +10,67 @@ captures. The full RTL catalog remains inaccessible; do not interpret missing
 models in the featured list as unsupported. See [RTL_COVERAGE.md](RTL_COVERAGE.md)
 and its per-skin comparison for checked sources, unknowns and completion steps.
 
+## Pixel emulator captures (issue #23, 2026-09-27)
+
+`scripts/capture-emulator.py` drives a booted headless AVD through every screen,
+navigation mode and rotation, pulls the raw InsetsProbe JSON and writes a
+`manifest.json` with the AVD, device profile, skin, system image, build
+fingerprint and installed emulator version. The step-by-step procedure and
+lessons live in the `pixel-emulator-insets` skill
+(`.agents/skills/pixel-emulator-insets/SKILL.md`).
+
+- Build the probe with `-PinsetsProbeUploadKey=` so emulator JSON never reaches
+  the real-device capture inbox.
+- Folds use `adb emu fold/unfold`; navigation uses the SystemUI navbar overlays.
+- Android 16+ ignores app orientation requests on large screens, so the inner
+  display is rotated with `cmd window user-rotation lock`. Cover and bar-phone
+  displays use the probe's own sweep, which records only allowed rotations.
+- Pixel 9 Pro Fold and Pixel 10 Pro Fold each produced 14 captures on Android 17
+  (API 37) system images. Pixel 9 Pro Fold values were identical on emulator
+  36.4.9 and 37.1.11. Pixel 10 Pro Fold reported the same inner cutout and
+  corner radii as Pixel 9 Pro Fold; cross-check the geometry against factory
+  images or real devices before publishing.
+- Registration: copy a validated run to
+  `measurements/<slug>/emulator-<date>/` (raw JSON plus `manifest.json`, never
+  mixed with real-device files), then run
+  `python3 scripts/import-emulator-captures.py [slug ...]`. The importer checks
+  the emulator model, spec resolution, navigation mode agreement and cover fold
+  state; copies the AOSP skin with a `source.json`; and generates
+  `app/data/devices/<slug>/index.ts`, `app/data/aospSkins.ts` and
+  `app/data/devices/pixel.ts`. Only rotation 0 is shown; other rotations stay
+  as raw evidence.
+- The site labels these values "Emulator insets" and shows the emulator version,
+  device profile and build instead of One UI. Never describe them as measured on
+  Pixel hardware.
+
+## Orientation support by form factor (2026-09-27, #24)
+
+Only tablets turn upside down. Galaxy phones and foldables leave 180° out of
+auto-rotation, so ordinary apps never see reverse portrait there.
+
+| Form factor | Portrait | Landscape (rotation 1 and 3) | Reverse portrait (rotation 2) | Evidence |
+| --- | --- | --- | --- | --- |
+| Bar phone | ✓ | ✓ | ✗ | Android/One UI default auto-rotation excludes 180° on phones |
+| Flip (main) | ✓ | ✓ | ✗ | Same as phones; the Flip8 cover screen did not rotate at all in the #30 sweep |
+| Fold (cover and inner) | ✓ | ✓ | ✗ | Owner check on a real Galaxy Fold, folded and unfolded |
+| TriFold | ✓ | ✓ | ✗ (assumed) | Not checked yet; treated like Fold |
+| Tablet | ✓ | ✓ | ✓ | Confirmed on a Galaxy Tab |
+
+Consequences:
+
+- The site offers **Portrait Upside Down** only for tablets (`DeviceView.tsx`,
+  documented in `REFERENCE_PARITY.md`).
+- In InsetsProbe, select **Tablet: include upside-down portrait** for Galaxy Tab
+  sweeps. This adds a reverse-portrait request after the standard three steps.
+  Verify four distinct `display.rotation` values in each navigation mode; the
+  number for reverse portrait depends on the display's natural orientation.
+  Leave this option off on phones and foldables. An app may be able to force
+  180° on a phone, but that is not what ordinary auto-rotation offers.
+- Where it does apply, reverse portrait is its own capture: the cutout moves to the
+  bottom edge (an earlier Flip5 rotation-2 capture had a bottom inset of 139 px
+  versus 45 px in portrait).
+- Non-Samsung devices (#23) are unverified; check before exposing 180°.
+
 ## Latest registered batch (2026-09-25)
 
 The 2026-09-25 batch adds paired main-display captures for Galaxy A07, A55, A53,
@@ -386,34 +447,55 @@ Android's `screenWidthDp`/`screenHeightDp` reflect whatever rotation the app hap
 
 ### Step 3: Capture Measurements
 
-Do not use Measure All. Capture each active display and navigation mode explicitly:
+Do not use Measure All (removed in 1.1.0). Capture each active display and
+navigation mode explicitly; InsetsProbe 1.4.0+ captures every rotation of that
+display in one step:
 
 1. Confirm the physical RTL state and Probe active-window size. On Fold8, the
    WebClient's middle Folded option produced the 1248×1972 cover; Unfolded produced
    the 2448×1848 inner display.
-2. Select the matching Probe radio label and tap **Measure**. Accept the capture
-   only when the toast filename matches the intended screen and actual nav mode.
+2. Select the matching Probe radio label and tap **Rotate & measure all
+   orientations**. The app turns itself to portrait, landscape and reverse
+   landscape, waits for each rotated window to settle and saves one file per
+   rotation; do not rotate the RTL device by hand. Check the summary line: saved
+   file names and any skipped step (a display that did not rotate, or a rotation
+   already recorded). Accept the captures only when the file names match the
+   intended screen and actual nav mode. **Measure** still captures the current
+   rotation only.
 3. Use **Display / navigation settings**, scroll to **Navigation bar**, select
    **Swipe gestures**, then use the left-edge back gesture twice to return to Probe.
-4. Tap **Measure** again and verify the `*-gesture.json` toast.
+4. Run **Rotate & measure all orientations** again and verify the `*-gesture*`
+   file names in the summary.
 5. For foldables, repeat after physically switching the WebClient display. Verify
    resolution after every switch; the label does not change the display.
-6. Optional bar-phone landscape (issue #22): rotate so the side button faces up,
-   which is display rotation 1 (cutout on the left). Capture both navigation
-   modes and store them as `landscape-1-{gesture,threeButton}.json` beside the
-   portrait `main-*` files. Rotation 3 is not collected; leave it unmeasured
-   rather than mirroring rotation 1. (A one-off Galaxy S23+ 3-button check
-   confirmed rotation 3 mirrors rotation 1 there, which is evidence for that
-   unit only, not a license to mirror other models.)
+6. File names (issues #22, #24): the natural rotation keeps `main-*` /
+   `cover-*`; other rotations are saved beside them as
+   `landscape-<rotation>-<nav>.json` on phones (rotation 1 = side button up,
+   cutout on the left; rotation 3 = the reverse) and with a screen prefix on
+   foldables (`cover-landscape-1-gesture.json`, `main-portrait-1-gesture.json`).
+   Keep both rotation 1 and 3: never mirror one into the other, and never rotate a
+   portrait capture into landscape. Pilot decision (2026-09-27, #24/#30): 3-button
+   rotation 1/3 pairs on Galaxy S23+, Z Fold8 cover and Z Flip8 main kept the status
+   bar on top while the navigation bar and cutout switched sides (a 180° rotation of
+   the 90° capture would be wrong); horizontal mirroring matched those three pairs
+   only and stays unverified elsewhere. Portrait and landscape status bars also
+   differed on all three (74→84, 110→79, 108→90 px). So each rotation is its own
+   sweep capture; a display that does not rotate (e.g. Flip8 cover) stays pending
+   for the missing rotations.
+   Earlier landscape captures were taken by rotating the RTL device by hand; they
+   remain valid evidence.
 
 ### Step 4: Export & Commit Data
 
 1. Open WebClient **File Browser** and navigate to
    `Android/data/info.windowinsets.probe/files`.
 2. Hover each JSON row to reveal its download icon. RTL downloads them as
-   `content`, `content (1)`, etc.; do not trust those browser filenames.
-3. Inspect `screen`, `navigation.mode`, `display.currentWindowPx`, model and
-   timestamp inside every download before assigning an evidence path.
+   `content`, `content (1)`, etc.; do not trust those browser filenames. A sweep
+   adds up to three files per navigation mode. (Direct upload from the probe is
+   planned in #28 and would replace this step.)
+3. Inspect `screen`, `navigation.mode`, `display.rotation`,
+   `display.currentWindowPx`, model and timestamp inside every download before
+   assigning an evidence path; the rotation decides the file name.
 4. Preserve superseded raw evidence. If canonical filenames already exist, add a
    dated recapture directory instead of overwriting them.
 5. Register only accepted values, update coverage/workflow docs, then run
@@ -421,32 +503,46 @@ Do not use Measure All. Capture each active display and navigation mode explicit
 
 ## Device Status & Progress
 
-| Device | Model | Screens | 3-Button | Gesture | Status |
-| --- | --- | --- | --- | --- | --- |
-| Galaxy Z Fold8 | SM-F971N | Cover + inner | ✓ both | ✓ both | Complete |
-| Galaxy Z Flip8 | SM-F776B | Cover + inner | ✓ both | ✓ both | Complete |
-| Galaxy S25 Ultra | SM-S938N | Main | ✓ | ✓ | Complete |
-| Galaxy S24 Ultra | SM-S928N-KR3 | Main | ✓ | ✓ | Complete (RTL, Korea/Gumi, Android 16 / One UI 8.5) |
-| Galaxy S24 | SM-S921N-KR3 | Main | ✓ | ✓ | Complete (RTL, Korea/Gumi, Android 16 / One UI 8.5) |
-| Galaxy S24+ | SM-S926N-KR3 | Main | ✓ | ✓ | Complete (RTL, Korea/Gumi, Android 16 / One UI 8.5) |
-| Galaxy S25+ | SM-S936N | Main | ✓ | ✓ | Complete (real device, Korea — not RTL) |
-| Galaxy S25 Edge | SM-S937N | Main | ✓ | ✓ | Complete (RTL, Korea/Gumi, Android 16) |
-| Galaxy S25 FE | SM-S731N | Main | ✓ | ✓ | Complete (RTL, Korea/Gumi, Android 16) |
-| Galaxy S25 | SM-S931N | Main | ✓ | ✓ | Complete (RTL, Korea/Gumi, Android 16) |
-| Galaxy S23 FE | SM-S711B | Main | ✓ | ✓ | Complete (RTL, Android 16 / One UI 8.5) |
-| Galaxy S22 Ultra | SM-S908U | Main | ✓ | ✓ | Complete (RTL, Android 13 / One UI 5.1; FHD+ capture, cutout geometry omitted due to coordinate mismatch) |
-| Galaxy S22+ | SM-S906B | Main | ✓ | ✓ | Complete (RTL, Android 15 / One UI 7.0) |
-| Galaxy S22 | SM-S901B | Main | ✓ | ✓ | Complete (RTL, Android 15 / One UI 7.0) |
-| Galaxy S21 Ultra | SM-G998B | Main | ✓ | ✓ | Complete (RTL, Android 14 / One UI 6.1; FHD+ capture on QHD+ panel; corner radii unavailable) |
-| Galaxy S21+ | SM-G996B | Main | ✓ | ✓ | Complete (RTL, Android 15 / One UI 7.0) |
-| Galaxy S21 | SM-G991B | Main | ✓ | ✓ | Complete (RTL, Android 14 / One UI 6.1) |
-| Galaxy S20 Ultra | SM-G988B | Main | ✓ | ✓ | Complete (RTL, Android 13 / One UI 5.1; FHD+ capture on QHD+ panel; cutout bounds mismatch, shape omitted) |
-| Galaxy S20 FE | SM-G780G | Main | ✓ | ✓ | Complete (RTL, Android 13 / One UI 5.1; raw 3-button timestamp differs from host download time and is documented as a device-clock anomaly) |
-| Galaxy Z Fold7 | SM-F966U | Cover + inner | ✓ both | ✓ both | Complete |
-| Galaxy Z Fold6 | SM-F956U | Cover + inner | ✓ both | ✓ both | Complete |
-| Galaxy Z Flip6 | SM-F741U | Main | ✓ | ✓ | Main complete; no cover skin |
-| Galaxy Z Flip5 | SM-F731B | Main | ✓ | ✓ | Main complete; no cover skin |
-| Galaxy Z Flip3 | SM-F711B | Main | ✓ | ✓ | Main complete; 3-button captured 2026-09-23 and gesture recaptured/downloaded 2026-09-24 from the same RTL unit; no cover skin |
+Rotation requirement (2026-09-27, issues #22/#24): a phone or foldable screen
+needs natural, rotation 1 and rotation 3 captures in both navigation modes,
+usually six files per screen. A Galaxy Tab needs four distinct rotations per
+mode, including reverse portrait, usually eight files per screen. Use the
+probe's tablet option and check each capture's actual `display.rotation` and
+window orientation. Natural-rotation captures stay published and valid. Devices
+that only have those captures need the full sweep again on the same screens.
+Missing rotations stay pending; never mirror or rotate existing captures to
+fill them.
+
+### Rotation sweep captured
+
+| Device | Model | Rotation captures on file | Remaining |
+| --- | --- | --- | --- |
+| Galaxy A54 5G | SM-A546B | Main: natural, rotation 1 and 3 in both modes | None |
+| Galaxy Z Fold7 | SM-F966U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold7/recapture-2026-09-27-rotation/`) | None |
+| Galaxy S23+ | SM-S916U | Main: 3-button rotation 1 and 3; gesture rotation 1 (pilot, captured by hand rotation) | Main gesture rotation 3 |
+| Galaxy Z Fold8 | SM-F971N | Cover: 3-button rotation 1 and 3 (pilot, `_inbox/SM-F971N/2026-09-27T11-55-09-931Z/`, not yet imported) | Cover gesture sweep; inner sweep in both modes |
+| Galaxy Z Flip8 | SM-F776B | Main: 3-button rotation 1 and 3 (pilot, `_inbox/SM-F776B/2026-09-27T12-08-11-853Z/`, not yet imported) | Main gesture sweep; cover gesture capture. The cover did not rotate, so its other rotations stay pending |
+
+### Natural rotation only — full sweep needed
+
+Recapture every listed screen in both navigation modes. Use the queue order in
+`.agents/skills/samsung-rtl-insets/SKILL.md`: Fold, then Flip, then S, then Tab,
+Note and A.
+
+| Series | Devices | Screens |
+| --- | --- | --- |
+| Galaxy Z Fold | Fold8 Ultra, Fold6, Fold5, Fold4, Fold3, Fold2 (user device), TriFold | Cover + inner |
+| Galaxy Z Flip | Flip7 | Cover + main |
+| Galaxy Z Flip | Flip7 FE, Flip6, Flip5, Flip4, Flip3, original Z Flip | Main (no cover skin) |
+| Galaxy S | S26 Ultra, S26+, S26, S25 Ultra, S25+ (user device), S25 Edge, S25 FE, S25, S24 Ultra, S24+, S24 FE, S24, S23 Ultra, S23 FE, S23, S22 Ultra, S22+, S22, S21 Ultra, S21+, S21 FE, S21, S20 Ultra, S20 FE | Main |
+| Galaxy Tab | Tab S11 Ultra, S11, S10 Ultra, S10+, S10 FE+, S10 FE, S10 Lite, S9 Ultra, S9+, S9 FE+, S9 FE, S9, S8 Ultra, S8+, S8, S7+, S7 FE, A11, A9+, A7 Lite | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
+| Galaxy Note | Note20 Ultra, Note20 | Main |
+| Galaxy A | A73, A57, A56, A55, A53, A52s, A37, A36, A35, A34, A33, A32 5G, A32, A27, A25, A24, A23, A17, A16, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
+
+Existing gaps in the natural-rotation data remain open alongside the sweep.
+The canonical Galaxy Z Flip8 cover has 3-button only. Galaxy S24 Ultra, A73 5G
+and Tab S9 FE keep their second mode in dated recapture directories. See
+`docs/RTL_COVERAGE.md` for per-device capture details.
 
 **Measurement Conditions**: full screen, default Display/Font size and One UI +
 Android version are recorded per capture. Orientation is evidence, not a default:

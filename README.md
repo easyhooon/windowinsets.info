@@ -22,9 +22,9 @@ The full write-up lives on the site at [/methodology](https://windowinsets.info/
 
 - **Three source tiers.** Every value is `official` (published by Samsung/Google), `measured` (captured with InsetsProbe on a real device or Samsung Remote Test Lab, raw JSON committed here) or `community` (not yet reproduced). Each source shows the date it was checked.
 - **Insets are measured, not published.** Samsung documents resolution and density, but not status/navigation bar heights, cutouts or corner radii, so I read them from Android itself with [InsetsProbe](tools/insets-probe).
-- **Conditions are part of the data.** Full screen, the recorded capture orientation (phones and cover screens in portrait; most tablets and the Fold8 and TriFold inner displays in landscape), default Display size / Font size / Screen resolution, one navigation mode (gesture or 3-button) per capture, and the One UI + Android version are all recorded. A value is only valid for those conditions.
+- **Conditions are part of the data.** Full screen, the recorded display rotation (natural orientation first: phones and cover screens in portrait; most tablets and the Fold8 and TriFold inner displays in landscape; other rotations as separate captures), default Display size / Font size / Screen resolution, one navigation mode (gesture or 3-button) per capture, and the One UI + Android version are all recorded. A value is only valid for those conditions.
 - **Never estimated.** Nothing is interpolated from another device or derived from resolution alone. Unverified values are `null` and shown as **pending**.
-- **Known limits.** One UI updates can change values; each screen is captured in one orientation, so other rotations and multi-window are not covered yet; a real app may see different insets if it adds its own padding or window flags.
+- **Known limits.** One UI updates can change values; each rotation is its own capture (InsetsProbe's orientation sweep records them), and rotations not captured yet show as not measured rather than being derived; multi-window is not covered yet; a real app may see different insets if it adds its own padding or window flags.
 
 Found a mistake or have a capture that differs from mine? Open an issue or pull request with your InsetsProbe JSON — a reproduction is as valuable as a new device.
 
@@ -32,7 +32,20 @@ Found a mistake or have a capture that differs from mine? Open an issue or pull 
 
 Manufacturers don't publish insets, so I measure them with [InsetsProbe](tools/insets-probe) — a tiny Android app that dumps `WindowInsets`, `DisplayCutout`, `RoundedCorner`, `FoldingFeature` and the hinge angle as JSON. It works on a real device or on [Samsung Remote Test Lab](https://developer.samsung.com/remote-test-lab). See [tools/insets-probe/README.md](tools/insets-probe/README.md).
 
-![InsetsProbe capture flow: a Galaxy device runs the probe, which collects insets, fold state, hinge angle, and display metrics. CapturePolicy validates the window before JSON is stored as immutable evidence and published on the site.](docs/media/insets-probe-flow.svg)
+**Capture flow:** Select a screen and navigation mode → measure or sweep rotations
+with InsetsProbe → save valid full-screen captures as raw JSON → upload them to
+one rolling Capture inbox PR. If upload is unavailable, use the RTL File Browser
+or `adb pull`. The user decides when to squash-merge the batch; site entries are
+maintained separately. See [capture upload and setup](docs/CAPTURE_UPLOAD.md) for
+the API, branch and token details. Live GitHub upload still needs a PAT-backed
+smoke test.
+
+```mermaid
+flowchart LR
+    A["Device + mode"] --> B["Measure / sweep"] --> C["Raw JSON"] --> D["Capture inbox PR"] --> E["Approved merge"]
+    C -. "Fallback" .-> F["File Browser / adb"]
+    E -. "Separate" .-> G["Site entries"]
+```
 
 ### What InsetsProbe records
 
@@ -185,4 +198,4 @@ Models without captures remain static previews with pending insets.
 
 ## Development
 
-See the [reference parity notes](docs/REFERENCE_PARITY.md) for design decisions and implementation details. Official Samsung artwork and layout coordinates are stored in `public/skins/` and `app/data/skins.ts`. Run geometry and asset tests with `node --test tests/rendering.test.mjs`.
+See the [reference parity notes](docs/REFERENCE_PARITY.md) for design decisions and implementation details. Official Samsung artwork and layout coordinates are stored in `public/skins/` and `app/data/skins.ts`; Pixel artwork comes from AOSP emulator skins (Apache 2.0, see [third-party notices](docs/THIRD_PARTY_NOTICES.md)) and `app/data/aospSkins.ts`. Run geometry and asset tests with `node --test tests/rendering.test.mjs`.

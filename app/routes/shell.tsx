@@ -6,11 +6,17 @@ import { Icon } from "../components/Icon";
 import { trackDeviceSelection } from "../lib/analytics";
 
 type Device = typeof devices[number];
-type Family = "All" | "Z" | "S" | "Tab" | "Note" | "A";
-const families: Family[] = ["All", "Z", "S", "Tab", "Note", "A"];
-const groupOf = (device: Device) => device.formFactor === "tablet" ? "Galaxy Tab"
+type Brand = "Galaxy" | "Pixel";
+type Family = "All" | "Z" | "S" | "Tab" | "Note" | "A" | "Fold" | "Phone" | "Tablet";
+const brands: Brand[] = ["Galaxy", "Pixel"];
+const familiesByBrand: Record<Brand, Family[]> = { Galaxy: ["All", "Z", "S", "Tab", "Note", "A"], Pixel: ["All", "Fold", "Phone", "Tablet"] };
+const brandOf = (device: Device): Brand => device.brand === "Google" ? "Pixel" : "Galaxy";
+const groupOf = (device: Device) => device.brand === "Google" ? device.series
+  : device.formFactor === "tablet" ? "Galaxy Tab"
   : /^Galaxy S\d*$/.test(device.series) ? "Galaxy S" : device.series;
-const familyOf = (device: Device): Family => device.formFactor === "tablet" ? "Tab"
+const familyOf = (device: Device): Family => device.brand === "Google"
+  ? device.formFactor === "tablet" ? "Tablet" : device.formFactor.startsWith("foldable") ? "Fold" : "Phone"
+  : device.formFactor === "tablet" ? "Tab"
   : device.series.startsWith("Galaxy Z") ? "Z" : device.series.startsWith("Galaxy Note") ? "Note"
   : device.series === "Galaxy A" ? "A" : "S";
 const measurementCount = (device: Device) => device.screens.reduce((count, screen) =>
@@ -18,7 +24,8 @@ const measurementCount = (device: Device) => device.screens.reduce((count, scree
 const hasMeasurements = (device: Device) => measurementCount(device) > 0;
 const measurementLabel = (device: Device) => {
   const count = measurementCount(device);
-  if (!count) return "No inset measurements";
+  if (!count) return device.brand === "Google" ? "No emulator capture" : "No inset measurements";
+  if (device.brand === "Google") return count === device.screens.length * 2 ? "Emulator insets" : "Some emulator insets";
   return count === device.screens.length * 2 ? "Insets measured" : "Some insets measured";
 };
 
@@ -29,21 +36,27 @@ export default function Shell() {
   const location = useLocation();
   const { slug } = useParams();
   const current = devices.find(d => d.slug === slug) ?? featuredDevice;
+  const [brand, setBrand] = useState<Brand>(() => brandOf(current));
   const [family, setFamily] = useState<Family>(() => familyOf(current));
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(() => new Set([groupOf(current)]));
   const [expandedPreviews, setExpandedPreviews] = useState<Set<string>>(() => new Set(hasMeasurements(current) ? [] : [groupOf(current)]));
   useEffect(() => {
+    setBrand(brandOf(current));
     setFamily(familyOf(current));
     setExpandedGroups(new Set([groupOf(current)]));
     setExpandedPreviews(new Set(hasMeasurements(current) ? [] : [groupOf(current)]));
   }, [location.pathname]);
   const search = query.trim().toLowerCase();
-  const filtered = devices.filter(d => search ? d.name.toLowerCase().includes(search) : family === "All" || familyOf(d) === family);
+  const filtered = devices.filter(d => search ? d.name.toLowerCase().includes(search)
+    : brandOf(d) === brand && (family === "All" || familyOf(d) === family));
   const series = [...new Set(filtered.map(groupOf))];
-  const selectFamily = (next: Family) => {
+  const selectFamily = (next: Family, nextBrand: Brand = brand) => {
+    setBrand(nextBrand);
     setFamily(next);
     setQuery("");
-    const first = next === "All" || familyOf(current) === next ? current : devices.find(d => familyOf(d) === next);
+    const inBrand = devices.filter(d => brandOf(d) === nextBrand);
+    const first = inBrand.includes(current) && (next === "All" || familyOf(current) === next) ? current
+      : inBrand.find(d => next === "All" || familyOf(d) === next);
     setExpandedGroups(new Set(first ? [groupOf(first)] : []));
     setExpandedPreviews(new Set(first && !hasMeasurements(first) ? [groupOf(first)] : []));
   };
@@ -70,8 +83,11 @@ export default function Shell() {
       <aside className={`device-sidebar ${mobileOpen ? "is-open" : ""}`} aria-label="Devices">
         <div className="sidebar-heading"><strong>Devices</strong><span>{devices.length}</span></div>
         <label className="device-search"><Icon name="search" /><input type="search" aria-label="Search devices" value={query} onChange={e => setQuery(e.target.value)} placeholder="Search devices…" /></label>
+        <div className="device-brand-tabs" role="group" aria-label="Brand">
+          {brands.map(option => <button key={option} type="button" aria-pressed={brand === option} onClick={() => selectFamily("All", option)}>{option}</button>)}
+        </div>
         <div className="device-family-tabs" role="group" aria-label="Device series">
-          {families.map(option => <button key={option} type="button" aria-pressed={family === option} onClick={() => selectFamily(option)}>{option}</button>)}
+          {familiesByBrand[brand].map(option => <button key={option} type="button" aria-pressed={family === option} onClick={() => selectFamily(option)}>{option}</button>)}
         </div>
         <nav className="device-list">
           {series.map(group => {
@@ -86,7 +102,7 @@ export default function Shell() {
             <div id={id} hidden={!expanded}>
               {measured.map(deviceLink)}
               {previews.length > 0 && <div className="device-preview-group">
-                <button type="button" className="device-group-toggle device-preview-toggle" aria-expanded={previewsExpanded} aria-controls={`${id}-previews`} disabled={Boolean(search)} onClick={() => togglePreviews(group)}><span>Skin previews</span><span className="device-group-count">{previews.length}</span><Icon name="chevron" /></button>
+                <button type="button" className="device-group-toggle device-preview-toggle" aria-expanded={previewsExpanded} aria-controls={`${id}-previews`} disabled={Boolean(search)} onClick={() => togglePreviews(group)}><span>{members[0]?.brand === "Google" ? "Artwork previews" : "Skin previews"}</span><span className="device-group-count">{previews.length}</span><Icon name="chevron" /></button>
                 <div id={`${id}-previews`} hidden={!previewsExpanded}>{previews.map(deviceLink)}</div>
               </div>}
             </div>

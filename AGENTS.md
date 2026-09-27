@@ -35,6 +35,11 @@ leave other models unverified. Preserve historical captures. See
 - `docs/REFERENCE_PARITY.md`: binding clone doctrine, observed reference behavior,
   intentional Android substitutions, implementation status and visual QA.
 - `docs/MEASUREMENT_WORKFLOW.md`: capture process, known RTL issues, corrections.
+- `docs/MEASUREMENT_WORKFLOW.md` "Device Status & Progress": the single
+  remaining-measurement queue. Phones and foldables need natural, rotation 1
+  and rotation 3 captures in both navigation modes; tablets also need reverse
+  portrait, for all four distinct rotations per mode. Pick the next device
+  from the queue and update it in the same commit as each device's captures.
 - `docs/RTL_CREDITS.md`: published credit policy, live grant evidence and budget rules.
 - `docs/DESIGN_HANDOFF.md`: original Claude visual backlog; see current status first.
 - React Router framework mode, React, TypeScript, three.js; pnpm; static prerender.
@@ -84,6 +89,9 @@ leave other models unverified. Preserve historical captures. See
   requests Korean output, even when the maintainer writes to you in Korean.
 - Write commit subjects and bodies in English using Conventional Commits.
   This repository rule overrides any global skill that requests Korean messages.
+- Do not put agent session links (for example `claude.ai/code/session_…` or
+  `Claude-Session:` trailers) in commit messages or PR descriptions; only the
+  maintainer can open them.
 - Codex attribution is allowed. Include
   `Co-authored-by: Codex <codex@openai.com>` in Codex-assisted commits while
   preserving the configured human author identity.

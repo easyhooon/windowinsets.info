@@ -1,0 +1,69 @@
+{
+  "specSources": {
+    "current": {
+      "label": "Google Pixel phone hardware tech specs",
+      "url": "https://support.google.com/pixelphone/answer/7158570?hl=en",
+      "retrievedAt": "2026-09-27"
+    },
+    "earlier": {
+      "label": "Google Pixel phone hardware tech specs (earlier models)",
+      "url": "https://support.google.com/pixelphone/answer/16043605?hl=en",
+      "retrievedAt": "2026-09-27"
+    },
+    "tablet": {
+      "label": "Google Pixel Tablet hardware tech specs",
+      "url": "https://support.google.com/googlepixeltablet/answer/13555146?hl=en",
+      "retrievedAt": "2026-09-27"
+    }
+  },
+  "devices": [
+    { "slug": "pixel-10-pro-fold", "name": "Pixel 10 Pro Fold", "profile": "pixel_10_pro_fold", "series": "Pixel Fold", "formFactor": "foldable-book", "releaseYear": 2025, "spec": "current",
+      "emulatorNote": "The emulator profile reports the same inner cutout and corner radii as Pixel 9 Pro Fold; not yet cross-checked against the factory image.",
+      "chassisMm": { "unfoldedWidth": 150.4, "unfoldedDepth": 5.2, "foldedDepth": 10.8 },
+      "screens": { "cover": { "diagonalInch": 6.4, "resolutionPx": [1080, 2364], "ppi": 408 }, "main": { "diagonalInch": 8.0, "resolutionPx": [2076, 2152], "ppi": 373 } } },
+    { "slug": "pixel-9-pro-fold", "name": "Pixel 9 Pro Fold", "profile": "pixel_9_pro_fold", "series": "Pixel Fold", "formFactor": "foldable-book", "releaseYear": 2024, "spec": "current",
+      "chassisMm": { "unfoldedWidth": 150.2, "unfoldedDepth": 5.1, "foldedDepth": 10.5 },
+      "screens": { "cover": { "diagonalInch": 6.3, "resolutionPx": [1080, 2424], "ppi": 422 }, "main": { "diagonalInch": 8.0, "resolutionPx": [2076, 2152], "ppi": 373 } } },
+    { "slug": "pixel-fold", "name": "Pixel Fold", "profile": "pixel_fold", "series": "Pixel Fold", "formFactor": "foldable-book", "releaseYear": 2023, "spec": "current",
+      "chassisMm": { "unfoldedWidth": 158.7, "unfoldedDepth": 5.8, "foldedDepth": 12.1 },
+      "screens": { "cover": { "diagonalInch": 5.8, "resolutionPx": [1080, 2092], "ppi": 408 }, "main": { "diagonalInch": 7.6, "resolutionPx": [2208, 1840], "ppi": 380 } } },
+    { "slug": "pixel-10-pro-xl", "name": "Pixel 10 Pro XL", "profile": "pixel_10_pro_xl", "series": "Pixel", "formFactor": "bar", "releaseYear": 2025, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.8, "resolutionPx": [1344, 2992], "ppi": 486 } } },
+    { "slug": "pixel-10-pro", "name": "Pixel 10 Pro", "profile": "pixel_10_pro", "series": "Pixel", "formFactor": "bar", "releaseYear": 2025, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.3, "resolutionPx": [1280, 2856], "ppi": 495 } } },
+    { "slug": "pixel-10", "name": "Pixel 10", "profile": "pixel_10", "series": "Pixel", "formFactor": "bar", "releaseYear": 2025, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.3, "resolutionPx": [1080, 2424], "ppi": 422 } } },
+    { "slug": "pixel-9-pro-xl", "name": "Pixel 9 Pro XL", "profile": "pixel_9_pro_xl", "series": "Pixel", "formFactor": "bar", "releaseYear": 2024, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.8, "resolutionPx": [1344, 2992], "ppi": 486 } } },
+    { "slug": "pixel-9-pro", "name": "Pixel 9 Pro", "profile": "pixel_9_pro", "series": "Pixel", "formFactor": "bar", "releaseYear": 2024, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.3, "resolutionPx": [1280, 2856], "ppi": 495 } } },
+    { "slug": "pixel-9", "name": "Pixel 9", "profile": "pixel_9", "series": "Pixel", "formFactor": "bar", "releaseYear": 2024, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.3, "resolutionPx": [1080, 2424], "ppi": 422 } } },
+    { "slug": "pixel-9a", "name": "Pixel 9a", "profile": "pixel_9a", "series": "Pixel", "formFactor": "bar", "releaseYear": 2025, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.3, "resolutionPx": [1080, 2424], "ppi": 422 } } },
+    { "slug": "pixel-8-pro", "name": "Pixel 8 Pro", "profile": "pixel_8_pro", "series": "Pixel", "formFactor": "bar", "releaseYear": 2023, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.7, "resolutionPx": [1344, 2992], "ppi": 489 } } },
+    { "slug": "pixel-8", "name": "Pixel 8", "profile": "pixel_8", "series": "Pixel", "formFactor": "bar", "releaseYear": 2023, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.2, "resolutionPx": [1080, 2400], "ppi": 428 } } },
+    { "slug": "pixel-8a", "name": "Pixel 8a", "profile": "pixel_8a", "series": "Pixel", "formFactor": "bar", "releaseYear": 2024, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.1, "resolutionPx": [1080, 2400], "ppi": 430 } } },
+    { "slug": "pixel-7-pro", "name": "Pixel 7 Pro", "profile": "pixel_7_pro", "series": "Pixel", "formFactor": "bar", "releaseYear": 2022, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.7, "resolutionPx": [1440, 3120], "ppi": 512 } } },
+    { "slug": "pixel-7", "name": "Pixel 7", "profile": "pixel_7", "series": "Pixel", "formFactor": "bar", "releaseYear": 2022, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.3, "resolutionPx": [1080, 2400], "ppi": 416 } } },
+    { "slug": "pixel-7a", "name": "Pixel 7a", "profile": "pixel_7a", "series": "Pixel", "formFactor": "bar", "releaseYear": 2023, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.1, "resolutionPx": [1080, 2400], "ppi": 429 } } },
+    { "slug": "pixel-6-pro", "name": "Pixel 6 Pro", "profile": "pixel_6_pro", "series": "Pixel", "formFactor": "bar", "releaseYear": 2021, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.7, "resolutionPx": [1440, 3120], "ppi": 512 } } },
+    { "slug": "pixel-6", "name": "Pixel 6", "profile": "pixel_6", "series": "Pixel", "formFactor": "bar", "releaseYear": 2021, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.4, "resolutionPx": [1080, 2400], "ppi": 411 } } },
+    { "slug": "pixel-6a", "name": "Pixel 6a", "profile": "pixel_6a", "series": "Pixel", "formFactor": "bar", "releaseYear": 2022, "spec": "current",
+      "screens": { "main": { "diagonalInch": 6.1, "resolutionPx": [1080, 2400], "ppi": 429 } } },
+    { "slug": "pixel-5", "name": "Pixel 5", "profile": "pixel_5", "series": "Pixel", "formFactor": "bar", "releaseYear": 2020, "spec": "earlier",
+      "screens": { "main": { "diagonalInch": 6.0, "resolutionPx": [1080, 2340], "ppi": 432 } } },
+    { "slug": "pixel-4a", "name": "Pixel 4a", "profile": "pixel_4a", "series": "Pixel", "formFactor": "bar", "releaseYear": 2020, "spec": "earlier",
+      "screens": { "main": { "diagonalInch": 5.8, "resolutionPx": [1080, 2340], "ppi": 443 } } },
+    { "slug": "pixel-tablet", "name": "Pixel Tablet", "profile": "pixel_tablet", "series": "Pixel Tablet", "formFactor": "tablet", "releaseYear": 2023, "spec": "tablet",
+      "screens": { "main": { "diagonalInch": 10.95, "resolutionPx": [2560, 1600], "ppi": 276 } } }
+  ]
+}

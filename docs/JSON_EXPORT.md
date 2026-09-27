@@ -41,5 +41,11 @@ or measured. Zero/unknown legacy placeholders are exported as `null`. Source
 entries always expose nullable `url` and `note` fields so downstream consumers do
 not need to infer missing provenance fields.
 
+Emulator captures (Google Pixel) use source kind `emulator` and the evidence
+label `emulator` instead of `measured`. Their `condition.oneUi` is `null` and
+`condition.emulator` names the device profile, skin, system image, build
+fingerprint, emulator version and manifest URL; Samsung captures export
+`condition.emulator: null`.
+
 Schema additions will remain backward-compatible within version 1. Any breaking
 field or meaning change requires a new `schemaVersion`.

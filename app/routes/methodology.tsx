@@ -24,7 +24,8 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 }
 
 export default function Methodology() {
-  const measured = devices.filter(hasVerifiedInsets).length;
+  const measured = devices.filter((d) => d.brand === "Samsung" && hasVerifiedInsets(d)).length;
+  const emulated = devices.filter((d) => d.brand === "Google" && hasVerifiedInsets(d)).length;
 
   return (
     <article className="mx-auto max-w-2xl p-4 md:p-8">
@@ -36,6 +37,7 @@ export default function Methodology() {
 
       <p className="mt-4 rounded-[10px] border border-line bg-surface p-3 text-sm shadow-card">
         <b>Current status:</b> {measured} of {devices.length} devices have measured inset
+        values from real hardware, and {emulated} Pixel devices have Android Emulator
         values. Everything else is shown as <i>pending</i>.
       </p>
 
@@ -50,13 +52,21 @@ export default function Methodology() {
             Test Lab. The raw JSON is committed to the repository and linked from the value.
           </li>
           <li>
+            <b>emulator</b> – captured by the same InsetsProbe on the Android Emulator with the
+            SDK's Pixel device profile and system image. These values show what the framework
+            reports for that profile; they were not read from Pixel hardware. The raw JSON and a
+            manifest with the emulator version, device profile and build fingerprint are
+            committed next to each other.
+          </li>
+          <li>
             <b>community</b> – contributed by someone else and not yet reproduced. Shown with a
             clear label until a second capture confirms it.
           </li>
         </ul>
         <p>
           Each source also shows the date it was last checked, and each measurement records the
-          One UI and Android version it was taken on.
+          One UI and Android version it was taken on. Emulator captures name the emulator
+          version, device profile and system image build instead of a One UI version.
         </p>
       </Section>
 
@@ -181,6 +191,11 @@ export default function Methodology() {
           <li>
             Only tablets offer upside-down portrait. Galaxy phones and foldables leave 180°
             out of auto-rotation, so apps never see that orientation there.
+          </li>
+          <li>
+            Pixel values come from emulator device profiles. A profile can reuse cutout or
+            corner geometry across models, so it may differ from the shipping phone until a
+            real-device capture confirms it.
           </li>
           <li>
             Apps can add their own padding or use different window flags, so a real app may

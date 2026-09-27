@@ -1,0 +1,106 @@
+{
+  "capturedAt": "2026-09-27T13-22-20Z",
+  "provenance": {
+    "source": "android-emulator",
+    "avd": "wi_pixel_10_pro_fold",
+    "hwDevice": "pixel_10_pro_fold",
+    "skin": "pixel_10_pro_fold",
+    "systemImage": "system-images/android-37.0/google_apis_playstore/arm64-v8a/",
+    "installedEmulatorVersion": "37.1.11.0",
+    "buildFingerprint": "google/sdk_gphone64_arm64/emu64a:17/CE2A.260420.019/15611780:user/release-keys"
+  },
+  "captures": [
+    {
+      "file": "main-gesture.json",
+      "screen": "main",
+      "navMode": "gesture",
+      "method": "userRotationLock",
+      "userRotation": 0
+    },
+    {
+      "file": "main-landscape-1-gesture.json",
+      "screen": "main",
+      "navMode": "gesture",
+      "method": "userRotationLock",
+      "userRotation": 1
+    },
+    {
+      "file": "main-portrait-2-gesture.json",
+      "screen": "main",
+      "navMode": "gesture",
+      "method": "userRotationLock",
+      "userRotation": 2
+    },
+    {
+      "file": "main-landscape-3-gesture.json",
+      "screen": "main",
+      "navMode": "gesture",
+      "method": "userRotationLock",
+      "userRotation": 3
+    },
+    {
+      "file": "cover-gesture.json",
+      "screen": "cover",
+      "navMode": "gesture",
+      "method": "probeSweep"
+    },
+    {
+      "file": "cover-landscape-1-gesture.json",
+      "screen": "cover",
+      "navMode": "gesture",
+      "method": "probeSweep"
+    },
+    {
+      "file": "cover-landscape-3-gesture.json",
+      "screen": "cover",
+      "navMode": "gesture",
+      "method": "probeSweep"
+    },
+    {
+      "file": "main-threeButton.json",
+      "screen": "main",
+      "navMode": "threeButton",
+      "method": "userRotationLock",
+      "userRotation": 0
+    },
+    {
+      "file": "main-landscape-1-threeButton.json",
+      "screen": "main",
+      "navMode": "threeButton",
+      "method": "userRotationLock",
+      "userRotation": 1
+    },
+    {
+      "file": "main-portrait-2-threeButton.json",
+      "screen": "main",
+      "navMode": "threeButton",
+      "method": "userRotationLock",
+      "userRotation": 2
+    },
+    {
+      "file": "main-landscape-3-threeButton.json",
+      "screen": "main",
+      "navMode": "threeButton",
+      "method": "userRotationLock",
+      "userRotation": 3
+    },
+    {
+      "file": "cover-landscape-1-threeButton.json",
+      "screen": "cover",
+      "navMode": "threeButton",
+      "method": "probeSweep"
+    },
+    {
+      "file": "cover-landscape-3-threeButton.json",
+      "screen": "cover",
+      "navMode": "threeButton",
+      "method": "probeSweep"
+    },
+    {
+      "file": "cover-threeButton.json",
+      "screen": "cover",
+      "navMode": "threeButton",
+      "method": "probeSweep"
+    }
+  ]
+}
