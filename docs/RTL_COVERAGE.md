@@ -514,6 +514,20 @@ navigation mode 2, `config_navBarInteractionMode=2` and 60 px side
 system-gesture insets; the inset-only heuristic reports threeButton. The larger
 gesture bottom inset matches the Tab S10 Ultra and Tab S9+/S8+ taskbar pattern.
 
+### Galaxy Tab S10 Lite — 2026-09-27
+
+InsetsProbe 1.3.0 captured Samsung RTL Galaxy Tab S10 Lite (SM-X406B), Android
+16 / One UI 8.0, build `BP2A.250605.031.A3.X406BXXS2BYJ5`, landscape at rotation
+1, 2112×1320 px, 240 dpi, font scale 1.15. Gesture bars are 45/23 px
+(30/15.33 dp) and 3-button bars are 45/72 px (30/48 dp). Neither capture reports
+a display cutout; corner radii are 20 px (13.33 dp). The gesture capture is
+confirmed by secure navigation mode 2, `config_navBarInteractionMode=2` and 45 px
+side system-gesture insets; the inset-only heuristic reports threeButton. The
+small gesture bottom inset matches the One UI 8 Tab S10 FE pattern rather than
+the One UI 6 taskbar pattern. Font scale was not recaptured at 1 because the
+Tab S10 FE comparison showed no inset change. The 3-button raw screen label is
+`phone`; model and resolution establish the tablet Main display.
+
 ## Galaxy Note20 and Galaxy Tab S9+/S8 series measured on 2026-09-25
 
 Samsung RTL produced paired full-screen Main captures for Galaxy Note20 5G
