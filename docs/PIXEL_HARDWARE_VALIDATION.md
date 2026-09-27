@@ -242,6 +242,8 @@ was offered only on API 30, below the probe APK's `minSdk 31`; moreover,
 Android 11 does not expose the cutout path and rounded-corner APIs used for
 this geometry comparison. An API-30-compatible probe could collect its cutout
 bounds and safe insets, but would not complete the same path/corner check.
+The model-specific blockers, next capture paths and completion criteria are
+tracked in [issue #46](https://github.com/easyhooon/windowinsets.info/issues/46).
 
 Blaze billing is active for the dedicated FTL project. The 30-minute daily
 allowance and $5/device-hour overage are service pricing, not a confirmed

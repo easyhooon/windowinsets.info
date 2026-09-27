@@ -142,6 +142,7 @@ where the API 37 AVD reports `null`. Some top safe insets also differ even when
 camera paths match. The FTL devices used API 32–36, so keep OS and source
 provenance separate rather than changing the published emulator values.
 Pixel 6 Pro and Pixel 4a are absent from the FTL physical catalog, and Pixel
-5's offered API 30 is below the current probe's minimum API. The spot checks
+5's offered API 30 is below the current probe's minimum API. [Issue #46](https://github.com/easyhooon/windowinsets.info/issues/46)
+tracks these three models. The spot checks
 do not validate both navigation modes, every rotation, or Fold cover states.
 See [the FTL validation log](PIXEL_HARDWARE_VALIDATION.md).

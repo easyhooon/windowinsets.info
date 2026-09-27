@@ -85,7 +85,7 @@ The keyless probe also runs on physical Pixel devices in Firebase Test Lab (FTL)
 
 A passed FTL run confirms that the app exported data; it does not establish that every published emulator value matches hardware. The [validation log](docs/PIXEL_HARDWARE_VALIDATION.md) contains the raw JSON, result links and the first run's complete Robo crawl graph.
 
-As of 2026-09-28, two-minute Robo runs had spot-checked **19 of 22** public Pixel models in gesture mode. Pixel 6 Pro and Pixel 4a were absent from the physical FTL catalog. Its Pixel 5 runs API 30, below the probe's minimum API 31. Other navigation modes, rotations and Fold cover states remain unverified.
+As of 2026-09-28, two-minute Robo runs had spot-checked **19 of 22** public Pixel models in gesture mode. Pixel 6 Pro and Pixel 4a were absent from the physical FTL catalog. Its Pixel 5 runs API 30, below the probe's minimum API 31. [Issue #46](https://github.com/easyhooon/windowinsets.info/issues/46) tracks the remaining three models and their next capture paths. Other navigation modes, rotations and Fold cover states remain unverified.
 
 The dedicated `windowinsets-testlab-2026` project used Spark for its first five physical runs, then switched to Blaze on 2026-09-28. Blaze includes 30 physical-device test minutes per project per day, then charges $5 per device-hour in one-minute increments; see [FTL quota and pricing](https://firebase.google.com/docs/test-lab/usage-quotas-pricing).
 
