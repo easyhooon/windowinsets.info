@@ -10,6 +10,29 @@ captures. The full RTL catalog remains inaccessible; do not interpret missing
 models in the featured list as unsupported. See [RTL_COVERAGE.md](RTL_COVERAGE.md)
 and its per-skin comparison for checked sources, unknowns and completion steps.
 
+## Pixel emulator captures (issue #23, 2026-09-27)
+
+`scripts/capture-emulator.py` drives a booted headless AVD through every screen,
+navigation mode and rotation, pulls the raw InsetsProbe JSON and writes a
+`manifest.json` with the AVD, device profile, skin, system image, build
+fingerprint and installed emulator version. The step-by-step procedure and
+lessons live in the `pixel-emulator-insets` skill
+(`.agents/skills/pixel-emulator-insets/SKILL.md`).
+
+- Build the probe with `-PinsetsProbeUploadKey=` so emulator JSON never reaches
+  the real-device capture inbox.
+- Folds use `adb emu fold/unfold`; navigation uses the SystemUI navbar overlays.
+- Android 16+ ignores app orientation requests on large screens, so the inner
+  display is rotated with `cmd window user-rotation lock`. Cover and bar-phone
+  displays use the probe's own sweep, which records only allowed rotations.
+- Pixel 9 Pro Fold and Pixel 10 Pro Fold each produced 14 captures on Android 17
+  (API 37) system images. Pixel 9 Pro Fold values were identical on emulator
+  36.4.9 and 37.1.11. Pixel 10 Pro Fold reported the same inner cutout and
+  corner radii as Pixel 9 Pro Fold; cross-check the geometry against factory
+  images or real devices before publishing.
+- These captures are not registered. They stay outside `measurements/` until the
+  site models emulator provenance.
+
 ## Latest registered batch (2026-09-25)
 
 The 2026-09-25 batch adds paired main-display captures for Galaxy A07, A55, A53,
