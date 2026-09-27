@@ -19,6 +19,7 @@ import { galaxyS22 } from "./devices/galaxy-s22";
 import { galaxyS21Ultra } from "./devices/galaxy-s21-ultra";
 import { galaxyS21Plus } from "./devices/galaxy-s21-plus";
 import { galaxyS21 } from "./devices/galaxy-s21";
+import { galaxyS21Fe } from "./devices/galaxy-s21-fe";
 import { galaxyS20Ultra } from "./devices/galaxy-s20-ultra";
 import { galaxyS20Fe } from "./devices/galaxy-s20-fe";
 import { galaxyNote20 } from "./devices/galaxy-note20";
@@ -92,7 +93,7 @@ import { isInCoverage } from "./coverage";
 // Explicit entries own all verified data. Skins can add missing screens, never
 // replace a screen's captures. Add a measured entry here as RTL data arrives.
 const verifiedEntries = [galaxyA57, galaxyA55, galaxyA53, galaxyA52s, galaxyA73, galaxyA37, galaxyA35, galaxyA34, galaxyA33, galaxyA32, galaxyA32FiveG, galaxyA24, galaxyA23, galaxyA17, galaxyA16, galaxyA15, galaxyA14, galaxyA06, galaxyA05, galaxyA04, galaxyA56, galaxyA36, galaxyA27, galaxyA07, galaxyTabA11, galaxyTabA7Lite, galaxyTabA9Plus, GalaxyTabS11, galaxyTabS10Ultra, galaxyTabS10Plus, GalaxyTabS10FePlus, GalaxyTabS10Fe, galaxyTabS10Lite, GalaxyTabS9FePlus, galaxyTabS9Fe, galaxyTabS9, galaxyTabS9Plus, galaxyTabS8Ultra, galaxyTabS8Plus, galaxyTabS8, galaxyTabS7Plus, galaxyTabS7Fe, galaxyZTriFold, galaxyZFold8Ultra, galaxyZFold8, galaxyZFlip8, galaxyZFlip7Fe, galaxyTabS11Ultra, galaxyTabS9Ultra, galaxyS26Ultra, galaxyS26Plus, galaxyS26,
-  galaxyS25Ultra, galaxyS25Plus, galaxyS25Edge, galaxyS25Fe, galaxyS25, galaxyS24Ultra, galaxyS24Plus, galaxyS24, galaxyS24Fe, galaxyS23Ultra, galaxyS23Plus, galaxyS23, galaxyS23Fe, galaxyS22Ultra, galaxyS22Plus, galaxyS22, galaxyS21Ultra, galaxyS21Plus, galaxyS21, galaxyS20Ultra, galaxyS20Fe, galaxyNote20Ultra, galaxyNote20, galaxyZFlip7, galaxyZFold7, galaxyZFold6, galaxyZFold5, galaxyZFold4, galaxyZFold3, galaxyZFlip6, galaxyZFlip5, galaxyZFlip4, galaxyZFlip3, galaxyZFlip, galaxyZFold2];
+  galaxyS25Ultra, galaxyS25Plus, galaxyS25Edge, galaxyS25Fe, galaxyS25, galaxyS24Ultra, galaxyS24Plus, galaxyS24, galaxyS24Fe, galaxyS23Ultra, galaxyS23Plus, galaxyS23, galaxyS23Fe, galaxyS22Ultra, galaxyS22Plus, galaxyS22, galaxyS21Ultra, galaxyS21Plus, galaxyS21, galaxyS21Fe, galaxyS20Ultra, galaxyS20Fe, galaxyNote20Ultra, galaxyNote20, galaxyZFlip7, galaxyZFold7, galaxyZFold6, galaxyZFold5, galaxyZFold4, galaxyZFold3, galaxyZFlip6, galaxyZFlip5, galaxyZFlip4, galaxyZFlip3, galaxyZFlip, galaxyZFold2];
 const mergedDevices = verifiedEntries.map(device => {
   const preview = skinPreviews.find(entry => entry.slug === device.slug);
   const missingScreens = preview?.screens.filter(screen => !device.screens.some(s => s.id === screen.id)) ?? [];

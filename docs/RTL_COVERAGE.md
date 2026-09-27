@@ -595,6 +595,15 @@ and 3-button bars are 81/144 px (27/48 dp). Both modes report a centered
 56×81 px top cutout and 102 px (34 dp) corner radii. Settings, configuration
 and inset classifications agree in both modes.
 
+### Galaxy S21 FE — 2026-09-27
+
+InsetsProbe 1.3.0 captured Samsung RTL Galaxy S21 FE (SM-G990B), Android 14 /
+One UI 6.1, build `UP1A.231005.007.G990BXXSCGYC9`, portrait at rotation 0,
+1080×2340 px, 480 dpi, font scale 1. Gesture bars are 99/45 px (33/15 dp) and
+3-button bars are 99/144 px (33/48 dp). Both modes report a centered 70×99 px
+top cutout and 121 px (40.33 dp) corner radii. Settings, configuration and
+inset classifications agree in both modes.
+
 ## Galaxy Note20 and Galaxy Tab S9+/S8 series measured on 2026-09-25
 
 Samsung RTL produced paired full-screen Main captures for Galaxy Note20 5G
