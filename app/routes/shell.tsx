@@ -112,10 +112,7 @@ export default function Shell() {
         <nav className="sidebar-footer">
           <NavLink to="/developer-guide" onClick={() => setMobileOpen(false)}>Developer guide</NavLink>
           <NavLink to="/methodology" onClick={() => setMobileOpen(false)}>How I measure</NavLink>
-          <span className="sidebar-footer-community">
-            <a href={REPO_URL} target="_blank" rel="noreferrer">GitHub ↗</a>
-            <a href={`${REPO_URL}/issues/new/choose`} target="_blank" rel="noreferrer" aria-label="Send feedback or report an issue on GitHub (opens in a new tab)">Send feedback ↗</a>
-          </span>
+          <a href={`${REPO_URL}/issues/new/choose`} target="_blank" rel="noreferrer" aria-label="Send feedback or report an issue on GitHub (opens in a new tab)">Send feedback ↗</a>
           <p className="sidebar-footer-support">
             <span>Found this useful?</span>
             <a href={REPO_URL} target="_blank" rel="noreferrer" aria-label="Star windowinsets.info on GitHub (opens in a new tab)">★ Star it on GitHub</a>

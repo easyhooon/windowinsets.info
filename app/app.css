@@ -73,8 +73,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .hinge-sequence-note { margin:4px 12px 8px; font-size:12px; line-height:1.6; color:var(--color-muted); }
 .device-thumbnail.foldable-flip { background:linear-gradient(#bfb4ce 48%,#736980 50%,#c6b6d3 53%); }
 .sidebar-footer { padding:12px 8px; border-top:1px solid #d1d9e0; display:grid; gap:7px; color:#59636e; font-size:11px; }
-.sidebar-footer-community { display:flex; align-items:center; gap:10px; }
-.sidebar-footer-community a+a { border-left:1px solid #d1d9e0; padding-left:10px; }
 .sidebar-footer-support { display:grid; gap:3px; margin:0; line-height:1.4; }
 .workspace { min-width:0; flex:1; overflow:auto; }
 .device-workspace { height:100%; min-height:0; display:grid; grid-template-columns:auto 11px minmax(0,1fr); position:relative; background:#fff; background-image:radial-gradient(#dbe0e666 .8px,transparent .8px); background-size:10px 10px; }
