@@ -25,6 +25,13 @@ removes a model from its catalog.
   Galaxy Z Fold8 Ultra (SM-F976U, Korea/Gumi) was reservable on 2026-09-23. An
   earlier session was returned before capture because the lock screen required
   manual handoff; later captures in the repository measured both displays.
+  On 2026-09-27, SM-F976U_KR1 on Android 17 / One UI 9.0 supplied cover and
+  inner captures at rotations 0, 1 and 3 in both navigation modes. The inner
+  display used the RTL Rotate control for rotations 1 and 3 because the Probe's
+  orientation request did not rotate that display. The 12 accepted raw files are
+  in `measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/`. All four
+  rotation-0 inset objects match the already published 2026-09-23 captures, so
+  the site keeps those published values and source labels.
   Galaxy Z Fold6 (SM-F956U-KR10, Korea/Gumi) was reserved three times on
   2026-09-23. Its cover and inner display were measured in both navigation
   modes. An earlier inner 3-button attempt was retained but not published
@@ -213,9 +220,25 @@ removes a model from its catalog.
   heuristic reports threeButton. Both modes report 48.08 dp / 64 px bottom
   system bars; preserve the measured values.
 - Fold8 cover and inner were both
-  recaptured from a live reservation in 3-button and gesture modes. Fold7 cover
-  and inner are also measured in both modes from the same SM-F966U software
-  build. On 2026-09-27 InsetsProbe 1.5.0 captured cover and
+  recaptured from a live reservation in 3-button and gesture modes. On
+  2026-09-27, SM-F971N_KR11 on Android 17 / One UI 9.0 supplied rotations 0, 1
+  and 3 for both screens and navigation modes
+  (`measurements/galaxy-z-fold8/recapture-2026-09-27-rotation/`). The inner
+  display's natural rotation is landscape; its rotations 1 and 3 were set with
+  the RTL Rotate control because the Probe's orientation request was ignored.
+  The main Taskbar was off for both modes. Continue apps on cover screen was
+  set to Always before the cover gesture sweep so Probe stayed on the active
+  display when folded. All four natural-rotation inset
+  objects match the earlier published recaptures; the new Probe also recorded
+  the cover cutout path without changing its safe insets or bounds. This RTL
+  unit reported `HALF_OPENED`/`isSeparating=true` for the inner folding feature
+  at every rotation despite a 180° hinge sensor and the visibly unfolded
+  chassis. The earlier published recapture reported `FLAT`; retain that
+  published fold state and treat the new state fields as inconsistent RTL
+  evidence.
+
+  Fold7 cover and inner are also measured in both modes from the same SM-F966U
+  software build. On 2026-09-27 InsetsProbe 1.5.0 captured cover and
   inner at rotations 0, 1 and 3 in both modes (`recapture-2026-09-27-rotation/`);
   the rotation 0 values match the published captures exactly. Inner rotations 1
   and 3 were set with the RTL Rotate control because the app's rotation request

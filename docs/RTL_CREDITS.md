@@ -1,6 +1,6 @@
 # Samsung RTL credits and reservation budget
 
-**Last live verification:** 2026-09-24 23:26 KST
+**Last live verification:** 2026-09-28 00:45 KST
 
 Samsung's published pages and the current RTL account UI do not agree on the
 daily grant. Keep the published policy, observed behavior and spending history
@@ -209,3 +209,28 @@ Vietnam/Hanoi. Galaxy S23 was reserved for one retry and its WebClient again
 showed `All ongoing tests have ended` immediately; no measurements were
 captured. The exact unit identifier, credit change and any refund were not
 recorded. Further S23-series bookings are paused until another unit appears.
+
+On 2026-09-27, a 30-minute Galaxy Z Fold8 Ultra reservation (SM-F976U_KR1,
+Korea/Gumi, Android 17) produced a complete 12-file rotation sweep. The header
+showed 5 Credits after that booking, but the pre-booking header had shown 14 and
+was not independently refreshed, so its exact net change is unverified. A
+subsequent 30-minute Galaxy Z Fold8 reservation (SM-F971N_KR1, Korea/Gumi,
+Android 17) reduced the confirmed header from **5 to 3 Credits**. The
+Reservations page kept its Start button disabled, but the existing WebClient
+tab switched to Fold8 automatically. InsetsProbe was not installed on that unit;
+the browser file chooser did not respond to the automated install control, so
+the install step was handed to the user. The installed APK saved nine rotation
+files on the device, but none appeared in the Vercel capture inbox and the
+reservation expired before a File Browser export. A local inspection found that
+APK lacked the configured upload key. No new Fold8 files from this reservation
+are accepted, and no refund is assumed.
+
+The Probe APK was rebuilt with the configured upload key and verified locally
+without printing the key. A second 30-minute Fold8 reservation on
+SM-F971N_KR11 reduced the confirmed header from **3 to 1 Credits**. This leaves
+the account below the two-credit minimum for another booking; the user was
+notified and offered an account handoff for later devices. With the keyed APK,
+the second reservation uploaded all 12 cover/inner, navigation-mode and rotation
+combinations to inbox PR #38. The accepted files are recorded in the
+measurement queue. The 1-credit balance is the last confirmed header value;
+any later refund must be verified separately.

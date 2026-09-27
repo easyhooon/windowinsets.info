@@ -108,14 +108,20 @@ of a session: Samsung's published 20-credit daily policy conflicts with a live
 10-credit once-per-day grant observed on 2026-09-23. Budget from the confirmed
 header balance, not the published maximum.
 Prepare the APK and capture checklist before reserving. Prioritize complete,
-settled captures, downloads and validation; there is no 15-minute deadline for
-the measurements. If all required evidence is already safe on the host and the
-WebClient still offers **Return this device to get back 1 credit(s)**, an early
-return can save a credit. Check the option and verify the balance increase if
-choosing to return. Do not assume a refund from elapsed time or checkbox text,
-and do not rush, skip validation, or end a productive reservation just to meet
-a presumed refund cutoff. When evidence is incomplete, use the reserved time
-while further progress is possible; preserve unresolved captures and their
+settled captures, downloads and validation. Once all required captures are
+uploaded and validated, use the device tab's **close** control in WebClient,
+confirm the **Exit** dialog, and check Reservations. If WebClient offers
+**Return this device to get back 1 credit(s)**, select it and verify the balance
+increased. The visible offer establishes refund eligibility; use the remaining
+time as a deadline, not a reason to retry a missing offer. When
+no return is offered, **Exit** can end the test while the paid reservation
+remains listed until its timer expires. Do not report that reservation as
+returned. Record the balance and reservation state before moving to the next
+device. Once the remaining time is 15 minutes or less, the unused 15-minute
+block is gone: confirm **Exit** and continue with the next target immediately.
+Do not wait for the timer to expire or retry the return flow.
+Validate captures promptly so an offered refund can still be claimed; keep
+collecting while evidence is incomplete. Preserve unresolved captures and their
 limitations. Do not extend or renew automatically. Confirm the
 reservation dialog still names the intended model and duration before starting.
 The user's request to reserve the named queue authorizes this
@@ -185,6 +191,11 @@ step to the user.
 1. Build before spending reservation time:
    `cd tools/insets-probe && ./gradlew :app:testDebugUnitTest :app:assembleDebug`.
    Record the APK checksum when traceability matters.
+   When using Probe 1.5.0 direct uploads, confirm `insetsProbeUploadKey` is
+   configured and that its exact value occurs in the built APK's DEX bytes.
+   Report only a Boolean result, never the key. Rebuild and repeat this check
+   before reserving if the APK lacks the key; a keyless build saves files on the
+   device but cannot send them to the Vercel capture inbox.
 2. On a Chrome setup that has returned `Not allowed`, check file selection **before
    reserving**. Use a temporary local page with a plain `input[type=file]` and no
    upload endpoint, in the same Chrome browser session used for RTL. Start
@@ -214,6 +225,8 @@ step to the user.
    the user instead of repeating the same browser call. For a native
    macOS file chooser, press **Cmd+Shift+G**, paste the absolute path to
    `tools/insets-probe/app/build/outputs/apk/debug/app-debug.apk`, and choose Open.
+   On 2026-09-28 the Chrome `filechooser` listener and `setFiles` succeeded for
+   Fold3; use this direct path first, then verify the installed app row appears.
 5. Wait for `InsetsProbe info.windowinsets.probe` to appear. Select the application
    row itself, then click the Start/play control.
 6. Do not enable Remote Debug Bridge or grant Chrome access to other apps/services
@@ -406,6 +419,13 @@ are available, or the remaining human step is explicit.
 Raw files under `measurements/` are immutable evidence. Copy downloads under explicit
 `<screen>-<threeButton|gesture>.json` names only after checking them; never repair or
 normalize the JSON by hand.
+
+For direct uploads, confirm Probe reports `Uploaded ... inbox PR #...`, then read
+the capture-inbox branch while the reservation is active. Match every expected
+filename to its fresh timestamp, model, screen, actual rotation, navigation
+setting, window dimensions and density. `Sweep done` only proves local files
+were saved; it does not prove that the API received them. Recover any missing
+upload or export its file through File Browser before the reservation expires.
 
 Check every file for:
 
