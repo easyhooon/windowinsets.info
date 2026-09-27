@@ -2,7 +2,7 @@ import { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } fro
 
 type Bounds = { left: number; top: number; right: number; bottom: number };
 export type DiagramViewportHandle = { fitFoldBounds: (bounds: Bounds, body: Bounds) => number; setFoldAngle: (angle: number) => void; effectiveZoom: () => number; refitFold: () => void;
-  /** Play an orientation change onto the already re-laid-out diagram. `before` is the device box before the change. */
+  /** Play an orientation change onto the already re-laid-out diagram, before it paints. */
   turn: (deltaDeg: number, before: DOMRect | null) => void };
 
 // Displayed zoom is CSS px per dp, like the reference's px per pt.
@@ -31,6 +31,17 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
   const scaleRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef<HTMLDivElement>(null);
   const turnRef = useRef<HTMLDivElement>(null);
+  // Fit must measure where the diagram will settle, not a frame of a running turn
+  // or zoom transition: jump every animation to its end, measure, then restore.
+  const measureSettled = <T,>(measure: () => T): T => {
+    const animations = ref.current?.getAnimations({ subtree: true }) ?? [];
+    const times = animations.map(animation => animation.currentTime);
+    for (const animation of animations) {
+      const end = animation.effect?.getComputedTiming().endTime;
+      if (typeof end === "number") animation.currentTime = end;
+    }
+    try { return measure(); } finally { animations.forEach((animation, i) => { animation.currentTime = times[i]; }); }
+  };
   // Unwrapped view angle so orientation changes animate along the shortest turn.
   const turn = useRef(rotation);
   const previousRotation = useRef(rotation);
@@ -119,32 +130,34 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       const wrap = turnRef.current;
       if (!wrap || !deltaDeg || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       for (const animation of wrap.getAnimations({ subtree: true })) animation.cancel();
-      // Fit measures the laid-out diagram, so hide it until fitting settles, then
-      // start from the previous pose and turn into the new one.
-      wrap.style.opacity = "0";
-      let frames = 0;
-      const start = () => {
-        frames++;
-        if (frames < 2 || (fitting.current && frames < 12)) { requestAnimationFrame(start); return; }
-        wrap.style.opacity = "";
-        const body = wrap.querySelector("[data-fit-body]")?.getBoundingClientRect();
-        const box = wrap.getBoundingClientRect();
-        if (!body || !body.width || !body.height) return;
-        const sideways = Math.abs(deltaDeg) % 180 === 90;
-        const k = before && before.width && before.height
-          ? Math.min(before.width / (sideways ? body.height : body.width), before.height / (sideways ? body.width : body.height)) : 1;
-        wrap.style.transformOrigin = `${body.left + body.width / 2 - box.left}px ${body.top + body.height / 2 - box.top}px`;
-        wrap.animate([{ transform: `rotate(${-deltaDeg}deg) scale(${k})` }, { transform: "none" }], { duration: ROTATION_MS, easing: ROTATION_EASING });
-        const content = wrap.querySelector<SVGGElement>("[data-screen-content]");
-        if (!content) return;
-        const fit = sideways ? Number(content.dataset.turnScale ?? 1) : 1;
-        const lag = CONTENT_LAG_MS / (ROTATION_MS + CONTENT_LAG_MS);
-        const from = `rotate(${deltaDeg}deg) scale(${fit})`;
-        // Per-keyframe easing keeps the hold linear in time and the turn decelerating.
-        content.animate([{ transform: from, offset: 0 }, { transform: from, offset: lag, easing: ROTATION_EASING }, { transform: "none" }],
-          { duration: ROTATION_MS + CONTENT_LAG_MS });
-      };
-      requestAnimationFrame(start);
+      // Runs before paint on the new layout at the previous zoom. Turned back by
+      // -delta about its own centre, it matches the previous pose (size swaps with
+      // orientation), so the turn starts without a jump. Fit passes then ease zoom and
+      // pan through the same window; they measure the settled pose (measureSettled).
+      const body = wrap.querySelector("[data-fit-body]")?.getBoundingClientRect();
+      const box = wrap.getBoundingClientRect();
+      if (!body || !body.width || !body.height) return;
+      const sideways = Math.abs(deltaDeg) % 180 === 90;
+      // Layouts are sized by height, so the re-laid-out device can differ in scale; match the previous box.
+      const k = before && before.width && before.height
+        ? Math.min(before.width / (sideways ? body.height : body.width), before.height / (sideways ? body.width : body.height)) : 1;
+      wrap.style.transformOrigin = `${body.left + body.width / 2 - box.left}px ${body.top + body.height / 2 - box.top}px`;
+      // The new layout may centre slightly differently; start from the previous centre too.
+      const dx = before ? before.left + before.width / 2 - (body.left + body.width / 2) : 0;
+      const dy = before ? before.top + before.height / 2 - (body.top + body.height / 2) : 0;
+      wrap.animate([{ transform: `translate(${dx}px, ${dy}px) rotate(${-deltaDeg}deg) scale(${k})` }, { transform: "none" }], { duration: ROTATION_MS, easing: ROTATION_EASING });
+      const eased = [scaleRef.current, positionRef.current].filter(Boolean) as HTMLDivElement[];
+      for (const el of eased) el.style.transition = `transform ${ROTATION_MS}ms ${ROTATION_EASING}`;
+      clearTimeout(turnTimer.current);
+      turnTimer.current = setTimeout(() => { for (const el of eased) el.style.transition = ""; }, ROTATION_MS + CONTENT_LAG_MS + 120);
+      const content = wrap.querySelector<SVGGElement>("[data-screen-content]");
+      if (!content) return;
+      const fit = sideways ? Number(content.dataset.turnScale ?? 1) : 1;
+      const lag = CONTENT_LAG_MS / (ROTATION_MS + CONTENT_LAG_MS);
+      const from = `rotate(${deltaDeg}deg) scale(${fit})`;
+      // Per-keyframe easing keeps the hold linear in time and the turn decelerating.
+      content.animate([{ transform: from, offset: 0 }, { transform: from, offset: lag, easing: ROTATION_EASING }, { transform: "none" }],
+        { duration: ROTATION_MS + CONTENT_LAG_MS });
     },
     refitFold: () => {
       if (!live.current.autoFit || foldFitPending.current || !scaleRef.current) return;
@@ -212,7 +225,7 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       if (!svg) { fitting.current = false; return; }
       // Fit the visible body and annotations, not the SVG's unused margins.
       // Constant-size labels need another pass after the device scale changes.
-      const boxes = [...svg.querySelectorAll('[data-fit-body], [data-ruler]')].map(node => node.getBoundingClientRect());
+      const boxes = measureSettled(() => [...svg.querySelectorAll('[data-fit-body], [data-ruler]')].map(node => node.getBoundingClientRect()));
       const left = Math.min(...boxes.map(box => box.left)), right = Math.max(...boxes.map(box => box.right));
       const top = Math.min(...boxes.map(box => box.top)), bottom = Math.max(...boxes.map(box => box.bottom));
       const viewport = el.getBoundingClientRect();
