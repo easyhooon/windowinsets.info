@@ -230,9 +230,15 @@ removes a model from its catalog.
   set to Always before the cover gesture sweep so Probe stayed on the active
   display when folded. All four natural-rotation inset
   objects match the earlier published recaptures; the new Probe also recorded
-  the cover cutout path without changing its safe insets or bounds. Fold7 cover
-  and inner are also measured in both modes from the same SM-F966U software
-  build. On 2026-09-27 InsetsProbe 1.5.0 captured cover and
+  the cover cutout path without changing its safe insets or bounds. This RTL
+  unit reported `HALF_OPENED`/`isSeparating=true` for the inner folding feature
+  at every rotation despite a 180° hinge sensor and the visibly unfolded
+  chassis. The earlier published recapture reported `FLAT`; retain that
+  published fold state and treat the new state fields as inconsistent RTL
+  evidence.
+
+  Fold7 cover and inner are also measured in both modes from the same SM-F966U
+  software build. On 2026-09-27 InsetsProbe 1.5.0 captured cover and
   inner at rotations 0, 1 and 3 in both modes (`recapture-2026-09-27-rotation/`);
   the rotation 0 values match the published captures exactly. Inner rotations 1
   and 3 were set with the RTL Rotate control because the app's rotation request
