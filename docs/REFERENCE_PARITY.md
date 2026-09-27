@@ -241,6 +241,10 @@ desktop and mobile.
   entries use AOSP emulator skins and Android Emulator captures, so the evidence
   panel replaces the Samsung RTL block with the emulator manifest, profile and
   build, and the canvas notes that values were not measured on Pixel hardware.
+- The light Porcelain Pixel Tablet AOSP frame gets a subtle SVG outline around
+  its body clip so its edge remains visible on the light canvas. The original
+  artwork and measured display geometry are unchanged; other device skins keep
+  their existing rendering.
 - **Export JSON** is an intentional product divergence from the observed
   safearea.info UI. Android consumers need exact probe dp/px, navigation-mode,
   display and provenance data outside the visual tool. The action stays secondary

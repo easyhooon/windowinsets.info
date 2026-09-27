@@ -72,6 +72,11 @@ all five physical-device runs available for 2026-09-28 were used for Pixel 10
 Pro XL, Pixel 10 Pro Fold, Pixel 9 Pro Fold, Pixel 8 Pro and Pixel Tablet. See the
 [validation log and exact commands](docs/PIXEL_HARDWARE_VALIDATION.md) and
 [FTL quota and pricing](https://firebase.google.com/docs/test-lab/usage-quotas-pricing).
+The remaining catalog-listed Pixel models can be checked in batches of five
+per day on Spark, with no billing account. Blaze provides 30 free physical-device
+test minutes per day, then charges $5 per device-hour; project-specific testing
+quotas still apply. It is unnecessary for this paced hardware comparison, and
+it would not resolve the Pixel Tablet artwork contrast tracked in [#35](https://github.com/easyhooon/windowinsets.info/issues/35).
 
 ### What InsetsProbe records
 
