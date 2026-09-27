@@ -14,14 +14,20 @@ const captureSource = (mode: "gesture" | "threeButton"): Source => ({
   url: `${captureBase}/main-${mode}.json`,
   retrievedAt: "2026-09-25",
 });
+const recaptureSource: Source = {
+  kind: "measured",
+  label: "InsetsProbe 1.3.0 on Samsung RTL Galaxy Tab S10 FE+ main (SM-X620), 2026-09-27 recapture of both modes",
+  url: "https://github.com/easyhooon/windowinsets.info/tree/main/measurements/galaxy-tab-s10-fe-plus/recapture-2026-09-27",
+  retrievedAt: "2026-09-27",
+};
 const gestureSource = captureSource("gesture");
 const threeButtonSource = captureSource("threeButton");
-const condition = { oneUi: "8.5", android: "16", note: "Samsung RTL Galaxy Tab S10 FE+ Wi-Fi (SM-X620), build BP4A.251205.006.X620XXS9CZG3. Main display landscape, rotation 1, full-screen 2880×1800 px, 320 dpi, font scale 1. InsetsProbe's non-foldable Phone label is classified as the tablet main display from model and skin-matching dimensions. Gesture mode is confirmed by Settings/config_navBarInteractionMode=2 and left/right system gesture insets although the inset-only heuristic reports threeButton due the nonzero tappable bottom inset." };
+const condition = { oneUi: "8.5", android: "16", note: "Samsung RTL Galaxy Tab S10 FE+ Wi-Fi (SM-X620), build BP4A.251205.006.X620XXS9CZG3. Main display landscape, rotation 1, full-screen 2880×1800 px, 320 dpi, font scale 1. InsetsProbe's non-foldable Phone label is classified as the tablet main display from model and skin-matching dimensions. Gesture mode is confirmed by Settings/config_navBarInteractionMode=2 and left/right system gesture insets although the inset-only heuristic reports threeButton due the nonzero tappable bottom inset. A 2026-09-27 recapture on the same build reproduced every value in both modes." };
 const measurement = (mode: "gesture" | "threeButton"): InsetsMeasurement => {
   const values = mode === "gesture"
     ? { systemBars: {"top": 30.0, "right": 0.0, "bottom": 15.0, "left": 0.0}, systemBarsPx: {"top": 60, "right": 0, "bottom": 30, "left": 0}, displayCutout: {"top": 0.0, "right": 0.0, "bottom": 0.0, "left": 0.0}, displayCutoutPx: {"top": 0, "right": 0, "bottom": 0, "left": 0}, source: gestureSource }
     : { systemBars: {"top": 30.0, "right": 0.0, "bottom": 48.0, "left": 0.0}, systemBarsPx: {"top": 60, "right": 0, "bottom": 96, "left": 0}, displayCutout: {"top": 0.0, "right": 0.0, "bottom": 0.0, "left": 0.0}, displayCutoutPx: {"top": 0, "right": 0, "bottom": 0, "left": 0}, source: threeButtonSource };
-  return { systemBars: values.systemBars, systemBarsPx: values.systemBarsPx, displayCutout: values.displayCutout, displayCutoutPx: values.displayCutoutPx, condition, sources: [values.source] };
+  return { systemBars: values.systemBars, systemBarsPx: values.systemBarsPx, displayCutout: values.displayCutout, displayCutoutPx: values.displayCutoutPx, condition, sources: [values.source, recaptureSource] };
 };
 
 export const GalaxyTabS10FePlus: Device = {
@@ -45,7 +51,7 @@ export const GalaxyTabS10FePlus: Device = {
     cornerRadiiDp: { topLeft: 13.0, topRight: 13.0, bottomRight: 13.0, bottomLeft: 13.0 },
     cornerRadiiPx: { topLeft: 26, topRight: 26, bottomRight: 26, bottomLeft: 26 },
     insets: { gesture: measurement("gesture"), threeButton: measurement("threeButton") },
-    sources: [samsungSpecs, gestureSource, threeButtonSource],
+    sources: [samsungSpecs, gestureSource, threeButtonSource, recaptureSource],
   }],
-  sources: [samsungSpecs, gestureSource, threeButtonSource],
+  sources: [samsungSpecs, gestureSource, threeButtonSource, recaptureSource],
 };

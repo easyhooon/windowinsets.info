@@ -190,7 +190,9 @@ removes a model from its catalog.
   even though InsetsProbe's inset-only classification says threeButton. The
   S10 FE captures report font scale 1.08 rather than the default 1.0; their raw
   measurements are registered with that condition and should be recaptured at
-  1.0 for a normalized comparison.
+  1.0 for a normalized comparison. A 2026-09-27 Tab S10 FE+ recapture on the
+  same build reproduced every value in both modes; it is kept under
+  `measurements/galaxy-tab-s10-fe-plus/recapture-2026-09-27/`.
 - Galaxy Tab A9+ 5G (SM-X216B) has both landscape main modes from Samsung RTL,
   Android 14 / One UI 6.1, build `UP1A.231005.007.X216BXXS3CXG1`. Captures match
   the official 1920×1200 skin at rotation 1, 240 dpi, and font scale 1.1. Both
