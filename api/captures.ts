@@ -1,4 +1,4 @@
-import { GitHubError, MAX_BODY_BYTES, commitToInbox, githubClient, parseUpload } from "./_lib/captureInbox";
+import { GitHubError, MAX_BODY_BYTES, commitToInbox, githubClient, parseUpload } from "./_lib/captureInbox.js";
 
 /**
  * POST /api/captures — InsetsProbe upload endpoint (issue #28).
