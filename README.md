@@ -1,10 +1,14 @@
 # windowinsets.info
 
+<p align="center">
+  <a href="https://ko-fi.com/easyhooon">
+    <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support the project on Ko-fi" height="45" />
+  </a>
+</p>
+
 Window insets, display cutouts, corner radii and foldable hinge states for Samsung Galaxy and Google Pixel devices — with a source for every number.
 
 Its interface is inspired by [safearea.info](https://safearea.info), adapted for Android data and foldables.
-
-> ☕ **Found this useful?** [Support the project on Ko-fi](https://ko-fi.com/easyhooon) to help keep the site and device measurements going.
 
 ## Fold it. Measure it.
 
