@@ -16,7 +16,23 @@ InsetsProbe ──POST /api/captures──▶ Vercel function ──GitHub API�
 - Values are never edited. Review moves accepted files to
   `measurements/<device-slug>/` with canonical names, registers them, and merges.
 
-## Setup (Vercel → Project → Settings → Environment Variables, Production)
+## Create the GitHub token
+
+1. GitHub → avatar → **Settings** → **Developer settings** →
+   **Personal access tokens** → **Fine-grained tokens** → **Generate new token**
+   (direct link: https://github.com/settings/personal-access-tokens/new).
+2. Name it e.g. `windowinsets-capture-inbox`; pick an **Expiration** (the longest
+   you are comfortable with; see Token expiry below).
+3. **Resource owner**: your account. **Repository access**: *Only select
+   repositories* → `easyhooon/windowinsets.info`.
+4. **Permissions → Repository permissions**:
+   - **Contents**: Read and write (commits to `capture-inbox`)
+   - **Pull requests**: Read and write (opens/reuses the inbox PR)
+   - Metadata: Read-only is added automatically. Leave everything else off.
+5. **Generate token** and copy it once (it is not shown again). Paste it straight
+   into Vercel, never into chat, issues or the repository.
+
+## Setup (Vercel → Project → Settings → Environment Variables, Production and Preview)
 
 | Name | Value |
 | --- | --- |
