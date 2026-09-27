@@ -572,6 +572,14 @@ and 3-button bars are 74/135 px (26.31/48 dp). Both modes report a centered
 52×74 px top cutout and 101 px (35.91 dp) corner radii. Settings, configuration
 and inset classifications agree in both modes.
 
+Landscape pilot for issue #22: the same unit was captured at rotation 1
+(2340×1080 px) in both modes (`landscape-1-*.json`). The status bar grows from
+74 to 84 px (29.87 dp), the cutout moves to the left (74 px), the left
+system-gesture zone widens to 158 px (84 + 74), and in 3-button mode the
+navigation bar moves to the right edge (right 135 px, bottom 0). Gesture mode
+keeps the 42 px bottom handle. These values are stored as evidence only; the
+site does not render landscape measurements yet, and rotation 3 is pending.
+
 ## Galaxy Note20 and Galaxy Tab S9+/S8 series measured on 2026-09-25
 
 Samsung RTL produced paired full-screen Main captures for Galaxy Note20 5G
