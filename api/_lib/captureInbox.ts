@@ -119,7 +119,7 @@ export async function commitToInbox(gh: GitHub, upload: Upload, now = new Date()
         title: "Capture inbox",
         head: INBOX_BRANCH,
         base: "main",
-        body: "Raw InsetsProbe uploads under `measurements/_inbox/<model>/<timestamp>/`.\n\nReview each capture, move accepted files to `measurements/<device-slug>/` with their canonical names, register them, then merge. Do not edit values.",
+        body: "Raw InsetsProbe uploads under `measurements/_inbox/<model>/<timestamp>/`.\n\nUploads accumulate in this PR without per-capture review. The repository owner decides whether and when to merge the batch. Merge retains the raw files; publishing them as site data is a separate step. Do not edit captured values.",
       },
     }), [201], "Open inbox PR");
   }

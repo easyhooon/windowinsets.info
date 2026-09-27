@@ -4,17 +4,22 @@ InsetsProbe can upload captures straight from an RTL or physical device instead 
 the RTL File Browser download round trip.
 
 ```
-InsetsProbe ──POST /api/captures──▶ Vercel function ──GitHub API──▶ capture-inbox branch ──one PR──▶ main
+InsetsProbe ──POST /api/captures──▶ Vercel function ──GitHub API──▶ capture-inbox branch ──one batch PR──▶ main (when approved)
 ```
 
 - `api/captures.ts` (Vercel Function): checks the upload key, size (256 KB),
   a per-IP limit (10/min) and the capture shape (`probeVersion`, `device.model`,
   display size, `navigation.mode`, `insets`).
 - `api/_lib/captureInbox.ts`: one upload = one commit on `capture-inbox` under
-  `measurements/_inbox/<model>/<timestamp>/<file>.json`; creates the branch and the
-  single **Capture inbox** PR when missing, otherwise reuses them. No PR per upload.
-- Values are never edited. Review moves accepted files to
-  `measurements/<device-slug>/` with canonical names, registers them, and merges.
+  `measurements/_inbox/<model>/<timestamp>/<file>.json`; creates the branch and
+  one **Capture inbox** PR when missing. Later uploads reuse the open PR. After
+  that PR is merged, the next upload opens a new batch PR.
+- Values are never edited. A successful upload is collected as soon as the raw
+  JSON is committed to `capture-inbox`. No per-capture human validation is part
+  of collection. The user decides whether and when to merge the batch; the agent
+  can carry out that merge. The website still reads separately maintained
+  `app/data/devices` entries, so collection does not automatically publish a
+  measurement on the site.
 
 ## Create the GitHub token
 
@@ -27,7 +32,7 @@ InsetsProbe ──POST /api/captures──▶ Vercel function ──GitHub API�
    repositories* → `easyhooon/windowinsets.info`.
 4. **Permissions → Repository permissions**:
    - **Contents**: Read and write (commits to `capture-inbox`)
-   - **Pull requests**: Read and write (opens/reuses the inbox PR)
+   - **Pull requests**: Read and write (opens/reuses the batch PR)
    - Metadata: Read-only is added automatically. Leave everything else off.
 5. **Generate token** and copy it once (it is not shown again). Paste it straight
    into Vercel, never into chat, issues or the repository.
@@ -58,6 +63,6 @@ need to change.
 
 ## Limits
 
-The key ships inside the APK, so treat it as a speed bump, not a secret: the
-inbox review is the real gate. Rotate `CAPTURE_UPLOAD_KEY` (and rebuild the probe)
-if uploads are abused.
+The key ships inside the APK, so treat it as a speed bump, not a secret. Uploads
+stay on the dedicated `capture-inbox` branch until the user approves a batch
+merge. Rotate `CAPTURE_UPLOAD_KEY` (and rebuild the probe) if uploads are abused.

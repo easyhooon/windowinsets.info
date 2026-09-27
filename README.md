@@ -44,18 +44,20 @@ flowchart TD
     G -- "No key or upload failed" --> I["File Browser or adb pull<br/>manual fallback"]
     H --> J["Vercel Function checks key,<br/>size and JSON shape"]
     J --> K["GitHub API: one commit per upload<br/>on capture-inbox"]
-    K --> L["One rolling Capture inbox PR"]
-    L --> M["Person reviews model, screen,<br/>orientation, navigation and values"]
-    I --> M
-    M -- "Accepted" --> N["measurements/&lt;device-slug&gt;/<br/>immutable raw evidence"]
-    N --> O["Register values and source<br/>in app/data/devices"]
-    O --> P["windowinsets.info"]
+    K --> L["One rolling Capture inbox PR<br/>many uploads in one batch"]
+    L --> M{"User: merge this batch?"}
+    M -- "Not yet" --> N["PR stays open;<br/>more captures accumulate"]
+    M -- "Approved" --> O["Agent merges PR into main;<br/>raw JSON retained"]
+    O -. "Separate site integration;<br/>not done by the upload API" .-> Q["app/data/devices entries"]
+    Q --> P["windowinsets.info"]
 ```
 
 The upload key is built into InsetsProbe; the GitHub write token stays in Vercel.
-The API checks the payload's shape, while a person reviews whether it matches the
-actual device state before accepted captures become site data. Upload setup and
-the review inbox are documented in [`docs/CAPTURE_UPLOAD.md`](docs/CAPTURE_UPLOAD.md).
+The API checks the payload's shape and completes collection when it commits the
+raw JSON. Captures accumulate in one PR; the user decides whether and when to
+merge the batch, without per-capture manual validation. Site entries are
+maintained separately and are not updated by this upload API. Setup is
+documented in [`docs/CAPTURE_UPLOAD.md`](docs/CAPTURE_UPLOAD.md).
 Live GitHub upload still needs a PAT-backed smoke test.
 
 ### What InsetsProbe records
