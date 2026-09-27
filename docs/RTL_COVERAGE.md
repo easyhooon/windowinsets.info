@@ -142,8 +142,8 @@ removes a model from its catalog.
   Other models reserved on the same days worked, which points at these units
   rather than the account or browser. Do not rebook them until the catalog
   offers another site or unit; keep the models as artwork-only previews. On
-  2026-09-27 a Galaxy S23 Ultra SM-S918U unit worked and was captured (see
-  below); Galaxy S23+ and Galaxy S23 remain unmeasured.
+  2026-09-27 Galaxy S23 Ultra SM-S918U and Galaxy S23+ SM-S916U units worked
+  and were captured (see below); Galaxy S23 remains unmeasured.
 - Galaxy S23 FE (SM-S711B), Galaxy S22 Ultra (SM-S908U), Galaxy S22+ (SM-S906B)
   and Galaxy S22 (SM-S901B) were reserved and captured on 2026-09-25. Each has
   full-screen main captures in both navigation modes with Android setting and
@@ -562,6 +562,15 @@ Gesture bars are 94/42 px (33.42/14.93 dp) and 3-button bars are 94/135 px
 (33.42/48 dp). Both modes report a centered 54×94 px top cutout in the FHD+
 coordinate space, so the cutout shape is registered, and 11 px (3.91 dp) corner
 radii. Settings, configuration and inset classifications agree in both modes.
+
+### Galaxy S23+ — 2026-09-27
+
+InsetsProbe 1.3.0 captured Samsung RTL Galaxy S23+ (SM-S916U), Android 16 /
+One UI 8.0, build `BP2A.250605.031.A3.S916USQS6EYK3`, portrait at rotation 0,
+1080×2340 px, 450 dpi, font scale 1. Gesture bars are 74/42 px (26.31/14.93 dp)
+and 3-button bars are 74/135 px (26.31/48 dp). Both modes report a centered
+52×74 px top cutout and 101 px (35.91 dp) corner radii. Settings, configuration
+and inset classifications agree in both modes.
 
 ## Galaxy Note20 and Galaxy Tab S9+/S8 series measured on 2026-09-25
 
