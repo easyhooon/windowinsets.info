@@ -604,6 +604,26 @@ One UI 6.1, build `UP1A.231005.007.G990BXXSCGYC9`, portrait at rotation 0,
 top cutout and 121 px (40.33 dp) corner radii. Settings, configuration and
 inset classifications agree in both modes.
 
+### Galaxy A54 5G — 2026-09-27
+
+InsetsProbe 1.5.0 captured Samsung RTL Galaxy A54 5G (SM-A546B-VN1, Vietnam /
+Hanoi), Android 16 / One UI 8.0, build `BP2A.250605.031.A3.A546BXXSJEZE5`,
+1080×2340 px, 450 dpi, font scale 1.15, with the in-app rotation sweep in both
+navigation modes. Portrait (rotation 0) gesture bars are 80/42 px (28.44/14.93
+dp) and 3-button bars are 80/135 px (28.44/48 dp); both report a centered
+58×80 px top cutout and 113 px (40.18 dp) corner radii. At rotations 1 and 3
+the status bar is 84 px, the 80 px cutout moves to the left (rotation 1) or
+right (rotation 3) edge, and the 3-button bar is a 135 px side bar opposite the
+cutout; gesture keeps a 42 px bottom bar. Settings, configuration and inset
+classifications agree in all six files.
+
+Uploading the APK through WebClient Applications again stalled at 0% on this
+unit (compare the 2026-09-25 A54 report above). The maintainer's manual
+install in the same session succeeded, so the stall is not a model-wide
+incompatibility. The in-app Upload did not reach the capture inbox because the
+installed APK had been built with a blank upload key (the emulator build
+setting); the six files were exported through File Browser instead.
+
 ## Galaxy Note20 and Galaxy Tab S9+/S8 series measured on 2026-09-25
 
 Samsung RTL produced paired full-screen Main captures for Galaxy Note20 5G
