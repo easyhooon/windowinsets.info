@@ -1,0 +1,48 @@
+digraph InsetsProbeFlow {
+  graph [
+    rankdir=TB,
+    bgcolor="#ffffff",
+    pad="0.3",
+    nodesep="0.35",
+    ranksep="0.5",
+    fontname="Arial"
+  ];
+  node [
+    shape=box,
+    style="rounded,filled",
+    color="#7c9dc1",
+    fillcolor="#edf5ff",
+    fontcolor="#172b4d",
+    fontname="Arial",
+    fontsize=13,
+    margin="0.18,0.12"
+  ];
+  edge [color="#52677d", fontcolor="#34495e", fontname="Arial", fontsize=11];
+
+  device [label="Galaxy device\nreal or Samsung RTL"];
+  probe [label="InsetsProbe\nedge-to-edge activity"];
+  insets [label="WindowInsetsCompat"];
+  fold [label="FoldingFeature"];
+  hinge [label="Hinge angle"];
+  metrics [label="Window size and density"];
+  gate [label="CapturePolicy", shape=diamond, color="#a9751b", fillcolor="#fff2d6"];
+  json [label="JSON schema v2\n<screen>-<navMode>.json"];
+  raw [label="measurements/<slug>/\nimmutable evidence"];
+  data [label="app/data/devices/<slug>"];
+  site [label="windowinsets.info"];
+
+  device -> probe;
+  probe -> insets [label="OnApplyWindowInsetsListener\non the content root"];
+  probe -> fold [label="WindowInfoTracker"];
+  probe -> hinge [label="Sensor.TYPE_HINGE_ANGLE"];
+  probe -> metrics [label="WindowManager, DisplayMetrics,\nConfiguration"];
+  { rank=same; insets; fold; hinge; metrics; }
+  insets -> gate;
+  fold -> gate;
+  hinge -> gate;
+  metrics -> gate;
+  gate -> json [label="settled full-screen window"];
+  json -> raw;
+  raw -> data [label="values plus source link"];
+  data -> site;
+}

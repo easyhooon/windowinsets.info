@@ -32,19 +32,7 @@ Found a mistake or have a capture that differs from mine? Open an issue or pull 
 
 Manufacturers don't publish insets, so I measure them with [InsetsProbe](tools/insets-probe) — a tiny Android app that dumps `WindowInsets`, `DisplayCutout`, `RoundedCorner`, `FoldingFeature` and the hinge angle as JSON. It works on a real device or on [Samsung Remote Test Lab](https://developer.samsung.com/remote-test-lab). See [tools/insets-probe/README.md](tools/insets-probe/README.md).
 
-```mermaid
-flowchart LR
-  device["Galaxy device<br/>real or Samsung RTL"] --> probe["InsetsProbe<br/>edge-to-edge activity"]
-  probe -- "OnApplyWindowInsetsListener<br/>on the content root" --> insets["WindowInsetsCompat"]
-  probe -- "WindowInfoTracker" --> fold["FoldingFeature"]
-  probe -- "Sensor.TYPE_HINGE_ANGLE" --> hinge["Hinge angle"]
-  probe -- "WindowManager, DisplayMetrics,<br/>Configuration" --> metrics["Window size and density"]
-  insets & fold & hinge & metrics --> gate{"CapturePolicy"}
-  gate -- "settled full-screen window" --> json["JSON schema v2<br/>&lt;screen&gt;-&lt;navMode&gt;.json"]
-  json --> raw["measurements/&lt;slug&gt;/<br/>immutable evidence"]
-  raw -- "values plus source link" --> data["app/data/devices/&lt;slug&gt;"]
-  data --> site["windowinsets.info"]
-```
+![InsetsProbe capture flow: a Galaxy device runs the probe, which collects insets, fold state, hinge angle, and display metrics. CapturePolicy validates the window before JSON is stored as immutable evidence and published on the site.](docs/media/insets-probe-flow.svg)
 
 ### What InsetsProbe records
 
