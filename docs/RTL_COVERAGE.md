@@ -528,6 +528,17 @@ the One UI 6 taskbar pattern. Font scale was not recaptured at 1 because the
 Tab S10 FE comparison showed no inset change. The 3-button raw screen label is
 `phone`; model and resolution establish the tablet Main display.
 
+### Galaxy Tab S7+ — 2026-09-27
+
+InsetsProbe 1.3.0 captured Samsung RTL Galaxy Tab S7+ (SM-T970, Vietnam),
+Android 13 / One UI 5.0, build `TP1A.220624.014.T970XXU2DVL1`, landscape at
+rotation 1, 2800×1752 px, 340 dpi, font scale 1. Both modes report 51/102 px
+(24/48 dp) system bars, no display cutout and 28 px (13.18 dp) corner radii. The
+gesture capture is confirmed by secure navigation mode 2,
+`config_navBarInteractionMode=2` and 63 px side system-gesture insets; the
+inset-only heuristic reports threeButton. The equal gesture and 3-button bottom
+inset matches the One UI 5.1 Tab S7 FE pattern.
+
 ## Galaxy Note20 and Galaxy Tab S9+/S8 series measured on 2026-09-25
 
 Samsung RTL produced paired full-screen Main captures for Galaxy Note20 5G
