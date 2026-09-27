@@ -465,32 +465,43 @@ display in one step:
 
 ## Device Status & Progress
 
-| Device | Model | Screens | 3-Button | Gesture | Status |
-| --- | --- | --- | --- | --- | --- |
-| Galaxy Z Fold8 | SM-F971N | Cover + inner | ✓ both | ✓ both | Complete |
-| Galaxy Z Flip8 | SM-F776B | Cover + inner | ✓ both | ✓ both | Complete |
-| Galaxy S25 Ultra | SM-S938N | Main | ✓ | ✓ | Complete |
-| Galaxy S24 Ultra | SM-S928N-KR3 | Main | ✓ | ✓ | Complete (RTL, Korea/Gumi, Android 16 / One UI 8.5) |
-| Galaxy S24 | SM-S921N-KR3 | Main | ✓ | ✓ | Complete (RTL, Korea/Gumi, Android 16 / One UI 8.5) |
-| Galaxy S24+ | SM-S926N-KR3 | Main | ✓ | ✓ | Complete (RTL, Korea/Gumi, Android 16 / One UI 8.5) |
-| Galaxy S25+ | SM-S936N | Main | ✓ | ✓ | Complete (real device, Korea — not RTL) |
-| Galaxy S25 Edge | SM-S937N | Main | ✓ | ✓ | Complete (RTL, Korea/Gumi, Android 16) |
-| Galaxy S25 FE | SM-S731N | Main | ✓ | ✓ | Complete (RTL, Korea/Gumi, Android 16) |
-| Galaxy S25 | SM-S931N | Main | ✓ | ✓ | Complete (RTL, Korea/Gumi, Android 16) |
-| Galaxy S23 FE | SM-S711B | Main | ✓ | ✓ | Complete (RTL, Android 16 / One UI 8.5) |
-| Galaxy S22 Ultra | SM-S908U | Main | ✓ | ✓ | Complete (RTL, Android 13 / One UI 5.1; FHD+ capture, cutout geometry omitted due to coordinate mismatch) |
-| Galaxy S22+ | SM-S906B | Main | ✓ | ✓ | Complete (RTL, Android 15 / One UI 7.0) |
-| Galaxy S22 | SM-S901B | Main | ✓ | ✓ | Complete (RTL, Android 15 / One UI 7.0) |
-| Galaxy S21 Ultra | SM-G998B | Main | ✓ | ✓ | Complete (RTL, Android 14 / One UI 6.1; FHD+ capture on QHD+ panel; corner radii unavailable) |
-| Galaxy S21+ | SM-G996B | Main | ✓ | ✓ | Complete (RTL, Android 15 / One UI 7.0) |
-| Galaxy S21 | SM-G991B | Main | ✓ | ✓ | Complete (RTL, Android 14 / One UI 6.1) |
-| Galaxy S20 Ultra | SM-G988B | Main | ✓ | ✓ | Complete (RTL, Android 13 / One UI 5.1; FHD+ capture on QHD+ panel; cutout bounds mismatch, shape omitted) |
-| Galaxy S20 FE | SM-G780G | Main | ✓ | ✓ | Complete (RTL, Android 13 / One UI 5.1; raw 3-button timestamp differs from host download time and is documented as a device-clock anomaly) |
-| Galaxy Z Fold7 | SM-F966U | Cover + inner | ✓ both | ✓ both | Complete |
-| Galaxy Z Fold6 | SM-F956U | Cover + inner | ✓ both | ✓ both | Complete |
-| Galaxy Z Flip6 | SM-F741U | Main | ✓ | ✓ | Main complete; no cover skin |
-| Galaxy Z Flip5 | SM-F731B | Main | ✓ | ✓ | Main complete; no cover skin |
-| Galaxy Z Flip3 | SM-F711B | Main | ✓ | ✓ | Main complete; 3-button captured 2026-09-23 and gesture recaptured/downloaded 2026-09-24 from the same RTL unit; no cover skin |
+Rotation requirement (2026-09-27, issues #22/#24): a screen is complete only when
+both navigation modes have separate captures at the natural rotation and at
+rotations 1 and 3, usually six files per screen from **Rotate & measure all
+orientations**. Natural-rotation captures stay published and valid. Devices
+that only have those captures need the full sweep again on the same screens.
+Missing rotations stay pending; never mirror or rotate existing captures to
+fill them.
+
+### Rotation sweep captured
+
+| Device | Model | Rotation captures on file | Remaining |
+| --- | --- | --- | --- |
+| Galaxy A54 5G | SM-A546B | Main: natural, rotation 1 and 3 in both modes | None |
+| Galaxy S23+ | SM-S916U | Main: 3-button rotation 1 and 3; gesture rotation 1 (pilot, captured by hand rotation) | Main gesture rotation 3 |
+| Galaxy Z Fold8 | SM-F971N | Cover: 3-button rotation 1 and 3 (pilot, `_inbox/SM-F971N/2026-09-27T11-55-09-931Z/`, not yet imported) | Cover gesture sweep; inner sweep in both modes |
+| Galaxy Z Flip8 | SM-F776B | Main: 3-button rotation 1 and 3 (pilot, `_inbox/SM-F776B/2026-09-27T12-08-11-853Z/`, not yet imported) | Main gesture sweep; cover gesture capture. The cover did not rotate, so its other rotations stay pending |
+
+### Natural rotation only — full sweep needed
+
+Recapture every listed screen in both navigation modes. Use the queue order in
+`.agents/skills/samsung-rtl-insets/SKILL.md`: Fold, then Flip, then S, then Tab,
+Note and A.
+
+| Series | Devices | Screens |
+| --- | --- | --- |
+| Galaxy Z Fold | Fold8 Ultra, Fold7, Fold6, Fold5, Fold4, Fold3, Fold2 (user device), TriFold | Cover + inner |
+| Galaxy Z Flip | Flip7 | Cover + main |
+| Galaxy Z Flip | Flip7 FE, Flip6, Flip5, Flip4, Flip3, original Z Flip | Main (no cover skin) |
+| Galaxy S | S26 Ultra, S26+, S26, S25 Ultra, S25+ (user device), S25 Edge, S25 FE, S25, S24 Ultra, S24+, S24 FE, S24, S23 Ultra, S23 FE, S23, S22 Ultra, S22+, S22, S21 Ultra, S21+, S21 FE, S21, S20 Ultra, S20 FE | Main |
+| Galaxy Tab | Tab S11 Ultra, S11, S10 Ultra, S10+, S10 FE+, S10 FE, S10 Lite, S9 Ultra, S9+, S9 FE+, S9 FE, S9, S8 Ultra, S8+, S8, S7+, S7 FE, A11, A9+, A7 Lite | Main (natural rotation is landscape on most tablets) |
+| Galaxy Note | Note20 Ultra, Note20 | Main |
+| Galaxy A | A73, A57, A56, A55, A53, A52s, A37, A36, A35, A34, A33, A32 5G, A32, A27, A25, A24, A23, A17, A16, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
+
+Existing gaps in the natural-rotation data remain open alongside the sweep.
+The canonical Galaxy Z Flip8 cover has 3-button only. Galaxy S24 Ultra, A73 5G
+and Tab S9 FE keep their second mode in dated recapture directories. See
+`docs/RTL_COVERAGE.md` for per-device capture details.
 
 **Measurement Conditions**: full screen, default Display/Font size and One UI +
 Android version are recorded per capture. Orientation is evidence, not a default:

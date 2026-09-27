@@ -25,6 +25,12 @@ registered official skin. TriFold is supported; apply the same RTL-availability
 and capture-evidence rules when collecting its measurements. Missing measurements
 remain pending.
 
+Since 2026-09-27 a screen counts as measured only with natural, rotation 1 and
+rotation 3 captures in both navigation modes. A device with natural-rotation
+captures only is an incomplete measured entry and needs the full sweep again.
+Read the rotation status in `docs/MEASUREMENT_WORKFLOW.md` ("Device Status &
+Progress") and update it after each device.
+
 For Galaxy Z Flip cover work, the supported collection scope starts at Flip5.
 Treat covers on Flip, Flip3 and Flip4 as unsupported and do not reserve or capture
 them. For Flip5 and later, collect cover measurements only when the registered
