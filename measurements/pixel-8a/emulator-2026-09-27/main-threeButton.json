@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 2,
+  "capturedAt": "2026-09-27T14:10:29.794959Z",
+  "screen": "phone",
+  "screenLabelSource": "manual",
+  "probeVersion": "1.5.0",
+  "device": {
+    "manufacturer": "Google",
+    "brand": "google",
+    "model": "sdk_gphone64_arm64",
+    "device": "emu64a",
+    "android": "17",
+    "sdkInt": 37,
+    "securityPatch": "2026-05-05",
+    "buildId": "CE2A.260420.019",
+    "oneUiProperty": null,
+    "oneUiSource": "ro.build.version.oneui"
+  },
+  "display": {
+    "id": 0,
+    "name": "Built-in Screen",
+    "rotation": 0,
+    "isInMultiWindowMode": false,
+    "rootViewPx": {
+      "width": 1080,
+      "height": 2400
+    },
+    "refreshRate": 60,
+    "widthPx": 1080,
+    "heightPx": 2400,
+    "sizeSource": "currentWindowMetrics",
+    "appMetricsPx": {
+      "width": 1080,
+      "height": 2400
+    },
+    "xdpi": 420,
+    "ydpi": 420,
+    "densityDpi": 420,
+    "density": 2.63,
+    "defaultDensityDpi": 420,
+    "fontScale": 1,
+    "orientation": "portrait",
+    "screenWidthDp": 411,
+    "screenHeightDp": 914,
+    "smallestScreenWidthDp": 411,
+    "currentWindowPx": {
+      "width": 1080,
+      "height": 2400
+    },
+    "maximumWindowPx": {
+      "width": 1080,
+      "height": 2400
+    },
+    "maximumWindowDp": {
+      "width": 411.43,
+      "height": 914.29
+    }
+  },
+  "navigation": {
+    "mode": "threeButton",
+    "modeSource": "insetsWithSettingFallback",
+    "modeFromInsets": "threeButton",
+    "modeFromSetting": "threeButton",
+    "settingAgreesWithInsets": true,
+    "settingsSecureNavigationMode": 0,
+    "configNavBarInteractionMode": 0
+  },
+  "insets": {
+    "statusBars": {
+      "px": {
+        "top": 121,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dp": {
+        "top": 46.1,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      }
+    },
+    "navigationBars": {
+      "px": {
+        "top": 0,
+        "right": 0,
+        "bottom": 126,
+        "left": 0
+      },
+      "dp": {
+        "top": 0,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    },
+    "systemBars": {
+      "px": {
+        "top": 121,
+        "right": 0,
+        "bottom": 126,
+        "left": 0
+      },
+      "dp": {
+        "top": 46.1,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    },
+    "displayCutout": {
+      "px": {
+        "top": 121,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dp": {
+        "top": 46.1,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      }
+    },
+    "captionBar": {
+      "px": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dp": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      }
+    },
+    "systemGestures": {
+      "px": {
+        "top": 153,
+        "right": 0,
+        "bottom": 126,
+        "left": 0
+      },
+      "dp": {
+        "top": 58.29,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    },
+    "mandatorySystemGestures": {
+      "px": {
+        "top": 153,
+        "right": 0,
+        "bottom": 126,
+        "left": 0
+      },
+      "dp": {
+        "top": 58.29,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    },
+    "tappableElement": {
+      "px": {
+        "top": 121,
+        "right": 0,
+        "bottom": 126,
+        "left": 0
+      },
+      "dp": {
+        "top": 46.1,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    }
+  },
+  "insetsIgnoringVisibility": {
+    "statusBars": {
+      "px": {
+        "top": 121,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dp": {
+        "top": 46.1,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      }
+    },
+    "navigationBars": {
+      "px": {
+        "top": 0,
+        "right": 0,
+        "bottom": 126,
+        "left": 0
+      },
+      "dp": {
+        "top": 0,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    },
+    "systemBars": {
+      "px": {
+        "top": 121,
+        "right": 0,
+        "bottom": 126,
+        "left": 0
+      },
+      "dp": {
+        "top": 46.1,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    }
+  },
+  "displayCutout": {
+    "safeInsetsPx": {
+      "top": 121,
+      "right": 0,
+      "bottom": 0,
+      "left": 0
+    },
+    "safeInsetsDp": {
+      "top": 46.1,
+      "right": 0,
+      "bottom": 0,
+      "left": 0
+    },
+    "boundingRects": [
+      {
+        "px": {
+          "left": 486,
+          "top": 0,
+          "right": 596,
+          "bottom": 121
+        },
+        "dp": {
+          "left": 185.14,
+          "top": 0,
+          "right": 227.05,
+          "bottom": 46.1,
+          "width": 41.9,
+          "height": 46.1
+        }
+      }
+    ],
+    "waterfallInsets": {
+      "px": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dp": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      }
+    },
+    "path": {
+      "coordinateSpace": "display",
+      "units": "px",
+      "fillType": "WINDING",
+      "approximationTolerancePx": 0.25,
+      "approximation": [
+        {
+          "fraction": 0,
+          "x": 573.219970703125,
+          "y": 68.70999908447266
+        },
+        {
+          "fraction": 0.03124995529651642,
+          "x": 572.47998046875,
+          "y": 62.21351623535156
+        },
+        {
+          "fraction": 0.0624999962747097,
+          "x": 570.4886474609375,
+          "y": 55.985618591308594
+        },
+        {
+          "fraction": 0.09375008195638657,
+          "x": 567.343505859375,
+          "y": 50.25322723388672
+        },
+        {
+          "fraction": 0.12499991804361343,
+          "x": 563.14208984375,
+          "y": 45.24327087402344
+        },
+        {
+          "fraction": 0.15624980628490448,
+          "x": 558.0604248046875,
+          "y": 41.12886047363281
+        },
+        {
+          "fraction": 0.18749995529651642,
+          "x": 552.2745971679688,
+          "y": 38.083106994628906
+        },
+        {
+          "fraction": 0.21875008940696716,
+          "x": 546.0132446289062,
+          "y": 36.19953918457031
+        },
+        {
+          "fraction": 0.2500001788139343,
+          "x": 539.5049438476562,
+          "y": 35.571685791015625
+        },
+        {
+          "fraction": 0.2812499403953552,
+          "x": 532.9967041015625,
+          "y": 36.19953918457031
+        },
+        {
+          "fraction": 0.31250008940696716,
+          "x": 526.7353515625,
+          "y": 38.083106994628906
+        },
+        {
+          "fraction": 0.3437499701976776,
+          "x": 520.9495849609375,
+          "y": 41.12885284423828
+        },
+        {
+          "fraction": 0.37499988079071045,
+          "x": 515.867919921875,
+          "y": 45.24326705932617
+        },
+        {
+          "fraction": 0.40625,
+          "x": 511.6664123535156,
+          "y": 50.25322723388672
+        },
+        {
+          "fraction": 0.4375,
+          "x": 508.52130126953125,
+          "y": 55.98561096191406
+        },
+        {
+          "fraction": 0.4687499701976776,
+          "x": 506.530029296875,
+          "y": 62.2135124206543
+        },
+        {
+          "fraction": 0.5,
+          "x": 505.78997802734375,
+          "y": 68.70999908447266
+        },
+        {
+          "fraction": 0.53125,
+          "x": 506.530029296875,
+          "y": 75.20648956298828
+        },
+        {
+          "fraction": 0.5625,
+          "x": 508.5213317871094,
+          "y": 81.43438720703125
+        },
+        {
+          "fraction": 0.5937499403953552,
+          "x": 511.6664123535156,
+          "y": 87.16677856445312
+        },
+        {
+          "fraction": 0.6250001192092896,
+          "x": 515.867919921875,
+          "y": 92.17674255371094
+        },
+        {
+          "fraction": 0.65625,
+          "x": 520.9495849609375,
+          "y": 96.29115295410156
+        },
+        {
+          "fraction": 0.6874999403953552,
+          "x": 526.7353515625,
+          "y": 99.33689880371094
+        },
+        {
+          "fraction": 0.7187500596046448,
+          "x": 532.9967041015625,
+          "y": 101.220458984375
+        },
+        {
+          "fraction": 0.7499998211860657,
+          "x": 539.5049438476562,
+          "y": 101.84831237792969
+        },
+        {
+          "fraction": 0.7812498807907104,
+          "x": 546.0132446289062,
+          "y": 101.220458984375
+        },
+        {
+          "fraction": 0.8125,
+          "x": 552.2745971679688,
+          "y": 99.33689880371094
+        },
+        {
+          "fraction": 0.8437501788139343,
+          "x": 558.0604248046875,
+          "y": 96.29115295410156
+        },
+        {
+          "fraction": 0.8750000596046448,
+          "x": 563.14208984375,
+          "y": 92.17674255371094
+        },
+        {
+          "fraction": 0.9062498807907104,
+          "x": 567.343505859375,
+          "y": 87.16677856445312
+        },
+        {
+          "fraction": 0.9374999403953552,
+          "x": 570.4886474609375,
+          "y": 81.43438720703125
+        },
+        {
+          "fraction": 0.96875,
+          "x": 572.47998046875,
+          "y": 75.20648956298828
+        },
+        {
+          "fraction": 1,
+          "x": 573.219970703125,
+          "y": 68.70999908447266
+        }
+      ]
+    }
+  },
+  "roundedCorners": {
+    "windowInsets": {
+      "topLeft": {
+        "radiusPx": 128,
+        "radiusDp": 48.76,
+        "centerPx": {
+          "x": 128,
+          "y": 128
+        }
+      },
+      "topRight": {
+        "radiusPx": 128,
+        "radiusDp": 48.76,
+        "centerPx": {
+          "x": 952,
+          "y": 128
+        }
+      },
+      "bottomRight": {
+        "radiusPx": 128,
+        "radiusDp": 48.76,
+        "centerPx": {
+          "x": 952,
+          "y": 2272
+        }
+      },
+      "bottomLeft": {
+        "radiusPx": 128,
+        "radiusDp": 48.76,
+        "centerPx": {
+          "x": 128,
+          "y": 2272
+        }
+      }
+    },
+    "display": {
+      "topLeft": {
+        "radiusPx": 128,
+        "radiusDp": 48.76,
+        "centerPx": {
+          "x": 128,
+          "y": 128
+        }
+      },
+      "topRight": {
+        "radiusPx": 128,
+        "radiusDp": 48.76,
+        "centerPx": {
+          "x": 952,
+          "y": 128
+        }
+      },
+      "bottomRight": {
+        "radiusPx": 128,
+        "radiusDp": 48.76,
+        "centerPx": {
+          "x": 952,
+          "y": 2272
+        }
+      },
+      "bottomLeft": {
+        "radiusPx": 128,
+        "radiusDp": 48.76,
+        "centerPx": {
+          "x": 128,
+          "y": 2272
+        }
+      }
+    }
+  },
+  "hinge": {
+    "angleDegrees": null,
+    "foldingFeatures": []
+  }
+}
