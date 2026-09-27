@@ -188,14 +188,14 @@ removes a model from its catalog.
   2304×1440 and 2560×1600 px respectively, all at rotation 1. Gesture mode is
   confirmed by Android Settings/configuration and side system gesture insets,
   even though InsetsProbe's inset-only classification says threeButton. The
-  S10 FE captures report font scale 1.08 rather than the default 1.0; their raw
-  measurements are registered with that condition and should be recaptured at
-  1.0 for a normalized comparison. A 2026-09-27 Tab S10 FE+ recapture on the
-  same build reproduced every value in both modes; it is kept under
-  `measurements/galaxy-tab-s10-fe-plus/recapture-2026-09-27/`. The same-day Tab
-  S10 FE recapture also reproduced every value, again at font scale 1.08, so the
-  normalized 1.0 baseline is still pending; it is kept under
-  `measurements/galaxy-tab-s10-fe/recapture-2026-09-27/`.
+  S10 FE's 2026-09-25 captures report font scale 1.08. A 2026-09-27 Tab S10 FE+
+  recapture on the same build reproduced every value in both modes; it is kept
+  under `measurements/galaxy-tab-s10-fe-plus/recapture-2026-09-27/`. The same-day
+  Tab S10 FE recapture first reproduced the 1.08 files exactly, then a font scale
+  1 recapture under `measurements/galaxy-tab-s10-fe/recapture-2026-09-27-fontscale-1/`
+  matched them in every inset and display field except `fontScale`. The font
+  scale 1 pair is registered as the baseline; font scale does not change inset
+  or display metrics.
 - Galaxy Tab A9+ 5G (SM-X216B) has both landscape main modes from Samsung RTL,
   Android 14 / One UI 6.1, build `UP1A.231005.007.X216BXXS3CXG1`. Captures match
   the official 1920×1200 skin at rotation 1, 240 dpi, and font scale 1.1. Both
@@ -463,7 +463,8 @@ insets of 84 px. It does not provide a settled 3-button system-bar measurement.
 The 2026-09-27 recapture on the same build and font scale is registered: 53/84 px
 system bars (48 dp bottom), with Settings, configuration and InsetsProbe all
 reporting 3-button mode. Font scale 1.08 is non-default and is
-recorded as captured; recapture at 1.0 if a normalized baseline is needed.
+recorded as captured. On the same One UI 8.5 build family, Tab S10 FE captures
+at 1.08 and 1 produced identical insets, so no normalization recapture is required.
 
 Accepted raw file: `measurements/galaxy-tab-s9-fe/main-gesture.json`.
 Accepted 3-button recapture: `measurements/galaxy-tab-s9-fe/recapture-2026-09-27/main-threeButton.json`.

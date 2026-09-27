@@ -22,7 +22,7 @@ const threeButtonSource: Source = {
 const condition = {
   oneUi: "8.5",
   android: "16",
-  note: "Samsung RTL Galaxy Tab S9 FE 5G (SM-X516N), build BP4A.251205.006.X516NKOSEEZG3. Main display landscape, rotation 1, full-screen 2304×1440 px, 280 dpi and font scale 1.08. InsetsProbe's non-foldable Phone label is classified as the tablet main display from model and skin-matching dimensions. Gesture mode is confirmed by Settings/config_navBarInteractionMode=2 and left/right system gesture insets, although the inset-only heuristic reports threeButton because the tappable bottom inset is nonzero. Font scale is non-default; preserve as captured and recapture at 1.0 for a normalized baseline.",
+  note: "Samsung RTL Galaxy Tab S9 FE 5G (SM-X516N), build BP4A.251205.006.X516NKOSEEZG3. Main display landscape, rotation 1, full-screen 2304×1440 px, 280 dpi and font scale 1.08. InsetsProbe's non-foldable Phone label is classified as the tablet main display from model and skin-matching dimensions. Gesture mode is confirmed by Settings/config_navBarInteractionMode=2 and left/right system gesture insets, although the inset-only heuristic reports threeButton because the tappable bottom inset is nonzero. Font scale is non-default; the same-OS Tab S10 FE showed identical insets at 1.08 and 1.",
 };
 const gestureMeasurement: InsetsMeasurement = {
   systemBars: { top: 30.29, right: 0, bottom: 14.86, left: 0 },
@@ -39,7 +39,7 @@ const threeButtonMeasurement: InsetsMeasurement = {
   displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 0 },
   condition: {
     ...condition,
-    note: "Samsung RTL Galaxy Tab S9 FE 5G (SM-X516N), build BP4A.251205.006.X516NKOSEEZG3, captured 2026-09-27. Main display landscape, rotation 1, full-screen 2304×1440 px, 280 dpi and font scale 1.08, the same conditions as the gesture capture. InsetsProbe's Phone label is classified as the tablet main display from model and skin-matching dimensions. 3-button mode agrees with Settings/config_navBarInteractionMode=0 and InsetsProbe. The 2026-09-25 attempt with a 1 px navigation bar remains rejected evidence. Font scale is non-default; preserve as captured.",
+    note: "Samsung RTL Galaxy Tab S9 FE 5G (SM-X516N), build BP4A.251205.006.X516NKOSEEZG3, captured 2026-09-27. Main display landscape, rotation 1, full-screen 2304×1440 px, 280 dpi and font scale 1.08, the same conditions as the gesture capture. InsetsProbe's Phone label is classified as the tablet main display from model and skin-matching dimensions. 3-button mode agrees with Settings/config_navBarInteractionMode=0 and InsetsProbe. The 2026-09-25 attempt with a 1 px navigation bar remains rejected evidence. Font scale is non-default; the same-OS Tab S10 FE showed identical insets at 1.08 and 1.",
   },
   sources: [threeButtonSource],
 };
