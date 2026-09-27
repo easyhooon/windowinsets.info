@@ -25,6 +25,13 @@ removes a model from its catalog.
   Galaxy Z Fold8 Ultra (SM-F976U, Korea/Gumi) was reservable on 2026-09-23. An
   earlier session was returned before capture because the lock screen required
   manual handoff; later captures in the repository measured both displays.
+  On 2026-09-27, SM-F976U_KR1 on Android 17 / One UI 9.0 supplied cover and
+  inner captures at rotations 0, 1 and 3 in both navigation modes. The inner
+  display used the RTL Rotate control for rotations 1 and 3 because the Probe's
+  orientation request did not rotate that display. The 12 accepted raw files are
+  in `measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/`. All four
+  rotation-0 inset objects match the already published 2026-09-23 captures, so
+  the site keeps those published values and source labels.
   Galaxy Z Fold6 (SM-F956U-KR10, Korea/Gumi) was reserved three times on
   2026-09-23. Its cover and inner display were measured in both navigation
   modes. An earlier inner 3-button attempt was retained but not published
