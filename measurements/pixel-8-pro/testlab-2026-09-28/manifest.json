@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-3ehvin61s5bsg",
+  "deviceModelId": "husky",
+  "deviceName": "Pixel 8 Pro",
+  "androidApi": 35,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/8103305516082310900",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_00:29:02.103613_vYUV/husky-35-en-portrait/",
+  "note": "Physical portrait gesture capture; compare against the API 37 emulator with the Android-version and active-resolution differences noted.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "2e1aa3683a3b6fbeba0a3d7180dfe44b7a835b4294a399e6ed067bcea79360c7"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "c02e50dc042c5a6a28dd86b45db8b6f2d0056e61d28240b3382fdaf24318391c"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-2lt0sk1fhxcls",
+  "deviceModelId": "mustang",
+  "deviceName": "Pixel 10 Pro XL",
+  "androidApi": 36,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/7029552250955893712",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_00:09:12.242998_KGnz/mustang-36-en-portrait/",
+  "note": "The first Robo script stopped at an inline ls check and then explored the app. Raw files include captures from that subsequent UI exploration; inspect screen and rotation in each JSON before comparison.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "869f02707d8c3ec98a808a3750a7596408c031c56788622cefb674ed5e135b84"
+    },
+    {
+      "file": "landscape-1-gesture.json",
+      "sha256": "c8e2e51303b23babb3d4a34bf0547dd6b93b2919ae4bcab8e1ee42dbdfea6a23"
+    },
+    {
+      "file": "landscape-3-gesture.json",
+      "sha256": "9733430133e80a7bcfc5d048a9818f4f701c34b9bd3331bcbeba824d70952859"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "b1a1d7055720a78080e1d8c9e65c93a84967fb4e44f487b64b97c268bebad2d6"
+    },
+    {
+      "file": "main-landscape-1-gesture.json",
+      "sha256": "2f653f70d196392cc7d9a8299aff247bf6fec837a022f37c7fce255e82559b4e"
+    },
+    {
+      "file": "main-landscape-3-gesture.json",
+      "sha256": "6f47adab72ecdddea158710b2eddef3002a1f0136ec1a84b927ff2c244be64de"
+    }
+  ]
+}
