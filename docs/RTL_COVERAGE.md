@@ -503,6 +503,17 @@ Main display.
 Raw files: `measurements/galaxy-tab-s10-ultra/main-{gesture,threeButton}.json`.
 
 
+### Galaxy Tab S10+ — 2026-09-27
+
+InsetsProbe 1.3.0 captured Samsung RTL Galaxy Tab S10+ (SM-X820), Android 14 /
+One UI 6.1.1, build `UP1A.231005.007.X820XXS2AYB3`, landscape at rotation 1,
+2800×1752 px, 320 dpi, font scale 1. Gesture bars are 48/128 px (24/64 dp) and
+3-button bars are 48/96 px (24/48 dp). Neither capture reports a display cutout;
+corner radii are 26 px (13 dp). The gesture capture is confirmed by secure
+navigation mode 2, `config_navBarInteractionMode=2` and 60 px side
+system-gesture insets; the inset-only heuristic reports threeButton. The larger
+gesture bottom inset matches the Tab S10 Ultra and Tab S9+/S8+ taskbar pattern.
+
 ## Galaxy Note20 and Galaxy Tab S9+/S8 series measured on 2026-09-25
 
 Samsung RTL produced paired full-screen Main captures for Galaxy Note20 5G
