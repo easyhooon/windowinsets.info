@@ -601,8 +601,9 @@ therefore remain unchanged; these files corroborate them across regional SKUs.
   1080×2400 px at 450 dpi, font scale 1, with 98/42 px system bars and a 98 px
   cutout safe inset. The supplied 3-button JSON has a 2025-05-15 timestamp; it
   is preserved under `measurements/galaxy-a73-5g/recapture-2025-05-15/` and is
-  not registered as a current 3-button value. That mode remains pending a fresh
-  capture.
+  not registered. The 2026-09-27 recapture on the same build supplies 98/135 px
+  3-button bars and reproduces every gesture value; both files are kept under
+  `measurements/galaxy-a73-5g/recapture-2026-09-27/`.
 - Galaxy A13 LTE (SM-A135F), Android 14 / One UI 6.1, build
   `UP1A.231005.007.A135FXXSEEZE3`: both captures agree with Settings and
   InsetsProbe at 1080×2408 px, 450 dpi and font scale 1. Gesture system bars

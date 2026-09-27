@@ -14,7 +14,8 @@ and its per-skin comparison for checked sources, unknowns and completion steps.
 
 The 2026-09-25 batch adds paired main-display captures for Galaxy A07, A55, A53,
 A52s, A57, A37, A35, A34, A33, A32 LTE, A32 5G, A27, A24, A23, A17, A16,
-A15, A14, A06, A05 and A04; Galaxy A73 has a gesture capture only. Earlier in
+A15, A14, A06, A05 and A04; Galaxy A73 gained its 3-button capture on
+2026-09-27. Earlier in
 the same batch, Galaxy Note20,
 Note20 Ultra and Galaxy Tab S9+, Tab S8 Ultra, Tab S8+ and Tab S8 were registered.
 A second A27 retail SKU (SM-A276B) independently reproduced both navigation-mode
@@ -22,9 +23,9 @@ measurements. Preserve capture conditions: A32 LTE, A33, A34, A52s and A53 were
 captured at font scale 1.1. The A23 page uses SM-A235F LTE captures because its
 display and body match the registered 5G skin model.
 
-Three exceptions remain explicit: Galaxy A73's 3-button file is dated
-2025-05-15 and is retained as historical evidence pending a fresh capture;
-Galaxy A13 LTE captures and Galaxy A25 captures are evidence-only because no
+Galaxy A73's earlier 3-button file, dated 2025-05-15, is retained as historical
+evidence; the 2026-09-27 recapture set supplies the registered value. Two
+exceptions remain explicit: Galaxy A13 LTE captures and Galaxy A25 captures are evidence-only because no
 matching official skin is available. A13 LTE's 1080×2408 display does not match
 the registered A13 5G skin's 720×1600 display. Raw capture files remain unchanged.
 For four tablets, Settings and configuration plus side system-gesture insets
