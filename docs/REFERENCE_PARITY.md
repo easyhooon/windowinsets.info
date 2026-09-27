@@ -329,11 +329,11 @@ These pose angles are illustrative controls, not newly captured hinge measuremen
 
 The earlier typography changes did **not** establish annotation readability:
 Fold8's WebGL rulers still intersected the official frame, and radius chips had
-no dimension construction. See [the issue 1 re-check](ISSUE_1_REVIEW.md) for the
-confirmed defects, current fixes, historical dispositions and explicit validation
-scope. Flat SVG and folded overlays share measured interval geometry;
-SVG fit includes numeric badges rather than only the original box. The current
-main frame-synchronized WebGL fold transition is preserved.
+no dimension construction. The follow-up moved folded rulers to projected SVG
+and added exterior lanes and radius brackets. Flat SVG and folded overlays
+share measured interval geometry; SVG fit includes numeric badges rather than
+only the original box. The current frame-synchronized WebGL fold transition is
+preserved.
 
 ### Issue 1 follow-up: folding annotations
 
@@ -342,8 +342,8 @@ attachment points use the device's current hinge transform and camera projection
 The labels and arrows remain flat and outside the projected body. Folding models
 hold their scale during hinge motion and refit the settled pose, including
 annotation space. Short measurements use adjacent badges rather
-than diagonal leaders through the hinge. See `ISSUE_1_REVIEW.md` for the explicit
-navigation/unit/pose/rotation matrix, integer-angle sweep and browser coverage.
+than diagonal leaders through the hinge. Browser coverage includes navigation
+mode, unit, pose and rotation combinations plus an integer-angle hinge sweep.
 
 The closed mobile view now uses more of the viewport for the official device skin.
 Top corner-radius badges take the lane nearest the body; the display-width and

@@ -92,6 +92,6 @@ folding feature.
 
 If the widget is missing or cannot open the activity on the cover, try the
 device's **Good Lock → MultiStar → Launcher Widget**. Its UI and availability
-vary by firmware. Record the exact failure rather than relabeling an inner
-capture as cover. The broader [compatibility investigation](../../docs/FLEXWINDOW_COMPATIBILITY.md)
-records the alternate paths and their limitations.
+vary by firmware. Samsung's [cover-screen app guide](https://www.samsung.com/jp/support/mobile-devices/coverdisplay-goodlock/)
+describes the alternate launcher. Record the exact failure rather than relabeling
+an inner capture as cover.

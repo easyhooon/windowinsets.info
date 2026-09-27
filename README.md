@@ -4,6 +4,26 @@ Window insets, display cutouts, corner radii and foldable hinge states for Samsu
 
 Its interface is inspired by [safearea.info](https://safearea.info), adapted for Android data and foldables.
 
+## Documentation
+
+Start with this README for the product, data limits, device priorities and local development. The other documents have narrower purposes:
+
+| Need | Document |
+| --- | --- |
+| Match the reference UI and understand intentional Android differences | [Reference parity](docs/REFERENCE_PARITY.md) |
+| Capture insets, check data quality and find the remaining measurement queue | [Measurement workflow](docs/MEASUREMENT_WORKFLOW.md) |
+| Check which models and official skins belong in the catalogue | [Device coverage](docs/DEVICE_COVERAGE.md) |
+| Check Samsung RTL availability and per-model capture evidence | [RTL coverage](docs/RTL_COVERAGE.md) and its [skin comparison table](docs/RTL_SKIN_COMPARISON.csv) |
+| Check RTL credit policy and reservation budget | [RTL credits](docs/RTL_CREDITS.md) |
+| Compare physical Pixel Test Lab captures with emulator data | [Pixel hardware validation](docs/PIXEL_HARDWARE_VALIDATION.md) |
+| Set up the probe's capture inbox | [Capture upload](docs/CAPTURE_UPLOAD.md) |
+| Launch the probe on a Flip cover display | [Probe FlexWindow guide](tools/insets-probe/FLEXWINDOW_README.md) |
+| Consume the downloadable device data | [JSON export format](docs/JSON_EXPORT.md) |
+| Configure and interpret site analytics | [Analytics](docs/ANALYTICS.md) |
+| Check asset attribution | [Third-party notices](docs/THIRD_PARTY_NOTICES.md) |
+
+The [InsetsProbe guide](tools/insets-probe/README.md) covers the Android app itself. Asset and test instructions stay next to their files in [`public/skins/`](public/skins/README.md), [`public/fonts/`](public/fonts/README.md), [`design/brand/`](design/brand/README.md), [`docs/media/`](docs/media/README.md) and [`tests/`](tests/README.md).
+
 ## Fold it. Measure it.
 
 Explore Galaxy Fold, Flip and TriFold hinge states in **real-time 3D, built with Three.js and WebGL**. Rigid housings and articulated hinges show the folded depth. Official Samsung display artwork and exterior SVG rulers follow the fold.

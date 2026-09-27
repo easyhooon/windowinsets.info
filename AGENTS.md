@@ -41,7 +41,6 @@ leave other models unverified. Preserve historical captures. See
   portrait, for all four distinct rotations per mode. Pick the next device
   from the queue and update it in the same commit as each device's captures.
 - `docs/RTL_CREDITS.md`: published credit policy, live grant evidence and budget rules.
-- `docs/DESIGN_HANDOFF.md`: original Claude visual backlog; see current status first.
 - React Router framework mode, React, TypeScript, three.js; pnpm; static prerender.
 - `pnpm dev`, `pnpm typecheck`, `pnpm build`, `pnpm test:visual`,
   `node --test tests/rendering.test.mjs`.
