@@ -402,7 +402,9 @@ Do not use Measure All. Capture each active display and navigation mode explicit
    which is display rotation 1 (cutout on the left). Capture both navigation
    modes and store them as `landscape-1-{gesture,threeButton}.json` beside the
    portrait `main-*` files. Rotation 3 is not collected; leave it unmeasured
-   rather than mirroring rotation 1.
+   rather than mirroring rotation 1. (A one-off Galaxy S23+ 3-button check
+   confirmed rotation 3 mirrors rotation 1 there, which is evidence for that
+   unit only, not a license to mirror other models.)
 
 ### Step 4: Export & Commit Data
 

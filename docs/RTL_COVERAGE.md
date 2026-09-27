@@ -579,7 +579,11 @@ system-gesture zone widens to 158 px (84 + 74), and in 3-button mode the
 navigation bar moves to the right edge (right 135 px, bottom 0). Gesture mode
 keeps the 42 px bottom handle. These values are stored as evidence only; the
 site does not render landscape measurements yet. Rotation 3 is not collected
-by convention (side button up = rotation 1).
+by convention (side button up = rotation 1). A one-off 3-button check at
+rotation 3 (`landscape-3-threeButton.json`; the two supplied RTL downloads were
+byte-identical, so one is stored) is the exact mirror of rotation 1 on this
+unit: status bar 84 px, cutout right 74 px (rect x 2266–2340), navigation bar on
+the left edge (left 135 px). Gesture mode was not captured at rotation 3.
 
 ## Galaxy Note20 and Galaxy Tab S9+/S8 series measured on 2026-09-25
 
