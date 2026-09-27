@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pixel Emulator Insets"
+  short_description: "Capture Pixel insets from headless emulator AVDs"
+  default_prompt: "Use $pixel-emulator-insets to capture the next Pixel emulator target."
