@@ -40,6 +40,13 @@ maintained separately. See [capture upload and setup](docs/CAPTURE_UPLOAD.md) fo
 the API, branch and token details. Live GitHub upload still needs a PAT-backed
 smoke test.
 
+```mermaid
+flowchart LR
+    A["Device + mode"] --> B["Measure / sweep"] --> C["Raw JSON"] --> D["Capture inbox PR"] --> E["Approved merge"]
+    C -. "Fallback" .-> F["File Browser / adb"]
+    E -. "Separate" .-> G["Site entries"]
+```
+
 ### What InsetsProbe records
 
 The probe targets Android 12+ (`minSdk 31`, `targetSdk 36`) and calls `enableEdgeToEdge()`.
