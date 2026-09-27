@@ -165,10 +165,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
   .canvas-controls .toolbar-button>span:first-child { flex-shrink:0; white-space:nowrap; }
   .canvas-controls .toolbar-button>span:last-of-type { min-width:0; }
   .canvas-controls .toolbar-button>svg { flex-shrink:0; margin-left:0; width:12px; }
-  .canvas-controls>.settings { justify-self:center; width:44px; }
+  .canvas-controls>.settings { position:fixed; top:8px; right:16px; width:44px; }
+  .canvas-controls>.settings .toolbar-button { min-height:40px; }
   .dropdown-panel { right:0; max-width:calc(100vw - 24px); }
   .canvas-controls>.dropdown:nth-child(odd) .dropdown-panel { left:0; right:auto; }
-  .canvas-controls>.settings .dropdown-panel { left:auto; right:0; }
+  .canvas-controls>.dropdown.settings .dropdown-panel { top:calc(100% + 6px); bottom:auto; left:auto; right:0; }
   .canvas-footer { padding:8px 12px 12px; }
   .region-legend { display:grid; grid-template-columns:repeat(2,max-content); max-width:100%; gap:2px 16px; font-size:11px; }
   .canvas-help { display:none; }

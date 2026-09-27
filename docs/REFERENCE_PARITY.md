@@ -379,7 +379,9 @@ collision spacing. The old flat-only label displacement algorithm is removed.
 No device names or viewport-specific measurement omissions select the policy.
 
 The desktop three-column hierarchy and mobile selector/Metrics/controls hierarchy
-remain reference-shaped. The shared workspace allocates real grid/flex space
+remain reference-shaped. On phones, the settings icon sits at the right of the
+top header row as on the reference, leaving no separate settings row in the
+bottom controls. The shared workspace allocates real grid/flex space
 to the diagram and bottom controls without guessed pixel reserves in Fit. The
 bottom toolbar grows with its content;
 long values wrap rather than truncate. The legend and gesture help overlay the
