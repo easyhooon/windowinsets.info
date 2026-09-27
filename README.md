@@ -1,8 +1,8 @@
 # windowinsets.info
 
-Window insets, display cutouts, corner radii and foldable hinge states for Samsung Galaxy devices — with a source for every number.
+Window insets, display cutouts, corner radii and foldable hinge states for Samsung Galaxy and Google Pixel devices — with a source for every number.
 
-Its interface is inspired by [safearea.info](https://safearea.info), adapted for measured Android data and Samsung foldables.
+Its interface is inspired by [safearea.info](https://safearea.info), adapted for Android data and foldables.
 
 ## Fold it. Measure it.
 
@@ -20,19 +20,19 @@ The animation illustrates device geometry. Insets remain the recorded Android me
 
 The full write-up lives on the site at [/methodology](https://windowinsets.info/methodology) (source: [`app/routes/methodology.tsx`](app/routes/methodology.tsx)). In short:
 
-- **Three source tiers.** Every value is `official` (published by Samsung/Google), `measured` (captured with InsetsProbe on a real device or Samsung Remote Test Lab, raw JSON committed here) or `community` (not yet reproduced). Each source shows the date it was checked.
-- **Insets are measured, not published.** Samsung documents resolution and density, but not status/navigation bar heights, cutouts or corner radii, so I read them from Android itself with [InsetsProbe](tools/insets-probe).
-- **Conditions are part of the data.** Full screen, the recorded display rotation (natural orientation first: phones and cover screens in portrait; most tablets and the Fold8 and TriFold inner displays in landscape; other rotations as separate captures), default Display size / Font size / Screen resolution, one navigation mode (gesture or 3-button) per capture, and the One UI + Android version are all recorded. A value is only valid for those conditions.
+- **Four source kinds.** Values are `official` (published by Samsung/Google), `measured` (captured with InsetsProbe on a real device or Samsung Remote Test Lab), `emulator` (captured with InsetsProbe on an Android Emulator Pixel profile) or `community` (not yet reproduced). Raw capture JSON is committed here, and each source shows the date it was checked. Emulator values are not Pixel hardware measurements.
+- **Insets come from Android, not product specifications.** Manufacturers publish display specifications but generally not the status/navigation bar heights, cutouts or corner radii shown here. [InsetsProbe](tools/insets-probe) reads what Android reports in each capture environment.
+- **Conditions are part of the data.** Captures record the full-screen window, display rotation, density and font settings, navigation mode (gesture or 3-button), and Android build. Samsung captures also record One UI; Pixel captures record the emulator profile, system image and emulator version. A value is only valid for its recorded conditions.
 - **Never estimated.** Nothing is interpolated from another device or derived from resolution alone. Unverified values are `null` and shown as **pending**.
-- **Known limits.** One UI updates can change values; each rotation is its own capture (InsetsProbe's orientation sweep records them), and rotations not captured yet show as not measured rather than being derived; multi-window is not covered yet; a real app may see different insets if it adds its own padding or window flags.
+- **Known limits.** OS updates can change values. Each rotation needs its own capture; rotating the site diagram does not create landscape measurements. The Pixel site entries use rotation-0 emulator captures, with other rotations retained as raw evidence. Emulator cutouts and corner radii still need comparison with factory images or real Pixel devices. Multi-window is not covered yet; a real app may see different insets if it adds its own padding or window flags.
 
 Found a mistake or have a capture that differs from mine? Open an issue or pull request with your InsetsProbe JSON — a reproduction is as valuable as a new device.
 
 ## Measuring a device
 
-Manufacturers don't publish insets, so I measure them with [InsetsProbe](tools/insets-probe) — a tiny Android app that dumps `WindowInsets`, `DisplayCutout`, `RoundedCorner`, `FoldingFeature` and the hinge angle as JSON. It works on a real device or on [Samsung Remote Test Lab](https://developer.samsung.com/remote-test-lab). See [tools/insets-probe/README.md](tools/insets-probe/README.md).
+Manufacturers don't publish insets, so I capture them with [InsetsProbe](tools/insets-probe) — a tiny Android app that dumps `WindowInsets`, `DisplayCutout`, `RoundedCorner`, `FoldingFeature` and the hinge angle as JSON. It runs on real devices, [Samsung Remote Test Lab](https://developer.samsung.com/remote-test-lab) and Android Emulator profiles. See [tools/insets-probe/README.md](tools/insets-probe/README.md).
 
-**Capture flow:** Select a screen and navigation mode → measure or sweep rotations
+**Real-device and RTL capture flow:** Select a screen and navigation mode → measure or sweep rotations
 with InsetsProbe → save valid full-screen captures as raw JSON → upload them to
 one rolling Capture inbox PR. If upload is unavailable, use the RTL File Browser
 or `adb pull`. The user decides when to squash-merge the batch; site entries are
@@ -46,6 +46,17 @@ flowchart LR
     C -. "Fallback" .-> F["File Browser / adb"]
     E -. "Separate" .-> G["Site entries"]
 ```
+
+**Pixel emulator flow:** Boot an SDK Pixel profile with its AOSP skin → run the
+keyless probe across screens, navigation modes and supported rotations → preserve
+the JSON and emulator manifest under `measurements/<pixel-slug>/emulator-<date>/`
+→ run `scripts/import-emulator-captures.py`. The importer checks rotation-0
+captures for emulator identity, navigation agreement and published display
+resolution, copies the AOSP
+skin with provenance, and generates the Pixel device entries. These captures do
+not enter the real-device Capture inbox. See [Pixel emulator coverage and
+limits](docs/DEVICE_COVERAGE.md#google-pixel-issue-23) and the [measurement
+workflow](docs/MEASUREMENT_WORKFLOW.md#pixel-emulator-captures-issue-23-2026-09-27).
 
 ### What InsetsProbe records
 
@@ -80,7 +91,9 @@ For automation, `adb shell am start -n info.windowinsets.probe/.MainActivity --e
 waits one second for `FoldingFeature`, then saves the JSON to the app's external
 files directory and logs it to logcat.
 
-Put raw captures in `measurements/<device-slug>/<screen>-<navMode>.json` and reference them from the device's `Source` so anyone can re-check them.
+Keep raw captures in `measurements/<device-slug>/`, separating dated Pixel
+emulator runs as described above, and reference each published value from its
+`Source` so anyone can re-check it.
 
 ## Camera cutouts and cover-screen limits
 
@@ -138,6 +151,11 @@ Rendering lives in [`FoldRenderer3D.tsx`](app/components/FoldRenderer3D.tsx), [`
 
 ## Device coverage and priorities
 
+Google Pixel coverage includes all 22 in-scope SDK profiles: every Pixel
+released in 2020 or later with an Android Emulator skin, plus every Pixel Fold.
+They use AOSP skins and Android Emulator captures, clearly labelled as emulator
+evidence rather than measurements from Pixel hardware. See [Pixel coverage](docs/DEVICE_COVERAGE.md#google-pixel-issue-23).
+
 **Target coverage (WIP): every Samsung Galaxy model released in 2020 or later
 with an official Galaxy Emulator Skin, plus all Galaxy Fold and Flip models with
 official skins regardless of release year**, including discontinued models and
@@ -177,6 +195,8 @@ and Android's [Wear OS screen-shape guidance](https://developer.android.com/trai
 
 ## Adding a device
 
+### Samsung Galaxy
+
 1. To register downloaded skins, run `python3 scripts/import-samsung-skins.py /path/to/downloads`.
    The importer copies original artwork, registers main/cover screens in
    `app/data/skinCatalog.json`, including TriFold. Review each new model’s release
@@ -188,13 +208,24 @@ and Android's [Wear OS screen-shape guidance](https://developer.android.com/trai
    existing preview slug. Its screens override preview data; additional skin-only
    screens stay pending. Routes, sitemap and prerendering use the merged catalogue.
 
-Current public catalogue: 120 models (29 S, 29 Tab, 9 Fold, 8 Flip, 1 TriFold,
-3 Note, 41 A), 78 of them with verified insets (21 S, 14 Tab, 8 Fold, 8 Flip,
-1 TriFold, 2 Note, 24 A). The skin archive retains 126 models; seven pre-2020
-models stay archived outside the public catalogue. Galaxy A52s 5G is public from
+Current public catalogue: 142 models: 120 Galaxy (29 S, 29 Tab, 9 Fold,
+8 Flip, 1 TriFold, 3 Note, 41 A) and 22 Pixel. Of the Galaxy models, 78 have
+verified real-device or RTL insets (21 S, 14 Tab, 8 Fold, 8 Flip, 1 TriFold,
+2 Note, 24 A). All 22 Pixel entries have emulator captures. The Samsung skin
+archive retains 126 models; seven pre-2020 models stay archived outside the
+public catalogue. Galaxy A52s 5G is public from
 RTL captures without an official skin. Fold/Flip entries have static main/cover
 previews where supplied; models with a main skin also have hinge animation.
 Models without captures remain static previews with pending insets.
+
+### Google Pixel
+
+Add the model, official Google display specification source and SDK profile to
+`scripts/pixel-devices.json`. Keep the probe's raw JSON and `manifest.json` in
+`measurements/<slug>/emulator-<date>/`, then run
+`python3 scripts/import-emulator-captures.py <slug>` to validate the rotation-0
+captures, copy the AOSP skin and regenerate the Pixel modules. Keep emulator
+provenance and real-device evidence distinct; missing measurements stay pending.
 
 ## Development
 
