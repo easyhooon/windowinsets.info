@@ -1,7 +1,9 @@
 import { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from "react";
 
 type Bounds = { left: number; top: number; right: number; bottom: number };
-export type DiagramViewportHandle = { fitFoldBounds: (bounds: Bounds, body: Bounds) => number; setFoldAngle: (angle: number) => void; effectiveZoom: () => number; refitFold: () => void };
+export type DiagramViewportHandle = { fitFoldBounds: (bounds: Bounds, body: Bounds) => number; setFoldAngle: (angle: number) => void; effectiveZoom: () => number; refitFold: () => void;
+  /** Play an orientation change onto the already re-laid-out diagram. `before` is the device box before the change. */
+  turn: (deltaDeg: number, before: DOMRect | null) => void };
 
 // Displayed zoom is CSS px per dp, like the reference's px per pt.
 // `zoom` itself stays the scale of the 700 px canvas, so limits are converted.
@@ -9,6 +11,8 @@ const MIN_ZOOM = 10, MAX_ZOOM = 500, MAX_FIT_ZOOM = 100;
 const FOLD_LABEL_ROOM = 64;
 const ROTATION_MS = 300;
 const ROTATION_EASING = "cubic-bezier(0.2, 0, 0, 1)";
+// Screen content starts turning after the frame, like One UI's rotation.
+const CONTENT_LAG_MS = 90;
 // Converts a screen offset into the rotated canvas frame.
 const rotateBack = (x: number, y: number, degrees: number) => {
   const r = -degrees * Math.PI / 180;
@@ -26,6 +30,7 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
   const ref = useRef<HTMLDivElement>(null);
   const scaleRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef<HTMLDivElement>(null);
+  const turnRef = useRef<HTMLDivElement>(null);
   // Unwrapped view angle so orientation changes animate along the shortest turn.
   const turn = useRef(rotation);
   const previousRotation = useRef(rotation);
@@ -110,6 +115,37 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
     },
     effectiveZoom: () => effectiveZoom.current,
     fitFoldBounds,
+    turn: (deltaDeg, before) => {
+      const wrap = turnRef.current;
+      if (!wrap || !deltaDeg || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      for (const animation of wrap.getAnimations({ subtree: true })) animation.cancel();
+      // Fit measures the laid-out diagram, so hide it until fitting settles, then
+      // start from the previous pose and turn into the new one.
+      wrap.style.opacity = "0";
+      let frames = 0;
+      const start = () => {
+        frames++;
+        if (frames < 2 || (fitting.current && frames < 12)) { requestAnimationFrame(start); return; }
+        wrap.style.opacity = "";
+        const body = wrap.querySelector("[data-fit-body]")?.getBoundingClientRect();
+        const box = wrap.getBoundingClientRect();
+        if (!body || !body.width || !body.height) return;
+        const sideways = Math.abs(deltaDeg) % 180 === 90;
+        const k = before && before.width && before.height
+          ? Math.min(before.width / (sideways ? body.height : body.width), before.height / (sideways ? body.width : body.height)) : 1;
+        wrap.style.transformOrigin = `${body.left + body.width / 2 - box.left}px ${body.top + body.height / 2 - box.top}px`;
+        wrap.animate([{ transform: `rotate(${-deltaDeg}deg) scale(${k})` }, { transform: "none" }], { duration: ROTATION_MS, easing: ROTATION_EASING });
+        const content = wrap.querySelector<SVGGElement>("[data-screen-content]");
+        if (!content) return;
+        const fit = sideways ? Number(content.dataset.turnScale ?? 1) : 1;
+        const lag = CONTENT_LAG_MS / (ROTATION_MS + CONTENT_LAG_MS);
+        const from = `rotate(${deltaDeg}deg) scale(${fit})`;
+        // Per-keyframe easing keeps the hold linear in time and the turn decelerating.
+        content.animate([{ transform: from, offset: 0 }, { transform: from, offset: lag, easing: ROTATION_EASING }, { transform: "none" }],
+          { duration: ROTATION_MS + CONTENT_LAG_MS });
+      };
+      requestAnimationFrame(start);
+    },
     refitFold: () => {
       if (!live.current.autoFit || foldFitPending.current || !scaleRef.current) return;
       const el = scaleRef.current;
@@ -245,7 +281,9 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
     onPointerUp={e => { pointers.current.delete(e.pointerId); pinchStart.current = null; }} onPointerCancel={e => { pointers.current.delete(e.pointerId); pinchStart.current = null; }}
     onLostPointerCapture={e => { pointers.current.delete(e.pointerId); pinchStart.current = null; }}>
     <div ref={positionRef} className="diagram-position" style={{ transform: `translate(${pan.x}px, ${pan.y}px)` }}>
-      <div ref={scaleRef} style={{ width: baseWidth, height: baseHeight, transformOrigin: "center" }}>{children}</div>
+      <div ref={turnRef}>
+        <div ref={scaleRef} style={{ width: baseWidth, height: baseHeight, transformOrigin: "center" }}>{children}</div>
+      </div>
     </div>
   </div>;
 }

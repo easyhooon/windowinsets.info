@@ -72,7 +72,7 @@ Use this decision order for every frontend change:
 2. Substitute Android concepts only where the underlying platform meaning differs.
    Keep the reference hierarchy and presentation around that substitution.
 3. Preserve measurement truth. A missing Android value remains pending, and a view
-   rotation remains a view transform rather than a claimed landscape capture.
+   rotation never turns one capture into another orientation's insets.
 4. Add an Android-only control only when the dataset cannot be represented without
    it, such as navigation mode, outer/inner display or hinge state. Place it in the
    closest reference control group without reorganizing the primary experience.
@@ -130,7 +130,7 @@ from https://developer.samsung.com/galaxy-emulator-skin.
 | Mobile | Model selector, collapsible Metrics, bottom controls | Implemented, checked at 390×844 |
 | Device navigation | Searchable grouped list with selected model | Android family tabs (All/Z/S/Tab/Note/A), collapsible series groups, cross-family search, active model on home and detail routes |
 | Viewport | Scroll/drag pan, pinch zoom, +/−, 0 fit | Pointer pan/touch pinch, native wheel pan/Ctrl-wheel zoom, zoom shown as CSS px per dp (10–500%, auto-fit capped at 100%) so every series shares one scale, ResizeObserver fit |
-| Orientation | Portrait, left/right landscape, upside down | All four view rotations; recorded Android insets are not relabeled as landscape captures |
+| Orientation | Portrait, left/right landscape, upside down | All four rotations. Flat devices re-lay out upright in the chosen orientation (swapped size, turned corners and artwork) with a One UI-style turn: frame first, screen content ~90 ms later, 300 ms decelerate; insets appear only for captured rotations, otherwise "not measured yet". 3D foldables still rotate the recorded view |
 | Fold | Closed/partial/open, arbitrary hinge | Presets and slider, eased three.js hinge, rigid outer panels, closed solid shell, reduced-motion support |
 | Layers | Safe area/insets/reserved/corners | Independent legend toggles; Android cutout bounding region replaces iOS reserved regions |
 | Settings | Frame, regions, dimensions, units | All switches plus Android dp/px and navigation mode |
