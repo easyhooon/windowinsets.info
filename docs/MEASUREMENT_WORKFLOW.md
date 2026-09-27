@@ -30,8 +30,18 @@ lessons live in the `pixel-emulator-insets` skill
   36.4.9 and 37.1.11. Pixel 10 Pro Fold reported the same inner cutout and
   corner radii as Pixel 9 Pro Fold; cross-check the geometry against factory
   images or real devices before publishing.
-- These captures are not registered. They stay outside `measurements/` until the
-  site models emulator provenance.
+- Registration: copy a validated run to
+  `measurements/<slug>/emulator-<date>/` (raw JSON plus `manifest.json`, never
+  mixed with real-device files), then run
+  `python3 scripts/import-emulator-captures.py [slug ...]`. The importer checks
+  the emulator model, spec resolution, navigation mode agreement and cover fold
+  state; copies the AOSP skin with a `source.json`; and generates
+  `app/data/devices/<slug>/index.ts`, `app/data/aospSkins.ts` and
+  `app/data/devices/pixel.ts`. Only rotation 0 is shown; other rotations stay
+  as raw evidence.
+- The site labels these values "Emulator insets" and shows the emulator version,
+  device profile and build instead of One UI. Never describe them as measured on
+  Pixel hardware.
 
 ## Orientation support by form factor (2026-09-27, #24)
 

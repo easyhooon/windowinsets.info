@@ -20,6 +20,7 @@ import os
 import re
 import subprocess
 import time
+import zipfile
 from pathlib import Path
 
 SDK = Path(os.environ.get("ANDROID_HOME", Path.home() / "Library/Android/sdk"))
@@ -131,6 +132,30 @@ def sweep(screen: str) -> list[str]:
     return shell(f"ls {EXPORT_DIR}").split()
 
 
+def configured_upload_key() -> str:
+    properties = Path.home() / ".gradle/gradle.properties"
+    if not properties.exists():
+        return ""
+    for line in properties.read_text().splitlines():
+        key, _, value = line.partition("=")
+        if key.strip() == "insetsProbeUploadKey":
+            return value.strip()
+    return ""
+
+
+def assert_keyless(apk: Path) -> None:
+    # A keyed build uploads sweeps to the real-device capture inbox. The default
+    # build path is shared with keyed builds for physical devices, so check the
+    # APK itself instead of trusting how it was built.
+    key = configured_upload_key()
+    if not key:
+        return
+    with zipfile.ZipFile(apk) as archive:
+        dex = b"".join(archive.read(name) for name in archive.namelist() if name.endswith(".dex"))
+    if key.encode() in dex:
+        raise SystemExit(f"{apk} carries the upload key; build with -PinsetsProbeUploadKey= and pass --apk")
+
+
 def emulator_provenance() -> dict:
     avd = adb("emu", "avd", "name").splitlines()[0].strip()
     config = {}
@@ -158,12 +183,14 @@ def main() -> None:
     parser.add_argument("--nav", default="gesture,threeButton")
     parser.add_argument("--rotations", default="0,1,2,3", help="user rotations for screens that ignore app requests")
     parser.add_argument("--sweep-screens", default="cover,phone", help="screens that honor app orientation requests")
+    parser.add_argument("--apk", type=Path, default=APK, help="keyless probe APK; copy it aside so keyed rebuilds cannot replace it")
     parser.add_argument("--no-install", action="store_true")
     args = parser.parse_args()
 
     wait_until(lambda: adb("shell", "getprop sys.boot_completed", check=False) == "1", timeout=300, message="boot")
     if not args.no_install:
-        adb("install", "-r", str(APK))
+        assert_keyless(args.apk)
+        adb("install", "-r", str(args.apk))
     shell(f"rm -rf {EXPORT_DIR}")
     shell(f"mkdir -p {EXPORT_DIR}")
     shell("settings put system screen_off_timeout 2147483647")

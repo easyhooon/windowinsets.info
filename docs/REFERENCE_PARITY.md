@@ -227,6 +227,11 @@ desktop and mobile.
   models than the reference. The dedicated A tab avoids a long scroll to its
   entries; groups begin with the active model's series open, can be toggled
   independently, and search shows matches across all families.
+- **Brand tabs and emulator provenance** (2026-09-27, issue #23) are an Android
+  addition. A Galaxy/Pixel segmented control sits above the family tabs. Pixel
+  entries use AOSP emulator skins and Android Emulator captures, so the evidence
+  panel replaces the Samsung RTL block with the emulator manifest, profile and
+  build, and the canvas notes that values were not measured on Pixel hardware.
 - **Export JSON** is an intentional product divergence from the observed
   safearea.info UI. Android consumers need exact probe dp/px, navigation-mode,
   display and provenance data outside the visual tool. The action stays secondary

@@ -1,0 +1,11 @@
+{
+  "source": "https://android.googlesource.com/platform/tools/adt/idea/+/ca26f0383e6cca7c3fe55ccbbe5526ba4e24d198/artwork/resources/device-art-resources/pixel_tablet",
+  "project": "Android Open Source Project, platform/tools/adt/idea",
+  "commit": "ca26f0383e6cca7c3fe55ccbbe5526ba4e24d198",
+  "license": "Apache-2.0",
+  "copyright": "Copyright The Android Open Source Project",
+  "copiedFrom": "Android SDK skins/pixel_tablet",
+  "background": "back.webp",
+  "foreground": "mask.webp",
+  "importedAt": "2026-09-27"
+}

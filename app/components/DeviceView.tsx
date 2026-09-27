@@ -10,7 +10,10 @@ import { InsetsDiagram } from "./InsetsDiagram";
 import { CodeBlock } from "./CodeBlock";
 import type { AppPreview } from "./appPreview";
 import { DiagramViewport, type DiagramViewportHandle } from "./DiagramViewport";
-import { skins } from "../data/skins";
+import { aospSkins } from "../data/aospSkins";
+import { skins as samsungSkins } from "../data/skins";
+
+const skins = { ...samsungSkins, ...aospSkins };
 import { ResizeHandle } from "./ResizeHandle";
 import { Icon } from "./Icon";
 import { getRtlAvailability } from "../data/rtlAvailability";
@@ -92,7 +95,7 @@ function SourceList({ sources }: { sources: Source[] }) {
     <ul className="space-y-1 text-sm">
       {sources.map((s) => (
         <li key={`${s.label}|${s.url ?? ""}|${s.retrievedAt}`}>
-          <span className="mr-2 rounded bg-canvas px-1.5 py-0.5 text-xs uppercase">{s.kind}</span>
+          <span className={`source-kind${s.kind === "emulator" ? " is-emulator" : ""} mr-2 rounded bg-canvas px-1.5 py-0.5 text-xs uppercase`}>{s.kind}</span>
           {s.url ? (
             <a href={s.url} className="underline" rel="noopener noreferrer" target="_blank">
               {s.label}
@@ -191,6 +194,9 @@ export function DeviceView({ device }: { device: Device }) {
   const screen = preciseScreen(device.screens.find(s => s.id === screenId) ?? main);
   const measurement = screen.insets[navMode];
   const rtl = getRtlAvailability(device.slug);
+  // Pixel entries come from the Android Emulator, never from Samsung RTL.
+  const emulatorOnly = device.brand === "Google";
+  const pendingNotice = emulatorOnly ? "Emulator artwork preview · No capture for this screen and navigation mode" : rtl.previewNotice;
   const skin = skins[`${device.slug}/${screen.id}`];
   const safe = measurement ? safeInsets(measurement) : null;
   const safePx = measurement ? safeInsetsPx(measurement) : null;
@@ -368,21 +374,35 @@ export function DeviceView({ device }: { device: Device }) {
             )}
 
         <details className="sources-details"><summary>Android details & sources</summary>
-          <section className="rtl-status" aria-label="Remote Test Lab availability">
+          {emulatorOnly ? <section className="rtl-status emulator-status" aria-label="Capture provenance">
+            {measurement?.condition.emulator ? <a href={measurement.condition.emulator.manifestUrl} target="_blank" rel="noreferrer">Android Emulator capture ↗</a> : <strong>Android Emulator capture</strong>}
+            <p>Values reported by the Android framework for the emulator's {device.name} device profile. They are not measured on Pixel hardware and may differ from a physical device.</p>
+            <small>{measurement ? "Emulator selection" : "No capture for this selection"}</small>
+          </section> : <section className="rtl-status" aria-label="Remote Test Lab availability">
             <a href={rtl.sourceUrl} target="_blank" rel="noreferrer">{rtl.label} ↗</a>
             <p>{rtl.description}</p>
             <small>Checked {rtl.checkedAt} · {measurement ? "Measured selection" : "No capture for this selection"}</small>
-          </section>
+          </section>}
           <SectionLabel>System Bars · {navMode === "gesture" ? "Gesture" : "3-button"}</SectionLabel>
           <dl>{measurement ? insetsRows(measurement.systemBars, measurement.systemBarsPx, units, fmt) : pendingInsetsRows}</dl>
           <SectionLabel>Display Cutout Insets</SectionLabel>
           <dl>{measurement ? insetsRows(measurement.displayCutout, measurement.displayCutoutPx, units, fmt) : pendingInsetsRows}</dl>
-          <SectionLabel>Measured On</SectionLabel>
-          <dl>
-            <Row label="One UI" value={measurement ? measurement.condition.oneUi : PENDING} />
-            <Row label="Android" value={measurement ? measurement.condition.android : PENDING} />
-          </dl>
-          <p className="mb-3 text-xs text-muted">{device.name} · {screen.label} · {measurement ? `Captured ${screen.captureOrientation ?? "orientation unknown"}. Rotation changes the view, not the recorded Android insets.` : "Official artwork preview. Android insets have not been measured for this navigation mode."}</p>
+          {emulatorOnly ? <>
+            <SectionLabel>Captured On</SectionLabel>
+            <dl>
+              <Row label="Emulator" value={measurement?.condition.emulator ? `Android Emulator ${measurement.condition.emulator.emulatorVersion}` : PENDING} />
+              <Row label="Device Profile" value={measurement?.condition.emulator?.deviceProfile ?? PENDING} />
+              <Row label="Android" value={measurement ? measurement.condition.android : PENDING} />
+              <Row label="Build" value={measurement?.condition.emulator?.buildFingerprint.split("/")[3] ?? PENDING} />
+            </dl>
+          </> : <>
+            <SectionLabel>Measured On</SectionLabel>
+            <dl>
+              <Row label="One UI" value={measurement ? measurement.condition.oneUi ?? PENDING : PENDING} />
+              <Row label="Android" value={measurement ? measurement.condition.android : PENDING} />
+            </dl>
+          </>}
+          <p className="mb-3 text-xs text-muted">{device.name} · {screen.label} · {measurement ? `Captured ${screen.captureOrientation ?? "orientation unknown"}. Rotation changes the view, not the recorded Android insets.` : emulatorOnly ? "AOSP emulator artwork preview. No emulator capture exists for this navigation mode." : "Official artwork preview. Android insets have not been measured for this navigation mode."}</p>
           {triFold && <p className="mb-3 text-xs text-muted">Two-hinge animation is illustrative. Partial poses do not represent measured Android window states.</p>}
           {measurement?.condition.note && <p className="mb-3 text-xs text-muted">{measurement.condition.note}</p>}
           <SourceList sources={Array.from(new Map((measurement?.sources ?? []).concat(screen.sources).map(s => [`${s.label}|${s.url ?? ""}`, s])).values())} />
@@ -427,7 +447,8 @@ export function DeviceView({ device }: { device: Device }) {
       </DiagramViewport>
       </div>
       <footer className="canvas-footer">
-      {useFold ? <div className="fold-measurement-notice">{!measurement && <p className="pending-notice">{rtl.previewNotice}</p>}</div> : !measurement && <p className="pending-notice">{rtl.previewNotice}</p>}
+      {useFold ? <div className="fold-measurement-notice">{!measurement ? <p className="pending-notice">{pendingNotice}</p> : emulatorOnly && <p className="pending-notice">Android Emulator capture · Not measured on Pixel hardware</p>}</div>
+        : !measurement ? <p className="pending-notice">{pendingNotice}</p> : emulatorOnly && <p className="pending-notice">Android Emulator capture · Not measured on Pixel hardware</p>}
       {(measurement || screen.cornerRadiiDp || useFold) && <div className="region-legend" aria-label="Region legend">
         {([{ key: "safe", label: "Safe Area", color: "#ade7bc" }, { key: "insets", label: "Insets", color: "#ffdab0" }, { key: "cutout", label: "Display Cutout", color: "#c4a0f1" }, { key: "corners", label: "Corner Radius", color: "#e4a6cc" }] as const).map(item => <button key={item.key} disabled={item.key === "corners" ? !screen.cornerRadiiDp : item.key === "cutout" ? !measurement?.cutoutShape : !measurement} aria-pressed={layers[item.key]} onClick={() => setLayers(v => ({ ...v, [item.key]: !v[item.key] }))}><i style={{ background: item.color }} />{item.label}</button>)}
       </div>}

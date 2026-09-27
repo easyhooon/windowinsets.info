@@ -3,9 +3,17 @@ import type {
   Device,
   Insets,
   InsetsMeasurement,
+  EmulatorProvenance,
   NavMode,
+  Screen,
   Source,
 } from "./types";
+
+/** "emulator" marks Android Emulator captures; they are never physical-device evidence. */
+type Evidence = "measured" | "emulator";
+
+const evidenceOf = (sources: Source[]): Evidence =>
+  sources.some(source => source.kind === "emulator") ? "emulator" : "measured";
 
 export const DEVICE_EXPORT_SCHEMA = "https://windowinsets.info/schemas/device-window-insets-v1.schema.json";
 export const DEVICE_EXPORT_SCHEMA_VERSION = 1;
@@ -57,7 +65,7 @@ interface MeasuredUnitPair<T> {
 }
 
 export interface PublicMeasurement {
-  evidence: "measured";
+  evidence: Evidence;
   raw: {
     systemBars: MeasuredUnitPair<Insets>;
     displayCutoutInsets: MeasuredUnitPair<Insets>;
@@ -81,9 +89,10 @@ export interface PublicMeasurement {
     };
   };
   condition: {
-    oneUi: string;
+    oneUi: string | null;
     android: string;
     note: string | null;
+    emulator: EmulatorProvenance | null;
   };
   sources: PublicSource[];
 }
@@ -112,7 +121,7 @@ export interface PublicDeviceExport {
     capture: {
       status: "measured" | "pending";
       value: {
-        evidence: "measured";
+        evidence: Evidence;
         logicalSize: MeasuredUnitPair<Size>;
         densityDpi: number;
         orientation: "portrait" | "landscape" | null;
@@ -139,6 +148,11 @@ function publicSource(source: Source): PublicSource {
   };
 }
 
+function captureEvidence(screen: Screen): Evidence {
+  const measurements = [screen.insets.gesture, screen.insets.threeButton].filter(m => m !== null);
+  return evidenceOf(measurements.length ? measurements.flatMap(m => m!.sources) : screen.sources);
+}
+
 function hasCompletePxBounds(shape: InsetsMeasurement["cutoutShape"]): boolean {
   return !!shape && [shape.xPx, shape.yPx, shape.widthPx, shape.heightPx, shape.rightPx, shape.bottomPx]
     .every(value => value != null);
@@ -162,7 +176,7 @@ function exportMeasurement(
   } : null;
 
   return {
-    evidence: "measured",
+    evidence: evidenceOf(measurement.sources),
     raw: {
       systemBars: { dp: measurement.systemBars, px: measurement.systemBarsPx ?? null },
       displayCutoutInsets: { dp: measurement.displayCutout, px: measurement.displayCutoutPx ?? null },
@@ -199,9 +213,10 @@ function exportMeasurement(
       },
     },
     condition: {
-      oneUi: measurement.condition.oneUi,
+      oneUi: measurement.condition.oneUi ?? null,
       android: measurement.condition.android,
       note: measurement.condition.note ?? null,
+      emulator: measurement.condition.emulator ?? null,
     },
     sources: measurement.sources.map(publicSource),
   };
@@ -231,7 +246,7 @@ export function createDeviceExport(device: Device): PublicDeviceExport {
       const capture = screen.logicalSizeDp !== null && screen.densityDpi !== null ? {
         status: "measured" as const,
         value: {
-          evidence: "measured" as const,
+          evidence: captureEvidence(screen),
           logicalSize: { dp: screen.logicalSizeDp, px: screen.logicalSizePx ?? null },
           densityDpi: screen.densityDpi,
           orientation: screen.captureOrientation ?? null,
