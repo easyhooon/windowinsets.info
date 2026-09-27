@@ -1,6 +1,6 @@
 # WindowInsets Measurement Workflow & Status
 
-**Last Updated**: 2026-09-25
+**Last Updated**: 2026-09-28
 
 ## RTL collection scope
 
@@ -28,8 +28,10 @@ lessons live in the `pixel-emulator-insets` skill
 - Pixel 9 Pro Fold and Pixel 10 Pro Fold each produced 14 captures on Android 17
   (API 37) system images. Pixel 9 Pro Fold values were identical on emulator
   36.4.9 and 37.1.11. Pixel 10 Pro Fold reported the same inner cutout and
-  corner radii as Pixel 9 Pro Fold; cross-check the geometry against factory
-  images or real devices before publishing.
+  corner radii as Pixel 9 Pro Fold. Physical FTL spot checks on 2026-09-28
+  found matching camera paths and corners on both Fold models. Pixel 10 Pro
+  Fold's physical top cutout safe inset differed from its API 37 emulator
+  capture; see [the FTL validation log](PIXEL_HARDWARE_VALIDATION.md).
 - Registration: copy a validated run to
   `measurements/<slug>/emulator-<date>/` (raw JSON plus `manifest.json`, never
   mixed with real-device files), then run
@@ -42,6 +44,13 @@ lessons live in the `pixel-emulator-insets` skill
 - The site labels these values "Emulator insets" and shows the emulator version,
   device profile and build instead of One UI. Never describe them as measured on
   Pixel hardware.
+
+Physical Firebase Test Lab captures are kept in separate dated `testlab-*/`
+folders with the model, Android build and matrix ID. They are spot checks, not
+automatic replacements for published emulator values. The 2026-09-28 Spark
+run covered Pixel 10 Pro XL, Pixel 10 Pro Fold, Pixel 9 Pro Fold, Pixel 8 Pro
+and Pixel Tablet. See [Pixel hardware validation](PIXEL_HARDWARE_VALIDATION.md)
+for the raw evidence, comparison conditions and unresolved differences.
 
 ## Orientation support by form factor (2026-09-27, #24)
 

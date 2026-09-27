@@ -1,0 +1,61 @@
+{
+  "events": [{
+    "sourceScreenId": "0",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 8.287,
+    "endTimeSeconds": 10.072,
+    "executionResult": "SUCCESS",
+    "launch": {
+    }
+  }, {
+    "sequence": 1,
+    "sourceScreenId": "1",
+    "destinationScreenId": "0",
+    "startTimeSeconds": 11.497,
+    "endTimeSeconds": 12.908,
+    "executionResult": "SUCCESS",
+    "isRoboscriptActive": true,
+    "adbCommandEvent": {
+      "command": "am force-stop info.windowinsets.probe"
+    }
+  }, {
+    "sequence": 2,
+    "sourceScreenId": "0",
+    "destinationScreenId": "0",
+    "startTimeSeconds": 14.409,
+    "endTimeSeconds": 15.902,
+    "executionResult": "SUCCESS",
+    "isRoboscriptActive": true,
+    "adbCommandEvent": {
+      "command": "rm -f /sdcard/Android/data/info.windowinsets.probe/files/*.json"
+    }
+  }, {
+    "sequence": 3,
+    "sourceScreenId": "0",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 17.404,
+    "endTimeSeconds": 18.57,
+    "executionResult": "SUCCESS",
+    "isRoboscriptActive": true,
+    "adbCommandEvent": {
+      "command": "am start -W -n info.windowinsets.probe/.MainActivity --es screen main --ez export true"
+    }
+  }, {
+    "sequence": 4,
+    "sourceScreenId": "1",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 19.8,
+    "endTimeSeconds": 24.897,
+    "executionResult": "SUCCESS",
+    "isRoboscriptActive": true,
+    "wait": {
+      "durationSeconds": 5.0
+    }
+  }, {
+    "startTimeSeconds": 24.897,
+    "endTimeSeconds": 24.897,
+    "roboscriptFinished": {
+      "reason": "END_OF_SCRIPT"
+    }
+  }]
+}

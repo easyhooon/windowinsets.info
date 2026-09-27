@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-e370qxayj12ua",
+  "deviceModelId": "comet",
+  "deviceName": "Pixel 9 Pro Fold",
+  "androidApi": 36,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/8502694126242610502",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_00:24:42.694267_XGNH/comet-36-en-portrait/",
+  "note": "Physical inner display, portrait gesture mode. Robo script ended without additional exploration. Compare against the API 37 emulator with the OS-version difference noted.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "6836240e281a0a2e7caad87d62a09872d6e33576609e8f4634aa5df87afec8dc"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "1ca745234ed7715740cd7b2929bce8747ced79fc8aefd4305292da2e9eed9112"
+    }
+  ]
+}

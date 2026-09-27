@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-27vyvgp301kyl",
+  "deviceModelId": "rango",
+  "deviceName": "Pixel 10 Pro Fold",
+  "androidApi": 36,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/5415288884619478105",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_00:20:13.202146_GVxJ/rango-36-en-portrait/",
+  "note": "Physical inner display, portrait gesture mode. Robo script ended without additional exploration. Compare against the API 37 emulator with the OS-version difference noted.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "b25771da08ed33dc724cf28a4c5aaa6b4c4a11d13553ff7dcba7412307f192ea"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "b93c84bd557026652cbc5feaf81a1ce5dbb15b8f2aa696bafe1c711fa05c40ea"
+    }
+  ]
+}

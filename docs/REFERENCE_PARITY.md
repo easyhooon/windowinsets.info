@@ -1,5 +1,14 @@
 # safearea.info parity — 2026-09-22
 
+## Ko-fi support link — 2026-09-28
+
+The owner requested a low-key funding link on the site and GitHub. The site
+places it next to the existing GitHub star prompt in the sidebar footer, away
+from the measurement diagram and controls. This is an intentional project-specific
+addition to the reference UI, with no popup or persistent banner. The README
+has a short support callout. Site link activations emit `support_click` in GA4;
+donations are not measured by the site.
+
 ## TriFold support — 2026-09-24
 
 The owner approved official artwork plus a two-hinge 3D animation, with the same
