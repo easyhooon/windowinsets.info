@@ -412,9 +412,15 @@ display in one step:
    `landscape-<rotation>-<nav>.json` on phones (rotation 1 = side button up,
    cutout on the left; rotation 3 = the reverse) and with a screen prefix on
    foldables (`cover-landscape-1-gesture.json`, `main-portrait-1-gesture.json`).
-   Keep both rotation 1 and 3: never mirror one into the other. (A one-off Galaxy
-   S23+ 3-button check found rotation 3 mirrors rotation 1 on that unit; #24 decides
-   from pilot devices whether a documented mirroring exception is acceptable.)
+   Keep both rotation 1 and 3: never mirror one into the other, and never rotate a
+   portrait capture into landscape. Pilot decision (2026-09-27, #24/#30): 3-button
+   rotation 1/3 pairs on Galaxy S23+, Z Fold8 cover and Z Flip8 main kept the status
+   bar on top while the navigation bar and cutout switched sides (a 180° rotation of
+   the 90° capture would be wrong); horizontal mirroring matched those three pairs
+   only and stays unverified elsewhere. Portrait and landscape status bars also
+   differed on all three (74→84, 110→79, 108→90 px). So each rotation is its own
+   sweep capture; a display that does not rotate (e.g. Flip8 cover) stays pending
+   for the missing rotations.
    Earlier landscape captures were taken by rotating the RTL device by hand; they
    remain valid evidence.
 
