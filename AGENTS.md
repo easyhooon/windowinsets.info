@@ -35,6 +35,10 @@ leave other models unverified. Preserve historical captures. See
 - `docs/REFERENCE_PARITY.md`: binding clone doctrine, observed reference behavior,
   intentional Android substitutions, implementation status and visual QA.
 - `docs/MEASUREMENT_WORKFLOW.md`: capture process, known RTL issues, corrections.
+- `docs/MEASUREMENT_WORKFLOW.md` "Device Status & Progress": the single
+  remaining-measurement queue. A screen counts as measured only with natural,
+  rotation 1 and rotation 3 captures in both navigation modes. Pick the next
+  device from it and update it in the same commit as each device's captures.
 - `docs/RTL_CREDITS.md`: published credit policy, live grant evidence and budget rules.
 - `docs/DESIGN_HANDOFF.md`: original Claude visual backlog; see current status first.
 - React Router framework mode, React, TypeScript, three.js; pnpm; static prerender.
