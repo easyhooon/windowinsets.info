@@ -398,6 +398,11 @@ Do not use Measure All. Capture each active display and navigation mode explicit
 4. Tap **Measure** again and verify the `*-gesture.json` toast.
 5. For foldables, repeat after physically switching the WebClient display. Verify
    resolution after every switch; the label does not change the display.
+6. Optional bar-phone landscape (issue #22): rotate so the side button faces up,
+   which is display rotation 1 (cutout on the left). Capture both navigation
+   modes and store them as `landscape-1-{gesture,threeButton}.json` beside the
+   portrait `main-*` files. Rotation 3 is not collected; leave it unmeasured
+   rather than mirroring rotation 1.
 
 ### Step 4: Export & Commit Data
 

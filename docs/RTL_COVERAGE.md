@@ -578,7 +578,8 @@ Landscape pilot for issue #22: the same unit was captured at rotation 1
 system-gesture zone widens to 158 px (84 + 74), and in 3-button mode the
 navigation bar moves to the right edge (right 135 px, bottom 0). Gesture mode
 keeps the 42 px bottom handle. These values are stored as evidence only; the
-site does not render landscape measurements yet, and rotation 3 is pending.
+site does not render landscape measurements yet. Rotation 3 is not collected
+by convention (side button up = rotation 1).
 
 ## Galaxy Note20 and Galaxy Tab S9+/S8 series measured on 2026-09-25
 
