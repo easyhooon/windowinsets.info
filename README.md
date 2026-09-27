@@ -1,6 +1,6 @@
 # windowinsets.info
 
-Window insets, display cutouts, corner radii and foldable hinge states for Samsung Galaxy and Google Pixel devices — with a source for every number.
+Window insets, display cutouts, corner radii and foldable hinge states for Samsung Galaxy and Google Pixel devices. Every number has a source.
 
 Its interface is inspired by [safearea.info](https://safearea.info), adapted for Android data and foldables.
 
@@ -26,11 +26,11 @@ The full write-up lives on the site at [/methodology](https://windowinsets.info/
 - **Never estimated.** Nothing is interpolated from another device or derived from resolution alone. Unverified values are `null` and shown as **pending**.
 - **Known limits.** OS updates can change values. Each rotation needs its own capture; rotating the site diagram does not create landscape measurements. The Pixel site entries use rotation-0 emulator captures, with other rotations retained as raw evidence. Five physical FTL runs cover selected portrait gesture conditions only; the Android 16 and Android 17 comparisons show that a matching camera contour can coexist with a different OS cutout safe inset. Pixel Tablet's physical portrait and emulator landscape captures need a matched-orientation comparison. Multi-window is not covered yet; a real app may see different insets if it adds its own padding or window flags.
 
-Found a mistake or have a capture that differs from mine? Open an issue or pull request with your InsetsProbe JSON — a reproduction is as valuable as a new device.
+Found a mistake or have a capture that differs from mine? Open an issue or pull request with your InsetsProbe JSON. A reproduction is as valuable as a new device.
 
 ## Measuring a device
 
-Manufacturers don't publish insets, so I capture them with [InsetsProbe](tools/insets-probe) — a tiny Android app that dumps `WindowInsets`, `DisplayCutout`, `RoundedCorner`, `FoldingFeature` and the hinge angle as JSON. It runs on real devices, [Samsung Remote Test Lab](https://developer.samsung.com/remote-test-lab), [Firebase Test Lab](https://firebase.google.com/docs/test-lab) physical devices and Android Emulator profiles. See [tools/insets-probe/README.md](tools/insets-probe/README.md).
+Manufacturers don't publish insets, so I capture them with [InsetsProbe](tools/insets-probe), a tiny Android app that dumps `WindowInsets`, `DisplayCutout`, `RoundedCorner`, `FoldingFeature` and the hinge angle as JSON. It runs on real devices, [Samsung Remote Test Lab](https://developer.samsung.com/remote-test-lab), [Firebase Test Lab](https://firebase.google.com/docs/test-lab) physical devices and Android Emulator profiles. See [tools/insets-probe/README.md](tools/insets-probe/README.md).
 
 **Real-device and RTL capture flow:** Select a screen and navigation mode → measure or sweep rotations
 with InsetsProbe → save valid full-screen captures as raw JSON → upload them to
