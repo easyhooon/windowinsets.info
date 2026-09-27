@@ -13,8 +13,14 @@ extensions.configure<ApplicationExtension> {
         // RoundedCorner / Display.getRoundedCorner need API 31.
         minSdk = 31
         targetSdk = 36
-        versionCode = 7
-        versionName = "1.4.0"
+        versionCode = 8
+        versionName = "1.5.0"
+        // Uploads go to windowinsets.info (issue #28). Set insetsProbeUploadKey in
+        // ~/.gradle/gradle.properties or pass -PinsetsProbeUploadKey=...; blank disables upload.
+        val uploadKey = providers.gradleProperty("insetsProbeUploadKey").orElse("").get()
+        val uploadUrl = providers.gradleProperty("insetsProbeUploadUrl").orElse("https://windowinsets.info/api/captures").get()
+        buildConfigField("String", "UPLOAD_KEY", "\"$uploadKey\"")
+        buildConfigField("String", "UPLOAD_URL", "\"$uploadUrl\"")
     }
 
     buildFeatures {

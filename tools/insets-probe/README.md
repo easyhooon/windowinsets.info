@@ -26,7 +26,7 @@ Dumps everything [windowinsets.info](https://windowinsets.info) needs for one sc
    adb pull /sdcard/Android/data/info.windowinsets.probe/files/
    ```
 
-7. Save it as `measurements/<device-slug>/<screen>-<navMode>.json` at the repo root.
+7. Tap **Upload** (automatic after a sweep when the build has an upload key), or save the file as `measurements/<device-slug>/<screen>-<navMode>.json` at the repo root.
 
 Repeat for every screen × navigation mode. Do not edit the JSON by hand.
 
@@ -66,6 +66,21 @@ adb pull /sdcard/Android/data/info.windowinsets.probe/files/
 ```
 
 `--es screen` accepts `cover` or `main` (default `phone`); `--ez export true` saves the JSON one second after launch. See [sample-output](sample-output) for a real capture.
+
+## Version 1.5.0: direct upload
+
+- **Upload** sends the last Measure or sweep to `windowinsets.info/api/captures`
+  (issue #28). A sweep uploads automatically when the build has an upload key. No
+  more RTL File Browser round trip.
+- Uploads land on the rolling `capture-inbox` branch under
+  `measurements/_inbox/<model>/<timestamp>/`, one commit per upload. One open
+  inbox PR accumulates a batch; the user decides when to squash-merge it as one
+  commit on `main`. No separate PR or manual validation is required for each
+  capture. Files are stored exactly as captured.
+- Build with the key: `./gradlew :app:assembleDebug -PinsetsProbeUploadKey=<key>`
+  (or put `insetsProbeUploadKey=<key>` in `~/.gradle/gradle.properties`; never in
+  the repository). Without a key, Upload is disabled and downloading still works.
+- Server setup: [`docs/CAPTURE_UPLOAD.md`](../../docs/CAPTURE_UPLOAD.md).
 
 ## Version 1.4.0: orientation sweep
 

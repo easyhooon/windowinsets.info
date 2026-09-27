@@ -57,6 +57,9 @@ class MainActivity : ComponentActivity(), SensorEventListener {
     /** Active orientation sweep, or null. See [OrientationSweep]. */
     private var sweep: Sweep? = null
     private var sweepSummary: String? = null
+    /** Files from the last Measure or sweep, sent by Upload. */
+    private val lastCaptures = linkedMapOf<String, String>()
+    private var uploadStatus: String? = null
     private val sweepCheck = Runnable { checkSweep() }
 
     private class Sweep {
@@ -171,6 +174,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
             "Screen label: ${selectedScreen()} ($screenLabelSource; does not switch displays)\n" +
             "Rotation: ${display?.rotation?.let { "${it * 90}°" } ?: "unknown"}" +
             (sweepSummary?.let { "\n$it" }.orEmpty()) +
+            (uploadStatus?.let { "\n$it" }.orEmpty()) +
             (sweep?.let { " · sweep ${it.index + 1}/${OrientationSweep.steps.size}: ${OrientationSweep.steps.getOrNull(it.index)?.label}" }.orEmpty())
 
         if (autoExport) {
@@ -219,6 +223,10 @@ class MainActivity : ComponentActivity(), SensorEventListener {
         val screen = json.getString("screen")
         val name = OrientationSweep.fileName(screen, nav, display?.rotation, bounds.width() > bounds.height())
         val file = File(getExternalFilesDir(null), name).apply { writeText(lastJson) }
+        if (sweep == null) {
+            lastCaptures.clear()
+            lastCaptures[name] = lastJson
+        }
         lastJson.lines().chunked(60).forEach { Log.i(TAG, it.joinToString("\n")) }
         return file
     }
@@ -287,8 +295,34 @@ class MainActivity : ComponentActivity(), SensorEventListener {
             if (s.skipped.isEmpty()) "" else "\nSkipped: ${s.skipped.joinToString("; ")}"
         sweepSummary = summary
         captureStatus.text = summary
+        lastCaptures.clear()
+        lastCaptures.putAll(s.captures)
+        if (CaptureUploader.configured && s.captures.isNotEmpty()) upload()
         Log.i(TAG, summary)
         Toast.makeText(this, "Sweep done · ${s.captures.size} files saved", Toast.LENGTH_LONG).show()
+    }
+
+    private fun upload() {
+        if (lastCaptures.isEmpty()) {
+            Toast.makeText(this, "Measure or sweep first.", Toast.LENGTH_LONG).show()
+            return
+        }
+        if (!CaptureUploader.configured) {
+            Toast.makeText(this, "Upload key not set in this build. Download the JSON instead.", Toast.LENGTH_LONG).show()
+            return
+        }
+        val files = LinkedHashMap(lastCaptures)
+        uploadStatus = "Uploading ${files.size} file(s)…"
+        captureStatus.append("\n$uploadStatus")
+        Thread {
+            val result = CaptureUploader.upload(files)
+            runOnUiThread {
+                uploadStatus = result.fold({ it }, { it.message ?: "Upload failed" })
+                Log.i(TAG, uploadStatus!!)
+                Toast.makeText(this, uploadStatus, Toast.LENGTH_LONG).show()
+                refresh()
+            }
+        }.start()
     }
 
     private fun cancelSweep(reason: String) {
@@ -372,7 +406,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
         }
         fun actionButton(label: String, onClick: () -> Unit) = buttons.addView(Button(this).apply {
             text = label
-            textSize = 18f
+            textSize = 16f
             minHeight = px(72)
             setOnClickListener { onClick() }
         }, LinearLayout.LayoutParams(0, WRAP_CONTENT, 1f))
@@ -385,6 +419,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
             getSystemService(ClipboardManager::class.java).setPrimaryClip(ClipData.newPlainText("probe", lastJson))
             Toast.makeText(this, "Copied. Saved: ${file.name}", Toast.LENGTH_LONG).show()
         }
+        actionButton("Upload") { upload() }
         actionButton("Share") {
             export() ?: return@actionButton
             val send = Intent(Intent.ACTION_SEND).apply {
