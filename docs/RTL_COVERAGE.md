@@ -215,7 +215,12 @@ removes a model from its catalog.
 - Fold8 cover and inner were both
   recaptured from a live reservation in 3-button and gesture modes. Fold7 cover
   and inner are also measured in both modes from the same SM-F966U software
-  build. Flip8 cover and inner are now measured in both modes; its accepted cover
+  build. On 2026-09-27 InsetsProbe 1.5.0 captured cover and
+  inner at rotations 0, 1 and 3 in both modes (`recapture-2026-09-27-rotation/`);
+  the rotation 0 values match the published captures exactly. Inner rotations 1
+  and 3 were set with the RTL Rotate control because the app's rotation request
+  was ignored on the large display; the navigation bar stays at the bottom and the
+  top bar is 79 px instead of 89 px. Flip8 cover and inner are now measured in both modes; its accepted cover
   captures report display 1 and 948×1048 px, while the older mislabeled
   `cover-threeButton.json` remains preserved as historical inner-display evidence.
   Fold6 now has accepted cover and inner captures in both navigation modes;

@@ -31,6 +31,12 @@ captures only is an incomplete measured entry and needs the full sweep again.
 Read the rotation status in `docs/MEASUREMENT_WORKFLOW.md` ("Device Status &
 Progress") and update it after each device.
 
+Large inner displays (for example Fold7 inner on Android 16) can ignore the
+probe's orientation request, so the sweep reports "display did not rotate" and
+skips landscape. Rotate with the WebClient Rotate control instead, then press
+Measure and Upload at rotations 1 and 3, and return the device to rotation 0.
+Uploads keep a separate inbox timestamp directory per capture.
+
 For Galaxy Z Flip cover work, the supported collection scope starts at Flip5.
 Treat covers on Flip, Flip3 and Flip4 as unsupported and do not reserve or capture
 them. For Flip5 and later, collect cover measurements only when the registered
