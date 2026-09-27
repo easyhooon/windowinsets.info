@@ -97,14 +97,17 @@ of a session: Samsung's published 20-credit daily policy conflicts with a live
 10-credit once-per-day grant observed on 2026-09-23. Budget from the confirmed
 header balance, not the published maximum.
 Prepare the APK and capture checklist before reserving. Prioritize complete,
-settled captures, downloads and validation; there is no 15-minute deadline for
-the measurements. If all required evidence is already safe on the host and the
-WebClient still offers **Return this device to get back 1 credit(s)**, an early
-return can save a credit. Check the option and verify the balance increase if
-choosing to return. Do not assume a refund from elapsed time or checkbox text,
-and do not rush, skip validation, or end a productive reservation just to meet
-a presumed refund cutoff. When evidence is incomplete, use the reserved time
-while further progress is possible; preserve unresolved captures and their
+settled captures, downloads and validation. Once all required captures are
+uploaded and validated, return the reservation before reserving another device.
+Open the device's quit/return flow in WebClient and confirm that Reservations no
+longer lists the device. The upper-left **Exit** only ends the current test and
+can leave the reservation running while the device restarts. If WebClient offers
+**Return this device to get back 1 credit(s)**, select it and verify the balance
+increased. The offer, not elapsed time, establishes refund eligibility.
+Reservation removal and balance verification are the final completion criterion
+for each device.
+Validate captures promptly so an offered refund can still be claimed; keep
+collecting while evidence is incomplete. Preserve unresolved captures and their
 limitations. Do not extend or renew automatically. Confirm the
 reservation dialog still names the intended model and duration before starting.
 The user's request to reserve the named queue authorizes this
