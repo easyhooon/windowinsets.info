@@ -179,6 +179,10 @@ export default function Methodology() {
             rotated from another orientation. Multi-window modes are not covered yet.
           </li>
           <li>
+            Only tablets offer upside-down portrait. Galaxy phones and foldables leave 180°
+            out of auto-rotation, so apps never see that orientation there.
+          </li>
+          <li>
             Apps can add their own padding or use different window flags, so a real app may
             see different insets than the raw platform values shown here.
           </li>
