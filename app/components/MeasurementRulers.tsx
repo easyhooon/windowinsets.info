@@ -8,7 +8,7 @@ export function MeasurementRulers({ measurements, onCopy }: {
 }) {
   const { scale, units } = measurements;
   const colors = { size: DIAGRAM_COLORS.ink, inset: DIAGRAM_COLORS.inset, radius: DIAGRAM_COLORS.radius, cutout: '#8950e8' };
-  return <g aria-label="Measurement rulers">
+  return <g aria-label="Measurement rulers" data-measurement-rulers="true">
     {layoutMeasurementRulers(measurements).map(ruler => {
       const color = colors[ruler.kind];
       const { p, q } = ruler;
