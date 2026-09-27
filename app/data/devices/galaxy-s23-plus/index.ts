@@ -1,4 +1,4 @@
-import type { Device, InsetsMeasurement, Source } from "../../types";
+import type { Device, Insets, InsetsMeasurement, Source } from "../../types";
 
 const samsungSpecs: Source = {
   kind: "official",
@@ -33,6 +33,39 @@ const measuredInsets = (mode: "gesture" | "threeButton"): InsetsMeasurement => (
   sources: [captureSource(mode)],
 });
 
+// Landscape captures (issue #22): separate RTL captures of the same unit, not rotated portrait values.
+const DENSITY = 450 / 160;
+const dp = (px: Insets): Insets => ({ top: px.top / DENSITY, right: px.right / DENSITY, bottom: px.bottom / DENSITY, left: px.left / DENSITY });
+const landscapeSource = (rotation: 1 | 3, mode: "gesture" | "threeButton"): Source => ({
+  kind: "measured",
+  label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy S23+ (SM-S916U), landscape rotation ${rotation} ${mode === "gesture" ? "gesture" : "3-button"}`,
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s23-plus/landscape-${rotation}-${mode}.json`,
+  retrievedAt: "2026-09-27",
+});
+const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton", systemBarsPx: Insets): InsetsMeasurement => {
+  // Rotation 1: cutout on the left edge; rotation 3: on the right edge.
+  const displayCutoutPx = rotation === 1 ? { top: 0, right: 0, bottom: 0, left: 74 } : { top: 0, right: 74, bottom: 0, left: 0 };
+  const xPx = rotation === 1 ? 0 : 2266;
+  return {
+    systemBars: dp(systemBarsPx),
+    systemBarsPx,
+    displayCutout: dp(displayCutoutPx),
+    displayCutoutPx,
+    cutoutShape: {
+      xDp: xPx / DENSITY, yDp: 514 / DENSITY, widthDp: 74 / DENSITY, heightDp: 52 / DENSITY,
+      rightDp: (2340 - xPx - 74) / DENSITY, bottomDp: (1080 - 566) / DENSITY,
+      xPx, yPx: 514, widthPx: 74, heightPx: 52, rightPx: 2340 - xPx - 74, bottomPx: 1080 - 566,
+    },
+    condition: {
+      oneUi: "8.0",
+      android: "16",
+      note: `Samsung RTL, SM-S916U, build BP2A.250605.031.A3.S916USQS6EYK3. Landscape rotation ${rotation}, 2340×1080 px full-screen capture, 450 dpi, font scale 1. The status bar is 84 px here versus 74 px in portrait.`,
+    },
+    sources: [landscapeSource(rotation, mode)],
+  };
+};
+const landscapeSize = { logicalSizePx: { width: 2340, height: 1080 }, logicalSizeDp: { width: 832, height: 384 } };
+
 export const galaxyS23Plus: Device = {
   slug: "galaxy-s23-plus",
   name: "Galaxy S23+",
@@ -54,6 +87,17 @@ export const galaxyS23Plus: Device = {
     cornerRadiiDp: { topLeft: 35.91111, topRight: 35.91111, bottomRight: 35.91111, bottomLeft: 35.91111 },
     cornerRadiiPx: { topLeft: 101, topRight: 101, bottomRight: 101, bottomLeft: 101 },
     insets: { gesture: measuredInsets("gesture"), threeButton: measuredInsets("threeButton") },
+    rotations: {
+      1: { ...landscapeSize, insets: {
+        gesture: landscapeInsets(1, "gesture", { top: 84, right: 0, bottom: 42, left: 0 }),
+        threeButton: landscapeInsets(1, "threeButton", { top: 84, right: 135, bottom: 0, left: 0 }),
+      } },
+      // Rotation 3 gesture has not been captured.
+      3: { ...landscapeSize, insets: {
+        gesture: null,
+        threeButton: landscapeInsets(3, "threeButton", { top: 84, right: 0, bottom: 0, left: 135 }),
+      } },
+    },
     sources: [samsungSpecs, captureSource("gesture"), captureSource("threeButton")],
   }],
   sources: [samsungSpecs, captureSource("gesture"), captureSource("threeButton")],

@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-3qe6bitme0p6b",
+  "deviceModelId": "cheetah",
+  "deviceName": "Pixel 7 Pro",
+  "androidApi": 33,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/5423514632819986165",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_01:21:48.393279_wMuy/cheetah-33-en-portrait/",
+  "note": "Physical device, portrait, existing navigation mode; compare with the API 37 emulator with the OS difference noted.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "25060096db20b0c5bdedb00b6173669953356c27a875f7617d9494dcb4fd81e5"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "17d1a8bafbf45b4375c1bf4d3afb7ee049be8a4c038b8615d8764b92aa0c54a6"
+    }
+  ]
+}

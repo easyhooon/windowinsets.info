@@ -18,6 +18,7 @@ import android.view.Gravity
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -45,6 +46,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
     private lateinit var output: TextView
     private lateinit var screenGroup: RadioGroup
     private lateinit var captureStatus: TextView
+    private lateinit var tabletReversePortrait: CheckBox
 
     private var latestInsets: WindowInsetsCompat? = null
     private var hingeAngle: Float? = null
@@ -62,7 +64,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
     private var uploadStatus: String? = null
     private val sweepCheck = Runnable { checkSweep() }
 
-    private class Sweep {
+    private class Sweep(val steps: List<OrientationSweep.Step>) {
         var index = 0
         var stepStartedAt = 0L
         val captures = linkedMapOf<String, String>()
@@ -93,6 +95,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
         )
         autoExport = intent.getBooleanExtra("export", false)
         // Automation: ... --ez sweep true  (records every orientation the display allows)
+        tabletReversePortrait.isChecked = intent.getBooleanExtra("tablet", false)
         if (intent.getBooleanExtra("sweep", false)) root.post { startSweep() }
 
         // Listen on the root so we see exactly what an app's content root would receive.
@@ -175,7 +178,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
             "Rotation: ${display?.rotation?.let { "${it * 90}°" } ?: "unknown"}" +
             (sweepSummary?.let { "\n$it" }.orEmpty()) +
             (uploadStatus?.let { "\n$it" }.orEmpty()) +
-            (sweep?.let { " · sweep ${it.index + 1}/${OrientationSweep.steps.size}: ${OrientationSweep.steps.getOrNull(it.index)?.label}" }.orEmpty())
+            (sweep?.let { " · sweep ${it.index + 1}/${it.steps.size}: ${it.steps.getOrNull(it.index)?.label}" }.orEmpty())
 
         if (autoExport) {
             autoExport = false
@@ -233,14 +236,14 @@ class MainActivity : ComponentActivity(), SensorEventListener {
 
     private fun startSweep() {
         if (sweep != null) return
-        sweep = Sweep()
+        sweep = Sweep(OrientationSweep.steps(tabletReversePortrait.isChecked))
         sweepSummary = null
         applySweepStep()
     }
 
     private fun applySweepStep() {
         val s = sweep ?: return
-        val step = OrientationSweep.steps.getOrNull(s.index) ?: return finishSweep()
+        val step = s.steps.getOrNull(s.index) ?: return finishSweep()
         s.stepStartedAt = SystemClock.uptimeMillis()
         requestedOrientation = step.requestedOrientation
         // Already in this orientation: no callback arrives, so schedule the check anyway.
@@ -252,7 +255,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
     /** Runs after a quiet period: capture the step once the window has really rotated. */
     private fun checkSweep() {
         val s = sweep ?: return
-        val step = OrientationSweep.steps[s.index]
+        val step = s.steps[s.index]
         val bounds = windowManager.currentWindowMetrics.bounds
         val timedOut = SystemClock.uptimeMillis() - s.stepStartedAt > OrientationSweep.TIMEOUT_MS
         if (!OrientationSweep.reached(step, bounds.width(), bounds.height())) {
@@ -386,6 +389,11 @@ class MainActivity : ComponentActivity(), SensorEventListener {
             text = "Waiting for active window insets…"
         }
         root.addView(captureStatus)
+        tabletReversePortrait = CheckBox(this).apply {
+            text = "Tablet: include upside-down portrait"
+            setPadding(px(8), 0, px(8), 0)
+        }
+        root.addView(tabletReversePortrait)
         root.addView(Button(this).apply {
             text = "Display / navigation settings"
             setOnClickListener { startActivity(Intent(Settings.ACTION_DISPLAY_SETTINGS)) }

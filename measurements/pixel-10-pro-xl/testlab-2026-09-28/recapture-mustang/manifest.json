@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-2ecgd5jtbg83a",
+  "deviceModelId": "mustang",
+  "deviceName": "Pixel 10 Pro XL",
+  "androidApi": 36,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/5645371184257131617",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_01:20:23.251766_UoCp/mustang-36-en-portrait/",
+  "note": "Correctly phone-labelled portrait gesture recapture.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "170ffea80ff38ab5ec434c6f657430fd8c555c02ba7390263fb817b9c714aa3c"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "2e81e4372dbefd48a584441ae276fb2e5eff35ad8b8ed61d600c072645ddd6ff"
+    }
+  ]
+}

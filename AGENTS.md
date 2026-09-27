@@ -36,9 +36,10 @@ leave other models unverified. Preserve historical captures. See
   intentional Android substitutions, implementation status and visual QA.
 - `docs/MEASUREMENT_WORKFLOW.md`: capture process, known RTL issues, corrections.
 - `docs/MEASUREMENT_WORKFLOW.md` "Device Status & Progress": the single
-  remaining-measurement queue. A screen counts as measured only with natural,
-  rotation 1 and rotation 3 captures in both navigation modes. Pick the next
-  device from it and update it in the same commit as each device's captures.
+  remaining-measurement queue. Phones and foldables need natural, rotation 1
+  and rotation 3 captures in both navigation modes; tablets also need reverse
+  portrait, for all four distinct rotations per mode. Pick the next device
+  from the queue and update it in the same commit as each device's captures.
 - `docs/RTL_CREDITS.md`: published credit policy, live grant evidence and budget rules.
 - `docs/DESIGN_HANDOFF.md`: original Claude visual backlog; see current status first.
 - React Router framework mode, React, TypeScript, three.js; pnpm; static prerender.
@@ -56,8 +57,10 @@ leave other models unverified. Preserve historical captures. See
   stretch the legacy cover values onto the inner display.
 - Skin foregrounds depict physical cameras; DisplayCutout bounds describe an OS
   exclusion rectangle. Do not replace the artwork's camera with the bounds.
-- View rotation rotates the recorded diagram; it does not invent landscape
-  WindowInsets. Describe this in measurement conditions.
+- Orientation never invents WindowInsets. Flat devices show a rotation's insets
+  only from a capture of that rotation (`landscape-<rotation>-*` probe files); otherwise window
+  size and corners follow the display geometry and insets read "not measured
+  yet". 3D foldables still rotate the recorded view.
 
 ## Rendering and assets
 

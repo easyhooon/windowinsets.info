@@ -7,7 +7,7 @@ export function meta(_: Route.MetaArgs) {
   return pageMeta({
     title: "How I measure Android window insets | windowinsets.info",
     description:
-      "Where every number on windowinsets.info comes from: official specs, open-source InsetsProbe measurements, the conditions they are valid for, and known limitations.",
+      "How windowinsets.info captures Android inset data, records its sources and conditions, and explains measurement limits.",
     url: `${SITE_URL}/methodology`,
   });
 }
@@ -143,7 +143,11 @@ export default function Methodology() {
 
       <Section title="4. Conditions a measurement is valid for">
         <ul>
-          <li>Portrait orientation, app in full screen (no split-screen or pop-up window).</li>
+          <li>
+            A recorded display rotation, app in full screen (no split-screen or pop-up window).
+            Each rotation is its own capture; InsetsProbe turns itself through portrait,
+            landscape and reverse landscape.
+          </li>
           <li>
             Default <b>Display size</b>, <b>Font size</b> and, on Samsung, default{" "}
             <b>Screen resolution</b>. Changing them changes pixels and density, so dp values
@@ -180,7 +184,14 @@ export default function Methodology() {
             One UI and Android version.
           </li>
           <li>Each capture comes from a specific unit and firmware, recorded by model number.</li>
-          <li>Landscape and multi-window modes are not covered yet.</li>
+          <li>
+            Rotations without their own capture show as not measured. Insets are never
+            rotated from another orientation. Multi-window modes are not covered yet.
+          </li>
+          <li>
+            Only tablets offer upside-down portrait. Galaxy phones and foldables leave 180°
+            out of auto-rotation, so apps never see that orientation there.
+          </li>
           <li>
             Pixel values come from emulator device profiles. A profile can reuse cutout or
             corner geometry across models, so it may differ from the shipping phone until a

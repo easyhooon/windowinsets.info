@@ -1,12 +1,16 @@
 import { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from "react";
 
 type Bounds = { left: number; top: number; right: number; bottom: number };
-export type DiagramViewportHandle = { fitFoldBounds: (bounds: Bounds, body: Bounds) => number; setFoldAngle: (angle: number) => void; effectiveZoom: () => number; refitFold: () => void };
+export type DiagramViewportHandle = { fitFoldBounds: (bounds: Bounds, body: Bounds) => number; setFoldAngle: (angle: number) => void; effectiveZoom: () => number; refitFold: () => void;
+  /** Play an orientation change onto the already re-laid-out diagram, before it paints. */
+  turn: (deltaDeg: number, before: DOMRect | null) => void };
 
 // Displayed zoom is CSS px per dp, like the reference's px per pt.
 // `zoom` itself stays the scale of the 700 px canvas, so limits are converted.
 const MIN_ZOOM = 10, MAX_ZOOM = 500, MAX_FIT_ZOOM = 100;
 const FOLD_LABEL_ROOM = 64;
+const ROTATION_MS = 300;
+const ROTATION_EASING = "cubic-bezier(0.2, 0, 0, 1)";
 // Converts a screen offset into the rotated canvas frame.
 const rotateBack = (x: number, y: number, degrees: number) => {
   const r = -degrees * Math.PI / 180;
@@ -23,6 +27,23 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const scaleRef = useRef<HTMLDivElement>(null);
+  const positionRef = useRef<HTMLDivElement>(null);
+  const turnRef = useRef<HTMLDivElement>(null);
+  // Fit must measure where the diagram will settle, not a frame of a running turn
+  // or zoom transition: jump every animation to its end, measure, then restore.
+  const measureSettled = <T,>(measure: () => T): T => {
+    const animations = ref.current?.getAnimations({ subtree: true }) ?? [];
+    const times = animations.map(animation => animation.currentTime);
+    for (const animation of animations) {
+      const end = animation.effect?.getComputedTiming().endTime;
+      if (typeof end === "number") animation.currentTime = end;
+    }
+    try { return measure(); } finally { animations.forEach((animation, i) => { animation.currentTime = times[i]; }); }
+  };
+  // Unwrapped view angle so orientation changes animate along the shortest turn.
+  const turn = useRef(rotation);
+  const previousRotation = useRef(rotation);
+  const turnTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const displayedAngle = useRef(0);
   const effectiveZoom = useRef(zoom);
   const fitScales = useRef({ closed: zoom, open: zoom });
@@ -83,7 +104,7 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       const y = (bounds.top + bounds.bottom) / 2 - 350;
       const [dx, dy] = rotateBack(0, lift, live.current.rotation);
       fitCenter.current = { x: x + dx, y: y + dy };
-      scaleRef.current.style.transform = `scale(${effectiveZoom.current / 100}) rotate(${live.current.rotation}deg) translate(${-fitCenter.current.x}px, ${-fitCenter.current.y}px)`;
+      scaleRef.current.style.transform = `scale(${effectiveZoom.current / 100}) rotate(${turn.current}deg) translate(${-fitCenter.current.x}px, ${-fitCenter.current.y}px)`;
       return effectiveZoom.current;
     };
   const applyScale = (includeBounds = true) => {
@@ -92,7 +113,7 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
     effectiveZoom.current = live.current.autoFit && live.current.closedFit
       ? fitScales.current.closed + (fitScales.current.open - fitScales.current.closed) * progress
       : live.current.zoom;
-    if (scaleRef.current) scaleRef.current.style.transform = `scale(${effectiveZoom.current / 100}) rotate(${live.current.rotation}deg) translate(${-fitCenter.current.x}px, ${-fitCenter.current.y}px)`;
+    if (scaleRef.current) scaleRef.current.style.transform = `scale(${effectiveZoom.current / 100}) rotate(${turn.current}deg) translate(${-fitCenter.current.x}px, ${-fitCenter.current.y}px)`;
     if (includeBounds && projectedFit.current) fitFoldBounds(projectedFit.current.bounds, projectedFit.current.body, true);
   };
   useImperativeHandle(viewportRef, () => ({
@@ -103,6 +124,42 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
     },
     effectiveZoom: () => effectiveZoom.current,
     fitFoldBounds,
+    turn: (deltaDeg, before) => {
+      const wrap = turnRef.current;
+      if (!wrap || !deltaDeg || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      for (const animation of wrap.getAnimations({ subtree: true })) animation.cancel();
+      // Runs before paint on the new layout at the previous zoom. Turned back by
+      // -delta about its own centre, it matches the previous pose (size swaps with
+      // orientation), so the turn starts without a jump. Fit passes then ease zoom and
+      // pan through the same window; they measure the settled pose (measureSettled).
+      const body = wrap.querySelector("[data-fit-body]")?.getBoundingClientRect();
+      const box = wrap.getBoundingClientRect();
+      if (!body || !body.width || !body.height) return;
+      const sideways = Math.abs(deltaDeg) % 180 === 90;
+      // Layouts are sized by height, so the re-laid-out device can differ in scale; match the previous box.
+      const k = before && before.width && before.height
+        ? Math.min(before.width / (sideways ? body.height : body.width), before.height / (sideways ? body.width : body.height)) : 1;
+      wrap.style.transformOrigin = `${body.left + body.width / 2 - box.left}px ${body.top + body.height / 2 - box.top}px`;
+      // The new layout may centre slightly differently; start from the previous centre too.
+      const dx = before ? before.left + before.width / 2 - (body.left + body.width / 2) : 0;
+      const dy = before ? before.top + before.height / 2 - (body.top + body.height / 2) : 0;
+      wrap.animate([{ transform: `translate(${dx}px, ${dy}px) rotate(${-deltaDeg}deg) scale(${k})` }, { transform: "none" }], { duration: ROTATION_MS, easing: ROTATION_EASING });
+      const eased = [scaleRef.current, positionRef.current].filter(Boolean) as HTMLDivElement[];
+      for (const el of eased) el.style.transition = `transform ${ROTATION_MS}ms ${ROTATION_EASING}`;
+      clearTimeout(turnTimer.current);
+      turnTimer.current = setTimeout(() => { for (const el of eased) el.style.transition = ""; }, ROTATION_MS + 120);
+      const content = wrap.querySelector<SVGGElement>("[data-screen-content]");
+      const timing = { duration: ROTATION_MS, easing: ROTATION_EASING };
+      // The frame turns around the already re-laid-out diagram. Apply the
+      // inverse turn with identical timing so text stays upright throughout.
+      if (content) {
+        const fit = sideways ? Number(content.dataset.turnScale ?? 1) : 1;
+        content.animate([{ transform: `rotate(${deltaDeg}deg) scale(${fit})` }, { transform: "none" }], timing);
+      }
+      for (const label of wrap.querySelectorAll<SVGGElement>("[data-ruler-label]")) {
+        label.animate([{ transform: `rotate(${deltaDeg}deg)` }, { transform: "none" }], timing);
+      }
+    },
     refitFold: () => {
       if (!live.current.autoFit || foldFitPending.current || !scaleRef.current) return;
       const el = scaleRef.current;
@@ -114,6 +171,20 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       fit.current();
     },
   }));
+  // Orientation changes ease the canvas into the new view, modeled on One UI's
+  // ~300 ms decelerating screen rotation. Fit passes retarget the same transition.
+  useLayoutEffect(() => {
+    if (rotation === previousRotation.current) return;
+    const delta = ((rotation - previousRotation.current) % 360 + 540) % 360 - 180;
+    turn.current += delta === -180 ? 180 : delta;
+    previousRotation.current = rotation;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const targets = [scaleRef.current, positionRef.current].filter(Boolean) as HTMLDivElement[];
+    for (const el of targets) el.style.transition = `transform ${ROTATION_MS}ms ${ROTATION_EASING}`;
+    clearTimeout(turnTimer.current);
+    turnTimer.current = setTimeout(() => { for (const el of targets) el.style.transition = ""; }, ROTATION_MS + 120);
+  }, [rotation]);
+  useEffect(() => () => clearTimeout(turnTimer.current), []);
   useLayoutEffect(() => applyScale(), [zoom, rotation, autoFit]);
   const fitting = useRef(false);
   const [fitRevision, setFitRevision] = useState(0);
@@ -155,7 +226,7 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       if (!svg) { fitting.current = false; return; }
       // Fit the visible body and annotations, not the SVG's unused margins.
       // Constant-size labels need another pass after the device scale changes.
-      const boxes = [...svg.querySelectorAll('[data-fit-body], [data-ruler]')].map(node => node.getBoundingClientRect());
+      const boxes = measureSettled(() => [...svg.querySelectorAll('[data-fit-body], [data-ruler]')].map(node => node.getBoundingClientRect()));
       const left = Math.min(...boxes.map(box => box.left)), right = Math.max(...boxes.map(box => box.right));
       const top = Math.min(...boxes.map(box => box.top)), bottom = Math.max(...boxes.map(box => box.bottom));
       const viewport = el.getBoundingClientRect();
@@ -223,8 +294,10 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
     }}
     onPointerUp={e => { pointers.current.delete(e.pointerId); pinchStart.current = null; }} onPointerCancel={e => { pointers.current.delete(e.pointerId); pinchStart.current = null; }}
     onLostPointerCapture={e => { pointers.current.delete(e.pointerId); pinchStart.current = null; }}>
-    <div className="diagram-position" style={{ transform: `translate(${pan.x}px, ${pan.y}px)` }}>
-      <div ref={scaleRef} style={{ width: baseWidth, height: baseHeight, transformOrigin: "center" }}>{children}</div>
+    <div ref={positionRef} className="diagram-position" style={{ transform: `translate(${pan.x}px, ${pan.y}px)` }}>
+      <div ref={turnRef} data-orientation-turn="true">
+        <div ref={scaleRef} style={{ width: baseWidth, height: baseHeight, transformOrigin: "center" }}>{children}</div>
+      </div>
     </div>
   </div>;
 }

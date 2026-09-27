@@ -49,6 +49,9 @@ test("sidebar inquiry opens the GitHub issue template chooser", async ({ page },
     "href",
     "https://github.com/easyhooon/windowinsets.info/issues/new/choose",
   );
+  const support = page.getByRole("link", { name: "Support windowinsets.info on Ko-fi (opens in a new tab)" });
+  await expect(support).toBeVisible();
+  await expect(support).toHaveAttribute("href", "https://ko-fi.com/easyhooon");
   await expect(page.locator(".sidebar-footer")).toHaveScreenshot("sidebar-footer-inquiry.png");
 });
 
@@ -185,10 +188,11 @@ test("S25 Ultra exposes exact captured px separately from panel resolution", asy
 
 test("S25 Ultra remains readable across navigation, units, and orientation", async ({ page }) => {
   await page.goto("/galaxy-s25-ultra");
-  const orientations = ["Portrait", "Landscape Left", "Portrait Upside Down", "Landscape Right"];
+  const orientations = ["Portrait", "Landscape Left", "Landscape Right"];
   for (const navigation of ["3-button", "Gesture"]) {
     await chooseDropdown(page, "Navigation", navigation);
     for (const units of ["dp", "px"] as const) {
+      await chooseDropdown(page, "Orientation", "Portrait");
       await chooseUnits(page, units);
       for (const orientation of orientations) {
         await chooseDropdown(page, "Orientation", orientation);
@@ -199,6 +203,75 @@ test("S25 Ultra remains readable across navigation, units, and orientation", asy
       }
     }
   }
+});
+
+test("S23+ landscape uses its own measured insets", async ({ page }) => {
+  await page.goto("/galaxy-s23-plus");
+  await openMetricsIfCollapsed(page);
+  await expect(page.getByRole("button", { name: "Logical Size 384 × 832 dp" })).toBeVisible();
+  await chooseDropdown(page, "Orientation", "Landscape Left");
+  await expect(page.getByRole("button", { name: "Logical Size 832 × 384 dp" })).toBeVisible();
+  await chooseUnits(page, "px");
+  await expect(page.getByRole("button", { name: "Logical Size 2340 × 1080 px" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Top 84 px" }).first()).toBeVisible();
+  if (page.viewportSize()?.width && page.viewportSize()!.width < 600) {
+    await page.getByRole("button", { name: "Metrics" }).click();
+  }
+  await expect(page).toHaveScreenshot("galaxy-s23-plus-measured-landscape-left.png", { fullPage: true });
+
+  await chooseDropdown(page, "Navigation", "Gesture");
+  await chooseDropdown(page, "Orientation", "Landscape Right");
+  await chooseDropdown(page, "Orientation", "Landscape Left");
+  await expect(page.locator(".canvas-footer .pending-notice")).toContainText("insets are not measured yet");
+  await expect(page).toHaveScreenshot("galaxy-s23-plus-pending-landscape-right.png", { fullPage: true });
+});
+
+test("Galaxy Tab keeps the upside-down portrait option", async ({ page }) => {
+  await page.goto("/galaxy-tab-s10-plus");
+  await chooseDropdown(page, "Orientation", "Portrait Upside Down");
+  await expect(page.locator(".canvas-footer .pending-notice")).toContainText("insets are not measured yet");
+  await expect(page).toHaveScreenshot("galaxy-tab-s10-plus-upside-down.png", { fullPage: true });
+});
+
+test("flat orientation change animates the frame and upright content together", async ({ page }) => {
+  await page.goto("/galaxy-s23-plus");
+  await page.evaluate(() => {
+    const calls: number[] = [];
+    const animate = Element.prototype.animate;
+    (window as typeof window & { turnDurations: number[] }).turnDurations = calls;
+    Element.prototype.animate = function (...args) {
+      if (Array.isArray(args[0]) && args[0].some(frame => "transform" in frame)) {
+        calls.push(typeof args[1] === "object" ? Number(args[1]?.duration) : Number(args[1]));
+      }
+      return animate.apply(this, args);
+    };
+  });
+  await chooseDropdown(page, "Orientation", "Landscape Left");
+  await expect.poll(() => page.evaluate(() => (window as typeof window & { turnDurations: number[] }).turnDurations)).toEqual(expect.arrayContaining([300]));
+});
+
+test("screen content and measurement numbers stay upright while the frame turns", async ({ page }) => {
+  await page.goto("/galaxy-s23-plus");
+  await chooseDropdown(page, "Orientation", "Landscape Left");
+  const angles = await page.evaluate(() => {
+    const wrap = document.querySelector("[data-orientation-turn]")!;
+    const content = wrap.querySelector("[data-screen-content]")!;
+    const badge = wrap.querySelector("[data-ruler-label]")!;
+    for (const animation of wrap.getAnimations({ subtree: true })) {
+      animation.pause();
+      animation.currentTime = 150;
+    }
+    const angle = (element: Element) => {
+      const m = new DOMMatrix(getComputedStyle(element).transform);
+      return Math.atan2(m.b, m.a) * 180 / Math.PI;
+    };
+    return { frame: angle(wrap), content: angle(content), badge: angle(badge) };
+  });
+  expect(Math.abs(angles.frame)).toBeGreaterThan(10);
+  expect(Math.abs(angles.frame + angles.content)).toBeLessThan(2);
+  expect(Math.abs(angles.frame + angles.badge)).toBeLessThan(2);
+  await page.waitForTimeout(300);
+  await expect(page.locator(".canvas-panel")).toHaveScreenshot("galaxy-s23-plus-mid-turn-upright.png", { animations: "allow" });
 });
 
 test("Fold7 animation switches from measured cover to measured inner display", async ({ page }) => {

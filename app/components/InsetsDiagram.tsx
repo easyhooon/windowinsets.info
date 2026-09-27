@@ -5,6 +5,7 @@ import type { RulerMeasurements } from "./measurementLayout";
 import { DIAGRAM_FONT, DIAGRAM_COLORS } from "./diagramStyle";
 import type { DeviceSkin } from "../data/skins";
 import { skinAssetUrl } from "../data/skinAssetUrl";
+import { skinDp } from "../data/orientation";
 import type { InsetsMeasurement, Screen } from "../data/types";
 import { cutoutPairs, cornerPairs, formatLengthFromPairs, insetPairs, safeInsets, safeInsetsPx } from "../data/measurementUnits";
 import { CLASH_COLOR, PREVIEW_INSET_OPACITY, appMockShapes, type AppPreview, type MockShape } from "./appPreview";
@@ -96,6 +97,7 @@ export function InsetsDiagram({
   layers,
   skin,
   appPreview = "off",
+  pendingOrientation,
 }: {
   screen: Screen;
   measurement: InsetsMeasurement | null;
@@ -108,12 +110,14 @@ export function InsetsDiagram({
   layers: { safe: boolean; insets: boolean; cutout: boolean; corners: boolean };
   skin?: DeviceSkin;
   appPreview?: AppPreview;
+  /** Set when this orientation has no capture: e.g. "Landscape". Insets stay empty. */
+  pendingOrientation?: string;
 }) {
   const id = useId().replace(/:/g, "");
   const [copyStatus, setCopyStatus] = useState("");
   const measured = !!screen.logicalSizeDp;
   showDimensions = showDimensions && measured;
-  const dp = screen.logicalSizeDp ?? (skin ? { width: skin.screen.width / 3, height: skin.screen.height / 3 } : null);
+  const dp = screen.logicalSizeDp ?? (skin ? skinDp(skin, screen.captureRotation) : null);
   if (!dp) {
     return (
       <div className="flex h-80 w-full max-w-lg items-center justify-center rounded-xl border border-dashed border-line p-4 text-center text-sm text-muted">
@@ -126,6 +130,7 @@ export function InsetsDiagram({
   const W = dp.width * s;
   const H = dp.height * s;
   const skinRotation = screen.captureRotation ?? 0;
+  const lightTabletFrame = skin?.image === "/skins/pixel-tablet/main/back.webp";
   const r = screen.cornerRadiiDp;
   const rPx = r ? r.topLeft * s : 0;
   const cornerPath = r ? `M ${r.topLeft * s},0 H ${W - r.topRight * s} A ${r.topRight * s},${r.topRight * s} 0 0 1 ${W},${r.topRight * s} V ${H - r.bottomRight * s} A ${r.bottomRight * s},${r.bottomRight * s} 0 0 1 ${W - r.bottomRight * s},${H} H ${r.bottomLeft * s} A ${r.bottomLeft * s},${r.bottomLeft * s} 0 0 1 0,${H - r.bottomLeft * s} V ${r.topLeft * s} A ${r.topLeft * s},${r.topLeft * s} 0 0 1 ${r.topLeft * s},0 Z` : undefined;
@@ -189,6 +194,7 @@ export function InsetsDiagram({
 
         {skin && showFrame && <g transform={skinTransform(skin, W, H, skinRotation)}>
           <defs><clipPath id={`${id}-body`}><rect x={skin.body.x} y={skin.body.y} width={skin.body.width} height={skin.body.height} rx={skin.body.radius} /></clipPath></defs>
+          {lightTabletFrame && <rect x={skin.body.x} y={skin.body.y} width={skin.body.width} height={skin.body.height} rx={skin.body.radius} fill="none" stroke="#64748b" strokeOpacity={0.6} strokeWidth={24} />}
           <image href={skinAssetUrl(skin.image)} width={skin.width} height={skin.height} clipPath={`url(#${id}-body)`} />
           <rect x={skin.screen.x} y={skin.screen.y} width={skin.screen.width} height={skin.screen.height} rx={rPx * skin.screen.width / W} fill="white" />
         </g>}
@@ -199,6 +205,9 @@ export function InsetsDiagram({
 
         {showRegions && (
           <g clipPath={`url(#${id}-display)`}>
+          {/* Screen content turns separately from the frame during orientation changes. */}
+          <g data-screen-content="true" data-turn-scale={Math.min(W / H, H / W)} style={{ transformBox: "view-box", transformOrigin: `${W / 2}px ${H / 2}px` }}>
+            {pendingOrientation && <RegionLabel x={W / 2} y={H / 2} name={pendingOrientation.toUpperCase()} value="Insets not measured yet" color="#59636e" scale={labelScale} width={W * .8} height={H * .3} />}
             {/* Decorative case chrome — schematic only, not measured data: a speaker
              * grille and volume/power buttons, purely for visual recognizability. */}
             {!skin && <rect x={W / 2 - 18} y={5} width={36} height={3} rx={1.5} fill="#1e293b" opacity={0.35} />}
@@ -259,6 +268,7 @@ export function InsetsDiagram({
                 })()}
               </>
             )}
+          </g>
           </g>
         )}
 

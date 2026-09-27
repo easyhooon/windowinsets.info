@@ -39,7 +39,7 @@ for(const slug of ['galaxy-z-fold2','galaxy-z-fold7','galaxy-z-fold8','galaxy-z-
     for(const pose of ['Closed','Partially Folded','Open']) {
      await choose(page,'Pose',pose);
      await expect(page.locator('[data-displayed-angle]')).toHaveAttribute('data-displayed-angle',pose==='Closed'?'0.00':pose==='Open'?'180.00':'90.00');
-     for(const orientation of ['Portrait','Landscape Left','Portrait Upside Down','Landscape Right']) {
+     for(const orientation of ['Portrait','Landscape Left','Landscape Right']) {
       await choose(page,'Orientation',orientation);
       await page.waitForTimeout(250);
       await assertBadges(page,`${slug} ${navigation} ${units} ${pose} ${orientation}`);

@@ -11,11 +11,14 @@ import android.content.pm.ActivityInfo
 object OrientationSweep {
     data class Step(val requestedOrientation: Int, val label: String, val landscape: Boolean)
 
-    val steps = listOf(
+    private val standardSteps = listOf(
         Step(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, "portrait", landscape = false),
         Step(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE, "landscape", landscape = true),
         Step(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE, "reverse landscape", landscape = true),
     )
+
+    fun steps(includeReversePortrait: Boolean): List<Step> = standardSteps +
+        if (includeReversePortrait) listOf(Step(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT, "reverse portrait", landscape = false)) else emptyList()
 
     /** Quiet period after the last insets/configuration callback before capturing. */
     const val SETTLE_MS = 700L

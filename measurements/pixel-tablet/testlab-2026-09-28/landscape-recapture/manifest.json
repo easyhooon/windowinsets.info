@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-134u1qomie5q0",
+  "deviceModelId": "tangorpro",
+  "deviceName": "Pixel Tablet",
+  "androidApi": 36,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/8410726263804805827",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_01:21:58.861445_jnMo/tangorpro-36-en-landscape/",
+  "note": "Landscape gesture recapture at rotation 1 to compare with landscape AVD rotation 0.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "a684e99be0b26c4d68ea486994e8baef8c0bb68b04f1ceaffa3536e6dc568b13"
+    },
+    {
+      "file": "main-landscape-1-gesture.json",
+      "sha256": "6681a6dcd9b345e5917366523ddc592058fa855413f15a7b03441557872910e9"
+    }
+  ]
+}

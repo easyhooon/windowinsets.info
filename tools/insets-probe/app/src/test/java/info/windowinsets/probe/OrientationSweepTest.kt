@@ -1,5 +1,6 @@
 package info.windowinsets.probe
 
+import android.content.pm.ActivityInfo
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -8,8 +9,16 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class OrientationSweepTest {
-    private val portrait = OrientationSweep.steps[0]
-    private val landscape = OrientationSweep.steps[1]
+    private val portrait = OrientationSweep.steps(false)[0]
+    private val landscape = OrientationSweep.steps(false)[1]
+
+    @Test fun reversePortraitIsRequestedOnlyForTabletSweeps() {
+        assertEquals(3, OrientationSweep.steps(false).size)
+        assertEquals(4, OrientationSweep.steps(true).size)
+        assertEquals("reverse portrait", OrientationSweep.steps(true).last().label)
+        assertEquals(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT, OrientationSweep.steps(true).last().requestedOrientation)
+        assertEquals("portrait-2-threeButton.json", OrientationSweep.fileName("phone", "threeButton", 2, false))
+    }
 
     @Test fun fileNamesFollowTheLandscapeRotationConvention() {
         assertEquals("main-gesture.json", OrientationSweep.fileName("phone", "gesture", 0, false))

@@ -95,6 +95,12 @@ export interface CornerRadii {
   bottomLeft: number;
 }
 
+export interface RotationCapture {
+  logicalSizePx: { width: number; height: number };
+  logicalSizeDp: { width: number; height: number };
+  insets: Record<NavMode, InsetsMeasurement | null>;
+}
+
 export interface Screen {
   id: "cover" | "main";
   label: string;
@@ -115,6 +121,11 @@ export interface Screen {
   cornerRadiiPx?: CornerRadii | null;
   /** Insets in captureOrientation per navigation mode; null = not measured yet. */
   insets: Record<NavMode, InsetsMeasurement | null>;
+  /**
+   * Other display rotations, each from its own capture (`landscape-<rotation>-<nav>.json`).
+   * Keyed by Surface.ROTATION_*. Never derived from another rotation.
+   */
+  rotations?: Partial<Record<0 | 1 | 2 | 3, RotationCapture>>;
   sources: Source[];
 }
 

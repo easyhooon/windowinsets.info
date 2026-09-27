@@ -130,3 +130,19 @@ Pixel 6 Pro, Pixel 6, Pixel 6a, Pixel 5, Pixel 4a and Pixel Tablet. No
 in-scope models with SDK emulator skins are pending capture.
 `scripts/pixel-devices.json` lists every in-scope model with its Google spec
 source.
+
+Physical Firebase Test Lab spot checks on 2026-09-28 covered 19 of the 22
+public Pixel models, using the existing gesture navigation mode and one
+physical screen/orientation per model. Raw captures stay in separate dated
+`testlab-2026-09-28/` folders. Camera paths and corner radii match or nearly
+match AVD data for most checked phones, but Pixel 10 Pro, Pixel 10 and Pixel
+9a have material corner or path differences. Matched landscape captures of
+Pixel Fold's inner display and Pixel Tablet report physical rounded corners
+where the API 37 AVD reports `null`. Some top safe insets also differ even when
+camera paths match. The FTL devices used API 32–36, so keep OS and source
+provenance separate rather than changing the published emulator values.
+Pixel 6 Pro and Pixel 4a are absent from the FTL physical catalog, and Pixel
+5's offered API 30 is below the current probe's minimum API. [Issue #46](https://github.com/easyhooon/windowinsets.info/issues/46)
+tracks these three models. The spot checks
+do not validate both navigation modes, every rotation, or Fold cover states.
+See [the FTL validation log](PIXEL_HARDWARE_VALIDATION.md).

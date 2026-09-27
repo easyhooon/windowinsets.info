@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-3qe6bitme0p6b",
+  "deviceModelId": "blazer",
+  "deviceName": "Pixel 10 Pro",
+  "androidApi": 36,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/5423514632819986165",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_01:21:48.393279_wMuy/blazer-36-en-portrait/",
+  "note": "Physical device, portrait, existing navigation mode; compare with the API 37 emulator with the OS difference noted.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "1a842b0b5cf0c49f89a1a190976600b74bb6ed30aa53d982b0065973fff341de"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "66682aa4dde31fad22f71e5954e0388a12673f086422744ec6522bd05cd86a9e"
+    }
+  ]
+}

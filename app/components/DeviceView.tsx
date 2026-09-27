@@ -1,7 +1,8 @@
 import { foldCanvasPxPerDp, triFoldAngles } from "./foldGeometry";
 import { flatCanvasPxPerDp, flatDiagramSize } from "./diagramAnnotations";
 import { preciseScreen } from "../data/measurementUnits";
-import { useEffect, useRef, useState } from "react";
+import { orientationName, orientScreen, skinDp, viewQuarter } from "../data/orientation";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import type { Device, Insets, NavMode, Source } from "../data/types";
 import { Dropdown } from "./Dropdown";
@@ -167,6 +168,8 @@ export function DeviceView({ device }: { device: Device }) {
   const [zoom, setZoom] = useState(100);
   const [autoFit, setAutoFit] = useState(true);
   const [rotation, setRotation] = useState(0);
+  const useFoldRef = useRef(false);
+  const pendingTurn = useRef<{ delta: number; before: DOMRect | null } | null>(null);
   const [fitKey, setFitKey] = useState(0);
   const [showFrame, setShowFrame] = useState(true);
   const [showRegions, setShowRegions] = useState(true);
@@ -180,6 +183,12 @@ export function DeviceView({ device }: { device: Device }) {
   const settings = useRef<HTMLDivElement>(null);
   const exportTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   useEffect(() => () => clearTimeout(exportTimer.current), []);
+  // Flat devices animate the orientation change onto the new layout.
+  useLayoutEffect(() => {
+    const turn = pendingTurn.current;
+    pendingTurn.current = null;
+    if (turn && !useFoldRef.current) viewport.current?.turn(turn.delta, turn.before);
+  }, [rotation]);
   useEffect(() => {
     if (!settingsOpen) return;
     const close = (e: PointerEvent) => { if (!settings.current?.contains(e.target as Node)) setSettingsOpen(false); };
@@ -191,8 +200,14 @@ export function DeviceView({ device }: { device: Device }) {
   const hinges = triFoldAngles(angle);
   const foldable = triFold || device.formFactor === "foldable-book" || device.formFactor === "foldable-flip";
   const main = preciseScreen(device.screens.find(s => s.id === "main")!);
-  const screen = preciseScreen(device.screens.find(s => s.id === screenId) ?? main);
+  const baseScreen = preciseScreen(device.screens.find(s => s.id === screenId) ?? main);
+  // Flat devices are re-laid out in the chosen orientation (upright content, swapped
+  // size); 3D foldables keep rotating the recorded view.
+  const flatTurns = foldable && skins[`${device.slug}/main`] ? 0 : viewQuarter(rotation);
+  const screen = orientScreen(baseScreen, flatTurns);
   const measurement = screen.insets[navMode];
+  // A turned flat device without a capture for this rotation and nav mode.
+  const rotationPending = flatTurns !== 0 && !measurement;
   const rtl = getRtlAvailability(device.slug);
   // Pixel entries come from the Android Emulator, never from Samsung RTL.
   const emulatorOnly = device.brand === "Google";
@@ -222,6 +237,7 @@ export function DeviceView({ device }: { device: Device }) {
   const mainSafe = mainMeasurement ? safeInsets(mainMeasurement) : null;
   const mainSafePx = mainMeasurement ? safeInsetsPx(mainMeasurement) : null;
   const useFold = foldable && !!mainSkin;
+  useFoldRef.current = useFold;
   const exactPxAvailable = hasExactPx(screen, measurement);
   useEffect(() => { if (units === "px" && !exactPxAvailable) setUnits("dp"); }, [exactPxAvailable, units]);
   const pose = (value: string) => {
@@ -246,11 +262,16 @@ export function DeviceView({ device }: { device: Device }) {
     pose(value);
     recordPose(value, source);
   };
-  const size = screen.logicalSizeDp ?? (skin ? { width: skin.screen.width, height: skin.screen.height } : null);
-  const orientationOptions = size && size.width > size.height ? [
+  const recordedSize = baseScreen.logicalSizeDp ?? (skin ? { width: skin.screen.width, height: skin.screen.height } : null);
+  const size = screen.logicalSizeDp ?? (skin ? skinDp(skin, screen.captureRotation) : null);
+  // Galaxy phones and foldables leave 180° out of auto-rotation (a Fold owner confirmed
+  // neither the folded nor unfolded display turns upside down); tablets do (REFERENCE_PARITY.md).
+  const allowsUpsideDown = device.formFactor === "tablet";
+  const allOrientationOptions = recordedSize && recordedSize.width > recordedSize.height ? [
     { value: "0", label: "Landscape Left" }, { value: "90", label: "Portrait" },
     { value: "-90", label: "Portrait Upside Down" }, { value: "180", label: "Landscape Right" },
   ] : orientations;
+  const orientationOptions = allowsUpsideDown ? allOrientationOptions : allOrientationOptions.filter(o => o.label !== "Portrait Upside Down");
 
   const diagramWidth = useFold
     ? 700
@@ -259,7 +280,7 @@ export function DeviceView({ device }: { device: Device }) {
   const mainWidthDp = main.logicalSizeDp?.width ?? (mainSkin ? mainSkin.screen.width / 3 : 0);
   const mainHeightDp = main.logicalSizeDp?.height ?? (mainSkin ? mainSkin.screen.height / 3 : 0);
   // Previews without a capture use the same 3x artwork assumption as InsetsDiagram.
-  const flatDp = screen.logicalSizeDp ?? (skin ? { width: skin.screen.width / 3, height: skin.screen.height / 3 } : null);
+  const flatDp = screen.logicalSizeDp ?? (skin ? skinDp(skin, screen.captureRotation) : null);
   const dpScale = useFold ? foldCanvasPxPerDp(mainWidthDp, mainHeightDp)
     : flatDp ? flatCanvasPxPerDp(flatDp.width, flatDp.height, showFrame ? skin : undefined,
       safe, screen.cornerRadiiDp, measurement?.cutoutShape, screen.captureRotation ?? 0) : 1;
@@ -402,7 +423,10 @@ export function DeviceView({ device }: { device: Device }) {
               <Row label="Android" value={measurement ? measurement.condition.android : PENDING} />
             </dl>
           </>}
-          <p className="mb-3 text-xs text-muted">{device.name} · {screen.label} · {measurement ? `Captured ${screen.captureOrientation ?? "orientation unknown"}. Rotation changes the view, not the recorded Android insets.` : emulatorOnly ? "AOSP emulator artwork preview. No emulator capture exists for this navigation mode." : "Official artwork preview. Android insets have not been measured for this navigation mode."}</p>
+          <p className="mb-3 text-xs text-muted">{device.name} · {screen.label} · {rotationPending
+            ? `${orientationName(screen)} insets are not measured yet${screen.orientationMeasured ? " for this navigation mode" : ""}. Size and corners follow the display; insets are never rotated from another orientation.`
+            : measurement ? `Captured ${screen.captureOrientation ?? "orientation unknown"}.${useFold ? " Rotation changes the view, not the recorded Android insets." : ""}`
+              : emulatorOnly ? "AOSP emulator artwork preview. No emulator capture exists for this navigation mode." : "Official artwork preview. Android insets have not been measured for this navigation mode."}</p>
           {triFold && <p className="mb-3 text-xs text-muted">Two-hinge animation is illustrative. Partial poses do not represent measured Android window states.</p>}
           {measurement?.condition.note && <p className="mb-3 text-xs text-muted">{measurement.condition.note}</p>}
           <SourceList sources={Array.from(new Map((measurement?.sources ?? []).concat(screen.sources).map(s => [`${s.label}|${s.url ?? ""}`, s])).values())} />
@@ -425,7 +449,7 @@ export function DeviceView({ device }: { device: Device }) {
     <section className="canvas-panel" aria-label="Device visualization">
       <div className="canvas-stage">
       <DiagramViewport viewportRef={viewport} autoFit={autoFit}
-        zoom={zoom} setZoom={setZoom} rotation={rotation} fitKey={fitKey}
+        zoom={zoom} setZoom={setZoom} rotation={useFold ? rotation : 0} fitKey={fitKey}
         onUserTransform={() => { setZoom(viewport.current?.effectiveZoom() ?? zoom); setAutoFit(false); }} onFit={() => setAutoFit(true)}
         baseWidth={diagramWidth}
         baseHeight={700} dpScale={dpScale} fitWidth={useFold ? triFold ? 780 : 1000 : diagramWidth} fitHeight={useFold && !triFold ? 1000 : diagramHeight}>
@@ -443,12 +467,13 @@ export function DeviceView({ device }: { device: Device }) {
             return viewport.current?.effectiveZoom();
           }}
           onTransitionEnd={() => { viewport.current?.refitFold(); if (transitionTarget) { setScreenId(transitionTarget); setTransitionTarget(null); } }} />
-          : <InsetsDiagram screen={screen} measurement={measurement} zoom={zoom} showFrame={showFrame} showRegions={showRegions} showDimensions={showDimensions} units={units} layers={layers} appPreview={appPreview} skin={skin} />}
+          : <InsetsDiagram screen={screen} measurement={measurement} pendingOrientation={rotationPending ? orientationName(screen) : undefined} zoom={zoom} showFrame={showFrame} showRegions={showRegions} showDimensions={showDimensions} units={units} layers={layers} appPreview={appPreview} skin={skin} />}
       </DiagramViewport>
       </div>
       <footer className="canvas-footer">
       {useFold ? <div className="fold-measurement-notice">{!measurement ? <p className="pending-notice">{pendingNotice}</p> : emulatorOnly && <p className="pending-notice">Android Emulator capture · Not measured on Pixel hardware</p>}</div>
-        : !measurement ? <p className="pending-notice">{pendingNotice}</p> : emulatorOnly && <p className="pending-notice">Android Emulator capture · Not measured on Pixel hardware</p>}
+        : rotationPending ? <p className="pending-notice">{orientationName(screen)} insets are not measured yet.</p>
+          : !measurement ? <p className="pending-notice">{pendingNotice}</p> : emulatorOnly && <p className="pending-notice">Android Emulator capture · Not measured on Pixel hardware</p>}
       {(measurement || screen.cornerRadiiDp || useFold) && <div className="region-legend" aria-label="Region legend">
         {([{ key: "safe", label: "Safe Area", color: "#ade7bc" }, { key: "insets", label: "Insets", color: "#ffdab0" }, { key: "cutout", label: "Display Cutout", color: "#c4a0f1" }, { key: "corners", label: "Corner Radius", color: "#e4a6cc" }] as const).map(item => <button key={item.key} disabled={item.key === "corners" ? !screen.cornerRadiiDp : item.key === "cutout" ? !measurement?.cutoutShape : !measurement} aria-pressed={layers[item.key]} onClick={() => setLayers(v => ({ ...v, [item.key]: !v[item.key] }))}><i style={{ background: item.color }} />{item.label}</button>)}
       </div>}
@@ -457,7 +482,15 @@ export function DeviceView({ device }: { device: Device }) {
     </section>
     <div className={`canvas-controls${useFold ? " is-foldable" : ""}`} aria-label="Canvas controls">
       <Dropdown label="Navigation" value={navMode} options={[{ value: "threeButton", label: "3-button" }, { value: "gesture", label: "Gesture" }]} onChange={v => setNavMode(v as NavMode)} />
-      <Dropdown label="Orientation" value={String(rotation)} options={orientationOptions} onChange={v => { setRotation(Number(v)); setAutoFit(true); setFitKey(key => key + 1); }} />
+      <Dropdown label="Orientation" value={String(rotation)} options={orientationOptions} onChange={v => {
+        const next = Number(v);
+        const delta = ((next - rotation) % 360 + 540) % 360 - 180;
+        pendingTurn.current = next === rotation ? null : {
+          delta: delta === -180 ? 180 : delta,
+          before: document.querySelector("#device-canvas [data-fit-body]")?.getBoundingClientRect() ?? null,
+        };
+        setRotation(next); setAutoFit(true); setFitKey(key => key + 1);
+      }} />
       <Dropdown label="Zoom" value={`${displayZoom(zoom)}%`} options={[{ value: "fit", label: "Fit to canvas" }, { value: "out", label: "− Zoom out" }, { value: "in", label: "+ Zoom in" }, ...[25,50,100,200,300].map(z => ({ value: String(z), label: `${z}%` }))]} onChange={v => {
         if (v === "fit") { setAutoFit(true); setFitKey(k => k + 1); return; }
         const current = displayZoom(viewport.current?.effectiveZoom() ?? zoom);

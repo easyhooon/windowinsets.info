@@ -22,7 +22,7 @@ same viewport:
 
 | Form factor | Viewports | Navigation | Units | Required states |
 | --- | --- | --- | --- | --- |
-| Bar | 1440×900, 390×844 | 3-button, gesture | dp, px | portrait, landscape left/right, upside down |
+| Bar | 1440×900, 390×844 | 3-button, gesture | dp, px | portrait, landscape left/right |
 | Fold | 1440×900, 390×844 | 3-button, gesture | dp, px | outer/closed, inner/90°, inner/open |
 | Flip | 1440×900, 390×844 | 3-button, gesture | dp, px | cover preview/closed, main/90°, main/open |
 
