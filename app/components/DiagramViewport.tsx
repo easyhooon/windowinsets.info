@@ -7,6 +7,8 @@ export type DiagramViewportHandle = { fitFoldBounds: (bounds: Bounds, body: Boun
 // `zoom` itself stays the scale of the 700 px canvas, so limits are converted.
 const MIN_ZOOM = 10, MAX_ZOOM = 500, MAX_FIT_ZOOM = 100;
 const FOLD_LABEL_ROOM = 64;
+const ROTATION_MS = 300;
+const ROTATION_EASING = "cubic-bezier(0.2, 0, 0, 1)";
 // Converts a screen offset into the rotated canvas frame.
 const rotateBack = (x: number, y: number, degrees: number) => {
   const r = -degrees * Math.PI / 180;
@@ -23,6 +25,11 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const scaleRef = useRef<HTMLDivElement>(null);
+  const positionRef = useRef<HTMLDivElement>(null);
+  // Unwrapped view angle so orientation changes animate along the shortest turn.
+  const turn = useRef(rotation);
+  const previousRotation = useRef(rotation);
+  const turnTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const displayedAngle = useRef(0);
   const effectiveZoom = useRef(zoom);
   const fitScales = useRef({ closed: zoom, open: zoom });
@@ -83,7 +90,7 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       const y = (bounds.top + bounds.bottom) / 2 - 350;
       const [dx, dy] = rotateBack(0, lift, live.current.rotation);
       fitCenter.current = { x: x + dx, y: y + dy };
-      scaleRef.current.style.transform = `scale(${effectiveZoom.current / 100}) rotate(${live.current.rotation}deg) translate(${-fitCenter.current.x}px, ${-fitCenter.current.y}px)`;
+      scaleRef.current.style.transform = `scale(${effectiveZoom.current / 100}) rotate(${turn.current}deg) translate(${-fitCenter.current.x}px, ${-fitCenter.current.y}px)`;
       return effectiveZoom.current;
     };
   const applyScale = (includeBounds = true) => {
@@ -92,7 +99,7 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
     effectiveZoom.current = live.current.autoFit && live.current.closedFit
       ? fitScales.current.closed + (fitScales.current.open - fitScales.current.closed) * progress
       : live.current.zoom;
-    if (scaleRef.current) scaleRef.current.style.transform = `scale(${effectiveZoom.current / 100}) rotate(${live.current.rotation}deg) translate(${-fitCenter.current.x}px, ${-fitCenter.current.y}px)`;
+    if (scaleRef.current) scaleRef.current.style.transform = `scale(${effectiveZoom.current / 100}) rotate(${turn.current}deg) translate(${-fitCenter.current.x}px, ${-fitCenter.current.y}px)`;
     if (includeBounds && projectedFit.current) fitFoldBounds(projectedFit.current.bounds, projectedFit.current.body, true);
   };
   useImperativeHandle(viewportRef, () => ({
@@ -114,6 +121,20 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       fit.current();
     },
   }));
+  // Orientation changes ease the canvas into the new view, modeled on One UI's
+  // ~300 ms decelerating screen rotation. Fit passes retarget the same transition.
+  useLayoutEffect(() => {
+    if (rotation === previousRotation.current) return;
+    const delta = ((rotation - previousRotation.current) % 360 + 540) % 360 - 180;
+    turn.current += delta === -180 ? 180 : delta;
+    previousRotation.current = rotation;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const targets = [scaleRef.current, positionRef.current].filter(Boolean) as HTMLDivElement[];
+    for (const el of targets) el.style.transition = `transform ${ROTATION_MS}ms ${ROTATION_EASING}`;
+    clearTimeout(turnTimer.current);
+    turnTimer.current = setTimeout(() => { for (const el of targets) el.style.transition = ""; }, ROTATION_MS + 120);
+  }, [rotation]);
+  useEffect(() => () => clearTimeout(turnTimer.current), []);
   useLayoutEffect(() => applyScale(), [zoom, rotation, autoFit]);
   const fitting = useRef(false);
   const [fitRevision, setFitRevision] = useState(0);
@@ -223,7 +244,7 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
     }}
     onPointerUp={e => { pointers.current.delete(e.pointerId); pinchStart.current = null; }} onPointerCancel={e => { pointers.current.delete(e.pointerId); pinchStart.current = null; }}
     onLostPointerCapture={e => { pointers.current.delete(e.pointerId); pinchStart.current = null; }}>
-    <div className="diagram-position" style={{ transform: `translate(${pan.x}px, ${pan.y}px)` }}>
+    <div ref={positionRef} className="diagram-position" style={{ transform: `translate(${pan.x}px, ${pan.y}px)` }}>
       <div ref={scaleRef} style={{ width: baseWidth, height: baseHeight, transformOrigin: "center" }}>{children}</div>
     </div>
   </div>;
