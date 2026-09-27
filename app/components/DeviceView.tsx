@@ -258,9 +258,9 @@ export function DeviceView({ device }: { device: Device }) {
   };
   const recordedSize = baseScreen.logicalSizeDp ?? (skin ? { width: skin.screen.width, height: skin.screen.height } : null);
   const size = screen.logicalSizeDp ?? (skin ? skinDp(skin, screen.captureRotation) : null);
-  // Android phones leave 180° out of auto-rotation by default, so apps do not turn
-  // upside down there; tablets and book-style inner displays do (REFERENCE_PARITY.md).
-  const allowsUpsideDown = device.formFactor === "tablet" || device.formFactor === "foldable-book" || device.formFactor === "foldable-trifold";
+  // Galaxy phones and foldables leave 180° out of auto-rotation (a Fold owner confirmed
+  // neither the folded nor unfolded display turns upside down); tablets do (REFERENCE_PARITY.md).
+  const allowsUpsideDown = device.formFactor === "tablet";
   const allOrientationOptions = recordedSize && recordedSize.width > recordedSize.height ? [
     { value: "0", label: "Landscape Left" }, { value: "90", label: "Portrait" },
     { value: "-90", label: "Portrait Upside Down" }, { value: "180", label: "Landscape Right" },
