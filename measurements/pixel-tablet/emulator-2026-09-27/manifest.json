@@ -1,0 +1,70 @@
+{
+  "capturedAt": "2026-09-27T13-56-24Z",
+  "provenance": {
+    "source": "android-emulator",
+    "avd": "wi_pixel_tablet",
+    "hwDevice": "pixel_tablet",
+    "skin": "pixel_tablet",
+    "systemImage": "system-images/android-37.0/google_apis_playstore/arm64-v8a/",
+    "installedEmulatorVersion": "37.1.11.0",
+    "buildFingerprint": "google/sdk_gphone64_arm64/emu64a:17/CE2A.260420.019/15611780:user/release-keys"
+  },
+  "captures": [
+    {
+      "file": "main-gesture.json",
+      "screen": "phone",
+      "navMode": "gesture",
+      "method": "userRotationLock",
+      "userRotation": 0
+    },
+    {
+      "file": "portrait-1-gesture.json",
+      "screen": "phone",
+      "navMode": "gesture",
+      "method": "userRotationLock",
+      "userRotation": 1
+    },
+    {
+      "file": "landscape-2-gesture.json",
+      "screen": "phone",
+      "navMode": "gesture",
+      "method": "userRotationLock",
+      "userRotation": 2
+    },
+    {
+      "file": "portrait-3-gesture.json",
+      "screen": "phone",
+      "navMode": "gesture",
+      "method": "userRotationLock",
+      "userRotation": 3
+    },
+    {
+      "file": "main-threeButton.json",
+      "screen": "phone",
+      "navMode": "threeButton",
+      "method": "userRotationLock",
+      "userRotation": 0
+    },
+    {
+      "file": "portrait-1-threeButton.json",
+      "screen": "phone",
+      "navMode": "threeButton",
+      "method": "userRotationLock",
+      "userRotation": 1
+    },
+    {
+      "file": "landscape-2-threeButton.json",
+      "screen": "phone",
+      "navMode": "threeButton",
+      "method": "userRotationLock",
+      "userRotation": 2
+    },
+    {
+      "file": "portrait-3-threeButton.json",
+      "screen": "phone",
+      "navMode": "threeButton",
+      "method": "userRotationLock",
+      "userRotation": 3
+    }
+  ]
+}

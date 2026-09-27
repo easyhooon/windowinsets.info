@@ -6,6 +6,7 @@ import { runnerImport } from 'vite';
 import { galaxyS25 } from '../app/data/devices/galaxy-s25/index.ts';
 import { galaxyS25Plus } from '../app/data/devices/galaxy-s25-plus/index.ts';
 import { galaxyZFlip8 } from '../app/data/devices/galaxy-z-flip8/index.ts';
+import { pixel9 } from '../app/data/devices/pixel-9/index.ts';
 import {
   createDeviceExport,
   deviceExportFilename,
@@ -67,6 +68,20 @@ test('device export keeps measured dp and exact raw px separate from derived val
   assert.equal(measurement.evidence, 'measured');
   assert.equal(measurement.condition.oneUi, '9.0');
   assert.ok(measurement.sources[0].url?.endsWith('/cover-gesture.json'));
+});
+
+test('emulator captures export as emulator evidence with their provenance', () => {
+  const exported = createDeviceExport(pixel9);
+  const main = exported.screens.find(screen => screen.id === 'main');
+  const measurement = main.navigationModes.gesture.value;
+  assert.equal(exported.device.brand, 'Google');
+  assert.equal(main.capture.value.evidence, 'emulator');
+  assert.equal(measurement.evidence, 'emulator');
+  assert.equal(measurement.condition.oneUi, null);
+  assert.equal(measurement.condition.emulator.deviceProfile, 'pixel_9');
+  assert.ok(measurement.condition.emulator.manifestUrl.endsWith('/measurements/pixel-9/emulator-2026-09-27/manifest.json'));
+  assert.ok(measurement.sources.every(source => source.kind === 'emulator'));
+  assert.equal(createDeviceExport(galaxyZFlip8).screens[0].navigationModes.gesture.value.condition.emulator, null);
 });
 
 test('TriFold artwork export preserves pending values on both screens', async () => {

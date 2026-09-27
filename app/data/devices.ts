@@ -88,6 +88,7 @@ import { galaxyA17 } from "./devices/galaxy-a17-5g";
 import { galaxyA56 } from "./devices/galaxy-a56-5g";
 import { galaxyA36 } from "./devices/galaxy-a36-5g";
 import { galaxyA07 } from "./devices/galaxy-a07";
+import { pixelDevices } from "./devices/pixel";
 import { skinPreviews } from "./skinPreviews";
 import { isInCoverage } from "./coverage";
 
@@ -108,8 +109,9 @@ const generation = (device: Device) => Number(device.slug.match(/(?:fold|flip|s|
 const tier = (device: Device) => device.slug.endsWith("ultra") ? 0 : device.slug.endsWith("plus") ? 1
   : device.slug.endsWith("edge") ? 2 : device.slug.includes("-fe") ? 4 : 3;
 
-export const devices: Device[] = mergedDevices.filter(isInCoverage).sort((a, b) => groupOrder(a) - groupOrder(b)
-  || generation(b) - generation(a) || tier(a) - tier(b) || a.name.localeCompare(b.name));
+// Samsung first; Pixel entries keep the generated order (Fold, phones newest first, Tablet).
+export const devices: Device[] = [...mergedDevices.filter(isInCoverage).sort((a, b) => groupOrder(a) - groupOrder(b)
+  || generation(b) - generation(a) || tier(a) - tier(b) || a.name.localeCompare(b.name)), ...pixelDevices.filter(isInCoverage)];
 
 export const featuredDevice = devices.find(device => device.slug === "galaxy-z-fold8")!;
 
