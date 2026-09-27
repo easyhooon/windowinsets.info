@@ -22,9 +22,9 @@ export function MeasurementRulers({ measurements, onCopy }: {
           d={`M${ruler.start.x},${ruler.start.y} L${p.x},${p.y} M${ruler.end.x},${ruler.end.y} L${q.x},${q.y}`} />
         <path d={`M${p.x},${p.y} L${q.x},${q.y}`} />
         {arrows.map(([point, direction], i) => <path key={i} d={`M${point.x + tip * Math.cos(direction - .7)},${point.y + tip * Math.sin(direction - .7)} L${point.x},${point.y} L${point.x + tip * Math.cos(direction + .7)},${point.y + tip * Math.sin(direction + .7)}`} />)}
-        <g role="button" tabIndex={0} aria-label={`Copy ${ruler.name}: ${ruler.text} ${units}`} onClick={event => { event.stopPropagation(); copy(); }}
+        <g data-ruler-label="true" role="button" tabIndex={0} aria-label={`Copy ${ruler.name}: ${ruler.text} ${units}`} onClick={event => { event.stopPropagation(); copy(); }}
           onPointerDown={event => event.stopPropagation()} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); copy(); } }}
-          style={{ pointerEvents: 'auto', cursor: 'copy' }}>
+          style={{ pointerEvents: 'auto', cursor: 'copy', transformBox: 'view-box', transformOrigin: `${ruler.x}px ${ruler.y}px` }}>
           <title>{`${ruler.secondaryValue === undefined ? ruler.equivalentNames?.join(", ") ?? ruler.name : ruler.name}: ${ruler.text} ${units}. Copy recorded measurement.`}</title>
           <rect data-badge="true" x={ruler.x - ruler.width / 2} y={ruler.y - ruler.height / 2} width={ruler.width} height={ruler.height} rx={2 * scale} fill={color} stroke="none" />
           <text x={ruler.x} y={ruler.y} fill="white" stroke="none" textAnchor="middle" dominantBaseline="central" fontFamily={DIAGRAM_FONT} fontWeight="500" fontSize={12 * scale}>{ruler.text}</text>

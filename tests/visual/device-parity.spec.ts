@@ -208,8 +208,11 @@ test("S25 Ultra remains readable across navigation, units, and orientation", asy
 test("S23+ landscape uses its own measured insets", async ({ page }) => {
   await page.goto("/galaxy-s23-plus");
   await openMetricsIfCollapsed(page);
+  await expect(page.getByRole("button", { name: "Logical Size 384 × 832 dp" })).toBeVisible();
   await chooseDropdown(page, "Orientation", "Landscape Left");
+  await expect(page.getByRole("button", { name: "Logical Size 832 × 384 dp" })).toBeVisible();
   await chooseUnits(page, "px");
+  await expect(page.getByRole("button", { name: "Logical Size 2340 × 1080 px" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Top 84 px" }).first()).toBeVisible();
   if (page.viewportSize()?.width && page.viewportSize()!.width < 600) {
     await page.getByRole("button", { name: "Metrics" }).click();
@@ -230,7 +233,7 @@ test("Galaxy Tab keeps the upside-down portrait option", async ({ page }) => {
   await expect(page).toHaveScreenshot("galaxy-tab-s10-plus-upside-down.png", { fullPage: true });
 });
 
-test("flat orientation change animates the frame and then the content", async ({ page }) => {
+test("flat orientation change animates the frame and upright content together", async ({ page }) => {
   await page.goto("/galaxy-s23-plus");
   await page.evaluate(() => {
     const calls: number[] = [];
@@ -244,7 +247,31 @@ test("flat orientation change animates the frame and then the content", async ({
     };
   });
   await chooseDropdown(page, "Orientation", "Landscape Left");
-  await expect.poll(() => page.evaluate(() => (window as typeof window & { turnDurations: number[] }).turnDurations)).toEqual(expect.arrayContaining([300, 390]));
+  await expect.poll(() => page.evaluate(() => (window as typeof window & { turnDurations: number[] }).turnDurations)).toEqual(expect.arrayContaining([300]));
+});
+
+test("screen content and measurement numbers stay upright while the frame turns", async ({ page }) => {
+  await page.goto("/galaxy-s23-plus");
+  await chooseDropdown(page, "Orientation", "Landscape Left");
+  const angles = await page.evaluate(() => {
+    const wrap = document.querySelector("[data-orientation-turn]")!;
+    const content = wrap.querySelector("[data-screen-content]")!;
+    const badge = wrap.querySelector("[data-ruler-label]")!;
+    for (const animation of wrap.getAnimations({ subtree: true })) {
+      animation.pause();
+      animation.currentTime = 150;
+    }
+    const angle = (element: Element) => {
+      const m = new DOMMatrix(getComputedStyle(element).transform);
+      return Math.atan2(m.b, m.a) * 180 / Math.PI;
+    };
+    return { frame: angle(wrap), content: angle(content), badge: angle(badge) };
+  });
+  expect(Math.abs(angles.frame)).toBeGreaterThan(10);
+  expect(Math.abs(angles.frame + angles.content)).toBeLessThan(2);
+  expect(Math.abs(angles.frame + angles.badge)).toBeLessThan(2);
+  await page.waitForTimeout(300);
+  await expect(page.locator(".canvas-panel")).toHaveScreenshot("galaxy-s23-plus-mid-turn-upright.png", { animations: "allow" });
 });
 
 test("Fold7 animation switches from measured cover to measured inner display", async ({ page }) => {

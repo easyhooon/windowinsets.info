@@ -11,8 +11,6 @@ const MIN_ZOOM = 10, MAX_ZOOM = 500, MAX_FIT_ZOOM = 100;
 const FOLD_LABEL_ROOM = 64;
 const ROTATION_MS = 300;
 const ROTATION_EASING = "cubic-bezier(0.2, 0, 0, 1)";
-// Screen content starts turning after the frame, like One UI's rotation.
-const CONTENT_LAG_MS = 90;
 // Converts a screen offset into the rotated canvas frame.
 const rotateBack = (x: number, y: number, degrees: number) => {
   const r = -degrees * Math.PI / 180;
@@ -149,15 +147,18 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       const eased = [scaleRef.current, positionRef.current].filter(Boolean) as HTMLDivElement[];
       for (const el of eased) el.style.transition = `transform ${ROTATION_MS}ms ${ROTATION_EASING}`;
       clearTimeout(turnTimer.current);
-      turnTimer.current = setTimeout(() => { for (const el of eased) el.style.transition = ""; }, ROTATION_MS + CONTENT_LAG_MS + 120);
+      turnTimer.current = setTimeout(() => { for (const el of eased) el.style.transition = ""; }, ROTATION_MS + 120);
       const content = wrap.querySelector<SVGGElement>("[data-screen-content]");
-      if (!content) return;
-      const fit = sideways ? Number(content.dataset.turnScale ?? 1) : 1;
-      const lag = CONTENT_LAG_MS / (ROTATION_MS + CONTENT_LAG_MS);
-      const from = `rotate(${deltaDeg}deg) scale(${fit})`;
-      // Per-keyframe easing keeps the hold linear in time and the turn decelerating.
-      content.animate([{ transform: from, offset: 0 }, { transform: from, offset: lag, easing: ROTATION_EASING }, { transform: "none" }],
-        { duration: ROTATION_MS + CONTENT_LAG_MS });
+      const timing = { duration: ROTATION_MS, easing: ROTATION_EASING };
+      // The frame turns around the already re-laid-out diagram. Apply the
+      // inverse turn with identical timing so text stays upright throughout.
+      if (content) {
+        const fit = sideways ? Number(content.dataset.turnScale ?? 1) : 1;
+        content.animate([{ transform: `rotate(${deltaDeg}deg) scale(${fit})` }, { transform: "none" }], timing);
+      }
+      for (const label of wrap.querySelectorAll<SVGGElement>("[data-ruler-label]")) {
+        label.animate([{ transform: `rotate(${deltaDeg}deg)` }, { transform: "none" }], timing);
+      }
     },
     refitFold: () => {
       if (!live.current.autoFit || foldFitPending.current || !scaleRef.current) return;
@@ -294,7 +295,7 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
     onPointerUp={e => { pointers.current.delete(e.pointerId); pinchStart.current = null; }} onPointerCancel={e => { pointers.current.delete(e.pointerId); pinchStart.current = null; }}
     onLostPointerCapture={e => { pointers.current.delete(e.pointerId); pinchStart.current = null; }}>
     <div ref={positionRef} className="diagram-position" style={{ transform: `translate(${pan.x}px, ${pan.y}px)` }}>
-      <div ref={turnRef}>
+      <div ref={turnRef} data-orientation-turn="true">
         <div ref={scaleRef} style={{ width: baseWidth, height: baseHeight, transformOrigin: "center" }}>{children}</div>
       </div>
     </div>
