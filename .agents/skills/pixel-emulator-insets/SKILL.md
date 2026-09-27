@@ -151,3 +151,11 @@ Remove lessons that no longer hold.
 - 2026-09-27: On the inner display the cutout follows the profile's side
   overrides: top at rotations 0/1, bottom at 2/3. The status bar is 136 px when
   the cutout is on top and 88 px otherwise.
+- 2026-09-27: A bar-phone AVD took about 1.3 minutes to capture. Check for all
+  six files before registering: the first Pixel 10 Pro XL sweep saved only five,
+  so it was rerun. Pixel 4a's first install failed with `device offline` just
+  after boot; `capture-emulator.py` now retries that specific transient failure.
+- 2026-09-27: A zero navigation-bar inset can make the probe's independent
+  `modeFromInsets` heuristic return `unknown`, particularly in landscape. The
+  resolved mode still agrees with the secure setting in the registered runs;
+  validate `navigation.mode` and `settingAgreesWithInsets` as the importer does.
