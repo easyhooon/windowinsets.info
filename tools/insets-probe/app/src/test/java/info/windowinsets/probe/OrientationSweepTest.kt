@@ -18,6 +18,12 @@ class OrientationSweepTest {
         assertEquals("landscape-3-threeButton.json", OrientationSweep.fileName("phone", "threeButton", 3, true))
         assertEquals("main-portrait-1-gesture.json", OrientationSweep.fileName("main", "gesture", 1, false))
         assertEquals("cover-landscape-3-gesture.json", OrientationSweep.fileName("cover", "gesture", 3, true))
+        assertEquals("portrait-2-gesture.json", OrientationSweep.fileName("phone", "gesture", 2, false))
+        assertEquals("main-landscape-2-threeButton.json", OrientationSweep.fileName("main", "threeButton", 2, true))
+    }
+
+    @Test fun sweepEndsWithReversePortrait() {
+        assertEquals(listOf("portrait", "landscape", "reverse landscape", "reverse portrait"), OrientationSweep.steps.map { it.label })
     }
 
     @Test fun waitsForTheRequestedWindowShape() {

@@ -15,6 +15,8 @@ object OrientationSweep {
         Step(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, "portrait", landscape = false),
         Step(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE, "landscape", landscape = true),
         Step(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE, "reverse landscape", landscape = true),
+        // Phones usually refuse 180°; the step then times out and is listed as skipped.
+        Step(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT, "reverse portrait", landscape = false),
     )
 
     /** Quiet period after the last insets/configuration callback before capturing. */

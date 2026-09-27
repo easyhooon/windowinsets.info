@@ -67,12 +67,16 @@ adb pull /sdcard/Android/data/info.windowinsets.probe/files/
 
 `--es screen` accepts `cover` or `main` (default `phone`); `--ez export true` saves the JSON one second after launch. See [sample-output](sample-output) for a real capture.
 
-## Version 1.5.1: cover label guard
+## Version 1.5.1: cover label guard, reverse portrait
 
 - **Cover** is rejected when the active display reports a WindowManager
   `FoldingFeature`: only the unfolded inner display has one. The pilot inbox (#30)
   contained a `cover` capture of the 2448×1848 Fold8 inner display; the raw file is
   kept but excluded from cover measurements.
+- The sweep adds **reverse portrait** as a fourth step. Tablets and foldable inner
+  displays usually rotate there; phones usually refuse 180° and the step is skipped
+  after the timeout. A phone-sized capture turned upside down still differs from
+  portrait when the cutout moves to the bottom (Flip5: bottom 45 → 139 px).
 
 ## Version 1.5.0: direct upload
 
