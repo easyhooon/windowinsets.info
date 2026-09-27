@@ -465,6 +465,22 @@ Accepted 3-button recapture: `measurements/galaxy-tab-s9-fe/recapture-2026-09-27
 Rejected raw file: `measurements/galaxy-tab-s9-fe/rejected-2026-09-25/main-threeButton.json`.
 
 
+### Galaxy Tab S7 FE — 2026-09-27
+
+InsetsProbe 1.3.0 captured Samsung RTL Galaxy Tab S7 FE (SM-T735), Android 13 /
+One UI 5.1, build `TP1A.220624.014.T735XXS3CWE6`, landscape at rotation 1,
+2560×1600 px, 340 dpi, font scale 1. Both modes record 51/102 px system bars
+(24/48 dp). The gesture capture is confirmed by secure navigation mode 2,
+`config_navBarInteractionMode=2` and 63 px side system-gesture insets; the
+inset-only heuristic reports threeButton. Its 102 px bottom navigation, system-bar
+and tappable insets match 3-button mode, consistent with the persistent One UI
+5.1 tablet taskbar; the taskbar state was not recorded. The Tab S9+ and S8+
+gesture captures (136 px) are larger than their 3-button bars, so this equal
+pair is preserved as captured, not normalized.
+
+Raw files: `measurements/galaxy-tab-s7-fe/main-{gesture,threeButton}.json`.
+
+
 ## Galaxy Note20 and Galaxy Tab S9+/S8 series measured on 2026-09-25
 
 Samsung RTL produced paired full-screen Main captures for Galaxy Note20 5G
