@@ -7,7 +7,7 @@ export function meta(_: Route.MetaArgs) {
   return pageMeta({
     title: "Android Window Insets & Safe Areas | windowinsets.info",
     description:
-      "Window insets, display cutouts, corner radii and foldable hinge states for Samsung Galaxy devices, with a source for every number.",
+      "Explore window insets, display cutouts, corner radii and foldable hinge states for Samsung Galaxy and Google Pixel devices. See how the measurements were captured.",
     url: SITE_URL,
   });
 }

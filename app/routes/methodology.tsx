@@ -7,7 +7,7 @@ export function meta(_: Route.MetaArgs) {
   return pageMeta({
     title: "How I measure Android window insets | windowinsets.info",
     description:
-      "Where every number on windowinsets.info comes from: official specs, open-source InsetsProbe measurements, the conditions they are valid for, and known limitations.",
+      "How windowinsets.info captures Android inset data, records its sources and conditions, and explains measurement limits.",
     url: `${SITE_URL}/methodology`,
   });
 }
