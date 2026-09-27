@@ -47,7 +47,7 @@ flowchart TD
     K --> L["One rolling Capture inbox PR<br/>many uploads in one batch"]
     L --> M{"User: merge this batch?"}
     M -- "Not yet" --> N["PR stays open;<br/>more captures accumulate"]
-    M -- "Approved" --> O["Agent merges PR into main;<br/>raw JSON retained"]
+    M -- "Approved" --> O["Agent squash-merges into main<br/>as one commit; deletes inbox branch"]
     O -. "Separate site integration;<br/>not done by the upload API" .-> Q["app/data/devices entries"]
     Q --> P["windowinsets.info"]
 ```
@@ -55,8 +55,10 @@ flowchart TD
 The upload key is built into InsetsProbe; the GitHub write token stays in Vercel.
 The API checks the payload's shape and completes collection when it commits the
 raw JSON. Captures accumulate in one PR; the user decides whether and when to
-merge the batch, without per-capture manual validation. Site entries are
-maintained separately and are not updated by this upload API. Setup is
+squash-merge the batch as one commit, without per-capture manual validation.
+The inbox branch is deleted after the merge so the next upload starts a fresh
+batch. Site entries are maintained separately and are not updated by this
+upload API. Setup is
 documented in [`docs/CAPTURE_UPLOAD.md`](docs/CAPTURE_UPLOAD.md).
 Live GitHub upload still needs a PAT-backed smoke test.
 

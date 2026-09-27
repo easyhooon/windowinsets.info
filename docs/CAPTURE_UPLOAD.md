@@ -4,7 +4,7 @@ InsetsProbe can upload captures straight from an RTL or physical device instead 
 the RTL File Browser download round trip.
 
 ```
-InsetsProbe ──POST /api/captures──▶ Vercel function ──GitHub API──▶ capture-inbox branch ──one batch PR──▶ main (when approved)
+InsetsProbe ──POST /api/captures──▶ Vercel function ──GitHub API──▶ capture-inbox branch ──one batch PR──▶ squash merge to main (when approved)
 ```
 
 - `api/captures.ts` (Vercel Function): checks the upload key, size (256 KB),
@@ -12,14 +12,25 @@ InsetsProbe ──POST /api/captures──▶ Vercel function ──GitHub API�
   display size, `navigation.mode`, `insets`).
 - `api/_lib/captureInbox.ts`: one upload = one commit on `capture-inbox` under
   `measurements/_inbox/<model>/<timestamp>/<file>.json`; creates the branch and
-  one **Capture inbox** PR when missing. Later uploads reuse the open PR. After
-  that PR is merged, the next upload opens a new batch PR.
+  one **Capture inbox** PR when missing. Later uploads reuse the open PR.
 - Values are never edited. A successful upload is collected as soon as the raw
   JSON is committed to `capture-inbox`. No per-capture human validation is part
   of collection. The user decides whether and when to merge the batch; the agent
-  can carry out that merge. The website still reads separately maintained
+  can carry out a squash merge. The website still reads separately maintained
   `app/data/devices` entries, so collection does not automatically publish a
   measurement on the site.
+
+## Close a collection batch
+
+When the user approves a merge, wait until no device upload is running. The
+agent squash-merges the **Capture inbox** PR and deletes its remote
+`capture-inbox` branch. GitHub then retains all raw JSON from that batch in one
+commit on `main`; the per-upload commits do not enter `main` history.
+Use `gh pr merge` with `--squash --delete-branch --match-head-commit` and the
+PR's current head SHA so a new upload cannot silently enter the approved batch.
+The next upload sees that the branch is missing, creates it from the new `main`,
+and opens one new PR for the next batch. Do not squash-merge or delete the branch
+before the user has decided to merge that batch.
 
 ## Create the GitHub token
 

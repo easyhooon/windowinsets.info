@@ -74,9 +74,9 @@ adb pull /sdcard/Android/data/info.windowinsets.probe/files/
   more RTL File Browser round trip.
 - Uploads land on the rolling `capture-inbox` branch under
   `measurements/_inbox/<model>/<timestamp>/`, one commit per upload. One open
-  inbox PR accumulates a batch; the user decides when to merge it. No separate
-  PR or manual validation is required for each capture. Files are stored exactly
-  as captured.
+  inbox PR accumulates a batch; the user decides when to squash-merge it as one
+  commit on `main`. No separate PR or manual validation is required for each
+  capture. Files are stored exactly as captured.
 - Build with the key: `./gradlew :app:assembleDebug -PinsetsProbeUploadKey=<key>`
   (or put `insetsProbeUploadKey=<key>` in `~/.gradle/gradle.properties`; never in
   the repository). Without a key, Upload is disabled and downloading still works.
