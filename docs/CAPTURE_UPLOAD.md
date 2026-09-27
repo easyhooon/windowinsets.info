@@ -32,7 +32,12 @@ InsetsProbe ──POST /api/captures──▶ Vercel function ──GitHub API�
 5. **Generate token** and copy it once (it is not shown again). Paste it straight
    into Vercel, never into chat, issues or the repository.
 
-## Setup (Vercel → Project → Settings → Environment Variables, Production and Preview)
+## Setup (Vercel → Project → Settings → Environment Variables)
+
+Set the variables for **Production**. To test this PR before merging, also set
+them for **Preview**, scoped to the `feat/capture-upload` Git branch. Do not expose
+the repository write token to every preview branch. Remove the branch-scoped
+Preview token after the test if it is no longer needed.
 
 | Name | Value |
 | --- | --- |
