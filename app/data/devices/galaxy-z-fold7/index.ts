@@ -48,13 +48,13 @@ const mainGesture: Source = {
 const coverCondition = {
   oneUi: "8.5",
   android: "16",
-  note: "Samsung RTL, physically folded, portrait. Active window 1080×2520 px; hinge 0° with no folding feature. The two navigation modes were captured from separate SM-F966U reservations on the same software build.",
+  note: "Samsung RTL, physically folded, portrait. Active window 1080×2520 px; hinge 0° with no folding feature. The two navigation modes were captured from separate SM-F966U reservations on the same software build. A 2026-09-27 InsetsProbe 1.5.0 sweep (recapture-2026-09-27-rotation/) reproduces these rotation 0 values and adds rotations 1 and 3 in both modes as evidence.",
 };
 
 const mainCondition = {
   oneUi: "8.5",
   android: "16",
-  note: "Samsung RTL, fully unfolded, portrait (rotation 0). Active window 1968×2184 px. RTL's hinge sensor remained at 0°, while WindowManager reported a vertical FLAT folding feature at x=984 px. In the gesture capture, Settings and the navigation configuration report gestures while the inset-only classifier reports 3-button; the recorded insets are used as captured.",
+  note: "Samsung RTL, fully unfolded, portrait (rotation 0). Active window 1968×2184 px. RTL's hinge sensor remained at 0°, while WindowManager reported a vertical FLAT folding feature at x=984 px. In the gesture capture, Settings and the navigation configuration report gestures while the inset-only classifier reports 3-button; the recorded insets are used as captured. A 2026-09-27 InsetsProbe 1.5.0 capture set (recapture-2026-09-27-rotation/) reproduces these rotation 0 values; its rotation 1 and 3 captures were taken by rotating with the RTL Rotate control because the inner display ignored the app orientation request, and report a 79 px top bar with the navigation bar still at the bottom. The taskbar setting stayed at the device default (on).",
 };
 
 const coverCutout = {
