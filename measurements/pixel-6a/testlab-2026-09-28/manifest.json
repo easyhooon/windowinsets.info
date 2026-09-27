@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-3qe6bitme0p6b",
+  "deviceModelId": "bluejay",
+  "deviceName": "Pixel 6a",
+  "androidApi": 32,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/5423514632819986165",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_01:21:48.393279_wMuy/bluejay-32-en-portrait/",
+  "note": "Physical device, portrait, existing navigation mode; compare with the API 37 emulator with the OS difference noted.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "19cb7053ab9fc0aaa23c8de1df88c08db8dd049e9ccb0ce657adb2f40fbbf028"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "c2c037f52ca0bd890ac0a88fc2132dc925fb9d4d0d385d713bde6e51ba959f8b"
+    }
+  ]
+}

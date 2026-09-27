@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-3qe6bitme0p6b",
+  "deviceModelId": "lynx",
+  "deviceName": "Pixel 7a",
+  "androidApi": 33,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/5423514632819986165",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_01:21:48.393279_wMuy/lynx-33-en-portrait/",
+  "note": "Physical device, portrait, existing navigation mode; compare with the API 37 emulator with the OS difference noted.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "1a3ae035cede3afbbebb993b791abe79b0e8b76f5b6526e7108ccb33b76b7e30"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "985c80e06d97a12f20f6f85d4e6c55d427f67830575125c723f9e31706c7b80b"
+    }
+  ]
+}

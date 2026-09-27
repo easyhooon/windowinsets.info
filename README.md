@@ -24,7 +24,7 @@ The full write-up lives on the site at [/methodology](https://windowinsets.info/
 - **Insets come from Android, not product specifications.** Manufacturers publish display specifications but generally not the status/navigation bar heights, cutouts or corner radii shown here. [InsetsProbe](tools/insets-probe) reads what Android reports in each capture environment.
 - **Conditions are part of the data.** Captures record the full-screen window, display rotation, density and font settings, navigation mode (gesture or 3-button), and Android build. Samsung captures also record One UI; Pixel emulator captures record the profile, system image and emulator version. FTL captures record the physical model, Android build and test matrix. A value is only valid for its recorded conditions.
 - **Never estimated.** Nothing is interpolated from another device or derived from resolution alone. Unverified values are `null` and shown as **pending**.
-- **Known limits.** OS updates can change values. Each rotation needs its own capture; rotating the site diagram does not create landscape measurements. The Pixel site entries use rotation-0 emulator captures, with other rotations retained as raw evidence. Five physical FTL runs cover selected portrait gesture conditions only; the Android 16 and Android 17 comparisons show that a matching camera contour can coexist with a different OS cutout safe inset. Pixel Tablet's physical portrait and emulator landscape captures need a matched-orientation comparison. Multi-window is not covered yet; a real app may see different insets if it adds its own padding or window flags.
+- **Known limits.** OS updates can change values. Each rotation needs its own capture; rotating the site diagram does not create landscape measurements. The Pixel site entries use rotation-0 emulator captures, with other rotations retained as raw evidence. Physical FTL spot checks now cover 19 of 22 Pixel models in the existing gesture mode, with matched landscape captures for Pixel Fold's inner display and Pixel Tablet. Android 16 and Android 17 comparisons show that a matching camera contour can coexist with a different OS cutout safe inset; physical rounded corners on Fold and Tablet are absent from their AVD captures. Multi-window is not covered yet; a real app may see different insets if it adds its own padding or window flags.
 
 Found a mistake or have a capture that differs from mine? Open an issue or pull request with your InsetsProbe JSON. A reproduction is as valuable as a new device.
 
@@ -65,16 +65,19 @@ devices in Firebase Test Lab. Robo scripts export raw JSON to the test result
 bucket; keep it under a separate dated `testlab-<date>/` directory and compare
 it with the matching emulator capture. A passed FTL test confirms that the app
 ran and exported data, not that every published value matches the hardware.
-The dedicated `windowinsets-testlab-2026` project uses the no-cost Spark plan;
-all five physical-device runs available for 2026-09-28 were used for Pixel 10
-Pro XL, Pixel 10 Pro Fold, Pixel 9 Pro Fold, Pixel 8 Pro and Pixel Tablet. See the
-[validation log and exact commands](docs/PIXEL_HARDWARE_VALIDATION.md) and
-[FTL quota and pricing](https://firebase.google.com/docs/test-lab/usage-quotas-pricing).
-The remaining catalog-listed Pixel models can be checked in batches of five
-per day on Spark, with no billing account. Blaze provides 30 free physical-device
-test minutes per day, then charges $5 per device-hour; project-specific testing
-quotas still apply. It is unnecessary for this paced hardware comparison, and
-it would not resolve the Pixel Tablet artwork contrast tracked in [#35](https://github.com/easyhooon/windowinsets.info/issues/35).
+The dedicated `windowinsets-testlab-2026` project used Spark for its first five
+physical runs, then switched to Blaze with a separate billing account on
+2026-09-28. Keyless Robo tests with a two-minute per-device timeout have now
+spot-checked 19 of the 22 public Pixel models in gesture mode. Their raw JSON,
+result links, and the first run's complete Robo crawl graph are in the
+[validation log](docs/PIXEL_HARDWARE_VALIDATION.md). Pixel 6 Pro and Pixel 4a
+were absent from the FTL physical catalog; the catalog's Pixel 5 runs API 30,
+below the probe's minimum API 31. These checks leave other navigation modes,
+rotations and Fold cover states unverified. Blaze includes 30 physical-device
+test minutes per project per day, then charges $5 per device-hour in one-minute
+increments; see [FTL quota and pricing](https://firebase.google.com/docs/test-lab/usage-quotas-pricing).
+The Pixel Tablet artwork contrast issue [#35](https://github.com/easyhooon/windowinsets.info/issues/35)
+was fixed separately in PR #42.
 
 ### What InsetsProbe records
 

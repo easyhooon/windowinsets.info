@@ -1,18 +1,41 @@
 # Pixel hardware validation with Firebase Test Lab
 
+## What the Robo test shows
+
+Firebase Test Lab's Robo test installs the APK on a selected device and explores
+its UI. A Robo script can run specified actions before that exploration. For
+these inset checks, the script starts the keyless InsetsProbe with an explicit
+screen label, exports a JSON capture, waits briefly, and terminates the crawl.
+The JSON is the measurement evidence; a passing Robo result alone only means
+the app and script ran. The console's crawl graph shows visited screens as nodes
+and actions as arrows. See [Firebase's Robo test guide](https://firebase.google.com/docs/test-lab/android/robo-ux-test).
+
+The first Pixel 10 Pro XL pilot continued into automatic UI exploration after
+one script assertion failed. Its console view and **complete exported crawl
+graph** are preserved below. The graph includes launcher and Settings screens
+that Robo reached during this extra exploration; those screens are not inset
+measurements. Later scripts terminate after the intended export.
+
+![Full Firebase Test Lab Robo results view for the first Pixel 10 Pro XL pilot](images/ftl-robo-pixel-10-pro-xl-console.png)
+
+![Complete Robo crawl graph exported by Firebase Test Lab for the first Pixel 10 Pro XL pilot](images/ftl-robo-pixel-10-pro-xl-graph.png)
+
 The published Pixel values come from local Android Emulator profiles. They are
 labelled `emulator` evidence, not Pixel hardware measurements. Issue #23 treats
 Firebase Test Lab (FTL) physical devices as a later spot check. A successful
 emulator capture does not establish that a physical device reports the same
 cutout, rounded corners or insets.
 
-## First physical-phone pilot
+## Physical-device capture procedure
 
 1. Use the dedicated `windowinsets-testlab-2026` Firebase project. It was
    created on 2026-09-28 under the maintainer's Google account with Google
-   Analytics disabled. It is on the Spark plan, with no billing account linked.
-   Spark currently allows five physical-device test runs per project per day at
-   no cost. Check the current quota before running tests. Do not add an upload
+   Analytics disabled. The first five physical runs used Spark. On 2026-09-28,
+   the maintainer created a separate billing account and linked it to this
+   project, switching it to Blaze. Blaze includes 30 physical-device test
+   minutes per project per day, then charges $5 per device-hour in one-minute
+   increments. Check the current quota and billing state before running more
+   tests; budget alerts are not spending caps. Do not add an upload
    key to the probe APK: a keyed
    build automatically sends a sweep to the real-device capture inbox.
 2. List the **current physical** models and supported Android versions with
@@ -38,11 +61,13 @@ cutout, rounded corners or insets.
      --robo-script tools/insets-probe/testlab/phone-portrait.robo.json \
      --device model=MODEL_ID,version=OS_VERSION_ID,locale=en,orientation=portrait \
      --directories-to-pull /sdcard/Android/data/info.windowinsets.probe/files \
+     --timeout=2m \
      --client-details matrixLabel=Pixel-hardware-insets-pilot
    ```
 
    The script clears earlier exports, launches InsetsProbe with `screen=phone`
-   and `export=true`, waits for a settled capture, then stops the crawl. Verify
+   and `export=true`, waits for a settled capture, then stops the crawl. The
+   timeout bounds each device execution. Verify
    the resulting JSON after downloading it. Test Lab pulls files from this
    app-specific directory successfully on the tested Pixel 10 Pro XL.
 
@@ -74,8 +99,8 @@ catalog reports 1080×2404 for `mustang`, while its local emulator profile uses
 1344×2992; compare dp and geometry relative to the active display dimensions,
 and record the physical device's actual reported resolution. The current FTL
 catalog contains no Galaxy Watch model. Test Lab measurements do not supply
-device artwork. Issue #35 concerns the Pixel Tablet frame's contrast on the
-website and requires a rendering change, not a Test Lab measurement.
+device artwork. Issue #35 concerned the Pixel Tablet frame's contrast and was
+fixed separately on the website in PR #42.
 
 ## First run: Pixel 10 Pro XL
 
@@ -157,25 +182,73 @@ version make these findings **unresolved**, not proof that the emulator's
 tablet profile is wrong. Re-run one source in the other's orientation before
 deciding whether to change published values. Both report no display cutout.
 
-Five physical test runs were used on the Spark plan on 2026-09-28 (Pixel 10
-Pro XL, Pixel 10 Pro Fold, Pixel 9 Pro Fold, Pixel 8 Pro, Pixel Tablet). The
-project has no billing account (`billingEnabled=False`). More physical tests
-must wait for the free daily quota to renew. The maintainer chose to remain on
-Spark and use up to five physical-device runs on each of the next two quota
-days. Fifteen catalog-listed Pixel models remain after the first five runs, so
-the two additional days cover up to ten of them; a further quota day would be
-needed for the final five. Re-run Pixel 10 Pro XL and compare Pixel Tablet in
-the matching orientation within that budget if they take priority over new
-models. Check the live quota before each batch; do not infer a reset time from
-the local calendar day.
+## Blaze continuation on 2026-09-28
 
-Blaze is not needed for this schedule. As of 2026-09-28, it includes 30
-physical-device test minutes per project per day, then charges $5 per device
-hour, rounded up to a minute. Enabling it requires a linked billing account;
-budget alerts notify but do not cap charges. Issue #35 is a website artwork
-contrast problem and cannot be resolved by either FTL plan. Do not infer
-verification for the remaining Pixel models or for the unmeasured navigation,
-rotation or Fold states from these spot checks.
+After five Spark executions, a newly created billing account was linked to the
+dedicated project. Seventeen more physical-device executions were submitted
+with `--timeout=2m`: a corrected Pixel 10 Pro XL capture, a landscape Pixel
+Tablet capture, fourteen previously unchecked catalog models, and a matched
+landscape inner-screen Pixel Fold recapture. All 17 executions passed and
+produced an exported JSON. The new phone batch is
+[matrix-3qe6bitme0p6b](https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/5423514632819986165);
+individual result URLs and SHA-256 checksums are in each capture manifest.
+The Pixel 10 Pro XL, Tablet and Fold recaptures have separate subdirectories,
+so none of the earlier raw files were changed.
+
+The result is **19 of 22 public Pixel models spot-checked on physical FTL
+devices**. Every new JSON identifies the expected Google Pixel model and API,
+reports gesture navigation with both detectors agreeing, and is a full-window
+capture. This checks one screen and navigation mode per model, not every
+orientation, navigation mode, or Fold cover state. All published site values
+continue to carry their original API 37 emulator provenance. FTL devices here
+ran API 32–36, so differences cannot yet be assigned solely to hardware.
+
+The camera path and display corner radii match the AVD values at recorded
+precision for Pixel 10 Pro Fold, Pixel 9 Pro Fold, Pixel 9, Pixel 8, Pixel 8a,
+Pixel 7, Pixel 7a, Pixel 6 and Pixel 6a. Pixel 10 Pro XL, Pixel 9 Pro XL,
+Pixel 9 Pro, Pixel 8 Pro and Pixel 7 Pro are close (roughly 0.1–0.5 dp in
+path size or corner radius). The physical Pixel 10 Pro path is about 1.2 dp
+smaller and its corner radius about 2 dp smaller; Pixel 10's corner radius
+is about 2.3 dp larger. Pixel 9a's physical corner radius is 43.81 dp versus
+50.29 dp in the AVD, despite a near-matching camera path. These differences
+remain findings, not corrections to raw captures or published values.
+
+The safe top cutout inset can differ even when the camera path matches. For
+example, the correctly labelled Pixel 10 Pro XL recapture reports 66.05 dp
+versus 53 dp in the AVD. Pixel 9 reports 65.90 versus 54.10 dp, and Pixel 6a
+reports 44.95 versus 50.29 dp. Pixel 8, 8a, 7, 7a and 6 match the AVD top
+cutout inset, while Pixel 8 Pro and 7 Pro are within about 0.2 dp. Preserve
+these OS- and resolution-dependent differences with both source labels.
+
+The matched-size, rotation-0 Pixel Fold inner recapture reports a 2208×1840
+screen and physical corner radii of 19.81 dp at the top and 18.29 dp at the
+bottom. The AVD reports `null` corners at the same size and rotation. Neither
+source reports a cutout on this inner screen; the physical status-bar top inset
+is 41.90 dp versus 28.19 dp in the AVD. The initial Fold batch capture was
+portrait, rotation 1 and manually labelled `phone`; it is retained as evidence
+but was not used for this matched comparison.
+
+The Pixel Tablet landscape recapture reports 2560×1600 and rounded corners
+of 14 and 13.5 dp. The AVD's landscape capture at the same dimensions reports
+`null` corners. Both report no cutout. The physical status-bar top inset is
+36 dp versus 24 dp in the AVD. The physical capture is rotation 1 and the AVD
+is rotation 0; the display orientation and dimensions match, but the OS build
+and rotation index still differ. The earlier portrait physical capture remains
+separate evidence.
+
+Three public models still lack this physical spot check. Pixel 6 Pro and Pixel
+4a were absent from the FTL physical catalog checked on 2026-09-28. Pixel 5
+was offered only on API 30, below the probe APK's `minSdk 31`; moreover,
+Android 11 does not expose the cutout path and rounded-corner APIs used for
+this geometry comparison. An API-30-compatible probe could collect its cutout
+bounds and safe insets, but would not complete the same path/corner check.
+
+Blaze billing is active for the dedicated FTL project. The 30-minute daily
+allowance and $5/device-hour overage are service pricing, not a confirmed
+invoice; inspect Cloud Billing for actual charges. The 2-minute per-device
+limit bounded these runs, and all completed well below that limit. The prior
+Spark-only two-day schedule is obsolete after this batch. Issue #35 was a
+website contrast issue and was fixed separately in PR #42.
 
 References: [FTL device catalog](https://firebase.google.com/docs/test-lab/android/available-testing-devices),
 [Robo script commands](https://firebase.google.com/docs/test-lab/android/robo-scripts-reference),

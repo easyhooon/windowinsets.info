@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-3qe6bitme0p6b",
+  "deviceModelId": "akita",
+  "deviceName": "Pixel 8a",
+  "androidApi": 35,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/5423514632819986165",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_01:21:48.393279_wMuy/akita-35-en-portrait/",
+  "note": "Physical device, portrait, existing navigation mode; compare with the API 37 emulator with the OS difference noted.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "cc821c470d0cb49d4930878badf24bee02a1b23cc89447b060ef48bd2da68091"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "900ffe78b9552186aada9f2852dd528dbe9914c4f74027595cdeff9fba0371d5"
+    }
+  ]
+}

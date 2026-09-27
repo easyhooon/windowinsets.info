@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-3qe6bitme0p6b",
+  "deviceModelId": "caiman",
+  "deviceName": "Pixel 9 Pro",
+  "androidApi": 35,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/5423514632819986165",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_01:21:48.393279_wMuy/caiman-35-en-portrait/",
+  "note": "Physical device, portrait, existing navigation mode; compare with the API 37 emulator with the OS difference noted.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "98f97dc78d4c72ec9c3a0a29dbf69a534b6ff8b7d9ad7f4c9de6021af9f0131d"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "1dbbd8fde0b878a3f97e990d1007eebac150d4c8315407d268d69a3a9586e695"
+    }
+  ]
+}

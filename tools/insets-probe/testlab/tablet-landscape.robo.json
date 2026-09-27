@@ -1,0 +1,21 @@
+[
+  {
+    "eventType": "ADB_SHELL_COMMAND",
+    "command": "am force-stop info.windowinsets.probe"
+  },
+  {
+    "eventType": "ADB_SHELL_COMMAND",
+    "command": "rm -f /sdcard/Android/data/info.windowinsets.probe/files/*.json"
+  },
+  {
+    "eventType": "ADB_SHELL_COMMAND",
+    "command": "am start -W -n info.windowinsets.probe/.MainActivity --es screen main --ez export true"
+  },
+  {
+    "eventType": "WAIT",
+    "delayTime": 5000
+  },
+  {
+    "eventType": "TERMINATE_CRAWL"
+  }
+]

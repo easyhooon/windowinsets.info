@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-3qe6bitme0p6b",
+  "deviceModelId": "komodo",
+  "deviceName": "Pixel 9 Pro XL",
+  "androidApi": 35,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/5423514632819986165",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_01:21:48.393279_wMuy/komodo-35-en-portrait/",
+  "note": "Physical device, portrait, existing navigation mode; compare with the API 37 emulator with the OS difference noted.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "9c3aa7e00c3a5617931250f5847190861f19769f3c4724f65ce3511808ca3c96"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "72bb2ed0fba625575c03e9e8b75e9803cfdea06d3a3fb15080e8d6ff6362d2ff"
+    }
+  ]
+}

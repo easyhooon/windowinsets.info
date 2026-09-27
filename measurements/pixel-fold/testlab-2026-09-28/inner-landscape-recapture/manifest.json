@@ -1,0 +1,21 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-1upqp6q9sdf5f",
+  "deviceModelId": "felix",
+  "deviceName": "Pixel Fold",
+  "androidApi": 36,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/8279237920308308955",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-09-28_01:30:59.013747_GuCb/felix-36-en-landscape/",
+  "note": "Physical inner display, landscape gesture mode; matches the AVD screen dimensions and rotation.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "190e23f8de4074b5ecfe3abedbc148ba77c27686dcdac617b2a899fbfcfb9669"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "af7ae7515320b320a9e9ef21959da0294578946de9e30a207b45c30795b2d328"
+    }
+  ]
+}
