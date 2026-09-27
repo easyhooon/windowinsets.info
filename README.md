@@ -32,7 +32,31 @@ Found a mistake or have a capture that differs from mine? Open an issue or pull 
 
 Manufacturers don't publish insets, so I measure them with [InsetsProbe](tools/insets-probe) — a tiny Android app that dumps `WindowInsets`, `DisplayCutout`, `RoundedCorner`, `FoldingFeature` and the hinge angle as JSON. It works on a real device or on [Samsung Remote Test Lab](https://developer.samsung.com/remote-test-lab). See [tools/insets-probe/README.md](tools/insets-probe/README.md).
 
-![InsetsProbe capture flow: a Galaxy device runs the probe, which collects insets, fold state, hinge angle, and display metrics. CapturePolicy validates the window before JSON is stored as immutable evidence and published on the site.](docs/media/insets-probe-flow.svg)
+```mermaid
+flowchart TD
+    A["Person: reserve/unlock the device;<br/>select active screen and navigation mode"] --> B["Galaxy device<br/>real or Samsung RTL"]
+    B --> C["InsetsProbe: Measure or rotation sweep"]
+    C --> D["Read WindowInsets, cutout, fold state,<br/>hinge angle, window size and density"]
+    D --> E{"Valid full-screen window?<br/>Sweep rotation reached?"}
+    E -- "No" --> F["Reject or skip;<br/>do not invent a capture"]
+    E -- "Yes" --> G["Save raw JSON on the device"]
+    G -- "Upload key configured" --> H["POST /api/captures<br/>button or automatic after a sweep"]
+    G -- "No key or upload failed" --> I["File Browser or adb pull<br/>manual fallback"]
+    H --> J["Vercel Function checks key,<br/>size and JSON shape"]
+    J --> K["GitHub API: one commit per upload<br/>on capture-inbox"]
+    K --> L["One rolling Capture inbox PR"]
+    L --> M["Person reviews model, screen,<br/>orientation, navigation and values"]
+    I --> M
+    M -- "Accepted" --> N["measurements/&lt;device-slug&gt;/<br/>immutable raw evidence"]
+    N --> O["Register values and source<br/>in app/data/devices"]
+    O --> P["windowinsets.info"]
+```
+
+The upload key is built into InsetsProbe; the GitHub write token stays in Vercel.
+The API checks the payload's shape, while a person reviews whether it matches the
+actual device state before accepted captures become site data. Upload setup and
+the review inbox are documented in [`docs/CAPTURE_UPLOAD.md`](docs/CAPTURE_UPLOAD.md).
+Live GitHub upload still needs a PAT-backed smoke test.
 
 ### What InsetsProbe records
 
