@@ -17,7 +17,7 @@ Dumps everything [windowinsets.info](https://windowinsets.info) needs for one sc
 1. Build and install: `./gradlew :app:installDebug` (needs `sdk.dir` in `local.properties`), or install the APK on Samsung Remote Test Lab.
 2. Set the device to its **default** Display size, Font size and, on Samsung, **Screen resolution** (HD+/FHD+/WQHD+). Screen resolution changes the pixel size and Display size changes `densityDpi`, so both change the dp values. The JSON records `widthPx`/`heightPx`, `densityDpi` and `defaultDensityDpi` so a non-default setting is visible.
 3. Choose the navigation mode you are recording (Settings → Display → Navigation bar).
-4. Hold the device in **portrait**, app in full screen (not split-screen / pop-up).
+4. App in full screen (not split-screen / pop-up). Tap **Rotate & measure all orientations** to capture every orientation, or hold the device in **portrait** and tap **Measure** for one.
 5. Foldables: physically open/close the device (or use a verified RTL device-state control), then pick **Cover** or **Main** to label the active screen. These buttons do not switch displays. Check the visible active-window pixel size and hinge reading before saving. A portrait/landscape rotation is not a cover/main switch.
 6. Tap **Copy JSON**. The file is also saved to the app's external files dir and logged under the `InsetsProbe` tag:
 
@@ -66,6 +66,25 @@ adb pull /sdcard/Android/data/info.windowinsets.probe/files/
 ```
 
 `--es screen` accepts `cover` or `main` (default `phone`); `--ez export true` saves the JSON one second after launch. See [sample-output](sample-output) for a real capture.
+
+## Version 1.4.0: orientation sweep
+
+- **Rotate & measure all orientations** requests portrait, landscape and reverse
+  landscape from inside the app (`setRequestedOrientation`), so nobody has to rotate
+  the RTL device. Each step waits until the window really has the requested shape and
+  no insets/configuration callback has arrived for 700 ms, then captures fresh
+  root-window insets exactly like **Measure**. The app returns to unspecified
+  orientation when done.
+- Values are always what Android reports in that rotation. A display that does not
+  rotate within 6 s (for example a locked cover screen), or that stays at a rotation
+  already recorded, is skipped and listed; nothing is derived or relabeled.
+- File names include the display rotation: natural rotation keeps the legacy name
+  (`main-gesture.json`); others get a suffix (`main-gesture-rot90.json`,
+  `main-gesture-rot270.json`). This also applies to a single **Measure**.
+- Larger buttons (the sweep button is full width) because RTL shows a scaled-down screen.
+- Automation: `adb shell am start -n info.windowinsets.probe/.MainActivity --es screen main --ez sweep true`.
+
+Run one sweep per screen × navigation mode.
 
 ## Version 1.1.1: verified on Galaxy Z Fold2
 
