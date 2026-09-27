@@ -111,3 +111,14 @@ eligibility.
 Artwork-only models continue to show pending measurements. A supported release
 year or an official skin does not establish WindowInsets values or measured 3D
 geometry. Raw captures and downloaded originals remain unchanged.
+
+## Google Pixel (issue #23)
+
+Pixel coverage starts with the Android Emulator device profiles and AOSP
+emulator skins (Apache 2.0) installed with the SDK. Foldables come first, newest
+first (Pixel 10 Pro Fold, Pixel 9 Pro Fold, Pixel Fold), then phones and the
+Pixel Tablet. As of 2026-09-27 no Pixel device is registered on the site:
+emulator captures are staged outside `measurements/` until the data model can
+express a non-Samsung brand, emulator provenance and skin attribution. Emulator
+values describe an AVD profile, not real hardware, and must stay labelled as
+such.
