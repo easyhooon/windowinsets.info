@@ -22,9 +22,9 @@ The full write-up lives on the site at [/methodology](https://windowinsets.info/
 
 - **Three source tiers.** Every value is `official` (published by Samsung/Google), `measured` (captured with InsetsProbe on a real device or Samsung Remote Test Lab, raw JSON committed here) or `community` (not yet reproduced). Each source shows the date it was checked.
 - **Insets are measured, not published.** Samsung documents resolution and density, but not status/navigation bar heights, cutouts or corner radii, so I read them from Android itself with [InsetsProbe](tools/insets-probe).
-- **Conditions are part of the data.** Full screen, the recorded capture orientation (phones and cover screens in portrait; most tablets and the Fold8 and TriFold inner displays in landscape), default Display size / Font size / Screen resolution, one navigation mode (gesture or 3-button) per capture, and the One UI + Android version are all recorded. A value is only valid for those conditions.
+- **Conditions are part of the data.** Full screen, the recorded display rotation (natural orientation first: phones and cover screens in portrait; most tablets and the Fold8 and TriFold inner displays in landscape; other rotations as separate captures), default Display size / Font size / Screen resolution, one navigation mode (gesture or 3-button) per capture, and the One UI + Android version are all recorded. A value is only valid for those conditions.
 - **Never estimated.** Nothing is interpolated from another device or derived from resolution alone. Unverified values are `null` and shown as **pending**.
-- **Known limits.** One UI updates can change values; each screen is captured in one orientation, so other rotations and multi-window are not covered yet; a real app may see different insets if it adds its own padding or window flags.
+- **Known limits.** One UI updates can change values; each rotation is its own capture (InsetsProbe's orientation sweep records them), and rotations not captured yet show as not measured rather than being derived; multi-window is not covered yet; a real app may see different insets if it adds its own padding or window flags.
 
 Found a mistake or have a capture that differs from mine? Open an issue or pull request with your InsetsProbe JSON — a reproduction is as valuable as a new device.
 
@@ -32,7 +32,35 @@ Found a mistake or have a capture that differs from mine? Open an issue or pull 
 
 Manufacturers don't publish insets, so I measure them with [InsetsProbe](tools/insets-probe) — a tiny Android app that dumps `WindowInsets`, `DisplayCutout`, `RoundedCorner`, `FoldingFeature` and the hinge angle as JSON. It works on a real device or on [Samsung Remote Test Lab](https://developer.samsung.com/remote-test-lab). See [tools/insets-probe/README.md](tools/insets-probe/README.md).
 
-![InsetsProbe capture flow: a Galaxy device runs the probe, which collects insets, fold state, hinge angle, and display metrics. CapturePolicy validates the window before JSON is stored as immutable evidence and published on the site.](docs/media/insets-probe-flow.svg)
+```mermaid
+flowchart TD
+    A["Person: reserve/unlock the device;<br/>select active screen and navigation mode"] --> B["Galaxy device<br/>real or Samsung RTL"]
+    B --> C["InsetsProbe: Measure or rotation sweep"]
+    C --> D["Read WindowInsets, cutout, fold state,<br/>hinge angle, window size and density"]
+    D --> E{"Valid full-screen window?<br/>Sweep rotation reached?"}
+    E -- "No" --> F["Reject or skip;<br/>do not invent a capture"]
+    E -- "Yes" --> G["Save raw JSON on the device"]
+    G -- "Upload key configured" --> H["POST /api/captures<br/>button or automatic after a sweep"]
+    G -- "No key or upload failed" --> I["File Browser or adb pull<br/>manual fallback"]
+    H --> J["Vercel Function checks key,<br/>size and JSON shape"]
+    J --> K["GitHub API: one commit per upload<br/>on capture-inbox"]
+    K --> L["One rolling Capture inbox PR<br/>many uploads in one batch"]
+    L --> M{"User: merge this batch?"}
+    M -- "Not yet" --> N["PR stays open;<br/>more captures accumulate"]
+    M -- "Approved" --> O["Agent squash-merges into main<br/>as one commit; deletes inbox branch"]
+    O -. "Separate site integration;<br/>not done by the upload API" .-> Q["app/data/devices entries"]
+    Q --> P["windowinsets.info"]
+```
+
+The upload key is built into InsetsProbe; the GitHub write token stays in Vercel.
+The API checks the payload's shape and completes collection when it commits the
+raw JSON. Captures accumulate in one PR; the user decides whether and when to
+squash-merge the batch as one commit, without per-capture manual validation.
+The inbox branch is deleted after the merge so the next upload starts a fresh
+batch. Site entries are maintained separately and are not updated by this
+upload API. Setup is
+documented in [`docs/CAPTURE_UPLOAD.md`](docs/CAPTURE_UPLOAD.md).
+Live GitHub upload still needs a PAT-backed smoke test.
 
 ### What InsetsProbe records
 
