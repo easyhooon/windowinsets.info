@@ -126,6 +126,7 @@ export function InsetsDiagram({
   const W = dp.width * s;
   const H = dp.height * s;
   const skinRotation = screen.captureRotation ?? 0;
+  const lightTabletFrame = skin?.image === "/skins/pixel-tablet/main/back.webp";
   const r = screen.cornerRadiiDp;
   const rPx = r ? r.topLeft * s : 0;
   const cornerPath = r ? `M ${r.topLeft * s},0 H ${W - r.topRight * s} A ${r.topRight * s},${r.topRight * s} 0 0 1 ${W},${r.topRight * s} V ${H - r.bottomRight * s} A ${r.bottomRight * s},${r.bottomRight * s} 0 0 1 ${W - r.bottomRight * s},${H} H ${r.bottomLeft * s} A ${r.bottomLeft * s},${r.bottomLeft * s} 0 0 1 0,${H - r.bottomLeft * s} V ${r.topLeft * s} A ${r.topLeft * s},${r.topLeft * s} 0 0 1 ${r.topLeft * s},0 Z` : undefined;
@@ -189,6 +190,7 @@ export function InsetsDiagram({
 
         {skin && showFrame && <g transform={skinTransform(skin, W, H, skinRotation)}>
           <defs><clipPath id={`${id}-body`}><rect x={skin.body.x} y={skin.body.y} width={skin.body.width} height={skin.body.height} rx={skin.body.radius} /></clipPath></defs>
+          {lightTabletFrame && <rect x={skin.body.x} y={skin.body.y} width={skin.body.width} height={skin.body.height} rx={skin.body.radius} fill="none" stroke="#64748b" strokeOpacity={0.6} strokeWidth={24} />}
           <image href={skinAssetUrl(skin.image)} width={skin.width} height={skin.height} clipPath={`url(#${id}-body)`} />
           <rect x={skin.screen.x} y={skin.screen.y} width={skin.screen.width} height={skin.screen.height} rx={rPx * skin.screen.width / W} fill="white" />
         </g>}
