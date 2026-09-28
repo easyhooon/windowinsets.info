@@ -271,3 +271,22 @@ rotation sweeps uploaded to inbox PR #55. The session ended with eight minutes
 remaining and the one-credit return option selected, but the refreshed
 Reservations page still showed **14 Credits** and no active devices. No refund
 is recorded.
+
+Galaxy S23 FE SM-S711BE-VN3 Vietnam/Hanoi Android 16 was reserved twice for
+30 minutes each. The first booking reduced the header from **14 to 12
+Credits**. InsetsProbe upload returned `401 Invalid upload key`, so files were
+downloaded through the WebClient File Browser; the gesture sweep arrived, but
+the session expired before the 3-button natural-rotation file downloaded. The
+second booking reduced the header from **12 to 10 Credits** and produced a
+complete 3-button sweep. That session was ended with 23 minutes remaining, but
+the confirmation closed before the one-credit return option was selected, and
+the refreshed header showed **10 Credits**. No refund is recorded. Net cost:
+four credits.
+
+Galaxy S22 Ultra SM-S908B-RU1 Russia/Moscow Android 15 was then reserved for
+30 minutes, reducing the header from **10 to 8 Credits**. Upload still
+returned `401 Invalid upload key` (this machine's build carries an outdated
+key), so both three-file sweeps were downloaded through the File Browser. The
+session ended with 15 minutes remaining and the one-credit return option
+selected; the refreshed Reservations page showed **9 Credits**. Net cost: one
+credit.
