@@ -4,6 +4,28 @@ Window insets, display cutouts, corner radii and foldable hinge states for Samsu
 
 Its interface is inspired by [safearea.info](https://safearea.info), adapted for Android data and foldables.
 
+## Why this exists
+
+Apps targeting Android 15 (SDK 35) draw edge to edge by default, and apps targeting Android 16 (SDK 36) can no longer opt out. Every app now has to handle insets itself, but few teams own enough devices to see what those insets actually are.
+
+**Check how your layout meets the system UI on devices you don't own, before you ship.**
+
+| Problem | What this site gives you |
+| --- | --- |
+| A bug report says a button is hidden on a device you don't have, such as a Flip cover screen. | Pick the device, screen, rotation and navigation mode, and see the recorded insets and cutout. No device purchase or Remote Test Lab session needed. |
+| Landscape was tested in one direction only. | Rotation 1 and rotation 3 are separate captures, so you can see which side the camera cutout lands on. |
+| QA covers gesture navigation but not three-button navigation. | Each screen is captured in both navigation modes. |
+| A Samsung skin in the emulator looks right, but it only changes the frame, not One UI's bars, cutout or corners. | Samsung values come from real devices or Samsung RTL. Pixel values are clearly labelled as emulator evidence. |
+| Designers need safe margins for foldable cover and inner displays. | Cover and inner displays each have their own insets, corner radii and cutout bounds, in dp and px. |
+
+### Common objections
+
+**"Can't I just read insets at runtime?"** Yes, and your code should. The API tells your app what it receives on the device it is running on. It cannot tell you, before release, what it will receive on devices you never tested. Use this site for design, test planning and reproducing reports, not as a replacement for the API.
+
+**"Can't an AI answer this?"** An AI can explain `WindowInsets` and write the handling code. It cannot reliably tell you the navigation bar inset on a specific Galaxy cover screen in rotation 3 with three-button navigation. Nobody publishes that number; it has to be measured, and a model asked for it will give a plausible guess. Every value here links to a raw capture you can check, and missing values stay **pending** instead of being guessed. AI tools can use the [JSON export](docs/JSON_EXPORT.md) as ground truth too.
+
+**"Why not use Remote Test Lab or buy the devices?"** Each RTL session costs credits and minutes per device, screen, rotation and navigation mode. This project has done that work once and published the results for everyone.
+
 ## Documentation
 
 Start with this README for the product, data limits, device priorities and local development. The other documents have narrower purposes:
