@@ -149,6 +149,244 @@ export const galaxyZFold8Ultra: Device = {
           }
         }
       },
+      rotations: {
+        "1": {
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 0,
+                "bottom": 45,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 36
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 108
+              },
+              "cutoutShape": {
+                "xDp": 0.0,
+                "yDp": 168.33,
+                "widthDp": 36.0,
+                "heightDp": 23.33,
+                "rightDp": 804.0,
+                "bottomDp": 168.33,
+                "xPx": 0,
+                "yPx": 505,
+                "widthPx": 108,
+                "heightPx": 70,
+                "rightPx": 2412,
+                "bottomPx": 505
+              },
+              "condition": {
+                "oneUi": "9.0",
+                "android": "17",
+                "note": "Samsung RTL SM-F976U, build CP2A.260605.016.F976USQU1AZGI. Cover display, rotation 1, 2520×1080 px at 480 dpi and font scale 1. Captured separately with InsetsProbe 1.5.0 on 2026-09-27; the Android navigation setting and configuration agree."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold8 Ultra cover, rotation 1, gesture (SM-F976U)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/cover-landscape-1-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 30,
+                "right": 48,
+                "bottom": 0,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 144,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 36
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 108
+              },
+              "cutoutShape": {
+                "xDp": 0.0,
+                "yDp": 168.33,
+                "widthDp": 36.0,
+                "heightDp": 23.33,
+                "rightDp": 804.0,
+                "bottomDp": 168.33,
+                "xPx": 0,
+                "yPx": 505,
+                "widthPx": 108,
+                "heightPx": 70,
+                "rightPx": 2412,
+                "bottomPx": 505
+              },
+              "condition": {
+                "oneUi": "9.0",
+                "android": "17",
+                "note": "Samsung RTL SM-F976U, build CP2A.260605.016.F976USQU1AZGI. Cover display, rotation 1, 2520×1080 px at 480 dpi and font scale 1. Captured separately with InsetsProbe 1.5.0 on 2026-09-27; the Android navigation setting and configuration agree."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold8 Ultra cover, rotation 1, threeButton (SM-F976U)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/cover-landscape-1-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          },
+          "logicalSizePx": {
+            "width": 2520,
+            "height": 1080
+          },
+          "logicalSizeDp": {
+            "width": 840.0,
+            "height": 360.0
+          }
+        },
+        "3": {
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 0,
+                "bottom": 45,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 36,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 108,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 804.0,
+                "yDp": 168.33,
+                "widthDp": 36.0,
+                "heightDp": 23.33,
+                "rightDp": 0.0,
+                "bottomDp": 168.33,
+                "xPx": 2412,
+                "yPx": 505,
+                "widthPx": 108,
+                "heightPx": 70,
+                "rightPx": 0,
+                "bottomPx": 505
+              },
+              "condition": {
+                "oneUi": "9.0",
+                "android": "17",
+                "note": "Samsung RTL SM-F976U, build CP2A.260605.016.F976USQU1AZGI. Cover display, rotation 3, 2520×1080 px at 480 dpi and font scale 1. Captured separately with InsetsProbe 1.5.0 on 2026-09-27; the Android navigation setting and configuration agree."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold8 Ultra cover, rotation 3, gesture (SM-F976U)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/cover-landscape-3-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 0,
+                "left": 48
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 0,
+                "bottom": 0,
+                "left": 144
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 36,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 108,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 804.0,
+                "yDp": 168.33,
+                "widthDp": 36.0,
+                "heightDp": 23.33,
+                "rightDp": 0.0,
+                "bottomDp": 168.33,
+                "xPx": 2412,
+                "yPx": 505,
+                "widthPx": 108,
+                "heightPx": 70,
+                "rightPx": 0,
+                "bottomPx": 505
+              },
+              "condition": {
+                "oneUi": "9.0",
+                "android": "17",
+                "note": "Samsung RTL SM-F976U, build CP2A.260605.016.F976USQU1AZGI. Cover display, rotation 3, 2520×1080 px at 480 dpi and font scale 1. Captured separately with InsetsProbe 1.5.0 on 2026-09-27; the Android navigation setting and configuration agree."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold8 Ultra cover, rotation 3, threeButton (SM-F976U)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/cover-landscape-3-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          },
+          "logicalSizePx": {
+            "width": 2520,
+            "height": 1080
+          },
+          "logicalSizeDp": {
+            "width": 840.0,
+            "height": 360.0
+          }
+        }
+      },
       "sources": [
         {
           "kind": "measured",
@@ -274,6 +512,188 @@ export const galaxyZFold8Ultra: Device = {
               "retrievedAt": "2026-09-23"
             }
           ]
+        }
+      },
+      rotations: {
+        "1": {
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 0,
+                "bottom": 45,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "condition": {
+                "oneUi": "9.0",
+                "android": "17",
+                "note": "Samsung RTL SM-F976U, build CP2A.260605.016.F976USQU1AZGI. Inner display, rotation 1, 2504×2256 px at 480 dpi and font scale 1. Captured separately with InsetsProbe 1.5.0 on 2026-09-27; the Android navigation setting and configuration agree."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold8 Ultra inner, rotation 1, gesture (SM-F976U)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/main-landscape-1-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 48,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 0,
+                "bottom": 144,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "condition": {
+                "oneUi": "9.0",
+                "android": "17",
+                "note": "Samsung RTL SM-F976U, build CP2A.260605.016.F976USQU1AZGI. Inner display, rotation 1, 2504×2256 px at 480 dpi and font scale 1. Captured separately with InsetsProbe 1.5.0 on 2026-09-27; the Android navigation setting and configuration agree."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold8 Ultra inner, rotation 1, threeButton (SM-F976U)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/main-landscape-1-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          },
+          "logicalSizePx": {
+            "width": 2504,
+            "height": 2256
+          },
+          "logicalSizeDp": {
+            "width": 834.67,
+            "height": 752.0
+          }
+        },
+        "3": {
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 0,
+                "bottom": 45,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "condition": {
+                "oneUi": "9.0",
+                "android": "17",
+                "note": "Samsung RTL SM-F976U, build CP2A.260605.016.F976USQU1AZGI. Inner display, rotation 3, 2504×2256 px at 480 dpi and font scale 1. Captured separately with InsetsProbe 1.5.0 on 2026-09-27; the Android navigation setting and configuration agree."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold8 Ultra inner, rotation 3, gesture (SM-F976U)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/main-landscape-3-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 48,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 0,
+                "bottom": 144,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "condition": {
+                "oneUi": "9.0",
+                "android": "17",
+                "note": "Samsung RTL SM-F976U, build CP2A.260605.016.F976USQU1AZGI. Inner display, rotation 3, 2504×2256 px at 480 dpi and font scale 1. Captured separately with InsetsProbe 1.5.0 on 2026-09-27; the Android navigation setting and configuration agree."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold8 Ultra inner, rotation 3, threeButton (SM-F976U)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/main-landscape-3-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          },
+          "logicalSizePx": {
+            "width": 2504,
+            "height": 2256
+          },
+          "logicalSizeDp": {
+            "width": 834.67,
+            "height": 752.0
+          }
         }
       },
       "sources": [

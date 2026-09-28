@@ -270,6 +270,11 @@ Flip6, Flip7 and Flip8. Each rotation has its own raw file in the device's
 in the capture session. Existing natural rotation values remain tied to their
 earlier accepted captures.
 
+Fold7, Fold8 and Fold8 Ultra had their 2026-09-27 cover and inner rotation
+files committed without device-data entries, so the site showed their landscape
+insets as unmeasured. On 2026-09-28 all 24 rotation 1 and 3 records were
+generated directly from those raw files and registered.
+
 On 2026-09-28, Galaxy Z Flip7 SM-F766N_KR2 (Korea/Gumi, build
 BP4A.251205.006.F766NKSSBBZG3) ran InsetsProbe 1.6.0 from its FlexWindow cover
 widget. The cover sweep saved rotation 0 in both navigation modes (display 1,
