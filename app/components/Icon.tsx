@@ -27,8 +27,8 @@ export function Icon({ name }: { name: IconName }) {
     {name === "zoom-in" && <path d="M8 10.5h5M10.5 8v5" />}
     {name === "zoom-out" && <path d="M8 10.5h5" />}
     {name === "zoom-fit" && <rect x="8.5" y="8.5" width="4" height="4" rx=".5" />}
-    {name === "rotate-cw" && <><rect x="7" y="7" width="10" height="10" rx="1.5" /><path d="M4 9V7a3 3 0 0 1 3-3h2m-2-2 2 2-2 2M20 15v2a3 3 0 0 1-3 3h-2m2-2-2 2 2 2" /></>}
-    {name === "rotate-ccw" && <><rect x="7" y="7" width="10" height="10" rx="1.5" /><path d="M20 9V7a3 3 0 0 0-3-3h-2m2-2-2 2 2 2M4 15v2a3 3 0 0 0 3 3h2m-2-2 2 2-2 2" /></>}
+    {name === "rotate-cw" && <><rect x="7" y="7" width="10" height="10" rx="1.5" /><path d="M3 8V6a3 3 0 0 1 3-3h2M6 1l2 2-2 2M21 16v2a3 3 0 0 1-3 3h-2m2-2-2 2 2 2" /></>}
+    {name === "rotate-ccw" && <><rect x="7" y="7" width="10" height="10" rx="1.5" /><path d="M21 8V6a3 3 0 0 0-3-3h-2m2-2-2 2 2 2M3 16v2a3 3 0 0 0 3 3h2m-2-2 2 2-2 2" /></>}
     {name in poses && poses[name as PoseGlyph]}
   </svg>;
 }
