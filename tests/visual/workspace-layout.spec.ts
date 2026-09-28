@@ -16,7 +16,8 @@ test('the canvas extends behind the floating controls at every breakpoint', asyn
         if (footer.top >= canvas.bottom || footer.bottom > canvas.bottom + 1) errors.push('legend outside canvas');
         const toggles = box('.canvas-toggles');
         if (controls.bottom > canvas.bottom + 1 || controls.bottom > window.innerHeight + 1) errors.push('controls clipped');
-        if (toggles.top < canvas.top || toggles.bottom > footer.top) errors.push('toggles overlap footer');
+        // Phones move the display options into the bottom stack and hide the top pill.
+        if (toggles.height && (toggles.top < canvas.top || toggles.bottom > footer.top)) errors.push('toggles overlap footer');
         if (document.documentElement.scrollWidth > window.innerWidth) errors.push('horizontal page overflow');
         for (const node of document.querySelectorAll('.control-pill button')) {
           if (node.scrollWidth > node.clientWidth + 1) errors.push('control text clipped');

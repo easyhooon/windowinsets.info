@@ -23,8 +23,9 @@ test("TriFold renders both hinges, switches measured modes, and fits each pose",
     await expect(diagram).toHaveAttribute("data-right-angle", right);
     await expect(page.locator(".metrics-panel")).toHaveAttribute("aria-busy", "false");
     // Perspective brings the folded left wing nearer the camera, so the fit may
-    // shrink there; the settled scale then carries into the open pose.
-    expect(parseInt((await page.getByRole("button", { name: /^Zoom:/ }).textContent())!.slice(5))).toBeLessThanOrEqual(parseInt(poseZoom!.slice(5)));
+    // shrink there. The wide open pose is width-bound and may exceed the
+    // height-bound closed fit.
+    if (pose !== "Open") expect(parseInt((await page.getByRole("button", { name: /^Zoom:/ }).textContent())!.slice(5))).toBeLessThanOrEqual(parseInt(poseZoom!.slice(5)));
     await expect(page).toHaveScreenshot(`trifold-${pose === "Open" ? "open" : "partial"}.png`);
   }
   const slider = page.getByRole("slider", { name: "Fold sequence" });
