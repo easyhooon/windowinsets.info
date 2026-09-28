@@ -538,7 +538,7 @@ fill them.
 | Galaxy Z Fold3 | SM-F926B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold3/recapture-2026-09-27-rotation/`) | None |
 | Galaxy Z TriFold | SM-F968N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-trifold/recapture-2026-09-27-rotation/`) | None |
 | Galaxy Z Flip8 | SM-F776B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip8/recapture-2026-09-27-rotation/`). Cover: natural in both modes on display 1 at 948×1048 px | Cover rotation 1 and 3 remain pending because this RTL cover did not rotate |
-| Galaxy Z Flip7 | SM-F766N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip7/recapture-2026-09-27-rotation/`) | Cover sweeps in both modes |
+| Galaxy Z Flip7 | SM-F766N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip7/recapture-2026-09-27-rotation/`). Cover: natural in both modes on display 1 at 948×1048 px (`recapture-2026-09-28-flexwindow/`) | Cover rotation 1 and 3 remain pending because this RTL cover did not rotate |
 | Galaxy Z Flip6 | SM-F741U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip6/recapture-2026-09-27-rotation/`) | None |
 | Galaxy Z Flip5 | SM-F731B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip5/recapture-2026-09-27-rotation/`) | None |
 | Galaxy Z Fold2 | SM-F916N (user device) | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold2/recapture-2026-09-28-rotation/`) | None |

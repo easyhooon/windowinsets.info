@@ -267,8 +267,18 @@ On 2026-09-27, separate rotation 1 and 3 captures were also registered for both
 displays of Fold3, Fold4, Fold5 and TriFold, and the main displays of Flip5,
 Flip6, Flip7 and Flip8. Each rotation has its own raw file in the device's
 `recapture-2026-09-27-rotation/` directory. Flip8's cover stayed at rotation 0
-in the capture session; Flip7's cover sweep is still missing. Existing natural
-rotation values remain tied to their earlier accepted captures.
+in the capture session. Existing natural rotation values remain tied to their
+earlier accepted captures.
+
+On 2026-09-28, Galaxy Z Flip7 SM-F766N_KR2 (Korea/Gumi, build
+BP4A.251205.006.F766NKSSBBZG3) ran InsetsProbe 1.6.0 from its FlexWindow cover
+widget. The cover sweep saved rotation 0 in both navigation modes (display 1,
+948×1048 px, 420 dpi, settings mode 0/2). Landscape and reverse landscape were
+skipped because the cover display did not rotate, the same result as on Flip8.
+Both files are in `measurements/galaxy-z-flip7/recapture-2026-09-28-flexwindow/`.
+Their insets, cutout and corner radii match the canonical physical cover
+captures, so they are listed as additional sources without changing values.
+Cover rotations 1 and 3 remain pending.
 
 ### Galaxy Z Fold3 — 2026-09-25
 
