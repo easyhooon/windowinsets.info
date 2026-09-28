@@ -291,6 +291,16 @@ or left (rotation 3), and gesture keeps a 45 px bottom inset. The 94×71 px cuto
 follows the rotation. Files are in
 `measurements/galaxy-z-flip3/recapture-2026-09-28-rotation/`.
 
+Also on 2026-09-28, Galaxy Z Flip4 SM-F721BE-VN1 (Android 14, One UI 6.1.1,
+the same build as the accepted captures) produced the same six-file main sweep
+with InsetsProbe 1.6.0 through the capture inbox. Rotation 0 matches the
+accepted captures. The landscape geometry equals Flip3's: 72 px top, 144 px
+three-button side bar, 45 px gesture bottom and a 94×71 px rotated cutout. Files
+are in `measurements/galaxy-z-flip4/recapture-2026-09-28-rotation/`. The
+reservation page's Return action did nothing while the WebClient ran in a tab.
+Exit in the WebClient with **Return this device** checked returned the credit.
+The original Galaxy Z Flip was not listed among RTL Galaxy Z models that day.
+
 ### Galaxy Z Fold3 — 2026-09-25
 
 InsetsProbe 1.3.0 captured all four display/navigation combinations on Samsung
