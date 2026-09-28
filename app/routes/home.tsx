@@ -12,7 +12,7 @@ export function meta(_: Route.MetaArgs) {
   });
 }
 
-/** Landing page shows the newest device's own detail view directly —
+/** Landing page shows the featured device's own detail view directly —
  * safearea.info does the same with iPhone Duo — instead of a separate
  * list-only summary page. Pick any other device from the sidebar. */
 export default function Home() {

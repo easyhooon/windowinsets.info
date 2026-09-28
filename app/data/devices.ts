@@ -113,7 +113,7 @@ const tier = (device: Device) => device.slug.endsWith("ultra") ? 0 : device.slug
 export const devices: Device[] = [...mergedDevices.filter(isInCoverage).sort((a, b) => groupOrder(a) - groupOrder(b)
   || generation(b) - generation(a) || tier(a) - tier(b) || a.name.localeCompare(b.name)), ...pixelDevices.filter(isInCoverage)];
 
-export const featuredDevice = devices.find(device => device.slug === "galaxy-z-fold8")!;
+export const featuredDevice = devices.find(device => device.slug === "galaxy-z-flip8")!;
 
 export const SITE_URL = "https://windowinsets.info";
 export const REPO_URL = "https://github.com/easyhooon/windowinsets.info";
