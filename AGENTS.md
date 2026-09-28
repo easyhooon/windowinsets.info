@@ -59,7 +59,8 @@ leave other models unverified. Preserve historical captures. See
 - Orientation never invents WindowInsets. Flat devices show a rotation's insets
   only from a capture of that rotation (`landscape-<rotation>-*` probe files); otherwise window
   size and corners follow the display geometry and insets read "not measured
-  yet". 3D foldables still rotate the recorded view.
+  yet". 3D foldables follow the same rule: the model turns while its display
+  shows the upright, re-laid-out screen.
 
 ## Rendering and assets
 
