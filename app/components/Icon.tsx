@@ -2,13 +2,14 @@ export type PoseGlyph = `${"book" | "flip" | "trifold"}-${"closed" | "partial" |
 export type IconName = "chevron" | "settings" | "search" | "check" | "zoom-in" | "zoom-out" | "zoom-fit" | "rotate-ccw" | "rotate-cw" | PoseGlyph;
 
 // Pose glyphs follow each hinge: a Fold folds about a vertical hinge, a Flip about
-// a horizontal one, and a TriFold about two vertical hinges.
+// a horizontal one, and a TriFold about two vertical hinges. Flip closed and
+// partial use side profiles: two stacked halves at the hinge, then the 90° Flex mode L.
 const poses: Record<PoseGlyph, React.ReactNode> = {
   "book-closed": <><rect x="7.5" y="4" width="9" height="16" rx="1.5" /><path d="M9.5 4v16" /></>,
   "book-partial": <><path d="M12 6H5.5A1.5 1.5 0 0 0 4 7.5v9A1.5 1.5 0 0 0 5.5 18H12z" /><path d="m12 6 7-2.5v17L12 18z" /></>,
   "book-open": <><rect x="3" y="5" width="18" height="14" rx="1.5" /><path d="M12 5v14" strokeDasharray="2 2" /></>,
-  "flip-closed": <><rect x="6.5" y="7" width="11" height="10" rx="2" /><rect x="8.5" y="9" width="7" height="3.5" rx=".8" /></>,
-  "flip-partial": <><path d="M6 13h12v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 19.5z" /><path d="M6 13 8.5 4.5a1.5 1.5 0 0 1 1.4-1H18.6L18 13" /></>,
+  "flip-closed": <><rect x="7" y="6" width="13" height="4.5" rx="1" /><rect x="7" y="13.5" width="13" height="4.5" rx="1" /><path d="M7 8.25a3.75 3.75 0 0 0 0 7.5" /></>,
+  "flip-partial": <path d="M5 4h3.5v11.5H20V19H8a3 3 0 0 1-3-3z" />,
   "flip-open": <><rect x="7" y="2.5" width="10" height="19" rx="1.5" /><path d="M7 12h10" strokeDasharray="2 2" /></>,
   "trifold-closed": <><rect x="8" y="5" width="8" height="14" rx="1.5" /><path d="M10 5v14M11.5 5v14" /></>,
   "trifold-partial": <><rect x="3" y="6" width="12" height="12" rx="1" /><path d="M9 6v12" strokeDasharray="2 2" /><path d="m15 6 6-2.5v17L15 18" /></>,

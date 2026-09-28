@@ -500,7 +500,9 @@ cannot express:
 - Foldables add a pose pill: Closed / Partially Folded / Open icon buttons, the
   hinge slider and a degree readout (`left°/right°` for TriFold). Pose glyphs
   follow each form factor's hinge: vertical for Fold, horizontal for Flip, two
-  vertical hinges for TriFold.
+  vertical hinges for TriFold. Flip closed and partial are side profiles
+  (stacked halves, then the 90° L) because front views of a closed or half-open
+  Flip read as unrelated objects at icon size.
 - On phones every pill stacks at the bottom, as on the reference, so the open
   Metrics disclosure never covers navigation mode. The −/+ zoom steps are
   hidden there; pinch and the zoom menu remain.
