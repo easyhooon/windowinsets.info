@@ -243,7 +243,10 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       const ratio = Math.min((viewport.width - 32) / (right - left), (viewport.height - 16 - bottomRoom) / (bottom - top));
       setPan(previous => ({ x: previous.x + viewport.left + viewport.width / 2 - (left + right) / 2,
         y: previous.y + viewport.top + 16 + (viewport.height - 16 - bottomRoom) / 2 - (top + bottom) / 2 }));
-      const next = clampZoom(Math.floor(zoom * ratio), MAX_FIT_ZOOM); if (Math.abs(next - zoom) > 1) setZoom(next); else fitting.current = false;
+      // A refit in the same commit may already have applied a new zoom that this
+      // render's prop predates; scale from the zoom the measured layout used.
+      const applied = live.current.zoom;
+      const next = clampZoom(Math.floor(applied * ratio), MAX_FIT_ZOOM); if (Math.abs(next - applied) > 1) setZoom(next); else fitting.current = false;
     });
     return () => cancelAnimationFrame(frame);
   }, [zoom, rotation, baseWidth, baseHeight, fitKey, fitRevision, setZoom]);
