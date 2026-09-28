@@ -165,6 +165,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
   .canvas-controls .toolbar-button>svg { flex-shrink:0; margin-left:0; width:12px; }
   .canvas-controls>.settings { position:fixed; top:8px; right:16px; width:44px; }
   .canvas-controls>.settings .toolbar-button { min-height:40px; }
+  .canvas-controls>.settings .toolbar-button>svg { width:24px; height:24px; }
   .dropdown-panel { right:0; max-width:calc(100vw - 24px); }
   .canvas-controls>.dropdown:nth-child(odd) .dropdown-panel { left:0; right:auto; }
   .canvas-controls>.dropdown.settings .dropdown-panel { top:calc(100% + 6px); bottom:auto; left:auto; right:0; }
