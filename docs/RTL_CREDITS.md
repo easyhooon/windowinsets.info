@@ -241,6 +241,12 @@ were uploaded and validated while 24 minutes remained. The WebClient offered
 `Return this device to get back 1 credit(s)`; selecting it and ending the test
 left 23 Credits in the header and no active reservations.
 
+On 2026-09-28, the Galaxy S24 FE SM-S721N_KR4 Korea/Gumi Android 16
+reservation began with a confirmed 23-credit balance. The 30-minute booking
+cost two credits; both three-file navigation sweeps uploaded to inbox PR #55.
+The early-return dialog offered one credit back, and the refreshed Reservations
+page showed 22 Credits and no active reservation. Net cost: one credit.
+
 On 2026-09-28, the Galaxy S24 SM-S921N-KR3 Korea/Gumi Android 16 reservation
 began with a confirmed 22-credit balance. The 30-minute booking cost two
 credits; both three-file navigation sweeps uploaded to inbox PR #55. The

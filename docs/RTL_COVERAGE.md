@@ -155,9 +155,19 @@ removes a model from its catalog.
   Android 16 / One UI 8.5. InsetsProbe 1.3.0 captured its Phone-labeled built-in
   display in both navigation modes at 1080×2340 px / 450 dpi with font scale 1.
   Both downloaded files report matching Settings and inset classifications.
-  Samsung's raw captures include the display cutout inset but no bounding
-  rectangles, so no cutout shape is registered. This confirms availability for
-  the exact model on that date only.
+  These historical captures have no cutout bounding rectangles. A 2026-09-28
+  reservation of the same SM-S721N_KR4 unit supplied a new InsetsProbe 1.6.0
+  sweep at rotations 0, 1 and 3 in both navigation modes. All six files report
+  Android 16 / One UI 8.5, build BP4A.251205.006.S721NKSSDDZG3, 450 dpi,
+  font scale 1, full-screen windows, and navigation settings matching Probe
+  classification. Portrait bars are 92/42 px in gesture mode and 92/135 px in
+  3-button mode. Landscape status bars are 84 px; the 92 px cutout moves left at
+  rotation 1 and right at rotation 3. Gesture retains a 42 px bottom bar,
+  while 3-button uses a 135 px bar on the opposite side. The recapture also
+  provides a 68×68 px cutout bound and 113 px corner radii. Files are in
+  `measurements/galaxy-s24-fe/recapture-2026-09-28-rotation/`; the original
+  portrait captures remain preserved. Availability is confirmed for this exact
+  model on the respective dates only.
 - Galaxy S23 Ultra, Galaxy S23+ and Galaxy S23 were offered only as
   Vietnam/Hanoi units when checked on 2026-09-25 and 2026-09-26 (S23 Ultra
   SM-S918B-VN4, S23+ SM-S916B-VN2). Every reservation opened a WebClient that
