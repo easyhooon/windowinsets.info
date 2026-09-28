@@ -233,6 +233,25 @@ removes a model from its catalog.
   identically to their downloaded files. Files are in
   `measurements/galaxy-s22-plus/recapture-2026-09-28-rotation/`; the original
   portrait captures remain preserved.
+- Galaxy S22 (SM-S901E-IN1, India/Noida) supplied an InsetsProbe 1.6.0 sweep
+  on 2026-09-28 at rotations 0, 1 and 3 in both navigation modes. No Korean
+  unit was listed. The Android 15 SM-S901B-RU7 unit (Russia/Moscow) was tried
+  first but did not install the probe APK, so it was returned; IN1 offered the
+  next-newest Android version (14 / One UI 6.1.1, build
+  UP1A.231005.007.S901EXXSCEYC1). All six captures report 480 dpi, font scale
+  1, 1080×2340 px full-screen windows and navigation settings matching Probe
+  classification. Portrait bars are 81/45 px in gesture mode and 81/144 px in
+  3-button mode, matching the original Android 15 captures. Landscape status
+  bars are 72 px; the 81 px cutout moves left at rotation 1 and right at
+  rotation 3. The 56×81 px cutout bound is unchanged, while this unit reports
+  102 px corner radii instead of the Android 15 unit's 108 px; the published
+  screen now follows the single-unit IN1 set. Only `landscape-1-gesture.json`
+  downloaded through the File Browser; the other five files were reconstructed
+  from two saved InsetsProbe logcat exports in `rtl-logs/` (the first export
+  stopped at 2,000 lines, the second was time-filtered), and the downloaded file
+  parses identically to its log copy. Files are in
+  `measurements/galaxy-s22/recapture-2026-09-28-rotation/`; the original
+  portrait captures remain preserved.
 - Galaxy S21 Ultra (SM-G998B), Galaxy S21+ (SM-G996B), Galaxy S21 (SM-G991B),
   Galaxy S20 Ultra (SM-G988B) and Galaxy S20 FE (SM-G780G) were reserved and
   captured on 2026-09-25. The first four have accepted main captures in both
