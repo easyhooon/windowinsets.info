@@ -9,7 +9,7 @@ for(const slug of ['galaxy-z-fold7','galaxy-z-flip8']) {
   await page.evaluate(()=>navigator.clipboard.writeText(''));
   await width.focus(); await page.keyboard.press('Enter');
   await expect.poll(()=>page.evaluate(()=>navigator.clipboard.readText())).toBe(value);
-  const scale=()=>page.locator('.diagram-position > div').evaluate(el=>{
+  const scale=()=>page.locator('.diagram-position > [data-orientation-turn] > div').evaluate(el=>{
    const m=new DOMMatrix(getComputedStyle(el).transform); return Math.hypot(m.a,m.b);
   });
   await page.waitForTimeout(500);

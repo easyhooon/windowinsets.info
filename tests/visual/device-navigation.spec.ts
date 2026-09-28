@@ -38,18 +38,18 @@ test("skin previews stay discoverable while measured insets lead each series", a
   const sGroup = sidebar.locator('section[aria-label="Galaxy S"]');
   await expect(sGroup.locator('a[href="/galaxy-s25-ultra"]')).toContainText("Insets measured");
   await expect(sGroup.locator(".device-preview-toggle")).toHaveAttribute("aria-expanded", "false");
-  await expect(sGroup.locator('a[href="/galaxy-s23"]')).toBeHidden();
+  await expect(sGroup.locator('a[href="/galaxy-s20"]')).toBeHidden();
 
   await sGroup.locator(".device-preview-toggle").click();
-  await expect(sGroup.locator('a[href="/galaxy-s23"]')).toContainText("No inset measurements");
+  await expect(sGroup.locator('a[href="/galaxy-s20"]')).toContainText("No inset measurements");
 
-  await sidebar.getByRole("searchbox", { name: "Search devices" }).fill("Galaxy S23");
-  await expect(sGroup.locator('a[href="/galaxy-s23"]')).toBeVisible();
-  await sGroup.locator('a[href="/galaxy-s23"]').click();
-  await expect(page).toHaveURL(/\/galaxy-s23$/);
+  await sidebar.getByRole("searchbox", { name: "Search devices" }).fill("Galaxy S20");
+  await expect(sGroup.locator('a[href="/galaxy-s20"]')).toBeVisible();
+  await sGroup.locator('a[href="/galaxy-s20"]').click();
+  await expect(page).toHaveURL(/\/galaxy-s20$/);
   if ((page.viewportSize()?.width ?? 0) < 768) await page.locator(".mobile-model").click();
   await expect(sGroup.locator(".device-preview-toggle")).toHaveAttribute("aria-expanded", "true");
-  await expect(sGroup.locator('a[href="/galaxy-s23"].selected')).toBeVisible();
+  await expect(sGroup.locator('a[href="/galaxy-s20"].selected')).toBeVisible();
 });
 
 test('prerendered model selection matches the requested device before hydration', async ({ browser, baseURL }) => {

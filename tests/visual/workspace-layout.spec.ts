@@ -43,7 +43,7 @@ test('panning can carry the device behind the legend without a footer clipping e
   await page.goto('/galaxy-s25-ultra');
   const canvas = page.locator('#device-canvas');
   await expect.poll(() => canvas.locator('.diagram-position').evaluate(node => (node as HTMLElement).style.transform)).not.toBe('translate(0px, 0px)');
-  await canvas.dispatchEvent('wheel', { deltaX: 0, deltaY: -100 });
+  await canvas.dispatchEvent('wheel', { deltaX: 0, deltaY: -120 });
   await expect.poll(() => page.evaluate(() => {
     const body = document.querySelector('[data-fit-body]')!.getBoundingClientRect();
     const legend = document.querySelector('.region-legend')!.getBoundingClientRect();

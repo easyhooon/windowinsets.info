@@ -9,7 +9,7 @@ async function settled(page: Page, angle: number) {
 }
 async function sample(page: Page) {
   return page.evaluate(() => {
-    const scale = document.querySelector<HTMLElement>(".diagram-position > div")!;
+    const scale = document.querySelector<HTMLElement>(".diagram-position > [data-orientation-turn] > div")!;
     return {
       angle: Number(document.querySelector<HTMLElement>("[data-displayed-angle]")!.dataset.displayedAngle),
       scale: new DOMMatrix(getComputedStyle(scale).transform).a,
@@ -34,7 +34,7 @@ for (const slug of ["galaxy-z-fold8", "galaxy-z-flip8"]) {
         const start = performance.now();
         const tick = () => {
           const el = document.querySelector<HTMLElement>("[data-displayed-angle]")!;
-          const transform = getComputedStyle(document.querySelector(".diagram-position > div")!).transform;
+          const transform = getComputedStyle(document.querySelector(".diagram-position > [data-orientation-turn] > div")!).transform;
           samples.push({ angle: Number(el.dataset.displayedAngle), scale: new DOMMatrix(transform).a });
           if (performance.now() - start < 1000) requestAnimationFrame(tick);
           else resolve(samples);
@@ -120,6 +120,6 @@ test("fully measured Fold6 shows both inner navigation modes", async ({ page }) 
   await page.screenshot({ path: test.info().outputPath("fold6-inner-gesture.png") });
   await page.locator(".screen-tabs").getByRole("button", { name: "Outer", exact: true }).click();
   await expect(page.locator(".pending-notice")).toHaveCount(0);
-  expect((await page.locator(".diagram-position > div").boundingBox())!.width).toBeGreaterThan(0);
+  expect((await page.locator(".diagram-position > [data-orientation-turn] > div").boundingBox())!.width).toBeGreaterThan(0);
   await page.screenshot({ path: test.info().outputPath("fold6-complete-measurements.png") });
 });
