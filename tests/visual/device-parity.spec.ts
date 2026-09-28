@@ -59,6 +59,8 @@ test("sidebar inquiry opens the GitHub issue template chooser", async ({ page },
 
 test("per-device JSON export downloads the complete versioned device payload", async ({ page }) => {
   await page.goto("/galaxy-z-flip8");
+  const link = page.getByRole("link", { name: "JSON link" });
+  await expect(link).toHaveAttribute("href", "/data/galaxy-z-flip8.json");
   const button = page.getByRole("button", { name: "Export JSON" });
   await expect(button).toBeVisible();
   const downloadPromise = page.waitForEvent("download");
@@ -73,6 +75,13 @@ test("per-device JSON export downloads the complete versioned device payload", a
   expect(exported.screens.map((screen: { id: string }) => screen.id)).toEqual(["cover", "main"]);
   expect(exported.screens[0].navigationModes.gesture.status).toBe("measured");
   expect(exported.screens[0].navigationModes.threeButton.status).toBe("measured");
+  const response = await page.request.get("/data/galaxy-z-flip8.json");
+  expect(response.ok()).toBe(true);
+  expect(response.headers()["content-type"]).toContain("application/json");
+  expect(await response.json()).toEqual(exported);
+  const direct = await page.goto("/data/galaxy-z-flip8.json");
+  expect(direct?.ok()).toBe(true);
+  expect(direct?.headers()["content-type"]).toContain("application/json");
 });
 
 test("Fold5 shows measured cover and inner values on both viewports", async ({ page }) => {

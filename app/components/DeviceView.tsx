@@ -19,7 +19,7 @@ import { ResizeHandle } from "./ResizeHandle";
 import { Icon } from "./Icon";
 import { getRtlAvailability } from "../data/rtlAvailability";
 import { formatLength, hasExactPx, safeInsets, safeInsetsPx } from "../data/measurementUnits";
-import { downloadDeviceExport } from "../data/deviceExport";
+import { deviceExportPath, downloadDeviceExport } from "../data/deviceExport";
 import { trackFoldPoseChange, trackJsonExport, trackUnitChange } from "../lib/analytics";
 
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
@@ -304,7 +304,10 @@ export function DeviceView({ device }: { device: Device }) {
       <div className="metrics-bar">
         <h2 className="metrics-heading">Metrics</h2>
         <button className="metrics-toggle" aria-expanded={metricsOpen} onClick={() => setMetricsOpen(!metricsOpen)}>Metrics<Icon name="chevron" /></button>
-        <button type="button" className="export-json-button" onClick={exportJson}>Export JSON</button>
+        <div className="metrics-actions">
+          <a className="export-json-button" href={deviceExportPath(device)}>JSON link</a>
+          <button type="button" className="export-json-button" onClick={exportJson}>Export JSON</button>
+        </div>
         <span className="sr-only" role="status">{exportStatus}</span>
       </div>
       <div className="metrics-content">

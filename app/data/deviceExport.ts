@@ -280,6 +280,10 @@ export function deviceExportFilename(device: Pick<Device, "slug">): string {
   return `${device.slug}-window-insets.json`;
 }
 
+export function deviceExportPath(device: Pick<Device, "slug">): string {
+  return `/data/${device.slug}.json`;
+}
+
 export function serializeDeviceExport(device: Device): string {
   return `${JSON.stringify(createDeviceExport(device), null, 2)}\n`;
 }

@@ -4,6 +4,17 @@ Every device page exposes an **Export JSON** action. It downloads
 `<slug>-window-insets.json` for the whole device—not only the screen or navigation
 mode currently selected in the UI.
 
+Each public device also has a shareable URL at
+`https://windowinsets.info/data/<slug>.json`. The **JSON link** action opens it
+directly; copy the link address to share it or fetch it from a script:
+
+```sh
+curl https://windowinsets.info/data/galaxy-z-flip8.json
+```
+
+Both actions return the same versioned payload. The link follows the current
+published data, so save a copy if a particular measurement revision matters.
+
 The root object identifies the stable public format with:
 
 ```json
