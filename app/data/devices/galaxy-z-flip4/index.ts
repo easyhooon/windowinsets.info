@@ -1,4 +1,4 @@
-import type { Device, Source } from "../../types";
+import type { Device, InsetsMeasurement, NavMode, Source } from "../../types";
 
 const samsungSpecs: Source = {
   kind: "official",
@@ -24,6 +24,38 @@ const cutoutShape = {
   xPx: 505, yPx: 0, widthPx: 71, heightPx: 94, rightPx: 504, bottomPx: 2546,
   xDp: 168.33, yDp: 0, widthDp: 23.67, heightDp: 31.33, rightDp: 168, bottomDp: 848.67,
 };
+
+// Separate InsetsProbe 1.6.0 captures of rotations 1 and 3; never derived from rotation 0.
+const landscapeInsets = (rotation: 1 | 3, mode: NavMode): InsetsMeasurement => {
+  const button = mode === "threeButton";
+  const left = rotation === 1;
+  return {
+    systemBars: { top: 24, right: button && left ? 48 : 0, bottom: button ? 0 : 15, left: button && !left ? 48 : 0 },
+    systemBarsPx: { top: 72, right: button && left ? 144 : 0, bottom: button ? 0 : 45, left: button && !left ? 144 : 0 },
+    displayCutout: { top: 0, right: left ? 0 : 31.33, bottom: 0, left: left ? 31.33 : 0 },
+    displayCutoutPx: { top: 0, right: left ? 0 : 94, bottom: 0, left: left ? 94 : 0 },
+    cutoutShape: left
+      ? { xPx: 0, yPx: 504, widthPx: 94, heightPx: 71, rightPx: 2546, bottomPx: 505, xDp: 0, yDp: 168, widthDp: 31.33, heightDp: 23.67, rightDp: 848.67, bottomDp: 168.33 }
+      : { xPx: 2546, yPx: 505, widthPx: 94, heightPx: 71, rightPx: 0, bottomPx: 504, xDp: 848.67, yDp: 168.33, widthDp: 31.33, heightDp: 23.67, rightDp: 0, bottomDp: 168 },
+    condition: {
+      oneUi: "6.1.1",
+      android: "14",
+      note: `Samsung RTL Vietnam/Hanoi, SM-F721BE-VN1, build UP1A.231005.007.F721BXXSAGYB2. Main display unfolded, landscape rotation ${rotation}, 2640×1080 px at 480 dpi and font scale 1, with a vertical FLAT folding feature at x=1320 px. Captured separately with InsetsProbe 1.6.0; the Android navigation setting and configuration agree.`,
+    },
+    sources: [{
+      kind: "measured",
+      label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy Z Flip4 main, rotation ${rotation}, ${mode} (SM-F721B)`,
+      url: `${captureBase}/recapture-2026-09-28-rotation/main-landscape-${rotation}-${mode}.json`,
+      retrievedAt: "2026-09-28",
+    }],
+  };
+};
+
+const landscape = (rotation: 1 | 3) => ({
+  logicalSizePx: { width: 2640, height: 1080 },
+  logicalSizeDp: { width: 880, height: 360 },
+  insets: { gesture: landscapeInsets(rotation, "gesture"), threeButton: landscapeInsets(rotation, "threeButton") },
+});
 
 export const galaxyZFlip4: Device = {
   slug: "galaxy-z-flip4",
@@ -66,6 +98,7 @@ export const galaxyZFlip4: Device = {
           sources: [threeButtonSource],
         },
       },
+      rotations: { 1: landscape(1), 3: landscape(3) },
       sources: [samsungSpecs, gestureSource, threeButtonSource],
     },
   ],
