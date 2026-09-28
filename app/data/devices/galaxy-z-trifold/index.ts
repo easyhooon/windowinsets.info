@@ -40,6 +40,244 @@ export const galaxyZTriFold: Device = {
         "bottomRight": 21,
         "bottomLeft": 21
       },
+      rotations: {
+        "1": {
+          "logicalSizePx": {
+            "width": 2520,
+            "height": 1080
+          },
+          "logicalSizeDp": {
+            "width": 960,
+            "height": 411.43
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 30.1,
+                "right": 0,
+                "bottom": 14.86,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 79,
+                "right": 0,
+                "bottom": 39,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 38.86
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 102
+              },
+              "cutoutShape": {
+                "xDp": 0,
+                "yDp": 193.52,
+                "widthDp": 38.86,
+                "heightDp": 24.38,
+                "rightDp": 921.14,
+                "bottomDp": 193.53,
+                "xPx": 0,
+                "yPx": 508,
+                "widthPx": 102,
+                "heightPx": 64,
+                "rightPx": 2418,
+                "bottomPx": 508
+              },
+              "condition": {
+                "oneUi": "8.5",
+                "android": "16",
+                "note": "Samsung RTL SM-F968N, build BP4A.251205.006.F968NKSS6BZG3. cover display, rotation 1, 2520×1080 px, full screen, 420 dpi, font scale 1.08. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-trifold cover, rotation 1, gesture (SM-F968N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-trifold/recapture-2026-09-27-rotation/cover-landscape-1-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 30.1,
+                "right": 48,
+                "bottom": 0,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 79,
+                "right": 126,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 38.86
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 102
+              },
+              "cutoutShape": {
+                "xDp": 0,
+                "yDp": 193.52,
+                "widthDp": 38.86,
+                "heightDp": 24.38,
+                "rightDp": 921.14,
+                "bottomDp": 193.53,
+                "xPx": 0,
+                "yPx": 508,
+                "widthPx": 102,
+                "heightPx": 64,
+                "rightPx": 2418,
+                "bottomPx": 508
+              },
+              "condition": {
+                "oneUi": "8.5",
+                "android": "16",
+                "note": "Samsung RTL SM-F968N, build BP4A.251205.006.F968NKSS6BZG3. cover display, rotation 1, 2520×1080 px, full screen, 420 dpi, font scale 1.08. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-trifold cover, rotation 1, threeButton (SM-F968N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-trifold/recapture-2026-09-27-rotation/cover-landscape-1-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        },
+        "3": {
+          "logicalSizePx": {
+            "width": 2520,
+            "height": 1080
+          },
+          "logicalSizeDp": {
+            "width": 960,
+            "height": 411.43
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 30.1,
+                "right": 0,
+                "bottom": 14.86,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 79,
+                "right": 0,
+                "bottom": 39,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 38.86,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 102,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 921.14,
+                "yDp": 193.52,
+                "widthDp": 38.86,
+                "heightDp": 24.38,
+                "rightDp": 0,
+                "bottomDp": 193.53,
+                "xPx": 2418,
+                "yPx": 508,
+                "widthPx": 102,
+                "heightPx": 64,
+                "rightPx": 0,
+                "bottomPx": 508
+              },
+              "condition": {
+                "oneUi": "8.5",
+                "android": "16",
+                "note": "Samsung RTL SM-F968N, build BP4A.251205.006.F968NKSS6BZG3. cover display, rotation 3, 2520×1080 px, full screen, 420 dpi, font scale 1.08. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-trifold cover, rotation 3, gesture (SM-F968N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-trifold/recapture-2026-09-27-rotation/cover-landscape-3-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 30.1,
+                "right": 0,
+                "bottom": 0,
+                "left": 48
+              },
+              "systemBarsPx": {
+                "top": 79,
+                "right": 0,
+                "bottom": 0,
+                "left": 126
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 38.86,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 102,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 921.14,
+                "yDp": 193.52,
+                "widthDp": 38.86,
+                "heightDp": 24.38,
+                "rightDp": 0,
+                "bottomDp": 193.53,
+                "xPx": 2418,
+                "yPx": 508,
+                "widthPx": 102,
+                "heightPx": 64,
+                "rightPx": 0,
+                "bottomPx": 508
+              },
+              "condition": {
+                "oneUi": "8.5",
+                "android": "16",
+                "note": "Samsung RTL SM-F968N, build BP4A.251205.006.F968NKSS6BZG3. cover display, rotation 3, 2520×1080 px, full screen, 420 dpi, font scale 1.08. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-trifold cover, rotation 3, threeButton (SM-F968N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-trifold/recapture-2026-09-27-rotation/cover-landscape-3-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        }
+      },
       "insets": {
         "gesture": {
           "systemBars": {
@@ -194,6 +432,188 @@ export const galaxyZTriFold: Device = {
         "topRight": 4,
         "bottomRight": 4,
         "bottomLeft": 4
+      },
+      rotations: {
+        "1": {
+          "logicalSizePx": {
+            "width": 1584,
+            "height": 2160
+          },
+          "logicalSizeDp": {
+            "width": 792,
+            "height": 1080
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 60,
+                "right": 0,
+                "bottom": 30,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "condition": {
+                "oneUi": "8.5",
+                "android": "16",
+                "note": "Samsung RTL SM-F968N, build BP4A.251205.006.F968NKSS6BZG3. main display, rotation 1, 1584×2160 px, full screen, 320 dpi, font scale 1.08. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-trifold main, rotation 1, gesture (SM-F968N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-trifold/recapture-2026-09-27-rotation/main-portrait-1-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 48,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 60,
+                "right": 0,
+                "bottom": 96,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "condition": {
+                "oneUi": "8.5",
+                "android": "16",
+                "note": "Samsung RTL SM-F968N, build BP4A.251205.006.F968NKSS6BZG3. main display, rotation 1, 1584×2160 px, full screen, 320 dpi, font scale 1.08. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-trifold main, rotation 1, threeButton (SM-F968N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-trifold/recapture-2026-09-27-rotation/main-portrait-1-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        },
+        "3": {
+          "logicalSizePx": {
+            "width": 1584,
+            "height": 2160
+          },
+          "logicalSizeDp": {
+            "width": 792,
+            "height": 1080
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 60,
+                "right": 0,
+                "bottom": 30,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "condition": {
+                "oneUi": "8.5",
+                "android": "16",
+                "note": "Samsung RTL SM-F968N, build BP4A.251205.006.F968NKSS6BZG3. main display, rotation 3, 1584×2160 px, full screen, 320 dpi, font scale 1.08. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-trifold main, rotation 3, gesture (SM-F968N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-trifold/recapture-2026-09-27-rotation/main-portrait-3-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 48,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 60,
+                "right": 0,
+                "bottom": 96,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "condition": {
+                "oneUi": "8.5",
+                "android": "16",
+                "note": "Samsung RTL SM-F968N, build BP4A.251205.006.F968NKSS6BZG3. main display, rotation 3, 1584×2160 px, full screen, 320 dpi, font scale 1.08. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-trifold main, rotation 3, threeButton (SM-F968N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-trifold/recapture-2026-09-27-rotation/main-portrait-3-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        }
       },
       "insets": {
         "gesture": {

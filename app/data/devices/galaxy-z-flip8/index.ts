@@ -92,6 +92,244 @@ export const galaxyZFlip8: Device = {
       densityDpi: 480,
       cornerRadiiDp: { topLeft: 22, topRight: 22, bottomRight: 22, bottomLeft: 22 },
       cornerRadiiPx: { topLeft: 66, topRight: 66, bottomRight: 66, bottomLeft: 66 },
+      rotations: {
+        "1": {
+          "logicalSizePx": {
+            "width": 2520,
+            "height": 1080
+          },
+          "logicalSizeDp": {
+            "width": 840,
+            "height": 360
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 0,
+                "bottom": 45,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 36
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 108
+              },
+              "cutoutShape": {
+                "xDp": 0,
+                "yDp": 169.67,
+                "widthDp": 36,
+                "heightDp": 20.67,
+                "rightDp": 804,
+                "bottomDp": 169.67,
+                "xPx": 0,
+                "yPx": 509,
+                "widthPx": 108,
+                "heightPx": 62,
+                "rightPx": 2412,
+                "bottomPx": 509
+              },
+              "condition": {
+                "oneUi": "9.0",
+                "android": "17",
+                "note": "Samsung RTL SM-F776B, build CP2A.260605.016.F776BXXU1AZGI. main display, rotation 1, 2520×1080 px, full screen, 480 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-flip8 main, rotation 1, gesture (SM-F776B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip8/recapture-2026-09-27-rotation/main-landscape-1-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 30,
+                "right": 48,
+                "bottom": 0,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 144,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 36
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 108
+              },
+              "cutoutShape": {
+                "xDp": 0,
+                "yDp": 169.67,
+                "widthDp": 36,
+                "heightDp": 20.67,
+                "rightDp": 804,
+                "bottomDp": 169.67,
+                "xPx": 0,
+                "yPx": 509,
+                "widthPx": 108,
+                "heightPx": 62,
+                "rightPx": 2412,
+                "bottomPx": 509
+              },
+              "condition": {
+                "oneUi": "9.0",
+                "android": "17",
+                "note": "Samsung RTL SM-F776B, build CP2A.260605.016.F776BXXU1AZGI. main display, rotation 1, 2520×1080 px, full screen, 480 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-flip8 main, rotation 1, threeButton (SM-F776B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip8/recapture-2026-09-27-rotation/main-landscape-1-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        },
+        "3": {
+          "logicalSizePx": {
+            "width": 2520,
+            "height": 1080
+          },
+          "logicalSizeDp": {
+            "width": 840,
+            "height": 360
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 0,
+                "bottom": 45,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 36,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 108,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 804,
+                "yDp": 169.67,
+                "widthDp": 36,
+                "heightDp": 20.67,
+                "rightDp": 0,
+                "bottomDp": 169.67,
+                "xPx": 2412,
+                "yPx": 509,
+                "widthPx": 108,
+                "heightPx": 62,
+                "rightPx": 0,
+                "bottomPx": 509
+              },
+              "condition": {
+                "oneUi": "9.0",
+                "android": "17",
+                "note": "Samsung RTL SM-F776B, build CP2A.260605.016.F776BXXU1AZGI. main display, rotation 3, 2520×1080 px, full screen, 480 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-flip8 main, rotation 3, gesture (SM-F776B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip8/recapture-2026-09-27-rotation/main-landscape-3-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 0,
+                "left": 48
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 0,
+                "bottom": 0,
+                "left": 144
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 36,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 108,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 804,
+                "yDp": 169.67,
+                "widthDp": 36,
+                "heightDp": 20.67,
+                "rightDp": 0,
+                "bottomDp": 169.67,
+                "xPx": 2412,
+                "yPx": 509,
+                "widthPx": 108,
+                "heightPx": 62,
+                "rightPx": 0,
+                "bottomPx": 509
+              },
+              "condition": {
+                "oneUi": "9.0",
+                "android": "17",
+                "note": "Samsung RTL SM-F776B, build CP2A.260605.016.F776BXXU1AZGI. main display, rotation 3, 2520×1080 px, full screen, 480 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-flip8 main, rotation 3, threeButton (SM-F776B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip8/recapture-2026-09-27-rotation/main-landscape-3-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        }
+      },
       insets: {
         gesture: {
           systemBars: { top: 36, right: 0, bottom: 15, left: 0 },

@@ -263,6 +263,13 @@ removes a model from its catalog.
   Galaxy Z Fold3 is now measured on both displays in both navigation modes from
   two Vietnam/Hanoi RTL units running Android 14 / One UI 6.1.
 
+On 2026-09-27, separate rotation 1 and 3 captures were also registered for both
+displays of Fold3, Fold4, Fold5 and TriFold, and the main displays of Flip5,
+Flip6, Flip7 and Flip8. Each rotation has its own raw file in the device's
+`recapture-2026-09-27-rotation/` directory. Flip8's cover stayed at rotation 0
+in the capture session; Flip7's cover sweep is still missing. Existing natural
+rotation values remain tied to their earlier accepted captures.
+
 ### Galaxy Z Fold3 — 2026-09-25
 
 InsetsProbe 1.3.0 captured all four display/navigation combinations on Samsung

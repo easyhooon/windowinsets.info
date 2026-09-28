@@ -183,6 +183,244 @@ export const galaxyZFlip7: Device = {
         "bottomRight": 22,
         "bottomLeft": 22
       },
+      rotations: {
+        "1": {
+          "logicalSizePx": {
+            "width": 2520,
+            "height": 1080
+          },
+          "logicalSizeDp": {
+            "width": 840,
+            "height": 360
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 0,
+                "bottom": 45,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 36.33
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 109
+              },
+              "cutoutShape": {
+                "xDp": 0,
+                "yDp": 168,
+                "widthDp": 36.33,
+                "heightDp": 24,
+                "rightDp": 803.67,
+                "bottomDp": 168,
+                "xPx": 0,
+                "yPx": 504,
+                "widthPx": 109,
+                "heightPx": 72,
+                "rightPx": 2411,
+                "bottomPx": 504
+              },
+              "condition": {
+                "oneUi": "8.5",
+                "android": "16",
+                "note": "Galaxy Z Flip7 SM-F766N, build BP4A.251205.006.F766NKSSBBZG3. main display, rotation 1, 2520×1080 px, full screen, 480 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Galaxy Z Flip7 main, rotation 1, gesture (SM-F766N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/recapture-2026-09-27-rotation/main-landscape-1-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 30,
+                "right": 48,
+                "bottom": 0,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 144,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 36.33
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 109
+              },
+              "cutoutShape": {
+                "xDp": 0,
+                "yDp": 168,
+                "widthDp": 36.33,
+                "heightDp": 24,
+                "rightDp": 803.67,
+                "bottomDp": 168,
+                "xPx": 0,
+                "yPx": 504,
+                "widthPx": 109,
+                "heightPx": 72,
+                "rightPx": 2411,
+                "bottomPx": 504
+              },
+              "condition": {
+                "oneUi": "8.5",
+                "android": "16",
+                "note": "Galaxy Z Flip7 SM-F766N, build BP4A.251205.006.F766NKSSBBZG3. main display, rotation 1, 2520×1080 px, full screen, 480 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Galaxy Z Flip7 main, rotation 1, threeButton (SM-F766N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/recapture-2026-09-27-rotation/main-landscape-1-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        },
+        "3": {
+          "logicalSizePx": {
+            "width": 2520,
+            "height": 1080
+          },
+          "logicalSizeDp": {
+            "width": 840,
+            "height": 360
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 0,
+                "bottom": 45,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 36.33,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 109,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 803.67,
+                "yDp": 168,
+                "widthDp": 36.33,
+                "heightDp": 24,
+                "rightDp": 0,
+                "bottomDp": 168,
+                "xPx": 2411,
+                "yPx": 504,
+                "widthPx": 109,
+                "heightPx": 72,
+                "rightPx": 0,
+                "bottomPx": 504
+              },
+              "condition": {
+                "oneUi": "8.5",
+                "android": "16",
+                "note": "Galaxy Z Flip7 SM-F766N, build BP4A.251205.006.F766NKSSBBZG3. main display, rotation 3, 2520×1080 px, full screen, 480 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Galaxy Z Flip7 main, rotation 3, gesture (SM-F766N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/recapture-2026-09-27-rotation/main-landscape-3-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 30,
+                "right": 0,
+                "bottom": 0,
+                "left": 48
+              },
+              "systemBarsPx": {
+                "top": 90,
+                "right": 0,
+                "bottom": 0,
+                "left": 144
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 36.33,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 109,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 803.67,
+                "yDp": 168,
+                "widthDp": 36.33,
+                "heightDp": 24,
+                "rightDp": 0,
+                "bottomDp": 168,
+                "xPx": 2411,
+                "yPx": 504,
+                "widthPx": 109,
+                "heightPx": 72,
+                "rightPx": 0,
+                "bottomPx": 504
+              },
+              "condition": {
+                "oneUi": "8.5",
+                "android": "16",
+                "note": "Galaxy Z Flip7 SM-F766N, build BP4A.251205.006.F766NKSSBBZG3. main display, rotation 3, 2520×1080 px, full screen, 480 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Galaxy Z Flip7 main, rotation 3, threeButton (SM-F766N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/recapture-2026-09-27-rotation/main-landscape-3-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        }
+      },
       "insets": {
         "gesture": {
           "systemBars": {
