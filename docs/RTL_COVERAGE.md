@@ -361,6 +361,19 @@ Galaxy Z Fold8, Fold7, Fold6, Fold5, Fold4 and Flip8 reservations were made duri
 They establish those models' availability on their checked dates only; they do not
 make the partial inventory complete.
 
+## Galaxy S26 rotation sweep on 2026-09-28
+
+Galaxy S26 SM-S942N_KR1 (Korea/Gumi, build BP4A.251205.006.S942NKSS4AZHA, same
+as the accepted captures) ran InsetsProbe 1.6.0 with the Main label. The in-app
+sweep captured rotations 0, 1 and 3 in both navigation modes. All six files
+report display 0, 480 dpi, font scale 1 and settings mode 0/2, and they were
+uploaded to the capture inbox. Rotation 0 matches the accepted captures.
+Landscape windows are 2340×1080 px with a 90 px top bar. Three-button places its
+144 px bar on the right (rotation 1) or left (rotation 3), and gesture keeps a
+45 px bottom inset. The 111×64 px cutout follows the rotation. Files are in
+`measurements/galaxy-s26/recapture-2026-09-28-rotation/`. S26+ was in use by
+another RTL user at the time.
+
 ## Galaxy S26 Ultra measured on 2026-09-23
 
 Samsung RTL Korea/Gumi SM-S948U_KR3 was reserved and its main display captured
