@@ -29,6 +29,23 @@
 
 바형 폰과 폴더블 커버는 일반적인 자동 회전에서 180°를 지원하지 않아 0·1·3만 측정했다. 폴더블 내측과 태블릿처럼 large screen으로 취급되는 화면은 네 방향을 모두 확인했다.
 
+### 삼성 측정과 Pixel 측정은 무엇이 달랐나
+
+두 제조사의 데이터를 모두 InsetsProbe로 읽었지만, 기기까지 도달하는 방법과 결과를 부르는 기준은 달랐다.
+
+| 구분 | Samsung Galaxy | Google Pixel |
+| --- | --- | --- |
+| 측정 환경 | Samsung RTL 또는 사용자가 가진 실기기 | Android SDK의 headless AVD |
+| 화면 외형 | Samsung이 배포한 Galaxy Emulator Skin | Android SDK의 AOSP Pixel skin |
+| 기기 조작 | 사람이 예약·설치·잠금 해제·화면 전환을 준비하고 Probe가 측정 | 스크립트가 AVD 부팅부터 화면·내비게이션·회전을 제어 |
+| 결과 전달 | Probe가 Vercel Function을 거쳐 capture inbox PR로 업로드 | 로컬에서 JSON과 manifest를 pull한 뒤 importer로 등록 |
+| 증거 등급 | 실제 기기 또는 RTL 실측 | AVD profile이 보고한 emulator 측정 |
+| 주된 실패 지점 | 예약 시간, 원격 UI, APK 설치, 파일 다운로드 | adb 상태, fold·rotation 전환, APK provenance, 조합 누락 |
+
+삼성 자동화는 사람이 원격 기기를 사용할 수 있게 준비한 다음부터 시작한다. Pixel은 AVD의 생성과 종료까지 로컬에서 제어할 수 있어 사람의 조작을 더 많이 없앨 수 있었다. 대신 Pixel 데이터에는 실제 제품이 아니라 특정 emulator version과 system image가 만든 값이라는 조건이 붙는다.
+
+공통점도 있었다. 화면 모양을 skin에서 추정하지 않고 Android가 InsetsProbe에 전달한 값을 저장했다. 측정하지 못한 조합은 비워 두고, raw JSON과 출처를 보존한 뒤 검증을 통과한 값만 사이트에 연결했다.
+
 전체 흐름은 다음과 같이 잡았다.
 
 ```mermaid
@@ -174,13 +191,34 @@ Pixel 10 Pro XL은 완전한 6개 세트로 다시 측정했다. 이후 `import-
 - Pixel 9 Pro Fold는 서로 다른 Emulator 버전에서도 같은 값을 냈다.
 - 사이트에 사용하는 rotation 0 값은 importer 검증을 통과한 데이터만 생성했다. 다른 방향은 원본 증거로 보관했다.
 
+### 다음에는 어떤 기기까지 대응할 수 있을까
+
+현재 공개 범위는 Galaxy 120종과 Pixel 22종이다. 다음 확장은 기종 수만 늘리는 방식보다, 이번에 나눈 수집과 검증 구조를 재사용할 수 있는지를 먼저 본다.
+
+가장 가까운 계획은 새 Pixel 대응이다. Android SDK에 새 device profile과 AOSP skin이 추가되면 `scripts/pixel-devices.json`에 사양과 출처를 등록하고 같은 headless 측정 흐름을 실행할 수 있다. 바형 폰, Fold, Tablet은 이미 서로 다른 화면·회전 행렬을 처리하므로 같은 형태의 후속 기종은 새 자동화 코드를 만들지 않고 추가하는 것이 목표다.
+
+동시에 Pixel 실기기 검증 범위를 넓혀야 한다. 현재 Firebase Test Lab에서는 공개 Pixel 22종 중 19종을 한 화면·한 방향의 gesture mode로 spot check했다. Pixel 6 Pro와 Pixel 4a는 물리 기기 목록에 없었고, Pixel 5는 제공되는 API 30이 Probe의 최소 API 31보다 낮았다. 남은 세 기종뿐 아니라 3-button navigation, 다른 회전, Fold 커버 화면도 아직 검증 대상이다.
+
+그다음 후보는 Firebase Test Lab에서 물리 기기를 제공하는 다른 Android 제조사다. [Pixel 지원 전략](https://github.com/easyhooon/windowinsets.info/issues/23)에는 다음 제품군을 후보로 두었다.
+
+- Motorola moto g·edge
+- Sony Xperia
+- OnePlus, OPPO, realme, vivo
+- Lenovo Tab P12 같은 Android 태블릿
+
+이 기기들은 Probe로 값을 측정할 수 있어도 사이트에 바로 정식 등록할 수 있는 것은 아니다. 화면을 표현할 수 있는 공식 또는 재사용 가능한 artwork 출처가 먼저 확보돼야 한다. artwork가 없다면 측정값만 보관하거나 preview로 남기고, 제품 이미지를 보고 좌표를 추정하지 않을 계획이다.
+
+더 긴 범위에는 Wear OS도 있다. 원형 화면은 휴대폰의 사각형 safe area와 모델이 달라 별도 Probe와 artwork가 필요하다. 현재는 휴대폰·폴더블·태블릿을 먼저 확장하고, Watch는 round-screen safe area를 추적할 수 있는 수집 경로가 완성된 뒤 다루려고 한다.
+
 ## 결론
 
-Pixel 측정 자동화의 핵심은 headless Emulator를 실행하는 명령 자체가 아니었다. 기기마다 다른 화면 상태와 회전 정책을 실제 Android 상태로 확인하고, 잘못된 APK와 불완전한 결과를 다음 단계로 넘기지 않는 경계를 만드는 일이었다.
+삼성 측정 자동화가 원격 실기기에서 파일을 꺼내는 병목을 줄이는 일이었다면, Pixel 자동화는 여러 AVD의 상태 조합을 같은 조건으로 반복하는 일이었다. Pixel 측정의 핵심도 headless Emulator를 실행하는 명령 자체가 아니었다. 기기마다 다른 화면 상태와 회전 정책을 실제 Android 상태로 확인하고, 잘못된 APK와 불완전한 결과를 다음 단계로 넘기지 않는 경계를 만드는 일이었다.
 
 `capture-emulator.py`는 AVD를 조작해 raw JSON과 provenance manifest를 만든다. `import-emulator-captures.py`는 그 결과를 다시 검증하고 사이트 데이터로 변환한다. 수집과 등록을 분리한 덕분에 스크립트가 끝났다는 이유만으로 측정값이 곧바로 공개되지 않는다.
 
-이 흐름으로 Pixel 22종의 반복 측정은 자동화했다. 다만 에뮬레이터 값은 끝까지 에뮬레이터 값이다. 다음 글에서는 Firebase Test Lab의 실제 Pixel 기기로 AVD 측정값을 검증하면서, 같은 모델에서도 OS와 실행 환경에 따라 무엇이 달라졌는지 살펴보려고 한다.
+이 흐름으로 Pixel 22종의 반복 측정은 자동화했다. 이후 새 Pixel profile은 같은 파이프라인에 추가하고, 공식 artwork와 실기기 측정 경로를 확보한 제조사도 차례로 연결할 수 있다. 다만 에뮬레이터 값은 끝까지 에뮬레이터 값이고, 측정할 수 있다는 사실만으로 공개 가능한 기기가 되는 것도 아니다.
+
+다음 글에서는 Firebase Test Lab의 실제 Pixel 기기로 AVD 측정값을 검증하면서, 같은 모델에서도 OS와 실행 환경에 따라 무엇이 달라졌는지 살펴보려고 한다.
 
 ## 참고 자료
 
@@ -189,4 +227,5 @@ Pixel 측정 자동화의 핵심은 headless Emulator를 실행하는 명령 자
 - [Pixel 캡처 importer](https://github.com/easyhooon/windowinsets.info/blob/main/scripts/import-emulator-captures.py)
 - [Pixel 측정 워크플로](https://github.com/easyhooon/windowinsets.info/blob/main/docs/MEASUREMENT_WORKFLOW.md#pixel-emulator-captures-issue-23-2026-09-27)
 - [Pixel 하드웨어 검증 기록](https://github.com/easyhooon/windowinsets.info/blob/main/docs/PIXEL_HARDWARE_VALIDATION.md)
+- [남은 Pixel 실기기 검증 Issue #46](https://github.com/easyhooon/windowinsets.info/issues/46)
 - [AOSP Android Emulator device art](https://android.googlesource.com/platform/tools/adt/idea/+/ca26f0383e6cca7c3fe55ccbbe5526ba4e24d198/artwork/resources/device-art-resources)
