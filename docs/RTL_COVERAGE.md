@@ -419,6 +419,14 @@ captures; landscape windows are 2340×1080 px with a 90 px top bar, a 144 px
 three-button side bar, a 45 px gesture bottom inset and a rotated 103×58 px
 cutout. Files are in `measurements/galaxy-s25/recapture-2026-09-28-rotation/`.
 
+Galaxy S24 Ultra had no free Android 16 unit at the time, so Galaxy S24+
+SM-S926N-KR3 (same build as the accepted captures) was measured next. Its
+six-file sweep matches rotation 0 and has the S25+ landscape geometry: 84 px
+top, 135 px three-button side bar, 42 px gesture bottom and a rotated 94×51 px
+cutout. An older S24+ upload from the upload pilot remains in the inbox and was
+not imported. Files are in
+`measurements/galaxy-s24-plus/recapture-2026-09-28-rotation/`.
+
 ## Galaxy S26 Ultra measured on 2026-09-23
 
 Samsung RTL Korea/Gumi SM-S948U_KR3 was reserved and its main display captured
