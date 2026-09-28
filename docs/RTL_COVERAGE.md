@@ -392,6 +392,14 @@ mid-reservation restarted and reset the unit (Probe removed, navigation back to
 three-button), so the gesture half was captured after reinstalling. Files are in
 `measurements/galaxy-s25-ultra/recapture-2026-09-28-rotation/`.
 
+The owner's USB-connected Galaxy S25+ (SM-S936N, same build as its accepted
+captures) was measured over ADB with `--ez sweep true`, once in three-button
+and once after enabling the standard gestural navbar overlay and Samsung's
+`navigation_bar_gesture_while_hidden`. Both sets uploaded to the capture inbox
+and report settings mode 0/2. The device was returned to three-button
+navigation. Rotation 0 matches the accepted captures. Files are in
+`measurements/galaxy-s25-plus/recapture-2026-09-28-rotation/`.
+
 ## Galaxy S26 Ultra measured on 2026-09-23
 
 Samsung RTL Korea/Gumi SM-S948U_KR3 was reserved and its main display captured
