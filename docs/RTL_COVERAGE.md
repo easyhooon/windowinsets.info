@@ -371,8 +371,13 @@ uploaded to the capture inbox. Rotation 0 matches the accepted captures.
 Landscape windows are 2340×1080 px with a 90 px top bar. Three-button places its
 144 px bar on the right (rotation 1) or left (rotation 3), and gesture keeps a
 45 px bottom inset. The 111×64 px cutout follows the rotation. Files are in
-`measurements/galaxy-s26/recapture-2026-09-28-rotation/`. S26+ was in use by
-another RTL user at the time.
+`measurements/galaxy-s26/recapture-2026-09-28-rotation/`.
+
+Galaxy S26+ SM-S947N_KR2 (same build as the accepted captures, 450 dpi) followed
+with the same six-file sweep. Rotation 0 matches the accepted captures. Landscape
+windows are 2340×1080 px with an 84 px top bar, a 135 px three-button side bar,
+a 42 px gesture bottom inset and a rotated 104×60 px cutout. Files are in
+`measurements/galaxy-s26-plus/recapture-2026-09-28-rotation/`.
 
 ## Galaxy S26 Ultra measured on 2026-09-23
 
