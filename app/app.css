@@ -70,7 +70,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .device-thumbnail { flex-shrink:0; display:block; width:15px; height:30px; border:2px solid #48515d; border-radius:3px; background:linear-gradient(135deg,#9bd4e4,#367fbd); box-shadow:1px 1px 2px #0003; }
 .device-thumbnail.foldable-book { width:23px; height:28px; background:linear-gradient(90deg,#789fad 48%,#344b5a 50%,#9bd4e4 53%,#5b91b4); }
 .device-thumbnail.foldable-trifold { width:30px; height:24px; background:linear-gradient(90deg,#789fad 31%,#344b5a 33%,#9bd4e4 35%,#9bd4e4 64%,#344b5a 66%,#5b91b4 68%); }
-.hinge-sequence-note { margin:4px 12px 8px; font-size:12px; line-height:1.6; color:var(--color-muted); }
 .device-thumbnail.foldable-flip { background:linear-gradient(#bfb4ce 48%,#736980 50%,#c6b6d3 53%); }
 .sidebar-footer { padding:12px 8px; border-top:1px solid #d1d9e0; display:grid; gap:7px; color:#59636e; font-size:11px; }
 .sidebar-footer-support { display:grid; gap:3px; margin:0; line-height:1.4; }
@@ -117,7 +116,22 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .region-legend button { display:flex; align-items:center; gap:6px; min-height:24px; }
 .region-legend button[aria-pressed=false],.region-legend button:disabled { opacity:.35; }
 .region-legend i { width:11px; height:11px; border-radius:1px; border:1px solid #0004; box-shadow:inset 0 0 0 1px #fff8; }
-.canvas-controls { position:fixed; z-index:30; right:16px; top:16px; display:flex; gap:8px; align-items:center; }
+/* Reference-style floating pills: display toggles over the canvas top, view
+   controls under the legend, and the settings gear in the header. */
+.canvas-toggles { position:absolute; z-index:3; top:16px; inset-inline:0; display:flex; justify-content:center; padding:0 12px; pointer-events:none; }
+.canvas-toggles-inline { display:none; }
+.canvas-controls { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; max-width:100%; }
+.control-pill { display:flex; align-items:center; gap:2px; min-width:0; margin:0; padding:3.5px; border:1px solid #d1d9e0; border-radius:18.5px; background:#fff; box-shadow:0 3px 12px #1f232814; pointer-events:auto; }
+.pill-divider { flex:none; width:1px; height:20px; margin:0 1px; background:#d1d9e0; }
+.pill-button,.control-pill .toolbar-button { height:28px; min-height:28px; display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:0 8px; border:0; border-radius:14px; background:transparent; font-size:12px; white-space:nowrap; color:#1f2328; }
+.pill-button.icon { width:32px; padding:0; }
+.pill-button:hover,.control-pill .toolbar-button:hover { background:#eef1f4; }
+.pill-button[aria-pressed=true] { background:#ddf4ff; color:#0969da; }
+.segmented { display:flex; gap:2px; }
+.segmented .pill-button[aria-pressed=true] { background:#eaeef2; color:#1f2328; font-weight:600; }
+.hinge-control input { width:90px; margin:0 6px; accent-color:#0969da; }
+.hinge-readout { min-width:4.5ch; padding-right:8px; font-size:12px; font-variant-numeric:tabular-nums; text-align:right; }
+.dropdown.canvas-settings { position:fixed; z-index:30; top:16px; right:16px; }
 .toolbar-button { min-height:32px; display:flex; align-items:center; justify-content:center; gap:5px; border:1px solid #d1d9e0; background:#f6f8fa; padding:5px 10px; border-radius:6px; font-size:12px; white-space:nowrap; }
 .toolbar-button:hover { background:#eef1f4; }
 .toolbar-button>svg:last-child { margin-left:4px; }
@@ -125,8 +139,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .dropdown-panel { position:absolute; top:calc(100% + 6px); right:0; min-width:180px; z-index:40; border:1px solid #d1d9e0; border-radius:8px; background:#fff; box-shadow:0 8px 24px #1f232826; padding:5px; }
 .dropdown-panel>button { display:flex; align-items:center; gap:8px; padding:7px 9px; width:100%; text-align:left; font-size:12px; white-space:nowrap; border-radius:4px; }
 .dropdown-panel>button:hover { background:#f0f3f6; }
-.dropdown-footer { padding:10px; }
-.dropdown-footer input { width:160px; accent-color:#0969da; }
+.dropdown-panel.opens-up { top:auto; bottom:calc(100% + 6px); left:50%; right:auto; min-width:160px; transform:translateX(-50%); }
 .settings-panel label { display:flex; align-items:center; gap:9px; padding:7px; white-space:nowrap; }
 .settings-panel input { accent-color:#0969da; }
 .settings-panel fieldset { border-top:1px solid #d1d9e0; padding-top:8px; margin-top:5px; }
@@ -138,9 +151,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .grid-canvas { background-image:radial-gradient(#dbe0e680 .8px,transparent .8px); background-size:10px 10px; }
 @media(max-width:1199px) {
   .app-header { height:54px; padding:0 16px; }
-  .device-workspace { grid-template-rows:minmax(0,1fr) auto; }
-  .canvas-controls { position:relative; inset:auto; grid-column:1 / -1; justify-content:center; border-top:1px solid #d1d9e0; background:#f6f8fa; gap:6px; padding:8px; flex-wrap:wrap; }
-  .dropdown-panel { top:auto; bottom:calc(100% + 6px); }
+  .dropdown.canvas-settings { top:11px; }
   .region-legend { flex-wrap:wrap; max-width:100%; }
 }
 @media(max-width:767px) {
@@ -158,7 +169,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
   .device-family-tabs { grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); }
   .device-list { flex:none; overflow:visible; }
   .sidebar-footer { flex:none; }
-  .device-workspace { grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto; }
+  .device-workspace { grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr); }
   .resize-handle { display:none; }
   .metrics-panel { position:relative; width:auto; margin:12px 12px 0; overflow:visible; z-index:10; }
   .metrics-heading { display:none; }
@@ -166,19 +177,15 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
   .metrics-toggle { display:flex; flex:1; justify-content:space-between; align-items:center; padding:12px; text-align:left; }
   .metrics-content { display:none; }
   .metrics-panel.is-open .metrics-content { display:block; position:absolute; top:100%; left:-1px; right:-1px; max-height:48dvh; overflow:auto; background:#fff; border:1px solid #d1d9e0; border-top:0; border-radius:0 0 9px 9px; box-shadow:var(--shadow-card); }
-  .canvas-controls { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; padding:8px max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)); }
-  .canvas-controls>.dropdown { min-width:0; }
-  .canvas-controls .toolbar-button { width:100%; min-height:34px; gap:3px; padding:6px; font-size:12px; white-space:normal; }
-  .canvas-controls .toolbar-button>span:first-child { flex-shrink:0; white-space:nowrap; }
-  .canvas-controls .toolbar-button>span:last-of-type { min-width:0; }
-  .canvas-controls .toolbar-button>svg { flex-shrink:0; margin-left:0; width:20px; height:20px; }
-  .canvas-controls>.settings { position:fixed; top:8px; right:16px; width:44px; }
-  .canvas-controls>.settings .toolbar-button { min-height:40px; }
-  .canvas-controls>.settings .toolbar-button>svg { width:24px; height:24px; }
-  .dropdown-panel { right:0; max-width:calc(100vw - 24px); }
-  .canvas-controls>.dropdown:nth-child(odd) .dropdown-panel { left:0; right:auto; }
-  .canvas-controls>.dropdown.settings .dropdown-panel { top:calc(100% + 6px); bottom:auto; left:auto; right:0; }
-  .canvas-footer { padding:8px 12px 12px; }
+  /* Like the reference, the phone keeps the zoom menu but drops the ± steps. */
+  .zoom-step { display:none; }
+  .dropdown.canvas-settings { top:8px; width:44px; }
+  .canvas-settings .toolbar-button { min-height:40px; }
+  .canvas-settings .toolbar-button>svg { width:24px; height:24px; }
+  .dropdown-panel { max-width:calc(100vw - 24px); }
+  .canvas-toggles { display:none; }
+  .canvas-toggles-inline { display:flex; justify-content:center; max-width:100%; }
+  .canvas-footer { padding:8px 12px max(12px, env(safe-area-inset-bottom)); }
   .region-legend { display:grid; grid-template-columns:repeat(2,max-content); max-width:100%; gap:2px 16px; font-size:11px; }
   .canvas-help { display:none; }
 }

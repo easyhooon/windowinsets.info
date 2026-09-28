@@ -27,7 +27,8 @@ async function waitForFoldTransition(page: Page) {
 }
 
 async function chooseDropdown(page: Page, label: string, option: string) {
-  await page.getByRole("button", { name: new RegExp(`^${label}:`) }).click();
+  // Pose and navigation are always-visible buttons; the rest open a menu.
+  if (label !== "Pose" && label !== "Navigation") await page.getByRole("button", { name: new RegExp(`^${label}:`) }).click();
   await page.getByRole("button", { name: option, exact: true }).click();
 }
 
@@ -135,7 +136,6 @@ for (const device of devices) {
       await page.goto(`/${device.slug}`);
       await waitForDiagram(page);
       if (pose !== "Closed") {
-        await page.getByRole("button", { name: "Pose: Closed" }).click();
         await page.getByRole("button", { name: pose, exact: true }).click();
         await waitForFoldTransition(page);
       }
@@ -143,8 +143,8 @@ for (const device of devices) {
         fullPage: true,
       });
 
-      await expect(page.getByRole("button", { name: /^Navigation:/ })).toBeVisible();
-      await expect(page.getByRole("button", { name: `Pose: ${pose}` })).toBeVisible();
+      await expect(page.getByRole("group", { name: "Navigation" })).toBeVisible();
+      await expect(page.getByRole("button", { name: pose, exact: true })).toHaveAttribute("aria-pressed", "true");
       if (testInfo.project.name === "mobile") {
         await expect(page.locator('[aria-label="Region legend"]')).toBeVisible();
       }
@@ -159,7 +159,6 @@ test("Fold8 gesture px diagrams remain readable through every pose", async ({ pa
   await chooseUnits(page, "px");
   for (const pose of poses) {
     if (pose !== "Closed") {
-      await page.getByRole("button", { name: /^Pose:/ }).click();
       await page.getByRole("button", { name: pose, exact: true }).click();
       await waitForFoldTransition(page);
     }
@@ -173,7 +172,6 @@ test("Flip8 gesture diagrams and exact inner px remain readable", async ({ page 
   await chooseDropdown(page, "Navigation", "Gesture");
   await expect(page).toHaveScreenshot("galaxy-z-flip8-gesture-dp-closed.png", { fullPage: true });
   for (const pose of ["Partially Folded", "Open"] as const) {
-    await page.getByRole("button", { name: /^Pose:/ }).click();
     await page.getByRole("button", { name: pose, exact: true }).click();
     await waitForFoldTransition(page);
     await expect(page).toHaveScreenshot(`galaxy-z-flip8-gesture-dp-${pose.toLowerCase().replaceAll(" ", "-")}.png`, { fullPage: true });
@@ -317,7 +315,6 @@ test("Fold7 animation switches from measured cover to measured inner display", a
   await page.goto("/galaxy-z-fold7");
   await waitForDiagram(page);
   await openMetricsIfCollapsed(page);
-  await page.getByRole("button", { name: "Pose: Closed" }).click();
   await page.getByRole("button", { name: "Open", exact: true }).click();
   await waitForFoldTransition(page);
   await expect(page.locator(".screen-tabs button").filter({ hasText: "Inner" })).toHaveAttribute("aria-pressed", "true");
@@ -329,7 +326,6 @@ test("fold pose changes preserve an explicit zoom", async ({ page }) => {
   await waitForDiagram(page);
   await page.getByRole("button", { name: /^Zoom:/ }).click();
   await page.getByRole("button", { name: "200%", exact: true }).click();
-  await page.getByRole("button", { name: "Pose: Closed" }).click();
   await page.getByRole("button", { name: "Open", exact: true }).click();
   await waitForFoldTransition(page);
   await expect(page.getByRole("button", { name: "Zoom: 200%" })).toBeVisible();
@@ -344,7 +340,6 @@ test("fold pose changes preserve pan and 0 restores automatic fit", async ({ pag
   const manualTransform = await position.evaluate(element => (element as HTMLElement).style.transform);
   expect(manualTransform).not.toBe("translate(0px, 0px)");
 
-  await page.getByRole("button", { name: "Pose: Closed" }).click();
   await page.getByRole("button", { name: "Open", exact: true }).click();
   await waitForFoldTransition(page);
   await expect(position).toHaveAttribute("style", `transform: ${manualTransform};`);
@@ -370,7 +365,6 @@ test("fold pose changes preserve pan and 0 restores automatic fit", async ({ pag
 test("animated hinge keeps outer metrics until the inner display is visible", async ({ page }) => {
   await page.goto("/galaxy-z-fold8");
   await waitForDiagram(page);
-  await page.getByRole("button", { name: "Pose: Closed" }).click();
   await page.getByRole("button", { name: "Open", exact: true }).click();
   await expect(page.locator(".metrics-panel")).toHaveAttribute("aria-busy", "true");
   const samples = await page.evaluate(() => new Promise<Array<{ angle: number; metrics: string; diagram: string }>>(resolve => {
@@ -395,7 +389,6 @@ test("reduced motion reaches the same Fold endpoint", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/galaxy-z-fold8");
   await waitForDiagram(page);
-  await page.getByRole("button", { name: "Pose: Closed" }).click();
   await page.getByRole("button", { name: "Open", exact: true }).click();
   await expect(page.locator(".screen-tabs button").filter({ hasText: "Inner" })).toHaveAttribute("aria-pressed", "true");
 });

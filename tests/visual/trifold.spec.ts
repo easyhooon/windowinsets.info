@@ -1,7 +1,8 @@
 import { expect, test, type Page } from "@playwright/test";
 
 async function choose(page: Page, control: string, value: string) {
-  await page.getByRole("button", { name: new RegExp(`^${control}:`) }).click();
+  // Pose and navigation are always-visible buttons; the rest open a menu.
+  if (control !== "Pose" && control !== "Navigation") await page.getByRole("button", { name: new RegExp(`^${control}:`) }).click();
   await page.getByRole("button", { name: value, exact: true }).click();
 }
 
@@ -22,18 +23,17 @@ test("TriFold renders both hinges, switches measured modes, and fits each pose",
     await expect(diagram).toHaveAttribute("data-right-angle", right);
     await expect(page.locator(".metrics-panel")).toHaveAttribute("aria-busy", "false");
     // Perspective brings the folded left wing nearer the camera, so the fit may
-    // shrink there; the settled scale then carries into the open pose.
-    expect(parseInt((await page.getByRole("button", { name: /^Zoom:/ }).textContent())!.slice(5))).toBeLessThanOrEqual(parseInt(poseZoom!.slice(5)));
+    // shrink there. The wide open pose is width-bound and may exceed the
+    // height-bound closed fit.
+    if (pose !== "Open") expect(parseInt((await page.getByRole("button", { name: /^Zoom:/ }).textContent())!.slice(5))).toBeLessThanOrEqual(parseInt(poseZoom!.slice(5)));
     await expect(page).toHaveScreenshot(`trifold-${pose === "Open" ? "open" : "partial"}.png`);
   }
-  await page.getByRole("button", { name: /^Hinge:/ }).click();
   const slider = page.getByRole("slider", { name: "Fold sequence" });
   await slider.fill("135");
   await expect(diagram).toHaveAttribute("data-left-angle", "90.00");
   await expect(diagram).toHaveAttribute("data-right-angle", "180.00");
   await slider.press("Escape");
   await expect(page).toHaveScreenshot("trifold-left-hinge.png");
-  await page.getByRole("button", { name: /^Hinge:/ }).click();
   await slider.fill("45");
   await expect(diagram).toHaveAttribute("data-left-angle", "0.00");
   await expect(diagram).toHaveAttribute("data-right-angle", "90.00");

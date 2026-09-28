@@ -135,8 +135,8 @@ from https://developer.samsung.com/galaxy-emulator-skin.
 
 | Surface | Reference | Current implementation |
 | --- | --- | --- |
-| Desktop layout | Device list, Metrics, large canvas; controls in header | Same three columns, independent scrolling and draggable/keyboard width handles |
-| Mobile | Model selector, collapsible Metrics, bottom controls; picker is a pinned search over one tall scrolling list | Implemented, checked at 390×844; the picker runs to the bottom edge, hides the Devices count, keeps family tabs on one row, and scrolls the tabs, list and footer links together under a sticky search |
+| Desktop layout | Device list, Metrics, large canvas; floating pill controls over the canvas | Same three columns, independent scrolling and draggable/keyboard width handles; view controls float as pills over the canvas (top: display options, bottom: zoom, rotation and pose) with the settings gear at the top right |
+| Mobile | Model selector, collapsible Metrics, floating bottom pills; picker is a pinned search over one tall scrolling list | Implemented, checked at 390×844; floating pills stack at the bottom as on the reference (display options first, so the open Metrics disclosure never covers them) and leave the canvas full height, −/+ zoom steps are hidden (pinch and the zoom menu remain), and foldable pose controls wrap onto their own row; the picker runs to the bottom edge, hides the Devices count, keeps family tabs on one row, and scrolls the tabs, list and footer links together under a sticky search |
 | Device navigation | Searchable grouped list with selected model | Android family tabs (All/Z/S/Tab/Note/A), collapsible series groups, cross-family search, active model on home and detail routes |
 | Viewport | Scroll/drag pan, pinch zoom, +/−, 0 fit | Pointer pan/touch pinch, native wheel pan/Ctrl-wheel zoom, zoom shown as CSS px per dp (10–500%, auto-fit capped at 100%) so every series shares one scale, ResizeObserver fit |
 | Orientation | Portrait, left/right landscape, upside down | Phones and foldables (bar, Flip, Fold, TriFold) offer three: Galaxy devices leave 180° out of auto-rotation there, so apps do not turn upside down (Fold confirmed on a real unit, folded and unfolded, 2026-09-27; TriFold assumed to match until checked). Tablets rotate 180° (confirmed) and keep all four. Flat devices re-lay out upright in the chosen orientation (swapped size, turned corners and artwork) with a 300 ms decelerating turn; screen content and measurement numbers counter-rotate to stay upright, while external measurement rulers briefly disappear during the turn, as on the reference. Insets appear only for captured rotations, otherwise "not measured yet". 3D foldables use the same rule: the WebGL model rolls in the view plane over the same 300 ms curve while its display texture draws the upright, re-laid-out screen (counter-rotating during the turn), and projected rulers annotate the target orientation. The canvas itself is never CSS-rotated |
@@ -382,11 +382,10 @@ No device names or viewport-specific measurement omissions select the policy.
 
 The desktop three-column hierarchy and mobile selector/Metrics/controls hierarchy
 remain reference-shaped. On phones, the settings icon sits at the right of the
-top header row as on the reference, leaving no separate settings row in the
-bottom controls. The shared workspace allocates real grid/flex space
-to the diagram and bottom controls without guessed pixel reserves in Fit. The
-bottom toolbar grows with its content;
-long values wrap rather than truncate. The legend and gesture help overlay the
+top header row as on the reference. View controls float over the canvas as
+pills, as on the reference, so the diagram keeps the full canvas height; Fit
+measures the actual top and bottom pill overlays instead of guessed pixel
+reserves. The legend and gesture help overlay the
 canvas as on the reference, so panned device artwork can remain visible behind
 them until it reaches the actual canvas edge. The legend stays interactive.
 
@@ -470,8 +469,8 @@ list, FAB):
   container and the list still draw behind the bars, matching Scaffold with
   `contentWindowInsets = WindowInsets.safeDrawing` and list `contentPadding`.
 
-The control is optional, so it sits last in the toolbar after the
-reference-shaped view controls, and its Metrics section follows the measured
+The control is optional, so it sits last in the top display-options pill after
+the navigation mode, and its Metrics section follows the measured
 data and sources. The options name what happens to the insets rather than `Before`/`After`, which did not say before or after what. It is named for the app rather than a toolkit because both Compose and
 Views resolve to the same values. The preview is a simulation derived from each
 capture, not a rendered app frame and not a new measurement. It is available
@@ -482,3 +481,26 @@ overlap stays visible, and the legend toggles still apply. Flat displays render
 it in the SVG diagram; foldables draw it into the same canvas texture, so it
 bends with the hinge. Metrics adds a Compose snippet with the per-edge dp values
 and a View snippet with the px values for the selected screen and mode.
+
+## Floating canvas controls — 2026-09-29
+
+The former six-dropdown toolbar is replaced by safearea.info's floating pill
+structure on desktop and mobile. Reference-shaped parts: an icon bottom pill
+row (zoom −/+ with a zoom menu showing the percentage, rotate counterclockwise
+and clockwise buttons) and the settings gear alone in the header corner.
+
+Intentional Android substitutions, because these controls carry values an icon
+cannot express:
+
+- A top pill holds a `3-button | Gesture` navigation segmented control and the
+  `App insets` text dropdown. The reference has no navigation mode.
+- The current orientation name sits between the rotate buttons as a menu, since
+  Android orientations are named (Portrait, Landscape Left/Right) and phones
+  skip 180°. Rotate buttons skip unavailable orientations.
+- Foldables add a pose pill: Closed / Partially Folded / Open icon buttons, the
+  hinge slider and a degree readout (`left°/right°` for TriFold). Pose glyphs
+  follow each form factor's hinge: vertical for Fold, horizontal for Flip, two
+  vertical hinges for TriFold.
+- On phones every pill stacks at the bottom, as on the reference, so the open
+  Metrics disclosure never covers navigation mode. The −/+ zoom steps are
+  hidden there; pinch and the zoom menu remain.
