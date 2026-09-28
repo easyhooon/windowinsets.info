@@ -443,6 +443,19 @@ skin includes only the main display, so no cover capture is in scope.
 Raw files: `measurements/galaxy-z-flip7-fe/main-gesture.json` and
 `main-threeButton.json`.
 
+On 2026-09-28, SM-F761B-VN4 (Vietnam/Hanoi, same build) ran InsetsProbe 1.6.0.
+The unit had an older Probe with a different signature, and RTL rejected the new
+APK with an empty "installation failed" message. After that app was uninstalled
+in the Applications panel, the new APK installed. The in-app sweep captured the
+main display at rotations 0, 1 and 3 in both navigation modes. Each capture
+reports display 0, 480 dpi, font scale 1 and settings mode 0/2, and all six
+were uploaded to the capture inbox. Rotation 0 matches the 2026-09-25 captures.
+Landscape windows are 2640×1080 px with a 90 px top bar and a vertical FLAT
+feature at x=1320. Three-button places its 144 px bar on the right (rotation 1)
+or left (rotation 3), while gesture keeps a 45 px bottom inset. The
+116×66 px cutout follows the rotation. Files are in
+`measurements/galaxy-z-flip7-fe/recapture-2026-09-28-rotation/`.
+
 ## Galaxy Tab S11 Ultra measured on 2026-09-25
 
 InsetsProbe 1.3.0 captured Samsung RTL Galaxy Tab S11 Ultra Wi-Fi (SM-X930),
