@@ -411,3 +411,22 @@ test("cover cutout bounds distinguish OS geometry from unmeasured lenses", async
   await expect(page.getByRole("heading", { name: "Camera cutouts: what can be measured" })).toBeVisible();
   await expect(page.locator("#camera-cutouts")).toContainText("pending a new, verified capture");
 });
+
+test("foldables roll the device and lay out upright content in the new orientation", async ({ page }) => {
+  await page.goto("/galaxy-z-fold7");
+  await openMetricsIfCollapsed(page);
+  await expect(page.getByRole("button", { name: "Logical Size 411.43 × 960 dp" })).toBeVisible();
+  await chooseDropdown(page, "Orientation", "Landscape Left");
+  await expect(page.getByRole("button", { name: "Logical Size 960 × 411.43 dp" })).toBeVisible();
+  // The 3D model turns in WebGL; the canvas itself is never CSS-rotated.
+  await expect.poll(() => page.locator("[data-fold-renderer]").getAttribute("data-view-rotation")).toMatch(/^-?90\.00$/);
+  const canvasTransform = await page.locator("[data-orientation-turn] > div").evaluate(element => new DOMMatrix(getComputedStyle(element).transform));
+  expect(Math.abs(canvasTransform.b)).toBeLessThan(1e-6);
+  // Rulers annotate the landscape screen with horizontal labels.
+  const width = page.locator(".projected-rulers [data-ruler='Display width'] [data-ruler-label]");
+  await expect(width).toContainText("960");
+  const box = (await width.boundingBox())!;
+  expect(box.width).toBeGreaterThan(box.height);
+  // Uncaptured rotations never reuse the portrait insets.
+  await expect(page.locator(".canvas-footer .pending-notice")).toContainText("Landscape insets are not measured yet");
+});

@@ -201,13 +201,13 @@ export function DeviceView({ device }: { device: Device }) {
   const foldable = triFold || device.formFactor === "foldable-book" || device.formFactor === "foldable-flip";
   const main = preciseScreen(device.screens.find(s => s.id === "main")!);
   const baseScreen = preciseScreen(device.screens.find(s => s.id === screenId) ?? main);
-  // Flat devices are re-laid out in the chosen orientation (upright content, swapped
-  // size); 3D foldables keep rotating the recorded view.
-  const flatTurns = foldable && skins[`${device.slug}/main`] ? 0 : viewQuarter(rotation);
-  const screen = orientScreen(baseScreen, flatTurns);
+  // Every device is re-laid out in the chosen orientation (upright content, swapped
+  // size); 3D foldables roll the recorded model and draw that upright screen on it.
+  const turns = viewQuarter(rotation);
+  const screen = orientScreen(baseScreen, turns);
   const measurement = screen.insets[navMode];
-  // A turned flat device without a capture for this rotation and nav mode.
-  const rotationPending = flatTurns !== 0 && !measurement;
+  // A turned device without a capture for this rotation and nav mode.
+  const rotationPending = turns !== 0 && !measurement;
   const rtl = getRtlAvailability(device.slug);
   // Pixel entries come from the Android Emulator, never from Samsung RTL.
   const emulatorOnly = device.brand === "Google";
@@ -222,6 +222,7 @@ export function DeviceView({ device }: { device: Device }) {
   const outerSkin = skins[`${device.slug}/cover`];
   const outerSource = device.screens.find(s => s.id === "cover");
   const outerScreen = outerSource ? preciseScreen(outerSource) : undefined;
+  const orientedOuter = outerScreen ? orientScreen(outerScreen, turns) : undefined;
   const densityRows = device.screens.flatMap(s => {
     const px = s.logicalSizePx ?? s.resolutionPx;
     if (!s.densityDpi || !s.logicalSizeDp || !px.width) return [];
@@ -233,7 +234,8 @@ export function DeviceView({ device }: { device: Device }) {
     }];
   });
   const densityScales = [...new Set(device.screens.flatMap(s => s.densityDpi ? [s.densityDpi] : []))];
-  const mainMeasurement = main.insets[navMode];
+  const orientedMain = orientScreen(main, turns);
+  const mainMeasurement = orientedMain.insets[navMode];
   const mainSafe = mainMeasurement ? safeInsets(mainMeasurement) : null;
   const mainSafePx = mainMeasurement ? safeInsetsPx(mainMeasurement) : null;
   const useFold = foldable && !!mainSkin;
@@ -449,15 +451,15 @@ export function DeviceView({ device }: { device: Device }) {
     <section className="canvas-panel" aria-label="Device visualization">
       <div className="canvas-stage">
       <DiagramViewport viewportRef={viewport} autoFit={autoFit}
-        zoom={zoom} setZoom={setZoom} rotation={useFold ? rotation : 0} fitKey={fitKey}
+        zoom={zoom} setZoom={setZoom} rotation={0} fitKey={fitKey}
         onUserTransform={() => { setZoom(viewport.current?.effectiveZoom() ?? zoom); setAutoFit(false); }} onFit={() => setAutoFit(true)}
         baseWidth={diagramWidth}
         baseHeight={700} dpScale={dpScale} fitWidth={useFold ? triFold ? 780 : 1000 : diagramWidth} fitHeight={useFold && !triFold ? 1000 : diagramHeight}>
         {useFold ? <FoldRenderer3D triFold={triFold} angle={angle} axis={device.formFactor === "foldable-flip" ? "horizontal" : "vertical"}
           widthDp={mainWidthDp} heightDp={mainHeightDp}
-          safe={mainSafe} safePx={mainSafePx} logicalSizePx={main.logicalSizePx} cornerRadiiDp={main.cornerRadiiDp} cornerRadiiPx={main.cornerRadiiPx} cutoutShape={mainMeasurement?.cutoutShape}
-          zoom={zoom} showFrame={showFrame} showRegions={showRegions} showDimensions={showDimensions} units={units} layers={layers} appPreview={appPreview} skin={mainSkin} skinRotation={main.captureRotation ?? 0} viewRotation={rotation} measured={!!main.logicalSizeDp} cover={outerScreen && outerSkin ? { screen: outerScreen, measurement: outerScreen.insets[navMode], skin: outerSkin } : undefined}
-          fallbackMain={{ screen: main, measurement: mainMeasurement }}
+          safe={mainSafe} safePx={mainSafePx} logicalSizePx={orientedMain.logicalSizePx} cornerRadiiDp={orientedMain.cornerRadiiDp} cornerRadiiPx={orientedMain.cornerRadiiPx} cutoutShape={mainMeasurement?.cutoutShape}
+          zoom={zoom} showFrame={showFrame} showRegions={showRegions} showDimensions={showDimensions} units={units} layers={layers} appPreview={appPreview} skin={mainSkin} skinRotation={main.captureRotation ?? 0} viewRotation={rotation} measured={!!main.logicalSizeDp} cover={outerScreen && orientedOuter && outerSkin ? { screen: outerScreen, oriented: orientedOuter, measurement: orientedOuter.insets[navMode], skin: outerSkin } : undefined}
+          fallbackMain={{ screen: orientedMain, measurement: mainMeasurement }}
           chassisMm={device.chassisMm}
           onMeasurementBounds={(bounds, body) => viewport.current?.fitFoldBounds(bounds, body)}
           onDisplayedAngle={value => {
@@ -471,7 +473,8 @@ export function DeviceView({ device }: { device: Device }) {
       </DiagramViewport>
       </div>
       <footer className="canvas-footer">
-      {useFold ? <div className="fold-measurement-notice">{!measurement ? <p className="pending-notice">{pendingNotice}</p> : emulatorOnly && <p className="pending-notice">Android Emulator capture · Not measured on Pixel hardware</p>}</div>
+      {useFold ? <div className="fold-measurement-notice">{rotationPending ? <p className="pending-notice">{orientationName(screen)} insets are not measured yet.</p>
+        : !measurement ? <p className="pending-notice">{pendingNotice}</p> : emulatorOnly && <p className="pending-notice">Android Emulator capture · Not measured on Pixel hardware</p>}</div>
         : rotationPending ? <p className="pending-notice">{orientationName(screen)} insets are not measured yet.</p>
           : !measurement ? <p className="pending-notice">{pendingNotice}</p> : emulatorOnly && <p className="pending-notice">Android Emulator capture · Not measured on Pixel hardware</p>}
       {(measurement || screen.cornerRadiiDp || useFold) && <div className="region-legend" aria-label="Region legend">
