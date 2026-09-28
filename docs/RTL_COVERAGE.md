@@ -723,6 +723,16 @@ Gesture bars are 94/42 px (33.42/14.93 dp) and 3-button bars are 94/135 px
 coordinate space, so the cutout shape is registered, and 11 px (3.91 dp) corner
 radii. Settings, configuration and inset classifications agree in both modes.
 
+On 2026-09-28, the USA/TX SM-S918U-US01 unit supplied an InsetsProbe 1.6.0
+sweep at rotations 0, 1 and 3 in both navigation modes. All six files report the
+same Android 16 / One UI 8.5 build, 450 dpi, font scale 1 and full-screen
+windows. Portrait bars remain 94/42 px in gesture mode and 94/135 px in
+3-button mode. Landscape status bars are 84 px; the 94 px cutout moves left at
+rotation 1 and right at rotation 3. Gesture retains a 42 px bottom bar, while
+3-button uses a 135 px bar on the opposite side. Files are in
+`measurements/galaxy-s23-ultra/recapture-2026-09-28-rotation/`; the original
+portrait captures remain preserved.
+
 ### Galaxy S23+ — 2026-09-27
 
 InsetsProbe 1.3.0 captured Samsung RTL Galaxy S23+ (SM-S916U), Android 16 /

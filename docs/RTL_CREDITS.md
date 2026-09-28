@@ -234,3 +234,15 @@ the second reservation uploaded all 12 cover/inner, navigation-mode and rotation
 combinations to inbox PR #38. The accepted files are recorded in the
 measurement queue. The 1-credit balance is the last confirmed header value;
 any later refund must be verified separately.
+
+On 2026-09-28, Galaxy S23 Ultra SM-S918B-VN4 Vietnam/Hanoi again opened a
+WebClient that immediately reported `All ongoing tests have ended`; it was
+returned early and the header recovered from 19 to 20 Credits. Two
+Poland/Warsaw reservations and one UK/Staines reservation did not yield a
+usable capture session. Samsung processed their returns asynchronously while
+the next booking was made, so the individual refund order cannot be
+reconstructed from the header. Galaxy S23 Ultra SM-S918U-US01 USA/TX Android
+16 then produced both three-file rotation sweeps in inbox PR #55. After its
+one-credit early return, Reservations showed 16 Credits and no active devices.
+The net cost since the confirmed 21-credit post-S24 balance was five credits
+across all S23 Ultra attempts.
