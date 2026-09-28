@@ -140,8 +140,17 @@ removes a model from its catalog.
 - Galaxy S24 (SM-S921N-KR3, Korea/Gumi) was reserved on 2026-09-24 with
   Android 16 / One UI 8.5. InsetsProbe 1.3.0 captured the main display in both
   navigation modes at 1080×2340 px / 480 dpi; the downloaded files report
-  matching Settings and inset classifications. This confirms availability for
-  this exact model on that date only.
+  matching Settings and inset classifications. A 2026-09-28 reservation of the
+  same unit supplied an InsetsProbe 1.6.0 sweep at rotations 0, 1 and 3 in both
+  navigation modes. All six files report build
+  BP4A.251205.006.S921NKSSGDZG1, 480 dpi, font scale 1, full-screen windows and
+  matching navigation evidence. Portrait bars are 103/45 px in gesture mode
+  and 103/144 px in 3-button mode. Landscape status bars are 90 px; the 103 px
+  cutout moves left at rotation 1 and right at rotation 3. Gesture retains a
+  45 px bottom bar, while 3-button uses a 144 px bar on the opposite side.
+  Files are in `measurements/galaxy-s24/recapture-2026-09-28-rotation/`; the
+  original portrait captures remain preserved. Availability is confirmed for
+  this exact model on the respective dates only.
 - Galaxy S24 FE (SM-S721N_KR4, Korea/Gumi) was reserved on 2026-09-25 with
   Android 16 / One UI 8.5. InsetsProbe 1.3.0 captured its Phone-labeled built-in
   display in both navigation modes at 1080×2340 px / 450 dpi with font scale 1.
@@ -733,6 +742,16 @@ Gesture bars are 94/42 px (33.42/14.93 dp) and 3-button bars are 94/135 px
 coordinate space, so the cutout shape is registered, and 11 px (3.91 dp) corner
 radii. Settings, configuration and inset classifications agree in both modes.
 
+On 2026-09-28, the USA/TX SM-S918U-US01 unit supplied an InsetsProbe 1.6.0
+sweep at rotations 0, 1 and 3 in both navigation modes. All six files report the
+same Android 16 / One UI 8.5 build, 450 dpi, font scale 1 and full-screen
+windows. Portrait bars remain 94/42 px in gesture mode and 94/135 px in
+3-button mode. Landscape status bars are 84 px; the 94 px cutout moves left at
+rotation 1 and right at rotation 3. Gesture retains a 42 px bottom bar, while
+3-button uses a 135 px bar on the opposite side. Files are in
+`measurements/galaxy-s23-ultra/recapture-2026-09-28-rotation/`; the original
+portrait captures remain preserved.
+
 ### Galaxy S23+ — 2026-09-27
 
 InsetsProbe 1.3.0 captured Samsung RTL Galaxy S23+ (SM-S916U), Android 16 /
@@ -764,6 +783,16 @@ the unit was not updated like the S23 Ultra/S23+ units), portrait at rotation
 and 3-button bars are 81/144 px (27/48 dp). Both modes report a centered
 56×81 px top cutout and 102 px (34 dp) corner radii. Settings, configuration
 and inset classifications agree in both modes.
+
+On 2026-09-28, India/Noida SM-S911B-IN1 supplied an InsetsProbe 1.6.0 sweep at
+rotations 0, 1 and 3 in both navigation modes. All six files report Android 15 /
+One UI 7.0 build `AP3A.240905.015.A2.S911BXXU8DYD9`, 480 dpi, font scale 1
+and full-screen windows. Portrait remains 1080×2340 px with 81 px status and
+cutout insets; landscape is 2340×1080 px with a 72 px status bar. The 81×56 px
+cutout moves left at rotation 1 and right at rotation 3. Gesture keeps a 45 px
+bottom bar, while 3-button uses a 144 px bar on the opposite side. Files are in
+`measurements/galaxy-s23/recapture-2026-09-28-rotation/`; the original
+portrait captures remain preserved.
 
 ### Galaxy S21 FE — 2026-09-27
 

@@ -20,29 +20,40 @@ import { galaxyZFlip5 } from '../app/data/devices/galaxy-z-flip5/index.ts';
 import { galaxyS25Plus } from '../app/data/devices/galaxy-s25-plus/index.ts';
 import { galaxyS25Ultra } from '../app/data/devices/galaxy-s25-ultra/index.ts';
 import { galaxyS24Ultra } from '../app/data/devices/galaxy-s24-ultra/index.ts';
+import { galaxyS23Ultra } from '../app/data/devices/galaxy-s23-ultra/index.ts';
+import { galaxyS24 } from '../app/data/devices/galaxy-s24/index.ts';
+import { galaxyS23 } from '../app/data/devices/galaxy-s23/index.ts';
 import { formatLength, hasExactPx, safeInsetsPx } from '../app/data/measurementUnits.ts';
 
 function readCapture(path) {
   return JSON.parse(readFileSync(path, 'utf8'));
 }
 
-test('S24 Ultra rotations publish only their own six raw captures', () => {
-  const screen = galaxyS24Ultra.screens[0];
-  for (const rotation of [0, 1, 3]) {
-    const view = rotation === 0 ? screen : screen.rotations[rotation];
-    for (const mode of ['gesture', 'threeButton']) {
-      const inset = view.insets[mode];
-      const path = new URL(inset.sources[0].url).pathname.split('/blob/main/')[1];
-      const raw = readCapture(path);
-      const rect = raw.displayCutout.boundingRects[0].px;
-      assert.equal(raw.display.rotation, rotation);
-      assert.equal(raw.navigation.mode, mode);
-      assert.deepEqual(view.logicalSizePx, raw.display.currentWindowPx);
-      assert.deepEqual(inset.systemBarsPx, raw.insets.systemBars.px);
-      assert.deepEqual(inset.displayCutoutPx, raw.insets.displayCutout.px);
-      assert.deepEqual([inset.cutoutShape.xPx, inset.cutoutShape.yPx, inset.cutoutShape.widthPx, inset.cutoutShape.heightPx],
-        [rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top]);
-    }
+for (const [name, device, model] of [
+  ['S24 Ultra', galaxyS24Ultra, 'SM-S928N'],
+  ['S24', galaxyS24, 'SM-S921N'],
+  ['S23 Ultra', galaxyS23Ultra, 'SM-S918U'],
+  ['S23', galaxyS23, 'SM-S911B'],
+]) test(`${name} published rotations match all six raw captures`, () => {
+  const screen = device.screens[0];
+  for (const rotation of [0, 1, 3]) for (const mode of ['gesture', 'threeButton']) {
+    const published = rotation === 0 ? screen.insets[mode] : screen.rotations[rotation].insets[mode];
+    const path = new URL(published.sources[0].url).pathname.split('/blob/main/')[1];
+    const raw = readCapture(path);
+    const rect = raw.displayCutout.boundingRects[0].px;
+    assert.equal(raw.device.model, model);
+    assert.equal(raw.display.rotation, rotation);
+    assert.equal(raw.navigation.mode, mode);
+    assert.equal(raw.navigation.settingAgreesWithInsets, true);
+    assert.deepEqual(rotation === 0 ? screen.logicalSizePx : screen.rotations[rotation].logicalSizePx, raw.display.currentWindowPx);
+    assert.deepEqual(published.systemBars, raw.insets.systemBars.dp);
+    assert.deepEqual(published.systemBarsPx, raw.insets.systemBars.px);
+    assert.deepEqual(published.displayCutout, raw.insets.displayCutout.dp);
+    assert.deepEqual(published.displayCutoutPx, raw.insets.displayCutout.px);
+    assert.deepEqual(
+      { xPx: published.cutoutShape.xPx, yPx: published.cutoutShape.yPx, widthPx: published.cutoutShape.widthPx, heightPx: published.cutoutShape.heightPx },
+      { xPx: rect.left, yPx: rect.top, widthPx: rect.right - rect.left, heightPx: rect.bottom - rect.top },
+    );
   }
 });
 

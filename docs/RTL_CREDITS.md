@@ -240,3 +240,28 @@ On 2026-09-28, Galaxy S24 Ultra SM-S928N-KR3 was reserved in Korea/Gumi for
 were uploaded and validated while 24 minutes remained. The WebClient offered
 `Return this device to get back 1 credit(s)`; selecting it and ending the test
 left 23 Credits in the header and no active reservations.
+
+On 2026-09-28, the Galaxy S24 SM-S921N-KR3 Korea/Gumi Android 16 reservation
+began with a confirmed 22-credit balance. The 30-minute booking cost two
+credits; both three-file navigation sweeps uploaded to inbox PR #55. The
+early-return dialog offered one credit back, and the refreshed Reservations
+page showed 21 Credits and no active reservation. Net cost: one credit.
+
+On 2026-09-28, Galaxy S23 Ultra SM-S918B-VN4 Vietnam/Hanoi again opened a
+WebClient that immediately reported `All ongoing tests have ended`; it was
+returned early and the header recovered from 19 to 20 Credits. Two
+Poland/Warsaw reservations and one UK/Staines reservation did not yield a
+usable capture session. Samsung processed their returns asynchronously while
+the next booking was made, so the individual refund order cannot be
+reconstructed from the header. Galaxy S23 Ultra SM-S918U-US01 USA/TX Android
+16 then produced both three-file rotation sweeps in inbox PR #55. After its
+one-credit early return, Reservations showed 16 Credits and no active devices.
+The net cost since the confirmed 21-credit post-S24 balance was five credits
+across all S23 Ultra attempts.
+
+Galaxy S23 SM-S911B-IN1 India/Noida Android 15 was then reserved for 30 minutes,
+reducing the confirmed header from **16 to 14 Credits**. Both three-file
+rotation sweeps uploaded to inbox PR #55. The session ended with eight minutes
+remaining and the one-credit return option selected, but the refreshed
+Reservations page still showed **14 Credits** and no active devices. No refund
+is recorded.
