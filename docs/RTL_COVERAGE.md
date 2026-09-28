@@ -384,6 +384,14 @@ windows are 2340×1080 px with an 84 px top bar, a 135 px three-button side bar,
 a 42 px gesture bottom inset and a rotated 104×60 px cutout. Files are in
 `measurements/galaxy-s26-plus/recapture-2026-09-28-rotation/`.
 
+Galaxy S25 Ultra SM-S938N_KR1 (same build as the accepted captures) produced the
+same six-file sweep. Rotation 0 matches the accepted captures; landscape windows
+are 2340×1080 px with an 84 px top bar, a 135 px three-button side bar, a 42 px
+gesture bottom inset and a rotated 96×52 px cutout. Closing the WebClient tab
+mid-reservation restarted and reset the unit (Probe removed, navigation back to
+three-button), so the gesture half was captured after reinstalling. Files are in
+`measurements/galaxy-s25-ultra/recapture-2026-09-28-rotation/`.
+
 ## Galaxy S26 Ultra measured on 2026-09-23
 
 Samsung RTL Korea/Gumi SM-S948U_KR3 was reserved and its main display captured
