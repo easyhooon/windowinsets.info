@@ -333,12 +333,10 @@ windowinsets.info is a reference site for Android window insets, display cutouts
 **Current Status**: Galaxy Z Fold8, Fold7, Fold6, Fold5, Fold4 and Flip8 cover and inner displays
 are measured in both navigation modes from verified live RTL sessions. Flip5 and
 Flip6 main screens are measured in both modes; no official cover skins were supplied.
-Galaxy S25 Ultra and Galaxy S25+ main screens are measured. Galaxy S24 Ultra and
-Galaxy S24 main screens are measured in both navigation modes; Galaxy S24+ has
-an accepted main 3-button capture, with gesture pending. Galaxy S25, Galaxy S25
-Edge and Galaxy S25 FE main screens are measured in both modes. These S24 and S25
-measurements are from Samsung RTL Korea/Gumi on Android 16 / One UI 8.5, captured
-2026-09-24.
+Galaxy S26, S25 and S24 series main screens (including S25 Edge, S25 FE and
+S24 FE), Galaxy S23 Ultra and Galaxy S23 have natural, rotation 1 and rotation 3
+captures in both navigation modes. Galaxy S23+ still lacks gesture rotation 3.
+See "Rotation sweep captured" below for units and capture directories.
 
 ## RTL Credits & Cost
 
