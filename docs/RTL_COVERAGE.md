@@ -332,6 +332,14 @@ files report an upright 1080×2340 px app window. The physical panel is
 that model was offered on the checked date; it does not complete the
 cross-region RTL catalog inventory.
 
+On 2026-09-27 the same model/build supplied a full main-display sweep with
+InsetsProbe 1.5.0. Separate rotation 1 and 3 captures in both navigation modes
+report a settled 2340×1080 px window at 450 dpi and font scale 1. The cutout is
+on the left at rotation 1 and right at rotation 3; the 3-button navigation bar
+is on the opposite side. These four raw files are preserved under
+`measurements/galaxy-s26-ultra/recapture-2026-09-27-rotation/` and registered
+as measured landscape insets.
+
 ## Galaxy S25 measured on 2026-09-24
 
 Samsung RTL Korea/Gumi SM-S931N_KR1 (Android 16, One UI 8.5, build
