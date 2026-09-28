@@ -211,12 +211,6 @@ for the boundary between published dimensions and illustrative geometry.
 
 ## Device coverage and priorities
 
-Google Pixel coverage includes all 22 in-scope SDK profiles: every Pixel
-released in 2020 or later with an Android Emulator skin, plus every Pixel Fold.
-These entries use AOSP skins and Android Emulator captures. They are labelled
-as emulator evidence, not Pixel hardware measurements. See
-[Pixel coverage](docs/DEVICE_COVERAGE.md#google-pixel-issue-23).
-
 **Samsung target coverage (WIP):** Every Galaxy model released in 2020 or later
 with an official Galaxy Emulator Skin, plus every Galaxy Fold and Flip with an
 official skin regardless of release year. This includes discontinued models and
@@ -236,6 +230,12 @@ An official skin permits an artwork preview, not a claim of verified inset data.
 Devices without captures remain marked **Skin preview / pending** until measured.
 Coverage is still in progress; this target is not a claim that every eligible
 model has already been imported or measured.
+
+Google Pixel coverage includes all 22 in-scope SDK profiles: every Pixel
+released in 2020 or later with an Android Emulator skin, plus every Pixel Fold.
+These entries use AOSP skins and Android Emulator captures. They are labelled
+as emulator evidence, not Pixel hardware measurements. See
+[Pixel coverage](docs/DEVICE_COVERAGE.md#google-pixel-issue-23).
 
 ### Galaxy Watch limitation
 
