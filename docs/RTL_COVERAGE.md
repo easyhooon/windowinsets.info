@@ -412,6 +412,13 @@ windows are 2340×1080 px with an 84 px top bar, a 135 px three-button side bar,
 a 42 px gesture bottom inset and an 82 px side cutout inset around a 58×58 px
 hole. Files are in `measurements/galaxy-s25-fe/recapture-2026-09-28-rotation/`.
 
+Galaxy S25 SM-S931N_KR1 (same build as the accepted captures, 480 dpi) produced
+the same six-file RTL sweep; the owner installed the keyed APK by hand while the
+agent's permission checks were unavailable. Rotation 0 matches the accepted
+captures; landscape windows are 2340×1080 px with a 90 px top bar, a 144 px
+three-button side bar, a 45 px gesture bottom inset and a rotated 103×58 px
+cutout. Files are in `measurements/galaxy-s25/recapture-2026-09-28-rotation/`.
+
 ## Galaxy S26 Ultra measured on 2026-09-23
 
 Samsung RTL Korea/Gumi SM-S948U_KR3 was reserved and its main display captured
