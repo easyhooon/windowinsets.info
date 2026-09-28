@@ -218,6 +218,21 @@ removes a model from its catalog.
   report 101 px instead of 8 px, so both are now registered. Files are in
   `measurements/galaxy-s22-ultra/recapture-2026-09-28-rotation/`; the original
   portrait captures remain preserved.
+- Galaxy S22+ (SM-S906B-RU1, Russia/Moscow) supplied an InsetsProbe 1.6.0
+  sweep on 2026-09-28 at rotations 0, 1 and 3 in both navigation modes. No
+  Korean unit was listed; RU1 offered the newest Android version (15 / One UI
+  7.0, build AP3A.240905.015.A2.S906BXXUDFYD9, the same build as the original
+  Vietnam capture). All six captures report 450 dpi, font scale 1, 1080×2340 px
+  full-screen windows and navigation settings matching Probe classification.
+  Portrait bars are 74/42 px in gesture mode and 74/135 px in 3-button mode,
+  matching the original captures. Landscape status bars are 68 px; the 74 px
+  cutout moves left at rotation 1 and right at rotation 3. The 52×74 px cutout
+  bound and 101 px corner radii are unchanged. The File Browser did not download
+  `main-threeButton.json`, so it was reconstructed from the saved InsetsProbe
+  logcat export in `rtl-logs/`; the same log's other five captures parse
+  identically to their downloaded files. Files are in
+  `measurements/galaxy-s22-plus/recapture-2026-09-28-rotation/`; the original
+  portrait captures remain preserved.
 - Galaxy S21 Ultra (SM-G998B), Galaxy S21+ (SM-G996B), Galaxy S21 (SM-G991B),
   Galaxy S20 Ultra (SM-G988B) and Galaxy S20 FE (SM-G780G) were reserved and
   captured on 2026-09-25. The first four have accepted main captures in both
