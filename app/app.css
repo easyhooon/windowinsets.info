@@ -147,6 +147,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
   .app-header { height:124px; display:block; padding:12px 16px; }
   .brand { margin-bottom:12px; }
   .mobile-model { display:flex; align-items:center; gap:16px; border:1px solid #d1d9e0; border-radius:6px; padding:8px 16px; width:100%; text-align:left; font-size:14px; }
+  .mobile-model>svg,.metrics-toggle>svg { width:20px; height:20px; flex-shrink:0; }
   .mobile-model>svg { margin-left:auto; }
   .device-sidebar { display:none; }
   .device-sidebar.is-open { display:flex; position:fixed; z-index:45; inset:124px 12px 108px; width:auto; border:1px solid #d1d9e0; border-radius:8px; background:#f6f8fa; box-shadow:0 12px 40px #0003; }
@@ -163,7 +164,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
   .canvas-controls .toolbar-button { width:100%; min-height:34px; gap:3px; padding:6px; font-size:12px; white-space:normal; }
   .canvas-controls .toolbar-button>span:first-child { flex-shrink:0; white-space:nowrap; }
   .canvas-controls .toolbar-button>span:last-of-type { min-width:0; }
-  .canvas-controls .toolbar-button>svg { flex-shrink:0; margin-left:0; width:12px; }
+  .canvas-controls .toolbar-button>svg { flex-shrink:0; margin-left:0; width:20px; height:20px; }
   .canvas-controls>.settings { position:fixed; top:8px; right:16px; width:44px; }
   .canvas-controls>.settings .toolbar-button { min-height:40px; }
   .canvas-controls>.settings .toolbar-button>svg { width:24px; height:24px; }
