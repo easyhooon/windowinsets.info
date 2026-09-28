@@ -217,7 +217,9 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       requestAnimationFrame(() => (el.querySelector("[data-fold-renderer]") as (Element & { __update?: () => void }) | null)?.__update?.());
     };
     fit.current = fitCanvas;
-    const observer = new ResizeObserver(fitCanvas);
+    // Canvas resizes (for example a wrapping mobile control) refit only
+    // automatic views; an explicit zoom and pan survive until Fit.
+    const observer = new ResizeObserver(() => { if (live.current.autoFit) fitCanvas(); });
     observer.observe(el);
     fitCanvas();
     return () => observer.disconnect();
