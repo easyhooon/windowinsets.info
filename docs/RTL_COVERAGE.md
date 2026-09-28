@@ -427,6 +427,16 @@ cutout. An older S24+ upload from the upload pilot remains in the inbox and was
 not imported. Files are in
 `measurements/galaxy-s24-plus/recapture-2026-09-28-rotation/`.
 
+Later on 2026-09-28, Galaxy S24 Ultra SM-S928N-KR3 became available in
+Korea/Gumi on Android 16 / One UI 8.5. InsetsProbe 1.6.0 uploaded six main-screen
+captures to inbox PR #55: rotations 0, 1 and 3 in both navigation modes. All
+report display 0, build `BP4A.251205.006.S928NKSS6DZG1`, 450 dpi, font scale 1
+and matching navigation settings. Portrait is 1080×2340 px; both landscape
+windows are 2340×1080 px with an 84 px top bar. Three-button places its
+135 px bar on the right at rotation 1 and left at rotation 3; gesture has a
+42 px bottom inset. The 96×51 px cutout follows the rotation. Raw files are in
+`measurements/galaxy-s24-ultra/recapture-2026-09-28-rotation/`.
+
 ## Galaxy S26 Ultra measured on 2026-09-23
 
 Samsung RTL Korea/Gumi SM-S948U_KR3 was reserved and its main display captured

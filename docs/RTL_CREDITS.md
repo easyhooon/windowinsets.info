@@ -1,6 +1,6 @@
 # Samsung RTL credits and reservation budget
 
-**Last live verification:** 2026-09-28 00:45 KST
+**Last live verification:** 2026-09-28 KST
 
 Samsung's published pages and the current RTL account UI do not agree on the
 daily grant. Keep the published policy, observed behavior and spending history
@@ -234,3 +234,9 @@ the second reservation uploaded all 12 cover/inner, navigation-mode and rotation
 combinations to inbox PR #38. The accepted files are recorded in the
 measurement queue. The 1-credit balance is the last confirmed header value;
 any later refund must be verified separately.
+
+On 2026-09-28, Galaxy S24 Ultra SM-S928N-KR3 was reserved in Korea/Gumi for
+30 minutes / 2 credits from a confirmed 24-credit balance. Both rotation sweeps
+were uploaded and validated while 24 minutes remained. The WebClient offered
+`Return this device to get back 1 credit(s)`; selecting it and ending the test
+left 23 Credits in the header and no active reservations.
