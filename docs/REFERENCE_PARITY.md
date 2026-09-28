@@ -487,7 +487,8 @@ and a View snippet with the px values for the selected screen and mode.
 The former six-dropdown toolbar is replaced by safearea.info's floating pill
 structure on desktop and mobile. Reference-shaped parts: an icon bottom pill
 row (zoom −/+ with a zoom menu showing the percentage, rotate counterclockwise
-and clockwise buttons) and the settings gear alone in the header corner.
+and clockwise buttons) and the settings gear alone in the header corner. The
+rotate glyphs use opposing corner arrows around a display, as on the reference.
 
 Intentional Android substitutions, because these controls carry values an icon
 cannot express:
@@ -502,7 +503,8 @@ cannot express:
   follow each form factor's hinge: vertical for Fold, horizontal for Flip, two
   vertical hinges for TriFold. Flip closed and partial are side profiles
   (stacked halves, then the 90° L) because front views of a closed or half-open
-  Flip read as unrelated objects at icon size.
+  Flip read as unrelated objects at icon size. The partial Flip uses two outlined
+  panels to match the partial Fold's line style.
 - On phones every pill stacks at the bottom, as on the reference, so the open
   Metrics disclosure never covers navigation mode. The −/+ zoom steps are
   hidden there; pinch and the zoom menu remain.
