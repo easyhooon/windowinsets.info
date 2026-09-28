@@ -531,6 +531,7 @@ fill them.
 | Galaxy Z Fold8 Ultra | SM-F976U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/`) | None |
 | Galaxy S23+ | SM-S916U | Main: 3-button rotation 1 and 3; gesture rotation 1 (pilot, captured by hand rotation) | Main gesture rotation 3 |
 | Galaxy Z Fold8 | SM-F971N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold8/recapture-2026-09-27-rotation/`) | None |
+| Galaxy S26 Ultra | SM-S948U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s26-ultra/recapture-2026-09-27-rotation/`) | None |
 | Galaxy Z Fold6 | SM-F956U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
 | Galaxy Z Fold5 | SM-F946B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
 | Galaxy Z Fold4 | SM-F936B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
@@ -540,7 +541,6 @@ fill them.
 | Galaxy Z Flip7 | SM-F766N | Main: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Cover sweeps in both modes; import and register verified captures |
 | Galaxy Z Flip6 | SM-F741U | Main: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
 | Galaxy Z Flip5 | SM-F731B | Main: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
-| Galaxy S26 Ultra | SM-S948U | Main: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
 
 ### Natural rotation only — full sweep needed
 
