@@ -386,7 +386,9 @@ top header row as on the reference, leaving no separate settings row in the
 bottom controls. The shared workspace allocates real grid/flex space
 to the diagram and bottom controls without guessed pixel reserves in Fit. The
 bottom toolbar grows with its content;
-long values wrap rather than truncate. The legend and gesture help overlay the
+long values wrap rather than truncate. The Orientation control reserves the
+widest label among the device's screens, so a fold switching between its cover
+and landscape-native inner display mid-drag does not resize the canvas. The legend and gesture help overlay the
 canvas as on the reference, so panned device artwork can remain visible behind
 them until it reaches the actual canvas edge. The legend stays interactive.
 

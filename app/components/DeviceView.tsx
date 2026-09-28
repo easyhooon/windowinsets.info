@@ -155,6 +155,10 @@ const orientations = [
   { value: "0", label: "Portrait" }, { value: "90", label: "Landscape Left" },
   { value: "-90", label: "Landscape Right" }, { value: "180", label: "Portrait Upside Down" },
 ];
+const landscapeOrientations = [
+  { value: "0", label: "Landscape Left" }, { value: "90", label: "Portrait" },
+  { value: "-90", label: "Portrait Upside Down" }, { value: "180", label: "Landscape Right" },
+];
 
 export function DeviceView({ device }: { device: Device }) {
   const initialHasCover = device.screens.some(screen => screen.id === "cover");
@@ -264,15 +268,19 @@ export function DeviceView({ device }: { device: Device }) {
     pose(value);
     recordPose(value, source);
   };
-  const recordedSize = baseScreen.logicalSizeDp ?? (skin ? { width: skin.screen.width, height: skin.screen.height } : null);
+  const orientationsFor = (target: typeof baseScreen) => {
+    const targetSkin = skins[`${device.slug}/${target.id}`];
+    const recorded = target.logicalSizeDp ?? (targetSkin ? { width: targetSkin.screen.width, height: targetSkin.screen.height } : null);
+    return recorded && recorded.width > recorded.height ? landscapeOrientations : orientations;
+  };
+  // A fold switches between a portrait cover and a landscape-native inner display
+  // mid-hinge; reserve both labels so a wrapping control cannot resize the canvas.
+  const orientationLabels = [...new Set(device.screens.map(s => orientationsFor(preciseScreen(s)).find(o => o.value === String(rotation))!.label))];
   const size = screen.logicalSizeDp ?? (skin ? skinDp(skin, screen.captureRotation) : null);
   // Galaxy phones and foldables leave 180° out of auto-rotation (a Fold owner confirmed
   // neither the folded nor unfolded display turns upside down); tablets do (REFERENCE_PARITY.md).
   const allowsUpsideDown = device.formFactor === "tablet";
-  const allOrientationOptions = recordedSize && recordedSize.width > recordedSize.height ? [
-    { value: "0", label: "Landscape Left" }, { value: "90", label: "Portrait" },
-    { value: "-90", label: "Portrait Upside Down" }, { value: "180", label: "Landscape Right" },
-  ] : orientations;
+  const allOrientationOptions = orientationsFor(baseScreen);
   const orientationOptions = allowsUpsideDown ? allOrientationOptions : allOrientationOptions.filter(o => o.label !== "Portrait Upside Down");
 
   const diagramWidth = useFold
@@ -488,7 +496,7 @@ export function DeviceView({ device }: { device: Device }) {
     </section>
     <div className={`canvas-controls${useFold ? " is-foldable" : ""}`} aria-label="Canvas controls">
       <Dropdown label="Navigation" value={navMode} options={[{ value: "threeButton", label: "3-button" }, { value: "gesture", label: "Gesture" }]} onChange={v => setNavMode(v as NavMode)} />
-      <Dropdown label="Orientation" value={String(rotation)} options={orientationOptions} onChange={v => {
+      <Dropdown label="Orientation" value={String(rotation)} options={orientationOptions} reserveLabels={orientationLabels} onChange={v => {
         const next = Number(v);
         const delta = ((next - rotation) % 360 + 540) % 360 - 180;
         pendingTurn.current = next === rotation ? null : {
