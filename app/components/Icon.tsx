@@ -10,7 +10,7 @@ const poses: Record<PoseGlyph, React.ReactNode> = {
   "book-partial": <><path d="M12 6H5.5A1.5 1.5 0 0 0 4 7.5v9A1.5 1.5 0 0 0 5.5 18H12z" /><path d="m12 6 7-2.5v17L12 18z" /></>,
   "book-open": <><rect x="3" y="5" width="18" height="14" rx="1.5" /><path d="M12 5v14" strokeDasharray="2 2" /></>,
   "flip-closed": <><rect x="7" y="6" width="13" height="4.5" rx="1" /><rect x="7" y="13.5" width="13" height="4.5" rx="1" /><path d="M7 8.25a3.75 3.75 0 0 0 0 7.5" /></>,
-  "flip-partial": <><path d="M5 16V5a1 1 0 0 1 1-1h3v12z" /><path d="M8 16h11a1 1 0 0 1 1 1v2H8a3 3 0 0 1-3-3z" /></>,
+  "flip-partial": <><rect x="4" y="4" width="6" height="11" rx="1" /><path d="M9 15h10a1 1 0 0 1 1 1v4H9z" /></>,
   "flip-open": <><rect x="7" y="2.5" width="10" height="19" rx="1.5" /><path d="M7 12h10" strokeDasharray="2 2" /></>,
   "trifold-closed": <><rect x="8" y="5" width="8" height="14" rx="1.5" /><path d="M10 5v14M11.5 5v14" /></>,
   "trifold-partial": <><rect x="3" y="6" width="12" height="12" rx="1" /><path d="M9 6v12" strokeDasharray="2 2" /><path d="m15 6 6-2.5v17L15 18" /></>,
@@ -27,8 +27,8 @@ export function Icon({ name }: { name: IconName }) {
     {name === "zoom-in" && <path d="M8 10.5h5M10.5 8v5" />}
     {name === "zoom-out" && <path d="M8 10.5h5" />}
     {name === "zoom-fit" && <rect x="8.5" y="8.5" width="4" height="4" rx=".5" />}
-    {name === "rotate-cw" && <><rect x="8" y="8" width="8" height="8" rx="1.5" /><path d="M4 9V7a3 3 0 0 1 3-3h2m-2-2 2 2-2 2M20 15v2a3 3 0 0 1-3 3h-2m2-2-2 2 2 2" /></>}
-    {name === "rotate-ccw" && <><rect x="8" y="8" width="8" height="8" rx="1.5" /><path d="M20 9V7a3 3 0 0 0-3-3h-2m2-2-2 2 2 2M4 15v2a3 3 0 0 0 3 3h2m-2-2 2 2-2 2" /></>}
+    {name === "rotate-cw" && <><rect x="7" y="7" width="10" height="10" rx="1.5" /><path d="M4 9V7a3 3 0 0 1 3-3h2m-2-2 2 2-2 2M20 15v2a3 3 0 0 1-3 3h-2m2-2-2 2 2 2" /></>}
+    {name === "rotate-ccw" && <><rect x="7" y="7" width="10" height="10" rx="1.5" /><path d="M20 9V7a3 3 0 0 0-3-3h-2m2-2-2 2 2 2M4 15v2a3 3 0 0 0 3 3h2m-2-2 2 2-2 2" /></>}
     {name in poses && poses[name as PoseGlyph]}
   </svg>;
 }
