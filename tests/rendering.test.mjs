@@ -20,6 +20,7 @@ import { galaxyZFlip5 } from '../app/data/devices/galaxy-z-flip5/index.ts';
 import { galaxyS25Plus } from '../app/data/devices/galaxy-s25-plus/index.ts';
 import { galaxyS25Ultra } from '../app/data/devices/galaxy-s25-ultra/index.ts';
 import { galaxyS24Fe } from '../app/data/devices/galaxy-s24-fe/index.ts';
+import { galaxyS23Fe } from '../app/data/devices/galaxy-s23-fe/index.ts';
 import { galaxyS24Ultra } from '../app/data/devices/galaxy-s24-ultra/index.ts';
 import { galaxyS23Ultra } from '../app/data/devices/galaxy-s23-ultra/index.ts';
 import { galaxyS24 } from '../app/data/devices/galaxy-s24/index.ts';
@@ -36,6 +37,7 @@ for (const [name, device, model] of [
   ['S23 Ultra', galaxyS23Ultra, 'SM-S918U'],
   ['S23', galaxyS23, 'SM-S911B'],
   ['S24 FE', galaxyS24Fe, 'SM-S721N'],
+  ['S23 FE', galaxyS23Fe, 'SM-S711B'],
 ]) test(`${name} published rotations match all six raw captures`, () => {
   const screen = device.screens[0];
   for (const rotation of [0, 1, 3]) for (const mode of ['gesture', 'threeButton']) {
