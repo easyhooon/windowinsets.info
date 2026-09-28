@@ -271,3 +271,40 @@ rotation sweeps uploaded to inbox PR #55. The session ended with eight minutes
 remaining and the one-credit return option selected, but the refreshed
 Reservations page still showed **14 Credits** and no active devices. No refund
 is recorded.
+
+Galaxy S23 FE SM-S711BE-VN3 Vietnam/Hanoi Android 16 was reserved twice for
+30 minutes each. The first booking reduced the header from **14 to 12
+Credits**. InsetsProbe upload returned `401 Invalid upload key`, so files were
+downloaded through the WebClient File Browser; the gesture sweep arrived, but
+the session expired before the 3-button natural-rotation file downloaded. The
+second booking reduced the header from **12 to 10 Credits** and produced a
+complete 3-button sweep. That session was ended with 23 minutes remaining, but
+the confirmation closed before the one-credit return option was selected, and
+the refreshed header showed **10 Credits**. No refund is recorded. Net cost:
+four credits.
+
+Galaxy S22 Ultra SM-S908B-RU1 Russia/Moscow Android 15 was then reserved for
+30 minutes, reducing the header from **10 to 8 Credits**. Upload still
+returned `401 Invalid upload key` (this machine's build carries an outdated
+key), so both three-file sweeps were downloaded through the File Browser. The
+session ended with 15 minutes remaining and the one-credit return option
+selected; the refreshed Reservations page showed **9 Credits**. Net cost: one
+credit.
+
+Galaxy S22+ SM-S906B-RU1 Russia/Moscow Android 15 was then reserved for 30
+minutes, reducing the header from **9 to 7 Credits**. Upload still returned
+`401 Invalid upload key`, so files were downloaded through the File Browser.
+The 3-button natural-rotation file would not download, so it was recovered from
+a saved InsetsProbe log export. The session ended with 13 minutes remaining,
+below the 15-minute return threshold, so no refund applies. Net cost: two
+credits.
+
+Galaxy S22 SM-S901B-RU7 Russia/Moscow Android 15 was then reserved for 30
+minutes, reducing the header from **7 to 5 Credits**. The probe APK did not
+install on that unit, so the session was ended with 22 minutes remaining and
+the one-credit return option selected; the Devices page showed **6 Credits**.
+Galaxy S22 SM-S901E-IN1 India/Noida Android 14 was then reserved for 30
+minutes (**6 to 4 Credits**). Upload returned `401 Invalid upload key`, and
+the File Browser downloaded only one file, so the rest were recovered from
+saved InsetsProbe log exports. The session ended with 14 minutes remaining,
+below the return threshold. Net cost for Galaxy S22: three credits.

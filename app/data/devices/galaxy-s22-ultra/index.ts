@@ -8,30 +8,44 @@ const samsungSpecs: Source = {
   note: "Samsung lists a 6.8-inch display and 3088×1440 px resolution; PPI is calculated from those values.",
 };
 
-const captureSource = (mode: "gesture" | "threeButton"): Source => ({
+const capture = (rotation: 0 | 1 | 3, mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
-  label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy S22 Ultra (SM-S908U), main ${mode === "gesture" ? "gesture" : "3-button"}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s22-ultra/main-${mode}.json`,
-  retrievedAt: "2026-09-25",
+  label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy S22 Ultra (SM-S908B-RU1), rotation ${rotation}, ${mode}`,
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s22-ultra/recapture-2026-09-28-rotation/${rotation === 0 ? "main" : `landscape-${rotation}`}-${mode}.json`,
+  retrievedAt: "2026-09-28",
 });
 
-const measuredInsets = (mode: "gesture" | "threeButton"): InsetsMeasurement => mode === "gesture"
-  ? {
-  systemBars: { top: 26.67, right: 0, bottom: 14.93, left: 0 },
-  systemBarsPx: { top: 75, right: 0, bottom: 42, left: 0 },
-  displayCutout: { top: 26.66667, right: 0.00000, bottom: 0.00000, left: 0.00000 },
-  displayCutoutPx: { top: 75, right: 0, bottom: 0, left: 0 },
-  condition: { oneUi: "5.1", android: "13", note: "Samsung RTL Vietnam/Hanoi, SM-S908U, build TP1A.220624.014.S908USQU4CWI2. Portrait rotation 0, 1080×2316 px active window, 450 dpi and font scale 1. Android setting and InsetsProbe navigation classification agree. The FHD+ capture (1080×2316) is scaled from the 1440×3088 physical panel. Raw DisplayCutout bounding coordinates are inconsistent with the active window dimensions, so the cutout shape is not rendered; raw JSON is retained unchanged." },
-  sources: [captureSource("gesture")],
-}
-  : {
-  systemBars: { top: 26.67, right: 0, bottom: 48, left: 0 },
-  systemBarsPx: { top: 75, right: 0, bottom: 135, left: 0 },
-  displayCutout: { top: 26.66667, right: 0.00000, bottom: 0.00000, left: 0.00000 },
-  displayCutoutPx: { top: 75, right: 0, bottom: 0, left: 0 },
-  condition: { oneUi: "5.1", android: "13", note: "Samsung RTL Vietnam/Hanoi, SM-S908U, build TP1A.220624.014.S908USQU4CWI2. Portrait rotation 0, 1080×2316 px active window, 450 dpi and font scale 1. Android setting and InsetsProbe navigation classification agree. The FHD+ capture (1080×2316) is scaled from the 1440×3088 physical panel. Raw DisplayCutout bounding coordinates are inconsistent with the active window dimensions, so the cutout shape is not rendered; raw JSON is retained unchanged." },
-  sources: [captureSource("threeButton")],
+const gestureSource = capture(0, "gesture");
+const buttonSource = capture(0, "threeButton");
+
+const measuredInsets = (rotation: 0 | 1 | 3, mode: "gesture" | "threeButton"): InsetsMeasurement => {
+  const portrait = rotation === 0;
+  const left = rotation === 1;
+  const button = mode === "threeButton";
+  return {
+    systemBars: { top: portrait ? 26.67 : 24.18, right: !portrait && left && button ? 48 : 0, bottom: button ? (portrait ? 48 : 0) : 14.93, left: !portrait && !left && button ? 48 : 0 },
+    systemBarsPx: { top: portrait ? 75 : 68, right: !portrait && left && button ? 135 : 0, bottom: button ? (portrait ? 135 : 0) : 42, left: !portrait && !left && button ? 135 : 0 },
+    displayCutout: { top: portrait ? 26.67 : 0, right: !portrait && !left ? 26.67 : 0, bottom: 0, left: !portrait && left ? 26.67 : 0 },
+    displayCutoutPx: { top: portrait ? 75 : 0, right: !portrait && !left ? 75 : 0, bottom: 0, left: !portrait && left ? 75 : 0 },
+    cutoutShape: portrait
+      ? { xDp: 182.04, yDp: 0, widthDp: 19.91, heightDp: 26.67, rightDp: 182.04, bottomDp: 796.8, xPx: 512, yPx: 0, widthPx: 56, heightPx: 75, rightPx: 512, bottomPx: 2241 }
+      : left
+        ? { xDp: 0, yDp: 182.04, widthDp: 26.67, heightDp: 19.91, rightDp: 796.8, bottomDp: 182.04, xPx: 0, yPx: 512, widthPx: 75, heightPx: 56, rightPx: 2241, bottomPx: 512 }
+        : { xDp: 796.8, yDp: 182.04, widthDp: 26.67, heightDp: 19.91, rightDp: 0, bottomDp: 182.04, xPx: 2241, yPx: 512, widthPx: 75, heightPx: 56, rightPx: 0, bottomPx: 512 },
+    condition: {
+      oneUi: "7.0",
+      android: "15",
+      note: `Samsung RTL Russia/Moscow, SM-S908B-RU1, build AP3A.240905.015.A2.S908BXXSIFYI3. Rotation ${rotation}, ${portrait ? "1080×2316" : "2316×1080"} px full-screen window (FHD+ scaled from the 1440×3088 panel), 450 dpi and font scale 1. Android navigation setting and InsetsProbe classification agree.`,
+    },
+    sources: [capture(rotation, mode)],
+  };
 };
+
+const landscape = (rotation: 1 | 3) => ({
+  logicalSizePx: { width: 2316, height: 1080 },
+  logicalSizeDp: { width: 823.47, height: 384 },
+  insets: { gesture: measuredInsets(rotation, "gesture"), threeButton: measuredInsets(rotation, "threeButton") },
+});
 
 export const galaxyS22Ultra: Device = {
   slug: "galaxy-s22-ultra",
@@ -49,12 +63,13 @@ export const galaxyS22Ultra: Device = {
     captureOrientation: "portrait",
     captureRotation: 0,
     ppi: 501,
-    logicalSizeDp: { width: 384.00, height: 823.47 },
+    logicalSizeDp: { width: 384, height: 823.47 },
     densityDpi: 450,
-    cornerRadiiDp: { topLeft: 2.84, topRight: 2.84, bottomRight: 2.84, bottomLeft: 2.84 },
-    cornerRadiiPx: { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
-    insets: { gesture: measuredInsets("gesture"), threeButton: measuredInsets("threeButton") },
-    sources: [samsungSpecs, captureSource("gesture"), captureSource("threeButton")],
+    cornerRadiiDp: { topLeft: 35.91, topRight: 35.91, bottomRight: 35.91, bottomLeft: 35.91 },
+    cornerRadiiPx: { topLeft: 101, topRight: 101, bottomRight: 101, bottomLeft: 101 },
+    insets: { gesture: measuredInsets(0, "gesture"), threeButton: measuredInsets(0, "threeButton") },
+    rotations: { 1: landscape(1), 3: landscape(3) },
+    sources: [samsungSpecs, gestureSource, buttonSource],
   }],
-  sources: [samsungSpecs, captureSource("gesture"), captureSource("threeButton")],
+  sources: [samsungSpecs, gestureSource, buttonSource],
 };

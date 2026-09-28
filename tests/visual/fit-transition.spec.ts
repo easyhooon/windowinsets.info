@@ -1,7 +1,8 @@
 import { expect, test, type Page } from "@playwright/test";
 
 async function choose(page: Page, label: string, option: string) {
-  await page.getByRole("button", { name: new RegExp(`^${label}:`) }).click();
+  // Pose and navigation are always-visible buttons; the rest open a menu.
+  if (label !== "Pose" && label !== "Navigation") await page.getByRole("button", { name: new RegExp(`^${label}:`) }).click();
   await page.getByRole("button", { name: option, exact: true }).click();
 }
 async function settled(page: Page, angle: number) {
@@ -28,7 +29,6 @@ for (const slug of ["galaxy-z-fold8", "galaxy-z-flip8"]) {
     let previous = closed.scale;
     // Sample the actual CSS transform and rendered angle in the same animation frame.
     for (const [pose, target] of [["Open", 180], ["Partially Folded", 90], ["Closed", 0]] as const) {
-      await page.getByRole("button", { name: /^Pose:/ }).click();
       const frames = page.evaluate(() => new Promise<Array<{ angle: number; scale: number }>>(resolve => {
         const samples: Array<{ angle: number; scale: number }> = [];
         const start = performance.now();

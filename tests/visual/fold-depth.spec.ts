@@ -11,7 +11,6 @@ for (const slug of ['galaxy-fold', 'galaxy-z-fold8', 'galaxy-z-fold5', 'galaxy-z
     await expect(model.locator('canvas')).toHaveCount(1);
     for (const [pose, angle] of [['Closed', 0], ['Partially Folded', 90], ['Open', 180]] as const) {
       if (angle !== 0) {
-        await page.getByRole('button', { name: /^Pose:/ }).click();
         await page.getByRole('button', { name: pose, exact: true }).click();
         await expect(model).toHaveAttribute('data-displayed-angle', angle.toFixed(2));
       }

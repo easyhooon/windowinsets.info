@@ -11,7 +11,6 @@ test("S26 Ultra shows both verified RTL modes and distinguishes window from pane
   await expect(page.getByRole("button", { name: "Top 37.33 dp" }).first()).toBeVisible();
   await expect(page.getByRole("button", { name: "Bottom 48 dp" }).first()).toBeVisible();
 
-  await page.getByRole("button", { name: "Navigation: 3-button" }).click();
   await page.getByRole("button", { name: "Gesture", exact: true }).click();
   await expect(page.getByRole("button", { name: "Bottom 14.93 dp" }).first()).toBeVisible();
 

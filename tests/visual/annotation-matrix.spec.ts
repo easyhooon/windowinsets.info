@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 async function choose(page: Page, label: string, option: string) {
-  await page.getByRole('button', { name: new RegExp(`^${label}:`) }).click();
+  // Pose and navigation are always-visible buttons; the rest open a menu.
+  if (label !== 'Pose' && label !== 'Navigation') await page.getByRole('button', { name: new RegExp(`^${label}:`) }).click();
   await page.getByRole('button', { name: option, exact: true }).click();
 }
 async function assertBadges(page: Page, context: string) {
@@ -57,7 +58,6 @@ for (const slug of ['galaxy-z-fold2', 'galaxy-z-fold7', 'galaxy-z-fold8', 'galax
   await page.goto('/'+slug);
   await expect(page.locator('.device-link.selected')).toContainText(slug.replace('galaxy-z-', 'Galaxy Z ').replace('fold', 'Fold').replace('flip', 'Flip'));
   await expect(page.locator('.projected-rulers')).toBeVisible();
-  await page.getByRole('button',{name:/^Hinge:/}).click();
   const hinge=page.getByRole('slider',{name:'Hinge angle in degrees'});
   await hinge.focus();
   await hinge.press('Home');
@@ -68,7 +68,6 @@ for (const slug of ['galaxy-z-fold2', 'galaxy-z-fold7', 'galaxy-z-fold8', 'galax
    await expect(page.locator('.screen-tabs button[aria-pressed="true"]')).toHaveText(angle < 60 ? 'Outer' : 'Inner');
    await assertBadges(page,`${slug} hinge ${angle}`);
   }
-  await page.getByRole('button',{name:/^Hinge:/}).click();
   // Return to the measured cover before testing available layer controls.
   await choose(page,'Pose','Closed');
   await expect(page.locator('[data-displayed-angle]')).toHaveAttribute('data-displayed-angle','0.00');

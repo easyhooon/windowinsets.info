@@ -25,7 +25,6 @@ for(const slug of ['galaxy-z-fold7','galaxy-z-flip8']) {
   await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
   await expect.poll(scale).toBeCloseTo(before*2,2);
   const manual=await scale();
-  await page.getByRole('button',{name:/^Pose:/}).click();
   await page.getByRole('button',{name:'Partially Folded',exact:true}).click();
   await expect(page.locator('[data-displayed-angle]')).toHaveAttribute('data-displayed-angle','90.00');
   expect(await scale()).toBeCloseTo(manual,3);

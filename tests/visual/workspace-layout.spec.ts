@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('the canvas extends behind the legend without covering the controls at every breakpoint', async ({ page }) => {
+test('the canvas extends behind the floating controls at every breakpoint', async ({ page }) => {
   test.setTimeout(120_000);
   // Different aspect ratios and data availability exercise the same layout contract.
   for (const slug of ['galaxy-s25-ultra', 'galaxy-z-fold8', 'galaxy-z-flip8', 'galaxy-tab-s11-ultra', 'galaxy-s23']) {
@@ -14,10 +14,12 @@ test('the canvas extends behind the legend without covering the controls at ever
         if (canvas.height < 140 || canvas.width < 150) errors.push('canvas squeezed');
         if (Math.abs(canvas.bottom - panel.bottom) > 1) errors.push('canvas stops above panel bottom');
         if (footer.top >= canvas.bottom || footer.bottom > canvas.bottom + 1) errors.push('legend outside canvas');
-        if (window.innerWidth < 1200 && footer.bottom > controls.top + 1) errors.push('controls overlap footer');
-        if (controls.bottom > window.innerHeight + 1) errors.push('controls clipped');
+        const toggles = box('.canvas-toggles');
+        if (controls.bottom > canvas.bottom + 1 || controls.bottom > window.innerHeight + 1) errors.push('controls clipped');
+        // Phones move the display options into the bottom stack and hide the top pill.
+        if (toggles.height && (toggles.top < canvas.top || toggles.bottom > footer.top)) errors.push('toggles overlap footer');
         if (document.documentElement.scrollWidth > window.innerWidth) errors.push('horizontal page overflow');
-        for (const node of document.querySelectorAll('.canvas-controls .toolbar-button')) {
+        for (const node of document.querySelectorAll('.control-pill button')) {
           if (node.scrollWidth > node.clientWidth + 1) errors.push('control text clipped');
         }
         if (window.innerWidth >= 768) {
