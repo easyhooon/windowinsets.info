@@ -234,3 +234,9 @@ the second reservation uploaded all 12 cover/inner, navigation-mode and rotation
 combinations to inbox PR #38. The accepted files are recorded in the
 measurement queue. The 1-credit balance is the last confirmed header value;
 any later refund must be verified separately.
+
+On 2026-09-28, the Galaxy S24 FE SM-S721N_KR4 Korea/Gumi Android 16
+reservation began with a confirmed 23-credit balance. The 30-minute booking
+cost two credits; both three-file navigation sweeps uploaded to inbox PR #55.
+The early-return dialog offered one credit back, and the refreshed Reservations
+page showed 22 Credits and no active reservation. Net cost: one credit.

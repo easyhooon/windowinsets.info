@@ -19,11 +19,35 @@ import { galaxyZFlip6 } from '../app/data/devices/galaxy-z-flip6/index.ts';
 import { galaxyZFlip5 } from '../app/data/devices/galaxy-z-flip5/index.ts';
 import { galaxyS25Plus } from '../app/data/devices/galaxy-s25-plus/index.ts';
 import { galaxyS25Ultra } from '../app/data/devices/galaxy-s25-ultra/index.ts';
+import { galaxyS24Fe } from '../app/data/devices/galaxy-s24-fe/index.ts';
 import { formatLength, hasExactPx, safeInsetsPx } from '../app/data/measurementUnits.ts';
 
 function readCapture(path) {
   return JSON.parse(readFileSync(path, 'utf8'));
 }
+
+test('S24 FE published rotations match all six raw captures', () => {
+  const screen = galaxyS24Fe.screens[0];
+  for (const rotation of [0, 1, 3]) for (const mode of ['gesture', 'threeButton']) {
+    const published = rotation === 0 ? screen.insets[mode] : screen.rotations[rotation].insets[mode];
+    const path = new URL(published.sources[0].url).pathname.split('/blob/main/')[1];
+    const raw = readCapture(path);
+    const rect = raw.displayCutout.boundingRects[0].px;
+    assert.equal(raw.device.model, 'SM-S721N');
+    assert.equal(raw.display.rotation, rotation);
+    assert.equal(raw.navigation.mode, mode);
+    assert.equal(raw.navigation.settingAgreesWithInsets, true);
+    assert.deepEqual(rotation === 0 ? screen.logicalSizePx : screen.rotations[rotation].logicalSizePx, raw.display.currentWindowPx);
+    assert.deepEqual(published.systemBars, raw.insets.systemBars.dp);
+    assert.deepEqual(published.systemBarsPx, raw.insets.systemBars.px);
+    assert.deepEqual(published.displayCutout, raw.insets.displayCutout.dp);
+    assert.deepEqual(published.displayCutoutPx, raw.insets.displayCutout.px);
+    assert.deepEqual(
+      { xPx: published.cutoutShape.xPx, yPx: published.cutoutShape.yPx, widthPx: published.cutoutShape.widthPx, heightPx: published.cutoutShape.heightPx },
+      { xPx: rect.left, yPx: rect.top, widthPx: rect.right - rect.left, heightPx: rect.bottom - rect.top },
+    );
+  }
+});
 
 test('existing Z-series rotation captures match every published inset', () => {
   const devices = [galaxyZFold5, galaxyZFold4, galaxyZFold3, galaxyZTriFold,

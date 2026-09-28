@@ -534,6 +534,7 @@ fill them.
 | Galaxy Z Fold6 | SM-F956U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold6/recapture-2026-09-27-rotation/`) | None |
 | Galaxy S26 Ultra | SM-S948U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s26-ultra/recapture-2026-09-27-rotation/`) | None |
 | Galaxy S24+ | SM-S926N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s24-plus/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S24 FE | SM-S721N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s24-fe/recapture-2026-09-28-rotation/`) | None |
 | Galaxy S25 | SM-S931N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s25/recapture-2026-09-28-rotation/`) | None |
 | Galaxy S25 FE | SM-S731N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s25-fe/recapture-2026-09-28-rotation/`) | None |
 | Galaxy S25 Edge | SM-S937N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s25-edge/recapture-2026-09-28-rotation/`) | None |
@@ -563,7 +564,7 @@ Note and A.
 | Series | Devices | Screens |
 | --- | --- | --- |
 | Galaxy Z Flip | original Z Flip (not listed on RTL as of 2026-09-28) | Main (no cover skin) |
-| Galaxy S | S24 Ultra, S24 FE, S24, S23 Ultra, S23 FE, S23, S22 Ultra, S22+, S22, S21 Ultra, S21+, S21 FE, S21, S20 Ultra, S20 FE | Main |
+| Galaxy S | S24 Ultra, S24, S23 Ultra, S23 FE, S23, S22 Ultra, S22+, S22, S21 Ultra, S21+, S21 FE, S21, S20 Ultra, S20 FE | Main |
 | Galaxy Tab | Tab S11 Ultra, S11, S10 Ultra, S10+, S10 FE+, S10 FE, S10 Lite, S9 Ultra, S9+, S9 FE+, S9 FE, S9, S8 Ultra, S8+, S8, S7+, S7 FE, A11, A9+, A7 Lite | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
 | Galaxy Note | Note20 Ultra, Note20 | Main |
 | Galaxy A | A73, A57, A56, A55, A53, A52s, A37, A36, A35, A34, A33, A32 5G, A32, A27, A25, A24, A23, A17, A16, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
