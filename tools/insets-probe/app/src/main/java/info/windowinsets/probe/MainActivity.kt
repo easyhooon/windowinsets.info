@@ -5,7 +5,6 @@ import android.content.ClipboardManager
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.graphics.Typeface
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -14,25 +13,57 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.provider.Settings
 import android.util.Log
-import android.view.Gravity
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.LinearLayout
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.ScrollView
-import android.widget.TextView
+import android.view.View
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.add
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.displayCutout
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.union
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.core.util.Consumer
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsCompat.Type
-import androidx.core.view.updatePadding
 import androidx.window.java.layout.WindowInfoTrackerCallbackAdapter
 import androidx.window.layout.FoldingFeature
 import androidx.window.layout.WindowInfoTracker
@@ -42,11 +73,13 @@ import java.io.File
 import kotlin.math.abs
 
 class MainActivity : ComponentActivity(), SensorEventListener {
-    private lateinit var root: LinearLayout
-    private lateinit var output: TextView
-    private lateinit var screenGroup: RadioGroup
-    private lateinit var captureStatus: TextView
-    private lateinit var tabletReversePortrait: CheckBox
+    /** The window's content root: its size and insets are what an app's content receives. */
+    private lateinit var root: View
+
+    private var screen by mutableStateOf("phone")
+    private var captureStatus by mutableStateOf("Waiting for active window insets…")
+    private var output by mutableStateOf("")
+    private var tabletReversePortrait by mutableStateOf(false)
 
     private var latestInsets: WindowInsetsCompat? = null
     private var hingeAngle: Float? = null
@@ -81,13 +114,11 @@ class MainActivity : ComponentActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        buildUi()
+        setContent { ProbeScreen() }
+        root = findViewById(android.R.id.content)
 
         // Automation: adb shell am start -n info.windowinsets.probe/.MainActivity --es screen main --ez export true
-        when (intent.getStringExtra(FlexWindowContract.EXTRA_SCREEN)) {
-            "cover" -> screenGroup.check(ID_COVER)
-            "main" -> screenGroup.check(ID_MAIN)
-        }
+        intent.getStringExtra(FlexWindowContract.EXTRA_SCREEN)?.takeIf { it in SCREENS }?.let { screen = it }
         expectedDisplayId = intent.takeIf { it.hasExtra(FlexWindowContract.EXTRA_EXPECTED_DISPLAY_ID) }
             ?.getIntExtra(FlexWindowContract.EXTRA_EXPECTED_DISPLAY_ID, FlexWindowContract.COVER_DISPLAY_ID)
         screenLabelSource = FlexWindowContract.screenLabelSource(
@@ -95,16 +126,15 @@ class MainActivity : ComponentActivity(), SensorEventListener {
         )
         autoExport = intent.getBooleanExtra("export", false)
         // Automation: ... --ez sweep true  (records every orientation the display allows)
-        tabletReversePortrait.isChecked = intent.getBooleanExtra("tablet", false)
+        tabletReversePortrait = intent.getBooleanExtra("tablet", false)
         if (intent.getBooleanExtra("sweep", false)) root.post { startSweep() }
 
         // Listen on the root so we see exactly what an app's content root would receive.
-        ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
+        // Compose pads the UI itself; the insets pass through unconsumed.
+        ViewCompat.setOnApplyWindowInsetsListener(root) { _, insets ->
             latestInsets = insets
-            val pad = insets.getInsets(Type.systemBars() or Type.displayCutout())
-            v.updatePadding(pad.left, pad.top, pad.right, pad.bottom)
             refresh()
-            insets // not consumed
+            insets
         }
     }
 
@@ -151,11 +181,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit
 
-    private fun selectedScreen(): String = when (screenGroup.checkedRadioButtonId) {
-        ID_COVER -> "cover"
-        ID_MAIN -> "main"
-        else -> "phone"
-    }
+    private fun selectedScreen(): String = screen
 
     private fun refresh() {
         // Every insets/configuration callback restarts the sweep's quiet period.
@@ -166,12 +192,12 @@ class MainActivity : ComponentActivity(), SensorEventListener {
         val insets = latestInsets ?: return
         val json = Probe.collect(this, insets, selectedScreen(), hingeAngle, foldingFeatures, screenLabelSource)
         lastJson = json.toString(2)
-        output.text = lastJson
+        output = lastJson
         val bounds = windowManager.currentWindowMetrics.bounds
         val maximumBounds = windowManager.maximumWindowMetrics.bounds
         val displayStatus = display?.displayId?.let { "display $it" } ?: "display unknown"
         val expectedStatus = expectedDisplayId?.let { " · expected display $it" }.orEmpty()
-        captureStatus.text = "Active window: ${bounds.width()} × ${bounds.height()} px · $displayStatus$expectedStatus · " +
+        captureStatus = "Active window: ${bounds.width()} × ${bounds.height()} px · $displayStatus$expectedStatus · " +
             "hinge: ${hingeAngle?.let { "${it.toInt()}°" } ?: "unavailable"}\n" +
             "Full display: ${maximumBounds.width()} × ${maximumBounds.height()} px\n" +
             "Screen label: ${selectedScreen()} ($screenLabelSource; does not switch displays)\n" +
@@ -221,7 +247,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
             screenLabelSource,
         )
         lastJson = json.toString(2)
-        output.text = lastJson
+        output = lastJson
         val nav = json.getJSONObject("navigation").getString("mode")
         val screen = json.getString("screen")
         val name = OrientationSweep.fileName(screen, nav, display?.rotation, bounds.width() > bounds.height())
@@ -236,7 +262,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
 
     private fun startSweep() {
         if (sweep != null) return
-        sweep = Sweep(OrientationSweep.steps(tabletReversePortrait.isChecked))
+        sweep = Sweep(OrientationSweep.steps(tabletReversePortrait))
         sweepSummary = null
         applySweepStep()
     }
@@ -293,11 +319,11 @@ class MainActivity : ComponentActivity(), SensorEventListener {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         val bundle = JSONObject()
         s.captures.forEach { (name, json) -> bundle.put(name, JSONObject(json)) }
-        output.text = bundle.toString(2)
+        output = bundle.toString(2)
         val summary = "Sweep saved ${s.captures.size}: ${s.captures.keys.joinToString()}" +
             if (s.skipped.isEmpty()) "" else "\nSkipped: ${s.skipped.joinToString("; ")}"
         sweepSummary = summary
-        captureStatus.text = summary
+        captureStatus = summary
         lastCaptures.clear()
         lastCaptures.putAll(s.captures)
         if (CaptureUploader.configured && s.captures.isNotEmpty()) upload()
@@ -316,7 +342,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
         }
         val files = LinkedHashMap(lastCaptures)
         uploadStatus = "Uploading ${files.size} file(s)…"
-        captureStatus.append("\n$uploadStatus")
+        captureStatus += "\n$uploadStatus"
         Thread {
             val result = CaptureUploader.upload(files)
             runOnUiThread {
@@ -337,124 +363,146 @@ class MainActivity : ComponentActivity(), SensorEventListener {
     }
 
 
-    private fun buildUi() {
-        val dp = resources.displayMetrics.density
-        fun px(v: Int) = (v * dp).toInt()
+    private fun measure() {
+        val file = export() ?: return
+        Toast.makeText(this, "Saved: ${file.name}", Toast.LENGTH_LONG).show()
+    }
 
-        root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+    private fun copyJson() {
+        val file = export() ?: return
+        getSystemService(ClipboardManager::class.java).setPrimaryClip(ClipData.newPlainText("probe", lastJson))
+        Toast.makeText(this, "Copied. Saved: ${file.name}", Toast.LENGTH_LONG).show()
+    }
 
-        root.addView(LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER_VERTICAL
-            setPadding(px(12), px(4), px(8), 0)
-
-            addView(TextView(context).apply {
-                text = "InsetsProbe · windowinsets.info"
-                textSize = 16f
-                setTypeface(typeface, Typeface.BOLD)
-            }, LinearLayout.LayoutParams(0, WRAP_CONTENT, 1f))
-
-            addView(Button(context).apply {
-                text = "×"
-                textSize = 24f
-                contentDescription = context.getString(R.string.close_probe)
-                minWidth = px(48)
-                minHeight = px(48)
-                setOnClickListener { this@MainActivity.finishAndRemoveTask() }
-            }, LinearLayout.LayoutParams(px(48), px(48)))
-        })
-        root.addView(TextView(this).apply {
-            text = "Use default Display size / Font size in full screen. Physically open or close the device first. " +
-                "Cover / Main only labels the active display; it cannot unfold the device. " +
-                "Change navigation in Android Settings, return here, then Measure. " +
-                "Rotate & measure turns the app itself; no need to rotate the device."
-            textSize = 12f
-            setPadding(px(12), px(4), px(12), px(4))
-        })
-
-        screenGroup = RadioGroup(this).apply {
-            orientation = RadioGroup.HORIZONTAL
-            setPadding(px(8), 0, px(8), 0)
-            addView(RadioButton(context).apply { id = ID_PHONE; text = "Phone" })
-            addView(RadioButton(context).apply { id = ID_COVER; text = "Cover" })
-            addView(RadioButton(context).apply { id = ID_MAIN; text = "Main" })
-            check(ID_PHONE)
-            setOnCheckedChangeListener { _, _ -> refresh() }
+    private fun share() {
+        export() ?: return
+        val send = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, lastJson)
         }
-        root.addView(screenGroup)
+        startActivity(Intent.createChooser(send, "Share probe JSON"))
+    }
 
-        captureStatus = TextView(this).apply {
-            textSize = 12f
-            setPadding(px(12), px(4), px(12), px(4))
-            text = "Waiting for active window insets…"
-        }
-        root.addView(captureStatus)
-        tabletReversePortrait = CheckBox(this).apply {
-            text = "Tablet: include upside-down portrait"
-            setPadding(px(8), 0, px(8), 0)
-        }
-        root.addView(tabletReversePortrait)
-        root.addView(Button(this).apply {
-            text = "Display / navigation settings"
-            setOnClickListener { startActivity(Intent(Settings.ACTION_DISPLAY_SETTINGS)) }
-        })
-
-        // Large targets: RTL streams a scaled-down screen, so small buttons are easy to miss.
-        root.addView(Button(this).apply {
-            text = "Rotate & measure all orientations"
-            textSize = 20f
-            setTypeface(typeface, Typeface.BOLD)
-            minHeight = px(88)
-            setOnClickListener { startSweep() }
-        }, LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT).apply { setMargins(px(8), px(4), px(8), 0) })
-
-        val buttons = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            setPadding(px(8), 0, px(8), 0)
-        }
-        fun actionButton(label: String, onClick: () -> Unit) = buttons.addView(Button(this).apply {
-            text = label
-            textSize = 16f
-            minHeight = px(72)
-            setOnClickListener { onClick() }
-        }, LinearLayout.LayoutParams(0, WRAP_CONTENT, 1f))
-        actionButton("Measure") {
-            val file = export() ?: return@actionButton
-            Toast.makeText(this, "Saved: ${file.name}", Toast.LENGTH_LONG).show()
-        }
-        actionButton("Copy JSON") {
-            val file = export() ?: return@actionButton
-            getSystemService(ClipboardManager::class.java).setPrimaryClip(ClipData.newPlainText("probe", lastJson))
-            Toast.makeText(this, "Copied. Saved: ${file.name}", Toast.LENGTH_LONG).show()
-        }
-        actionButton("Upload") { upload() }
-        actionButton("Share") {
-            export() ?: return@actionButton
-            val send = Intent(Intent.ACTION_SEND).apply {
-                type = "text/plain"
-                putExtra(Intent.EXTRA_TEXT, lastJson)
+    @Composable
+    private fun ProbeScreen() {
+        MaterialTheme(colorScheme = darkColorScheme()) {
+            Surface(Modifier.fillMaxSize()) {
+                // One lazy list scrolls everything: a Flip cover is ~440 dp tall with a large bottom
+                // cutout, so fixed controls would end up out of reach.
+                LazyColumn(
+                    Modifier.fillMaxSize(),
+                    contentPadding = WindowInsets.systemBars.union(WindowInsets.displayCutout)
+                        .add(WindowInsets(left = 8.dp, top = 4.dp, right = 8.dp, bottom = 8.dp))
+                        .asPaddingValues(),
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                ) {
+                    item { Header() }
+                    item {
+                        Text(
+                            "Use default Display size / Font size in full screen. Physically open or close the device first. " +
+                                "Cover / Main only labels the active display; it cannot unfold the device. " +
+                                "Change navigation in Android Settings, return here, then Measure. " +
+                                "Rotate & measure turns the app itself; no need to rotate the device.",
+                            fontSize = 12.sp,
+                            modifier = Modifier.padding(horizontal = 4.dp),
+                        )
+                    }
+                    item { ScreenLabel() }
+                    item { Text(captureStatus, fontSize = 12.sp, modifier = Modifier.padding(horizontal = 4.dp)) }
+                    item {
+                        Row(
+                            Modifier
+                                .fillMaxWidth()
+                                .toggleable(tabletReversePortrait, role = Role.Checkbox) { tabletReversePortrait = it },
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Checkbox(tabletReversePortrait, onCheckedChange = null)
+                            Text("Tablet: include upside-down portrait", Modifier.padding(start = 8.dp))
+                        }
+                    }
+                    item {
+                        FilledTonalButton(
+                            { startActivity(Intent(Settings.ACTION_DISPLAY_SETTINGS)) },
+                            Modifier.fillMaxWidth(),
+                        ) { Text("Display / navigation settings") }
+                    }
+                    item {
+                        // Large targets: RTL streams a scaled-down screen, so small buttons are easy to miss.
+                        Button(::startSweep, Modifier.fillMaxWidth().heightIn(min = 88.dp)) {
+                            Text(
+                                "Rotate & measure all orientations",
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                            )
+                        }
+                    }
+                    item {
+                        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                            ActionButton("Measure", ::measure)
+                            ActionButton("Copy JSON", ::copyJson)
+                            ActionButton("Upload", ::upload)
+                            ActionButton("Share", ::share)
+                        }
+                    }
+                    // Copy JSON / Share export the full text; lines keep a long capture cheap to scroll.
+                    items(output.lines()) { line ->
+                        Text(
+                            line,
+                            fontFamily = FontFamily.Monospace,
+                            fontSize = 10.sp,
+                            lineHeight = 13.sp,
+                            modifier = Modifier.padding(horizontal = 4.dp),
+                        )
+                    }
+                }
             }
-            startActivity(Intent.createChooser(send, "Share probe JSON"))
         }
-        root.addView(buttons)
+    }
 
-        output = TextView(this).apply {
-            typeface = Typeface.MONOSPACE
-            textSize = 10f
-            setTextIsSelectable(true)
-            setPadding(px(12), px(4), px(12), px(12))
+    @Composable
+    private fun Header() {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                "InsetsProbe · windowinsets.info",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.weight(1f).padding(start = 4.dp),
+            )
+            val closeLabel = getString(R.string.close_probe)
+            TextButton(
+                { finishAndRemoveTask() },
+                Modifier.size(48.dp).semantics { contentDescription = closeLabel },
+            ) { Text("×", fontSize = 24.sp) }
         }
-        root.addView(ScrollView(this).apply { addView(output, MATCH_PARENT, WRAP_CONTENT) }, MATCH_PARENT, 0).also {
-            (root.getChildAt(root.childCount - 1).layoutParams as LinearLayout.LayoutParams).weight = 1f
-        }
+    }
 
-        setContentView(root)
+    @Composable
+    private fun ScreenLabel() {
+        Row(Modifier.selectableGroup(), verticalAlignment = Alignment.CenterVertically) {
+            for (id in SCREENS) {
+                Row(
+                    Modifier
+                        .selectable(screen == id, role = Role.RadioButton) { screen = id; refresh() }
+                        .padding(end = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    RadioButton(screen == id, onClick = null)
+                    Text(id.replaceFirstChar(Char::uppercase), Modifier.padding(start = 4.dp))
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun RowScope.ActionButton(label: String, onClick: () -> Unit) {
+        Button(onClick, Modifier.weight(1f).heightIn(min = 72.dp)) {
+            Text(label, fontSize = 16.sp, textAlign = TextAlign.Center)
+        }
     }
 
     private companion object {
         const val TAG = "InsetsProbe"
-        const val ID_PHONE = 1001
-        const val ID_COVER = 1002
-        const val ID_MAIN = 1003
+        val SCREENS = listOf("phone", "cover", "main")
     }
 }

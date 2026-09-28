@@ -2,6 +2,7 @@ import com.android.build.api.dsl.ApplicationExtension
 
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.compose)
 }
 
 extensions.configure<ApplicationExtension> {
@@ -13,8 +14,8 @@ extensions.configure<ApplicationExtension> {
         // RoundedCorner / Display.getRoundedCorner need API 31.
         minSdk = 31
         targetSdk = 36
-        versionCode = 8
-        versionName = "1.5.0"
+        versionCode = 9
+        versionName = "1.6.0"
         // Uploads go to windowinsets.info (issue #28). Set insetsProbeUploadKey in
         // ~/.gradle/gradle.properties or pass -PinsetsProbeUploadKey=...; blank disables upload.
         val uploadKey = providers.gradleProperty("insetsProbeUploadKey").orElse("").get()
@@ -25,6 +26,7 @@ extensions.configure<ApplicationExtension> {
 
     buildFeatures {
         buildConfig = true
+        compose = true
     }
 
     compileOptions {
@@ -39,4 +41,8 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.window)
     implementation(libs.androidx.window.java)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material3)
 }
