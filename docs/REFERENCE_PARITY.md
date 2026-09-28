@@ -146,7 +146,7 @@ from https://developer.samsung.com/galaxy-emulator-skin.
 | Measurements | Labels and clickable metrics | Whole metric rows and 2D/3D labels copy values; exact captured px is kept separately from rounded dp |
 | Display metadata | Logical size, panel resolution, physical density and scale | Android adds Captured Window and Android Density so active WindowMetrics are not mislabeled as native panel resolution or physical PPI; Aspect Ratio is derived from panel resolution and rounded to a compact whole-number ratio; `sw600dp` reports whether the selected display's smallest logical dimension is at least 600 dp |
 | Reserved regions | Size and four directional offsets | Android cutout bounds expose Size plus Left/Top/Right/Bottom distances in the same hierarchy |
-| Data export | No observed per-device JSON download | Intentional Android-service divergence: a compact Export JSON action in the Metrics header downloads the complete versioned evidence payload |
+| Data export | No observed per-device JSON download | Intentional Android-service divergence: compact Export JSON and JSON link actions in the Metrics header expose the complete versioned evidence payload |
 | Artwork | Per-device frames | Official Fold8 main/cover, Flip8 main/cover and 28 S20–S26 variants aligned by original layout coordinates |
 
 ## Proportions and measurement correction
@@ -245,11 +245,12 @@ desktop and mobile.
   its body clip so its edge remains visible on the light canvas. The original
   artwork and measured display geometry are unchanged; other device skins keep
   their existing rendering.
-- **Export JSON** is an intentional product divergence from the observed
+- **Export JSON** and **JSON link** are intentional product divergences from the observed
   safearea.info UI. Android consumers need exact probe dp/px, navigation-mode,
   display and provenance data outside the visual tool. The action stays secondary
   in the Metrics header on desktop and mobile so it does not reorganize the
-  reference-shaped canvas controls. Its v1 contract and derivation boundaries are
+  reference-shaped canvas controls. The link opens a stable device URL for sharing
+  and scripted reads. Its v1 contract and derivation boundaries are
   documented in `JSON_EXPORT.md`.
 - **Aspect Ratio** is an owner-requested Android metric with no safearea.info
   counterpart. It appears as a row in the existing Dimensions section for every

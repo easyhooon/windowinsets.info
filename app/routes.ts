@@ -8,4 +8,5 @@ export default [
     route(":slug", "routes/device.tsx"),
   ]),
   route("sitemap.xml", "routes/sitemap.ts"),
+  route("data/:slug.json", "routes/device-data.ts"),
 ] satisfies RouteConfig;

@@ -300,6 +300,10 @@ hinges.forEach { hinge ->
           dp and px separate, labels safe-area calculations as derived, includes capture
           conditions and sources, and leaves unmeasured values explicitly pending.
         </p>
+        <p>
+          Choose <b>JSON link</b> to open a shareable URL. Scripts can fetch the same data at{" "}
+          <code>https://windowinsets.info/data/&lt;device-slug&gt;.json</code>.
+        </p>
       </Section>
 
       <Section title="Found an issue or want to contribute?">
