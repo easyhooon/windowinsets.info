@@ -37,6 +37,13 @@ removes a model from its catalog.
   modes. An earlier inner 3-button attempt was retained but not published
   because the navigation bar was transiently reported as 1 px; a later
   recapture reported a settled 126 px navigation bar.
+  A 2026-09-27 InsetsProbe 1.5.0 sweep supplied all 12 cover/inner × rotation
+  0/1/3 × navigation captures on the same build at 420 dpi and font scale 1.
+  The rotation-0 inset values match the existing published captures. The eight
+  separately measured landscape values are registered; Fold's 3D view still
+  rotates its recorded diagram until issue #24 connects display orientation
+  to the fold renderer. One repeated main-gesture upload was byte-identical
+  and is kept in the inbox only.
   Galaxy Z Fold5 (SM-F946BE-VN1, Vietnam/Hanoi) was reserved twice on
   2026-09-23. Both screens were measured in both navigation modes; the first
   cover gesture capture was rotated and retained as rejected evidence, then
@@ -256,6 +263,13 @@ removes a model from its catalog.
   Galaxy Z Fold3 is now measured on both displays in both navigation modes from
   two Vietnam/Hanoi RTL units running Android 14 / One UI 6.1.
 
+On 2026-09-27, separate rotation 1 and 3 captures were also registered for both
+displays of Fold3, Fold4, Fold5 and TriFold, and the main displays of Flip5,
+Flip6, Flip7 and Flip8. Each rotation has its own raw file in the device's
+`recapture-2026-09-27-rotation/` directory. Flip8's cover stayed at rotation 0
+in the capture session; Flip7's cover sweep is still missing. Existing natural
+rotation values remain tied to their earlier accepted captures.
+
 ### Galaxy Z Fold3 — 2026-09-25
 
 InsetsProbe 1.3.0 captured all four display/navigation combinations on Samsung
@@ -324,6 +338,14 @@ files report an upright 1080×2340 px app window. The physical panel is
 1440×3120 px according to Samsung specifications. This reservation verifies
 that model was offered on the checked date; it does not complete the
 cross-region RTL catalog inventory.
+
+On 2026-09-27 the same model/build supplied a full main-display sweep with
+InsetsProbe 1.5.0. Separate rotation 1 and 3 captures in both navigation modes
+report a settled 2340×1080 px window at 450 dpi and font scale 1. The cutout is
+on the left at rotation 1 and right at rotation 3; the 3-button navigation bar
+is on the opposite side. These four raw files are preserved under
+`measurements/galaxy-s26-ultra/recapture-2026-09-27-rotation/` and registered
+as measured landscape insets.
 
 ## Galaxy S25 measured on 2026-09-24
 

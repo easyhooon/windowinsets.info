@@ -72,6 +72,244 @@ export const galaxyZFold3: Device = {
       densityDpi: 420,
       cornerRadiiDp: null,
       cornerRadiiPx: null,
+      rotations: {
+        "1": {
+          "logicalSizePx": {
+            "width": 2289,
+            "height": 840
+          },
+          "logicalSizeDp": {
+            "width": 872,
+            "height": 320
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 14.86,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 63,
+                "right": 0,
+                "bottom": 39,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 31.24
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 82
+              },
+              "cutoutShape": {
+                "xDp": 0,
+                "yDp": 148.19,
+                "widthDp": 31.24,
+                "heightDp": 23.62,
+                "rightDp": 840.76,
+                "bottomDp": 148.19,
+                "xPx": 0,
+                "yPx": 389,
+                "widthPx": 82,
+                "heightPx": 62,
+                "rightPx": 2207,
+                "bottomPx": 389
+              },
+              "condition": {
+                "oneUi": "6.1",
+                "android": "14",
+                "note": "Samsung RTL SM-F926B, build UP1A.231005.007.F926BXXU6HXDB. cover display, rotation 1, 2289×840 px, full screen, 420 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-fold3 cover, rotation 1, gesture (SM-F926B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold3/recapture-2026-09-27-rotation/cover-landscape-1-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 24,
+                "right": 48,
+                "bottom": 0,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 63,
+                "right": 126,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 31.24
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 82
+              },
+              "cutoutShape": {
+                "xDp": 0,
+                "yDp": 148.19,
+                "widthDp": 31.24,
+                "heightDp": 23.62,
+                "rightDp": 840.76,
+                "bottomDp": 148.19,
+                "xPx": 0,
+                "yPx": 389,
+                "widthPx": 82,
+                "heightPx": 62,
+                "rightPx": 2207,
+                "bottomPx": 389
+              },
+              "condition": {
+                "oneUi": "6.1",
+                "android": "14",
+                "note": "Samsung RTL SM-F926B, build UP1A.231005.007.F926BXXU6HXDB. cover display, rotation 1, 2289×840 px, full screen, 420 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-fold3 cover, rotation 1, threeButton (SM-F926B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold3/recapture-2026-09-27-rotation/cover-landscape-1-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        },
+        "3": {
+          "logicalSizePx": {
+            "width": 2289,
+            "height": 840
+          },
+          "logicalSizeDp": {
+            "width": 872,
+            "height": 320
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 14.86,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 63,
+                "right": 0,
+                "bottom": 39,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 31.24,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 82,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 840.76,
+                "yDp": 148.19,
+                "widthDp": 31.24,
+                "heightDp": 23.62,
+                "rightDp": 0,
+                "bottomDp": 148.19,
+                "xPx": 2207,
+                "yPx": 389,
+                "widthPx": 82,
+                "heightPx": 62,
+                "rightPx": 0,
+                "bottomPx": 389
+              },
+              "condition": {
+                "oneUi": "6.1",
+                "android": "14",
+                "note": "Samsung RTL SM-F926B, build UP1A.231005.007.F926BXXU6HXDB. cover display, rotation 3, 2289×840 px, full screen, 420 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-fold3 cover, rotation 3, gesture (SM-F926B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold3/recapture-2026-09-27-rotation/cover-landscape-3-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 0,
+                "left": 48
+              },
+              "systemBarsPx": {
+                "top": 63,
+                "right": 0,
+                "bottom": 0,
+                "left": 126
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 31.24,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 82,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 840.76,
+                "yDp": 148.19,
+                "widthDp": 31.24,
+                "heightDp": 23.62,
+                "rightDp": 0,
+                "bottomDp": 148.19,
+                "xPx": 2207,
+                "yPx": 389,
+                "widthPx": 82,
+                "heightPx": 62,
+                "rightPx": 0,
+                "bottomPx": 389
+              },
+              "condition": {
+                "oneUi": "6.1",
+                "android": "14",
+                "note": "Samsung RTL SM-F926B, build UP1A.231005.007.F926BXXU6HXDB. cover display, rotation 3, 2289×840 px, full screen, 420 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-fold3 cover, rotation 3, threeButton (SM-F926B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold3/recapture-2026-09-27-rotation/cover-landscape-3-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        }
+      },
       insets: {
         gesture: {
           systemBars: { top: 31.24, right: 0, bottom: 14.86, left: 0 },
@@ -107,6 +345,188 @@ export const galaxyZFold3: Device = {
       densityDpi: 420,
       cornerRadiiDp: mainCorners,
       cornerRadiiPx: mainCornersPx,
+      rotations: {
+        "1": {
+          "logicalSizePx": {
+            "width": 2208,
+            "height": 1768
+          },
+          "logicalSizeDp": {
+            "width": 841.14,
+            "height": 673.52
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 14.86,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 63,
+                "right": 0,
+                "bottom": 39,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "condition": {
+                "oneUi": "6.1",
+                "android": "14",
+                "note": "Samsung RTL SM-F926B, build UP1A.231005.007.F926BXXU6HXDB. main display, rotation 1, 2208×1768 px, full screen, 420 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-fold3 main, rotation 1, gesture (SM-F926B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold3/recapture-2026-09-27-rotation/main-landscape-1-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 48,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 63,
+                "right": 0,
+                "bottom": 126,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "condition": {
+                "oneUi": "6.1",
+                "android": "14",
+                "note": "Samsung RTL SM-F926B, build UP1A.231005.007.F926BXXU6HXDB. main display, rotation 1, 2208×1768 px, full screen, 420 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-fold3 main, rotation 1, threeButton (SM-F926B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold3/recapture-2026-09-27-rotation/main-landscape-1-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        },
+        "3": {
+          "logicalSizePx": {
+            "width": 2208,
+            "height": 1768
+          },
+          "logicalSizeDp": {
+            "width": 841.14,
+            "height": 673.52
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 14.86,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 63,
+                "right": 0,
+                "bottom": 39,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "condition": {
+                "oneUi": "6.1",
+                "android": "14",
+                "note": "Samsung RTL SM-F926B, build UP1A.231005.007.F926BXXU6HXDB. main display, rotation 3, 2208×1768 px, full screen, 420 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-fold3 main, rotation 3, gesture (SM-F926B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold3/recapture-2026-09-27-rotation/main-landscape-3-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 48,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 63,
+                "right": 0,
+                "bottom": 126,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "condition": {
+                "oneUi": "6.1",
+                "android": "14",
+                "note": "Samsung RTL SM-F926B, build UP1A.231005.007.F926BXXU6HXDB. main display, rotation 3, 2208×1768 px, full screen, 420 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-fold3 main, rotation 3, threeButton (SM-F926B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold3/recapture-2026-09-27-rotation/main-landscape-3-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        }
+      },
       insets: {
         gesture: {
           systemBars: { top: 33.52, right: 0, bottom: 64, left: 0 },

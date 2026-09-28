@@ -531,16 +531,16 @@ fill them.
 | Galaxy Z Fold8 Ultra | SM-F976U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/`) | None |
 | Galaxy S23+ | SM-S916U | Main: 3-button rotation 1 and 3; gesture rotation 1 (pilot, captured by hand rotation) | Main gesture rotation 3 |
 | Galaxy Z Fold8 | SM-F971N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold8/recapture-2026-09-27-rotation/`) | None |
-| Galaxy Z Fold6 | SM-F956U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
-| Galaxy Z Fold5 | SM-F946B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
-| Galaxy Z Fold4 | SM-F936B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
-| Galaxy Z Fold3 | SM-F926B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
-| Galaxy Z TriFold | SM-F968N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
-| Galaxy Z Flip8 | SM-F776B | Main: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported). Cover: natural in both modes on display 1 at 948×1048 px | Import and register verified captures. Cover rotation 1 and 3 remain pending because this RTL cover did not rotate |
-| Galaxy Z Flip7 | SM-F766N | Main: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Cover sweeps in both modes; import and register verified captures |
-| Galaxy Z Flip6 | SM-F741U | Main: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
-| Galaxy Z Flip5 | SM-F731B | Main: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
-| Galaxy S26 Ultra | SM-S948U | Main: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
+| Galaxy Z Fold6 | SM-F956U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold6/recapture-2026-09-27-rotation/`) | None |
+| Galaxy S26 Ultra | SM-S948U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s26-ultra/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Fold5 | SM-F946B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold5/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Fold4 | SM-F936B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold4/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Fold3 | SM-F926B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold3/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z TriFold | SM-F968N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-trifold/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Flip8 | SM-F776B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip8/recapture-2026-09-27-rotation/`). Cover: natural in both modes on display 1 at 948×1048 px | Cover rotation 1 and 3 remain pending because this RTL cover did not rotate |
+| Galaxy Z Flip7 | SM-F766N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip7/recapture-2026-09-27-rotation/`) | Cover sweeps in both modes |
+| Galaxy Z Flip6 | SM-F741U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip6/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Flip5 | SM-F731B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip5/recapture-2026-09-27-rotation/`) | None |
 
 ### Natural rotation only — full sweep needed
 

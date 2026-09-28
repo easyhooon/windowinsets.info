@@ -35,6 +35,24 @@ const measuredInsets = (mode: "gesture" | "threeButton"): InsetsMeasurement => (
   sources: [mode === "gesture" ? gestureSource : buttonSource],
 });
 
+const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton"): InsetsMeasurement => ({
+  systemBars: { top: 29.87, right: mode === "threeButton" && rotation === 1 ? 48 : 0, bottom: mode === "gesture" ? 14.93 : 0, left: mode === "threeButton" && rotation === 3 ? 48 : 0 },
+  systemBarsPx: { top: 84, right: mode === "threeButton" && rotation === 1 ? 135 : 0, bottom: mode === "gesture" ? 42 : 0, left: mode === "threeButton" && rotation === 3 ? 135 : 0 },
+  displayCutout: { top: 0, right: rotation === 3 ? 36.98 : 0, bottom: 0, left: rotation === 1 ? 36.98 : 0 },
+  displayCutoutPx: { top: 0, right: rotation === 3 ? 104 : 0, bottom: 0, left: rotation === 1 ? 104 : 0 },
+  cutoutShape: {
+    xDp: rotation === 1 ? 0 : 795.02, yDp: 181.33, widthDp: 36.98, heightDp: 21.33,
+    rightDp: rotation === 1 ? 795.02 : 0, bottomDp: 181.33,
+    xPx: rotation === 1 ? 0 : 2236, yPx: 510, widthPx: 104, heightPx: 60,
+    rightPx: rotation === 1 ? 2236 : 0, bottomPx: 510,
+  },
+  condition: {
+    oneUi: "8.5", android: "16",
+    note: `Samsung RTL Korea/Gumi, SM-S948U_KR3, build BP4A.251205.006.S948USQS4AZG3. Landscape rotation ${rotation}, full-screen 2340×1080 px, 450 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0.`,
+  },
+  sources: [{ kind: "measured", label: `InsetsProbe 1.5.0 on Samsung RTL Galaxy S26 Ultra, landscape rotation ${rotation} ${mode} (SM-S948U)`, url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s26-ultra/recapture-2026-09-27-rotation/main-landscape-${rotation}-${mode}.json`, retrievedAt: "2026-09-27" }],
+});
+
 export const galaxyS26Ultra: Device = {
   slug: "galaxy-s26-ultra",
   name: "Galaxy S26 Ultra",
@@ -56,6 +74,10 @@ export const galaxyS26Ultra: Device = {
     cornerRadiiDp: { topLeft: 28.09, topRight: 28.09, bottomRight: 28.09, bottomLeft: 28.09 },
     cornerRadiiPx: { topLeft: 79, topRight: 79, bottomRight: 79, bottomLeft: 79 },
     insets: { gesture: measuredInsets("gesture"), threeButton: measuredInsets("threeButton") },
+    rotations: {
+      1: { logicalSizePx: { width: 2340, height: 1080 }, logicalSizeDp: { width: 832, height: 384 }, insets: { gesture: landscapeInsets(1, "gesture"), threeButton: landscapeInsets(1, "threeButton") } },
+      3: { logicalSizePx: { width: 2340, height: 1080 }, logicalSizeDp: { width: 832, height: 384 }, insets: { gesture: landscapeInsets(3, "gesture"), threeButton: landscapeInsets(3, "threeButton") } },
+    },
     sources: [specs, gestureSource, buttonSource],
   }],
   sources: [specs, gestureSource, buttonSource],

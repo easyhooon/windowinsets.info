@@ -46,6 +46,244 @@ export const galaxyZFlip5: Device = {
       densityDpi: 480,
       cornerRadiiDp: { topLeft: 36, topRight: 36, bottomRight: 36, bottomLeft: 36 },
       cornerRadiiPx: { topLeft: 108, topRight: 108, bottomRight: 108, bottomLeft: 108 },
+      rotations: {
+        "1": {
+          "logicalSizePx": {
+            "width": 2640,
+            "height": 1080
+          },
+          "logicalSizeDp": {
+            "width": 880,
+            "height": 360
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 72,
+                "right": 0,
+                "bottom": 45,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 31.33
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 94
+              },
+              "cutoutShape": {
+                "xDp": 0,
+                "yDp": 168,
+                "widthDp": 31.33,
+                "heightDp": 23.67,
+                "rightDp": 848.67,
+                "bottomDp": 168.33,
+                "xPx": 0,
+                "yPx": 504,
+                "widthPx": 94,
+                "heightPx": 71,
+                "rightPx": 2546,
+                "bottomPx": 505
+              },
+              "condition": {
+                "oneUi": "6.1.1",
+                "android": "14",
+                "note": "Samsung RTL SM-F731B, build UP1A.231005.007.F731BXXS3DXI9. main display, rotation 1, 2640×1080 px, full screen, 480 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-flip5 main, rotation 1, gesture (SM-F731B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip5/recapture-2026-09-27-rotation/main-landscape-1-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 24,
+                "right": 48,
+                "bottom": 0,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 72,
+                "right": 144,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 31.33
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 94
+              },
+              "cutoutShape": {
+                "xDp": 0,
+                "yDp": 168,
+                "widthDp": 31.33,
+                "heightDp": 23.67,
+                "rightDp": 848.67,
+                "bottomDp": 168.33,
+                "xPx": 0,
+                "yPx": 504,
+                "widthPx": 94,
+                "heightPx": 71,
+                "rightPx": 2546,
+                "bottomPx": 505
+              },
+              "condition": {
+                "oneUi": "6.1.1",
+                "android": "14",
+                "note": "Samsung RTL SM-F731B, build UP1A.231005.007.F731BXXS3DXI9. main display, rotation 1, 2640×1080 px, full screen, 480 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-flip5 main, rotation 1, threeButton (SM-F731B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip5/recapture-2026-09-27-rotation/main-landscape-1-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        },
+        "3": {
+          "logicalSizePx": {
+            "width": 2640,
+            "height": 1080
+          },
+          "logicalSizeDp": {
+            "width": 880,
+            "height": 360
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 72,
+                "right": 0,
+                "bottom": 45,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 31.33,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 94,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 848.67,
+                "yDp": 168.33,
+                "widthDp": 31.33,
+                "heightDp": 23.67,
+                "rightDp": 0,
+                "bottomDp": 168,
+                "xPx": 2546,
+                "yPx": 505,
+                "widthPx": 94,
+                "heightPx": 71,
+                "rightPx": 0,
+                "bottomPx": 504
+              },
+              "condition": {
+                "oneUi": "6.1.1",
+                "android": "14",
+                "note": "Samsung RTL SM-F731B, build UP1A.231005.007.F731BXXS3DXI9. main display, rotation 3, 2640×1080 px, full screen, 480 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-flip5 main, rotation 3, gesture (SM-F731B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip5/recapture-2026-09-27-rotation/main-landscape-3-gesture.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 0,
+                "left": 48
+              },
+              "systemBarsPx": {
+                "top": 72,
+                "right": 0,
+                "bottom": 0,
+                "left": 144
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 31.33,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 94,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 848.67,
+                "yDp": 168.33,
+                "widthDp": 31.33,
+                "heightDp": 23.67,
+                "rightDp": 0,
+                "bottomDp": 168,
+                "xPx": 2546,
+                "yPx": 505,
+                "widthPx": 94,
+                "heightPx": 71,
+                "rightPx": 0,
+                "bottomPx": 504
+              },
+              "condition": {
+                "oneUi": "6.1.1",
+                "android": "14",
+                "note": "Samsung RTL SM-F731B, build UP1A.231005.007.F731BXXS3DXI9. main display, rotation 3, 2640×1080 px, full screen, 480 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-flip5 main, rotation 3, threeButton (SM-F731B)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip5/recapture-2026-09-27-rotation/main-landscape-3-threeButton.json",
+                  "retrievedAt": "2026-09-27"
+                }
+              ]
+            }
+          }
+        }
+      },
       insets: {
         gesture: {
           systemBars: { top: 31.33, right: 0, bottom: 15, left: 0 },

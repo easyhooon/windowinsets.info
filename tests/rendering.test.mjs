@@ -10,9 +10,11 @@ import { galaxyZFold2 } from '../app/data/devices/galaxy-z-fold2/index.ts';
 import { galaxyZFold6 } from '../app/data/devices/galaxy-z-fold6/index.ts';
 import { galaxyZFold5 } from '../app/data/devices/galaxy-z-fold5/index.ts';
 import { galaxyZFold4 } from '../app/data/devices/galaxy-z-fold4/index.ts';
+import { galaxyZFold3 } from '../app/data/devices/galaxy-z-fold3/index.ts';
 import { galaxyZFold7 } from '../app/data/devices/galaxy-z-fold7/index.ts';
 import { galaxyZFold8 } from '../app/data/devices/galaxy-z-fold8/index.ts';
 import { galaxyZFlip8 } from '../app/data/devices/galaxy-z-flip8/index.ts';
+import { galaxyZFlip7 } from '../app/data/devices/galaxy-z-flip7/index.ts';
 import { galaxyZFlip6 } from '../app/data/devices/galaxy-z-flip6/index.ts';
 import { galaxyZFlip5 } from '../app/data/devices/galaxy-z-flip5/index.ts';
 import { galaxyS25Plus } from '../app/data/devices/galaxy-s25-plus/index.ts';
@@ -22,6 +24,37 @@ import { formatLength, hasExactPx, safeInsetsPx } from '../app/data/measurementU
 function readCapture(path) {
   return JSON.parse(readFileSync(path, 'utf8'));
 }
+
+test('existing Z-series rotation captures match every published inset', () => {
+  const devices = [galaxyZFold5, galaxyZFold4, galaxyZFold3, galaxyZTriFold,
+    galaxyZFlip8, galaxyZFlip7, galaxyZFlip6, galaxyZFlip5];
+  let checked = 0;
+  for (const device of devices) {
+    for (const screen of device.screens) {
+      for (const rotation of [1, 3]) {
+        const capture = screen.rotations?.[rotation];
+        if (!capture) continue;
+        for (const mode of ['gesture', 'threeButton']) {
+          const inset = capture.insets[mode];
+          if (!inset) continue;
+          const path = new URL(inset.sources[0].url).pathname.split('/blob/main/')[1];
+          const raw = readCapture(path);
+          assert.equal(raw.screen, screen.id);
+          assert.equal(raw.display.rotation, rotation);
+          assert.equal(raw.navigation.mode, mode);
+          assert.deepEqual(capture.logicalSizePx, raw.display.currentWindowPx);
+          assert.deepEqual(capture.logicalSizeDp, raw.display.maximumWindowDp);
+          assert.deepEqual(inset.systemBars, raw.insets.systemBars.dp);
+          assert.deepEqual(inset.systemBarsPx, raw.insets.systemBars.px);
+          assert.deepEqual(inset.displayCutout, raw.insets.displayCutout.dp);
+          assert.deepEqual(inset.displayCutoutPx, raw.insets.displayCutout.px);
+          checked++;
+        }
+      }
+    }
+  }
+  assert.equal(checked, 48);
+});
 
 test('TriFold folds left before right with three rigid, separated housings', () => {
   assert.deepEqual(triFoldAngles(180), { left: 180, right: 180 });

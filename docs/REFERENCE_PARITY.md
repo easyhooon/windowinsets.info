@@ -283,7 +283,8 @@ desktop and mobile.
   with separate static main/cover previews where supplied. Fold/Flip models
   with a main skin have hinge animation; TriFold has a separately approved
   sequential two-hinge animation (2026-09-24). No measurements are borrowed across models.
-- Native Android landscape insets require new captures. Current rotation is visual.
+- Native Android landscape insets appear only for separately captured rotations;
+  uncaptured orientations remain pending rather than borrowing portrait values.
 - OG/favicon have been replaced with generated Android inset artwork and a matching
   corner mark. Production assets and the exact generation prompt are documented in
   `design/brand/README.md`; sharing metadata uses versioned URLs. This describes local
