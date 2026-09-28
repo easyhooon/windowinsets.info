@@ -32,10 +32,15 @@ export function layoutMeasurementRulers({ rulers, body, scale, format, compact =
     const middle = (a + b) / 2;
     const half = (horizontal ? width : height) / 2;
     const interval: [number, number] = [Math.min(a, b, middle - half) - 4 * scale, Math.max(a, b, middle + half) + 4 * scale];
+    // For a small span, place the badge beside the arrow, on the same lane.
+    const short = Math.abs(b - a) < (horizontal ? width + 8 * scale : height + 8 * scale);
+    // A side badge beside its arrow reaches into the next lane outward, so it claims both.
+    const span = short && !compact && !horizontal ? 2 : 1;
     const rows = lanes.get(ruler.side) ?? [];
-    let row = rows.findIndex(used => used.every(([start, end]) => interval[1] < start || interval[0] > end));
-    if (row < 0) { row = rows.length; rows.push([]); }
-    rows[row].push(interval);
+    const free = (index: number) => (rows[index] ?? []).every(([start, end]) => interval[1] < start || interval[0] > end);
+    let row = 0;
+    while (!Array.from({ length: span }, (_, i) => free(row + i)).every(Boolean)) row++;
+    for (let i = 0; i < span; i++) (rows[row + i] ??= []).push(interval);
     lanes.set(ruler.side, rows);
     // A fixed lane width avoids varying-length values shifting adjacent lanes.
     const distance = (horizontal ? (compact ? 16 + row * 20 : 24 + row * 26) : (compact ? 32 + row * 52 : 40 + row * 65)) * scale;
@@ -43,8 +48,6 @@ export function layoutMeasurementRulers({ rulers, body, scale, format, compact =
       : ruler.side === 'left' ? body.left - distance : body.right + distance;
     const p = horizontal ? { x: a, y: lane } : { x: lane, y: a };
     const q = horizontal ? { x: b, y: lane } : { x: lane, y: b };
-    // For a small span, place the badge beside the arrow, on the same lane.
-    const short = Math.abs(b - a) < (horizontal ? width + 8 * scale : height + 8 * scale);
     const x = horizontal ? middle : lane + (short && !compact ? (ruler.side === 'left' ? -1 : 1) * (width / 2 + 5 * scale) : 0);
     const y = horizontal ? lane + (ruler.side === 'top' ? -1 : 1) * (height / 2 + 4 * scale) : middle;
     return { ...ruler, text, p, q, x, y, width, height };
