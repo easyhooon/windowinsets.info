@@ -87,3 +87,33 @@ window dimensions and complete insets match `main-gesture.json`. This final
 close/resume/reopen sequence confirms correct live display updates after removal
 of the global override. Cover continuation still requires bringing the app back
 from the launcher on this device configuration.
+
+## Rotation sweep (2026-09-28)
+
+`recapture-2026-09-28-rotation/` holds 12 InsetsProbe 1.5.0 captures from the same
+owner device over USB (SM-F916N, Android 13, One UI 5.1.1, build
+F916NKSS4KXH1, 480 dpi, font scale 0.8): cover and inner × rotation 0/1/3 ×
+three-button and gesture navigation. Each set was captured with
+`--ez sweep true`. Navigation was switched with ADB (the AOSP navbar overlay
+category plus Samsung's `navigation_bar_gesture_while_hidden`). Every accepted
+file reports `settingsSecureNavigationMode` and `configNavBarInteractionMode`
+0 (three-button) or 2 (gesture).
+
+- Inner: full window 1768×2208 (rotation 0) and 2208×1768 (rotations 1 and 3),
+  display 0, 20 dp corners, and a FLAT fold at 884 px in each capture. Bottom
+  is 48 dp in both modes because the persistent taskbar is visible. The top is
+  29.33 dp at rotation 0 and 24 dp in landscape, and the 29.33 dp cutout moves
+  to the left edge (rotation 1) or the right edge (rotation 3).
+- Cover: the observed 960×2658 override appeared again after closing, as
+  described above. `wm size` reported physical 816×2260. No folding feature was
+  reported. Top is 31 dp (rotation 0) or 24 dp (landscape). Gesture bottom is
+  15 dp. Three-button places its 48 dp bar at the bottom (rotation 0), right
+  (rotation 1) or left (rotation 3). The 30.67 dp cutout follows the rotation.
+- Rotation-0 values match the 2026-09-22 captures, which remain canonical.
+
+Rejected transients were not imported. Switching navigation recreated the
+activity while it was changing, so an automatic sweep saved inner three-button
+files before the mode had settled. Separately, enabling Samsung's
+`sec_gestural` overlay reported navigation mode 3 and produced `unknown`
+landscape names. Both sets were recaptured with a settled mode. The device was
+left in gesture navigation with the standard gestural overlay.

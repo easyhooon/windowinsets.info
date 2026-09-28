@@ -27,6 +27,244 @@ export const galaxyZFold2: Device = {
       "densityDpi": 480,
       "cornerRadiiDp": null,
       "cornerRadiiPx": null,
+      "rotations": {
+        "1": {
+          "logicalSizePx": {
+            "width": 2658,
+            "height": 960
+          },
+          "logicalSizeDp": {
+            "width": 886.0,
+            "height": 320.0
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 72,
+                "right": 0,
+                "bottom": 45,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 30.67
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 92
+              },
+              "cutoutShape": {
+                "xDp": 0.0,
+                "yDp": 148.0,
+                "widthDp": 30.67,
+                "heightDp": 24.0,
+                "rightDp": 855.33,
+                "bottomDp": 148.0,
+                "xPx": 0,
+                "yPx": 444,
+                "widthPx": 92,
+                "heightPx": 72,
+                "rightPx": 2566,
+                "bottomPx": 444
+              },
+              "condition": {
+                "oneUi": "5.1.1",
+                "android": "13",
+                "note": "Physical device, closed, rotation 1, 2658×960 px, full screen, 480 dpi, font scale 0.8. Swipe gestures with hints. App window uses the observed 960×2658 cover override while wm reports an 816×2260 panel. Rounded corners unavailable. Build TP1A.220624.014.F916NKSS4KXH1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on physical Galaxy Z Fold2 cover, rotation 1, gesture (SM-F916N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold2/recapture-2026-09-28-rotation/cover-landscape-1-gesture.json",
+                  "retrievedAt": "2026-09-28"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 24,
+                "right": 48,
+                "bottom": 0,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 72,
+                "right": 144,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 30.67
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 92
+              },
+              "cutoutShape": {
+                "xDp": 0.0,
+                "yDp": 148.0,
+                "widthDp": 30.67,
+                "heightDp": 24.0,
+                "rightDp": 855.33,
+                "bottomDp": 148.0,
+                "xPx": 0,
+                "yPx": 444,
+                "widthPx": 92,
+                "heightPx": 72,
+                "rightPx": 2566,
+                "bottomPx": 444
+              },
+              "condition": {
+                "oneUi": "5.1.1",
+                "android": "13",
+                "note": "Physical device, closed, rotation 1, 2658×960 px, full screen, 480 dpi, font scale 0.8. Three-button navigation. App window uses the observed 960×2658 cover override while wm reports an 816×2260 panel. Rounded corners unavailable. Build TP1A.220624.014.F916NKSS4KXH1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on physical Galaxy Z Fold2 cover, rotation 1, threeButton (SM-F916N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold2/recapture-2026-09-28-rotation/cover-landscape-1-threeButton.json",
+                  "retrievedAt": "2026-09-28"
+                }
+              ]
+            }
+          }
+        },
+        "3": {
+          "logicalSizePx": {
+            "width": 2658,
+            "height": 960
+          },
+          "logicalSizeDp": {
+            "width": 886.0,
+            "height": 320.0
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 15,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 72,
+                "right": 0,
+                "bottom": 45,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 30.67,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 92,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 855.33,
+                "yDp": 148.0,
+                "widthDp": 30.67,
+                "heightDp": 24.0,
+                "rightDp": 0.0,
+                "bottomDp": 148.0,
+                "xPx": 2566,
+                "yPx": 444,
+                "widthPx": 92,
+                "heightPx": 72,
+                "rightPx": 0,
+                "bottomPx": 444
+              },
+              "condition": {
+                "oneUi": "5.1.1",
+                "android": "13",
+                "note": "Physical device, closed, rotation 3, 2658×960 px, full screen, 480 dpi, font scale 0.8. Swipe gestures with hints. App window uses the observed 960×2658 cover override while wm reports an 816×2260 panel. Rounded corners unavailable. Build TP1A.220624.014.F916NKSS4KXH1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on physical Galaxy Z Fold2 cover, rotation 3, gesture (SM-F916N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold2/recapture-2026-09-28-rotation/cover-landscape-3-gesture.json",
+                  "retrievedAt": "2026-09-28"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 0,
+                "left": 48
+              },
+              "systemBarsPx": {
+                "top": 72,
+                "right": 0,
+                "bottom": 0,
+                "left": 144
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 30.67,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 92,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 855.33,
+                "yDp": 148.0,
+                "widthDp": 30.67,
+                "heightDp": 24.0,
+                "rightDp": 0.0,
+                "bottomDp": 148.0,
+                "xPx": 2566,
+                "yPx": 444,
+                "widthPx": 92,
+                "heightPx": 72,
+                "rightPx": 0,
+                "bottomPx": 444
+              },
+              "condition": {
+                "oneUi": "5.1.1",
+                "android": "13",
+                "note": "Physical device, closed, rotation 3, 2658×960 px, full screen, 480 dpi, font scale 0.8. Three-button navigation. App window uses the observed 960×2658 cover override while wm reports an 816×2260 panel. Rounded corners unavailable. Build TP1A.220624.014.F916NKSS4KXH1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on physical Galaxy Z Fold2 cover, rotation 3, threeButton (SM-F916N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold2/recapture-2026-09-28-rotation/cover-landscape-3-threeButton.json",
+                  "retrievedAt": "2026-09-28"
+                }
+              ]
+            }
+          }
+        }
+      },
       "insets": {
         "gesture": {
           "systemBars": {
@@ -151,6 +389,244 @@ export const galaxyZFold2: Device = {
         "bottomLeft": 20
       },
       "cornerRadiiPx": { "topLeft": 60, "topRight": 60, "bottomRight": 60, "bottomLeft": 60 },
+      "rotations": {
+        "1": {
+          "logicalSizePx": {
+            "width": 2208,
+            "height": 1768
+          },
+          "logicalSizeDp": {
+            "width": 736.0,
+            "height": 589.33
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 48,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 72,
+                "right": 0,
+                "bottom": 144,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 29.33
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 88
+              },
+              "cutoutShape": {
+                "xDp": 0.0,
+                "yDp": 128.0,
+                "widthDp": 29.33,
+                "heightDp": 25.0,
+                "rightDp": 706.67,
+                "bottomDp": 436.33,
+                "xPx": 0,
+                "yPx": 384,
+                "widthPx": 88,
+                "heightPx": 75,
+                "rightPx": 2120,
+                "bottomPx": 1309
+              },
+              "condition": {
+                "oneUi": "5.1.1",
+                "android": "13",
+                "note": "Physical device, fully open, rotation 1, 2208×1768 px, full screen, 480 dpi, font scale 0.8. Swipe gestures with hints; persistent taskbar supplies the 48 dp bottom inset. Hinge-angle sensor unavailable; WindowManager reports a FLAT fold. Build TP1A.220624.014.F916NKSS4KXH1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on physical Galaxy Z Fold2 inner, rotation 1, gesture (SM-F916N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold2/recapture-2026-09-28-rotation/main-landscape-1-gesture.json",
+                  "retrievedAt": "2026-09-28"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 48,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 72,
+                "right": 0,
+                "bottom": 144,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 29.33
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 88
+              },
+              "cutoutShape": {
+                "xDp": 0.0,
+                "yDp": 128.0,
+                "widthDp": 29.33,
+                "heightDp": 25.0,
+                "rightDp": 706.67,
+                "bottomDp": 436.33,
+                "xPx": 0,
+                "yPx": 384,
+                "widthPx": 88,
+                "heightPx": 75,
+                "rightPx": 2120,
+                "bottomPx": 1309
+              },
+              "condition": {
+                "oneUi": "5.1.1",
+                "android": "13",
+                "note": "Physical device, fully open, rotation 1, 2208×1768 px, full screen, 480 dpi, font scale 0.8. Three-button navigation; persistent taskbar supplies the 48 dp bottom inset. Hinge-angle sensor unavailable; WindowManager reports a FLAT fold. Build TP1A.220624.014.F916NKSS4KXH1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on physical Galaxy Z Fold2 inner, rotation 1, threeButton (SM-F916N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold2/recapture-2026-09-28-rotation/main-landscape-1-threeButton.json",
+                  "retrievedAt": "2026-09-28"
+                }
+              ]
+            }
+          }
+        },
+        "3": {
+          "logicalSizePx": {
+            "width": 2208,
+            "height": 1768
+          },
+          "logicalSizeDp": {
+            "width": 736.0,
+            "height": 589.33
+          },
+          "insets": {
+            "gesture": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 48,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 72,
+                "right": 0,
+                "bottom": 144,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 29.33,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 88,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 706.67,
+                "yDp": 436.33,
+                "widthDp": 29.33,
+                "heightDp": 25.0,
+                "rightDp": 0.0,
+                "bottomDp": 128.0,
+                "xPx": 2120,
+                "yPx": 1309,
+                "widthPx": 88,
+                "heightPx": 75,
+                "rightPx": 0,
+                "bottomPx": 384
+              },
+              "condition": {
+                "oneUi": "5.1.1",
+                "android": "13",
+                "note": "Physical device, fully open, rotation 3, 2208×1768 px, full screen, 480 dpi, font scale 0.8. Swipe gestures with hints; persistent taskbar supplies the 48 dp bottom inset. Hinge-angle sensor unavailable; WindowManager reports a FLAT fold. Build TP1A.220624.014.F916NKSS4KXH1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on physical Galaxy Z Fold2 inner, rotation 3, gesture (SM-F916N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold2/recapture-2026-09-28-rotation/main-landscape-3-gesture.json",
+                  "retrievedAt": "2026-09-28"
+                }
+              ]
+            },
+            "threeButton": {
+              "systemBars": {
+                "top": 24,
+                "right": 0,
+                "bottom": 48,
+                "left": 0
+              },
+              "systemBarsPx": {
+                "top": 72,
+                "right": 0,
+                "bottom": 144,
+                "left": 0
+              },
+              "displayCutout": {
+                "top": 0,
+                "right": 29.33,
+                "bottom": 0,
+                "left": 0
+              },
+              "displayCutoutPx": {
+                "top": 0,
+                "right": 88,
+                "bottom": 0,
+                "left": 0
+              },
+              "cutoutShape": {
+                "xDp": 706.67,
+                "yDp": 436.33,
+                "widthDp": 29.33,
+                "heightDp": 25.0,
+                "rightDp": 0.0,
+                "bottomDp": 128.0,
+                "xPx": 2120,
+                "yPx": 1309,
+                "widthPx": 88,
+                "heightPx": 75,
+                "rightPx": 0,
+                "bottomPx": 384
+              },
+              "condition": {
+                "oneUi": "5.1.1",
+                "android": "13",
+                "note": "Physical device, fully open, rotation 3, 2208×1768 px, full screen, 480 dpi, font scale 0.8. Three-button navigation; persistent taskbar supplies the 48 dp bottom inset. Hinge-angle sensor unavailable; WindowManager reports a FLAT fold. Build TP1A.220624.014.F916NKSS4KXH1. Captured separately with InsetsProbe 1.5.0."
+              },
+              "sources": [
+                {
+                  "kind": "measured",
+                  "label": "InsetsProbe 1.5.0 on physical Galaxy Z Fold2 inner, rotation 3, threeButton (SM-F916N)",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold2/recapture-2026-09-28-rotation/main-landscape-3-threeButton.json",
+                  "retrievedAt": "2026-09-28"
+                }
+              ]
+            }
+          }
+        }
+      },
       "insets": {
         "gesture": {
           "systemBars": {

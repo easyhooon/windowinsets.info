@@ -67,6 +67,17 @@ adb pull /sdcard/Android/data/info.windowinsets.probe/files/
 
 `--es screen` accepts `cover` or `main` (default `phone`); `--ez export true` saves the JSON one second after launch. See [sample-output](sample-output) for a real capture.
 
+## Version 1.6.0: Compose UI
+
+- The measurement screen is built with Jetpack Compose. One `LazyColumn` scrolls
+  every control and the JSON output, padded by system-bar and display-cutout
+  insets. On the Galaxy Z Flip7 cover (about 441 dp tall, 88 dp bottom cutout),
+  1.5.0 left the sweep and Measure buttons below the cutout with no way to scroll.
+- Insets are still read from the window's content root, unconsumed, so captures
+  are unchanged. The 1.6.0 Fold2 cover sweep matched the 1.5.0 JSON in every
+  field except `capturedAt` and `probeVersion`.
+- The FlexWindow widget stays a RemoteViews layout.
+
 ## Version 1.5.0: direct upload
 
 - **Upload** sends the last Measure or sweep to `windowinsets.info/api/captures`
