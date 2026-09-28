@@ -24,6 +24,16 @@ extensions.configure<ApplicationExtension> {
         buildConfigField("String", "UPLOAD_URL", "\"$uploadUrl\"")
     }
 
+    buildTypes {
+        // RTL install build: R8 keeps Compose small (~6 MB instead of 27 MB), stays
+        // debuggable and is signed with the local debug key so it replaces debug installs.
+        getByName("release") {
+            isMinifyEnabled = true
+            isDebuggable = true
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
+
     buildFeatures {
         buildConfig = true
         compose = true

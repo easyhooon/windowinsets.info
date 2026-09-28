@@ -77,6 +77,9 @@ adb pull /sdcard/Android/data/info.windowinsets.probe/files/
   are unchanged. The 1.6.0 Fold2 cover sweep matched the 1.5.0 JSON in every
   field except `capturedAt` and `probeVersion`.
 - The FlexWindow widget stays a RemoteViews layout.
+- `./gradlew :app:assembleRelease` builds the RTL APK: R8-shrunk, debuggable
+  and signed with the local debug key. The unshrunk debug APK is about 27 MB
+  because it contains all of Compose.
 
 ## Version 1.5.0: direct upload
 
