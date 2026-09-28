@@ -1,4 +1,4 @@
-import type { Device, Source } from "../../types";
+import type { Device, InsetsMeasurement, NavMode, Source } from "../../types";
 
 const samsungSpecs: Source = {
   kind: "official",
@@ -69,6 +69,33 @@ const coverCutout = {
   bottomPx: 2281,
 };
 
+const landscapeInsets = (screen: "cover" | "main", rotation: 1 | 3, mode: NavMode): InsetsMeasurement => {
+  const cover = screen === "cover";
+  const button = mode === "threeButton";
+  const side = cover && button;
+  return {
+    systemBars: { top: 30.1, right: side && rotation === 1 ? 48 : 0, bottom: cover && button ? 0 : button ? 48 : 14.86, left: side && rotation === 3 ? 48 : 0 },
+    systemBarsPx: { top: 79, right: side && rotation === 1 ? 126 : 0, bottom: cover && button ? 0 : button ? 126 : 39, left: side && rotation === 3 ? 126 : 0 },
+    displayCutout: { top: 0, right: cover && rotation === 3 ? 36.19 : 0, bottom: 0, left: cover && rotation === 1 ? 36.19 : 0 },
+    displayCutoutPx: { top: 0, right: cover && rotation === 3 ? 95 : 0, bottom: 0, left: cover && rotation === 1 ? 95 : 0 },
+    ...(cover ? { cutoutShape: {
+      xDp: rotation === 1 ? 0 : 868.95, yDp: 172.57, widthDp: 36.19, heightDp: 23.62,
+      rightDp: rotation === 1 ? 868.95 : 0, bottomDp: 172.57,
+      xPx: rotation === 1 ? 0 : 2281, yPx: 453, widthPx: 95, heightPx: 62,
+      rightPx: rotation === 1 ? 2281 : 0, bottomPx: 453,
+    } } : {}),
+    condition: {
+      oneUi: "8.5", android: "16",
+      note: `Samsung RTL Galaxy Z Fold6, SM-F956U, build BP4A.251205.006.F956USQS4DZG3. ${cover ? "Folded cover 2376×968" : "Unfolded inner 2160×1856"} px, landscape rotation ${rotation}, full screen, 420 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0.`,
+    },
+    sources: [{ kind: "measured", label: `InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold6 ${screen}, rotation ${rotation}, ${mode} (SM-F956U)`, url: `${captureBase}/recapture-2026-09-27-rotation/${screen}-landscape-${rotation}-${mode}.json`, retrievedAt: "2026-09-27" }],
+  };
+};
+
+const landscapeSize = (screen: "cover" | "main") => screen === "cover"
+  ? { logicalSizePx: { width: 2376, height: 968 }, logicalSizeDp: { width: 905.14, height: 368.76 } }
+  : { logicalSizePx: { width: 2160, height: 1856 }, logicalSizeDp: { width: 822.86, height: 707.05 } };
+
 export const galaxyZFold6: Device = {
   slug: "galaxy-z-fold6",
   name: "Galaxy Z Fold6",
@@ -110,6 +137,10 @@ export const galaxyZFold6: Device = {
           sources: [coverThreeButton],
         },
       },
+      rotations: {
+        1: { ...landscapeSize("cover"), insets: { gesture: landscapeInsets("cover", 1, "gesture"), threeButton: landscapeInsets("cover", 1, "threeButton") } },
+        3: { ...landscapeSize("cover"), insets: { gesture: landscapeInsets("cover", 3, "gesture"), threeButton: landscapeInsets("cover", 3, "threeButton") } },
+      },
       sources: [samsungSkinPage, coverThreeButton, coverGesture],
     },
     {
@@ -142,6 +173,10 @@ export const galaxyZFold6: Device = {
           condition: mainThreeButtonCondition,
           sources: [mainThreeButton],
         },
+      },
+      rotations: {
+        1: { ...landscapeSize("main"), insets: { gesture: landscapeInsets("main", 1, "gesture"), threeButton: landscapeInsets("main", 1, "threeButton") } },
+        3: { ...landscapeSize("main"), insets: { gesture: landscapeInsets("main", 3, "gesture"), threeButton: landscapeInsets("main", 3, "threeButton") } },
       },
       sources: [samsungSpecs, samsungSkinPage, mainGesture, mainThreeButton],
     },

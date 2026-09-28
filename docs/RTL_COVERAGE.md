@@ -37,6 +37,13 @@ removes a model from its catalog.
   modes. An earlier inner 3-button attempt was retained but not published
   because the navigation bar was transiently reported as 1 px; a later
   recapture reported a settled 126 px navigation bar.
+  A 2026-09-27 InsetsProbe 1.5.0 sweep supplied all 12 cover/inner × rotation
+  0/1/3 × navigation captures on the same build at 420 dpi and font scale 1.
+  The rotation-0 inset values match the existing published captures. The eight
+  separately measured landscape values are registered; Fold's 3D view still
+  rotates its recorded diagram until issue #24 connects display orientation
+  to the fold renderer. One repeated main-gesture upload was byte-identical
+  and is kept in the inbox only.
   Galaxy Z Fold5 (SM-F946BE-VN1, Vietnam/Hanoi) was reserved twice on
   2026-09-23. Both screens were measured in both navigation modes; the first
   cover gesture capture was rotated and retained as rejected evidence, then
