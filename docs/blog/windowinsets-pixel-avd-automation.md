@@ -6,7 +6,11 @@
 
 [1탄](https://velog.io/@mraz3068/windowinsets-rtl-automation)에서는 [windowinsets.info](https://windowinsets.info)에 필요한 Samsung Remote Test Lab 기기를 직접 조작하고, InsetsProbe가 측정한 JSON을 Vercel Function을 통해 GitHub PR로 보내는 흐름을 만들었다. 삼성 기기는 실제 기기에서 값을 얻을 수 있었지만, Pixel 기종을 추가할 때는 같은 방법을 쓸 수 없었다. Samsung RTL처럼 여러 Pixel 기기를 빌려 주는 환경이 없었기 때문이다.
 
-대신 Android SDK에는 Pixel device profile과 AOSP emulator skin이 들어 있다. 그렇다면 화면을 띄우지 않는 Android Emulator를 기종별로 실행하고, InsetsProbe를 설치한 뒤 내비게이션 방식·화면·회전을 바꾸며 JSON을 모으면 된다. 처음에는 이 정도면 단순한 반복문으로 끝날 줄 알았다.
+대신 Android SDK에는 Pixel device profile과 AOSP emulator skin이 들어 있다. 그렇다면 Emulator 창을 띄우지 않는 headless 방식으로 가상 기기를 실행하고, InsetsProbe를 설치한 뒤 내비게이션 방식·화면·회전을 바꾸며 JSON을 모으면 된다. 처음에는 이 정도면 단순한 반복문으로 끝날 줄 알았다.
+
+> 여기서 headless 부팅은 가상 기기의 화면 자체를 없애는 방식이 아니다. 호스트 컴퓨터에 Android Emulator 창을 띄우지 않고 백그라운드 프로세스로 실행하는 방식이다. `-no-window`로 실행해도 가상 Android 안에서는 display와 SystemUI가 그대로 동작하므로 앱은 WindowInsets를 받을 수 있다. 마우스로 화면을 누르는 대신 `adb` 명령으로 앱 실행, 화면 회전, 접힘 상태와 내비게이션 방식을 조작한다.
+>
+> 이번 측정에서는 `-no-window -no-audio -no-snapshot -no-boot-anim`을 함께 사용했다. 호스트의 Emulator 창과 오디오 출력을 만들지 않고, 저장된 snapshot을 복원하지 않으며, 부팅 애니메이션도 생략한 채 매번 `sys.boot_completed`를 기다렸다. 사람이 Emulator UI를 보고 조작하지 않아도 같은 시작 조건에서 여러 AVD를 순서대로 측정하기 위한 설정이었다.
 
 그런데 자동화할 대상은 앱 실행만이 아니었다. 바형 폰과 폴더블 내측 화면은 회전 방식이 달랐고, 접힘 상태를 바꾸는 순간 앱이 재생성되면서 이전 화면 라벨로 파일을 내보내기도 했다. 실기기용 업로드 키가 든 APK를 잘못 사용해 에뮬레이터 데이터가 실제 기기용 PR에 올라간 일도 있었다.
 
