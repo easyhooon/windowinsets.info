@@ -290,3 +290,11 @@ key), so both three-file sweeps were downloaded through the File Browser. The
 session ended with 15 minutes remaining and the one-credit return option
 selected; the refreshed Reservations page showed **9 Credits**. Net cost: one
 credit.
+
+Galaxy S22+ SM-S906B-RU1 Russia/Moscow Android 15 was then reserved for 30
+minutes, reducing the header from **9 to 7 Credits**. Upload still returned
+`401 Invalid upload key`, so files were downloaded through the File Browser.
+The 3-button natural-rotation file would not download, so it was recovered from
+a saved InsetsProbe log export. The session ended with 13 minutes remaining,
+below the 15-minute return threshold, so no refund applies. Net cost: two
+credits.
