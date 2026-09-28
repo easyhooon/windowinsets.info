@@ -309,6 +309,15 @@ export function DeviceView({ device }: { device: Device }) {
     rotateTo(next);
   };
   const poseGlyph = triFold ? "trifold" : device.formFactor === "foldable-flip" ? "flip" : "book";
+  // Phones show these in the bottom stack, where the open Metrics disclosure cannot cover them.
+  const displayOptions = <fieldset className="control-pill" aria-label="Display options">
+    <div className="segmented" role="group" aria-label="Navigation">
+      {([["threeButton", "3-button"], ["gesture", "Gesture"]] as const).map(([value, label]) =>
+        <button key={value} type="button" className="pill-button" aria-pressed={navMode === value} onClick={() => setNavMode(value)}>{label}</button>)}
+    </div>
+    <span className="pill-divider" />
+    <Dropdown label="App insets" value={safe ? appPreview : "off"} valueWidthCh={7} options={[{ value: "off", label: "Off" }, { value: "ignored", label: "Ignored", disabled: !safe }, { value: "applied", label: "Applied", disabled: !safe }]} onChange={v => setAppPreview(v as AppPreview)} />
+  </fieldset>;
   const exportJson = () => {
     try {
       downloadDeviceExport(device);
@@ -505,6 +514,7 @@ export function DeviceView({ device }: { device: Device }) {
       {(measurement || screen.cornerRadiiDp || useFold) && <div className="region-legend" aria-label="Region legend">
         {([{ key: "safe", label: "Safe Area", color: "#ade7bc" }, { key: "insets", label: "Insets", color: "#ffdab0" }, { key: "cutout", label: "Display Cutout", color: "#c4a0f1" }, { key: "corners", label: "Corner Radius", color: "#e4a6cc" }] as const).map(item => <button key={item.key} disabled={item.key === "corners" ? !screen.cornerRadiiDp : item.key === "cutout" ? !measurement?.cutoutShape : !measurement} aria-pressed={layers[item.key]} onClick={() => setLayers(v => ({ ...v, [item.key]: !v[item.key] }))}><i style={{ background: item.color }} />{item.label}</button>)}
       </div>}
+      <div className="canvas-toggles-inline">{displayOptions}</div>
       <div className="canvas-controls" aria-label="Canvas controls">
         <fieldset className="control-pill" aria-label="Canvas zoom">
           <button type="button" className="pill-button icon zoom-step" aria-label="Zoom out" title="Zoom out" onClick={() => zoomTo("out")}><Icon name="zoom-out" /></button>
@@ -527,16 +537,7 @@ export function DeviceView({ device }: { device: Device }) {
       </div>
       <p className="canvas-help">Scroll or drag to pan · Pinch to zoom · + / − to zoom · 0 to fit</p>
       </footer>
-      <div className="canvas-toggles">
-        <fieldset className="control-pill" aria-label="Display options">
-          <div className="segmented" role="group" aria-label="Navigation">
-            {([["threeButton", "3-button"], ["gesture", "Gesture"]] as const).map(([value, label]) =>
-              <button key={value} type="button" className="pill-button" aria-pressed={navMode === value} onClick={() => setNavMode(value)}>{label}</button>)}
-          </div>
-          <span className="pill-divider" />
-          <Dropdown label="App insets" value={safe ? appPreview : "off"} valueWidthCh={7} options={[{ value: "off", label: "Off" }, { value: "ignored", label: "Ignored", disabled: !safe }, { value: "applied", label: "Applied", disabled: !safe }]} onChange={v => setAppPreview(v as AppPreview)} />
-        </fieldset>
-      </div>
+      <div className="canvas-toggles">{displayOptions}</div>
     </section>
     <div className="dropdown settings canvas-settings" ref={settings}><button className="toolbar-button" aria-label="View settings" aria-expanded={settingsOpen} onClick={() => setSettingsOpen(!settingsOpen)}><Icon name="settings" /></button>
       {settingsOpen && <div className="dropdown-panel settings-panel">
