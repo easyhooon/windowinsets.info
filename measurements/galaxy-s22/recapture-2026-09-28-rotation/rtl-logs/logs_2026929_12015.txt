@@ -1,0 +1,1161 @@
+date		time		pid	tid	priority	tag			message
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe		{
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"schemaVersion": 2,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"capturedAt": "2026-09-28T16:09:33.100710Z",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"screen": "phone",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"screenLabelSource": "manual",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"probeVersion": "1.6.0",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"device": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"manufacturer": "samsung",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"brand": "samsung",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"model": "SM-S901E",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"device": "r0q",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"android": "14",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"sdkInt": 34,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"securityPatch": "2025-03-01",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"buildId": "UP1A.231005.007.S901EXXSCEYC1",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"oneUi": "6.1.1",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"oneUiProperty": 60101,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"oneUiSource": "ro.build.version.oneui",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"semPlatformInt": 150500
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"display": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"id": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"name": "Built-in Screen",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"rotation": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"isInMultiWindowMode": false,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"rootViewPx": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"width": 1080,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"height": 2340
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"refreshRate": 120,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"widthPx": 1080,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"heightPx": 2340,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"sizeSource": "currentWindowMetrics",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"appMetricsPx": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"width": 1080,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"height": 2214
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"xdpi": 428.63,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"ydpi": 424.54,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"densityDpi": 480,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"density": 3,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"defaultDensityDpi": 480,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"fontScale": 1,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"orientation": "portrait",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"screenWidthDp": 360,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"screenHeightDp": 738,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"smallestScreenWidthDp": 360,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"currentWindowPx": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"width": 1080,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"height": 2340
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"maximumWindowPx": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"width": 1080,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"height": 2340
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"maximumWindowDp": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"width": 360,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"height": 780
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"navigation": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"mode": "gesture",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"modeSource": "configAndSideGestures",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"modeFromInsets": "gesture",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"modeFromSetting": "gesture",
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"settingAgreesWithInsets": true,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"settingsSecureNavigationMode": 2,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"configNavBarInteractionMode": 2
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"insets": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"statusBars": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"top": 81,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"top": 27,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"navigationBars": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"bottom": 45,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"bottom": 15,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"systemBars": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"top": 81,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"bottom": 45,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"top": 27,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"bottom": 15,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"displayCutout": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"top": 81,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.118	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 27,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"captionBar": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"systemGestures": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 117,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 90,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 96,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 90
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 39,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 30,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 32,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 30
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"mandatorySystemGestures": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 117,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 96,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 39,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 32,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"tappableElement": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 81,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 27,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"insetsIgnoringVisibility": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"statusBars": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 81,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 27,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"navigationBars": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 45,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 15,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"systemBars": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 81,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 45,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 27,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 15,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"displayCutout": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"safeInsetsPx": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 81,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"safeInsetsDp": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 27,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"boundingRects": [
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 512,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 568,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 81
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 170.67,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 189.33,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 27,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"width": 18.67,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"height": 27
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		],
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"waterfallInsets": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"path": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"coordinateSpace": "display",
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"units": "px",
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"fillType": "WINDING",
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"approximationTolerancePx": 0.25,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"approximation": [
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"fraction": 0,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"x": 540,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"y": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"fraction": 0.10218977928161621,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"x": 512,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"y": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"fraction": 0.3978102207183838,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"x": 512,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"y": 81
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"fraction": 0.6021897792816162,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"x": 568,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"y": 81
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"fraction": 0.8978102207183838,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"x": 568,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"y": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"fraction": 1,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"x": 540,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"y": 0
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		]
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"roundedCorners": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"windowInsets": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"topLeft": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"x": 102,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"y": 102
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"topRight": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"x": 978,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"y": 102
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottomRight": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"x": 978,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"y": 2238
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"bottomLeft": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"x": 102,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"y": 2238
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"display": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"topLeft": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"x": 102,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"y": 102
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"topRight": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.119	28719	28719	I		InsetsProbe:		"x": 978,
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"y": 102
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"bottomRight": {
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"x": 978,
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"y": 2238
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"bottomLeft": {
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"x": 102,
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"y": 2238
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"hinge": {
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"angleDegrees": null,
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		"foldingFeatures": []
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.120	28719	28719	I		InsetsProbe		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe		{
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"schemaVersion": 2,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"capturedAt": "2026-09-28T16:09:33.953381Z",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"screen": "phone",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"screenLabelSource": "manual",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"probeVersion": "1.6.0",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"device": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"manufacturer": "samsung",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"brand": "samsung",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"model": "SM-S901E",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"device": "r0q",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"android": "14",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"sdkInt": 34,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"securityPatch": "2025-03-01",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"buildId": "UP1A.231005.007.S901EXXSCEYC1",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"oneUi": "6.1.1",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"oneUiProperty": 60101,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"oneUiSource": "ro.build.version.oneui",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"semPlatformInt": 150500
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"display": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"id": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"name": "Built-in Screen",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"rotation": 1,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"isInMultiWindowMode": false,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"rootViewPx": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"width": 2340,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"height": 1080
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"refreshRate": 120,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"widthPx": 2340,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"heightPx": 1080,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"sizeSource": "currentWindowMetrics",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"appMetricsPx": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"width": 2259,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"height": 1035
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"xdpi": 428.63,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"ydpi": 424.54,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"densityDpi": 480,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"density": 3,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"defaultDensityDpi": 480,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"fontScale": 1,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"orientation": "landscape",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"screenWidthDp": 753,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"screenHeightDp": 321,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"smallestScreenWidthDp": 360,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"currentWindowPx": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"width": 2340,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"height": 1080
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"maximumWindowPx": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"width": 2340,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"height": 1080
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"maximumWindowDp": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"width": 780,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"height": 360
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"navigation": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"mode": "gesture",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"modeSource": "configAndSideGestures",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"modeFromInsets": "gesture",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"modeFromSetting": "gesture",
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"settingAgreesWithInsets": true,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"settingsSecureNavigationMode": 2,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"configNavBarInteractionMode": 2
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"insets": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"statusBars": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"navigationBars": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 45,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 15,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"systemBars": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 45,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 15,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"displayCutout": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 81
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 27
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"captionBar": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"systemGestures": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 90,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 96,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 171
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 30,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 32,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 57
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"mandatorySystemGestures": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 96,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 32,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"tappableElement": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"insetsIgnoringVisibility": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"statusBars": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"navigationBars": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 45,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 15,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"systemBars": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 45,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 15,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"displayCutout": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"safeInsetsPx": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 81
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"safeInsetsDp": {
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		"left": 27
+2026-09-28	21:39:33.959	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"boundingRects": [
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"left": 0,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"top": 512,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"right": 81,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"bottom": 568
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"left": 0,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"top": 170.67,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"right": 27,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"bottom": 189.33,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"width": 27,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"height": 18.67
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		],
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"waterfallInsets": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"path": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"coordinateSpace": "display",
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"units": "px",
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"fillType": "WINDING",
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"approximationTolerancePx": 0.25,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"approximation": [
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"fraction": 0,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 0,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 540
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"fraction": 0.10218977928161621,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 0,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 568
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"fraction": 0.3978102207183838,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 81,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 568
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"fraction": 0.6021897792816162,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 81,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 512
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"fraction": 0.8978102207183838,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 0,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 512
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"fraction": 1,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 0,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 540
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		]
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"roundedCorners": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"windowInsets": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"topLeft": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 102,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 102
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"topRight": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 2238,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 102
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"bottomRight": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 2238,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 978
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"bottomLeft": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 102,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 978
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"display": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"topLeft": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 102,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 102
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"topRight": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 2238,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 102
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"bottomRight": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 2238,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 978
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"bottomLeft": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"x": 102,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"y": 978
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"hinge": {
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"angleDegrees": null,
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		"foldingFeatures": []
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:33.960	28719	28719	I		InsetsProbe		}
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe		{
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"schemaVersion": 2,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"capturedAt": "2026-09-28T16:09:34.716096Z",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"screen": "phone",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"screenLabelSource": "manual",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"probeVersion": "1.6.0",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"device": {
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"manufacturer": "samsung",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"brand": "samsung",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"model": "SM-S901E",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"device": "r0q",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"android": "14",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"sdkInt": 34,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"securityPatch": "2025-03-01",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"buildId": "UP1A.231005.007.S901EXXSCEYC1",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"oneUi": "6.1.1",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"oneUiProperty": 60101,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"oneUiSource": "ro.build.version.oneui",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"semPlatformInt": 150500
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"display": {
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"id": 0,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"name": "Built-in Screen",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"rotation": 3,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"isInMultiWindowMode": false,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"rootViewPx": {
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"width": 2340,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"height": 1080
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"refreshRate": 120,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"widthPx": 2340,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"heightPx": 1080,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"sizeSource": "currentWindowMetrics",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"appMetricsPx": {
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"width": 2259,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"height": 1035
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"xdpi": 428.63,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"ydpi": 424.54,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"densityDpi": 480,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"density": 3,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"defaultDensityDpi": 480,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"fontScale": 1,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"orientation": "landscape",
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"screenWidthDp": 753,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"screenHeightDp": 321,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"smallestScreenWidthDp": 360,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"currentWindowPx": {
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"width": 2340,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"height": 1080
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"maximumWindowPx": {
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"width": 2340,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"height": 1080
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"maximumWindowDp": {
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"width": 780,
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		"height": 360
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.722	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"navigation": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"mode": "gesture",
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"modeSource": "configAndSideGestures",
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"modeFromInsets": "gesture",
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"modeFromSetting": "gesture",
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"settingAgreesWithInsets": true,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"settingsSecureNavigationMode": 2,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"configNavBarInteractionMode": 2
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"insets": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"statusBars": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"navigationBars": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 45,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 15,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"systemBars": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 45,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 15,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"displayCutout": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 81,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 27,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"captionBar": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"systemGestures": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 171,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 96,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 90
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 57,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 32,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 30
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"mandatorySystemGestures": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 96,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 32,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"tappableElement": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"insetsIgnoringVisibility": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"statusBars": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"navigationBars": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 45,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 15,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"systemBars": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 72,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 45,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 24,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 15,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"displayCutout": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"safeInsetsPx": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 81,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"safeInsetsDp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 27,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"boundingRects": [
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 2259,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 512,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 2340,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 568
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 753,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 170.67,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 780,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 189.33,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"width": 27,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"height": 18.67
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		],
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"waterfallInsets": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"px": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"dp": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"top": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"right": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottom": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"left": 0
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"path": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"coordinateSpace": "display",
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"units": "px",
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"fillType": "WINDING",
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"approximationTolerancePx": 0.25,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"approximation": [
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"fraction": 0,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"x": 2340,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"y": 540
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"fraction": 0.10218977928161621,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"x": 2340,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"y": 512
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"fraction": 0.3978102207183838,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"x": 2259,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"y": 512
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"fraction": 0.6021897792816162,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"x": 2259,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"y": 568
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"fraction": 0.8978102207183838,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"x": 2340,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"y": 568
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		{
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"fraction": 1,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"x": 2340,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"y": 540
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		]
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"roundedCorners": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"windowInsets": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"topLeft": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"x": 102,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"y": 102
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"topRight": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"x": 2238,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"y": 102
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottomRight": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"x": 2238,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"y": 978
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"bottomLeft": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"x": 102,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"y": 978
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"display": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"topLeft": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"x": 102,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"y": 102
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"topRight": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:34.723	28719	28719	I		InsetsProbe:		"x": 2238,
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"y": 102
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"bottomRight": {
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"x": 2238,
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"y": 978
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"bottomLeft": {
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"radiusPx": 102,
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"radiusDp": 34,
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"centerPx": {
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"x": 102,
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"y": 978
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		},
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"hinge": {
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"angleDegrees": null,
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		"foldingFeatures": []
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe:		}
+2026-09-28	21:39:34.724	28719	28719	I		InsetsProbe		}
+2026-09-28	21:39:34.802	28719	28719	I		InsetsProbe		Sweep saved 3: main-gesture.json, landscape-1-gesture.json, landscape-3-gesture.json
+2026-09-28	21:39:35.603	28719	28719	I		InsetsProbe		Upload failed (401): Invalid upload key.
