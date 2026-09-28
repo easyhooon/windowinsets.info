@@ -5,7 +5,8 @@ for (const slug of ['galaxy-s25-plus', 'galaxy-s25-ultra']) {
   await page.goto('/'+slug);
   await expect(page.locator('.device-link.selected')).toContainText(slug === 'galaxy-s25-plus' ? 'Galaxy S25+' : 'Galaxy S25 Ultra');
   const choose = async (label: string, option: string) => {
-   await page.getByRole('button',{name:new RegExp(`^${label}:`)}).click();
+   // Pose and navigation are always-visible buttons; the rest open a menu.
+   if (label !== 'Pose' && label !== 'Navigation') await page.getByRole('button',{name:new RegExp(`^${label}:`)}).click();
    await page.getByRole('button',{name:option,exact:true}).click();
   };
   for(const nav of ['3-button','Gesture']) {

@@ -14,10 +14,9 @@ test("every published Fold and Flip exposes a working hinge control", async ({ p
 
   for (const device of foldables) {
     await page.goto(`/${device.slug}`);
-    await expect(page.getByRole("button", { name: /^Pose:/ })).toBeVisible();
-    const hinge = page.getByRole("button", { name: /^Hinge:/ });
+    await expect(page.getByRole("group", { name: "Device pose and hinge" })).toBeVisible();
+    const hinge = page.getByRole("status", { name: "Hinge angle" });
     await expect(hinge).toBeVisible();
-    await hinge.click();
 
     const slider = page.getByRole("slider", { name: "Hinge angle in degrees" });
     await expect(slider).toBeVisible();
