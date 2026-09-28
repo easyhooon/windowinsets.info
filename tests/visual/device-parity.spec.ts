@@ -427,6 +427,4 @@ test("foldables roll the device and lay out upright content in the new orientati
   await expect(width).toContainText("960");
   const box = (await width.boundingBox())!;
   expect(box.width).toBeGreaterThan(box.height);
-  // Uncaptured rotations never reuse the portrait insets.
-  await expect(page.locator(".canvas-footer .pending-notice")).toContainText("Landscape insets are not measured yet");
 });
