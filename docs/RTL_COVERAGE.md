@@ -280,6 +280,17 @@ Their insets, cutout and corner radii match the canonical physical cover
 captures, so they are listed as additional sources without changing values.
 Cover rotations 1 and 3 remain pending.
 
+On 2026-09-28, Galaxy Z Flip3 SM-F711B-VN2 (Android 14, One UI 6.1, the same
+build as the accepted captures) ran InsetsProbe 1.6.0. The in-app sweep captured
+the main display at rotations 0, 1 and 3 in both navigation modes. All six files
+report display 0, 480 dpi, font scale 1 and settings mode 0/2, and they were
+uploaded to the capture inbox. Rotation 0 matches the accepted captures.
+Landscape windows are 2640×1080 px with a 72 px top bar and a vertical FLAT
+feature at x=1320. Three-button places its 144 px bar on the right (rotation 1)
+or left (rotation 3), and gesture keeps a 45 px bottom inset. The 94×71 px cutout
+follows the rotation. Files are in
+`measurements/galaxy-z-flip3/recapture-2026-09-28-rotation/`.
+
 ### Galaxy Z Fold3 — 2026-09-25
 
 InsetsProbe 1.3.0 captured all four display/navigation combinations on Samsung
