@@ -400,6 +400,12 @@ and report settings mode 0/2. The device was returned to three-button
 navigation. Rotation 0 matches the accepted captures. Files are in
 `measurements/galaxy-s25-plus/recapture-2026-09-28-rotation/`.
 
+Galaxy S25 Edge SM-S937N_KR10 (same build as the accepted captures) produced the
+same six-file RTL sweep. Rotation 0 matches the accepted captures; landscape
+windows are 2340×1080 px with an 84 px top bar, a 135 px three-button side bar,
+a 42 px gesture bottom inset and a rotated 93×63 px cutout. Files are in
+`measurements/galaxy-s25-edge/recapture-2026-09-28-rotation/`.
+
 ## Galaxy S26 Ultra measured on 2026-09-23
 
 Samsung RTL Korea/Gumi SM-S948U_KR3 was reserved and its main display captured
