@@ -282,3 +282,11 @@ complete 3-button sweep. That session was ended with 23 minutes remaining, but
 the confirmation closed before the one-credit return option was selected, and
 the refreshed header showed **10 Credits**. No refund is recorded. Net cost:
 four credits.
+
+Galaxy S22 Ultra SM-S908B-RU1 Russia/Moscow Android 15 was then reserved for
+30 minutes, reducing the header from **10 to 8 Credits**. Upload still
+returned `401 Invalid upload key` (this machine's build carries an outdated
+key), so both three-file sweeps were downloaded through the File Browser. The
+session ended with 15 minutes remaining and the one-credit return option
+selected; the refreshed Reservations page showed **9 Credits**. Net cost: one
+credit.

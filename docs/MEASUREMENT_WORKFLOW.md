@@ -334,7 +334,7 @@ windowinsets.info is a reference site for Android window insets, display cutouts
 are measured in both navigation modes from verified live RTL sessions. Flip5 and
 Flip6 main screens are measured in both modes; no official cover skins were supplied.
 Galaxy S26, S25 and S24 series main screens (including S25 Edge, S25 FE and
-S24 FE), Galaxy S23 Ultra, Galaxy S23 FE and Galaxy S23 have natural, rotation 1 and rotation 3
+S24 FE), Galaxy S23 Ultra, Galaxy S23 FE, Galaxy S23 and Galaxy S22 Ultra have natural, rotation 1 and rotation 3
 captures in both navigation modes. Galaxy S23+ still lacks gesture rotation 3.
 See "Rotation sweep captured" below for units and capture directories.
 
@@ -537,6 +537,7 @@ fill them.
 | Galaxy S23 | SM-S911B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s23/recapture-2026-09-28-rotation/`) | None |
 | Galaxy S24 FE | SM-S721N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s24-fe/recapture-2026-09-28-rotation/`) | None |
 | Galaxy S23 FE | SM-S711B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s23-fe/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S22 Ultra | SM-S908B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s22-ultra/recapture-2026-09-28-rotation/`) | None |
 | Galaxy S25 | SM-S931N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s25/recapture-2026-09-28-rotation/`) | None |
 | Galaxy S25 FE | SM-S731N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s25-fe/recapture-2026-09-28-rotation/`) | None |
 | Galaxy S25 Edge | SM-S937N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s25-edge/recapture-2026-09-28-rotation/`) | None |
@@ -567,7 +568,7 @@ Note and A.
 | Series | Devices | Screens |
 | --- | --- | --- |
 | Galaxy Z Flip | original Z Flip (not listed on RTL as of 2026-09-28) | Main (no cover skin) |
-| Galaxy S | S22 Ultra, S22+, S22, S21 Ultra, S21+, S21 FE, S21, S20 Ultra, S20 FE | Main |
+| Galaxy S | S22+, S22, S21 Ultra, S21+, S21 FE, S21, S20 Ultra, S20 FE | Main |
 | Galaxy Tab | Tab S11 Ultra, S11, S10 Ultra, S10+, S10 FE+, S10 FE, S10 Lite, S9 Ultra, S9+, S9 FE+, S9 FE, S9, S8 Ultra, S8+, S8, S7+, S7 FE, A11, A9+, A7 Lite | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
 | Galaxy Note | Note20 Ultra, Note20 | Main |
 | Galaxy A | A73, A57, A56, A55, A53, A52s, A37, A36, A35, A34, A33, A32 5G, A32, A27, A25, A24, A23, A17, A16, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
