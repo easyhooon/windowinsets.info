@@ -56,7 +56,9 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
   // the reference does for its foldable. Automatic fit then eases to the new pose.
   const foldFitPending = useRef(true);
   // Stop fold fitting immediately; renderer frames can arrive before autoFit=false renders.
-  const userTransform = () => { foldFitPending.current = false; live.current.onUserTransform?.(); };
+  // User input ends any fit still converging, so a later pass cannot recentre over it.
+  const fitting = useRef(false);
+  const userTransform = () => { foldFitPending.current = false; fitting.current = false; live.current.onUserTransform?.(); };
   const foldFitAngle = useRef<number | null>(null);
   const fitBounds = useRef({ fitWidth, fitHeight });
   fitBounds.current = { fitWidth, fitHeight };
@@ -191,7 +193,6 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
   }, [rotation]);
   useEffect(() => () => clearTimeout(turnTimer.current), []);
   useLayoutEffect(() => applyScale(), [zoom, rotation, autoFit]);
-  const fitting = useRef(false);
   const [fitRevision, setFitRevision] = useState(0);
   const fit = useRef(() => {});
   useEffect(() => {
@@ -228,6 +229,7 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
   useEffect(() => {
     if (!fitting.current) return;
     const frame = requestAnimationFrame(() => {
+      if (!fitting.current) return;
       const el = ref.current!;
       const svg = el.querySelector('svg[role="group"]');
       if (!svg) { fitting.current = false; return; }
