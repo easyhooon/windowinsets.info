@@ -1,4 +1,4 @@
-import type { Device, Source } from "../../types";
+import type { Device, Insets, InsetsMeasurement, Source } from "../../types";
 
 const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold7";
 const mainCaptureBase = `${captureBase}/recapture-2026-09-25`;
@@ -72,6 +72,27 @@ const coverCutout = {
   bottomPx: 2418,
 };
 
+// Rotation sweep (2026-09-27): each rotation from its own capture, never rotated from portrait.
+const rotationBase = `${captureBase}/recapture-2026-09-27-rotation`;
+const rotationSource = (screen: "cover" | "main", rotation: 1 | 3, mode: "gesture" | "threeButton"): Source => ({
+  kind: "measured",
+  label: `InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold7 ${screen === "cover" ? "cover" : "inner display"}, rotation ${rotation} ${mode === "gesture" ? "gestures" : "3-button"} (SM-F966U)`,
+  url: `${rotationBase}/${screen}-landscape-${rotation}-${mode}.json`,
+  retrievedAt: "2026-09-27",
+});
+type RotationValues = Pick<InsetsMeasurement, "cutoutShape"> & { systemBars: Insets; systemBarsPx: Insets; displayCutout: Insets; displayCutoutPx: Insets };
+const rotationInsets = (screen: "cover" | "main", rotation: 1 | 3, mode: "gesture" | "threeButton", values: RotationValues): InsetsMeasurement => ({
+  ...values,
+  condition: {
+    oneUi: "8.5",
+    android: "16",
+    note: screen === "cover"
+      ? `Samsung RTL, SM-F966U, physically folded. Landscape rotation ${rotation}, 2520×1080 px, 420 dpi, font scale 1. The status bar is 79 px here versus 110 px in portrait, and the camera cutout moves to the ${rotation === 1 ? "left" : "right"} edge.`
+      : `Samsung RTL, SM-F966U, fully unfolded. Landscape rotation ${rotation}, 2184×1968 px, 420 dpi, font scale 1, rotated with the RTL Rotate control because the inner display ignored the app orientation request. The status bar is 79 px and the navigation bar stays at the bottom.${mode === "gesture" ? " Settings report gestures while the inset-only classifier reports 3-button, as in the portrait capture; the recorded insets are used as captured." : ""}`,
+  },
+  sources: [rotationSource(screen, rotation, mode)],
+});
+
 export const galaxyZFold7: Device = {
   slug: "galaxy-z-fold7",
   name: "Galaxy Z Fold7",
@@ -114,6 +135,16 @@ export const galaxyZFold7: Device = {
           sources: [coverThreeButton],
         },
       },
+      rotations: {
+      1: { logicalSizePx: { width: 2520, height: 1080 }, logicalSizeDp: { width: 960, height: 411.43 }, insets: {
+        gesture: rotationInsets("cover", 1, "gesture", { systemBars: { top: 30.1, right: 0, bottom: 14.86, left: 0 }, systemBarsPx: { top: 79, right: 0, bottom: 39, left: 0 }, displayCutout: { top: 0, right: 0, bottom: 0, left: 38.86 }, displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 102 }, cutoutShape: { xDp: 0, yDp: 194.29, widthDp: 38.86, heightDp: 22.86, rightDp: 921.14, bottomDp: 194.29, xPx: 0, yPx: 510, widthPx: 102, heightPx: 60, rightPx: 2418, bottomPx: 510 } }),
+        threeButton: rotationInsets("cover", 1, "threeButton", { systemBars: { top: 30.1, right: 48, bottom: 0, left: 0 }, systemBarsPx: { top: 79, right: 126, bottom: 0, left: 0 }, displayCutout: { top: 0, right: 0, bottom: 0, left: 38.86 }, displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 102 }, cutoutShape: { xDp: 0, yDp: 194.29, widthDp: 38.86, heightDp: 22.86, rightDp: 921.14, bottomDp: 194.29, xPx: 0, yPx: 510, widthPx: 102, heightPx: 60, rightPx: 2418, bottomPx: 510 } }),
+      } },
+      3: { logicalSizePx: { width: 2520, height: 1080 }, logicalSizeDp: { width: 960, height: 411.43 }, insets: {
+        gesture: rotationInsets("cover", 3, "gesture", { systemBars: { top: 30.1, right: 0, bottom: 14.86, left: 0 }, systemBarsPx: { top: 79, right: 0, bottom: 39, left: 0 }, displayCutout: { top: 0, right: 38.86, bottom: 0, left: 0 }, displayCutoutPx: { top: 0, right: 102, bottom: 0, left: 0 }, cutoutShape: { xDp: 921.14, yDp: 194.29, widthDp: 38.86, heightDp: 22.86, rightDp: 0, bottomDp: 194.29, xPx: 2418, yPx: 510, widthPx: 102, heightPx: 60, rightPx: 0, bottomPx: 510 } }),
+        threeButton: rotationInsets("cover", 3, "threeButton", { systemBars: { top: 30.1, right: 0, bottom: 0, left: 48 }, systemBarsPx: { top: 79, right: 0, bottom: 0, left: 126 }, displayCutout: { top: 0, right: 38.86, bottom: 0, left: 0 }, displayCutoutPx: { top: 0, right: 102, bottom: 0, left: 0 }, cutoutShape: { xDp: 921.14, yDp: 194.29, widthDp: 38.86, heightDp: 22.86, rightDp: 0, bottomDp: 194.29, xPx: 2418, yPx: 510, widthPx: 102, heightPx: 60, rightPx: 0, bottomPx: 510 } }),
+      } },
+      },
       sources: [samsungSkinPage, coverThreeButton, coverGesture],
     },
     {
@@ -146,6 +177,16 @@ export const galaxyZFold7: Device = {
           condition: mainCondition,
           sources: [mainThreeButton],
         },
+      },
+      rotations: {
+      1: { logicalSizePx: { width: 2184, height: 1968 }, logicalSizeDp: { width: 832, height: 749.71 }, insets: {
+        gesture: rotationInsets("main", 1, "gesture", { systemBars: { top: 30.1, right: 0, bottom: 14.86, left: 0 }, systemBarsPx: { top: 79, right: 0, bottom: 39, left: 0 }, displayCutout: { top: 0, right: 0, bottom: 0, left: 0 }, displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 0 } }),
+        threeButton: rotationInsets("main", 1, "threeButton", { systemBars: { top: 30.1, right: 0, bottom: 48, left: 0 }, systemBarsPx: { top: 79, right: 0, bottom: 126, left: 0 }, displayCutout: { top: 0, right: 0, bottom: 0, left: 0 }, displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 0 } }),
+      } },
+      3: { logicalSizePx: { width: 2184, height: 1968 }, logicalSizeDp: { width: 832, height: 749.71 }, insets: {
+        gesture: rotationInsets("main", 3, "gesture", { systemBars: { top: 30.1, right: 0, bottom: 14.86, left: 0 }, systemBarsPx: { top: 79, right: 0, bottom: 39, left: 0 }, displayCutout: { top: 0, right: 0, bottom: 0, left: 0 }, displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 0 } }),
+        threeButton: rotationInsets("main", 3, "threeButton", { systemBars: { top: 30.1, right: 0, bottom: 48, left: 0 }, systemBarsPx: { top: 79, right: 0, bottom: 126, left: 0 }, displayCutout: { top: 0, right: 0, bottom: 0, left: 0 }, displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 0 } }),
+      } },
       },
       sources: [samsungSkinPage, mainThreeButton, mainGesture],
     },

@@ -526,11 +526,11 @@ fill them.
 
 | Device | Model | Rotation captures on file | Remaining |
 | --- | --- | --- | --- |
-| Galaxy A54 5G | SM-A546B | Main: natural, rotation 1 and 3 in both modes | None |
-| Galaxy Z Fold7 | SM-F966U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold7/recapture-2026-09-27-rotation/`) | None |
-| Galaxy Z Fold8 Ultra | SM-F976U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/`) | None |
+| Galaxy A54 5G | SM-A546B | Main: natural, rotation 1 and 3 in both modes | Register rotations 1 and 3 on the site |
+| Galaxy Z Fold7 | SM-F966U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold7/recapture-2026-09-27-rotation/`) | None; rotations 1 and 3 are registered on the site |
+| Galaxy Z Fold8 Ultra | SM-F976U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/`) | Register rotations 1 and 3 on the site |
 | Galaxy S23+ | SM-S916U | Main: 3-button rotation 1 and 3; gesture rotation 1 (pilot, captured by hand rotation) | Main gesture rotation 3 |
-| Galaxy Z Fold8 | SM-F971N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold8/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Fold8 | SM-F971N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold8/recapture-2026-09-27-rotation/`) | Register rotations 1 and 3 on the site |
 | Galaxy Z Fold6 | SM-F956U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
 | Galaxy Z Fold5 | SM-F946B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |
 | Galaxy Z Fold4 | SM-F936B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/_inbox/`, not yet imported) | Import and register verified captures |

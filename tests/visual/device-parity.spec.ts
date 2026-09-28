@@ -427,6 +427,8 @@ test("foldables roll the device and lay out upright content in the new orientati
   await expect(width).toContainText("960");
   const box = (await width.boundingBox())!;
   expect(box.width).toBeGreaterThan(box.height);
-  // Uncaptured rotations never reuse the portrait insets.
-  await expect(page.locator(".canvas-footer .pending-notice")).toContainText("Landscape insets are not measured yet");
+  // Rotation 3 comes from its own capture: the cutout and 3-button bar move to the sides.
+  await expect(page.locator(".canvas-footer .pending-notice")).toHaveCount(0);
+  await expect(page.locator(".projected-rulers [data-ruler='Right inset']")).toHaveAttribute("data-value", "38.86");
+  await expect(page.locator(".projected-rulers [data-ruler='Left inset']")).toHaveAttribute("data-value", "48");
 });
