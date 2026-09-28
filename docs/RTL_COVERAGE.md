@@ -140,8 +140,17 @@ removes a model from its catalog.
 - Galaxy S24 (SM-S921N-KR3, Korea/Gumi) was reserved on 2026-09-24 with
   Android 16 / One UI 8.5. InsetsProbe 1.3.0 captured the main display in both
   navigation modes at 1080×2340 px / 480 dpi; the downloaded files report
-  matching Settings and inset classifications. This confirms availability for
-  this exact model on that date only.
+  matching Settings and inset classifications. A 2026-09-28 reservation of the
+  same unit supplied an InsetsProbe 1.6.0 sweep at rotations 0, 1 and 3 in both
+  navigation modes. All six files report build
+  BP4A.251205.006.S921NKSSGDZG1, 480 dpi, font scale 1, full-screen windows and
+  matching navigation evidence. Portrait bars are 103/45 px in gesture mode
+  and 103/144 px in 3-button mode. Landscape status bars are 90 px; the 103 px
+  cutout moves left at rotation 1 and right at rotation 3. Gesture retains a
+  45 px bottom bar, while 3-button uses a 144 px bar on the opposite side.
+  Files are in `measurements/galaxy-s24/recapture-2026-09-28-rotation/`; the
+  original portrait captures remain preserved. Availability is confirmed for
+  this exact model on the respective dates only.
 - Galaxy S24 FE (SM-S721N_KR4, Korea/Gumi) was reserved on 2026-09-25 with
   Android 16 / One UI 8.5. InsetsProbe 1.3.0 captured its Phone-labeled built-in
   display in both navigation modes at 1080×2340 px / 450 dpi with font scale 1.
