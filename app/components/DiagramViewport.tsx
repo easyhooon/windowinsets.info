@@ -12,7 +12,17 @@ const FOLD_LABEL_ROOM = 64;
 const ROTATION_MS = 300;
 const ROTATION_EASING = "cubic-bezier(0.2, 0, 0, 1)";
 // Converts a screen offset into the rotated canvas frame.
-const rotateBack = (x: number, y: number, degrees: number) => {
+// The floating toggles and the legend/controls footer overlay the canvas edges.
+const overlayRoom = (el: Element, viewport: DOMRect) => {
+  const panel = el.closest(".canvas-panel");
+  const toggles = panel?.querySelector(".canvas-toggles")?.getBoundingClientRect();
+  const footer = panel?.querySelector(".canvas-footer")?.getBoundingClientRect();
+  return {
+    topRoom: Math.max(16, toggles && toggles.height ? toggles.bottom - viewport.top + 8 : 16),
+    bottomRoom: Math.max(16, footer && footer.height ? viewport.bottom - footer.top + 8 : 16),
+  };
+};
+const rotateBack =(x: number, y: number, degrees: number) => {
   const r = -degrees * Math.PI / 180;
   return [x * Math.cos(r) - y * Math.sin(r), x * Math.sin(r) + y * Math.cos(r)];
 };
@@ -73,10 +83,9 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       const sideways = Math.abs(live.current.rotation) % 180 === 90;
       const width = body.right - body.left, height = body.bottom - body.top;
       const viewport = ref.current.getBoundingClientRect();
-      const footer = ref.current.closest(".canvas-panel")?.querySelector(".canvas-footer")?.getBoundingClientRect();
-      // The legend overlays the canvas bottom; keep the device clear of it.
-      const bottomRoom = Math.max(16, footer && footer.height ? viewport.bottom - footer.top + 8 : 16);
-      const availableW = viewport.width - 32, availableH = viewport.height - 16 - bottomRoom;
+      // The toggles and legend overlay the canvas; keep the device clear of them.
+      const { topRoom, bottomRoom } = overlayRoom(ref.current, viewport);
+      const availableW = viewport.width - 32, availableH = viewport.height - topRoom - bottomRoom;
       const scaleFor = (roomX: number, roomY: number) => clampZoom(100 * Math.min((availableW - roomX) / (sideways ? height : width),
         (availableH - roomY) / (sideways ? width : height)), MAX_FIT_ZOOM);
       const base = scaleFor(2 * FOLD_LABEL_ROOM, 2 * FOLD_LABEL_ROOM);
@@ -98,8 +107,8 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
         live.current.zoom = effectiveZoom.current; live.current.setZoom(effectiveZoom.current);
       }
       // Center the labelled bounds, since labels stack unevenly, then lift
-      // the center by half the legend room.
-      const lift = (bottomRoom - 16) / 2 / (effectiveZoom.current / 100);
+      // the center by half the difference between the overlay rooms.
+      const lift = (bottomRoom - topRoom) / 2 / (effectiveZoom.current / 100);
       const x = (bounds.left + bounds.right) / 2 - 350;
       const y = (bounds.top + bounds.bottom) / 2 - 350;
       const [dx, dy] = rotateBack(0, lift, live.current.rotation);
@@ -235,12 +244,11 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       const left = Math.min(...boxes.map(box => box.left)), right = Math.max(...boxes.map(box => box.right));
       const top = Math.min(...boxes.map(box => box.top)), bottom = Math.max(...boxes.map(box => box.bottom));
       const viewport = el.getBoundingClientRect();
-      // Same legend room as the fold fit: the footer overlays the canvas bottom.
-      const footer = el.closest(".canvas-panel")?.querySelector(".canvas-footer")?.getBoundingClientRect();
-      const bottomRoom = Math.max(16, footer && footer.height ? viewport.bottom - footer.top + 8 : 16);
-      const ratio = Math.min((viewport.width - 32) / (right - left), (viewport.height - 16 - bottomRoom) / (bottom - top));
+      // Same overlay room as the fold fit.
+      const { topRoom, bottomRoom } = overlayRoom(el, viewport);
+      const ratio = Math.min((viewport.width - 32) / (right - left), (viewport.height - topRoom - bottomRoom) / (bottom - top));
       setPan(previous => ({ x: previous.x + viewport.left + viewport.width / 2 - (left + right) / 2,
-        y: previous.y + viewport.top + 16 + (viewport.height - 16 - bottomRoom) / 2 - (top + bottom) / 2 }));
+        y: previous.y + viewport.top + topRoom + (viewport.height - topRoom - bottomRoom) / 2 - (top + bottom) / 2 }));
       const next = clampZoom(Math.floor(zoom * ratio), MAX_FIT_ZOOM); if (Math.abs(next - zoom) > 1) setZoom(next); else fitting.current = false;
     });
     return () => cancelAnimationFrame(frame);

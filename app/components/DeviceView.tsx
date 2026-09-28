@@ -287,6 +287,28 @@ export function DeviceView({ device }: { device: Device }) {
     : flatDp ? flatCanvasPxPerDp(flatDp.width, flatDp.height, showFrame ? skin : undefined,
       safe, screen.cornerRadiiDp, measurement?.cutoutShape, screen.captureRotation ?? 0) : 1;
   const displayZoom = (canvasZoom: number) => Math.round(canvasZoom * dpScale);
+  const zoomTo = (v: string) => {
+    if (v === "fit") { setAutoFit(true); setFitKey(k => k + 1); return; }
+    const current = displayZoom(viewport.current?.effectiveZoom() ?? zoom);
+    setAutoFit(false);
+    setZoom((v === "in" ? Math.min(500, current + 10) : v === "out" ? Math.max(10, current - 10) : Number(v)) / dpScale);
+  };
+  const rotateTo = (next: number) => {
+    const delta = ((next - rotation) % 360 + 540) % 360 - 180;
+    pendingTurn.current = next === rotation ? null : {
+      delta: delta === -180 ? 180 : delta,
+      before: document.querySelector("#device-canvas [data-fit-body]")?.getBoundingClientRect() ?? null,
+    };
+    setRotation(next); setAutoFit(true); setFitKey(key => key + 1);
+  };
+  // The view turns clockwise for a positive step; skip orientations the device lacks.
+  const rotateBy = (step: 90 | -90) => {
+    let next = rotation;
+    do { const turned = ((next + step) % 360 + 360) % 360; next = turned > 180 ? turned - 360 : turned; }
+    while (!orientationOptions.some(o => Number(o.value) === next));
+    rotateTo(next);
+  };
+  const poseGlyph = triFold ? "trifold" : device.formFactor === "foldable-flip" ? "flip" : "book";
   const exportJson = () => {
     try {
       downloadDeviceExport(device);
@@ -483,37 +505,46 @@ export function DeviceView({ device }: { device: Device }) {
       {(measurement || screen.cornerRadiiDp || useFold) && <div className="region-legend" aria-label="Region legend">
         {([{ key: "safe", label: "Safe Area", color: "#ade7bc" }, { key: "insets", label: "Insets", color: "#ffdab0" }, { key: "cutout", label: "Display Cutout", color: "#c4a0f1" }, { key: "corners", label: "Corner Radius", color: "#e4a6cc" }] as const).map(item => <button key={item.key} disabled={item.key === "corners" ? !screen.cornerRadiiDp : item.key === "cutout" ? !measurement?.cutoutShape : !measurement} aria-pressed={layers[item.key]} onClick={() => setLayers(v => ({ ...v, [item.key]: !v[item.key] }))}><i style={{ background: item.color }} />{item.label}</button>)}
       </div>}
+      <div className="canvas-controls" aria-label="Canvas controls">
+        <fieldset className="control-pill" aria-label="Canvas zoom">
+          <button type="button" className="pill-button icon zoom-step" aria-label="Zoom out" title="Zoom out" onClick={() => zoomTo("out")}><Icon name="zoom-out" /></button>
+          <button type="button" className="pill-button icon zoom-step" aria-label="Zoom in" title="Zoom in" onClick={() => zoomTo("in")}><Icon name="zoom-in" /></button>
+          <span className="pill-divider zoom-step" />
+          <Dropdown label="Zoom" hideLabel opensUp icon="zoom-fit" value={`${displayZoom(zoom)}%`} valueWidthCh={4} options={[{ value: "fit", label: "Fit to canvas" }, { value: "out", label: "− Zoom out" }, { value: "in", label: "+ Zoom in" }, ...[25,50,100,200,300].map(z => ({ value: String(z), label: `${z}%` }))]} onChange={zoomTo} />
+        </fieldset>
+        <fieldset className="control-pill" aria-label="Device rotation">
+          <button type="button" className="pill-button icon" aria-label="Rotate counterclockwise" title="Rotate counterclockwise" onClick={() => rotateBy(-90)}><Icon name="rotate-ccw" /></button>
+          <Dropdown label="Orientation" hideLabel opensUp value={String(rotation)} options={orientationOptions} onChange={v => rotateTo(Number(v))} />
+          <button type="button" className="pill-button icon" aria-label="Rotate clockwise" title="Rotate clockwise" onClick={() => rotateBy(90)}><Icon name="rotate-cw" /></button>
+        </fieldset>
+        {useFold && <fieldset className="control-pill hinge-control" aria-label="Device pose and hinge">
+          {([["0", "Closed", "closed"], [triFold ? "135" : "90", "Partially Folded", "partial"], ["180", "Open", "open"]] as const).map(([value, label, glyph]) =>
+            <button key={value} type="button" className="pill-button icon" aria-label={label} title={label} aria-pressed={angle === Number(value)} onClick={() => selectPose(value, "pose_menu")}><Icon name={`${poseGlyph}-${glyph}`} /></button>)}
+          <span className="pill-divider" />
+          <input aria-label={triFold ? "Fold sequence" : "Hinge angle in degrees"} title={triFold ? "Close left first, then right." : undefined} type="range" min={0} max={180} value={angle} onChange={e => pose(e.target.value)} onPointerUp={e => recordPose(e.currentTarget.value, "hinge_slider")} onKeyUp={e => recordPose(e.currentTarget.value, "hinge_slider")} />
+          <output className="hinge-readout" aria-label="Hinge angle">{triFold ? `${hinges.left}°/${hinges.right}°` : `${angle}°`}</output>
+        </fieldset>}
+      </div>
       <p className="canvas-help">Scroll or drag to pan · Pinch to zoom · + / − to zoom · 0 to fit</p>
       </footer>
-    </section>
-    <div className={`canvas-controls${useFold ? " is-foldable" : ""}`} aria-label="Canvas controls">
-      <Dropdown label="Navigation" value={navMode} options={[{ value: "threeButton", label: "3-button" }, { value: "gesture", label: "Gesture" }]} onChange={v => setNavMode(v as NavMode)} />
-      <Dropdown label="Orientation" value={String(rotation)} options={orientationOptions} onChange={v => {
-        const next = Number(v);
-        const delta = ((next - rotation) % 360 + 540) % 360 - 180;
-        pendingTurn.current = next === rotation ? null : {
-          delta: delta === -180 ? 180 : delta,
-          before: document.querySelector("#device-canvas [data-fit-body]")?.getBoundingClientRect() ?? null,
-        };
-        setRotation(next); setAutoFit(true); setFitKey(key => key + 1);
-      }} />
-      <Dropdown label="Zoom" value={`${displayZoom(zoom)}%`} options={[{ value: "fit", label: "Fit to canvas" }, { value: "out", label: "− Zoom out" }, { value: "in", label: "+ Zoom in" }, ...[25,50,100,200,300].map(z => ({ value: String(z), label: `${z}%` }))]} onChange={v => {
-        if (v === "fit") { setAutoFit(true); setFitKey(k => k + 1); return; }
-        const current = displayZoom(viewport.current?.effectiveZoom() ?? zoom);
-        setAutoFit(false);
-        setZoom((v === "in" ? Math.min(500, current + 10) : v === "out" ? Math.max(10, current - 10) : Number(v)) / dpScale);
-      }} />
-      {useFold && <><Dropdown label="Pose" value={triFold && ![0, 135, 180].includes(angle) ? `${Math.round(angle / 180 * 100)}% open` : String(angle)} options={[{value:"0",label:"Closed"},{value:triFold ? "135" : "90",label:"Partially Folded"},{value:"180",label:"Open"}]} onChange={v => selectPose(v, "pose_menu")} />
-      <Dropdown label="Hinge" value={triFold ? `${hinges.left}° / ${hinges.right}°` : `${angle}°`} valueWidthCh={triFold ? 10 : 4} options={[]} onChange={() => {}} footer={<>{triFold && <p className="hinge-sequence-note">Left {hinges.left}° · Right {hinges.right}°<br />Close left first, then right.</p>}<input aria-label={triFold ? "Fold sequence" : "Hinge angle in degrees"} type="range" min={0} max={180} value={angle} onChange={e => pose(e.target.value)} onPointerUp={e => recordPose(e.currentTarget.value, "hinge_slider")} onKeyUp={e => recordPose(e.currentTarget.value, "hinge_slider")} /></>} /></>}
-      <Dropdown label="App insets" value={safe ? appPreview : "off"} valueWidthCh={7} options={[{ value: "off", label: "Off" }, { value: "ignored", label: "Ignored", disabled: !safe }, { value: "applied", label: "Applied", disabled: !safe }]} onChange={v => setAppPreview(v as AppPreview)} />
-      <div className="dropdown settings" ref={settings}><button className="toolbar-button" aria-label="View settings" aria-expanded={settingsOpen} onClick={() => setSettingsOpen(!settingsOpen)}><Icon name="settings" /></button>
-        {settingsOpen && <div className="dropdown-panel settings-panel">
-          <label><input type="checkbox" checked={showFrame} onChange={e => setShowFrame(e.target.checked)} />Show Frame</label>
-          <label><input type="checkbox" checked={showRegions} onChange={e => setShowRegions(e.target.checked)} />Show Regions</label>
-          <label><input type="checkbox" checked={showDimensions} onChange={e => setShowDimensions(e.target.checked)} />Show Dimensions</label>
-          <fieldset><legend>Dimension units</legend>{(["dp","px"] as const).map(u => <label key={u}><input type="radio" name="units" checked={units === u} disabled={u === "px" && !exactPxAvailable} onChange={() => { if (u !== units) { setUnits(u); trackUnitChange(device, u); } }} />{u}</label>)}</fieldset>
-        </div>}
+      <div className="canvas-toggles">
+        <fieldset className="control-pill" aria-label="Display options">
+          <div className="segmented" role="group" aria-label="Navigation">
+            {([["threeButton", "3-button"], ["gesture", "Gesture"]] as const).map(([value, label]) =>
+              <button key={value} type="button" className="pill-button" aria-pressed={navMode === value} onClick={() => setNavMode(value)}>{label}</button>)}
+          </div>
+          <span className="pill-divider" />
+          <Dropdown label="App insets" value={safe ? appPreview : "off"} valueWidthCh={7} options={[{ value: "off", label: "Off" }, { value: "ignored", label: "Ignored", disabled: !safe }, { value: "applied", label: "Applied", disabled: !safe }]} onChange={v => setAppPreview(v as AppPreview)} />
+        </fieldset>
       </div>
+    </section>
+    <div className="dropdown settings canvas-settings" ref={settings}><button className="toolbar-button" aria-label="View settings" aria-expanded={settingsOpen} onClick={() => setSettingsOpen(!settingsOpen)}><Icon name="settings" /></button>
+      {settingsOpen && <div className="dropdown-panel settings-panel">
+        <label><input type="checkbox" checked={showFrame} onChange={e => setShowFrame(e.target.checked)} />Show Frame</label>
+        <label><input type="checkbox" checked={showRegions} onChange={e => setShowRegions(e.target.checked)} />Show Regions</label>
+        <label><input type="checkbox" checked={showDimensions} onChange={e => setShowDimensions(e.target.checked)} />Show Dimensions</label>
+        <fieldset><legend>Dimension units</legend>{(["dp","px"] as const).map(u => <label key={u}><input type="radio" name="units" checked={units === u} disabled={u === "px" && !exactPxAvailable} onChange={() => { if (u !== units) { setUnits(u); trackUnitChange(device, u); } }} />{u}</label>)}</fieldset>
+      </div>}
     </div>
   </article>;
 }
