@@ -11,7 +11,7 @@ const samsungSpecs: Source = {
 const captureSource = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy A35 5G (SM-A356N), main ${mode === "gesture" ? "gesture" : "3-button"}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a35-5g/main-${mode}.json`,
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a35-5g/main-${mode}.json`,
   retrievedAt: "2026-09-25",
 });
 
@@ -77,7 +77,7 @@ const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton"): Inse
   sources: [{
     kind: "measured",
     label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy A35 5G, rotation ${rotation}, ${mode} (SM-A356N)`,
-    url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a35-5g/recapture-2026-09-29-rotation/main-landscape-${rotation}-${mode}.json`,
+    url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a35-5g/recapture-2026-09-29-rotation/main-landscape-${rotation}-${mode}.json`,
     retrievedAt: "2026-09-29",
   }],
 });

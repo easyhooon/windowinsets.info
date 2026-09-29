@@ -7,7 +7,7 @@ const samsungSpecs: Source = {
   retrievedAt: "2026-09-25",
   note: "Samsung lists an 8.7-inch (220.5 mm), 1340×800 WXGA+ display; PPI is calculated from those values.",
 };
-const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab-a7-lite";
+const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab/galaxy-tab-a7-lite";
 const captureSource = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy Tab A7 Lite main (SM-T225), ${mode}`,

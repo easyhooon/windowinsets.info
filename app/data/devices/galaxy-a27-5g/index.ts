@@ -11,14 +11,14 @@ const samsungSpecs: Source = {
 const captureSource = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy A27 5G / Galaxy Jump5 (SM-A276K), main ${mode === "gesture" ? "gesture" : "3-button"}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a27-5g/main-${mode}.json`,
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a27-5g/main-${mode}.json`,
   retrievedAt: "2026-09-25",
 });
 
 const internationalVariantSource = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy A27 5G (SM-A276B), main ${mode === "gesture" ? "gesture" : "3-button"}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a27-5g/SM-A276B/main-${mode}.json`,
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a27-5g/SM-A276B/main-${mode}.json`,
   retrievedAt: "2026-09-25",
 });
 
@@ -84,7 +84,7 @@ const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton"): Inse
   sources: [{
     kind: "measured",
     label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy A27 5G, rotation ${rotation}, ${mode} (SM-A276K)`,
-    url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a27-5g/recapture-2026-09-29-rotation/main-landscape-${rotation}-${mode}.json`,
+    url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a27-5g/recapture-2026-09-29-rotation/main-landscape-${rotation}-${mode}.json`,
     retrievedAt: "2026-09-29",
   }],
 });

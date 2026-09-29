@@ -33,7 +33,7 @@ lessons live in the `pixel-emulator-insets` skill
   Fold's physical top cutout safe inset differed from its API 37 emulator
   capture; see [the FTL validation log](PIXEL_HARDWARE_VALIDATION.md).
 - Registration: copy a validated run to
-  `measurements/<slug>/emulator-<date>/` (raw JSON plus `manifest.json`, never
+  `measurements/pixel/<slug>/emulator-<date>/` (raw JSON plus `manifest.json`, never
   mixed with real-device files), then run
   `python3 scripts/import-emulator-captures.py [slug ...]`. The importer checks
   the emulator model, spec resolution, navigation mode agreement and cover fold
@@ -168,7 +168,7 @@ and used the WebClient folding control to activate both physical displays:
 
 Both displays were captured in 3-button and gesture navigation modes. The accepted
 raw files are preserved under
-`measurements/galaxy-z-fold8/recapture-2026-09-22/`. The older root-level
+`measurements/galaxy-fold/galaxy-z-fold8/recapture-2026-09-22/`. The older root-level
 `main-*.json` evidence remains immutable, but the website now uses the correctly
 labeled recaptures. The folded capture still reports a 180° hinge sensor value with
 no folding features, so the cover classification relies on the actively switched
@@ -190,15 +190,15 @@ RTL instances reported the same Android 16 / One UI 8.5 build.
 
 The inner display's hinge sensor remained at 0°, but InsetsProbe accepted the
 capture because WindowManager supplied a real FLAT folding feature across the
-display midpoint. The cover files are under `measurements/galaxy-z-fold7/`.
+display midpoint. The cover files are under `measurements/galaxy-fold/galaxy-z-fold7/`.
 
 Upright inner recapture (2026-09-25): the first inner captures (InsetsProbe
 1.2.1) were taken with the device turned sideways (rotation 1, 2184×1968 px,
 horizontal FLAT feature, 79 px top), so the renderer turned the opened chassis
 90° while Fold4/Fold6/Fold8 open as upright books. They remain unchanged at
-`measurements/galaxy-z-fold7/main-*.json` as historical evidence. The published
+`measurements/galaxy-fold/galaxy-z-fold7/main-*.json` as historical evidence. The published
 inner values now come from InsetsProbe 1.3.0 captures at rotation 0 in
-`measurements/galaxy-z-fold7/recapture-2026-09-25/`, on the same software build.
+`measurements/galaxy-fold/galaxy-z-fold7/recapture-2026-09-25/`, on the same software build.
 The gesture capture's Settings and configuration report gestures with 78 px side
 gesture regions, while the inset-only classifier reports `threeButton`; this is
 disclosed in the published condition.
@@ -222,9 +222,9 @@ disagreement is disclosed in the device condition rather than hidden.
 An earlier inner 3-button attempt had Settings/configuration set to 3-button,
 but the navigation bar/system bar bottom was only **1 px** while other gesture
 and tappable regions were 126 px. It is preserved in
-`measurements/galaxy-z-fold6/rejected-2026-09-23/` and **not published** as an
+`measurements/galaxy-fold/galaxy-z-fold6/rejected-2026-09-23/` and **not published** as an
 inset measurement. A third reservation produced a settled inner 3-button
-recapture in `measurements/galaxy-z-fold6/main-threeButton.json`: its navigation
+recapture in `measurements/galaxy-fold/galaxy-z-fold6/main-threeButton.json`: its navigation
 mode agrees across Settings, Android configuration and Probe's inset classifier,
 and the navigation/system/tappable bottom insets all measure **126 px (48 dp)**.
 The earlier 1 px file remains unchanged as rejected historical evidence.
@@ -246,16 +246,16 @@ Galaxy Z Fold5 (SM-F946B, RTL Vietnam/Hanoi) was measured with InsetsProbe
   126/39 px bottom (2026-09-25 recapture).
 
 The first cover gesture capture was accidentally rotated to landscape. Its
-original JSON remains under `measurements/galaxy-z-fold5/rejected-2026-09-23/`;
+original JSON remains under `measurements/galaxy-fold/galaxy-z-fold5/rejected-2026-09-23/`;
 the second reservation supplied an upright 904×2316 px capture whose gesture
 configuration, Settings value and inset classifier all agree.
 
 Upright inner recapture (2026-09-25): the 2026-09-23 inner captures were taken
 sideways (rotation 1, 2176×1812 px, horizontal FLAT feature, 79 px top), which
 turned the opened chassis 90°. They remain unchanged at
-`measurements/galaxy-z-fold5/main-*.json` as historical evidence. Published
+`measurements/galaxy-fold/galaxy-z-fold5/main-*.json` as historical evidence. Published
 inner values come from the rotation-0 InsetsProbe 1.3.0 captures in
-`measurements/galaxy-z-fold5/recapture-2026-09-25/` on the same build. The
+`measurements/galaxy-fold/galaxy-z-fold5/recapture-2026-09-25/` on the same build. The
 recapture's hinge sensor reported 180°. The inner gesture capture has gesture Settings/configuration and 78 px side gesture regions, but
 Probe's inset-only classifier reports `threeButton`; this disagreement is
 disclosed in the published condition. The cover hinge sensor reported 180° with
@@ -316,7 +316,7 @@ reported a 180° hinge angle with no folding feature, so cover identity comes fr
 the FlexWindow launch source, display ID and exact active-window resolution—not
 the hinge sensor. The untouched legacy `cover-threeButton.json` remains an inner
 display mislabeled as cover; accepted cover evidence is stored under
-`measurements/galaxy-z-flip8/recapture-2026-09-23/`.
+`measurements/galaxy-flip/galaxy-z-flip8/recapture-2026-09-23/`.
 
 ### RTL access outcome
 
@@ -525,60 +525,60 @@ fill them.
 | Device | Model | Rotation captures on file | Remaining |
 | --- | --- | --- | --- |
 | Galaxy A54 5G | SM-A546B | Main: natural, rotation 1 and 3 in both modes | None |
-| Galaxy Z Fold7 | SM-F966U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold7/recapture-2026-09-27-rotation/`) | None |
-| Galaxy Z Fold8 Ultra | SM-F976U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Fold7 | SM-F966U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold7/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Fold8 Ultra | SM-F976U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/`) | None |
 | Galaxy S23+ | SM-S916U | Main: 3-button rotation 1 and 3; gesture rotation 1 (pilot, captured by hand rotation) | Main gesture rotation 3 |
-| Galaxy Z Fold8 | SM-F971N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold8/recapture-2026-09-27-rotation/`) | None |
-| Galaxy Z Fold6 | SM-F956U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold6/recapture-2026-09-27-rotation/`) | None |
-| Galaxy S26 Ultra | SM-S948U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s26-ultra/recapture-2026-09-27-rotation/`) | None |
-| Galaxy S24+ | SM-S926N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s24-plus/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S24 | SM-S921N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s24/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S23 Ultra | SM-S918U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s23-ultra/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S23 | SM-S911B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s23/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S24 FE | SM-S721N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s24-fe/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S23 FE | SM-S711B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s23-fe/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S21 | SM-G991B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s21/recapture-2026-09-29-rotation/`) | None |
-| Galaxy S21 FE | SM-G990B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s21-fe/recapture-2026-09-29-rotation/`) | None |
-| Galaxy S20 Ultra | SM-G988B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s20-ultra/recapture-2026-09-29-rotation/`) | Cutout shape stays unregistered; raw bounds are off-center in every rotation |
-| Galaxy S20 FE | SM-G780G | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s20-fe/recapture-2026-09-29-rotation/`) | None |
-| Galaxy Note20 Ultra | SM-N985F | Main: natural in both modes; rotation 1 and 3 in 3-button mode (`measurements/galaxy-note20-ultra/recapture-2026-09-29-rotation/`) | Main gesture rotations 1 and 3; the 2026-09-29 gesture sweep is rejected because its navigation setting disagrees with the configuration and portrait inset |
-| Galaxy Note20 | SM-N981U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-note20/recapture-2026-09-29-rotation/`) | None |
-| Galaxy A57 5G | SM-A576S | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a57-5g/recapture-2026-09-29-rotation/`) | None |
-| Galaxy A36 5G | SM-A366N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a36-5g/recapture-2026-09-29-rotation/`) | None |
-| Galaxy A35 5G | SM-A356N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a35-5g/recapture-2026-09-29-rotation/`) | None |
-| Galaxy A37 5G | SM-A376N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a37-5g/recapture-2026-09-29-rotation/`) | None |
-| Galaxy A25 5G | SM-A256N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a25-5g/recapture-2026-09-29-rotation/`), evidence only | No public route until an official A25 skin exists |
-| Galaxy A17 | SM-A175N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a17-5g/recapture-2026-09-29-rotation/`) | None |
-| Galaxy A16 | SM-A165N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a16-5g/recapture-2026-09-29-rotation/`) | None |
-| Galaxy A27 5G | SM-A276K | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a27-5g/recapture-2026-09-29-rotation/`) | None |
-| Galaxy A55 5G | SM-A556S | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a55-5g/recapture-2026-09-29-rotation/`) | None |
-| Galaxy Tab S11 Ultra | SM-X930 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`) | None |
-| Galaxy Tab S11 | SM-X730 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab-s11/recapture-2026-09-29-rotation/`) | None |
-| Galaxy S21+ | SM-G996B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s21-plus/recapture-2026-09-29-rotation/`) | None |
-| Galaxy S21 Ultra | SM-G998B / SM-G998U1 | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s21-ultra/recapture-2026-09-29-rotation/`) | None |
-| Galaxy S22 Ultra | SM-S908B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s22-ultra/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S22+ | SM-S906B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s22-plus/recapture-2026-09-28-rotation/`; 3-button natural reconstructed from the preserved RTL log) | None |
-| Galaxy S22 | SM-S901E | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s22/recapture-2026-09-28-rotation/`; five files reconstructed from the preserved RTL logs) | None |
-| Galaxy S25 | SM-S931N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s25/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S25 FE | SM-S731N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s25-fe/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S25 Edge | SM-S937N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s25-edge/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S25+ | SM-S936N (user device) | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s25-plus/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S25 Ultra | SM-S938N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s25-ultra/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S24 Ultra | SM-S928N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s24-ultra/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S26+ | SM-S947N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s26-plus/recapture-2026-09-28-rotation/`) | None |
-| Galaxy S26 | SM-S942N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s26/recapture-2026-09-28-rotation/`) | None |
-| Galaxy Z Fold5 | SM-F946B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold5/recapture-2026-09-27-rotation/`) | None |
-| Galaxy Z Fold4 | SM-F936B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold4/recapture-2026-09-27-rotation/`) | None |
-| Galaxy Z Fold3 | SM-F926B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold3/recapture-2026-09-27-rotation/`) | None |
-| Galaxy Z TriFold | SM-F968N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-trifold/recapture-2026-09-27-rotation/`) | None |
-| Galaxy Z Flip8 | SM-F776B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip8/recapture-2026-09-27-rotation/`). Cover: natural in both modes on display 1 at 948×1048 px | Cover rotation 1 and 3 remain pending because this RTL cover did not rotate |
-| Galaxy Z Flip7 | SM-F766N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip7/recapture-2026-09-27-rotation/`). Cover: natural in both modes on display 1 at 948×1048 px (`recapture-2026-09-28-flexwindow/`) | Cover rotation 1 and 3 remain pending because this RTL cover did not rotate |
-| Galaxy Z Flip7 FE | SM-F761B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip7-fe/recapture-2026-09-28-rotation/`) | None |
-| Galaxy Z Flip3 | SM-F711B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip3/recapture-2026-09-28-rotation/`) | None |
-| Galaxy Z Flip4 | SM-F721B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip4/recapture-2026-09-28-rotation/`) | None |
-| Galaxy Z Flip6 | SM-F741U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip6/recapture-2026-09-27-rotation/`) | None |
-| Galaxy Z Flip5 | SM-F731B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-flip5/recapture-2026-09-27-rotation/`) | None |
-| Galaxy Z Fold2 | SM-F916N (user device) | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-z-fold2/recapture-2026-09-28-rotation/`) | None |
+| Galaxy Z Fold8 | SM-F971N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold8/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Fold6 | SM-F956U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold6/recapture-2026-09-27-rotation/`) | None |
+| Galaxy S26 Ultra | SM-S948U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s26-ultra/recapture-2026-09-27-rotation/`) | None |
+| Galaxy S24+ | SM-S926N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s24-plus/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S24 | SM-S921N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s24/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S23 Ultra | SM-S918U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s23-ultra/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S23 | SM-S911B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s23/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S24 FE | SM-S721N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s24-fe/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S23 FE | SM-S711B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s23-fe/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S21 | SM-G991B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s21/recapture-2026-09-29-rotation/`) | None |
+| Galaxy S21 FE | SM-G990B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s21-fe/recapture-2026-09-29-rotation/`) | None |
+| Galaxy S20 Ultra | SM-G988B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s20-ultra/recapture-2026-09-29-rotation/`) | Cutout shape stays unregistered; raw bounds are off-center in every rotation |
+| Galaxy S20 FE | SM-G780G | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s20-fe/recapture-2026-09-29-rotation/`) | None |
+| Galaxy Note20 Ultra | SM-N985F | Main: natural in both modes; rotation 1 and 3 in 3-button mode (`measurements/galaxy-note/galaxy-note20-ultra/recapture-2026-09-29-rotation/`) | Main gesture rotations 1 and 3; the 2026-09-29 gesture sweep is rejected because its navigation setting disagrees with the configuration and portrait inset |
+| Galaxy Note20 | SM-N981U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-note/galaxy-note20/recapture-2026-09-29-rotation/`) | None |
+| Galaxy A57 5G | SM-A576S | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a57-5g/recapture-2026-09-29-rotation/`) | None |
+| Galaxy A36 5G | SM-A366N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a36-5g/recapture-2026-09-29-rotation/`) | None |
+| Galaxy A35 5G | SM-A356N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a35-5g/recapture-2026-09-29-rotation/`) | None |
+| Galaxy A37 5G | SM-A376N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a37-5g/recapture-2026-09-29-rotation/`) | None |
+| Galaxy A25 5G | SM-A256N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a25-5g/recapture-2026-09-29-rotation/`), evidence only | No public route until an official A25 skin exists |
+| Galaxy A17 | SM-A175N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a17-5g/recapture-2026-09-29-rotation/`) | None |
+| Galaxy A16 | SM-A165N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a16-5g/recapture-2026-09-29-rotation/`) | None |
+| Galaxy A27 5G | SM-A276K | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a27-5g/recapture-2026-09-29-rotation/`) | None |
+| Galaxy A55 5G | SM-A556S | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a55-5g/recapture-2026-09-29-rotation/`) | None |
+| Galaxy Tab S11 Ultra | SM-X930 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`) | None |
+| Galaxy Tab S11 | SM-X730 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s11/recapture-2026-09-29-rotation/`) | None |
+| Galaxy S21+ | SM-G996B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s21-plus/recapture-2026-09-29-rotation/`) | None |
+| Galaxy S21 Ultra | SM-G998B / SM-G998U1 | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s21-ultra/recapture-2026-09-29-rotation/`) | None |
+| Galaxy S22 Ultra | SM-S908B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s22-ultra/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S22+ | SM-S906B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s22-plus/recapture-2026-09-28-rotation/`; 3-button natural reconstructed from the preserved RTL log) | None |
+| Galaxy S22 | SM-S901E | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s22/recapture-2026-09-28-rotation/`; five files reconstructed from the preserved RTL logs) | None |
+| Galaxy S25 | SM-S931N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s25/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S25 FE | SM-S731N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s25-fe/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S25 Edge | SM-S937N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s25-edge/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S25+ | SM-S936N (user device) | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s25-plus/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S25 Ultra | SM-S938N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s25-ultra/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S24 Ultra | SM-S928N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s24-ultra/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S26+ | SM-S947N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s26-plus/recapture-2026-09-28-rotation/`) | None |
+| Galaxy S26 | SM-S942N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s26/recapture-2026-09-28-rotation/`) | None |
+| Galaxy Z Fold5 | SM-F946B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold5/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Fold4 | SM-F936B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold4/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Fold3 | SM-F926B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold3/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z TriFold | SM-F968N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-trifold/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Flip8 | SM-F776B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip8/recapture-2026-09-27-rotation/`). Cover: natural in both modes on display 1 at 948×1048 px | Cover rotation 1 and 3 remain pending because this RTL cover did not rotate |
+| Galaxy Z Flip7 | SM-F766N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-27-rotation/`). Cover: natural in both modes on display 1 at 948×1048 px (`recapture-2026-09-28-flexwindow/`) | Cover rotation 1 and 3 remain pending because this RTL cover did not rotate |
+| Galaxy Z Flip7 FE | SM-F761B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip7-fe/recapture-2026-09-28-rotation/`) | None |
+| Galaxy Z Flip3 | SM-F711B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip3/recapture-2026-09-28-rotation/`) | None |
+| Galaxy Z Flip4 | SM-F721B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip4/recapture-2026-09-28-rotation/`) | None |
+| Galaxy Z Flip6 | SM-F741U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip6/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Flip5 | SM-F731B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip5/recapture-2026-09-27-rotation/`) | None |
+| Galaxy Z Fold2 | SM-F916N (user device) | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold2/recapture-2026-09-28-rotation/`) | None |
 
 ### Natural rotation only — full sweep needed
 
@@ -613,7 +613,7 @@ on Android 16 / One UI 8.5, build `BP4A.251205.006.S928NKSS6DZG1`. Both main
 navigation modes report display 0, rotation 0, a settled full-screen 1080×2340 px
 window, 450 dpi, font scale 1 and matching Settings/configuration mode evidence.
 The original gesture capture remains at the canonical path; the recapture pair is
-in `measurements/galaxy-s24-ultra/recapture-2026-09-24/`. Neither raw file
+in `measurements/galaxy-s/galaxy-s24-ultra/recapture-2026-09-24/`. Neither raw file
 includes a cutout bounding rectangle, so the top display-cutout inset is
 registered without a bounding rectangle in that historical dataset. The
 2026-09-28 rotation recapture includes a measured cutout rectangle in all six
@@ -630,7 +630,7 @@ files and supplies the current device page.
 ## Data Flow: Device → JSON → TypeScript → Website
 
 1. **InsetsProbe** exports raw JSON (schemaVersion 2) with device/display/navigation/insets/displayCutout/roundedCorners/hinge and explicit capture context.
-2. **Raw JSON committed** to `measurements/<device-slug>/<screen>-<navMode>.json` — source of truth, never hand-edited.
+2. **Raw JSON committed** to `measurements/<series>/<device-slug>/<screen>-<navMode>.json` — source of truth, never hand-edited.
 3. **TypeScript device file** (`app/data/devices/<slug>/index.ts`) implements `Device` (see `app/data/types.ts`): dp-converted insets per nav mode, `cornerRadiiDp`, optional `cutoutShape` (real punch-hole position, when the raw capture has `boundingRects`), sources with GitHub links.
 4. **Website**: React Router, statically prerendered. `app/components/DeviceView.tsx` holds the full device-detail render — a single uniform toolbar row (Navigation / Pose / Hinge / Zoom dropdowns + a settings gear, all one button style, matching safearea.info's own toolbar exactly) plus the diagram, metrics, and sources — shared by both the `/​:slug` route and the home page. Home (`/`) renders `DeviceView` for `devices[0]` (the newest device) directly — safearea.info-style landing straight on its equivalent of iPhone Duo, instead of a separate list-only summary page. `zoom`/`showFrame`/`showRegions`/`showDimensions`/`units` all live as state in `DeviceView` and are passed down as props — both diagram components below are now fully controlled, so there's exactly one toolbar on the page, never a second private one duplicated inside a component. It shows:
    - **Bar phones**: `InsetsDiagram` — flat 2D SVG diagram with dimension lines/arrows, per-edge inset chips, corner-radius chips, the real cutout shape at its measured position, schematic (unmeasured) speaker/button marks, and mouse-wheel zoom. No inner max-height/overflow cap — like safearea.info, zooming in just grows the diagram (and the page scrolls), it doesn't get boxed into a fixed viewport.
@@ -722,7 +722,7 @@ window and physical panel are separate measurements. Both captures report
 cutout rectangle, and 79 px / 28.09 dp corner radii. The 3-button bottom bar is
 135 px / 48 dp; gesture is 42 px / 14.93 dp. Android's navigation setting and
 Probe's classification agree for each file. Raw accepted evidence is in
-`measurements/galaxy-s26-ultra/main-{threeButton,gesture}.json`.
+`measurements/galaxy-s/galaxy-s26-ultra/main-{threeButton,gesture}.json`.
 
 An initial gesture export after using RTL's Rotate control recorded rotation 2
 and an upside-down cutout. It was rejected before repository import. Rotating
@@ -743,8 +743,8 @@ line at y=1318 px; the hinge-angle sensor is unavailable. The 3-button and
 gesture modes agree with Android Settings and Probe. The main display reports a
 91 px centered top cutout, 92 px top system bar, 144 px 3-button bottom bar or
 45 px gesture bottom bar, and 108 px rounded corners. Raw captures are
-`measurements/galaxy-z-flip/main-threeButton.json` and
-`measurements/galaxy-z-flip/main-gesture.json`. Cover remains unmeasured because
+`measurements/galaxy-flip/galaxy-z-flip/main-threeButton.json` and
+`measurements/galaxy-flip/galaxy-z-flip/main-gesture.json`. Cover remains unmeasured because
 the imported official skin has no cover layout.
 
 Galaxy S25 Edge's 2026-09-24 RTL captures are from SM-S937N_KR10 in Korea/Gumi
@@ -766,7 +766,7 @@ font scale 1 and the centered cutout bounds. InsetsProbe labels the non-folding
 display `phone`; the accepted file uses the site's `main` screen filename and
 keeps the raw label unchanged. The gesture file was downloaded as `content (33)`
 and validated from its JSON fields before being copied unchanged to
-`measurements/galaxy-s24-plus/main-gesture.json`. The earlier stale-export symptom
+`measurements/galaxy-s/galaxy-s24-plus/main-gesture.json`. The earlier stale-export symptom
 is tracked in [issue #12](https://github.com/easyhooon/windowinsets.info/issues/12).
 
 ## Galaxy S24 RTL capture — 2026-09-24
@@ -775,8 +775,8 @@ Samsung RTL Korea/Gumi SM-S921N-KR3 (Android 16 / One UI 8.5) produced main
 3-button and gesture captures at 1080×2340 px / 480 dpi. Both downloaded JSON
 files report display 0, rotation 0, screen label `main`, and matching navigation
 settings/inset classifications. The centered cutout bounds are present in both
-files. The accepted evidence is `measurements/galaxy-s24/main-threeButton.json`
-and `measurements/galaxy-s24/main-gesture.json`.
+files. The accepted evidence is `measurements/galaxy-s/galaxy-s24/main-threeButton.json`
+and `measurements/galaxy-s/galaxy-s24/main-gesture.json`.
 
 ## Galaxy Z TriFold — 2026-09-24 and 2026-09-25
 
@@ -787,7 +787,7 @@ gesture is 1080×2520 px, portrait, 420 dpi. The 2026-09-24 session did not yiel
 the cover 3-button file. A second Korea/Gumi reservation on 2026-09-25 captured it
 at 2026-09-24T15:17:37Z: 1080×2520 px, display 0, rotation 0, 420 dpi, default
 density 320 dpi and fontScale 1. Probe and Settings agree on three-button mode. It is preserved as
-`measurements/galaxy-z-trifold/cover-threeButton.json`; all four screen/mode
+`measurements/galaxy-fold/galaxy-z-trifold/cover-threeButton.json`; all four screen/mode
 captures are now registered.
 
 File Browser delivered only main-threeButton.json. The other two accepted

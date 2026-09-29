@@ -1,6 +1,6 @@
 import type { Device, InsetsMeasurement, NavMode, Source } from "../../types";
 
-const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7-fe";
+const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7-fe";
 const sourceFor = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy Z Flip7 FE main (SM-F761B), ${mode}`,

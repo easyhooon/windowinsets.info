@@ -10,13 +10,13 @@ const samsungSpecs: Source = {
 const gestureSource: Source = {
   kind: "measured",
   label: "InsetsProbe 1.3.0 on Samsung RTL Galaxy Tab S9 FE 5G main (SM-X516N), gesture",
-  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab-s9-fe/main-gesture.json",
+  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab/galaxy-tab-s9-fe/main-gesture.json",
   retrievedAt: "2026-09-25",
 };
 const threeButtonSource: Source = {
   kind: "measured",
   label: "InsetsProbe 1.3.0 on Samsung RTL Galaxy Tab S9 FE 5G main (SM-X516N), 3-button recapture",
-  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab-s9-fe/recapture-2026-09-27/main-threeButton.json",
+  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab/galaxy-tab-s9-fe/recapture-2026-09-27/main-threeButton.json",
   retrievedAt: "2026-09-27",
 };
 const condition = {

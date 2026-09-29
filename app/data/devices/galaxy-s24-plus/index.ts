@@ -19,14 +19,14 @@ const samsungResolution: Source = {
 const buttonSource: Source = {
   kind: "measured",
   label: "InsetsProbe 1.3.0 on Samsung RTL Galaxy S24+ (SM-S926N-KR3), main 3-button",
-  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s24-plus/main-threeButton.json",
+  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s24-plus/main-threeButton.json",
   retrievedAt: "2026-09-24",
 };
 
 const gestureSource: Source = {
   kind: "measured",
   label: "InsetsProbe 1.3.0 on Samsung RTL Galaxy S24+ (SM-S926N-KR3), main gesture",
-  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s24-plus/main-gesture.json",
+  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s24-plus/main-gesture.json",
   retrievedAt: "2026-09-24",
 };
 
@@ -86,7 +86,7 @@ const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton"): Inse
     sources: [{
       kind: "measured",
       label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy S24+, rotation ${rotation}, ${mode} (SM-S926N)`,
-      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s24-plus/recapture-2026-09-28-rotation/main-landscape-${rotation}-${mode}.json`,
+      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s24-plus/recapture-2026-09-28-rotation/main-landscape-${rotation}-${mode}.json`,
       retrievedAt: "2026-09-28",
     }],
   };

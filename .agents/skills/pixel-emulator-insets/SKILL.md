@@ -127,7 +127,7 @@ rejected evidence.
 ## 5. Stage and document
 
 Keep emulator captures out of the capture inbox. To register, copy a
-validated run to `measurements/<slug>/emulator-<date>/` (raw JSON beside
+validated run to `measurements/pixel/<slug>/emulator-<date>/` (raw JSON beside
 `manifest.json`, never mixed with real-device files) and run
 `python3 scripts/import-emulator-captures.py <slug>`. It validates the files,
 copies the AOSP skin with `source.json` (Apache 2.0) and regenerates the device

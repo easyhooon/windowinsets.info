@@ -10,7 +10,7 @@ test('S26 Ultra publishes mode-matched RTL evidence in all captured rotations', 
   assert.deepEqual(screen.logicalSizeDp, { width: 384, height: 832 });
 
   for (const mode of ['threeButton', 'gesture']) {
-    const raw = JSON.parse(readFileSync(`measurements/galaxy-s26-ultra/main-${mode}.json`, 'utf8'));
+    const raw = JSON.parse(readFileSync(`measurements/galaxy-s/galaxy-s26-ultra/main-${mode}.json`, 'utf8'));
     const measured = screen.insets[mode];
     assert.equal(raw.device.model, 'SM-S948U');
     assert.equal(raw.screen, 'phone');
@@ -32,7 +32,7 @@ test('S26 Ultra publishes mode-matched RTL evidence in all captured rotations', 
       raw.displayCutout.boundingRects[0].px.bottom - raw.displayCutout.boundingRects[0].px.top);
 
     for (const rotation of [1, 3]) {
-      const turned = JSON.parse(readFileSync(`measurements/galaxy-s26-ultra/recapture-2026-09-27-rotation/main-landscape-${rotation}-${mode}.json`, 'utf8'));
+      const turned = JSON.parse(readFileSync(`measurements/galaxy-s/galaxy-s26-ultra/recapture-2026-09-27-rotation/main-landscape-${rotation}-${mode}.json`, 'utf8'));
       const published = screen.rotations[rotation];
       const insets = published.insets[mode];
       const bounds = turned.displayCutout.boundingRects[0].px;

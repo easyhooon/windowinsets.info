@@ -66,13 +66,13 @@ export const galaxyZFlip7: Device = {
             {
               "kind": "measured",
               "label": "InsetsProbe 1.1.2 on physical Galaxy Z Flip7 cover (SM-F766N), threeButton setting",
-              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/cover-threeButton-awake.json",
+              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/cover-threeButton-awake.json",
               "retrievedAt": "2026-09-23"
             },
             {
               "kind": "measured",
               "label": "InsetsProbe 1.6.0 on Samsung RTL Galaxy Z Flip7 cover via FlexWindow widget (SM-F766N), threeButton setting; values match the physical capture",
-              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/recapture-2026-09-28-flexwindow/cover-threeButton.json",
+              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-28-flexwindow/cover-threeButton.json",
               "retrievedAt": "2026-09-28"
             }
           ],
@@ -125,13 +125,13 @@ export const galaxyZFlip7: Device = {
             {
               "kind": "measured",
               "label": "InsetsProbe 1.1.2 on physical Galaxy Z Flip7 cover (SM-F766N), gesture setting",
-              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/cover-gesture.json",
+              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/cover-gesture.json",
               "retrievedAt": "2026-09-23"
             },
             {
               "kind": "measured",
               "label": "InsetsProbe 1.6.0 on Samsung RTL Galaxy Z Flip7 cover via FlexWindow widget (SM-F766N), gesture setting; values match the physical capture",
-              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/recapture-2026-09-28-flexwindow/cover-gesture.json",
+              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-28-flexwindow/cover-gesture.json",
               "retrievedAt": "2026-09-28"
             }
           ],
@@ -153,25 +153,25 @@ export const galaxyZFlip7: Device = {
         {
           "kind": "measured",
           "label": "InsetsProbe 1.1.2 on physical Galaxy Z Flip7 cover (SM-F766N), threeButton setting",
-          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/cover-threeButton-awake.json",
+          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/cover-threeButton-awake.json",
           "retrievedAt": "2026-09-23"
         },
         {
           "kind": "measured",
           "label": "InsetsProbe 1.6.0 on Samsung RTL Galaxy Z Flip7 cover via FlexWindow widget (SM-F766N), threeButton setting; values match the physical capture",
-          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/recapture-2026-09-28-flexwindow/cover-threeButton.json",
+          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-28-flexwindow/cover-threeButton.json",
           "retrievedAt": "2026-09-28"
         },
         {
           "kind": "measured",
           "label": "InsetsProbe 1.1.2 on physical Galaxy Z Flip7 cover (SM-F766N), gesture setting",
-          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/cover-gesture.json",
+          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/cover-gesture.json",
           "retrievedAt": "2026-09-23"
         },
         {
           "kind": "measured",
           "label": "InsetsProbe 1.6.0 on Samsung RTL Galaxy Z Flip7 cover via FlexWindow widget (SM-F766N), gesture setting; values match the physical capture",
-          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/recapture-2026-09-28-flexwindow/cover-gesture.json",
+          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-28-flexwindow/cover-gesture.json",
           "retrievedAt": "2026-09-28"
         }
       ],
@@ -266,7 +266,7 @@ export const galaxyZFlip7: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Galaxy Z Flip7 main, rotation 1, gesture (SM-F766N)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/recapture-2026-09-27-rotation/main-landscape-1-gesture.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-27-rotation/main-landscape-1-gesture.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -319,7 +319,7 @@ export const galaxyZFlip7: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Galaxy Z Flip7 main, rotation 1, threeButton (SM-F766N)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/recapture-2026-09-27-rotation/main-landscape-1-threeButton.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-27-rotation/main-landscape-1-threeButton.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -384,7 +384,7 @@ export const galaxyZFlip7: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Galaxy Z Flip7 main, rotation 3, gesture (SM-F766N)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/recapture-2026-09-27-rotation/main-landscape-3-gesture.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-27-rotation/main-landscape-3-gesture.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -437,7 +437,7 @@ export const galaxyZFlip7: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Galaxy Z Flip7 main, rotation 3, threeButton (SM-F766N)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/recapture-2026-09-27-rotation/main-landscape-3-threeButton.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-27-rotation/main-landscape-3-threeButton.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -482,7 +482,7 @@ export const galaxyZFlip7: Device = {
             {
               "kind": "measured",
               "label": "InsetsProbe 1.1.2 on physical Galaxy Z Flip7 (SM-F766N), gesture",
-              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/main-gesture.json",
+              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/main-gesture.json",
               "retrievedAt": "2026-09-23"
             }
           ],
@@ -535,7 +535,7 @@ export const galaxyZFlip7: Device = {
             {
               "kind": "measured",
               "label": "InsetsProbe 1.1.2 on physical Galaxy Z Flip7 (SM-F766N), threeButton",
-              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/main-threeButton.json",
+              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/main-threeButton.json",
               "retrievedAt": "2026-09-23"
             }
           ],
@@ -557,13 +557,13 @@ export const galaxyZFlip7: Device = {
         {
           "kind": "measured",
           "label": "InsetsProbe 1.1.2 on physical Galaxy Z Flip7 (SM-F766N), gesture",
-          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/main-gesture.json",
+          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/main-gesture.json",
           "retrievedAt": "2026-09-23"
         },
         {
           "kind": "measured",
           "label": "InsetsProbe 1.1.2 on physical Galaxy Z Flip7 (SM-F766N), threeButton",
-          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/main-threeButton.json",
+          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/main-threeButton.json",
           "retrievedAt": "2026-09-23"
         }
       ],
@@ -584,25 +584,25 @@ export const galaxyZFlip7: Device = {
     {
       "kind": "measured",
       "label": "InsetsProbe 1.1.2 on physical Galaxy Z Flip7 (SM-F766N), gesture",
-      "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/main-gesture.json",
+      "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/main-gesture.json",
       "retrievedAt": "2026-09-23"
     },
     {
       "kind": "measured",
       "label": "InsetsProbe 1.1.2 on physical Galaxy Z Flip7 (SM-F766N), threeButton",
-      "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/main-threeButton.json",
+      "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/main-threeButton.json",
       "retrievedAt": "2026-09-23"
     },
     {
       "kind": "measured",
       "label": "InsetsProbe 1.1.2 on physical Galaxy Z Flip7 cover (SM-F766N), threeButton setting",
-      "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/cover-threeButton-awake.json",
+      "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/cover-threeButton-awake.json",
       "retrievedAt": "2026-09-23"
     },
     {
       "kind": "measured",
       "label": "InsetsProbe 1.1.2 on physical Galaxy Z Flip7 cover (SM-F766N), gesture setting",
-      "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip7/cover-gesture.json",
+      "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip7/cover-gesture.json",
       "retrievedAt": "2026-09-23"
     }
   ]

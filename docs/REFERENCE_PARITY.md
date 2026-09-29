@@ -63,7 +63,7 @@ browser checks cover both hinge stages, endpoints, rotation, frame toggling,
 manual zoom, reduced motion and unavailable WebGL. Existing Fold/Flip geometry,
 fit, pan, hinge controls and S25 Ultra exact-px checks also pass. No raw capture
 files were created for the initial artwork change. The subsequent RTL capture
-set and log provenance are documented in `measurements/galaxy-z-trifold/README.md`.
+set and log provenance are documented in `measurements/galaxy-fold/galaxy-z-trifold/README.md`.
 
 
 ## Binding development direction

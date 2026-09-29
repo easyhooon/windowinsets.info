@@ -90,14 +90,14 @@ export const pixel9Pro: Device = {
               "systemImage": "system-images/android-37.0/google_apis_playstore/arm64-v8a",
               "buildFingerprint": "google/sdk_gphone64_arm64/emu64a:17/CE2A.260420.019/15611780:user/release-keys",
               "emulatorVersion": "37.1.11.0",
-              "manifestUrl": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel-9-pro/emulator-2026-09-27/manifest.json"
+              "manifestUrl": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel/pixel-9-pro/emulator-2026-09-27/manifest.json"
             }
           },
           "sources": [
             {
               "kind": "emulator",
               "label": "InsetsProbe 1.5.0 on Android Emulator, pixel_9_pro profile, gestures",
-              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel-9-pro/emulator-2026-09-27/main-gesture.json",
+              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel/pixel-9-pro/emulator-2026-09-27/main-gesture.json",
               "retrievedAt": "2026-09-27"
             }
           ]
@@ -150,14 +150,14 @@ export const pixel9Pro: Device = {
               "systemImage": "system-images/android-37.0/google_apis_playstore/arm64-v8a",
               "buildFingerprint": "google/sdk_gphone64_arm64/emu64a:17/CE2A.260420.019/15611780:user/release-keys",
               "emulatorVersion": "37.1.11.0",
-              "manifestUrl": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel-9-pro/emulator-2026-09-27/manifest.json"
+              "manifestUrl": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel/pixel-9-pro/emulator-2026-09-27/manifest.json"
             }
           },
           "sources": [
             {
               "kind": "emulator",
               "label": "InsetsProbe 1.5.0 on Android Emulator, pixel_9_pro profile, 3-button",
-              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel-9-pro/emulator-2026-09-27/main-threeButton.json",
+              "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel/pixel-9-pro/emulator-2026-09-27/main-threeButton.json",
               "retrievedAt": "2026-09-27"
             }
           ]
@@ -179,13 +179,13 @@ export const pixel9Pro: Device = {
         {
           "kind": "emulator",
           "label": "InsetsProbe 1.5.0 on Android Emulator, pixel_9_pro profile, gestures",
-          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel-9-pro/emulator-2026-09-27/main-gesture.json",
+          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel/pixel-9-pro/emulator-2026-09-27/main-gesture.json",
           "retrievedAt": "2026-09-27"
         },
         {
           "kind": "emulator",
           "label": "InsetsProbe 1.5.0 on Android Emulator, pixel_9_pro profile, 3-button",
-          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel-9-pro/emulator-2026-09-27/main-threeButton.json",
+          "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel/pixel-9-pro/emulator-2026-09-27/main-threeButton.json",
           "retrievedAt": "2026-09-27"
         }
       ]
@@ -207,13 +207,13 @@ export const pixel9Pro: Device = {
     {
       "kind": "emulator",
       "label": "InsetsProbe 1.5.0 on Android Emulator, pixel_9_pro profile, gestures",
-      "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel-9-pro/emulator-2026-09-27/main-gesture.json",
+      "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel/pixel-9-pro/emulator-2026-09-27/main-gesture.json",
       "retrievedAt": "2026-09-27"
     },
     {
       "kind": "emulator",
       "label": "InsetsProbe 1.5.0 on Android Emulator, pixel_9_pro profile, 3-button",
-      "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel-9-pro/emulator-2026-09-27/main-threeButton.json",
+      "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/pixel/pixel-9-pro/emulator-2026-09-27/main-threeButton.json",
       "retrievedAt": "2026-09-27"
     }
   ]

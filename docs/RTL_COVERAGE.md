@@ -29,7 +29,7 @@ removes a model from its catalog.
   inner captures at rotations 0, 1 and 3 in both navigation modes. The inner
   display used the RTL Rotate control for rotations 1 and 3 because the Probe's
   orientation request did not rotate that display. The 12 accepted raw files are
-  in `measurements/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/`. All four
+  in `measurements/galaxy-fold/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/`. All four
   rotation-0 inset objects match the already published 2026-09-23 captures, so
   the site keeps those published values and source labels.
   Galaxy Z Fold6 (SM-F956U-KR10, Korea/Gumi) was reserved three times on
@@ -65,13 +65,13 @@ removes a model from its catalog.
   then reserved and produced an upright 1080×2520 main 3-button capture with
   Probe 1.3.0. The model already had complete physical-device measurements for
   both screens and modes, so this RTL file is preserved separately under
-  `measurements/galaxy-z-flip7/rtl-recapture-2026-09-23/` and does not replace
+  `measurements/galaxy-flip/galaxy-z-flip7/rtl-recapture-2026-09-23/` and does not replace
   the canonical measurements. Its inset values agree with the physical main
   3-button capture; the newer probe also records a cutout path.
   Galaxy Z Flip5 (SM-F731BE-VN3, Vietnam/Hanoi) was then reserved. Its
   official main skin matches upright 1080×2640 captures in both navigation
   modes. The first gesture export was rotated 180° and is retained as rejected
-  evidence in `measurements/galaxy-z-flip5/rejected-2026-09-23/`; the accepted
+  evidence in `measurements/galaxy-flip/galaxy-z-flip5/rejected-2026-09-23/`; the accepted
   recapture is rotation 0. The imported
   archive has no cover layout, so cover remains unavailable.
   Galaxy Z Flip3 (SM-F711B-VN2, Vietnam/Hanoi) was reserved on 2026-09-23.
@@ -148,7 +148,7 @@ removes a model from its catalog.
   and 103/144 px in 3-button mode. Landscape status bars are 90 px; the 103 px
   cutout moves left at rotation 1 and right at rotation 3. Gesture retains a
   45 px bottom bar, while 3-button uses a 144 px bar on the opposite side.
-  Files are in `measurements/galaxy-s24/recapture-2026-09-28-rotation/`; the
+  Files are in `measurements/galaxy-s/galaxy-s24/recapture-2026-09-28-rotation/`; the
   original portrait captures remain preserved. Availability is confirmed for
   this exact model on the respective dates only.
 - Galaxy S24 FE (SM-S721N_KR4, Korea/Gumi) was reserved on 2026-09-25 with
@@ -165,7 +165,7 @@ removes a model from its catalog.
   rotation 1 and right at rotation 3. Gesture retains a 42 px bottom bar,
   while 3-button uses a 135 px bar on the opposite side. The recapture also
   provides a 68×68 px cutout bound and 113 px corner radii. Files are in
-  `measurements/galaxy-s24-fe/recapture-2026-09-28-rotation/`; the original
+  `measurements/galaxy-s/galaxy-s24-fe/recapture-2026-09-28-rotation/`; the original
   portrait captures remain preserved. Availability is confirmed for this exact
   model on the respective dates only.
 - Galaxy S23 Ultra, Galaxy S23+ and Galaxy S23 were offered only as
@@ -203,7 +203,7 @@ removes a model from its catalog.
   Gesture retains a 42 px bottom bar, while 3-button uses a 135 px bar on the
   opposite side. The recapture provides a 58×58 px cutout bound and 113 px
   corner radii. Files are in
-  `measurements/galaxy-s23-fe/recapture-2026-09-28-rotation/`; the original
+  `measurements/galaxy-s/galaxy-s23-fe/recapture-2026-09-28-rotation/`; the original
   portrait captures remain preserved.
 - Galaxy S22 Ultra (SM-S908B-RU1, Russia/Moscow) supplied an InsetsProbe 1.6.0
   sweep on 2026-09-28 at rotations 0, 1 and 3 in both navigation modes. No
@@ -216,7 +216,7 @@ removes a model from its catalog.
   rotation 3. Unlike the 2026-09-25 Android 13 capture, the cutout bound is
   consistent with the window (56×75 px centered at x=540) and the corners
   report 101 px instead of 8 px, so both are now registered. Files are in
-  `measurements/galaxy-s22-ultra/recapture-2026-09-28-rotation/`; the original
+  `measurements/galaxy-s/galaxy-s22-ultra/recapture-2026-09-28-rotation/`; the original
   portrait captures remain preserved.
 - Galaxy S22+ (SM-S906B-RU1, Russia/Moscow) supplied an InsetsProbe 1.6.0
   sweep on 2026-09-28 at rotations 0, 1 and 3 in both navigation modes. No
@@ -231,7 +231,7 @@ removes a model from its catalog.
   `main-threeButton.json`, so it was reconstructed from the saved InsetsProbe
   logcat export in `rtl-logs/`; the same log's other five captures parse
   identically to their downloaded files. Files are in
-  `measurements/galaxy-s22-plus/recapture-2026-09-28-rotation/`; the original
+  `measurements/galaxy-s/galaxy-s22-plus/recapture-2026-09-28-rotation/`; the original
   portrait captures remain preserved.
 - Galaxy S22 (SM-S901E-IN1, India/Noida) supplied an InsetsProbe 1.6.0 sweep
   on 2026-09-28 at rotations 0, 1 and 3 in both navigation modes. No Korean
@@ -250,7 +250,7 @@ removes a model from its catalog.
   from two saved InsetsProbe logcat exports in `rtl-logs/` (the first export
   stopped at 2,000 lines, the second was time-filtered), and the downloaded file
   parses identically to its log copy. Files are in
-  `measurements/galaxy-s22/recapture-2026-09-28-rotation/`; the original
+  `measurements/galaxy-s/galaxy-s22/recapture-2026-09-28-rotation/`; the original
   portrait captures remain preserved.
 - Galaxy S21 Ultra (SM-G998B), Galaxy S21+ (SM-G996B), Galaxy S21 (SM-G991B),
   Galaxy S20 Ultra (SM-G988B) and Galaxy S20 FE (SM-G780G) were reserved and
@@ -309,9 +309,9 @@ removes a model from its catalog.
   even though InsetsProbe's inset-only classification says threeButton. The
   S10 FE's 2026-09-25 captures report font scale 1.08. A 2026-09-27 Tab S10 FE+
   recapture on the same build reproduced every value in both modes; it is kept
-  under `measurements/galaxy-tab-s10-fe-plus/recapture-2026-09-27/`. The same-day
+  under `measurements/galaxy-tab/galaxy-tab-s10-fe-plus/recapture-2026-09-27/`. The same-day
   Tab S10 FE recapture first reproduced the 1.08 files exactly, then a font scale
-  1 recapture under `measurements/galaxy-tab-s10-fe/recapture-2026-09-27-fontscale-1/`
+  1 recapture under `measurements/galaxy-tab/galaxy-tab-s10-fe/recapture-2026-09-27-fontscale-1/`
   matched them in every inset and display field except `fontScale`. The font
   scale 1 pair is registered as the baseline; font scale does not change inset
   or display metrics.
@@ -333,7 +333,7 @@ removes a model from its catalog.
   recaptured from a live reservation in 3-button and gesture modes. On
   2026-09-27, SM-F971N_KR11 on Android 17 / One UI 9.0 supplied rotations 0, 1
   and 3 for both screens and navigation modes
-  (`measurements/galaxy-z-fold8/recapture-2026-09-27-rotation/`). The inner
+  (`measurements/galaxy-fold/galaxy-z-fold8/recapture-2026-09-27-rotation/`). The inner
   display's natural rotation is landscape; its rotations 1 and 3 were set with
   the RTL Rotate control because the Probe's orientation request was ignored.
   The main Taskbar was off for both modes. Continue apps on cover screen was
@@ -383,7 +383,7 @@ BP4A.251205.006.F766NKSSBBZG3) ran InsetsProbe 1.6.0 from its FlexWindow cover
 widget. The cover sweep saved rotation 0 in both navigation modes (display 1,
 948×1048 px, 420 dpi, settings mode 0/2). Landscape and reverse landscape were
 skipped because the cover display did not rotate, the same result as on Flip8.
-Both files are in `measurements/galaxy-z-flip7/recapture-2026-09-28-flexwindow/`.
+Both files are in `measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-28-flexwindow/`.
 Their insets, cutout and corner radii match the canonical physical cover
 captures, so they are listed as additional sources without changing values.
 Cover rotations 1 and 3 remain pending.
@@ -397,14 +397,14 @@ Landscape windows are 2640×1080 px with a 72 px top bar and a vertical FLAT
 feature at x=1320. Three-button places its 144 px bar on the right (rotation 1)
 or left (rotation 3), and gesture keeps a 45 px bottom inset. The 94×71 px cutout
 follows the rotation. Files are in
-`measurements/galaxy-z-flip3/recapture-2026-09-28-rotation/`.
+`measurements/galaxy-flip/galaxy-z-flip3/recapture-2026-09-28-rotation/`.
 
 Also on 2026-09-28, Galaxy Z Flip4 SM-F721BE-VN1 (Android 14, One UI 6.1.1,
 the same build as the accepted captures) produced the same six-file main sweep
 with InsetsProbe 1.6.0 through the capture inbox. Rotation 0 matches the
 accepted captures. The landscape geometry equals Flip3's: 72 px top, 144 px
 three-button side bar, 45 px gesture bottom and a 94×71 px rotated cutout. Files
-are in `measurements/galaxy-z-flip4/recapture-2026-09-28-rotation/`. The
+are in `measurements/galaxy-flip/galaxy-z-flip4/recapture-2026-09-28-rotation/`. The
 reservation page's Return action did nothing while the WebClient ran in a tab.
 Exit in the WebClient with **Return this device** checked returned the credit.
 The original Galaxy Z Flip was not listed among RTL Galaxy Z models that day.
@@ -427,7 +427,7 @@ vertical FLAT folding feature at x=884 px.
   these measured values as the observed Fold3 configuration, not a mode error.
 
 Two rejected attempts are preserved under
-`measurements/galaxy-z-fold3/rejected-2026-09-25/`: `content (40)` was labeled
+`measurements/galaxy-fold/galaxy-z-fold3/rejected-2026-09-25/`: `content (40)` was labeled
 main gesture but had cover dimensions (840×2289 px), while `content (43)` had
 the correct inner dimensions but retained the Phone label. Neither is registered.
 Fold3 RTL availability is confirmed by live reservations in Vietnam/Hanoi on
@@ -479,13 +479,13 @@ uploaded to the capture inbox. Rotation 0 matches the accepted captures.
 Landscape windows are 2340×1080 px with a 90 px top bar. Three-button places its
 144 px bar on the right (rotation 1) or left (rotation 3), and gesture keeps a
 45 px bottom inset. The 111×64 px cutout follows the rotation. Files are in
-`measurements/galaxy-s26/recapture-2026-09-28-rotation/`.
+`measurements/galaxy-s/galaxy-s26/recapture-2026-09-28-rotation/`.
 
 Galaxy S26+ SM-S947N_KR2 (same build as the accepted captures, 450 dpi) followed
 with the same six-file sweep. Rotation 0 matches the accepted captures. Landscape
 windows are 2340×1080 px with an 84 px top bar, a 135 px three-button side bar,
 a 42 px gesture bottom inset and a rotated 104×60 px cutout. Files are in
-`measurements/galaxy-s26-plus/recapture-2026-09-28-rotation/`.
+`measurements/galaxy-s/galaxy-s26-plus/recapture-2026-09-28-rotation/`.
 
 Galaxy S25 Ultra SM-S938N_KR1 (same build as the accepted captures) produced the
 same six-file sweep. Rotation 0 matches the accepted captures; landscape windows
@@ -493,7 +493,7 @@ are 2340×1080 px with an 84 px top bar, a 135 px three-button side bar, a 42 px
 gesture bottom inset and a rotated 96×52 px cutout. Closing the WebClient tab
 mid-reservation restarted and reset the unit (Probe removed, navigation back to
 three-button), so the gesture half was captured after reinstalling. Files are in
-`measurements/galaxy-s25-ultra/recapture-2026-09-28-rotation/`.
+`measurements/galaxy-s/galaxy-s25-ultra/recapture-2026-09-28-rotation/`.
 
 The owner's USB-connected Galaxy S25+ (SM-S936N, same build as its accepted
 captures) was measured over ADB with `--ez sweep true`, once in three-button
@@ -501,26 +501,26 @@ and once after enabling the standard gestural navbar overlay and Samsung's
 `navigation_bar_gesture_while_hidden`. Both sets uploaded to the capture inbox
 and report settings mode 0/2. The device was returned to three-button
 navigation. Rotation 0 matches the accepted captures. Files are in
-`measurements/galaxy-s25-plus/recapture-2026-09-28-rotation/`.
+`measurements/galaxy-s/galaxy-s25-plus/recapture-2026-09-28-rotation/`.
 
 Galaxy S25 Edge SM-S937N_KR10 (same build as the accepted captures) produced the
 same six-file RTL sweep. Rotation 0 matches the accepted captures; landscape
 windows are 2340×1080 px with an 84 px top bar, a 135 px three-button side bar,
 a 42 px gesture bottom inset and a rotated 93×63 px cutout. Files are in
-`measurements/galaxy-s25-edge/recapture-2026-09-28-rotation/`.
+`measurements/galaxy-s/galaxy-s25-edge/recapture-2026-09-28-rotation/`.
 
 Galaxy S25 FE SM-S731N_KR2 (same build as the accepted captures) produced the
 same six-file RTL sweep. Rotation 0 matches the accepted captures; landscape
 windows are 2340×1080 px with an 84 px top bar, a 135 px three-button side bar,
 a 42 px gesture bottom inset and an 82 px side cutout inset around a 58×58 px
-hole. Files are in `measurements/galaxy-s25-fe/recapture-2026-09-28-rotation/`.
+hole. Files are in `measurements/galaxy-s/galaxy-s25-fe/recapture-2026-09-28-rotation/`.
 
 Galaxy S25 SM-S931N_KR1 (same build as the accepted captures, 480 dpi) produced
 the same six-file RTL sweep; the owner installed the keyed APK by hand while the
 agent's permission checks were unavailable. Rotation 0 matches the accepted
 captures; landscape windows are 2340×1080 px with a 90 px top bar, a 144 px
 three-button side bar, a 45 px gesture bottom inset and a rotated 103×58 px
-cutout. Files are in `measurements/galaxy-s25/recapture-2026-09-28-rotation/`.
+cutout. Files are in `measurements/galaxy-s/galaxy-s25/recapture-2026-09-28-rotation/`.
 
 Galaxy S24 Ultra had no free Android 16 unit at the time, so Galaxy S24+
 SM-S926N-KR3 (same build as the accepted captures) was measured next. Its
@@ -528,7 +528,7 @@ six-file sweep matches rotation 0 and has the S25+ landscape geometry: 84 px
 top, 135 px three-button side bar, 42 px gesture bottom and a rotated 94×51 px
 cutout. An older S24+ upload from the upload pilot remains in the inbox and was
 not imported. Files are in
-`measurements/galaxy-s24-plus/recapture-2026-09-28-rotation/`.
+`measurements/galaxy-s/galaxy-s24-plus/recapture-2026-09-28-rotation/`.
 
 Later on 2026-09-28, Galaxy S24 Ultra SM-S928N-KR3 became available in
 Korea/Gumi on Android 16 / One UI 8.5. InsetsProbe 1.6.0 uploaded six main-screen
@@ -538,7 +538,7 @@ and matching navigation settings. Portrait is 1080×2340 px; both landscape
 windows are 2340×1080 px with an 84 px top bar. Three-button places its
 135 px bar on the right at rotation 1 and left at rotation 3; gesture has a
 42 px bottom inset. The 96×51 px cutout follows the rotation. Raw files are in
-`measurements/galaxy-s24-ultra/recapture-2026-09-28-rotation/`.
+`measurements/galaxy-s/galaxy-s24-ultra/recapture-2026-09-28-rotation/`.
 
 ## Galaxy S26 Ultra measured on 2026-09-23
 
@@ -554,7 +554,7 @@ InsetsProbe 1.5.0. Separate rotation 1 and 3 captures in both navigation modes
 report a settled 2340×1080 px window at 450 dpi and font scale 1. The cutout is
 on the left at rotation 1 and right at rotation 3; the 3-button navigation bar
 is on the opposite side. These four raw files are preserved under
-`measurements/galaxy-s26-ultra/recapture-2026-09-27-rotation/` and registered
+`measurements/galaxy-s/galaxy-s26-ultra/recapture-2026-09-27-rotation/` and registered
 as measured landscape insets.
 
 ## Galaxy S25 measured on 2026-09-24
@@ -600,7 +600,7 @@ Android Settings both reported three-button navigation. All four screen/mode
 captures are now verified.
 
 Raw captures and unchanged RTL log exports are preserved in
-`measurements/galaxy-z-trifold/`. See its README for extraction provenance,
+`measurements/galaxy-fold/galaxy-z-trifold/`. See its README for extraction provenance,
 display-density refresh behavior and the RTL hinge-report limitation.
 
 ## Galaxy Z Flip4 measured on 2026-09-25
@@ -621,7 +621,7 @@ and Flip4 covers are unsupported and are not measurement targets because their
 registered official skins have no cover layout. The physical Flip4 cover exists,
 but its RTL captures are intentionally excluded from product support. See the raw
 captures, rejected files and unchanged log export under
-`measurements/galaxy-z-flip4/`.
+`measurements/galaxy-flip/galaxy-z-flip4/`.
 
 For Flip5 and later, cover measurement is eligible only after a registered
 official cover skin exists. As of 2026-09-25, only Flip7 and Flip8 have cover
@@ -640,7 +640,7 @@ configuration: gesture has 116/45 px top/bottom system bars; 3-button has
 116/144 px. Both include a 66×116 px centered cutout bound. The registered
 skin includes only the main display, so no cover capture is in scope.
 
-Raw files: `measurements/galaxy-z-flip7-fe/main-gesture.json` and
+Raw files: `measurements/galaxy-flip/galaxy-z-flip7-fe/main-gesture.json` and
 `main-threeButton.json`.
 
 On 2026-09-28, SM-F761B-VN4 (Vietnam/Hanoi, same build) ran InsetsProbe 1.6.0.
@@ -654,7 +654,7 @@ Landscape windows are 2640×1080 px with a 90 px top bar and a vertical FLAT
 feature at x=1320. Three-button places its 144 px bar on the right (rotation 1)
 or left (rotation 3), while gesture keeps a 45 px bottom inset. The
 116×66 px cutout follows the rotation. Files are in
-`measurements/galaxy-z-flip7-fe/recapture-2026-09-28-rotation/`.
+`measurements/galaxy-flip/galaxy-z-flip7-fe/recapture-2026-09-28-rotation/`.
 
 ## Galaxy Tab S11 Ultra measured on 2026-09-25
 
@@ -675,7 +675,7 @@ diagonal and 2960×1848 resolution give approximately 240 ppi.
   corners. InsetsProbe labels non-foldable displays `phone`; these matching
   SM-X930 captures are registered as the tablet's main screen.
 
-Raw files: `measurements/galaxy-tab-s11-ultra/main-gesture.json` and
+Raw files: `measurements/galaxy-tab/galaxy-tab-s11-ultra/main-gesture.json` and
 `main-threeButton.json`.
 
 On 2026-09-29, Samsung RTL Korea/Gumi unit SM-X930_KR1 on the same build yielded
@@ -687,7 +687,7 @@ mode. Gesture captures retain the tablet taskbar's tappable bottom inset, so
 the inset-only heuristic reports threeButton even though Settings and
 `config_navBarInteractionMode=2` confirm gestures. The cutout bounds remain
 centered on the physical short edge in every rotation. Raw files:
-`measurements/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`.
+`measurements/galaxy-tab/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`.
 
 ## Galaxy Tab S9 Ultra measured on 2026-09-25
 
@@ -705,7 +705,7 @@ main screen from the model and dimensions.
 - Both captures include a 186×28 px centered cutout bound (106.29×16 dp) and
   23 px rounded corners (13.14 dp).
 
-Raw files: `measurements/galaxy-tab-s9-ultra/main-gesture.json` and
+Raw files: `measurements/galaxy-tab/galaxy-tab-s9-ultra/main-gesture.json` and
 `main-threeButton.json`. The reservation confirms this exact model was offered
 in RTL on this date; it does not complete the cross-region catalog inventory.
 
@@ -729,7 +729,7 @@ for both captures and was left unchanged.
 
 These are direct physical-device captures, not RTL data; the RTL catalog status
 for Galaxy Tab S9 remains unknown. Raw files:
-`measurements/galaxy-tab-s9/main-gesture.json` and
+`measurements/galaxy-tab/galaxy-tab-s9/main-gesture.json` and
 `main-threeButton.json`.
 
 
@@ -752,9 +752,9 @@ reporting 3-button mode. Font scale 1.08 is non-default and is
 recorded as captured. On the same One UI 8.5 build family, Tab S10 FE captures
 at 1.08 and 1 produced identical insets, so no normalization recapture is required.
 
-Accepted raw file: `measurements/galaxy-tab-s9-fe/main-gesture.json`.
-Accepted 3-button recapture: `measurements/galaxy-tab-s9-fe/recapture-2026-09-27/main-threeButton.json`.
-Rejected raw file: `measurements/galaxy-tab-s9-fe/rejected-2026-09-25/main-threeButton.json`.
+Accepted raw file: `measurements/galaxy-tab/galaxy-tab-s9-fe/main-gesture.json`.
+Accepted 3-button recapture: `measurements/galaxy-tab/galaxy-tab-s9-fe/recapture-2026-09-27/main-threeButton.json`.
+Rejected raw file: `measurements/galaxy-tab/galaxy-tab-s9-fe/rejected-2026-09-25/main-threeButton.json`.
 
 
 ### Galaxy Tab S7 FE — 2026-09-27
@@ -770,7 +770,7 @@ and tappable insets match 3-button mode, consistent with the persistent One UI
 gesture captures (136 px) are larger than their 3-button bars, so this equal
 pair is preserved as captured, not normalized.
 
-Raw files: `measurements/galaxy-tab-s7-fe/main-{gesture,threeButton}.json`.
+Raw files: `measurements/galaxy-tab/galaxy-tab-s7-fe/main-{gesture,threeButton}.json`.
 
 
 ### Galaxy Tab S10 Ultra — 2026-09-27
@@ -786,7 +786,7 @@ The larger gesture bottom inset matches the Tab S9+/S8+ taskbar pattern. The
 3-button raw screen label is `phone`; model and resolution establish the tablet
 Main display.
 
-Raw files: `measurements/galaxy-tab-s10-ultra/main-{gesture,threeButton}.json`.
+Raw files: `measurements/galaxy-tab/galaxy-tab-s10-ultra/main-{gesture,threeButton}.json`.
 
 
 ### Galaxy Tab S10+ — 2026-09-27
@@ -854,7 +854,7 @@ windows. Portrait bars remain 94/42 px in gesture mode and 94/135 px in
 3-button mode. Landscape status bars are 84 px; the 94 px cutout moves left at
 rotation 1 and right at rotation 3. Gesture retains a 42 px bottom bar, while
 3-button uses a 135 px bar on the opposite side. Files are in
-`measurements/galaxy-s23-ultra/recapture-2026-09-28-rotation/`; the original
+`measurements/galaxy-s/galaxy-s23-ultra/recapture-2026-09-28-rotation/`; the original
 portrait captures remain preserved.
 
 ### Galaxy S23+ — 2026-09-27
@@ -896,7 +896,7 @@ and full-screen windows. Portrait remains 1080×2340 px with 81 px status and
 cutout insets; landscape is 2340×1080 px with a 72 px status bar. The 81×56 px
 cutout moves left at rotation 1 and right at rotation 3. Gesture keeps a 45 px
 bottom bar, while 3-button uses a 144 px bar on the opposite side. Files are in
-`measurements/galaxy-s23/recapture-2026-09-28-rotation/`; the original
+`measurements/galaxy-s/galaxy-s23/recapture-2026-09-28-rotation/`; the original
 portrait captures remain preserved.
 
 ### Galaxy S21 FE — 2026-09-27
@@ -933,7 +933,7 @@ setting); the six files were exported through File Browser instead.
 Samsung RTL produced paired full-screen Main captures for Galaxy Note20 5G
 (SM-N981U), Galaxy Tab S9+ (SM-X816B), Tab S8 Ultra (SM-X906B), Tab S8+
 (SM-X806B), and Tab S8 (SM-X706N). The raw JSONs are retained unchanged under
-`measurements/<device-slug>/main-{gesture,threeButton}.json`; each pair has the
+`measurements/<series>/<device-slug>/main-{gesture,threeButton}.json`; each pair has the
 same model/build, display 0, default font scale 1, and matching full-screen and
 maximum-window dimensions.
 
@@ -979,7 +979,7 @@ the module renders the safe inset only and does not scale the cutout shape onto
 the 1080 px active window. Samsung lists the 6.9-inch, 3088×1440, 496 ppi panel
 in its [Note20 series specifications](https://news.samsung.com/global/samsung-unveils-five-new-power-devices-in-the-galaxy-ecosystem-to-empower-their-work-and-play).
 
-Raw files: `measurements/galaxy-note20-ultra/main-threeButton.json` and
+Raw files: `measurements/galaxy-note/galaxy-note20-ultra/main-threeButton.json` and
 `main-gesture.json`.
 
 On 2026-09-29, Russia/Moscow SM-N985F-RU1 supplied an InsetsProbe 1.6.0 sweep
@@ -990,13 +990,13 @@ landscape is 2316×1080 px with a 63 px top status inset and a 126 px navigation
 inset on the right at rotation 1 or left at rotation 3. The cutout safe inset is
 67 px on the opposite side. As in portrait, the raw cutout rectangles are
 off-centre, so no cutout shape is registered. The accepted raw files are in
-`measurements/galaxy-note20-ultra/recapture-2026-09-29-rotation/`.
+`measurements/galaxy-note/galaxy-note20-ultra/recapture-2026-09-29-rotation/`.
 
 The same session produced a gesture-labelled sweep, but all three files report
 `configNavBarInteractionMode: 2` while `settingsSecureNavigationMode` remains 0.
 The portrait system-bar bottom inset is still the 3-button value, 126 px. The
 three raw files are preserved under
-`measurements/galaxy-note20-ultra/rejected-2026-09-29-navigation-mismatch/` and
+`measurements/galaxy-note/galaxy-note20-ultra/rejected-2026-09-29-navigation-mismatch/` and
 are not published as landscape gesture values. Gesture rotations 1 and 3 need
 fresh captures with matching configuration, setting and insets.
 
@@ -1016,7 +1016,7 @@ identifies the SM-A276K Korean device as Galaxy Jump5 with a 169.1 mm,
 [Samsung Korea specs](https://www.samsung.com/sec/support/model/SM-A276KZKAKTC/) ·
 [Samsung Galaxy A27 5G announcement](https://news.samsung.com/uk/samsung-galaxy-a27-5g-brings-an-immersive-display-and-awesome-intelligence-to-more-users).
 
-Raw files: `measurements/galaxy-a27-5g/main-gesture.json` and
+Raw files: `measurements/galaxy-a/galaxy-a27-5g/main-gesture.json` and
 `main-threeButton.json`.
 
 On 2026-09-29 SM-A276K_KR1 (Korea/Gumi, the same build) swept rotations 0, 1
@@ -1028,7 +1028,7 @@ The two captures supplied as Galaxy A26 identify the device as
 SM-A276B / `a27xq`, which Samsung identifies as Galaxy A27 5G. They are not
 Galaxy A26 captures (that model uses SM-A266B). The SM-A276B gesture and
 3-button captures were preserved byte-for-byte under
-`measurements/galaxy-a27-5g/SM-A276B/`. Both independently match the existing
+`measurements/galaxy-a/galaxy-a27-5g/SM-A276B/`. Both independently match the existing
 SM-A276K A27 captures: 1080×2340 px, 450 dpi, font scale 1, Android 16 / One UI
 8.5, status bar 102 px, cutout safe inset 94 px with the same 70×70 px bound,
 and navigation bar 42 px (gesture) / 135 px (3-button). The active A27 values
@@ -1093,16 +1093,16 @@ therefore remain unchanged; these files corroborate them across regional SKUs.
   `AP3A.240905.015.A2.A736BXXUAFYE6`: the fresh Main gesture capture is
   1080×2400 px at 450 dpi, font scale 1, with 98/42 px system bars and a 98 px
   cutout safe inset. The supplied 3-button JSON has a 2025-05-15 timestamp; it
-  is preserved under `measurements/galaxy-a73-5g/recapture-2025-05-15/` and is
+  is preserved under `measurements/galaxy-a/galaxy-a73-5g/recapture-2025-05-15/` and is
   not registered. The 2026-09-27 recapture on the same build supplies 98/135 px
   3-button bars and reproduces every gesture value; both files are kept under
-  `measurements/galaxy-a73-5g/recapture-2026-09-27/`.
+  `measurements/galaxy-a/galaxy-a73-5g/recapture-2026-09-27/`.
 - Galaxy A13 LTE (SM-A135F), Android 14 / One UI 6.1, build
   `UP1A.231005.007.A135FXXSEEZE3`: both captures agree with Settings and
   InsetsProbe at 1080×2408 px, 450 dpi and font scale 1. Gesture system bars
   are 70/42 px and 3-button bars 70/135 px; the cutout safe inset is 65 px
   with 172×65 px bounds. These raw captures are preserved under
-  `measurements/galaxy-a13-lte/` but are not attached to the A13 5G skin:
+  `measurements/galaxy-a/galaxy-a13-lte/` but are not attached to the A13 5G skin:
   Samsung's A13 5G skin is 720×1600 px, so its display geometry does not match.
   The earlier generic A13 0% installation report therefore remains unresolved
   for its unidentified SKU; SM-A135F did install and produce captures in RTL.
@@ -1132,7 +1132,7 @@ therefore remain unchanged; these files corroborate them across regional SKUs.
   at 450 dpi, font scale 1. Gesture system bars are 77/42 px; 3-button bars
   are 77/135 px. Both report a 77 px safe cutout inset and the same centered
   126×77 px bound. The raw captures are preserved under
-  `measurements/galaxy-a25-5g/`, but the repository has no official A25 skin,
+  `measurements/galaxy-a/galaxy-a25-5g/`, but the repository has no official A25 skin,
   so they are not attached to a public device route. No skin artwork was
   inferred from another A-series model. [Samsung identifies SM-A256N as Galaxy A25 5G](https://www.samsung.com/sec/support/model/SM-A256NLBAKOD/).
   On 2026-09-29 SM-A256N_KR4 (Korea/Gumi, the same build) swept rotations 0,
@@ -1254,7 +1254,7 @@ therefore remain unchanged; these files corroborate them across regional SKUs.
   accepted captures.
 
 All valid navigation settings and Probe modes agree. Raw captures are preserved
-under each model's `measurements/<slug>/` directory; the invalid A37 button-mode
+under each model's `measurements/<series>/<slug>/` directory; the invalid A37 button-mode
 file is retained as rejected evidence and is not published. Samsung's official
 model specifications confirm the matching 6.7-inch 1080×2340 displays for
 [A57](https://www.samsung.com/br/smartphones/galaxy-a/galaxy-a57-5g-awesome-icyblue-256gb-sm-a576blbfzto/),
@@ -1264,6 +1264,6 @@ model specifications confirm the matching 6.7-inch 1080×2340 displays for
 [A36](https://www.samsung.com/sec/support/model/SM-A366NZKAKOD/).
 
 The earlier Galaxy Z TriFold 3-button cover attempt from `content (34)` is also
-preserved under `measurements/galaxy-z-trifold/rejected-2026-09-25/`: it has
+preserved under `measurements/galaxy-fold/galaxy-z-trifold/rejected-2026-09-25/`: it has
 font scale 1.08 and no WindowManager folding feature; the later 2026-09-24T15:17Z
 recapture remains the accepted cover 3-button evidence.

@@ -10,14 +10,14 @@ const samsungSpecs: Source = {
 const probe: Source = {
   kind: "measured",
   label: "InsetsProbe on SM-S936N (Korea)",
-  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s25-plus/main-threeButton.json",
+  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s25-plus/main-threeButton.json",
   retrievedAt: "2025-01-14",
 };
 
 const probeGesture: Source = {
   kind: "measured",
   label: "InsetsProbe on SM-S936N (Korea)",
-  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s25-plus/main-gesture.json",
+  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s25-plus/main-gesture.json",
   retrievedAt: "2026-09-22",
 };
 
@@ -41,7 +41,7 @@ const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton"): Inse
     sources: [{
       kind: "measured",
       label: `InsetsProbe 1.6.0 on physical Galaxy S25+, rotation ${rotation}, ${mode} (SM-S936N)`,
-      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s25-plus/recapture-2026-09-28-rotation/main-landscape-${rotation}-${mode}.json`,
+      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s25-plus/recapture-2026-09-28-rotation/main-landscape-${rotation}-${mode}.json`,
       retrievedAt: "2026-09-28",
     }],
   };

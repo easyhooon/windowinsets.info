@@ -6,7 +6,7 @@ const samsungSpecs: Source = {
   url: "https://news.samsung.com/kr/%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90-%EC%83%88%EB%A1%9C%EC%9A%B4-%ED%8F%BC%ED%8C%A9%ED%84%B0-%ED%8F%B4%EB%8D%94%EB%B8%94%ED%8F%B0-%EA%B0%A4%EB%9F%AD%EC%8B%9C-z-%ED%94%8C%EB%A6%BD-%EC%A0%84%EA%B2%A9-%EA%B3%B5%EA%B0%9C",
   retrievedAt: "2026-09-24",
 };
-const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip";
+const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip";
 const measuredSource = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy Z Flip main, ${mode} (SM-F700F-IN5)`,

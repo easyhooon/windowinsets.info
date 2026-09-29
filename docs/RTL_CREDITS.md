@@ -128,7 +128,7 @@ booked for 30 minutes from 22 Credits, leaving 20. Both FE captures were
 completed while its reservation remained active. Galaxy S24 Ultra SM-S928N-KR3
 was then booked for 30 minutes from 20 Credits, leaving 18. Its reservation
 showed 28 minutes remaining at the first check. Its accepted main 3-button and
-gesture captures are in `measurements/galaxy-s24-ultra/recapture-2026-09-24/`.
+gesture captures are in `measurements/galaxy-s/galaxy-s24-ultra/recapture-2026-09-24/`.
 
 Galaxy S24+ SM-S926N-KR3 and Galaxy S24 SM-S921N-KR3 were each booked for
 30 minutes on 2026-09-24 (2 credits apiece). The S24+ reservation produced

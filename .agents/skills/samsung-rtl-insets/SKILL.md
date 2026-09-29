@@ -493,7 +493,7 @@ screen/nav classification or retained as rejected evidence with a stated reason.
 
 ## 5. Register and verify
 
-Add accepted raw evidence under `measurements/<device-slug>/`. If canonical files
+Add accepted raw evidence under `measurements/<series>/<device-slug>/`. If canonical files
 already contain historical evidence, preserve them and add a dated recapture
 directory rather than overwriting them. Update the existing
 device module or create one following a comparable bar/book/flip entry, then register

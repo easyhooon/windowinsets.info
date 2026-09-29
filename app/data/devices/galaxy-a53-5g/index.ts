@@ -7,7 +7,7 @@ const official: Source = {
 };
 const capture = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured", label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy A53 5G (SM-A536B), main ${mode}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a53-5g/main-${mode}.json`, retrievedAt: "2026-09-25",
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a53-5g/main-${mode}.json`, retrievedAt: "2026-09-25",
 });
 const measurement = (mode: "gesture" | "threeButton"): InsetsMeasurement => ({
   systemBars: { top: 31.29, right: 0, bottom: mode === "gesture" ? 14.93 : 48, left: 0 },

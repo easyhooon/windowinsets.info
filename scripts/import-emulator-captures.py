@@ -3,7 +3,7 @@
 
 Usage: python3 scripts/import-emulator-captures.py [slug ...]
 
-Reads scripts/pixel-devices.json and, per device with a measurements/<slug>/emulator-*/
+Reads scripts/pixel-devices.json and, per device with a measurements/pixel/<slug>/emulator-*/
 set, copies the AOSP skin into public/skins/<slug>/, regenerates app/data/aospSkins.ts,
 writes app/data/devices/<slug>/index.ts from the rotation-0 captures and lists the
 modules in app/data/devices/pixel.ts. Raw captures are read, never modified. Screen
@@ -87,7 +87,7 @@ def import_skin(slug: str, profile: str, screen: str) -> dict:
 
 
 def capture_set(slug: str) -> Path | None:
-    sets = sorted((ROOT / "measurements" / slug).glob("emulator-*/manifest.json"))
+    sets = sorted((ROOT / "measurements" / "pixel" / slug).glob("emulator-*/manifest.json"))
     return sets[-1].parent if sets else None
 
 

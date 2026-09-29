@@ -7,7 +7,7 @@ const samsungSpecs: Source = {
   retrievedAt: "2025-01-14",
 };
 
-const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold6";
+const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-fold/galaxy-z-fold6";
 const samsungSkinPage: Source = {
   kind: "official",
   label: "Samsung Developer – Galaxy Z emulator skins",

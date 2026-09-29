@@ -10,7 +10,7 @@ const specs: Source = {
 const capture = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.2.1 on Samsung RTL Galaxy S26 Ultra, ${mode} (SM-S948U)`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s26-ultra/main-${mode}.json`,
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s26-ultra/main-${mode}.json`,
   retrievedAt: "2026-09-23",
 });
 
@@ -50,7 +50,7 @@ const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton"): Inse
     oneUi: "8.5", android: "16",
     note: `Samsung RTL Korea/Gumi, SM-S948U_KR3, build BP4A.251205.006.S948USQS4AZG3. Landscape rotation ${rotation}, full-screen 2340×1080 px, 450 dpi, font scale 1. Captured separately with InsetsProbe 1.5.0.`,
   },
-  sources: [{ kind: "measured", label: `InsetsProbe 1.5.0 on Samsung RTL Galaxy S26 Ultra, landscape rotation ${rotation} ${mode} (SM-S948U)`, url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s26-ultra/recapture-2026-09-27-rotation/main-landscape-${rotation}-${mode}.json`, retrievedAt: "2026-09-27" }],
+  sources: [{ kind: "measured", label: `InsetsProbe 1.5.0 on Samsung RTL Galaxy S26 Ultra, landscape rotation ${rotation} ${mode} (SM-S948U)`, url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s26-ultra/recapture-2026-09-27-rotation/main-landscape-${rotation}-${mode}.json`, retrievedAt: "2026-09-27" }],
 });
 
 export const galaxyS26Ultra: Device = {

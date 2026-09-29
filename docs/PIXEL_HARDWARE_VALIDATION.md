@@ -143,7 +143,7 @@ at the recorded precision. Its OS cutout exclusion rectangle reaches 160 px
 from the top, versus 136 px on the emulator. The Android versions differ, so
 this comparison does not establish the cause of that safe-inset difference.
 The physical capture is preserved separately in
-`measurements/pixel-10-pro-fold/testlab-2026-09-28/`.
+`measurements/pixel/pixel-10-pro-fold/testlab-2026-09-28/`.
 
 ## Third run: Pixel 9 Pro Fold inner display
 
@@ -155,7 +155,7 @@ navigation detectors. The cutout exclusion rectangle, sampled camera path and
 four corner radii match the Pixel 9 Pro Fold API 37 emulator exactly at recorded
 precision. This supports the emulator geometry for the 9 Pro Fold, while the
 10 Pro Fold physical safe inset still differs from its emulator capture. Its
-raw result is preserved in `measurements/pixel-9-pro-fold/testlab-2026-09-28/`.
+raw result is preserved in `measurements/pixel/pixel-9-pro-fold/testlab-2026-09-28/`.
 
 ## Fourth matrix: Pixel 8 Pro and Pixel Tablet
 
@@ -164,7 +164,7 @@ Pro (`husky`, API 35) and Pixel Tablet (`tangorpro`, API 36), consuming two
 physical-device runs. [FTL results](https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/8103305516082310900).
 Both scripts exported one portrait gesture JSON and ended normally; their
 navigation detectors agreed. Raw files and action logs are preserved in the
-respective `measurements/<slug>/testlab-2026-09-28/` directories.
+respective `measurements/pixel/<slug>/testlab-2026-09-28/` directories.
 
 Pixel 8 Pro: the physical Android 15 build `BP1A.250505.005.B1` uses an active
 1008×2244 resolution at 360 dpi, while the API 37 emulator uses 1344×2992 at

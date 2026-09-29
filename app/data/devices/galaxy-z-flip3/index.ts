@@ -6,7 +6,7 @@ const samsungSpecs: Source = {
   url: "https://news.samsung.com/ca/the-next-chapter-in-mobile-innovation-unfold-your-world-with-galaxy-z-fold3-5g-and-galaxy-z-flip3-5g",
   retrievedAt: "2026-09-24",
 };
-const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip3";
+const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip3";
 const measuredSource = (mode: "gesture" | "threeButton", date: string): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy Z Flip3 main, ${mode} (SM-F711B)`,

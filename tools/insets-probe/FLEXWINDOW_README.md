@@ -18,7 +18,7 @@ was folded. An early file named `cover-threeButton.json` therefore contained a
 1080 × 2520 inner window. The file is preserved as raw evidence, but its name
 does not make it a cover measurement. The later verified cover captures were
 launched through the packaged widget and measured 948 × 1048 px on display 1.
-See [the dated captures](../../measurements/galaxy-z-flip8/recapture-2026-09-23/)
+See [the dated captures](../../measurements/galaxy-flip/galaxy-z-flip8/recapture-2026-09-23/)
 and [measurement workflow](../../docs/MEASUREMENT_WORKFLOW.md).
 
 Samsung's built-in **Favorite apps** picker filters apps by a compatibility

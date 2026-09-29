@@ -11,7 +11,7 @@ const samsungSpecs: Source = {
 const capture = (rotation: 0 | 1 | 3, mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy S22 Plus (SM-S906B-RU1), rotation ${rotation}, ${mode}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s22-plus/recapture-2026-09-28-rotation/${rotation === 0 ? "main" : `landscape-${rotation}`}-${mode}.json`,
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s22-plus/recapture-2026-09-28-rotation/${rotation === 0 ? "main" : `landscape-${rotation}`}-${mode}.json`,
   retrievedAt: "2026-09-28",
   ...(rotation === 0 && mode === "threeButton"
     ? { note: "Reconstructed from the preserved RTL InsetsProbe log because the File Browser download did not complete; the log's other five captures match their downloaded files exactly." }
