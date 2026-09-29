@@ -554,6 +554,7 @@ fill them.
 | Galaxy A27 5G | SM-A276K | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a27-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy A55 5G | SM-A556S | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a55-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S11 Ultra | SM-X930 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`) | None |
+| Galaxy Tab S10 Ultra | SM-X920 | Main: rotation 1 in both modes (accepted). Rotations 0, 1 and 3 in 3-button (`measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation/`) | Rotation 2 in both modes; rotations 0 and 3 in gesture |
 | Galaxy Tab S11 | SM-X730 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s11/recapture-2026-09-29-rotation/`) | None |
 | Galaxy S21+ | SM-G996B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s21-plus/recapture-2026-09-29-rotation/`) | None |
 | Galaxy S21 Ultra | SM-G998B / SM-G998U1 | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s21-ultra/recapture-2026-09-29-rotation/`) | None |
@@ -590,7 +591,7 @@ Note and A.
 | Series | Devices | Screens |
 | --- | --- | --- |
 | Galaxy Z Flip | original Z Flip (not listed on RTL as of 2026-09-28) | Main (no cover skin) |
-| Galaxy Tab | S10 Ultra, S10+, S10 FE+, S10 FE, S10 Lite, S9 Ultra, S9+, S9 FE+, S9 FE, S9, S8 Ultra, S8+, S8, S7+, S7 FE, A11, A9+, A7 Lite | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
+| Galaxy Tab | S10+, S10 FE+, S10 FE, S10 Lite, S9 Ultra, S9+, S9 FE+, S9 FE, S9, S8 Ultra, S8+, S8, S7+, S7 FE, A11, A9+, A7 Lite | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
 | Galaxy A | A73, A56, A53, A52s, A34, A33, A32 5G, A32, A24, A23, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
 
 Existing gaps in the natural-rotation data remain open alongside the sweep.

@@ -795,6 +795,24 @@ Main display.
 
 Raw files: `measurements/galaxy-tab/galaxy-tab-s10-ultra/main-{gesture,threeButton}.json`.
 
+### Galaxy Tab S10 Ultra rotations — 2026-09-29 (partial)
+
+InsetsProbe 1.6.1 swept Samsung RTL SM-X920-IN1 (India/Noida), same build
+`UP1A.231005.007.X920XXS2AYB5`, 280 dpi, font scale 1, in 3-button mode.
+Rotation 0 is portrait 1848×2960 px with bars 42/84 px (24/48 dp) and the
+186×28 px cutout on the right edge (28 px safe inset). Rotation 1 reproduces
+the accepted capture exactly (insets, cutout and corners). Rotation 3 is
+landscape with the cutout at the bottom and a 112 px (64 dp) bottom bar, the
+same pattern as Tab S11 Ultra rotation 3.
+
+Rotation 2 was skipped because Probe's tablet checkbox resets when the activity
+is recreated. The WebClient then stopped delivering input (a black stream that
+ignored taps and the power key), so the gesture sweep was not run. Rotation 2 in
+both modes and gesture rotations 0 and 3 remain pending.
+
+Raw files: `measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation/{main,landscape-1,landscape-3}-threeButton.json`
+(downloaded through the File Browser after upload returned `401 Invalid upload key`).
+
 
 ### Galaxy Tab S10+ — 2026-09-27
 
