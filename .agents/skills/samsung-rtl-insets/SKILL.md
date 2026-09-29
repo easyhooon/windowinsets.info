@@ -93,6 +93,15 @@ in India, Russia or the USA). Avoid Vietnam (Hanoi) units whenever another locat
 offers the model: their WebClient sessions often end early with "All ongoing tests
 have ended." Pick Vietnam only when it is the sole location, and record the choice.
 
+Before measuring, check the **Active window** size Probe shows against the model's
+default resolution. Samsung flagships ship at FHD+ (1080 px wide) even on
+1440 px panels, and every accepted capture uses that default. RTL units are
+sometimes left at WQHD+/QHD+. If so, open Settings → Display → Screen resolution,
+select FHD+, apply it and reopen Probe before any capture. Samsung scales the
+density with the resolution, so dp stays nearly the same while every px value
+changes. A capture at a non-default resolution would not match the published
+px values. Record the reset in the capture notes.
+
 ### Authentication handoff
 
 Authentication is always manual. If Samsung shows Sign in, credentials, QR sign-in,
