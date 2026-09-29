@@ -116,7 +116,7 @@ flowchart LR
 ### Pixel emulator captures
 
 1. Boot an SDK Pixel profile with its AOSP skin. Run the keyless probe across screens, navigation modes and supported rotations.
-2. Preserve the JSON and emulator manifest under `measurements/<pixel-slug>/emulator-<date>/`.
+2. Preserve the JSON and emulator manifest under `measurements/pixel/<pixel-slug>/emulator-<date>/`.
 3. Run `scripts/import-emulator-captures.py <pixel-slug>`. The importer validates rotation-0 identity, navigation mode and published display resolution; then it copies the AOSP skin with provenance and generates the Pixel device entry.
 
 These captures do not enter the real-device Capture inbox. See [Pixel emulator coverage and limits](docs/DEVICE_COVERAGE.md#google-pixel-issue-23) and the [measurement workflow](docs/MEASUREMENT_WORKFLOW.md#pixel-emulator-captures-issue-23-2026-09-27).
@@ -166,7 +166,9 @@ For automation, `adb shell am start -n info.windowinsets.probe/.MainActivity --e
 waits one second for `FoldingFeature`, then saves the JSON to the app's external
 files directory and logs it to logcat.
 
-Keep raw captures in `measurements/<device-slug>/`, separating dated Pixel
+Keep raw captures in `measurements/<series>/<device-slug>/`, where `<series>` is
+`galaxy-a`, `galaxy-s`, `galaxy-note`, `galaxy-tab`, `galaxy-fold` (including TriFold),
+`galaxy-flip` or `pixel`; `measurements/_inbox/` holds unreviewed uploads. Separate dated Pixel
 emulator and physical FTL runs as described above. Reference each published
 value from its `Source` so anyone can re-check it.
 
@@ -175,7 +177,7 @@ value from its `Source` so anyone can re-check it.
 Android can report cover-screen cutout bounds through
 [`DisplayCutout.getBoundingRects()`](https://developer.android.com/reference/android/view/DisplayCutout#getBoundingRects()).
 The site shows width, height and all four distances to the captured window edges.
-For example, the [verified Flip8 cover capture](measurements/galaxy-z-flip8/recapture-2026-09-23/cover-threeButton.json)
+For example, the [verified Flip8 cover capture](measurements/galaxy-flip/galaxy-z-flip8/recapture-2026-09-23/cover-threeButton.json)
 has one rectangle at `(428, 839)` sized **520 × 209 px**, inside a 948 × 1048 px window.
 This covers the OS exclusion area. It does not measure each camera lens separately.
 
@@ -287,7 +289,7 @@ and Android's [Wear OS screen-shape guidance](https://developer.android.com/trai
    including TriFold. Before publishing, check each model against the 2020 release
    cutoff (except Fold/Flip). Record boundary and older models in
    `app/data/coverage.ts`, with sources in `docs/DEVICE_COVERAGE.md`.
-2. For RTL data, keep raw JSON in `measurements/<device-slug>/`, then create
+2. For RTL data, keep raw JSON in `measurements/<series>/<device-slug>/`, then create
    `app/data/devices/<slug>/index.ts` implementing `Device` (see `app/data/types.ts`).
 3. Register that entry in `verifiedEntries` in `app/data/devices.ts` using the
    existing preview slug. Its screens override preview data; additional skin-only
@@ -312,7 +314,7 @@ with pending insets.
 1. Add the model, official Google display specification source and SDK profile
    to `scripts/pixel-devices.json`.
 2. Keep the probe's raw JSON and `manifest.json` in
-   `measurements/<slug>/emulator-<date>/`.
+   `measurements/pixel/<slug>/emulator-<date>/`.
 3. Run `python3 scripts/import-emulator-captures.py <slug>` to validate rotation-0
    captures, copy the AOSP skin and regenerate the Pixel modules.
 

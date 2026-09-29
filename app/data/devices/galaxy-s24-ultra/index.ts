@@ -11,7 +11,7 @@ const samsungSpecs: Source = {
 const capture = (mode: "gesture" | "threeButton", rotation = 0): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy S24 Ultra (SM-S928N-KR3), rotation ${rotation}, ${mode}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s24-ultra/recapture-2026-09-28-rotation/${rotation === 0 ? "main" : `landscape-${rotation}`}-${mode}.json`,
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s24-ultra/recapture-2026-09-28-rotation/${rotation === 0 ? "main" : `landscape-${rotation}`}-${mode}.json`,
   retrievedAt: "2026-09-28",
 });
 

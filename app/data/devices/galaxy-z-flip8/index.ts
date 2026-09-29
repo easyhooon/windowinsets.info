@@ -3,18 +3,18 @@ import type { Device, Source } from "../../types";
 const rtlThreeButton: Source = {
   kind: "measured",
   label: "Samsung Remote Test Lab (RTL), One UI 9.0, Android 17",
-  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip8/main-threeButton.json",
+  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip8/main-threeButton.json",
   retrievedAt: "2026-09-22",
 };
 
 const rtlGesture: Source = {
   kind: "measured",
   label: "Samsung Remote Test Lab (RTL), One UI 9.0, Android 17",
-  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip8/main-gesture.json",
+  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip8/main-gesture.json",
   retrievedAt: "2026-09-22",
 };
 
-const coverCaptureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip8/recapture-2026-09-23";
+const coverCaptureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip8/recapture-2026-09-23";
 
 const coverThreeButton: Source = {
   kind: "measured",
@@ -151,7 +151,7 @@ export const galaxyZFlip8: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-flip8 main, rotation 1, gesture (SM-F776B)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip8/recapture-2026-09-27-rotation/main-landscape-1-gesture.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip8/recapture-2026-09-27-rotation/main-landscape-1-gesture.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -204,7 +204,7 @@ export const galaxyZFlip8: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-flip8 main, rotation 1, threeButton (SM-F776B)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip8/recapture-2026-09-27-rotation/main-landscape-1-threeButton.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip8/recapture-2026-09-27-rotation/main-landscape-1-threeButton.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -269,7 +269,7 @@ export const galaxyZFlip8: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-flip8 main, rotation 3, gesture (SM-F776B)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip8/recapture-2026-09-27-rotation/main-landscape-3-gesture.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip8/recapture-2026-09-27-rotation/main-landscape-3-gesture.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -322,7 +322,7 @@ export const galaxyZFlip8: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Samsung RTL galaxy-z-flip8 main, rotation 3, threeButton (SM-F776B)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-flip8/recapture-2026-09-27-rotation/main-landscape-3-threeButton.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip8/recapture-2026-09-27-rotation/main-landscape-3-threeButton.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]

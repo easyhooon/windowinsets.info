@@ -8,7 +8,7 @@ test('Fold6 rotation captures retain their own screen, mode, and measured insets
     for (const mode of ['gesture', 'threeButton']) {
       for (const rotation of [0, 1, 3]) {
         const name = `${screen.id}-${rotation ? `landscape-${rotation}-` : ''}${mode}.json`;
-        const raw = JSON.parse(readFileSync(`measurements/galaxy-z-fold6/recapture-2026-09-27-rotation/${name}`, 'utf8'));
+        const raw = JSON.parse(readFileSync(`measurements/galaxy-fold/galaxy-z-fold6/recapture-2026-09-27-rotation/${name}`, 'utf8'));
         const capture = rotation ? screen.rotations[rotation] : screen;
         const published = capture.insets[mode];
         assert.equal(raw.device.model, 'SM-F956U');

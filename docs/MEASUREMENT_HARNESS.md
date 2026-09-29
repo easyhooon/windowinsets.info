@@ -54,7 +54,7 @@ flowchart TB
 | Instrument | InsetsProbe 1.6.0 | Reads real `WindowInsets`, rotates itself (0°/90°/270°), labels the capture, uploads JSON |
 | Input path | `api/captures.ts` (Vercel Function) → `capture-inbox` | Probe POSTs JSON to the deployed API; the function commits each upload unchanged through the GitHub API into one inbox PR |
 | Gates | Comparison script, `pnpm typecheck`, `tests/rendering.test.mjs` | Block wrong screen labels, stale builds and mismatched values |
-| Evidence | `measurements/<device>/recapture-*/`, coverage notes | Raw files stay immutable; every published value links to one |
+| Evidence | `measurements/<series>/<device>/recapture-*/`, coverage notes | Raw files stay immutable; every published value links to one |
 
 ## The per-device loop
 

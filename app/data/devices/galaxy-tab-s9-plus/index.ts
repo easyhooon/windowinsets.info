@@ -11,7 +11,7 @@ const samsungSpecs: Source = {
 const captureSource = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy Tab S9+ (SM-X816B), main ${mode === "gesture" ? "gesture" : "3-button"}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab-s9-plus/main-${mode}.json`,
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab/galaxy-tab-s9-plus/main-${mode}.json`,
   retrievedAt: "2026-09-25",
 });
 

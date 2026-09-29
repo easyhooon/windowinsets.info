@@ -26,7 +26,7 @@ Dumps everything [windowinsets.info](https://windowinsets.info) needs for one sc
    adb pull /sdcard/Android/data/info.windowinsets.probe/files/
    ```
 
-7. Tap **Upload** (automatic after a sweep when the build has an upload key), or save the file as `measurements/<device-slug>/<screen>-<navMode>.json` at the repo root.
+7. Tap **Upload** (automatic after a sweep when the build has an upload key), or save the file as `measurements/<series>/<device-slug>/<screen>-<navMode>.json` at the repo root.
 
 Repeat for every screen × navigation mode. Do not edit the JSON by hand.
 

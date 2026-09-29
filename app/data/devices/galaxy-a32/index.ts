@@ -7,7 +7,7 @@ const official: Source = {
 };
 const capture = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured", label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy A32 (SM-A325F), main ${mode}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a32/main-${mode}.json`, retrievedAt: "2026-09-25",
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a32/main-${mode}.json`, retrievedAt: "2026-09-25",
 });
 const measurement = (mode: "gesture" | "threeButton"): InsetsMeasurement => ({
   systemBars: { top: 30.48, right: 0, bottom: mode === "gesture" ? 14.86 : 48, left: 0 },

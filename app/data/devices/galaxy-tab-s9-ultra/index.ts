@@ -8,7 +8,7 @@ const samsungSpecs: Source = {
   note: "Samsung lists a 14.6-inch (369.9 mm) display diagonal and 2960×1848 WQXGA+ resolution; PPI is calculated from those values.",
 };
 
-const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab-s9-ultra";
+const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab/galaxy-tab-s9-ultra";
 const captureSource = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy Tab S9 Ultra main (SM-X916B), ${mode}`,

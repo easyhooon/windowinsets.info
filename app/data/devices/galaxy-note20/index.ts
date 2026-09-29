@@ -11,7 +11,7 @@ const samsungSpecs: Source = {
 const captureSource = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy Note20 (SM-N981U), main ${mode === "gesture" ? "gesture" : "3-button"}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-note20/main-${mode}.json`,
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-note/galaxy-note20/main-${mode}.json`,
   retrievedAt: "2026-09-25",
 });
 
@@ -56,7 +56,7 @@ const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton"): Inse
     sources: [{
       kind: "measured",
       label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy Note20, rotation ${rotation}, ${mode} (SM-N981U)`,
-      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-note20/recapture-2026-09-29-rotation/main-landscape-${rotation}-${mode}.json`,
+      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-note/galaxy-note20/recapture-2026-09-29-rotation/main-landscape-${rotation}-${mode}.json`,
       retrievedAt: "2026-09-29",
     }],
   };

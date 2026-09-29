@@ -11,7 +11,7 @@ const samsungSpecs: Source = {
 const captureSource = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy S20 FE (SM-G780G), main ${mode === "gesture" ? "gesture" : "3-button"}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s20-fe/main-${mode}.json`,
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s20-fe/main-${mode}.json`,
   retrievedAt: "2026-09-25",
 });
 
@@ -56,7 +56,7 @@ const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton"): Inse
     sources: [{
       kind: "measured",
       label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy S20 FE, rotation ${rotation}, ${mode} (SM-G780G)`,
-      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s20-fe/recapture-2026-09-29-rotation/main-landscape-${rotation}-${mode}.json`,
+      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s20-fe/recapture-2026-09-29-rotation/main-landscape-${rotation}-${mode}.json`,
       retrievedAt: "2026-09-29",
     }],
   };

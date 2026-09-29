@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { commitToInbox, inboxPath, parseUpload } from '../api/_lib/captureInbox.ts';
 
-const capture = JSON.parse(readFileSync('measurements/galaxy-s23-plus/landscape-1-gesture.json', 'utf8'));
+const capture = JSON.parse(readFileSync('measurements/galaxy-s/galaxy-s23-plus/landscape-1-gesture.json', 'utf8'));
 
 test('accepts real probe captures and rejects malformed uploads', () => {
   const upload = parseUpload({ files: { 'landscape-1-gesture.json': capture }, note: 'RTL sweep' });

@@ -7,7 +7,7 @@ const samsungSpecs: Source = {
   retrievedAt: "2026-09-25",
   note: "Samsung lists 12.4-inch (315.0 mm), 2560×1600 WQXGA; PPI is calculated from that diagonal and resolution.",
 };
-const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab-s9-fe-plus";
+const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab/galaxy-tab-s9-fe-plus";
 const captureSource = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy Tab S9 FE+ main (SM-X616N), ${mode}`,

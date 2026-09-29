@@ -7,7 +7,7 @@ const samsungSpecs: Source = {
   retrievedAt: "2026-09-25",
   note: "Samsung lists 13.1-inch (332.8 mm), 2880×1800 WQXGA+; PPI is calculated from that diagonal and resolution.",
 };
-const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab-s10-fe-plus";
+const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab/galaxy-tab-s10-fe-plus";
 const captureSource = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy Tab S10 FE+ main (SM-X620), ${mode}`,
@@ -17,7 +17,7 @@ const captureSource = (mode: "gesture" | "threeButton"): Source => ({
 const recaptureSource: Source = {
   kind: "measured",
   label: "InsetsProbe 1.3.0 on Samsung RTL Galaxy Tab S10 FE+ main (SM-X620), 2026-09-27 recapture of both modes",
-  url: "https://github.com/easyhooon/windowinsets.info/tree/main/measurements/galaxy-tab-s10-fe-plus/recapture-2026-09-27",
+  url: "https://github.com/easyhooon/windowinsets.info/tree/main/measurements/galaxy-tab/galaxy-tab-s10-fe-plus/recapture-2026-09-27",
   retrievedAt: "2026-09-27",
 };
 const gestureSource = captureSource("gesture");

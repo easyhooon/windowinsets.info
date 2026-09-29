@@ -1,6 +1,6 @@
 import type { Device, Source } from "../../types";
 
-const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold7";
+const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-fold/galaxy-z-fold7";
 const mainCaptureBase = `${captureBase}/recapture-2026-09-25`;
 
 const samsungSkinPage: Source = {
@@ -165,7 +165,7 @@ export const galaxyZFold7: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold7 cover, rotation 1, gesture (SM-F966U)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold7/recapture-2026-09-27-rotation/cover-landscape-1-gesture.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-fold/galaxy-z-fold7/recapture-2026-09-27-rotation/cover-landscape-1-gesture.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -218,7 +218,7 @@ export const galaxyZFold7: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold7 cover, rotation 1, threeButton (SM-F966U)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold7/recapture-2026-09-27-rotation/cover-landscape-1-threeButton.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-fold/galaxy-z-fold7/recapture-2026-09-27-rotation/cover-landscape-1-threeButton.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -283,7 +283,7 @@ export const galaxyZFold7: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold7 cover, rotation 3, gesture (SM-F966U)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold7/recapture-2026-09-27-rotation/cover-landscape-3-gesture.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-fold/galaxy-z-fold7/recapture-2026-09-27-rotation/cover-landscape-3-gesture.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -336,7 +336,7 @@ export const galaxyZFold7: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold7 cover, rotation 3, threeButton (SM-F966U)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold7/recapture-2026-09-27-rotation/cover-landscape-3-threeButton.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-fold/galaxy-z-fold7/recapture-2026-09-27-rotation/cover-landscape-3-threeButton.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -422,7 +422,7 @@ export const galaxyZFold7: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold7 inner, rotation 1, gesture (SM-F966U)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold7/recapture-2026-09-27-rotation/main-landscape-1-gesture.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-fold/galaxy-z-fold7/recapture-2026-09-27-rotation/main-landscape-1-gesture.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -461,7 +461,7 @@ export const galaxyZFold7: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold7 inner, rotation 1, threeButton (SM-F966U)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold7/recapture-2026-09-27-rotation/main-landscape-1-threeButton.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-fold/galaxy-z-fold7/recapture-2026-09-27-rotation/main-landscape-1-threeButton.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -512,7 +512,7 @@ export const galaxyZFold7: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold7 inner, rotation 3, gesture (SM-F966U)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold7/recapture-2026-09-27-rotation/main-landscape-3-gesture.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-fold/galaxy-z-fold7/recapture-2026-09-27-rotation/main-landscape-3-gesture.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]
@@ -551,7 +551,7 @@ export const galaxyZFold7: Device = {
                 {
                   "kind": "measured",
                   "label": "InsetsProbe 1.5.0 on Samsung RTL Galaxy Z Fold7 inner, rotation 3, threeButton (SM-F966U)",
-                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-z-fold7/recapture-2026-09-27-rotation/main-landscape-3-threeButton.json",
+                  "url": "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-fold/galaxy-z-fold7/recapture-2026-09-27-rotation/main-landscape-3-threeButton.json",
                   "retrievedAt": "2026-09-27"
                 }
               ]

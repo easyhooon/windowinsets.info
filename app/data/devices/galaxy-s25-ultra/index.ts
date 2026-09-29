@@ -10,13 +10,13 @@ const samsungSpecs: Source = {
 const rtlThreeButton: Source = {
   kind: "measured",
   label: "Samsung Remote Test Lab (RTL), One UI 8.5, Android 16",
-  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s25-ultra/main-threeButton.json",
+  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s25-ultra/main-threeButton.json",
   retrievedAt: "2026-09-22",
 };
 
 const rtlGesture: Source = {
   ...rtlThreeButton,
-  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s25-ultra/main-gesture.json",
+  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s25-ultra/main-gesture.json",
 };
 
 // Separate InsetsProbe 1.6.0 captures of rotations 1 and 3; never derived from rotation 0.
@@ -40,7 +40,7 @@ const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton"): Inse
     sources: [{
       kind: "measured",
       label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy S25 Ultra, rotation ${rotation}, ${mode} (SM-S938N)`,
-      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s25-ultra/recapture-2026-09-28-rotation/main-landscape-${rotation}-${mode}.json`,
+      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s25-ultra/recapture-2026-09-28-rotation/main-landscape-${rotation}-${mode}.json`,
       retrievedAt: "2026-09-28",
     }],
   };

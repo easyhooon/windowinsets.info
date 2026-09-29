@@ -7,11 +7,11 @@ const official: Source = {
 };
 const capture: Source = {
   kind: "measured", label: "InsetsProbe 1.3.0 on Samsung RTL Galaxy A73 5G (SM-A736B), main gesture",
-  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a73-5g/main-gesture.json", retrievedAt: "2026-09-25",
+  url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a73-5g/main-gesture.json", retrievedAt: "2026-09-25",
 };
 const recapture: Source = {
   kind: "measured", label: "InsetsProbe 1.3.0 on Samsung RTL Galaxy A73 5G (SM-A736B), main 3-button and gesture recapture",
-  url: "https://github.com/easyhooon/windowinsets.info/tree/main/measurements/galaxy-a73-5g/recapture-2026-09-27", retrievedAt: "2026-09-27",
+  url: "https://github.com/easyhooon/windowinsets.info/tree/main/measurements/galaxy-a/galaxy-a73-5g/recapture-2026-09-27", retrievedAt: "2026-09-27",
 };
 const gesture: InsetsMeasurement = {
   systemBars: { top: 34.84, right: 0, bottom: 14.93, left: 0 },

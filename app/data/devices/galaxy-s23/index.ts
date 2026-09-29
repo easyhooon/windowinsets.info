@@ -11,7 +11,7 @@ const samsungSpecs: Source = {
 const captureSource = (rotation: 0 | 1 | 3, mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy S23 (SM-S911B-IN1), rotation ${rotation}, ${mode}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s23/recapture-2026-09-28-rotation/${rotation === 0 ? "main" : `landscape-${rotation}`}-${mode}.json`,
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s23/recapture-2026-09-28-rotation/${rotation === 0 ? "main" : `landscape-${rotation}`}-${mode}.json`,
   retrievedAt: "2026-09-28",
 });
 

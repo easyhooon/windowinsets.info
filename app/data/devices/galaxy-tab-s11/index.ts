@@ -8,7 +8,7 @@ const samsungSpecs: Source = {
   note: "Samsung lists 11.0-inch (278.1 mm), 2560×1600 WQXGA; PPI is calculated from that diagonal and resolution.",
 };
 
-const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab-s11/recapture-2026-09-29-rotation";
+const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab/galaxy-tab-s11/recapture-2026-09-29-rotation";
 const captureSource = (file: string, mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy Tab S11 main (SM-X730), ${file}, ${mode}`,

@@ -80,7 +80,7 @@ test('emulator captures export as emulator evidence with their provenance', () =
   assert.equal(measurement.evidence, 'emulator');
   assert.equal(measurement.condition.oneUi, null);
   assert.equal(measurement.condition.emulator.deviceProfile, 'pixel_9');
-  assert.ok(measurement.condition.emulator.manifestUrl.endsWith('/measurements/pixel-9/emulator-2026-09-27/manifest.json'));
+  assert.ok(measurement.condition.emulator.manifestUrl.endsWith('/measurements/pixel/pixel-9/emulator-2026-09-27/manifest.json'));
   assert.ok(measurement.sources.every(source => source.kind === 'emulator'));
   assert.equal(createDeviceExport(galaxyZFlip8).screens[0].navigationModes.gesture.value.condition.emulator, null);
 });

@@ -10,7 +10,7 @@ const specs: Source = {
 const capture = (mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
   label: `InsetsProbe 1.2.1 on Samsung RTL Galaxy S26 (SM-S942N), ${mode}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s26/main-${mode}.json`,
+  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s26/main-${mode}.json`,
   retrievedAt: "2026-09-23",
 });
 
@@ -56,7 +56,7 @@ const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton"): Inse
     sources: [{
       kind: "measured",
       label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy S26, rotation ${rotation}, ${mode} (SM-S942N)`,
-      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s26/recapture-2026-09-28-rotation/main-landscape-${rotation}-${mode}.json`,
+      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s26/recapture-2026-09-28-rotation/main-landscape-${rotation}-${mode}.json`,
       retrievedAt: "2026-09-28",
     }],
   };
