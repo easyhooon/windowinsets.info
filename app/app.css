@@ -130,10 +130,16 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .segmented { display:flex; gap:2px; }
 .segmented .pill-button[aria-pressed=true] { background:#eaeef2; color:#1f2328; font-weight:600; }
 .hinge-control input { width:90px; margin:0 6px; accent-color:#0969da; }
-.hinge-readout { min-width:4.5ch; padding-right:8px; font-size:12px; font-variant-numeric:tabular-nums; text-align:right; }
+.hinge-readout { display:inline-grid; padding-right:8px; font-size:12px; font-variant-numeric:tabular-nums; text-align:right; }
+/* The widest reading reserves the width so the centred pills never shift mid-drag. */
+.hinge-readout>span { grid-area:1/1; }
 .dropdown.canvas-settings { position:fixed; z-index:30; top:16px; right:16px; }
 .toolbar-button { min-height:32px; display:flex; align-items:center; justify-content:center; gap:5px; border:1px solid #d1d9e0; background:#f6f8fa; padding:5px 10px; border-radius:6px; font-size:12px; white-space:nowrap; }
 .toolbar-button:hover { background:#eef1f4; }
+/* Stack reserved values in one cell so the button keeps the size of the largest. */
+.dropdown-value { display:inline-grid; }
+.dropdown-value>span { grid-area:1/1; align-self:center; text-align:center; }
+.dropdown-value-reserve { visibility:hidden; }
 .toolbar-button>svg:last-child { margin-left:4px; }
 .dropdown { position:relative; }
 .dropdown-panel { position:absolute; top:calc(100% + 6px); right:0; min-width:180px; z-index:40; border:1px solid #d1d9e0; border-radius:8px; background:#fff; box-shadow:0 8px 24px #1f232826; padding:5px; }

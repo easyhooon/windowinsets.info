@@ -66,7 +66,9 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
   // the reference does for its foldable. Automatic fit then eases to the new pose.
   const foldFitPending = useRef(true);
   // Stop fold fitting immediately; renderer frames can arrive before autoFit=false renders.
-  const userTransform = () => { foldFitPending.current = false; live.current.onUserTransform?.(); };
+  // User input ends any fit still converging, so a later pass cannot recentre over it.
+  const fitting = useRef(false);
+  const userTransform = () => { foldFitPending.current = false; fitting.current = false; live.current.onUserTransform?.(); };
   const foldFitAngle = useRef<number | null>(null);
   const fitBounds = useRef({ fitWidth, fitHeight });
   fitBounds.current = { fitWidth, fitHeight };
@@ -200,7 +202,6 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
   }, [rotation]);
   useEffect(() => () => clearTimeout(turnTimer.current), []);
   useLayoutEffect(() => applyScale(), [zoom, rotation, autoFit]);
-  const fitting = useRef(false);
   const [fitRevision, setFitRevision] = useState(0);
   const fit = useRef(() => {});
   useEffect(() => {
@@ -226,7 +227,9 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       requestAnimationFrame(() => (el.querySelector("[data-fold-renderer]") as (Element & { __update?: () => void }) | null)?.__update?.());
     };
     fit.current = fitCanvas;
-    const observer = new ResizeObserver(fitCanvas);
+    // Canvas resizes (for example a wrapping mobile control) refit only
+    // automatic views; an explicit zoom and pan survive until Fit.
+    const observer = new ResizeObserver(() => { if (live.current.autoFit) fitCanvas(); });
     observer.observe(el);
     fitCanvas();
     return () => observer.disconnect();
@@ -235,6 +238,9 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
   useEffect(() => {
     if (!fitting.current) return;
     const frame = requestAnimationFrame(() => {
+      // A refit in the same commit may already have scaled to a zoom this render
+      // predates, while labels still follow the old one; measure once it catches up.
+      if (!fitting.current || Math.abs(live.current.zoom - zoom) > .001) return;
       const el = ref.current!;
       const svg = el.querySelector('svg[role="group"]');
       if (!svg) { fitting.current = false; return; }

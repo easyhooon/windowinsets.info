@@ -1,8 +1,10 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Icon, type IconName } from "./Icon";
 
-export function Dropdown({ label, value, options, onChange, valueWidthCh, icon, hideLabel, opensUp }: {
+export function Dropdown({ label, value, options, onChange, valueWidthCh, icon, hideLabel, opensUp, reserveLabels = [] }: {
   label: string; value: string;
+  /** Labels the value may switch to without a click; the button keeps room for each. */
+  reserveLabels?: string[];
   options: { value: string; label: string; disabled?: boolean }[];
   onChange: (value: string) => void;
   valueWidthCh?: number;
@@ -26,7 +28,10 @@ export function Dropdown({ label, value, options, onChange, valueWidthCh, icon, 
     <button ref={trigger} className="toolbar-button" aria-expanded={open} aria-controls={id} onClick={() => setOpen(!open)}>
       {icon && <Icon name={icon} />}
       <span className={hideLabel ? "sr-only" : "text-muted"}>{label}:</span>
-      <span className="tabular-nums" style={{ minWidth: valueWidthCh ? `${valueWidthCh}ch` : undefined }}>{current?.label ?? value}</span>
+      <span className="tabular-nums dropdown-value" style={{ minWidth: valueWidthCh ? `${valueWidthCh}ch` : undefined }}>
+        <span>{current?.label ?? value}</span>
+        {reserveLabels.map(text => <span key={text} className="dropdown-value-reserve" aria-hidden="true">{text}</span>)}
+      </span>
       <Icon name="chevron" />
     </button>
     {open && <div id={id} className={`dropdown-panel${opensUp ? " opens-up" : ""}`} aria-label={label}>

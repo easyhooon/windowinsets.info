@@ -10,7 +10,7 @@ async function settled(page: Page, angle: number) {
 }
 async function sample(page: Page) {
   return page.evaluate(() => {
-    const scale = document.querySelector<HTMLElement>(".diagram-position > div")!;
+    const scale = document.querySelector<HTMLElement>(".diagram-position > [data-orientation-turn] > div")!;
     return {
       angle: Number(document.querySelector<HTMLElement>("[data-displayed-angle]")!.dataset.displayedAngle),
       scale: new DOMMatrix(getComputedStyle(scale).transform).a,
@@ -34,7 +34,7 @@ for (const slug of ["galaxy-z-fold8", "galaxy-z-flip8"]) {
         const start = performance.now();
         const tick = () => {
           const el = document.querySelector<HTMLElement>("[data-displayed-angle]")!;
-          const transform = getComputedStyle(document.querySelector(".diagram-position > div")!).transform;
+          const transform = getComputedStyle(document.querySelector(".diagram-position > [data-orientation-turn] > div")!).transform;
           samples.push({ angle: Number(el.dataset.displayedAngle), scale: new DOMMatrix(transform).a });
           if (performance.now() - start < 1000) requestAnimationFrame(tick);
           else resolve(samples);
@@ -55,8 +55,9 @@ for (const slug of ["galaxy-z-fold8", "galaxy-z-flip8"]) {
     await choose(page, "Pose", "Open");
     await settled(page, 180);
     await page.waitForTimeout(400);
-    // The open pose fits the canvas instead of overflowing at the closed scale.
-    expect((await sample(page)).scale).toBeLessThan(closed.scale);
+    // The open pose refits instead of keeping the closed scale. Fold8's landscape inner
+    // display can fit larger than its tall cover on a height-bound desktop canvas.
+    expect((await sample(page)).scale).not.toBeCloseTo(closed.scale, 2);
     await page.screenshot({ path: test.info().outputPath(`${slug}-open.png`) });
   });
 
@@ -76,10 +77,11 @@ for (const slug of ["galaxy-z-fold8", "galaxy-z-flip8"]) {
     await choose(page, "Pose", "Open");
     await settled(page, 180);
     await expect(page.getByRole("button", { name: "Zoom: 200%" })).toBeVisible();
+    const zoomed = await sample(page);
     await page.locator("#device-canvas").focus();
     await page.keyboard.press("0");
     expect((await sample(page)).pan).toBe("translate(0px, 0px)");
-    expect((await sample(page)).scale).toBeLessThan(before.scale);
+    expect((await sample(page)).scale).toBeLessThan(zoomed.scale);
     await choose(page, "Pose", "Closed");
     await settled(page, 0);
     await page.waitForTimeout(400);
@@ -120,6 +122,6 @@ test("fully measured Fold6 shows both inner navigation modes", async ({ page }) 
   await page.screenshot({ path: test.info().outputPath("fold6-inner-gesture.png") });
   await page.locator(".screen-tabs").getByRole("button", { name: "Outer", exact: true }).click();
   await expect(page.locator(".pending-notice")).toHaveCount(0);
-  expect((await page.locator(".diagram-position > div").boundingBox())!.width).toBeGreaterThan(0);
+  expect((await page.locator(".diagram-position > [data-orientation-turn] > div").boundingBox())!.width).toBeGreaterThan(0);
   await page.screenshot({ path: test.info().outputPath("fold6-complete-measurements.png") });
 });

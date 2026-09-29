@@ -385,7 +385,9 @@ remain reference-shaped. On phones, the settings icon sits at the right of the
 top header row as on the reference. View controls float over the canvas as
 pills, as on the reference, so the diagram keeps the full canvas height; Fit
 measures the actual top and bottom pill overlays instead of guessed pixel
-reserves. The legend and gesture help overlay the
+reserves. The Orientation value and hinge readout reserve their widest
+readings (a fold's cover and landscape-native inner names; 180°), so centred
+pills never shift under the pointer during a hinge drag. The legend and gesture help overlay the
 canvas as on the reference, so panned device artwork can remain visible behind
 them until it reaches the actual canvas edge. The legend stays interactive.
 

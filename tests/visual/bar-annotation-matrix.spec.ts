@@ -18,10 +18,8 @@ for (const slug of ['galaxy-s25-plus', 'galaxy-s25-ultra']) {
     await page.getByRole('button',{name:'View settings'}).click();
     for(const orientation of ['Portrait','Landscape Left','Landscape Right']) {
      await choose('Orientation',orientation);
-     if (orientation !== 'Portrait') {
-      await expect(page.locator('.canvas-footer .pending-notice')).toContainText('insets are not measured yet.');
-      continue;
-     }
+     // Rotation 1 and 3 are captured in both navigation modes (2026-09-28).
+     await expect(page.locator('.canvas-footer .pending-notice')).toHaveCount(0);
      await expect(page.locator('[aria-label="Measurement rulers"] [role="button"]').first()).toBeVisible();
      await expect.poll(()=>page.evaluate(()=>{
       const viewport=document.querySelector('#device-canvas')!.getBoundingClientRect();

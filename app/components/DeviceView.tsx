@@ -155,6 +155,11 @@ const orientations = [
   { value: "0", label: "Portrait" }, { value: "90", label: "Landscape Left" },
   { value: "-90", label: "Landscape Right" }, { value: "180", label: "Portrait Upside Down" },
 ];
+// Landscape-native screens (inner Fold displays) are Landscape Left at rotation 0.
+const landscapeOrientations = [
+  { value: "0", label: "Landscape Left" }, { value: "90", label: "Portrait" },
+  { value: "-90", label: "Portrait Upside Down" }, { value: "180", label: "Landscape Right" },
+];
 
 export function DeviceView({ device }: { device: Device }) {
   const initialHasCover = device.screens.some(screen => screen.id === "cover");
@@ -264,15 +269,20 @@ export function DeviceView({ device }: { device: Device }) {
     pose(value);
     recordPose(value, source);
   };
-  const recordedSize = baseScreen.logicalSizeDp ?? (skin ? { width: skin.screen.width, height: skin.screen.height } : null);
+  const orientationsFor = (target: typeof baseScreen) => {
+    const targetSkin = skins[`${device.slug}/${target.id}`];
+    const recorded = target.logicalSizeDp ?? (targetSkin ? { width: targetSkin.screen.width, height: targetSkin.screen.height } : null);
+    return recorded && recorded.width > recorded.height ? landscapeOrientations : orientations;
+  };
   const size = screen.logicalSizeDp ?? (skin ? skinDp(skin, screen.captureRotation) : null);
   // Galaxy phones and foldables leave 180° out of auto-rotation (a Fold owner confirmed
   // neither the folded nor unfolded display turns upside down); tablets do (REFERENCE_PARITY.md).
   const allowsUpsideDown = device.formFactor === "tablet";
-  const allOrientationOptions = recordedSize && recordedSize.width > recordedSize.height ? [
-    { value: "0", label: "Landscape Left" }, { value: "90", label: "Portrait" },
-    { value: "-90", label: "Portrait Upside Down" }, { value: "180", label: "Landscape Right" },
-  ] : orientations;
+  const allOrientationOptions = orientationsFor(baseScreen);
+  // A hinge drag can switch between cover and landscape-native inner screens,
+  // renaming the current rotation. Reserve each name so the centred pills keep
+  // their positions and the slider stays under the pointer.
+  const orientationLabels = [...new Set(device.screens.map(s => orientationsFor(preciseScreen(s)).find(o => o.value === String(rotation))!.label))];
   const orientationOptions = allowsUpsideDown ? allOrientationOptions : allOrientationOptions.filter(o => o.label !== "Portrait Upside Down");
 
   const diagramWidth = useFold
@@ -524,7 +534,7 @@ export function DeviceView({ device }: { device: Device }) {
         </fieldset>
         <fieldset className="control-pill" aria-label="Device rotation">
           <button type="button" className="pill-button icon" aria-label="Rotate counterclockwise" title="Rotate counterclockwise" onClick={() => rotateBy(-90)}><Icon name="rotate-ccw" /></button>
-          <Dropdown label="Orientation" hideLabel opensUp value={String(rotation)} options={orientationOptions} onChange={v => rotateTo(Number(v))} />
+          <Dropdown label="Orientation" hideLabel opensUp value={String(rotation)} options={orientationOptions} reserveLabels={orientationLabels} onChange={v => rotateTo(Number(v))} />
           <button type="button" className="pill-button icon" aria-label="Rotate clockwise" title="Rotate clockwise" onClick={() => rotateBy(90)}><Icon name="rotate-cw" /></button>
         </fieldset>
         {useFold && <fieldset className="control-pill hinge-control" aria-label="Device pose and hinge">
@@ -532,7 +542,7 @@ export function DeviceView({ device }: { device: Device }) {
             <button key={value} type="button" className="pill-button icon" aria-label={label} title={label} aria-pressed={angle === Number(value)} onClick={() => selectPose(value, "pose_menu")}><Icon name={`${poseGlyph}-${glyph}`} /></button>)}
           <span className="pill-divider" />
           <input aria-label={triFold ? "Fold sequence" : "Hinge angle in degrees"} title={triFold ? "Close left first, then right." : undefined} type="range" min={0} max={180} value={angle} onChange={e => pose(e.target.value)} onPointerUp={e => recordPose(e.currentTarget.value, "hinge_slider")} onKeyUp={e => recordPose(e.currentTarget.value, "hinge_slider")} />
-          <output className="hinge-readout" aria-label="Hinge angle">{triFold ? `${hinges.left}°/${hinges.right}°` : `${angle}°`}</output>
+          <output className="hinge-readout" aria-label="Hinge angle"><span>{triFold ? `${hinges.left}°/${hinges.right}°` : `${angle}°`}</span><span className="dropdown-value-reserve" aria-hidden="true">{triFold ? "180°/180°" : "180°"}</span></output>
         </fieldset>}
       </div>
       <p className="canvas-help">Scroll or drag to pan · Pinch to zoom · + / − to zoom · 0 to fit</p>
