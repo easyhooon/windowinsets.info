@@ -271,7 +271,11 @@ removes a model from its catalog.
   stalled once and was resent with Upload. Rotation 0 matches the accepted captures.
   SM-G991B-RU2 (Russia/Moscow, the accepted S21 build) completed the same sweep
   (`galaxy-s21/recapture-2026-09-29-rotation/`); rotation 0 matches the accepted
-  captures. Russian units' uploads can time out and succeed on a manual Upload. S21+: Android 15 / One UI 7.0,
+  captures. Russian units' uploads can time out and succeed on a manual Upload.
+  SM-G988B-RU1 (Russia/Moscow, the accepted S20 Ultra build) completed the same
+  sweep at FHD+ (`galaxy-s20-ultra/recapture-2026-09-29-rotation/`); rotation 0
+  matches the accepted captures, and the landscape cutout rectangles keep the
+  same off-center placement, so the shape stays unregistered. S21+: Android 15 / One UI 7.0,
   1080×2400 px / 450 dpi. S21: Android 14 / One UI 6.1, 1080×2400 px / 480
   dpi. S20 Ultra: Android 13 / One UI 5.1, 1080×2400 px / 420 dpi on a
   1440×3200 panel. Its raw cutout rectangle is centered around x=720 despite
