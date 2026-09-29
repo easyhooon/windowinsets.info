@@ -238,7 +238,9 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
   useEffect(() => {
     if (!fitting.current) return;
     const frame = requestAnimationFrame(() => {
-      if (!fitting.current) return;
+      // A refit in the same commit may already have scaled to a zoom this render
+      // predates, while labels still follow the old one; measure once it catches up.
+      if (!fitting.current || Math.abs(live.current.zoom - zoom) > .001) return;
       const el = ref.current!;
       const svg = el.querySelector('svg[role="group"]');
       if (!svg) { fitting.current = false; return; }
@@ -253,10 +255,8 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       const ratio = Math.min((viewport.width - 32) / (right - left), (viewport.height - topRoom - bottomRoom) / (bottom - top));
       setPan(previous => ({ x: previous.x + viewport.left + viewport.width / 2 - (left + right) / 2,
         y: previous.y + viewport.top + topRoom + (viewport.height - topRoom - bottomRoom) / 2 - (top + bottom) / 2 }));
-      // A refit in the same commit may already have applied a new zoom that this
-      // render's prop predates; scale from the zoom the measured layout used.
-      const applied = live.current.zoom;
-      const next = clampZoom(Math.floor(applied * ratio), MAX_FIT_ZOOM); if (Math.abs(next - applied) > 1) setZoom(next); else fitting.current = false;
+      console.log('FIT', zoom, left|0, right|0, top|0, bottom|0, ratio.toFixed(3));
+      const next = clampZoom(Math.floor(zoom * ratio), MAX_FIT_ZOOM); if (Math.abs(next - zoom) > 1) setZoom(next); else fitting.current = false;
     });
     return () => cancelAnimationFrame(frame);
   }, [zoom, rotation, baseWidth, baseHeight, fitKey, fitRevision, setZoom]);
