@@ -837,6 +837,20 @@ reproduces IN1/IN2 in all four rotations.
 Raw files: `measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation-vn1/{main,landscape-1,landscape-3,portrait-2}-{gesture,threeButton}.json`.
 
 
+### Galaxy Tab S10 FE+ rotations — 2026-09-29
+
+InsetsProbe 1.6.1 captured Samsung RTL SM-X620_KR3 (Korea/Gumi), same build
+`BP4A.251205.006.X620XXS9CZG3`, 320 dpi, font scale 1, in all four rotations
+and both navigation modes (2026-09-29T22:57Z). The session was driven over
+Remote Debug Bridge (adb). Android 16 ignores the probe's orientation requests
+on this large screen, so its sweep recorded only rotation 1; each rotation was
+then fixed with `cmd window user-rotation lock`. Every rotation keeps
+60/96 px (30/48 dp) 3-button bars and 60/30 px (30/15 dp) gesture bars with no
+cutout, and rotation 1 reproduces the accepted captures exactly. Navigation was
+selected in Settings (gesture taskbar setting 30 px, 3-button 96 px).
+
+Raw files: `measurements/galaxy-tab/galaxy-tab-s10-fe-plus/recapture-2026-09-29-rotation/{main,landscape-1,landscape-3,portrait-2}-{gesture,threeButton}.json`.
+
 ### Galaxy Tab S10+ — 2026-09-27
 
 InsetsProbe 1.3.0 captured Samsung RTL Galaxy Tab S10+ (SM-X820), Android 14 /

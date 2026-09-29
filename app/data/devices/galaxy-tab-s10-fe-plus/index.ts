@@ -30,6 +30,23 @@ const measurement = (mode: "gesture" | "threeButton"): InsetsMeasurement => {
   return { systemBars: values.systemBars, systemBarsPx: values.systemBarsPx, displayCutout: values.displayCutout, displayCutoutPx: values.displayCutoutPx, condition, sources: [values.source, recaptureSource] };
 };
 
+const rotationBase = `${captureBase}/recapture-2026-09-29-rotation`;
+const rotationNote = "Samsung RTL Korea/Gumi, SM-X620_KR3, same build BP4A.251205.006.X620XXS9CZG3, 320 dpi and font scale 1. Driven over Remote Debug Bridge (adb): navigation was selected in Settings and each rotation was fixed with `cmd window user-rotation lock`, because Android 16 ignores the probe's orientation requests on this large screen. Rotation 1 from the same session reproduces the accepted capture exactly in both modes.";
+// Every rotation keeps the same bars: the taskbar stays at the bottom and there is no cutout.
+const rotationCapture = (file: string, width: number, height: number) => {
+  const insets = (mode: "gesture" | "threeButton"): InsetsMeasurement => ({
+    ...measurement(mode),
+    condition: { oneUi: "8.5", android: "16", note: rotationNote },
+    sources: [{
+      kind: "measured",
+      label: `InsetsProbe 1.6.1 on Samsung RTL Galaxy Tab S10 FE+ main (SM-X620), ${file}, ${mode}`,
+      url: `${rotationBase}/${file}-${mode}.json`,
+      retrievedAt: "2026-09-30",
+    }],
+  });
+  return { logicalSizePx: { width, height }, logicalSizeDp: { width: width / 2, height: height / 2 }, insets: { gesture: insets("gesture"), threeButton: insets("threeButton") } };
+};
+
 export const GalaxyTabS10FePlus: Device = {
   slug: "galaxy-tab-s10-fe-plus",
   name: "Galaxy Tab S10 FE+",
@@ -51,6 +68,11 @@ export const GalaxyTabS10FePlus: Device = {
     cornerRadiiDp: { topLeft: 13.0, topRight: 13.0, bottomRight: 13.0, bottomLeft: 13.0 },
     cornerRadiiPx: { topLeft: 26, topRight: 26, bottomRight: 26, bottomLeft: 26 },
     insets: { gesture: measurement("gesture"), threeButton: measurement("threeButton") },
+    rotations: {
+      0: rotationCapture("main", 1800, 2880),
+      2: rotationCapture("portrait-2", 1800, 2880),
+      3: rotationCapture("landscape-3", 2880, 1800),
+    },
     sources: [samsungSpecs, gestureSource, threeButtonSource, recaptureSource],
   }],
   sources: [samsungSpecs, gestureSource, threeButtonSource, recaptureSource],
