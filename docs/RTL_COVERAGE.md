@@ -1126,6 +1126,13 @@ therefore remain unchanged; these files corroborate them across regional SKUs.
   `measurements/galaxy-a25-5g/`, but the repository has no official A25 skin,
   so they are not attached to a public device route. No skin artwork was
   inferred from another A-series model. [Samsung identifies SM-A256N as Galaxy A25 5G](https://www.samsung.com/sec/support/model/SM-A256NLBAKOD/).
+  On 2026-09-29 SM-A256N_KR4 (Korea/Gumi, the same build) swept rotations 0,
+  1 and 3 in both modes with InsetsProbe 1.6.0
+  (`galaxy-a25-5g/recapture-2026-09-29-rotation/`). Rotation 0 reproduces the
+  accepted system bars, cutout inset and bounds; only the gesture capture's
+  bottom system-gesture inset differs (90 px instead of 135 px), which the site
+  does not publish. A mistaken second 3-button sweep uploaded an identical set;
+  the first set is kept. These files stay evidence-only like the originals.
 - Galaxy A14 LTE (SM-A145F), Android 14 / One UI 6.1, build
   `UP1A.231005.007.A145FXXS9CYB1`: both Main modes are portrait 1080×2408 px
   at 450 dpi, font scale 1. Gesture system bars are 65/42 px top/bottom;
