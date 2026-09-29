@@ -851,6 +851,21 @@ selected in Settings (gesture taskbar setting 30 px, 3-button 96 px).
 
 Raw files: `measurements/galaxy-tab/galaxy-tab-s10-fe-plus/recapture-2026-09-29-rotation/{main,landscape-1,landscape-3,portrait-2}-{gesture,threeButton}.json`.
 
+### Galaxy Tab S10 FE rotations — 2026-09-29
+
+InsetsProbe 1.6.1 captured Samsung RTL SM-X520_KR3 (Korea/Gumi), same build
+`BP4A.251205.006.X520XXS9CZG3`, 280 dpi, in all four rotations and both
+navigation modes over Remote Debug Bridge, with each rotation fixed by
+`cmd window user-rotation lock`. The unit defaulted to font scale 1.08; a first
+sweep at 1.08 and a second after `settings put system font_scale 1.0`
+(2026-09-29T23:07Z) report identical insets. Every rotation keeps 53/84 px
+(30.29/48 dp) 3-button bars and 53/26 px (30.29/14.86 dp) gesture bars with no
+cutout, and rotation 1 reproduces the accepted captures exactly. A taskbar
+first-run tip covered Settings and was closed through its "Close tips" node.
+
+Raw files: `measurements/galaxy-tab/galaxy-tab-s10-fe/recapture-2026-09-29-rotation/` (font scale 1) and
+`recapture-2026-09-29-rotation-fontscale-1.08/`.
+
 ### Galaxy Tab S10+ — 2026-09-27
 
 InsetsProbe 1.3.0 captured Samsung RTL Galaxy Tab S10+ (SM-X820), Android 14 /

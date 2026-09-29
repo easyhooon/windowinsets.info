@@ -362,3 +362,8 @@ Galaxy Tab S10 FE+ SM-X620_KR3 Korea/Gumi Android 16 was reserved next (**36
 to 34 Credits**) and captured over Remote Debug Bridge in both modes and all
 four rotations. It was returned with 19 minutes displayed and the return option
 selected; the device list showed **35 Credits**. Net cost: one credit.
+
+Galaxy Tab S10 FE SM-X520_KR3 Korea/Gumi Android 16 followed (**35 to 33
+Credits**): both modes and four rotations at font scale 1.08 and again at 1. It
+was returned with 22 minutes displayed and the return option selected; the
+device list showed **34 Credits**. Net cost: one credit.
