@@ -36,7 +36,7 @@ test("skin previews stay discoverable while measured insets lead each series", a
 
   const sidebar = page.getByRole("complementary", { name: "Devices" });
   const sGroup = sidebar.locator('section[aria-label="Galaxy S"]');
-  await expect(sGroup.locator('a[href="/galaxy-s25-ultra"]')).toContainText("Insets measured");
+  await expect(sGroup.locator('a[href="/galaxy-s25-ultra"]')).not.toContainText("measured");
   await expect(sGroup.locator(".device-preview-toggle")).toHaveAttribute("aria-expanded", "false");
   await expect(sGroup.locator('a[href="/galaxy-s20"]')).toBeHidden();
 

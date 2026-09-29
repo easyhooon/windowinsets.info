@@ -399,9 +399,10 @@ disabled when other measured layers exist.
 
 The device selector groups official skin previews in a collapsed section within
 each series, with search and the selected preview opening that section. Entries
-with any captured inset data appear first. Their labels describe measured inset
-coverage (complete or partial) rather than RTL reservation status; the preview
-label explicitly says inset measurements are unavailable. This is an intentional
+with any captured inset data appear first. Complete measured coverage is the
+expected state and carries no label; only exceptions are labeled (partial
+coverage, emulator-derived insets, or previews whose label explicitly says inset
+measurements are unavailable), never RTL reservation status. This is an intentional
 Android data-availability distinction in the reference-shaped device list.
 
 Validation covers the layout contract at 320×640, 390×844, 768×1024, 1024×768 and

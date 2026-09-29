@@ -26,8 +26,10 @@ const measurementLabel = (device: Device) => {
   const count = measurementCount(device);
   if (!count) return device.brand === "Google" ? "No emulator capture" : "No inset measurements";
   if (device.brand === "Google") return count === device.screens.length * 2 ? "Emulator insets" : "Some emulator insets";
-  return count === device.screens.length * 2 ? "Insets measured" : "Some insets measured";
+  // Complete measurements are the expected state, so only exceptions get a label.
+  return count === device.screens.length * 2 ? null : "Some insets measured";
 };
+const deviceCaption = (device: Device) => [device.releaseYear, measurementLabel(device)].filter(Boolean).join(" · ");
 
 export default function Shell() {
   const [sidebarWidth, setSidebarWidth] = useState(240);
@@ -71,13 +73,13 @@ export default function Shell() {
     return next;
   });
   const deviceLink = (d: Device) => <NavLink key={d.slug} to={`/${d.slug}`} onClick={() => { trackDeviceSelection(d); setQuery(""); setMobileOpen(false); }} onAuxClick={e => { if (e.button === 1) trackDeviceSelection(d); }} className={`device-link ${current.slug === d.slug ? "selected" : ""}`}>
-    <span className={`device-thumbnail ${d.formFactor}`} /><span>{d.name}<small>{d.releaseYear ? `${d.releaseYear} · ` : ""}{measurementLabel(d)}</small></span>
+    <span className={`device-thumbnail ${d.formFactor}`} /><span>{d.name}<small>{deviceCaption(d)}</small></span>
   </NavLink>;
   return <div style={{ "--sidebar-width": `${sidebarWidth}px` } as React.CSSProperties} className="app-shell" data-build-commit={__BUILD_COMMIT__}>
     <a href="#device-canvas" className="skip-link">Skip to device canvas</a>
     <header className="app-header">
       <NavLink to="/" className="brand"><img src="/favicon-v2.svg" width="28" height="28" alt="" />windowinsets.info</NavLink>
-      <button className="mobile-model" aria-expanded={mobileOpen} onClick={() => setMobileOpen(!mobileOpen)}><span className={`device-thumbnail ${current.formFactor}`} /><span>{current.name}<small>{measurementLabel(current)}</small></span><Icon name="chevron" /></button>
+      <button className="mobile-model" aria-expanded={mobileOpen} onClick={() => setMobileOpen(!mobileOpen)}><span className={`device-thumbnail ${current.formFactor}`} /><span>{current.name}{measurementLabel(current) && <small>{measurementLabel(current)}</small>}</span><Icon name="chevron" /></button>
     </header>
     <div className="app-content">
       <aside className={`device-sidebar ${mobileOpen ? "is-open" : ""}`} aria-label="Devices">
