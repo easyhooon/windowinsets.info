@@ -86,6 +86,13 @@ unit is currently reservable, use an available location that offers the newest
 Android version and record the location/version fallback. Verify the final model,
 location and OS version in the reservation before starting it.
 
+When browsing a series, set the Device Location filter to **ALL** before judging
+which models exist. The page can open with only KOREA and VIETNAM selected, which
+hides models that are listed only in other locations (for example, the S21 family
+in India, Russia or the USA). Avoid Vietnam (Hanoi) units whenever another location
+offers the model: their WebClient sessions often end early with "All ongoing tests
+have ended." Pick Vietnam only when it is the sole location, and record the choice.
+
 ### Authentication handoff
 
 Authentication is always manual. If Samsung shows Sign in, credentials, QR sign-in,
