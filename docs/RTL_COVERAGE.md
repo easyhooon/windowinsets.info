@@ -1215,6 +1215,10 @@ therefore remain unchanged; these files corroborate them across regional SKUs.
   1080×2340 px at 450 dpi, font scale 1. System bars are 101/42 px in gesture
   mode and 101/135 px in 3-button mode; both include a centered 68×68 px bound
   and 92 px cutout safe inset.
+  On 2026-09-29 SM-A366N_KR3 (Korea/Gumi, the same build) swept rotations 0,
+  1 and 3 in both modes with InsetsProbe 1.6.0
+  (`galaxy-a36-5g/recapture-2026-09-29-rotation/`); rotation 0 matches the
+  accepted captures.
 
 All valid navigation settings and Probe modes agree. Raw captures are preserved
 under each model's `measurements/<slug>/` directory; the invalid A37 button-mode
