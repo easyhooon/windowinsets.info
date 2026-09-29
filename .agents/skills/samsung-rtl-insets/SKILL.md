@@ -147,8 +147,10 @@ before pressing OK. The visible offer establishes refund eligibility; use the re
 time as a deadline, not a reason to retry a missing offer. When
 no return is offered, **Exit** can end the test while the paid reservation
 remains listed until its timer expires. Do not report that reservation as
-returned. Record the balance and reservation state before moving to the next
-device. Once the remaining time is 15 minutes or less, the unused 15-minute
+returned. Check the balance and reservation state before moving to the next
+device, but do not log per-reservation balances in the repository; RTL Usage
+History already keeps them. Add to `docs/RTL_CREDITS.md` only a new, general
+credit rule. Once the remaining time is 15 minutes or less, the unused 15-minute
 block is gone: confirm **Exit** and continue with the next target immediately.
 Do not wait for the timer to expire or retry the return flow.
 Validate captures promptly so an offered refund can still be claimed; keep
@@ -159,8 +161,8 @@ The user's request to reserve the named queue authorizes this
 ordinary reservation; unexpected paid options, terms, permissions, or a target
 change require a fresh user decision.
 
-If credits are insufficient, use **Get Free Credits** once and record the exact
-notification plus resulting balance. A repeat can report `Available only 1 time a
+If credits are insufficient, use **Get Free Credits** once and check the
+resulting balance. A repeat can report `Available only 1 time a
 day`; stop retrying when it does. Treat the header as the current reservation
 ceiling. Before booking, inspect **Usage History** for booked credits, but keep them
 separate from net consumption because ending early can return unused-time credits.
