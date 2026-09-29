@@ -386,7 +386,14 @@ skipped because the cover display did not rotate, the same result as on Flip8.
 Both files are in `measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-28-flexwindow/`.
 Their insets, cutout and corner radii match the canonical physical cover
 captures, so they are listed as additional sources without changing values.
-Cover rotations 1 and 3 remain pending.
+
+On 2026-09-29, Galaxy Z Flip8 SM-F776B_KR1 was rotated with the RTL WebClient's
+own Rotate control to 90°, 180° and 270°. The cover lock screen, cover home and
+Gallery on the cover all kept their natural portrait layout. Together with the
+Flip7 Probe result, this establishes that Flip covers do not rotate: cover
+rotations 1 and 3 do not exist, rather than being unmeasured. The site marks
+both covers `fixedOrientation` and shows the rotation 0 layout turned with the
+hardware (issue #105).
 
 On 2026-09-28, Galaxy Z Flip3 SM-F711B-VN2 (Android 14, One UI 6.1, the same
 build as the accepted captures) ran InsetsProbe 1.6.0. The in-app sweep captured

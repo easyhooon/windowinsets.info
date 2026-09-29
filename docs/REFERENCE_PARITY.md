@@ -1,5 +1,14 @@
 # safearea.info parity — 2026-09-22
 
+## Non-rotating Flip covers — 2026-09-29
+
+safearea.info has no display that ignores device rotation. Galaxy Z Flip covers
+keep their natural portrait layout at every device rotation (issue #105). When
+the view turns, a `fixedOrientation` cover draws its rotation 0 insets turned
+with the hardware, omits the upright rulers, and states that the screen does
+not rotate. This replaces the "not measured yet" placeholder, which implied a
+missing capture.
+
 ## Ko-fi support link — 2026-09-28
 
 The owner requested a low-key funding link on the site and GitHub. The site

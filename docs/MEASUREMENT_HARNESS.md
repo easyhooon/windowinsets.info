@@ -119,7 +119,7 @@ The loop still needs a person at these points:
 | Settings navigation is manual | Probe already opens Display settings, but finding "Navigation bar" and selecting a mode still requires screen taps | Use a verified Samsung deep link to Navigation bar if one is available |
 | Registration code is hand-assembled per model | Each device file has its own shape | Generate rotation records from inbox JSON with one script (already done for Fold7/Fold8/Fold8 Ultra) and make it the default path |
 | Uploads can time out (seen on Russia units) | A sweep finishes but the inbox stays incomplete | Retry automatically inside Probe with backoff and show a persistent "not uploaded" state |
-| Covers that never rotate | Flip7/Flip8 cover landscape stays pending | Test RTL's own Rotate control on covers. If it also fails, record "not supported by device" instead of "not measured" |
+| Covers that never rotate | Resolved 2026-09-29: RTL's Rotate control confirmed Flip covers stay portrait | Mark such screens `fixedOrientation` instead of queueing landscape captures |
 | Session state lives in chat | A reset or lost tab group loses context | Keep a machine-readable queue (JSON) and a per-device run log so any agent can resume |
 
 The RTL skill already permits overlapping reservations in separate WebClient

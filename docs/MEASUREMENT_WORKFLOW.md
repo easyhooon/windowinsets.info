@@ -60,7 +60,8 @@ auto-rotation, so ordinary apps never see reverse portrait there.
 | Form factor | Portrait | Landscape (rotation 1 and 3) | Reverse portrait (rotation 2) | Evidence |
 | --- | --- | --- | --- | --- |
 | Bar phone | ✓ | ✓ | ✗ | Android/One UI default auto-rotation excludes 180° on phones |
-| Flip (main) | ✓ | ✓ | ✗ | Same as phones; the Flip8 cover screen did not rotate at all in the #30 sweep |
+| Flip (main) | ✓ | ✓ | ✗ | Same as phones |
+| Flip (cover) | ✓ | ✗ | ✗ | Flip7 Probe sweep (2026-09-28) and Flip8 RTL Rotate control (2026-09-29): the cover never rotates |
 | Fold (cover and inner) | ✓ | ✓ | ✗ | Owner check on a real Galaxy Fold, folded and unfolded |
 | TriFold | ✓ | ✓ | ✗ (assumed) | Not checked yet; treated like Fold |
 | Tablet | ✓ | ✓ | ✓ | Confirmed on a Galaxy Tab |
@@ -571,8 +572,8 @@ fill them.
 | Galaxy Z Fold4 | SM-F936B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold4/recapture-2026-09-27-rotation/`) | None |
 | Galaxy Z Fold3 | SM-F926B | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold3/recapture-2026-09-27-rotation/`) | None |
 | Galaxy Z TriFold | SM-F968N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-trifold/recapture-2026-09-27-rotation/`) | None |
-| Galaxy Z Flip8 | SM-F776B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip8/recapture-2026-09-27-rotation/`). Cover: natural in both modes on display 1 at 948×1048 px | Cover rotation 1 and 3 remain pending because this RTL cover did not rotate |
-| Galaxy Z Flip7 | SM-F766N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-27-rotation/`). Cover: natural in both modes on display 1 at 948×1048 px (`recapture-2026-09-28-flexwindow/`) | Cover rotation 1 and 3 remain pending because this RTL cover did not rotate |
+| Galaxy Z Flip8 | SM-F776B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip8/recapture-2026-09-27-rotation/`). Cover: natural in both modes on display 1 at 948×1048 px | None. The cover does not rotate, so rotation 0 is its only layout |
+| Galaxy Z Flip7 | SM-F766N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-27-rotation/`). Cover: natural in both modes on display 1 at 948×1048 px (`recapture-2026-09-28-flexwindow/`) | None. The cover does not rotate, so rotation 0 is its only layout |
 | Galaxy Z Flip7 FE | SM-F761B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip7-fe/recapture-2026-09-28-rotation/`) | None |
 | Galaxy Z Flip3 | SM-F711B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip3/recapture-2026-09-28-rotation/`) | None |
 | Galaxy Z Flip4 | SM-F721B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip4/recapture-2026-09-28-rotation/`) | None |
