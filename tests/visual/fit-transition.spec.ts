@@ -55,8 +55,9 @@ for (const slug of ["galaxy-z-fold8", "galaxy-z-flip8"]) {
     await choose(page, "Pose", "Open");
     await settled(page, 180);
     await page.waitForTimeout(400);
-    // The open pose fits the canvas instead of overflowing at the closed scale.
-    expect((await sample(page)).scale).toBeLessThan(closed.scale);
+    // The open pose refits instead of keeping the closed scale. Fold8's landscape inner
+    // display can fit larger than its tall cover on a height-bound desktop canvas.
+    expect((await sample(page)).scale).not.toBeCloseTo(closed.scale, 2);
     await page.screenshot({ path: test.info().outputPath(`${slug}-open.png`) });
   });
 
@@ -76,10 +77,11 @@ for (const slug of ["galaxy-z-fold8", "galaxy-z-flip8"]) {
     await choose(page, "Pose", "Open");
     await settled(page, 180);
     await expect(page.getByRole("button", { name: "Zoom: 200%" })).toBeVisible();
+    const zoomed = await sample(page);
     await page.locator("#device-canvas").focus();
     await page.keyboard.press("0");
     expect((await sample(page)).pan).toBe("translate(0px, 0px)");
-    expect((await sample(page)).scale).toBeLessThan(before.scale);
+    expect((await sample(page)).scale).toBeLessThan(zoomed.scale);
     await choose(page, "Pose", "Closed");
     await settled(page, 0);
     await page.waitForTimeout(400);
