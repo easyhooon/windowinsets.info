@@ -245,8 +245,9 @@ step to the user.
    the exact active Chrome profile; do not claim the toggle is off when they say
    it is on. If a fresh task still fails one local preflight, stop retries and
    hand off the WebClient **Applications → install** file selection to the user.
-   Do not enable Remote Debug Bridge, rebuild the APK, clear Samsung cookies, or
-   book another reservation to work around this browser-side failure.
+   Do not rebuild the APK, clear Samsung cookies, or book another reservation to
+   work around this browser-side failure; install over Remote Debug Bridge
+   instead (see "Headless capture over Remote Debug Bridge").
 4. Open WebClient **Applications** and click its install/upload icon. Its APK
    `input[type=file]` is hidden, so click the visible install control while a
    `filechooser` listener is armed. On 2026-09-23 the listener timed out after
@@ -274,9 +275,36 @@ step to the user.
    rotation 2.
 5. Wait for `InsetsProbe info.windowinsets.probe` to appear. Select the application
    row itself, then click the Start/play control.
-6. Do not enable Remote Debug Bridge or grant Chrome access to other apps/services
-   unless the user explicitly authorizes that permission. The visible WebClient
-   workflow does not require RDB.
+6. Do not grant Chrome access to other apps/services unless the user explicitly
+   authorizes that permission. Remote Debug Bridge was authorized by the
+   maintainer on 2026-09-30 and is the preferred capture path.
+
+### Headless capture over Remote Debug Bridge (preferred)
+
+Screenshot-driven taps were the least reliable part of this workflow. Use RDB
+whenever it connects, and keep the visible WebClient steps above as fallback.
+
+1. Start RTL's `rdb` binary locally (downloaded from the WebClient's Remote
+   Debug Bridge panel with the user's permission) and keep it running.
+2. Reserve the device and open the WebClient as a tab. Wait until the device
+   stream is visible (about 30–40 s), open **Remote Debug Bridge** and press
+   **Connect**. An early click closes the panel without connecting; reopen it
+   and retry until the button reads **Disconnect**, then confirm
+   `adb devices` lists `localhost:<port>`.
+3. Run `scripts/capture-rtl-adb.py localhost:<port> <outdir> --lock`, adding
+   `--tablet` for Galaxy Tab. It installs Probe, sets font scale 1, selects each
+   navigation mode in Settings, fixes every rotation with
+   `cmd window user-rotation lock` and pulls the JSON. Do not use `--overlay`
+   for Samsung captures: the overlay switch keeps the 3-button taskbar size.
+4. Check the set with `scripts/summarize-captures.py`: model, build, dpi, font
+   scale, both navigation-mode fields per file, and rotation 1 (or the accepted
+   capture rotation) equal to the accepted capture.
+5. Exit with **Return this device**, then copy the files without the `rot<N>-`
+   prefix into a dated `recapture-*-rotation/` directory and register them.
+
+If the WebClient later returns `400 Request Header Or Cookie Too Large` or the
+device list returns 403, stop and hand the browser to the user; do not clear
+cookies or sign in.
 
 Known device-specific 0% reports include Fold3, an initial Flip7 FE session,
 Galaxy A56, Galaxy A54 and Galaxy A13 (all reported 2026-09-25; exact failing
