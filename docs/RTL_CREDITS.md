@@ -337,3 +337,9 @@ succeeded. The 3-button sweep was exported, then the stream stopped accepting
 input. The session ended with 18 minutes remaining and the return option
 selected; the exit showed a `postMessage` error, but the device list showed
 **7 Credits**. Net cost for the two reservations: two credits.
+
+SM-X920-IN2 India/Noida was then reserved (**7 to 5 Credits**). The 3-button
+sweep, including rotation 2, was exported through the File Browser. Settings
+input lagged by tens of seconds and then stopped registering on the Navigation
+bar page, so the device was returned with 16 minutes displayed and the return
+option selected. The device list showed **6 Credits**. Net cost: one credit.

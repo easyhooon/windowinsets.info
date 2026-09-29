@@ -425,6 +425,15 @@ See the per-model notes in `docs/RTL_COVERAGE.md`.
    clicks showed Download without creating host files until the user enabled that
    site permission. After every click, verify a new host file exists and matches
    the intended JSON fields; recover missing files while the reservation is live.
+5. Page JS can drive the panel: a single `.click()` on a `.scroll-text-item.folder`
+   row's `.text` opens it (double-click events do not), and each
+   `.scroll-text-item.file` row's `.item-actions button` downloads it. Wait about
+   2.5 s between steps (2026-09-30, Tab S10 Ultra IN2).
+6. When a unit's input starts lagging, export what is already saved before
+   switching navigation mode. A frozen stream can be refreshed by clicking the
+   quality slider on the toolbar, but taps and typed text may arrive tens of
+   seconds late or not at all; do not repeat a toggle tap until a refreshed frame
+   shows the first one was ignored.
 
 ### Fallback: export InsetsProbe logs
 
