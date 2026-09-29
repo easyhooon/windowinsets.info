@@ -30,4 +30,9 @@ class CapturePolicyTest {
         assertNotNull(CapturePolicy.blockingReason("cover", 0f, true, false, 1, 1, false))
         assertNotNull(CapturePolicy.blockingReason("phone", null, true, false, fullDisplayWindow = false))
     }
+
+    @Test fun coverLabelIsRejectedOnTheUnfoldedInnerDisplay() {
+        assertNotNull(CapturePolicy.blockingReason("cover", 0f, true, false, hasFoldingFeature = true))
+        assertNull(CapturePolicy.blockingReason("cover", 0f, true, false, hasFoldingFeature = false))
+    }
 }

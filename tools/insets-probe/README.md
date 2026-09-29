@@ -67,6 +67,12 @@ adb pull /sdcard/Android/data/info.windowinsets.probe/files/
 
 `--es screen` accepts `cover` or `main` (default `phone`); `--ez export true` saves the JSON one second after launch. See [sample-output](sample-output) for a real capture.
 
+## Version 1.6.1: cover label guard
+
+- **Cover** is rejected when the active display reports a WindowManager
+  `FoldingFeature`: only the unfolded inner display has one. The pilot inbox (#30)
+  contained a `cover` capture of the 2448×1848 Fold8 inner display.
+
 ## Version 1.6.0: Compose UI
 
 - The measurement screen is built with Jetpack Compose. One `LazyColumn` scrolls

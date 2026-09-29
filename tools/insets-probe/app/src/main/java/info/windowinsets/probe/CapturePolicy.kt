@@ -21,6 +21,10 @@ object CapturePolicy {
                 "Launch it from the InsetsProbe cover widget and try again."
         !fullDisplayWindow ->
             "The active window does not fill this display. Exit compatibility, pop-up, or split-screen mode and try again."
+        // The cover never exposes a folding feature; one being present means the
+        // unfolded inner display is active (#30: 'cover' label, 2448×1848 window).
+        screen == "cover" && hasFoldingFeature ->
+            "Cover selected, but this display reports a hinge, so the inner display is active. Close the device or select Main."
         screen == "main" && hingeAngle != null && hingeAngle <= 5f && !hasFoldingFeature ->
             "Main selected, but the hinge reports closed. Open the device and verify the active window size."
         else -> null // Missing hinge data cannot establish which physical display is active.
