@@ -12,6 +12,7 @@ export const galaxyZFlip7: Device = {
     {
       "id": "cover",
       "label": "Cover",
+      "fixedOrientation": true,
       "diagonalInch": 0,
       "resolutionPx": {
         "width": 948,

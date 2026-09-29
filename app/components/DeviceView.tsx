@@ -517,7 +517,8 @@ export function DeviceView({ device }: { device: Device }) {
       </DiagramViewport>
       </div>
       <footer className="canvas-footer">
-      {useFold ? <div className="fold-measurement-notice">{rotationPending ? <p className="pending-notice">{orientationName(screen)} insets are not measured yet.</p>
+      {useFold ? <div className="fold-measurement-notice">{turns !== 0 && screen.fixedOrientation ? <p className="pending-notice">This screen does not rotate. It keeps its portrait layout and turns with the device.</p>
+        : rotationPending ? <p className="pending-notice">{orientationName(screen)} insets are not measured yet.</p>
         : !measurement ? <p className="pending-notice">{pendingNotice}</p> : emulatorOnly && <p className="pending-notice">Android Emulator capture · Not measured on Pixel hardware</p>}</div>
         : rotationPending ? <p className="pending-notice">{orientationName(screen)} insets are not measured yet.</p>
           : !measurement ? <p className="pending-notice">{pendingNotice}</p> : emulatorOnly && <p className="pending-notice">Android Emulator capture · Not measured on Pixel hardware</p>}

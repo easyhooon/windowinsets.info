@@ -126,6 +126,12 @@ export interface Screen {
    * Keyed by Surface.ROTATION_*. Never derived from another rotation.
    */
   rotations?: Partial<Record<0 | 1 | 2 | 3, RotationCapture>>;
+  /**
+   * The display keeps its natural layout when the device turns (verified on the
+   * device, e.g. Flip covers). Turning the device then shows the recorded
+   * rotation turned with the hardware instead of a pending landscape layout.
+   */
+  fixedOrientation?: boolean;
   sources: Source[];
 }
 

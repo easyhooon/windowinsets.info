@@ -34,9 +34,10 @@ export type OrientedScreen = Screen & {
  * Window size and corner positions follow from the display geometry. Insets depend on
  * how Android lays out system bars and the cutout in that rotation, so they are only
  * shown when that rotation was captured; they are never rotated from another capture.
+ * A `fixedOrientation` display does not re-lay out at all, so it keeps its recorded values.
  */
 export function orientScreen(screen: Screen, turns: Quarter): OrientedScreen {
-  if (turns === 0) return { ...screen, orientationMeasured: true };
+  if (turns === 0 || screen.fixedOrientation) return { ...screen, orientationMeasured: true };
   const rotation = quarter((screen.captureRotation ?? 0) + turns);
   const swap = turns % 2 === 1;
   const flipOrientation = screen.captureOrientation === "portrait" ? "landscape" : screen.captureOrientation === "landscape" ? "portrait" : null;

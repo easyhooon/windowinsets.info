@@ -54,7 +54,7 @@ export const galaxyZFlip8: Device = {
     {
       id: "cover", label: "Cover", diagonalInch: 0,
       resolutionPx: { width: 948, height: 1048 }, ppi: 0,
-      logicalSizePx: { width: 948, height: 1048 }, captureOrientation: "portrait", captureRotation: 0,
+      logicalSizePx: { width: 948, height: 1048 }, captureOrientation: "portrait", captureRotation: 0, fixedOrientation: true,
       logicalSizeDp: { width: 399.16, height: 441.26 }, densityDpi: 380,
       cornerRadiiDp: { topLeft: 5.05, topRight: 5.05, bottomRight: 40.84, bottomLeft: 40.84 },
       cornerRadiiPx: { topLeft: 12, topRight: 12, bottomRight: 97, bottomLeft: 97 },

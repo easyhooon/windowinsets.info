@@ -592,7 +592,10 @@ export function FoldRenderer3D({
       coverBase = positions.array.slice();
       const outerSafe = measurement ? safeInsets(measurement) : null;
       const outerSafePx = measurement ? safeInsetsPx(measurement) : null;
-      const frame = contentFrame(size.width, size.height, oriented.cornerRadiiDp);
+      // A cover that never rotates keeps its recorded layout and turns with the hardware.
+      const frame = screen.fixedOrientation
+        ? { width: size.width, height: size.height, cornerRadiiDp: screen.cornerRadiiDp, angle: 0, scale: 1 }
+        : contentFrame(size.width, size.height, oriented.cornerRadiiDp);
       drawDiagram(coverCtx, size.width, size.height, factor, {
         safe: outerSafe, cornerRadiiDp: screen.cornerRadiiDp, cutoutShape: measurement?.cutoutShape, content: frame,
         showFrame: st.showFrame, showRegions: st.showRegions, showDimensions: st.showDimensions && !!screen.logicalSizeDp,
@@ -752,7 +755,8 @@ export function FoldRenderer3D({
       const body = { left: Math.min(...points.map(p => p.x)), right: Math.max(...points.map(p => p.x)),
         top: Math.min(...points.map(p => p.y)), bottom: Math.max(...points.map(p => p.y)) };
       const next: RulerMeasurements = { body, compact: true, scale: 100 / annotationZoom, format, units: st.units, screen: outer ? 'Cover' : 'Inner',
-        rulers: visibleDiagramRulers(layout.rulers, st.layers).map(r => ({ ...r,
+        // A cover that never rotates stays turned with the hardware; upright rulers would not fit it.
+        rulers: (outer?.screen.fixedOrientation && viewQuarter(viewTo) !== 0 ? [] : visibleDiagramRulers(layout.rulers, st.layers)).map(r => ({ ...r,
           start: project(r.guides[0][0], r.guides[0][1]), end: project(r.guides[1][0], r.guides[1][1]),
           bracket: r.kind === 'radius' ? project(r.guides[1][0], r.guides[1][1] > h / 2 ? h : 0) : undefined,
           side: r.y1 === r.y2 ? (r.y1 < 0 ? 'top' : 'bottom') : (r.x1 < 0 ? 'left' : 'right'),
