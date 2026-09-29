@@ -554,7 +554,7 @@ fill them.
 | Galaxy A27 5G | SM-A276K | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a27-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy A55 5G | SM-A556S | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a55-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S11 Ultra | SM-X930 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`) | None |
-| Galaxy Tab S10 Ultra | SM-X920 | Main: rotation 1 in both modes (accepted). Rotations 0, 1 and 3 in 3-button (`measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation/`) | Rotation 2 in both modes; rotations 0 and 3 in gesture |
+| Galaxy Tab S10 Ultra | SM-X920 | Main: rotation 1 in both modes (accepted). All four rotations in 3-button (`measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation/`, rotation 2 in `recapture-2026-09-29-rotation-in2/`) | Rotations 0, 2 and 3 in gesture |
 | Galaxy Tab S11 | SM-X730 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s11/recapture-2026-09-29-rotation/`) | None |
 | Galaxy S21+ | SM-G996B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s21-plus/recapture-2026-09-29-rotation/`) | None |
 | Galaxy S21 Ultra | SM-G998B / SM-G998U1 | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s21-ultra/recapture-2026-09-29-rotation/`) | None |

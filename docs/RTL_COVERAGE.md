@@ -813,6 +813,15 @@ both modes and gesture rotations 0 and 3 remain pending.
 Raw files: `measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation/{main,landscape-1,landscape-3}-threeButton.json`
 (downloaded through the File Browser after upload returned `401 Invalid upload key`).
 
+A second 3-button sweep on SM-X920-IN2 (India/Noida, same build, captured
+2026-09-29T15:46Z) added rotation 2: portrait 1848×2960 px, bars 42/84 px
+(24/48 dp) and the 186×28 px cutout on the left edge (28 px safe inset). Its
+rotations 0, 1 and 3 reproduce the IN1 files exactly (insets and cutout). The
+stream again stopped delivering taps while switching to gesture navigation, so
+gesture rotations 0, 2 and 3 remain pending.
+
+Raw files: `measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation-in2/{main,landscape-1,landscape-3,portrait-2}-threeButton.json`.
+
 
 ### Galaxy Tab S10+ — 2026-09-27
 
