@@ -1114,6 +1114,10 @@ therefore remain unchanged; these files corroborate them across regional SKUs.
   SKU as Galaxy Quantum5 and lists the same 1080×2340 display as Galaxy A55 5G.
   [Samsung Korea specs](https://www.samsung.com/sec/support/model/SM-A556SZKBSKC/) ·
   [Galaxy A55 5G specs](https://www.samsung.com/mx/smartphones/galaxy-a/galaxy-a55-5g-awesome-navy-256gb-sm-a556ezkqltm/).
+  On 2026-09-29 SM-A556S_KR4 (Korea/Gumi, the same build) swept rotations 0,
+  1 and 3 in both modes with InsetsProbe 1.6.0
+  (`galaxy-a55-5g/recapture-2026-09-29-rotation/`); rotation 0 matches the
+  accepted captures.
 - Galaxy A35 5G (SM-A356N), Android 16 / One UI 8.5, build
   `BP4A.251205.006.A356NKSS9DZG1`: both Main modes are portrait 1080×2340 px
   at 450 dpi, font scale 1. Gesture system bars are 101/42 px top/bottom;
