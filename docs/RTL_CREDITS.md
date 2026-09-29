@@ -349,3 +349,11 @@ Credits**). The 3-button sweep was exported, but gesture switching stalled on
 delayed input and a brief Chrome extension disconnect; by then only 14 minutes
 remained, so the session ended without the return option. Net cost: two
 credits.
+
+On 2026-09-30 the maintainer signed in to an account with **37 Credits**.
+Galaxy Tab S10 Ultra SM-X920-VN1 Vietnam/Hanoi was reserved (**37 to 35
+Credits**) and driven over Remote Debug Bridge (adb). Both navigation modes
+were captured in all four rotations. The session ended with 19 minutes
+displayed and the return option selected; the exit showed the same
+`postMessage` error, and the device list showed **36 Credits**. Net cost: one
+credit.

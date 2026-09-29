@@ -795,7 +795,7 @@ Main display.
 
 Raw files: `measurements/galaxy-tab/galaxy-tab-s10-ultra/main-{gesture,threeButton}.json`.
 
-### Galaxy Tab S10 Ultra rotations — 2026-09-29 (partial)
+### Galaxy Tab S10 Ultra rotations — 2026-09-29
 
 InsetsProbe 1.6.1 swept Samsung RTL SM-X920-IN1 (India/Noida), same build
 `UP1A.231005.007.X920XXS2AYB5`, 280 dpi, font scale 1, in 3-button mode.
@@ -821,6 +821,20 @@ stream again stopped delivering taps while switching to gesture navigation, so
 gesture rotations 0, 2 and 3 remain pending.
 
 Raw files: `measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation-in2/{main,landscape-1,landscape-3,portrait-2}-threeButton.json`.
+
+A third sweep on SM-X920-VN1 (Vietnam/Hanoi, same build, captured
+2026-09-29T22:44Z) was driven headlessly over Remote Debug Bridge (adb).
+Gesture navigation was selected in Settings through adb taps; the overlay
+command alone set navigation mode 2 but left the taskbar at 84 px, so those
+files were discarded. With the Settings switch the taskbar setting reads
+112 px. Gesture rotation 1 reproduces the accepted `main-gesture.json` exactly.
+Rotations 0 and 2 have 42/112 px (24/64 dp) bars; rotation 3 has a 140 px
+(80 dp) bottom bar, 28 px above the 3-button value, like the 3-button rotation
+3 offset. Side system-gesture insets are 52 px, or 80 px on the cutout edge.
+The 3-button sweep from the same session (after selecting Buttons in Settings)
+reproduces IN1/IN2 in all four rotations.
+
+Raw files: `measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation-vn1/{main,landscape-1,landscape-3,portrait-2}-{gesture,threeButton}.json`.
 
 
 ### Galaxy Tab S10+ — 2026-09-27
