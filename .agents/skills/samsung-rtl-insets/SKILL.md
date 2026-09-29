@@ -265,6 +265,13 @@ step to the user.
    WebClient page, join them with `new Blob([a, b])`, check the byte length, and
    set the joined file on the `accept*=apk` input with `input` and `change`
    events. Remove the temporary inputs afterwards (2026-09-29, Note20 and A57).
+   Always build the final `File` with type
+   `application/vnd.android.package-archive`. On 2026-09-30 two Tab S10 Ultra
+   units reported "installation failed" for the same APK set by `file_upload`;
+   a local-server fetch wrapped in a File with that MIME type installed at once.
+   On tablets, re-check Probe's tablet (rotation 2) checkbox right before each
+   sweep: it resets when the activity is recreated, and a sweep without it skips
+   rotation 2.
 5. Wait for `InsetsProbe info.windowinsets.probe` to appear. Select the application
    row itself, then click the Start/play control.
 6. Do not enable Remote Debug Bridge or grant Chrome access to other apps/services

@@ -323,3 +323,17 @@ Credits**. Four rotations in each navigation mode uploaded to inbox PR #55.
 The session ended with 15 minutes displayed and the one-credit return option
 selected. Reservations then showed no active devices and **22 Credits**. Net
 cost: one credit.
+
+On 2026-09-30 at about 00:20 KST, the free-credit request returned "Available
+only 1 time a day", so the daily limit does not reset at Korean midnight.
+
+Galaxy Tab S10 Ultra SM-X926B-VN2 Vietnam was reserved first because the
+location filter had defaulted to Korea and Vietnam (**9 to 7 Credits**). APK
+1.6.1 failed to install twice through the file-upload tool, so the unit was
+returned with the one-credit option (**8 Credits**). With the filter set to ALL,
+SM-X920-IN1 India/Noida was reserved (**8 to 6 Credits**). Installing through a
+local server fetch with the `application/vnd.android.package-archive` MIME type
+succeeded. The 3-button sweep was exported, then the stream stopped accepting
+input. The session ended with 18 minutes remaining and the return option
+selected; the exit showed a `postMessage` error, but the device list showed
+**7 Credits**. Net cost for the two reservations: two credits.
