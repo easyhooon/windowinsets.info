@@ -33,6 +33,36 @@ const measuredInsets = (mode: "gesture" | "threeButton"): InsetsMeasurement | nu
   sources: [captureSource("threeButton")],
 };
 
+// Separate InsetsProbe 1.6.0 captures of rotations 1 and 3; never derived from rotation 0.
+// The raw cutout rectangles keep the same off-center placement as rotation 0, so no shape is registered.
+const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton"): InsetsMeasurement => {
+  const button = mode === "threeButton";
+  const left = rotation === 1;
+  return {
+    systemBars: { top: 24, right: button && left ? 48 : 0, bottom: button ? 0 : 14.86, left: button && !left ? 48 : 0 },
+    systemBarsPx: { top: 63, right: button && left ? 126 : 0, bottom: button ? 0 : 39, left: button && !left ? 126 : 0 },
+    displayCutout: { top: 0, right: left ? 0 : 28.19, bottom: 0, left: left ? 28.19 : 0 },
+    displayCutoutPx: { top: 0, right: left ? 0 : 74, bottom: 0, left: left ? 74 : 0 },
+    condition: {
+      oneUi: "5.1",
+      android: "13",
+      note: `Samsung RTL Russia/Moscow, SM-G988B-RU1, build TP1A.220624.014.G988BXXSNHYB1. Landscape rotation ${rotation}, FHD+ 2400×1080 px window at 420 dpi and font scale 1. Captured separately with InsetsProbe 1.6.0; the Android navigation setting and configuration agree.`,
+    },
+    sources: [{
+      kind: "measured",
+      label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy S20 Ultra, rotation ${rotation}, ${mode} (SM-G988B)`,
+      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s20-ultra/recapture-2026-09-29-rotation/main-landscape-${rotation}-${mode}.json`,
+      retrievedAt: "2026-09-29",
+    }],
+  };
+};
+
+const landscape = (rotation: 1 | 3) => ({
+  logicalSizePx: { width: 2400, height: 1080 },
+  logicalSizeDp: { width: 914.29, height: 411.43 },
+  insets: { gesture: landscapeInsets(rotation, "gesture"), threeButton: landscapeInsets(rotation, "threeButton") },
+});
+
 export const galaxyS20Ultra: Device = {
   slug: "galaxy-s20-ultra",
   name: "Galaxy S20 Ultra",
@@ -54,6 +84,7 @@ export const galaxyS20Ultra: Device = {
     cornerRadiiDp: { topLeft: 24.00, topRight: 24.00, bottomRight: 24.00, bottomLeft: 24.00 },
     cornerRadiiPx: { topLeft: 63, topRight: 63, bottomRight: 63, bottomLeft: 63 },
     insets: { gesture: measuredInsets("gesture"), threeButton: measuredInsets("threeButton") },
+    rotations: { 1: landscape(1), 3: landscape(3) },
     sources: [samsungSpecs, captureSource("gesture"), captureSource("threeButton")],
   }],
   sources: [samsungSpecs, captureSource("gesture"), captureSource("threeButton")],
