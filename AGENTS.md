@@ -35,6 +35,8 @@ leave other models unverified. Preserve historical captures. See
 - `docs/REFERENCE_PARITY.md`: binding clone doctrine, observed reference behavior,
   intentional Android substitutions, implementation status and visual QA.
 - `docs/MEASUREMENT_WORKFLOW.md`: capture process, known RTL issues, corrections.
+- `docs/MEASUREMENT_HARNESS.md`: how the agent measurement loop and its
+  harness (skill, Probe, capture inbox, validation gates) fit together.
 - `docs/MEASUREMENT_WORKFLOW.md` "Device Status & Progress": the single
   remaining-measurement queue. Phones and foldables need natural, rotation 1
   and rotation 3 captures in both navigation modes; tablets also need reverse
