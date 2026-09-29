@@ -1195,6 +1195,11 @@ therefore remain unchanged; these files corroborate them across regional SKUs.
   agree with Android Settings and InsetsProbe. The initial 3-button attempt
   reported a 1 px bottom system inset and remains preserved as rejected evidence;
   the later valid recapture is registered as `main-threeButton.json`.
+  On 2026-09-29 SM-A376N_KR2 (Korea/Gumi, the same build) swept rotations 0,
+  1 and 3 in both modes with InsetsProbe 1.6.0
+  (`galaxy-a37-5g/recapture-2026-09-29-rotation/`); rotation 0 matches the
+  accepted captures. SM-A376N_KR1 was returned unused because it booted into
+  the setup wizard with a USB-debugging authorization prompt.
 - Galaxy A17 LTE (SM-A175N), Android 16 / One UI 8.5, build
   `BP4A.251205.006.A175NKSS6CZG1`: both modes are full-screen portrait
   1080×2340 px at 450 dpi, font scale 1. System bars are 100/42 px in gesture
