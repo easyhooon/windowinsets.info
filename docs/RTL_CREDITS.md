@@ -343,3 +343,9 @@ sweep, including rotation 2, was exported through the File Browser. Settings
 input lagged by tens of seconds and then stopped registering on the Navigation
 bar page, so the device was returned with 16 minutes displayed and the return
 option selected. The device list showed **6 Credits**. Net cost: one credit.
+
+Galaxy Tab S10+ SM-X820-RU1 Russia/Moscow was reserved next (**6 to 4
+Credits**). The 3-button sweep was exported, but gesture switching stalled on
+delayed input and a brief Chrome extension disconnect; by then only 14 minutes
+remained, so the session ended without the return option. Net cost: two
+credits.

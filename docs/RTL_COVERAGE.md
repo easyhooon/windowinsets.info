@@ -834,6 +834,21 @@ navigation mode 2, `config_navBarInteractionMode=2` and 60 px side
 system-gesture insets; the inset-only heuristic reports threeButton. The larger
 gesture bottom inset matches the Tab S10 Ultra and Tab S9+/S8+ taskbar pattern.
 
+### Galaxy Tab S10+ rotations — 2026-09-29 (partial)
+
+InsetsProbe 1.6.1 swept Samsung RTL SM-X820-RU1 (Russia/Moscow), build
+`UP1A.231005.007.X820XXU1AXI9`, 320 dpi, font scale 1, in 3-button mode
+(captured 2026-09-29T16:06Z). The build differs from the accepted capture's
+`X820XXS2AYB3`, but rotation 1 reproduces the accepted insets and corners
+exactly. Every rotation reports bars 48/96 px (24/48 dp), no display cutout and
+26 px corners; rotations 0 and 2 are portrait 1752×2800 px.
+
+The unit applied taps 20–30 seconds late and then ignored them, including an
+RTL-launched Settings activity, so the gesture sweep was not run. Gesture
+rotations 0, 2 and 3 remain pending.
+
+Raw files: `measurements/galaxy-tab/galaxy-tab-s10-plus/recapture-2026-09-29-rotation/{main,landscape-1,landscape-3,portrait-2}-threeButton.json`.
+
 ### Galaxy Tab S10 Lite — 2026-09-27
 
 InsetsProbe 1.3.0 captured Samsung RTL Galaxy Tab S10 Lite (SM-X406B), Android

@@ -32,6 +32,36 @@ const measuredInsets = (mode: "gesture" | "threeButton"): InsetsMeasurement => (
   sources: [captureSource(mode)],
 });
 
+const rotationBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab/galaxy-tab-s10-plus/recapture-2026-09-29-rotation";
+
+const rotationFiles = { 0: "main", 2: "portrait-2", 3: "landscape-3" } as const;
+
+// Only 3-button rotations were captured before the RTL session stopped accepting input; gesture stays pending.
+// The unit ran build X820XXU1AXI9, but its rotation 1 file reproduces the accepted AYB3 capture exactly.
+const rotationCapture = (rotation: 0 | 2 | 3) => {
+  const portrait = rotation !== 3;
+  const sizePx = portrait ? { width: 1752, height: 2800 } : { width: 2800, height: 1752 };
+  const sizeDp = portrait ? { width: 876, height: 1400 } : { width: 1400, height: 876 };
+  const threeButton: InsetsMeasurement = {
+    systemBars: { top: 24, right: 0, bottom: 48, left: 0 },
+    systemBarsPx: { top: 48, right: 0, bottom: 96, left: 0 },
+    displayCutout: { top: 0, right: 0, bottom: 0, left: 0 },
+    displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 0 },
+    condition: {
+      oneUi: "6.1.1",
+      android: "14",
+      note: `Samsung RTL Russia/Moscow, SM-X820-RU1, build UP1A.231005.007.X820XXU1AXI9 (accepted capture: X820XXS2AYB3). Separate rotation ${rotation} capture at ${sizePx.width}×${sizePx.height} px, 320 dpi and font scale 1. 3-button mode agrees with Settings, configuration and InsetsProbe. The same sweep's rotation 1 file reproduces the accepted capture exactly.`,
+    },
+    sources: [{
+      kind: "measured",
+      label: `InsetsProbe 1.6.1 on Samsung RTL Galaxy Tab S10+, rotation ${rotation}, 3-button`,
+      url: `${rotationBase}/${rotationFiles[rotation]}-threeButton.json`,
+      retrievedAt: "2026-09-29",
+    }],
+  };
+  return { logicalSizePx: sizePx, logicalSizeDp: sizeDp, insets: { gesture: null, threeButton } };
+};
+
 export const galaxyTabS10Plus: Device = {
   slug: "galaxy-tab-s10-plus",
   name: "Galaxy Tab S10+",
@@ -53,6 +83,7 @@ export const galaxyTabS10Plus: Device = {
     cornerRadiiDp: { topLeft: 13, topRight: 13, bottomRight: 13, bottomLeft: 13 },
     cornerRadiiPx: { topLeft: 26, topRight: 26, bottomRight: 26, bottomLeft: 26 },
     insets: { gesture: measuredInsets("gesture"), threeButton: measuredInsets("threeButton") },
+    rotations: { 0: rotationCapture(0), 2: rotationCapture(2), 3: rotationCapture(3) },
     sources: [samsungSpecs, captureSource("gesture"), captureSource("threeButton")],
   }],
   sources: [samsungSpecs, captureSource("gesture"), captureSource("threeButton")],
