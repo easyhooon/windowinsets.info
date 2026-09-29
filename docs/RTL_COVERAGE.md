@@ -941,6 +941,10 @@ maximum-window dimensions.
   system bars are 92/42 px top/bottom and 3-button bars are 92/135 px. Both
   modes agree with the recorded navigation setting. The centered cutout bound is
   74×92 px.
+  On 2026-09-29 SM-N981U-US03 (USA/Texas, the same build) swept rotations 0, 1
+  and 3 in both modes with InsetsProbe 1.6.0
+  (`galaxy-note20/recapture-2026-09-29-rotation/`); rotation 0 matches the
+  accepted captures.
 - Tab S9+: SM-X816B, Android 14 / One UI 6.1, landscape 2800×1752 px at
   rotation 1 and 340 dpi. Gesture/button bars are 51/136 px and 51/102 px.
 - Tab S8 Ultra: SM-X906B, Android 16 / One UI 8.0, landscape 2960×1848 px at
