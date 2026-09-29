@@ -49,6 +49,33 @@ dates below establish the year; they are not necessarily the first worldwide dat
 | Galaxy A42 5G | [UK availability November 6, 2020](https://news.samsung.com/uk/samsung-unveils-galaxy-a42-5g-its-most-affordable-5g-smartphone-to-date) | Included |
 | Galaxy A71 | [Brazil availability February 17, 2020](https://news.samsung.com/br/com-tres-opcoes-de-cores-samsung-galaxy-a71-ja-esta-a-venda-no-brasil) | Included |
 
+## Release-year metadata audit (2026-09-28)
+
+The public catalogue had 33 entries with a missing year: 31 artwork previews
+and two measured foldables. Their years now come from Samsung release evidence,
+including the boundary audit above. Artwork and inset measurement status are
+unchanged. For the distinct Tab A7 10.4 (2022) skin, Samsung's June 2022 price
+list identifies the SM-T503 model; the original Tab A7 was released in 2020.
+
+| Models | Year | Samsung evidence |
+| --- | --- | --- |
+| Galaxy S20, S20+ | 2020 | [Series availability](https://news.samsung.com/us/introducing-samsung-galaxy-s20-5g-unpacked2020/) |
+| Galaxy S26 FE | 2026 | [September availability](https://news.samsung.com/us/samsung-galaxy-s26-fe-delivering-latest-flagship-features-what-matters-most/) |
+| Galaxy Z Flip7 FE | 2025 | [July launch and specifications](https://news.samsung.com/global/samsung-galaxy-z-flip7-a-pocket-sized-ai-powerhouse-with-a-new-edge-to-edge-flexwindow) |
+| Galaxy Z Fold8 Ultra | 2026 | [August global availability](https://news.samsung.com/global/samsung-officially-launches-galaxy-z-fold8-ultra-fold8-flip8-watch-ultra2-and-watch9) |
+| Galaxy Tab A11+ | 2025 | [November availability](https://news.samsung.com/jp/tab-a11-plus) |
+| Galaxy Tab A7 10.4 (2022) | 2022 | [SM-T503 in Samsung's June 2022 price list](https://image-us.samsung.com/SamsungUS/samsungbusiness/solutions/industries/government/msrp-price-sheets/Samsung_Galaxy_Tablet_MSRP_Price_File_June_2022.pdf) |
+| Galaxy Tab A9 | 2023 | [A9 series launch](https://news.samsung.com/global/samsung-galaxy-tab-a9-and-galaxy-tab-a9-entertainment-and-productivity-engineered-for-everyone) |
+| Galaxy Tab Active3, Active4 Pro, Active5, Active5 Pro | 2020, 2022, 2024, 2025 | [Active3](https://news.samsung.com/mx/samsung-presenta-en-mexico-galaxy-tab-active3-una-tableta-disenada-para-entornos-desafiantes), [Active4 Pro](https://news.samsung.com/uk/introducing-the-galaxy-tab-active4-pro-a-rugged-device-designed-for-the-new-mobile-workforce), [Active5](https://news.samsung.com/us/galaxy-tab-active5-delivering-next-level-durability-productivity-security-for-enterprises/), [Active5 Pro](https://news.samsung.com/us/samsung-introduces-galaxy-xcover7-pro-galaxy-tab-active5-pro-ruggedized-devices-frontline-excellence/) |
+| Galaxy Tab S7 | 2020 | [September availability](https://news.samsung.com/us/galaxy-tab-s7-s7plus-available-today-first-5g-enabled-tablets-united-states/) |
+| Galaxy A02s, A12 | 2020 | [December 2020 retail availability](https://news.samsung.com/vn/samsung-chinh-thuc-ra-mat-galaxy-a12-va-a02s-bo-doi-smartphone-tien-phong-cong-nghe-voi-bo-4-camera-uu-viet-hieu-nang-manh-me-thiet-ke-man-hinh-lon-va-dung-luong-pin-vuot-troi) |
+| Galaxy A03s | 2021 | [September launch](https://news.samsung.com/uk/samsung-adds-the-new-galaxy-a03s-to-the-galaxy-a-series) |
+| Galaxy A05s | 2023 | [October launch](https://news.samsung.com/in/samsung-unveils-galaxy-a05s-with-stylish-design-snapdragon-processor-and-up-to-12gb-ram) |
+| Galaxy A13 5G | 2021 | [December launch](https://news.samsung.com/us/samsung-introduces-galaxy-a13-5g-us/) |
+| Galaxy A22, A22 5G | 2021 | [A22 arrival](https://news.samsung.com/br/samsung-apresenta-galaxy-a22-no-brasil), [A22 5G launch](https://news.samsung.com/in/samsung-announces-first-5g-smartphone-in-galaxy-a-series-launches-future-ready-galaxy-a22-5g-in-india) |
+| Galaxy A26 5G | 2025 | [April availability](https://news.samsung.com/latin/samsung-lanza-hoy-la-nueva-linea-galaxy-a-en-latinoamerica) |
+| Galaxy A52, A72 | 2021 | [March launch and sale](https://news.samsung.com/in/samsung-launches-galaxy-a52-and-galaxy-a72-in-india-makes-exciting-innovations-accessible-to-all) |
+
 The downloaded archive therefore reaches back at least to 2017. This is not a
 claim about the oldest model in Samsung's entire skin library. This boundary
 audit also does not establish exact release dates for every imported model.

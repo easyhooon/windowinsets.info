@@ -1,9 +1,31 @@
 /** Product decision, 2026-09-22. Release evidence: docs/DEVICE_COVERAGE.md. */
 export const MIN_RELEASE_YEAR = 2020;
 
-// Audited boundary models. Do not infer a release year from a skin ZIP date.
+// Audited release years for artwork previews and coverage boundaries.
+// Do not infer a release year from a skin ZIP date.
 export const checkedReleaseYears: Record<string, number> = {
   "galaxy-z-trifold": 2025,
+  "galaxy-s20": 2020,
+  "galaxy-s20-plus": 2020,
+  "galaxy-s26-fe": 2026,
+  "galaxy-tab-a11-plus": 2025,
+  "galaxy-tab-a7-10-4-2022": 2022,
+  "galaxy-tab-a9": 2023,
+  "galaxy-tab-active3": 2020,
+  "galaxy-tab-active4-pro": 2022,
+  "galaxy-tab-active5": 2024,
+  "galaxy-tab-active5-pro": 2025,
+  "galaxy-tab-s7": 2020,
+  "galaxy-a02s": 2020,
+  "galaxy-a03s": 2021,
+  "galaxy-a05s": 2023,
+  "galaxy-a12": 2020,
+  "galaxy-a13-5g": 2021,
+  "galaxy-a22": 2021,
+  "galaxy-a22-5g": 2021,
+  "galaxy-a26-5g": 2025,
+  "galaxy-a52": 2021,
+  "galaxy-a72": 2021,
   "galaxy-tab-s4-10-5": 2018,
   "galaxy-tab-s6": 2019,
   "galaxy-fold": 2019,

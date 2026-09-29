@@ -1,4 +1,5 @@
 import catalog from "./skinCatalog.json";
+import { checkedReleaseYears } from "./coverage";
 import type { Device, FormFactor, Screen, Source } from "./types";
 
 const source: Source = {
@@ -20,7 +21,7 @@ const galaxyFoldChassisSource: Source = {
 /** Imported artwork is browsable before RTL captures arrive. No specs are inferred. */
 export const skinPreviews: Device[] = catalog.map(entry => ({
   slug: entry.slug, name: entry.name, brand: "Samsung", series: entry.series,
-  formFactor: entry.formFactor as FormFactor, releaseYear: null,
+  formFactor: entry.formFactor as FormFactor, releaseYear: checkedReleaseYears[entry.slug] ?? null,
   ...(entry.slug === "galaxy-fold" ? {
     chassisMm: { unfoldedWidth: 117.9, unfoldedDepth: 6.9, foldedDepth: 17.1, source: galaxyFoldChassisSource },
   } : {}),

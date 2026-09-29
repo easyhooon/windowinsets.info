@@ -37,6 +37,7 @@ test('every public device export validates against the published schema', async 
   const validate = new Ajv2020({ allErrors: true, validateFormats: false }).compile(schema);
   const { module: { devices } } = await runnerImport('./app/data/devices.ts', { root: process.cwd() });
   for (const device of devices) {
+    assert.notEqual(device.releaseYear, null, `${device.slug}: public release year is missing`);
     const exported = createDeviceExport(device);
     assert.equal(validate(exported), true, `${device.slug}: ${JSON.stringify(validate.errors)}`);
     if (device.formFactor === 'foldable-book' || device.formFactor === 'foldable-flip' || device.formFactor === 'foldable-trifold') {
