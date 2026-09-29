@@ -35,6 +35,38 @@ const measuredInsets = (mode: "gesture" | "threeButton"): InsetsMeasurement | nu
   sources: [captureSource("threeButton")],
 };
 
+// Separate InsetsProbe 1.6.0 captures of rotations 1 and 3; never derived from rotation 0.
+const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton"): InsetsMeasurement => {
+  const button = mode === "threeButton";
+  const left = rotation === 1;
+  return {
+    systemBars: { top: 24.18, right: button && left ? 48 : 0, bottom: button ? 0 : 14.93, left: button && !left ? 48 : 0 },
+    systemBarsPx: { top: 68, right: button && left ? 135 : 0, bottom: button ? 0 : 42, left: button && !left ? 135 : 0 },
+    displayCutout: { top: 0, right: left ? 0 : 26.67, bottom: 0, left: left ? 26.67 : 0 },
+    displayCutoutPx: { top: 0, right: left ? 0 : 75, bottom: 0, left: left ? 75 : 0 },
+    cutoutShape: left
+      ? { xDp: 0, yDp: 181.69, widthDp: 26.67, heightDp: 20.27, rightDp: 826.67, bottomDp: 182.04, xPx: 0, yPx: 511, widthPx: 75, heightPx: 57, rightPx: 2325, bottomPx: 512 }
+      : { xDp: 826.67, yDp: 182.04, widthDp: 26.67, heightDp: 20.27, rightDp: 0, bottomDp: 181.69, xPx: 2325, yPx: 512, widthPx: 75, heightPx: 57, rightPx: 0, bottomPx: 511 },
+    condition: {
+      oneUi: "7.0",
+      android: "15",
+      note: `Samsung RTL Russia/Moscow, SM-G996B-RU8, build AP3A.240905.015.A2.G996BXXUEHYD5. Landscape rotation ${rotation}, FHD+ 2400×1080 px window at 450 dpi and font scale 1. Captured separately with InsetsProbe 1.6.0; the Android navigation setting and configuration agree.`,
+    },
+    sources: [{
+      kind: "measured",
+      label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy S21+, rotation ${rotation}, ${mode} (SM-G996B)`,
+      url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s21-plus/recapture-2026-09-29-rotation/main-landscape-${rotation}-${mode}.json`,
+      retrievedAt: "2026-09-29",
+    }],
+  };
+};
+
+const landscape = (rotation: 1 | 3) => ({
+  logicalSizePx: { width: 2400, height: 1080 },
+  logicalSizeDp: { width: 853.33, height: 384 },
+  insets: { gesture: landscapeInsets(rotation, "gesture"), threeButton: landscapeInsets(rotation, "threeButton") },
+});
+
 export const galaxyS21Plus: Device = {
   slug: "galaxy-s21-plus",
   name: "Galaxy S21 Plus",
@@ -56,6 +88,7 @@ export const galaxyS21Plus: Device = {
     cornerRadiiDp: { topLeft: 35.91, topRight: 35.91, bottomRight: 35.91, bottomLeft: 35.91 },
     cornerRadiiPx: { topLeft: 101, topRight: 101, bottomRight: 101, bottomLeft: 101 },
     insets: { gesture: measuredInsets("gesture"), threeButton: measuredInsets("threeButton") },
+    rotations: { 1: landscape(1), 3: landscape(3) },
     sources: [samsungSpecs, captureSource("gesture"), captureSource("threeButton")],
   }],
   sources: [samsungSpecs, captureSource("gesture"), captureSource("threeButton")],
