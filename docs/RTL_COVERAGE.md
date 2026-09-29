@@ -866,6 +866,17 @@ first-run tip covered Settings and was closed through its "Close tips" node.
 Raw files: `measurements/galaxy-tab/galaxy-tab-s10-fe/recapture-2026-09-29-rotation/` (font scale 1) and
 `recapture-2026-09-29-rotation-fontscale-1.08/`.
 
+### Galaxy Tab S9 FE+ rotations — 2026-09-29
+
+InsetsProbe 1.6.1 captured Samsung RTL SM-X616N_KR3 (Korea/Gumi), same build
+`BP4A.251205.006.X616NKOSEEZG3`, 340 dpi, font scale 1, in all four rotations
+and both navigation modes (2026-09-29T23:13Z) over Remote Debug Bridge, with
+each rotation fixed by `cmd window user-rotation lock`. Every rotation keeps
+64/102 px (30.05/47.89 dp) 3-button bars and 64/32 px (30.05/15.02 dp) gesture
+bars with no cutout, and rotation 1 reproduces the accepted captures exactly.
+
+Raw files: `measurements/galaxy-tab/galaxy-tab-s9-fe-plus/recapture-2026-09-29-rotation/{main,landscape-1,landscape-3,portrait-2}-{gesture,threeButton}.json`.
+
 ### Galaxy Tab S10+ — 2026-09-27
 
 InsetsProbe 1.3.0 captured Samsung RTL Galaxy Tab S10+ (SM-X820), Android 14 /

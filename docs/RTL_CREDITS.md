@@ -367,3 +367,9 @@ Galaxy Tab S10 FE SM-X520_KR3 Korea/Gumi Android 16 followed (**35 to 33
 Credits**): both modes and four rotations at font scale 1.08 and again at 1. It
 was returned with 22 minutes displayed and the return option selected; the
 device list showed **34 Credits**. Net cost: one credit.
+
+Galaxy Tab S9 FE+ SM-X616N_KR3 Korea/Gumi Android 16 was reserved next (**34
+to 32 Credits**) and captured in both modes and all four rotations. Before the
+exit, the browser tab had left the web client, and reopening it returned
+`400 Request Header Or Cookie Too Large` while the device list returned 403, so
+the return option could not be reached from the browser.
