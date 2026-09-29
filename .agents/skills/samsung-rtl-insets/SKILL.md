@@ -95,6 +95,9 @@ hides models that are listed only in other locations (for example, the S21 famil
 in India, Russia or the USA). Avoid Vietnam (Hanoi) units whenever another location
 offers the model: their WebClient sessions often end early with "All ongoing tests
 have ended." Pick Vietnam only when it is the sole location, and record the choice.
+India (Noida) units can run a full sweep but time out on every upload, including
+manual resends (S20 FE, 2026-09-29). Prefer Russia, Korea, Poland or the USA when
+they offer the same build; on India units plan the File Browser export from the start.
 
 Before measuring, check the **Active window** size Probe shows against the model's
 default resolution. Samsung flagships ship at FHD+ (1080 px wide) even on
@@ -276,6 +279,10 @@ See the per-model notes in `docs/RTL_COVERAGE.md`.
   Chrome bars and RTL full-screen transitions change their scale and origin. A
   single deliberate power click may wake or sleep the device, so re-read the same
   coordinate space after every click.
+- On S20-series lock screens the display sleeps about 3 seconds after a power
+  wake. Batch the power click, a 1-second wait and one upward drag through the
+  lower-middle of the display in a single call; a separate screenshot in between
+  lets the screen sleep, and a black stream after the drag then looks like failure.
 - Lock-screen swipes and authentication are a manual fallback. If one precise
   attempt is unreliable, ask the user to unlock the device and state its exact
   state and remaining reservation time. While the reservation and turn remain
@@ -445,6 +452,10 @@ filename to its fresh timestamp, model, screen, actual rotation, navigation
 setting, window dimensions and density. `Sweep done` only proves local files
 were saved; it does not prove that the API received them. Recover any missing
 upload or export its file through File Browser before the reservation expires.
+After two timed-out Upload retries, stop retrying and export
+`Android/data/info.windowinsets.probe/files/`. Downloads can arrive as `content`,
+`content (1)` and so on; name each copy from its own `display.rotation` and
+`navigation.settingsSecureNavigationMode`, never from download order.
 
 Check every file for:
 
