@@ -262,7 +262,10 @@ removes a model from its catalog.
   On 2026-09-29 an SM-G998U1-IN2 unit (India/Noida, Android 14 / One UI 6.1)
   set to WQHD+ was switched to the default FHD+, then swept rotations 0, 1 and 3
   in both modes with InsetsProbe 1.6.0 (`recapture-2026-09-29-rotation/`).
-  Rotation 0 matches the accepted SM-G998B values exactly. S21+: Android 15 / One UI 7.0,
+  Rotation 0 matches the accepted SM-G998B values exactly.
+  The same day SM-G996B-RU8 (Russia/Moscow, the accepted S21+ build) swept
+  rotations 0, 1 and 3 in both modes (`galaxy-s21-plus/recapture-2026-09-29-rotation/`);
+  rotation 0 matches the accepted S21+ captures. S21+: Android 15 / One UI 7.0,
   1080×2400 px / 450 dpi. S21: Android 14 / One UI 6.1, 1080×2400 px / 480
   dpi. S20 Ultra: Android 13 / One UI 5.1, 1080×2400 px / 420 dpi on a
   1440×3200 panel. Its raw cutout rectangle is centered around x=720 despite
