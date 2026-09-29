@@ -258,7 +258,11 @@ removes a model from its catalog.
   navigation modes, all with matching Android setting and InsetsProbe mode,
   font scale 1 and rotation 0. S21 Ultra: Android 14 / One UI 6.1,
   1080×2400 px / 450 dpi on a 1440×3200 panel; rounded-corner values are null
-  in both raw captures and remain unavailable. S21+: Android 15 / One UI 7.0,
+  in both raw captures and remain unavailable.
+  On 2026-09-29 an SM-G998U1-IN2 unit (India/Noida, Android 14 / One UI 6.1)
+  set to WQHD+ was switched to the default FHD+, then swept rotations 0, 1 and 3
+  in both modes with InsetsProbe 1.6.0 (`recapture-2026-09-29-rotation/`).
+  Rotation 0 matches the accepted SM-G998B values exactly. S21+: Android 15 / One UI 7.0,
   1080×2400 px / 450 dpi. S21: Android 14 / One UI 6.1, 1080×2400 px / 480
   dpi. S20 Ultra: Android 13 / One UI 5.1, 1080×2400 px / 420 dpi on a
   1440×3200 panel. Its raw cutout rectangle is centered around x=720 despite
