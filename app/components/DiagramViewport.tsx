@@ -255,7 +255,6 @@ export function DiagramViewport({ viewportRef, autoFit = false, closedFit, child
       const ratio = Math.min((viewport.width - 32) / (right - left), (viewport.height - topRoom - bottomRoom) / (bottom - top));
       setPan(previous => ({ x: previous.x + viewport.left + viewport.width / 2 - (left + right) / 2,
         y: previous.y + viewport.top + topRoom + (viewport.height - topRoom - bottomRoom) / 2 - (top + bottom) / 2 }));
-      console.log('FIT', zoom, left|0, right|0, top|0, bottom|0, ratio.toFixed(3));
       const next = clampZoom(Math.floor(zoom * ratio), MAX_FIT_ZOOM); if (Math.abs(next - zoom) > 1) setZoom(next); else fitting.current = false;
     });
     return () => cancelAnimationFrame(frame);
