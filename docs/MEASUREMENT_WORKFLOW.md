@@ -83,7 +83,7 @@ Consequences:
 ## Latest registered batch (2026-09-25)
 
 The 2026-09-25 batch adds paired main-display captures for Galaxy A07, A55, A53,
-A52s, A57, A37, A35, A34, A33, A32 LTE, A32 5G, A27, A24, A23, A17, A16,
+A52s, A57, A37, A35, A34, A33, A32 LTE, A32 5G, A27, A24, A23, A16,
 A15, A14, A06, A05 and A04; Galaxy A73 gained its 3-button capture on
 2026-09-27. Earlier in
 the same batch, Galaxy Note20,
@@ -548,6 +548,7 @@ fill them.
 | Galaxy A35 5G | SM-A356N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a35-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy A37 5G | SM-A376N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a37-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy A25 5G | SM-A256N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a25-5g/recapture-2026-09-29-rotation/`), evidence only | No public route until an official A25 skin exists |
+| Galaxy A17 | SM-A175N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a17-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S11 Ultra | SM-X930 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S11 | SM-X730 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab-s11/recapture-2026-09-29-rotation/`) | None |
 | Galaxy S21+ | SM-G996B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s21-plus/recapture-2026-09-29-rotation/`) | None |
