@@ -678,6 +678,17 @@ diagonal and 2960×1848 resolution give approximately 240 ppi.
 Raw files: `measurements/galaxy-tab-s11-ultra/main-gesture.json` and
 `main-threeButton.json`.
 
+On 2026-09-29, Samsung RTL Korea/Gumi unit SM-X930_KR1 on the same build yielded
+all four distinct rotations in both navigation modes at 280 dpi and font scale
+1. Rotation 1 exactly matches the existing inset, cutout and corner data. The
+new portrait rotations 0 and 2 are 1848×2960 px; landscape rotations 1 and 3
+are 2960×1848 px. Android Settings and configuration agree on each navigation
+mode. Gesture captures retain the tablet taskbar's tappable bottom inset, so
+the inset-only heuristic reports threeButton even though Settings and
+`config_navBarInteractionMode=2` confirm gestures. The cutout bounds remain
+centered on the physical short edge in every rotation. Raw files:
+`measurements/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`.
+
 ## Galaxy Tab S9 Ultra measured on 2026-09-25
 
 Samsung RTL SM-X916B (Android 15 / One UI 7.0, build

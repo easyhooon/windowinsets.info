@@ -316,3 +316,10 @@ navigation-setting mismatch and was retained as rejected evidence. With 15
 minutes displayed, the exit dialog offered a one-credit return. Selecting it
 and ending the session left no ongoing tests, and a refreshed device-list header
 showed **23 Credits**. Net cost: one credit.
+
+On 2026-09-29, Galaxy Tab S11 Ultra SM-X930_KR1 Korea/Gumi Android 16 was
+reserved for 30 minutes, reducing the confirmed header from **23 to 21
+Credits**. Four rotations in each navigation mode uploaded to inbox PR #55.
+The session ended with 15 minutes displayed and the one-credit return option
+selected. Reservations then showed no active devices and **22 Credits**. Net
+cost: one credit.
