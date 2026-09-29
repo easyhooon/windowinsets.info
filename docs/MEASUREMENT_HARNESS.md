@@ -99,6 +99,34 @@ A capture set is published only if all of these hold:
 
 Values are never derived from another rotation. Missing rotations stay pending.
 
+## Samsung RTL vs Pixel emulator harness
+
+Pixel devices use a second harness, `.agents/skills/pixel-emulator-insets/SKILL.md`,
+built on headless Android Emulator AVDs. Both run the same InsetsProbe and the
+same "raw JSON → validation → generated device records" pipeline; everything
+around the instrument differs.
+
+| Aspect | Samsung (`samsung-rtl-insets`) | Pixel (`pixel-emulator-insets`) |
+| --- | --- | --- |
+| Device | Real hardware in Samsung Remote Test Lab (or owner's USB device) | AVD device profile on the local host |
+| Evidence class | Real-device capture | Emulator capture: framework values for a profile, never merged with real-device data |
+| Control surface | Browser WebClient: screenshots, coordinate taps, page JS | `adb` shell only: `cmd`, `settings`, `adb emu fold` |
+| Cost and time box | Credits, 30-minute reservation, location/build choice | Free; disk space and boot time |
+| Human in the loop | Samsung sign-in, local-network permission, inbox merge | None during capture |
+| Probe build | Keyed APK; uploads to the capture-inbox PR | Keyless APK; the script refuses a keyed build so emulator JSON never reaches the inbox |
+| Navigation mode | Tapped through Settings → Navigation bar | `cmd overlay enable-exclusive` + `settings get secure navigation_mode` check |
+| Rotation | Probe sweep (0/1/3); RTL Rotate control when a display ignores app requests | Probe sweep on phone-sized displays; `cmd window user-rotation lock N` on large inner displays (Android 16+ ignores app requests), all four rotations |
+| Fold state | RTL toolbar toggle | `adb emu fold` / `unfold`, wait for `cmd device_state state` |
+| Collection | Fetch the inbox PR while the reservation is live | `scripts/capture-emulator.py` writes files + `manifest.json` locally |
+| Registration | Per-device rotation records generated from inbox JSON | `scripts/import-emulator-captures.py` regenerates device module, AOSP skin and registry |
+| Artwork | Official Samsung skins | AOSP emulator skins (Apache 2.0) |
+| Typical failures | Upload timeouts, APK install failures, sessions going dark, credits spent on no-rotate displays | Duplicate adb daemons, `device offline` right after boot, stale labels when the probe survives a fold or mode change |
+
+The practical difference: the Samsung loop is bounded by remote-lab time and
+UI automation, so its skill is mostly recovery steps and credit rules. The
+Pixel loop is a deterministic script, so its skill is mostly about keeping
+emulator evidence separate from real-device evidence.
+
 ## Human checkpoints
 
 The loop still needs a person at these points:
