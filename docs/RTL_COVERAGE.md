@@ -1019,6 +1019,11 @@ identifies the SM-A276K Korean device as Galaxy Jump5 with a 169.1 mm,
 Raw files: `measurements/galaxy-a27-5g/main-gesture.json` and
 `main-threeButton.json`.
 
+On 2026-09-29 SM-A276K_KR1 (Korea/Gumi, the same build) swept rotations 0, 1
+and 3 in both modes with InsetsProbe 1.6.0
+(`galaxy-a27-5g/recapture-2026-09-29-rotation/`); rotation 0 matches the
+accepted captures. Its lock screen slept within seconds, so the user unlocked it.
+
 The two captures supplied as Galaxy A26 identify the device as
 SM-A276B / `a27xq`, which Samsung identifies as Galaxy A27 5G. They are not
 Galaxy A26 captures (that model uses SM-A266B). The SM-A276B gesture and
