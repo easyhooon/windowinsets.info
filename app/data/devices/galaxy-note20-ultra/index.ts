@@ -33,6 +33,30 @@ const measuredInsets = (mode: "gesture" | "threeButton"): InsetsMeasurement => m
       sources: [captureSource("threeButton")],
     };
 
+const landscapeThreeButton = (rotation: 1 | 3): InsetsMeasurement => ({
+  systemBars: { top: 24, right: rotation === 1 ? 48 : 0, bottom: 0, left: rotation === 3 ? 48 : 0 },
+  systemBarsPx: { top: 63, right: rotation === 1 ? 126 : 0, bottom: 0, left: rotation === 3 ? 126 : 0 },
+  displayCutout: { top: 0, right: rotation === 3 ? 25.52 : 0, bottom: 0, left: rotation === 1 ? 25.52 : 0 },
+  displayCutoutPx: { top: 0, right: rotation === 3 ? 67 : 0, bottom: 0, left: rotation === 1 ? 67 : 0 },
+  condition: {
+    oneUi: "5.1",
+    android: "13",
+    note: `Samsung RTL Russia/Moscow, SM-N985F-RU1, build TP1A.220624.014.N985FXXSIHYH3. Separate landscape rotation ${rotation} capture at 2316×1080 px, 420 dpi and font scale 1. Android navigation setting and InsetsProbe agree on 3-button mode. The cutout rectangle is off-centre, so only its safe inset is registered.`,
+  },
+  sources: [{
+    kind: "measured",
+    label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy Note20 Ultra, rotation ${rotation}, 3-button (SM-N985F)`,
+    url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-note20-ultra/recapture-2026-09-29-rotation/main-landscape-${rotation}-threeButton.json`,
+    retrievedAt: "2026-09-29",
+  }],
+});
+
+const landscape = (rotation: 1 | 3) => ({
+  logicalSizePx: { width: 2316, height: 1080 },
+  logicalSizeDp: { width: 882.29, height: 411.43 },
+  insets: { gesture: null, threeButton: landscapeThreeButton(rotation) },
+});
+
 export const galaxyNote20Ultra: Device = {
   slug: "galaxy-note20-ultra",
   name: "Galaxy Note20 Ultra",
@@ -54,6 +78,7 @@ export const galaxyNote20Ultra: Device = {
     cornerRadiiDp: { topLeft: 24, topRight: 24, bottomRight: 24, bottomLeft: 24 },
     cornerRadiiPx: { topLeft: 63, topRight: 63, bottomRight: 63, bottomLeft: 63 },
     insets: { gesture: measuredInsets("gesture"), threeButton: measuredInsets("threeButton") },
+    rotations: { 1: landscape(1), 3: landscape(3) },
     sources: [samsungSpecs, captureSource("gesture"), captureSource("threeButton")],
   }],
   sources: [samsungSpecs, captureSource("gesture"), captureSource("threeButton")],

@@ -541,6 +541,7 @@ fill them.
 | Galaxy S21 FE | SM-G990B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s21-fe/recapture-2026-09-29-rotation/`) | None |
 | Galaxy S20 Ultra | SM-G988B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s20-ultra/recapture-2026-09-29-rotation/`) | Cutout shape stays unregistered; raw bounds are off-center in every rotation |
 | Galaxy S20 FE | SM-G780G | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s20-fe/recapture-2026-09-29-rotation/`) | None |
+| Galaxy Note20 Ultra | SM-N985F | Main: natural in both modes; rotation 1 and 3 in 3-button mode (`measurements/galaxy-note20-ultra/recapture-2026-09-29-rotation/`) | Main gesture rotations 1 and 3; the 2026-09-29 gesture sweep is rejected because its navigation setting disagrees with the configuration and portrait inset |
 | Galaxy S21+ | SM-G996B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s21-plus/recapture-2026-09-29-rotation/`) | None |
 | Galaxy S21 Ultra | SM-G998B / SM-G998U1 | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s21-ultra/recapture-2026-09-29-rotation/`) | None |
 | Galaxy S22 Ultra | SM-S908B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s22-ultra/recapture-2026-09-28-rotation/`) | None |
@@ -577,7 +578,7 @@ Note and A.
 | --- | --- | --- |
 | Galaxy Z Flip | original Z Flip (not listed on RTL as of 2026-09-28) | Main (no cover skin) |
 | Galaxy Tab | Tab S11 Ultra, S11, S10 Ultra, S10+, S10 FE+, S10 FE, S10 Lite, S9 Ultra, S9+, S9 FE+, S9 FE, S9, S8 Ultra, S8+, S8, S7+, S7 FE, A11, A9+, A7 Lite | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
-| Galaxy Note | Note20 Ultra, Note20 | Main |
+| Galaxy Note | Note20 | Main |
 | Galaxy A | A73, A57, A56, A55, A53, A52s, A37, A36, A35, A34, A33, A32 5G, A32, A27, A25, A24, A23, A17, A16, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
 
 Existing gaps in the natural-rotation data remain open alongside the sweep.
