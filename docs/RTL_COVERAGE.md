@@ -1218,6 +1218,10 @@ therefore remain unchanged; these files corroborate them across regional SKUs.
   build remain explicit; navigation insets are evidence from that measured
   software configuration. [A17 LTE specs](https://www.samsung.com/sec/support/model/SM-A175NZAAKOD/) ·
   [A17 5G specs](https://www.samsung.com/uk/smartphones/galaxy-a/galaxy-a17-5g-grey-128gb-sm-a176bzaaeub/).
+  On 2026-09-29 SM-A175N_KR3 (Korea/Gumi, the same build) swept rotations 0,
+  1 and 3 in both modes with InsetsProbe 1.6.0
+  (`galaxy-a17-5g/recapture-2026-09-29-rotation/`); rotation 0 matches the
+  accepted captures. Its lock screen slept within seconds, so the user unlocked it.
 - Galaxy A56 5G (SM-A566B), Android 15 / One UI 7.0, build
   `AP3A.240905.015.A2.A566BXXS4AYE6`: both modes are full-screen portrait
   1080×2340 px at 450 dpi, font scale 1. System bars are 92/42 px in gesture
