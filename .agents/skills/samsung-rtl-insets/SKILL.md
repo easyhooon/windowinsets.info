@@ -92,12 +92,19 @@ location and OS version in the reservation before starting it.
 When browsing a series, set the Device Location filter to **ALL** before judging
 which models exist. The page can open with only KOREA and VIETNAM selected, which
 hides models that are listed only in other locations (for example, the S21 family
-in India, Russia or the USA). Avoid Vietnam (Hanoi) units whenever another location
-offers the model: their WebClient sessions often end early with "All ongoing tests
-have ended." Pick Vietnam only when it is the sole location, and record the choice.
-India (Noida) units can run a full sweep but time out on every upload, including
-manual resends (S20 FE, 2026-09-29). Prefer Russia, Korea, Poland or the USA when
-they offer the same build; on India units plan the File Browser export from the start.
+in India, Russia or the USA).
+
+Location priority when several locations offer the model and the accepted build:
+
+1. Korea, Poland, UK, USA or Brazil.
+2. India (Noida): sweeps work, but uploads can time out on every attempt,
+   including manual resends (S20 FE, 2026-09-29). Plan the File Browser export
+   from the start.
+3. Russia (Moscow) and Vietnam (Hanoi): last resort. Vietnam sessions often end
+   early with "All ongoing tests have ended." Russia uploads often time out, and
+   on 2026-09-29 a Note20 Ultra reservation's Start button did nothing, even for
+   the user. Pick either only when it is the sole location offering the model,
+   and record the choice.
 
 Before measuring, check the **Active window** size Probe shows against the model's
 default resolution. Samsung flagships ship at FHD+ (1080 px wide) even on
