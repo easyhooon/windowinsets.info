@@ -141,7 +141,9 @@ settled captures, downloads and validation. Once all required captures are
 uploaded and validated, use the device tab's **close** control in WebClient,
 confirm the **Exit** dialog, and check Reservations. If WebClient offers
 **Return this device to get back 1 credit(s)**, select it and verify the balance
-increased. The visible offer establishes refund eligibility; use the remaining
+increased. The Exit dialog can render behind the device canvas, so the
+checkbox may be hidden in screenshots; confirm it in the DOM and check it there
+before pressing OK. The visible offer establishes refund eligibility; use the remaining
 time as a deadline, not a reason to retry a missing offer. When
 no return is offered, **Exit** can end the test while the paid reservation
 remains listed until its timer expires. Do not report that reservation as
@@ -256,6 +258,13 @@ step to the user.
    `tools/insets-probe/app/build/outputs/apk/debug/app-debug.apk`, and choose Open.
    On 2026-09-28 the Chrome `filechooser` listener and `setFiles` succeeded for
    Fold3; use this direct path first, then verify the installed app row appears.
+   Claude-in-Chrome's `file_upload` accepts at most 10 MB and the R8 release APK
+   is about 11.7 MB. When a local `127.0.0.1` fetch is blocked (a new Chrome
+   profile without local-network permission), split the APK into two chunks
+   below 10 MB, upload each into a temporary `input[type=file]` added to the
+   WebClient page, join them with `new Blob([a, b])`, check the byte length, and
+   set the joined file on the `accept*=apk` input with `input` and `change`
+   events. Remove the temporary inputs afterwards (2026-09-29, Note20 and A57).
 5. Wait for `InsetsProbe info.windowinsets.probe` to appear. Select the application
    row itself, then click the Start/play control.
 6. Do not enable Remote Debug Bridge or grant Chrome access to other apps/services
