@@ -1,6 +1,6 @@
 # Samsung RTL credits and reservation budget
 
-**Last live verification:** 2026-09-28 KST
+**Last live verification:** 2026-09-29 KST
 
 Samsung's published pages and the current RTL account UI do not agree on the
 daily grant. Keep the published policy, observed behavior and spending history
@@ -308,3 +308,11 @@ minutes (**6 to 4 Credits**). Upload returned `401 Invalid upload key`, and
 the File Browser downloaded only one file, so the rest were recovered from
 saved InsetsProbe log exports. The session ended with 14 minutes remaining,
 below the return threshold. Net cost for Galaxy S22: three credits.
+
+On 2026-09-29, Galaxy Note20 Ultra SM-N985F-RU1 Russia/Moscow Android 13 was
+reserved for 30 minutes, reducing the live header from **24 to 22 Credits**.
+The 3-button sweep uploaded successfully; a gesture-labelled sweep had a
+navigation-setting mismatch and was retained as rejected evidence. With 15
+minutes displayed, the exit dialog offered a one-credit return. Selecting it
+and ending the session left no ongoing tests, and a refreshed device-list header
+showed **23 Credits**. Net cost: one credit.

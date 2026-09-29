@@ -967,6 +967,24 @@ in its [Note20 series specifications](https://news.samsung.com/global/samsung-un
 Raw files: `measurements/galaxy-note20-ultra/main-threeButton.json` and
 `main-gesture.json`.
 
+On 2026-09-29, Russia/Moscow SM-N985F-RU1 supplied an InsetsProbe 1.6.0 sweep
+at rotations 0, 1 and 3 in 3-button mode. All three files report the same
+Android 13 / One UI 5.1 build, 420 dpi, font scale 1, full-screen windows and
+agreement between navigation settings and insets. Portrait remains 1080×2316 px;
+landscape is 2316×1080 px with a 63 px top status inset and a 126 px navigation
+inset on the right at rotation 1 or left at rotation 3. The cutout safe inset is
+67 px on the opposite side. As in portrait, the raw cutout rectangles are
+off-centre, so no cutout shape is registered. The accepted raw files are in
+`measurements/galaxy-note20-ultra/recapture-2026-09-29-rotation/`.
+
+The same session produced a gesture-labelled sweep, but all three files report
+`configNavBarInteractionMode: 2` while `settingsSecureNavigationMode` remains 0.
+The portrait system-bar bottom inset is still the 3-button value, 126 px. The
+three raw files are preserved under
+`measurements/galaxy-note20-ultra/rejected-2026-09-29-navigation-mismatch/` and
+are not published as landscape gesture values. Gesture rotations 1 and 3 need
+fresh captures with matching configuration, setting and insets.
+
 
 ## Galaxy A27 5G measured on 2026-09-25
 
