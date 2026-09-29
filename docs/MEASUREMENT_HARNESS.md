@@ -24,7 +24,7 @@ flowchart TB
     Skill["Procedure<br/>.agents/skills/samsung-rtl-insets/SKILL.md"]
     Queue["Queue and status<br/>docs/MEASUREMENT_WORKFLOW.md"]
     Probe["Instrument<br/>InsetsProbe app (sweep + upload)"]
-    Api["Input path<br/>/api/captures → capture-inbox PR"]
+    Api["Vercel Function<br/>POST /api/captures → capture-inbox PR"]
     Checks["Gates<br/>raw-vs-data comparison, typecheck, rendering tests"]
     Record["Evidence<br/>measurements/ + RTL_COVERAGE.md"]
   end
@@ -52,7 +52,7 @@ flowchart TB
 | Procedure | `samsung-rtl-insets` skill | Queue order, location/OS choice, credit rules, forbidden actions, recovery steps |
 | Queue | `MEASUREMENT_WORKFLOW.md` status tables | Single source for what is measured and what remains |
 | Instrument | InsetsProbe 1.6.0 | Reads real `WindowInsets`, rotates itself (0°/90°/270°), labels the capture, uploads JSON |
-| Input path | `api/captures.ts` → `capture-inbox` | Every capture lands as an unedited commit in one inbox PR |
+| Input path | `api/captures.ts` (Vercel Function) → `capture-inbox` | Probe POSTs JSON to the deployed API; the function commits each upload unchanged through the GitHub API into one inbox PR |
 | Gates | Comparison script, `pnpm typecheck`, `tests/rendering.test.mjs` | Block wrong screen labels, stale builds and mismatched values |
 | Evidence | `measurements/<device>/recapture-*/`, coverage notes | Raw files stay immutable; every published value links to one |
 
@@ -71,10 +71,10 @@ flowchart TD
   G --> H[Switch to gesture navigation<br/>Settings → Navigation bar]
   H --> I[Run sweep again]
   G & I -->|upload timeout| U[Tap Upload to resend]
-  I --> J[Exit WebClient with<br/>Return this device → +1 credit]
-  J --> K[Fetch inbox, validate 6 files<br/>model, build, display, dpi, mode,<br/>rotation 0 == accepted capture]
+  I --> K[Fetch inbox while reservation is live,<br/>validate 6 files: model, build,<br/>display, dpi, mode, rotation 0]
   K -->|mismatch| K1[Stop: record evidence, do not publish]
-  K --> L[Generate rotation records from raw JSON<br/>update queue + coverage docs]
+  K --> J[Exit WebClient with<br/>Return this device → +1 credit]
+  J --> L[Generate rotation records from raw JSON<br/>update queue + coverage docs]
   L --> M[typecheck + rendering tests]
   M --> N[PR → CI → merge]
   N --> A
@@ -116,12 +116,16 @@ The loop still needs a person at these points:
 | Limitation | Effect | Possible fix |
 | --- | --- | --- |
 | Coordinates come from screenshots | Layout changes (density, panel size) need a fresh zoom before each tap | Drive Probe through RTL's Remote Debug Bridge (ADB) instead of pixels, or read the WebClient's device frame size and compute taps from dp |
-| Settings navigation is manual | Scrolling Settings to "Navigation bar" is the slowest and most fragile step | Let Probe open `Settings.ACTION_*` deep links, or switch mode through RDB with the navbar overlays used for USB devices |
-| One device at a time | Throughput is bound by one WebClient session | Reserve the next device while validating the previous one; run two WebClient tabs with strict per-tab state |
+| Settings navigation is manual | Probe already opens Display settings, but finding "Navigation bar" and selecting a mode still requires screen taps | Use a verified Samsung deep link to Navigation bar if one is available |
 | Registration code is hand-assembled per model | Each device file has its own shape | Generate rotation records from inbox JSON with one script (already done for Fold7/Fold8/Fold8 Ultra) and make it the default path |
 | Uploads can time out (seen on Russia units) | A sweep finishes but the inbox stays incomplete | Retry automatically inside Probe with backoff and show a persistent "not uploaded" state |
 | Covers that never rotate | Flip7/Flip8 cover landscape stays pending | Test RTL's own Rotate control on covers. If it also fails, record "not supported by device" instead of "not measured" |
 | Session state lives in chat | A reset or lost tab group loses context | Keep a machine-readable queue (JSON) and a per-device run log so any agent can resume |
+
+The RTL skill already permits overlapping reservations in separate WebClient
+tabs. Measurements remain sequential so each capture can be checked against the
+active device; reserving the next device during validation does not require a
+harness change.
 
 ## Where this came from
 
