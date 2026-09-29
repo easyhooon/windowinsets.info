@@ -1,6 +1,6 @@
 ---
 name: samsung-rtl-insets
-description: "Continue Samsung Remote Test Lab inset collection: choose the next covered Galaxy Fold, Flip, or S model, automate reservation and visible WebClient controls, hand off authentication or unreliable lock-screen steps, then validate and register InsetsProbe evidence."
+description: "Continue Samsung Remote Test Lab inset collection: choose the next covered Galaxy Fold, Flip, S, Tab, Note or A model, automate reservation and visible WebClient controls, hand off authentication or unreliable lock-screen steps, then validate and register InsetsProbe evidence."
 ---
 
 # Samsung RTL Insets
@@ -17,6 +17,9 @@ RTL. Select one measurement target at a time in this order:
 1. Galaxy Z Fold, newest first.
 2. Galaxy Z Flip, newest first.
 3. Galaxy S, newest first; within a generation use Ultra, Plus, base, then other variants.
+4. Galaxy Tab, newest first. Tablets need all four display rotations per mode.
+5. Galaxy Note, newest first.
+6. Galaxy A, newest first.
 
 Put a known wrong or suspect published measurement ahead of collecting any new
 model, then prefer an incomplete measured entry over an older untouched preview.
