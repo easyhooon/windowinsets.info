@@ -546,6 +546,7 @@ fill them.
 | Galaxy A57 5G | SM-A576S | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a57-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy A36 5G | SM-A366N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a36-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy A35 5G | SM-A356N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a35-5g/recapture-2026-09-29-rotation/`) | None |
+| Galaxy A37 5G | SM-A376N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a37-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S11 Ultra | SM-X930 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S11 | SM-X730 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab-s11/recapture-2026-09-29-rotation/`) | None |
 | Galaxy S21+ | SM-G996B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s21-plus/recapture-2026-09-29-rotation/`) | None |
@@ -584,7 +585,7 @@ Note and A.
 | --- | --- | --- |
 | Galaxy Z Flip | original Z Flip (not listed on RTL as of 2026-09-28) | Main (no cover skin) |
 | Galaxy Tab | S10 Ultra, S10+, S10 FE+, S10 FE, S10 Lite, S9 Ultra, S9+, S9 FE+, S9 FE, S9, S8 Ultra, S8+, S8, S7+, S7 FE, A11, A9+, A7 Lite | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
-| Galaxy A | A73, A56, A55, A53, A52s, A37, A34, A33, A32 5G, A32, A27, A25, A24, A23, A17, A16, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
+| Galaxy A | A73, A56, A55, A53, A52s, A34, A33, A32 5G, A32, A27, A25, A24, A23, A17, A16, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
 
 Existing gaps in the natural-rotation data remain open alongside the sweep.
 The canonical Galaxy Z Flip8 cover has 3-button only. Galaxy S24 Ultra, A73 5G
