@@ -1156,6 +1156,10 @@ therefore remain unchanged; these files corroborate them across regional SKUs.
   official artwork is the A16 5G skin. Insets are from the LTE unit and its
   exact software build. [A16 LTE specs](https://www.samsung.com/sec/support/model/SM-A165NLGEKOO/) ·
   [A16 5G specs](https://www.samsung.com/uk/smartphones/galaxy-a/galaxy-a16-5g-blue-black-128gb-sm-a166bzkdeub/).
+  On 2026-09-29 SM-A165N_KR2 (Korea/Gumi, the same build) swept rotations 0,
+  1 and 3 in both modes with InsetsProbe 1.6.0
+  (`galaxy-a16-5g/recapture-2026-09-29-rotation/`); rotation 0 matches the
+  accepted captures. Its lock screen slept within seconds, so the user unlocked it.
 - Galaxy A15 LTE (SM-A155F), Android 14 / One UI 6.1, build
   `UP1A.231005.007.A155FXXS6BYE1`: both Main modes are portrait 1080×2340 px
   at 450 dpi, font scale 1. Gesture system bars are 80/42 px top/bottom;
