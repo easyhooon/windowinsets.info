@@ -1114,6 +1114,10 @@ therefore remain unchanged; these files corroborate them across regional SKUs.
   at 450 dpi, font scale 1. Gesture system bars are 101/42 px top/bottom;
   3-button bars are 101/135 px. Both report an 89 px safe cutout inset and a
   centered 66×66 px camera bound. [Samsung Korea specs](https://www.samsung.com/sec/support/model/SM-A356NLBWKOD/).
+  On 2026-09-29 SM-A356N_KR4 (Korea/Gumi, the same build) swept rotations 0,
+  1 and 3 in both modes with InsetsProbe 1.6.0
+  (`galaxy-a35-5g/recapture-2026-09-29-rotation/`); rotation 0 matches the
+  accepted captures.
 - Galaxy A25 5G (SM-A256N), Android 16 / One UI 8.5, build
   `BP4A.251205.006.A256NKSSAEZG1`: both Main modes are portrait 1080×2340 px
   at 450 dpi, font scale 1. Gesture system bars are 77/42 px; 3-button bars
