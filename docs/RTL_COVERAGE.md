@@ -1170,6 +1170,10 @@ therefore remain unchanged; these files corroborate them across regional SKUs.
   1080×2340 px at 450 dpi, font scale 1. The captures agree on navigation mode.
   System bars are 97/42 px top/bottom in gesture mode and 97/135 px in
   3-button mode; the cutout safe inset is 82 px, with a centered 58×58 px bound.
+  On 2026-09-29 SM-A576S_KR1 (Korea/Gumi, the same build) swept rotations 0,
+  1 and 3 in both modes with InsetsProbe 1.6.0
+  (`galaxy-a57-5g/recapture-2026-09-29-rotation/`); rotation 0 matches the
+  accepted captures.
 - Galaxy A07 5G (SM-A076M), Android 16 / One UI 8.0, build
   `BP2A.250605.031.A3.A076MXXS4AZD2`: both Main modes are full-screen portrait
   720×1600 px at 300 dpi, font scale 1. Gesture system bars are 64/28 px and
