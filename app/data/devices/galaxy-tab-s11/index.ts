@@ -7,22 +7,41 @@ const samsungSpecs: Source = {
   retrievedAt: "2026-09-25",
   note: "Samsung lists 11.0-inch (278.1 mm), 2560×1600 WQXGA; PPI is calculated from that diagonal and resolution.",
 };
-const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab-s11";
-const captureSource = (mode: "gesture" | "threeButton"): Source => ({
+
+const captureBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab-s11/recapture-2026-09-29-rotation";
+const captureSource = (file: string, mode: "gesture" | "threeButton"): Source => ({
   kind: "measured",
-  label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy Tab S11 main (SM-X730), ${mode}`,
-  url: `${captureBase}/main-${mode}.json`,
-  retrievedAt: "2026-09-25",
+  label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy Tab S11 main (SM-X730), ${file}, ${mode}`,
+  url: `${captureBase}/${file}-${mode}.json`,
+  retrievedAt: "2026-09-29",
 });
-const gestureSource = captureSource("gesture");
-const threeButtonSource = captureSource("threeButton");
-const condition = { oneUi: "8.5", android: "16", note: "Samsung RTL Galaxy Tab S11 Wi-Fi (SM-X730), build BP4A.251205.006.X730XXS7BZG3. Main display landscape, rotation 1, full-screen 2560×1600 px, 340 dpi, font scale 1. InsetsProbe's non-foldable Phone label is classified as the tablet main display from model and skin-matching dimensions. Gesture mode is confirmed by Settings/config_navBarInteractionMode=2 and left/right system gesture insets although the inset-only heuristic reports threeButton due the nonzero tappable bottom inset." };
-const measurement = (mode: "gesture" | "threeButton"): InsetsMeasurement => {
-  const values = mode === "gesture"
-    ? { systemBars: {"top": 30.05, "right": 0.0, "bottom": 15.02, "left": 0.0}, systemBarsPx: {"top": 64, "right": 0, "bottom": 32, "left": 0}, displayCutout: {"top": 0.0, "right": 0.0, "bottom": 0.0, "left": 0.0}, displayCutoutPx: {"top": 0, "right": 0, "bottom": 0, "left": 0}, source: gestureSource }
-    : { systemBars: {"top": 30.05, "right": 0.0, "bottom": 47.89, "left": 0.0}, systemBarsPx: {"top": 64, "right": 0, "bottom": 102, "left": 0}, displayCutout: {"top": 0.0, "right": 0.0, "bottom": 0.0, "left": 0.0}, displayCutoutPx: {"top": 0, "right": 0, "bottom": 0, "left": 0}, source: threeButtonSource };
-  return { systemBars: values.systemBars, systemBarsPx: values.systemBarsPx, displayCutout: values.displayCutout, displayCutoutPx: values.displayCutoutPx, condition, sources: [values.source] };
+
+const condition = {
+  oneUi: "8.5",
+  android: "16",
+  note: "Samsung RTL Korea/Gumi, SM-X730_KR1, build BP4A.251205.006.X730XXS7BZG3. Four separate display rotations in both navigation modes, 340 dpi and font scale 1. Probe labels this non-foldable display 'phone'; model and dimensions identify the tablet main screen. Gesture mode is confirmed by Settings and configNavBarInteractionMode=2; its inset-only heuristic reports threeButton because the taskbar retains a tappable bottom inset.",
 };
+
+const measurement = (file: string, mode: "gesture" | "threeButton"): InsetsMeasurement => ({
+  systemBars: { top: 30.12, right: 0, bottom: mode === "gesture" ? 15.06 : 48, left: 0 },
+  systemBarsPx: { top: 64, right: 0, bottom: mode === "gesture" ? 32 : 102, left: 0 },
+  displayCutout: { top: 0, right: 0, bottom: 0, left: 0 },
+  displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 0 },
+  condition,
+  sources: [captureSource(file, mode)],
+});
+
+const rotationCapture = (file: string, width: number, height: number, widthDp: number, heightDp: number) => ({
+  logicalSizePx: { width, height },
+  logicalSizeDp: { width: widthDp, height: heightDp },
+  insets: {
+    gesture: measurement(file, "gesture"),
+    threeButton: measurement(file, "threeButton"),
+  },
+});
+
+const gestureSource = captureSource("landscape-1", "gesture");
+const threeButtonSource = captureSource("landscape-1", "threeButton");
 
 export const GalaxyTabS11: Device = {
   slug: "galaxy-tab-s11",
@@ -40,11 +59,19 @@ export const GalaxyTabS11: Device = {
     captureOrientation: "landscape",
     captureRotation: 1,
     ppi: 274,
-    logicalSizeDp: { width: 1201.88, height: 751.17 },
+    logicalSizeDp: { width: 1204.71, height: 752.94 },
     densityDpi: 340,
-    cornerRadiiDp: { topLeft: 13.15, topRight: 13.15, bottomRight: 13.15, bottomLeft: 13.15 },
+    cornerRadiiDp: { topLeft: 13.18, topRight: 13.18, bottomRight: 13.18, bottomLeft: 13.18 },
     cornerRadiiPx: { topLeft: 28, topRight: 28, bottomRight: 28, bottomLeft: 28 },
-    insets: { gesture: measurement("gesture"), threeButton: measurement("threeButton") },
+    insets: {
+      gesture: measurement("landscape-1", "gesture"),
+      threeButton: measurement("landscape-1", "threeButton"),
+    },
+    rotations: {
+      0: rotationCapture("main", 1600, 2560, 752.94, 1204.71),
+      2: rotationCapture("portrait-2", 1600, 2560, 752.94, 1204.71),
+      3: rotationCapture("landscape-3", 2560, 1600, 1204.71, 752.94),
+    },
     sources: [samsungSpecs, gestureSource, threeButtonSource],
   }],
   sources: [samsungSpecs, gestureSource, threeButtonSource],
