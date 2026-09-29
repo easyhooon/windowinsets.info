@@ -275,7 +275,12 @@ removes a model from its catalog.
   SM-G988B-RU1 (Russia/Moscow, the accepted S20 Ultra build) completed the same
   sweep at FHD+ (`galaxy-s20-ultra/recapture-2026-09-29-rotation/`); rotation 0
   matches the accepted captures, and the landscape cutout rectangles keep the
-  same off-center placement, so the shape stays unregistered. S21+: Android 15 / One UI 7.0,
+  same off-center placement, so the shape stays unregistered.
+  SM-G780G-IN3 (India/Noida, the accepted S20 FE build) completed the same sweep
+  (`galaxy-s20-fe/recapture-2026-09-29-rotation/`), but every upload timed out,
+  including manual resends. The six JSON files were downloaded unchanged from
+  `Android/data/info.windowinsets.probe/files/` with the File Browser. Rotation 0
+  matches the accepted captures. S21+: Android 15 / One UI 7.0,
   1080×2400 px / 450 dpi. S21: Android 14 / One UI 6.1, 1080×2400 px / 480
   dpi. S20 Ultra: Android 13 / One UI 5.1, 1080×2400 px / 420 dpi on a
   1440×3200 panel. Its raw cutout rectangle is centered around x=720 despite
