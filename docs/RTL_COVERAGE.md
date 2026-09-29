@@ -265,7 +265,10 @@ removes a model from its catalog.
   Rotation 0 matches the accepted SM-G998B values exactly.
   The same day SM-G996B-RU8 (Russia/Moscow, the accepted S21+ build) swept
   rotations 0, 1 and 3 in both modes (`galaxy-s21-plus/recapture-2026-09-29-rotation/`);
-  rotation 0 matches the accepted S21+ captures. S21+: Android 15 / One UI 7.0,
+  rotation 0 matches the accepted S21+ captures.
+  SM-G990B-RU1 (Russia/Moscow, the accepted S21 FE build) followed with the same
+  sweep (`galaxy-s21-fe/recapture-2026-09-29-rotation/`); the gesture upload
+  stalled once and was resent with Upload. Rotation 0 matches the accepted captures. S21+: Android 15 / One UI 7.0,
   1080×2400 px / 450 dpi. S21: Android 14 / One UI 6.1, 1080×2400 px / 480
   dpi. S20 Ultra: Android 13 / One UI 5.1, 1080×2400 px / 420 dpi on a
   1440×3200 panel. Its raw cutout rectangle is centered around x=720 despite
