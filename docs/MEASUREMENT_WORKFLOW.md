@@ -185,6 +185,7 @@ fill them.
 | Galaxy Tab S8 Ultra | SM-X906B | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s8-ultra/recapture-2026-09-30-rotation/`) | None |
 | Galaxy Tab S8+ | SM-X806B | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s8-plus/recapture-2026-09-30-rotation/`) | None |
 | Galaxy Tab S8 | SM-X706N | Main: natural rotation 1 in both modes; rotations 0, 2 and 3 in 3-button mode (`measurements/galaxy-tab/galaxy-tab-s8/recapture-2026-09-30-rotation/`) | Main gesture rotations 0, 2 and 3; the 2026-09-30 gesture sweep on the same build is rejected because it reports a 102 px bottom navigation inset in every rotation (also with `task_bar` 0) against the accepted 32 px (`rejected-2026-09-30-gesture/`) |
+| Galaxy Tab S7+ | SM-T970 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s7-plus/recapture-2026-09-30-rotation/`) | None |
 | Galaxy Tab S9 FE+ | SM-X616N | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s9-fe-plus/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S11 | SM-X730 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s11/recapture-2026-09-29-rotation/`) | None |
 | Galaxy S21+ | SM-G996B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s21-plus/recapture-2026-09-29-rotation/`) | None |
@@ -222,5 +223,5 @@ Note and A.
 | Series | Devices | Screens |
 | --- | --- | --- |
 | Galaxy Z Flip | original Z Flip (not listed on RTL as of 2026-09-28) | Main (no cover skin) |
-| Galaxy Tab | S9, S7+, S7 FE, A11, A9+, A7 Lite | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
+| Galaxy Tab | S9, S7 FE, A11, A9+, A7 Lite | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
 | Galaxy A | A73, A56, A53, A52s, A34, A33, A32 5G, A32, A24, A23, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
