@@ -35,6 +35,57 @@ const threeButton: InsetsMeasurement = {
 export const galaxyA73: Device = {
   slug: "galaxy-a73-5g", name: "Galaxy A73 5G", brand: "Samsung", series: "Galaxy A", formFactor: "bar", releaseYear: 2022,
   screens: [{ id: "main", label: "Main", diagonalInch: 6.7, resolutionPx: { width: 1080, height: 2400 }, logicalSizePx: { width: 1080, height: 2400 }, captureOrientation: "portrait", captureRotation: 0, ppi: 393, logicalSizeDp: { width: 384, height: 853.33 }, densityDpi: 450, cornerRadiiDp: null, cornerRadiiPx: null,
+    // Separate captures of rotations 1 and 3; never derived from rotation 0.
+    rotations: {
+      1: {
+        logicalSizePx: { width: 2400, height: 1080 },
+        logicalSizeDp: { width: 853.33, height: 384 },
+        insets: {
+          gesture: {
+            systemBars: { top: 24.18, right: 0, bottom: 14.93, left: 0 },
+            systemBarsPx: { top: 68, right: 0, bottom: 42, left: 0 },
+            displayCutout: { top: 0, right: 0, bottom: 0, left: 34.84 },
+            displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 98 },
+            cutoutShape: { xDp: 0, yDp: 178.13, widthDp: 34.84, heightDp: 27.73, rightDp: 818.49, bottomDp: 178.13, xPx: 0, yPx: 501, widthPx: 98, heightPx: 78, rightPx: 2302, bottomPx: 501 },
+            condition: { oneUi: "7.0", android: "15", note: `Samsung RTL India/Noida, SM-A736B-IN2, same build AP3A.240905.015.A2.A736BXXUAFYE6, 450 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 1, 2400×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A73 5G (SM-A736B), rotation 1, gesture", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a73-5g/recapture-2026-09-30-rotation/main-landscape-1-gesture.json", retrievedAt: "2026-09-30" }],
+          },
+          threeButton: {
+            systemBars: { top: 24.18, right: 48, bottom: 0, left: 0 },
+            systemBarsPx: { top: 68, right: 135, bottom: 0, left: 0 },
+            displayCutout: { top: 0, right: 0, bottom: 0, left: 34.84 },
+            displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 98 },
+            cutoutShape: { xDp: 0, yDp: 178.13, widthDp: 34.84, heightDp: 27.73, rightDp: 818.49, bottomDp: 178.13, xPx: 0, yPx: 501, widthPx: 98, heightPx: 78, rightPx: 2302, bottomPx: 501 },
+            condition: { oneUi: "7.0", android: "15", note: `Samsung RTL India/Noida, SM-A736B-IN2, same build AP3A.240905.015.A2.A736BXXUAFYE6, 450 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 1, 2400×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A73 5G (SM-A736B), rotation 1, 3-button", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a73-5g/recapture-2026-09-30-rotation/main-landscape-1-threeButton.json", retrievedAt: "2026-09-30" }],
+          },
+        },
+      },
+      3: {
+        logicalSizePx: { width: 2400, height: 1080 },
+        logicalSizeDp: { width: 853.33, height: 384 },
+        insets: {
+          gesture: {
+            systemBars: { top: 24.18, right: 0, bottom: 14.93, left: 0 },
+            systemBarsPx: { top: 68, right: 0, bottom: 42, left: 0 },
+            displayCutout: { top: 0, right: 34.84, bottom: 0, left: 0 },
+            displayCutoutPx: { top: 0, right: 98, bottom: 0, left: 0 },
+            cutoutShape: { xDp: 818.49, yDp: 178.13, widthDp: 34.84, heightDp: 27.73, rightDp: 0, bottomDp: 178.13, xPx: 2302, yPx: 501, widthPx: 98, heightPx: 78, rightPx: 0, bottomPx: 501 },
+            condition: { oneUi: "7.0", android: "15", note: `Samsung RTL India/Noida, SM-A736B-IN2, same build AP3A.240905.015.A2.A736BXXUAFYE6, 450 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 3, 2400×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A73 5G (SM-A736B), rotation 3, gesture", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a73-5g/recapture-2026-09-30-rotation/main-landscape-3-gesture.json", retrievedAt: "2026-09-30" }],
+          },
+          threeButton: {
+            systemBars: { top: 24.18, right: 0, bottom: 0, left: 48 },
+            systemBarsPx: { top: 68, right: 0, bottom: 0, left: 135 },
+            displayCutout: { top: 0, right: 34.84, bottom: 0, left: 0 },
+            displayCutoutPx: { top: 0, right: 98, bottom: 0, left: 0 },
+            cutoutShape: { xDp: 818.49, yDp: 178.13, widthDp: 34.84, heightDp: 27.73, rightDp: 0, bottomDp: 178.13, xPx: 2302, yPx: 501, widthPx: 98, heightPx: 78, rightPx: 0, bottomPx: 501 },
+            condition: { oneUi: "7.0", android: "15", note: `Samsung RTL India/Noida, SM-A736B-IN2, same build AP3A.240905.015.A2.A736BXXUAFYE6, 450 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 3, 2400×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A73 5G (SM-A736B), rotation 3, 3-button", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a73-5g/recapture-2026-09-30-rotation/main-landscape-3-threeButton.json", retrievedAt: "2026-09-30" }],
+          },
+        },
+      },
+    },
     insets: { gesture, threeButton }, sources: [official, capture, recapture] }],
   sources: [official, capture, recapture],
 };

@@ -172,6 +172,7 @@ fill them.
 | Galaxy A27 5G | SM-A276K | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a27-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy A26 5G | SM-A266B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a26-5g/rtl-2026-09-30/`) | None |
 | Galaxy A13 5G | SM-A136B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a13-5g/rtl-2026-09-30/`) | None |
+| Galaxy A73 5G | SM-A736B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a73-5g/recapture-2026-09-30-rotation/`) | None |
 | Galaxy A55 5G | SM-A556S | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a55-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S11 Ultra | SM-X930 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S10 Ultra | SM-X920 | Main: rotation 1 in both modes (accepted). All four rotations in 3-button (`measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation/`, rotation 2 in `recapture-2026-09-29-rotation-in2/`) and in gesture (`recapture-2026-09-29-rotation-vn1/`) | None |
@@ -228,4 +229,4 @@ Note and A.
 | --- | --- | --- |
 | Galaxy Z Flip | original Z Flip (not listed on RTL as of 2026-09-28) | Main (no cover skin) |
 | Galaxy Tab | S9 (no Android 16 unit matching the accepted build is listed on RTL as of 2026-09-30) | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
-| Galaxy A | A73, A56, A53, A52s, A34, A33, A32 5G, A32, A24, A23, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
+| Galaxy A | A56, A53, A52s, A34, A33, A32 5G, A32, A24, A23, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
