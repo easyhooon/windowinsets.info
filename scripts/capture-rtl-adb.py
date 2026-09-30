@@ -91,6 +91,9 @@ sh("settings put system accelerometer_rotation 0", check=False)
 fs = sh("settings get system font_scale", check=False)
 if fs not in ("1.0", "1", "null"):
     log("font_scale", fs, "-> 1.0"); sh("settings put system font_scale 1.0", check=False); time.sleep(2)
+if "Override density" in sh("wm density", check=False):
+    # A leftover Display size setting changes every px value; captures use the default.
+    log("density", sh("wm density", check=False).replace("\n", " "), "-> reset"); sh("wm density reset", check=False); time.sleep(2)
 out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
 expected = 4 if a.tablet else 3
 
