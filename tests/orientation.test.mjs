@@ -2,11 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { orientScreen, rotateCorners, viewQuarter, orientationName } from '../app/data/orientation.ts';
 import { galaxyS25Ultra } from '../app/data/devices/galaxy-s25-ultra/index.ts';
-import { galaxyA73 } from '../app/data/devices/galaxy-a73-5g/index.ts';
+import { galaxyA32FiveG } from '../app/data/devices/galaxy-a32-5g/index.ts';
 
 const main = galaxyS25Ultra.screens.find(s => s.id === 'main');
-// A73 has no rotation captures, so it exercises the unmeasured-orientation path.
-const unrotated = galaxyA73.screens.find(s => s.id === 'main');
+// A32 5G has no rotation captures (RTL lists no unit), so it exercises the unmeasured-orientation path.
+const unrotated = galaxyA32FiveG.screens.find(s => s.id === 'main');
 
 test('view rotation maps clockwise degrees to Android rotation', () => {
   assert.equal(viewQuarter(0), 0);
