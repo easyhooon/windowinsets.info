@@ -112,15 +112,18 @@ for mode in a.modes.split(","):
     sh("wm dismiss-keyguard", check=False)
     if a.lock:
         for rot in ([0, 1, 2, 3] if a.tablet else [0, 1, 3]):
-            sh(f"am force-stop {PKG}"); sh(f"rm -f {FILES}/*.json", check=False)
+            sh(f"rm -f {FILES}/*.json", check=False)
+            # Lock while Probe is in front: a force-stop shows the portrait-only
+            # launcher, and a probe started from there can export rotation 0.
+            sh(f"am start -W -n {PKG}/.MainActivity --es screen {a.screen}")
             sh(f"cmd window user-rotation lock {rot}")
             for _ in range(40):
                 if f"mRotation={rot}" in sh("dumpsys window displays"): break
                 time.sleep(0.5)
             time.sleep(2)
             for attempt in range(3):
-                sh(f"am force-stop {PKG}")
-                sh(f"am start -W -n {PKG}/.MainActivity --es screen {a.screen} --ez export true")
+                # NEW_TASK | CLEAR_TASK recreates Probe without the launcher in between.
+                sh(f"am start -W -f 0x10008000 -n {PKG}/.MainActivity --es screen {a.screen} --ez export true")
                 got = []
                 for _ in range(20):
                     time.sleep(1)
@@ -131,7 +134,8 @@ for mode in a.modes.split(","):
             for n in got:
                 adb("pull", f"{FILES}/{n}", str(out / f"rot{rot}-{n}"))
                 d = json.loads((out / f"rot{rot}-{n}").read_text())
-                log("  ", rot, n, "rot", d["display"].get("rotation"), "nav", d["navigation"]["mode"], "nb", d["insets"]["navigationBars"]["px"])
+                log("  ", rot, n, "rot", d["display"].get("rotation"), "nav", d["navigation"]["mode"], "nb", d["insets"]["navigationBars"]["px"],
+                    "" if d["display"].get("rotation") == rot else "ROTATION MISMATCH: recapture")
         sh("cmd window user-rotation free", check=False)
         continue
     extra = " --ez tablet true" if a.tablet else ""
