@@ -13,7 +13,8 @@ export function MeasurementRulers({ measurements, onCopy }: {
       const color = colors[ruler.kind];
       const { p, q } = ruler;
       const angle = Math.atan2(q.y - p.y, q.x - p.x);
-      const tip = 3 * scale;
+      // Reference arrowheads are 8×4 px right-angle chevrons, shrunk on rulers too short to hold two.
+      const tip = Math.SQRT2 * Math.min(4 * scale, Math.hypot(q.x - p.x, q.y - p.y) / 3);
       const arrows = [[p, angle], [q, angle + Math.PI]] as const;
       const copy = () => { void onCopy(rulerValue(ruler, measurements.format)); };
       return <g key={ruler.name} data-ruler={ruler.name} data-symmetry={ruler.symmetry} data-value={ruler.value} stroke={color} strokeWidth={.75 * scale} fill="none">
@@ -21,7 +22,7 @@ export function MeasurementRulers({ measurements, onCopy }: {
         <path data-guide="true" opacity=".45" strokeDasharray={`${2 * scale} ${3 * scale}`}
           d={`M${ruler.start.x},${ruler.start.y} L${p.x},${p.y} M${ruler.end.x},${ruler.end.y} L${q.x},${q.y}`} />
         <path d={`M${p.x},${p.y} L${q.x},${q.y}`} />
-        {arrows.map(([point, direction], i) => <path key={i} d={`M${point.x + tip * Math.cos(direction - .7)},${point.y + tip * Math.sin(direction - .7)} L${point.x},${point.y} L${point.x + tip * Math.cos(direction + .7)},${point.y + tip * Math.sin(direction + .7)}`} />)}
+        {arrows.map(([point, direction], i) => <path key={i} d={`M${point.x + tip * Math.cos(direction - Math.PI / 4)},${point.y + tip * Math.sin(direction - Math.PI / 4)} L${point.x},${point.y} L${point.x + tip * Math.cos(direction + Math.PI / 4)},${point.y + tip * Math.sin(direction + Math.PI / 4)}`} />)}
         <g data-ruler-label="true" role="button" tabIndex={0} aria-label={`Copy ${ruler.name}: ${ruler.text} ${units}`} onClick={event => { event.stopPropagation(); copy(); }}
           onPointerDown={event => event.stopPropagation()} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); copy(); } }}
           style={{ pointerEvents: 'auto', cursor: 'copy', transformBox: 'view-box', transformOrigin: `${ruler.x}px ${ruler.y}px` }}>
