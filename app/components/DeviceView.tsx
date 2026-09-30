@@ -400,8 +400,7 @@ export function DeviceView({ device }: { device: Device }) {
             {safe && <p className="mt-2 text-xs leading-relaxed text-muted">
               With the keyboard hidden, Compose's <code>WindowInsets.safeDrawing</code> and a View's
               {" "}<code>systemBars() or displayCutout()</code> insets resolve to these values.
-              {" "}<Link to="/developer-guide#jetpack-compose" className="text-accent underline">Compose</Link>
-              {" · "}<Link to="/developer-guide#views" className="text-accent underline">Views guide →</Link>
+              <Link to="/developer-guide" className="mt-2 block whitespace-nowrap text-accent underline">Compose · Views guide →</Link>
             </p>}
 
             {measurement?.cutoutShape && <>
@@ -416,7 +415,7 @@ export function DeviceView({ device }: { device: Device }) {
               <p className="mt-2 text-xs leading-relaxed text-muted">
                 Android-reported exclusion rectangle. Camera lenses may share one region;
                 individual lens diameters and spacing are not measured.
-                {" "}<Link to="/methodology#camera-cutouts" className="text-accent underline">Cutout measurement limits →</Link>
+                <Link to="/methodology#camera-cutouts" className="mt-2 block whitespace-nowrap text-accent underline">Cutout measurement limits →</Link>
               </p>
             </>}
             {measurement && !measurement.cutoutShape && skin && Object.values(measurement.displayCutout).every(v => !v) && <>
@@ -424,7 +423,7 @@ export function DeviceView({ device }: { device: Device }) {
               <p className="text-xs leading-relaxed text-muted">
                 Android reported no display cutout here. Any camera shown in the official
                 artwork is not a measured exclusion, so its edge distances are not shown.
-                {" "}<Link to="/methodology#camera-cutouts" className="text-accent underline">Cutout measurement limits →</Link>
+                <Link to="/methodology#camera-cutouts" className="mt-2 block whitespace-nowrap text-accent underline">Cutout measurement limits →</Link>
               </p>
             </>}
 
