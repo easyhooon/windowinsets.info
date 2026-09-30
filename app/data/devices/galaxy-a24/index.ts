@@ -48,6 +48,57 @@ export const galaxyA24: Device = {
     densityDpi: 450,
     cornerRadiiDp: cornerRadii,
     cornerRadiiPx,
+    // Separate captures of rotations 1 and 3; never derived from rotation 0.
+    rotations: {
+      1: {
+        logicalSizePx: { width: 2340, height: 1080 },
+        logicalSizeDp: { width: 832, height: 384 },
+        insets: {
+          gesture: {
+            systemBars: { top: 24.18, right: 0, bottom: 14.93, left: 0 },
+            systemBarsPx: { top: 68, right: 0, bottom: 42, left: 0 },
+            displayCutout: { top: 0, right: 0, bottom: 0, left: 27.38 },
+            displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 77 },
+            cutoutShape: { xDp: 0, yDp: 169.6, widthDp: 27.38, heightDp: 44.8, rightDp: 804.62, bottomDp: 169.6, xPx: 0, yPx: 477, widthPx: 77, heightPx: 126, rightPx: 2263, bottomPx: 477 },
+            condition: { oneUi: "5.1", android: "13", note: `Samsung RTL India/Noida, SM-A245F-IN5, same build TP1A.220624.014.A245FXXU2AWE6, 450 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 1, 2340×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A24 (SM-A245F), rotation 1, gesture", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a24/recapture-2026-09-30-rotation/main-landscape-1-gesture.json", retrievedAt: "2026-09-30" }],
+          },
+          threeButton: {
+            systemBars: { top: 24.18, right: 48, bottom: 0, left: 0 },
+            systemBarsPx: { top: 68, right: 135, bottom: 0, left: 0 },
+            displayCutout: { top: 0, right: 0, bottom: 0, left: 27.38 },
+            displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 77 },
+            cutoutShape: { xDp: 0, yDp: 169.6, widthDp: 27.38, heightDp: 44.8, rightDp: 804.62, bottomDp: 169.6, xPx: 0, yPx: 477, widthPx: 77, heightPx: 126, rightPx: 2263, bottomPx: 477 },
+            condition: { oneUi: "5.1", android: "13", note: `Samsung RTL India/Noida, SM-A245F-IN5, same build TP1A.220624.014.A245FXXU2AWE6, 450 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 1, 2340×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A24 (SM-A245F), rotation 1, 3-button", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a24/recapture-2026-09-30-rotation/main-landscape-1-threeButton.json", retrievedAt: "2026-09-30" }],
+          },
+        },
+      },
+      3: {
+        logicalSizePx: { width: 2340, height: 1080 },
+        logicalSizeDp: { width: 832, height: 384 },
+        insets: {
+          gesture: {
+            systemBars: { top: 24.18, right: 0, bottom: 14.93, left: 0 },
+            systemBarsPx: { top: 68, right: 0, bottom: 42, left: 0 },
+            displayCutout: { top: 0, right: 27.38, bottom: 0, left: 0 },
+            displayCutoutPx: { top: 0, right: 77, bottom: 0, left: 0 },
+            cutoutShape: { xDp: 804.62, yDp: 169.6, widthDp: 27.38, heightDp: 44.8, rightDp: 0, bottomDp: 169.6, xPx: 2263, yPx: 477, widthPx: 77, heightPx: 126, rightPx: 0, bottomPx: 477 },
+            condition: { oneUi: "5.1", android: "13", note: `Samsung RTL India/Noida, SM-A245F-IN5, same build TP1A.220624.014.A245FXXU2AWE6, 450 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 3, 2340×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A24 (SM-A245F), rotation 3, gesture", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a24/recapture-2026-09-30-rotation/main-landscape-3-gesture.json", retrievedAt: "2026-09-30" }],
+          },
+          threeButton: {
+            systemBars: { top: 24.18, right: 0, bottom: 0, left: 48 },
+            systemBarsPx: { top: 68, right: 0, bottom: 0, left: 135 },
+            displayCutout: { top: 0, right: 27.38, bottom: 0, left: 0 },
+            displayCutoutPx: { top: 0, right: 77, bottom: 0, left: 0 },
+            cutoutShape: { xDp: 804.62, yDp: 169.6, widthDp: 27.38, heightDp: 44.8, rightDp: 0, bottomDp: 169.6, xPx: 2263, yPx: 477, widthPx: 77, heightPx: 126, rightPx: 0, bottomPx: 477 },
+            condition: { oneUi: "5.1", android: "13", note: `Samsung RTL India/Noida, SM-A245F-IN5, same build TP1A.220624.014.A245FXXU2AWE6, 450 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 3, 2340×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A24 (SM-A245F), rotation 3, 3-button", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a24/recapture-2026-09-30-rotation/main-landscape-3-threeButton.json", retrievedAt: "2026-09-30" }],
+          },
+        },
+      },
+    },
     insets: { gesture: measuredInsets("gesture"), threeButton: measuredInsets("threeButton") },
     sources: [specifications, captureSource("gesture"), captureSource("threeButton")],
   }],
