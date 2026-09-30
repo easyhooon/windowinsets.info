@@ -23,8 +23,10 @@
   **Return this device to get back 1 credit(s)** checked returns one credit.
   The option appears only while at least one whole 15-minute block is unused;
   with 14 minutes or less left, no return is offered.
-- The reservation page's own Return does not refund a WebClient that was opened
-  as a browser tab; use the WebClient exit dialog.
+- The Reservations page offers the same one-credit return: hover the reservation
+  card, press its top-right close button, then **Return** in the Notification
+  dialog. Use it when the WebClient tab is gone; prefer the WebClient exit dialog
+  otherwise.
 - The exit can show a `postMessage` error; the refund still applies, so confirm
   it from the device-list header rather than the error.
 - A typical measured device therefore costs **1 credit net** (book 2, return 1).

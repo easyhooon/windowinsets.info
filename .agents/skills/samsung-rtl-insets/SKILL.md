@@ -143,7 +143,11 @@ confirm the **Exit** dialog, and check Reservations. If WebClient offers
 **Return this device to get back 1 credit(s)**, select it and verify the balance
 increased. The Exit dialog can render behind the device canvas, so the
 checkbox may be hidden in screenshots; confirm it in the DOM and check it there
-before pressing OK. The visible offer establishes refund eligibility; use the remaining
+before pressing OK. The Reservations page is a second refund channel: hover the
+reservation card to reveal its top-right **Return device** close button
+(`.reservation-item__close-button`, `display: none` until hover), then confirm
+**Return** in the Notification dialog. Use it when the WebClient tab is no longer
+reachable. The visible offer establishes refund eligibility; use the remaining
 time as a deadline, not a reason to retry a missing offer. When
 no return is offered, **Exit** can end the test while the paid reservation
 remains listed until its timer expires. Do not report that reservation as
