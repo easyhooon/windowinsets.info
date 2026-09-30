@@ -179,6 +179,7 @@ fill them.
 | Galaxy Tab S10 FE+ | SM-X620 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s10-fe-plus/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S10 FE | SM-X520 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s10-fe/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S10 Lite | SM-X406B | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s10-lite/recapture-2026-09-30-rotation/`) | None |
+| Galaxy Tab S9 Ultra | SM-X916B | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s9-ultra/recapture-2026-09-30-rotation/`) | None |
 | Galaxy Tab S9 FE+ | SM-X616N | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s9-fe-plus/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S11 | SM-X730 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s11/recapture-2026-09-29-rotation/`) | None |
 | Galaxy S21+ | SM-G996B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s21-plus/recapture-2026-09-29-rotation/`) | None |
@@ -216,5 +217,5 @@ Note and A.
 | Series | Devices | Screens |
 | --- | --- | --- |
 | Galaxy Z Flip | original Z Flip (not listed on RTL as of 2026-09-28) | Main (no cover skin) |
-| Galaxy Tab | S9 Ultra, S9+, S9 FE, S9, S8 Ultra, S8+, S8, S7+, S7 FE, A11, A9+, A7 Lite | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
+| Galaxy Tab | S9+, S9 FE, S9, S8 Ultra, S8+, S8, S7+, S7 FE, A11, A9+, A7 Lite | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
 | Galaxy A | A73, A56, A53, A52s, A34, A33, A32 5G, A32, A24, A23, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |

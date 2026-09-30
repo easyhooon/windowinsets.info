@@ -43,6 +43,61 @@ const measurement = (mode: "gesture" | "threeButton"): InsetsMeasurement => {
   };
 };
 
+const rotationBase = `${captureBase}/recapture-2026-09-30-rotation`;
+const rotationMeasurements = {
+  0: {
+    sizePx: { width: 1848, height: 2960 }, sizeDp: { width: 1056, height: 1691.43 },
+    bottom: 48, bottomPx: 84, gestureBottom: 14.86, gestureBottomPx: 26,
+    cutout: { top: 0, right: 16, bottom: 0, left: 0 },
+    cutoutPx: { top: 0, right: 28, bottom: 0, left: 0 },
+    shape: { xDp: 1040, yDp: 792.57, widthDp: 16, heightDp: 106.29, rightDp: 0, bottomDp: 792.57, xPx: 1820, yPx: 1387, widthPx: 28, heightPx: 186, rightPx: 0, bottomPx: 1387 },
+    file: "main",
+  },
+  2: {
+    sizePx: { width: 1848, height: 2960 }, sizeDp: { width: 1056, height: 1691.43 },
+    bottom: 48, bottomPx: 84, gestureBottom: 14.86, gestureBottomPx: 26,
+    cutout: { top: 0, right: 0, bottom: 0, left: 16 },
+    cutoutPx: { top: 0, right: 0, bottom: 0, left: 28 },
+    shape: { xDp: 0, yDp: 792.57, widthDp: 16, heightDp: 106.29, rightDp: 1040, bottomDp: 792.57, xPx: 0, yPx: 1387, widthPx: 28, heightPx: 186, rightPx: 1820, bottomPx: 1387 },
+    file: "portrait-2",
+  },
+  // The cutout edge is at the bottom, so the navigation inset grows by the 28 px cutout.
+  3: {
+    sizePx: { width: 2960, height: 1848 }, sizeDp: { width: 1691.43, height: 1056 },
+    bottom: 64, bottomPx: 112, gestureBottom: 30.86, gestureBottomPx: 54,
+    cutout: { top: 0, right: 0, bottom: 16, left: 0 },
+    cutoutPx: { top: 0, right: 0, bottom: 28, left: 0 },
+    shape: { xDp: 792.57, yDp: 1040, widthDp: 106.29, heightDp: 16, rightDp: 792.57, bottomDp: 0, xPx: 1387, yPx: 1820, widthPx: 186, heightPx: 28, rightPx: 1387, bottomPx: 0 },
+    file: "landscape-3",
+  },
+} as const;
+
+const rotationCapture = (rotation: 0 | 2 | 3) => {
+  const data = rotationMeasurements[rotation];
+  const insets = (mode: "gesture" | "threeButton"): InsetsMeasurement => {
+    const isGesture = mode === "gesture";
+    return {
+      systemBars: { top: 24, right: 0, bottom: isGesture ? data.gestureBottom : data.bottom, left: 0 },
+      systemBarsPx: { top: 42, right: 0, bottom: isGesture ? data.gestureBottomPx : data.bottomPx, left: 0 },
+      displayCutout: data.cutout,
+      displayCutoutPx: data.cutoutPx,
+      cutoutShape: data.shape,
+      condition: {
+        oneUi: "7.0",
+        android: "15",
+        note: `Samsung RTL UK/Staines, SM-X916B-UK01, same build AP3A.240905.015.A2.X916BXXS5CYG1. Separate rotation ${rotation} capture at ${data.sizePx.width}×${data.sizePx.height} px, 280 dpi and font scale 1, driven over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same sweep's rotation 1 files reproduce the accepted captures exactly.`,
+      },
+      sources: [{
+        kind: "measured",
+        label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy Tab S9 Ultra, rotation ${rotation}, ${isGesture ? "gesture" : "3-button"}`,
+        url: `${rotationBase}/${data.file}-${mode}.json`,
+        retrievedAt: "2026-09-30",
+      }],
+    };
+  };
+  return { logicalSizePx: data.sizePx, logicalSizeDp: data.sizeDp, insets: { gesture: insets("gesture"), threeButton: insets("threeButton") } };
+};
+
 export const galaxyTabS9Ultra: Device = {
   slug: "galaxy-tab-s9-ultra",
   name: "Galaxy Tab S9 Ultra",
@@ -67,6 +122,7 @@ export const galaxyTabS9Ultra: Device = {
       gesture: measurement("gesture"),
       threeButton: measurement("threeButton"),
     },
+    rotations: { 0: rotationCapture(0), 2: rotationCapture(2), 3: rotationCapture(3) },
     sources: [samsungSpecs, gestureSource, threeButtonSource],
   }],
   sources: [samsungSpecs, gestureSource, threeButtonSource],
