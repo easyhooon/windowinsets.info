@@ -63,6 +63,57 @@ export const galaxyA15: Device = {
     densityDpi: 450,
     cornerRadiiDp: null,
     cornerRadiiPx: null,
+    // Separate captures of rotations 1 and 3; never derived from rotation 0.
+    rotations: {
+      1: {
+        logicalSizePx: { width: 2340, height: 1080 },
+        logicalSizeDp: { width: 832, height: 384 },
+        insets: {
+          gesture: {
+            systemBars: { top: 24.18, right: 0, bottom: 14.93, left: 0 },
+            systemBarsPx: { top: 68, right: 0, bottom: 42, left: 0 },
+            displayCutout: { top: 0, right: 0, bottom: 0, left: 28.44 },
+            displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 80 },
+            cutoutShape: { xDp: 0, yDp: 167.82, widthDp: 28.44, heightDp: 48.36, rightDp: 803.56, bottomDp: 167.82, xPx: 0, yPx: 472, widthPx: 80, heightPx: 136, rightPx: 2260, bottomPx: 472 },
+            condition: { oneUi: "6.1", android: "14", note: `Samsung RTL Russia/Moscow, SM-A155F-RU2, build UP1A.231005.007.A155FXXS5BYC2 (the same Android 14 / One UI 6.1 release line as the accepted capture), 450 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 1, 2340×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A15 (SM-A155F), rotation 1, gesture", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a15-5g/recapture-2026-09-30-rotation/main-landscape-1-gesture.json", retrievedAt: "2026-09-30" }],
+          },
+          threeButton: {
+            systemBars: { top: 24.18, right: 48, bottom: 0, left: 0 },
+            systemBarsPx: { top: 68, right: 135, bottom: 0, left: 0 },
+            displayCutout: { top: 0, right: 0, bottom: 0, left: 28.44 },
+            displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 80 },
+            cutoutShape: { xDp: 0, yDp: 167.82, widthDp: 28.44, heightDp: 48.36, rightDp: 803.56, bottomDp: 167.82, xPx: 0, yPx: 472, widthPx: 80, heightPx: 136, rightPx: 2260, bottomPx: 472 },
+            condition: { oneUi: "6.1", android: "14", note: `Samsung RTL Russia/Moscow, SM-A155F-RU2, build UP1A.231005.007.A155FXXS5BYC2 (the same Android 14 / One UI 6.1 release line as the accepted capture), 450 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 1, 2340×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A15 (SM-A155F), rotation 1, 3-button", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a15-5g/recapture-2026-09-30-rotation/main-landscape-1-threeButton.json", retrievedAt: "2026-09-30" }],
+          },
+        },
+      },
+      3: {
+        logicalSizePx: { width: 2340, height: 1080 },
+        logicalSizeDp: { width: 832, height: 384 },
+        insets: {
+          gesture: {
+            systemBars: { top: 24.18, right: 0, bottom: 14.93, left: 0 },
+            systemBarsPx: { top: 68, right: 0, bottom: 42, left: 0 },
+            displayCutout: { top: 0, right: 28.44, bottom: 0, left: 0 },
+            displayCutoutPx: { top: 0, right: 80, bottom: 0, left: 0 },
+            cutoutShape: { xDp: 803.56, yDp: 167.82, widthDp: 28.44, heightDp: 48.36, rightDp: 0, bottomDp: 167.82, xPx: 2260, yPx: 472, widthPx: 80, heightPx: 136, rightPx: 0, bottomPx: 472 },
+            condition: { oneUi: "6.1", android: "14", note: `Samsung RTL Russia/Moscow, SM-A155F-RU2, build UP1A.231005.007.A155FXXS5BYC2 (the same Android 14 / One UI 6.1 release line as the accepted capture), 450 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 3, 2340×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A15 (SM-A155F), rotation 3, gesture", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a15-5g/recapture-2026-09-30-rotation/main-landscape-3-gesture.json", retrievedAt: "2026-09-30" }],
+          },
+          threeButton: {
+            systemBars: { top: 24.18, right: 0, bottom: 0, left: 48 },
+            systemBarsPx: { top: 68, right: 0, bottom: 0, left: 135 },
+            displayCutout: { top: 0, right: 28.44, bottom: 0, left: 0 },
+            displayCutoutPx: { top: 0, right: 80, bottom: 0, left: 0 },
+            cutoutShape: { xDp: 803.56, yDp: 167.82, widthDp: 28.44, heightDp: 48.36, rightDp: 0, bottomDp: 167.82, xPx: 2260, yPx: 472, widthPx: 80, heightPx: 136, rightPx: 0, bottomPx: 472 },
+            condition: { oneUi: "6.1", android: "14", note: `Samsung RTL Russia/Moscow, SM-A155F-RU2, build UP1A.231005.007.A155FXXS5BYC2 (the same Android 14 / One UI 6.1 release line as the accepted capture), 450 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 3, 2340×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A15 (SM-A155F), rotation 3, 3-button", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a15-5g/recapture-2026-09-30-rotation/main-landscape-3-threeButton.json", retrievedAt: "2026-09-30" }],
+          },
+        },
+      },
+    },
     insets: { gesture: measuredInsets("gesture"), threeButton: measuredInsets("threeButton") },
     sources: [lteSpecs, fiveGSpecs, captureSource("gesture"), captureSource("threeButton")],
   }],
