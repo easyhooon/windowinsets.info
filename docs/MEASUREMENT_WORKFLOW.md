@@ -237,4 +237,9 @@ Note and A.
 | --- | --- | --- |
 | Galaxy Z Flip | original Z Flip (not listed on RTL as of 2026-09-28) | Main (no cover skin) |
 | Galaxy Tab | S9 (no Android 16 unit matching the accepted build is listed on RTL as of 2026-09-30) | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
-| Galaxy A | A56, A53, A32 5G, A13 LTE, A07, A06, A05, A04 | Main |
+| Galaxy A | A56, A53, A32 5G, A07, A06, A05, A04 | Main |
+
+Galaxy A13 LTE (SM-A135F) has natural captures but no registered skin or
+device page. Its 2026-09-30 rotation 1 and 3 captures in both modes
+(`measurements/galaxy-a/galaxy-a13-lte/recapture-2026-09-30-rotation/`) are
+kept as raw evidence until an official skin is imported.
