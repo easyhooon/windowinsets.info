@@ -38,6 +38,26 @@ const measurement = (mode: "gesture" | "threeButton"): InsetsMeasurement => {
   };
 };
 
+const rotationBase = `${captureBase}/rtl-2026-09-30-android-15-rotation`;
+const rotationNote = "Samsung RTL Russia/Moscow, SM-X716B-RU3, build AP3A.240905.015.A2.X716BXXU5CYD9 (Android 15 / One UI 7.0), 340 dpi and font scale 1. RTL lists no unit on the Android 16 build of the natural capture, so these rotations come from the closest available release. Driven over Remote Debug Bridge (adb): navigation was selected in Settings and each rotation was fixed with `cmd window user-rotation lock`. This release reports a 51 px status bar in every rotation, including its own rotation 0 file, against 64 px on the Android 16 natural capture; the bottom insets match.";
+// Rotations 1, 2 and 3 are Android 15 captures; never mixed into the Android 16 natural values.
+const rotationCapture = (file: string, width: number, height: number) => {
+  const insets = (mode: "gesture" | "threeButton"): InsetsMeasurement => ({
+    ...measurement(mode),
+    systemBars: { top: 24, right: 0, bottom: mode === "gesture" ? 15.06 : 48, left: 0 },
+    systemBarsPx: { top: 51, right: 0, bottom: mode === "gesture" ? 32 : 102, left: 0 },
+    condition: { oneUi: "7.0", android: "15", note: rotationNote },
+    sources: [{
+      kind: "measured",
+      label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy Tab S9 5G (SM-X716B), ${file}, ${mode}, font scale 1`,
+      url: `${rotationBase}/${file}-${mode}.json`,
+      retrievedAt: "2026-09-30",
+    }],
+  });
+  const dp = (px: number) => Math.round(px / 2.125 * 100) / 100;
+  return { logicalSizePx: { width, height }, logicalSizeDp: { width: dp(width), height: dp(height) }, insets: { gesture: insets("gesture"), threeButton: insets("threeButton") } };
+};
+
 export const galaxyTabS9: Device = {
   slug: "galaxy-tab-s9",
   name: "Galaxy Tab S9",
@@ -61,6 +81,11 @@ export const galaxyTabS9: Device = {
     insets: {
       gesture: measurement("gesture"),
       threeButton: measurement("threeButton"),
+    },
+    rotations: {
+      1: rotationCapture("landscape-1", 2560, 1600),
+      2: rotationCapture("portrait-2", 1600, 2560),
+      3: rotationCapture("landscape-3", 2560, 1600),
     },
     sources: [samsungSpecs, gestureSource, threeButtonSource],
   }],

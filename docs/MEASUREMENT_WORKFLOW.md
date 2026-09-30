@@ -196,6 +196,7 @@ fill them.
 | Galaxy Tab S10 Lite | SM-X406B | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s10-lite/recapture-2026-09-30-rotation/`) | None |
 | Galaxy Tab S9 Ultra | SM-X916B | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s9-ultra/recapture-2026-09-30-rotation/`) | None |
 | Galaxy Tab S9+ | SM-X816B | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s9-plus/recapture-2026-09-30-rotation/`) | None |
+| Galaxy Tab S9 | SM-X710 (natural, Android 16), SM-X716B (rotations, Android 15) | Main: rotations 0, 1, 2 and 3 in both modes; rotations 1, 2 and 3 from `measurements/galaxy-tab/galaxy-tab-s9/rtl-2026-09-30-android-15-rotation/` | None on RTL. The rotations are Android 15 / One UI 7.0 captures with a 51 px status bar against 64 px on the Android 16 natural capture; recapture if an Android 16 unit appears |
 | Galaxy Tab S9 FE | SM-X516N | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s9-fe/recapture-2026-09-30-rotation/`) | None |
 | Galaxy Tab S8 Ultra | SM-X906B | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s8-ultra/recapture-2026-09-30-rotation/`) | None |
 | Galaxy Tab S8+ | SM-X806B | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s8-plus/recapture-2026-09-30-rotation/`) | None |
@@ -236,14 +237,8 @@ fill them.
 
 ### Natural rotation only — full sweep needed
 
-Recapture every listed screen in both navigation modes. Use the queue order in
-`.agents/skills/samsung-rtl-insets/SKILL.md`: Fold, then Flip, then S, then Tab,
-Note and A.
-
-| Series | Devices | Screens |
-| --- | --- | --- |
-| Galaxy Tab | S9 (no Android 16 unit matching the accepted build is listed on RTL as of 2026-09-30) | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
-| Galaxy A | A32 5G | Main |
+No model is queued. Galaxy A32 5G is excluded because RTL lists no unit for it
+(checked 2026-09-30); it keeps its natural captures.
 
 Galaxy A13 LTE (SM-A135F) has natural captures but no registered skin or
 device page. Its 2026-09-30 rotation 1 and 3 captures in both modes
