@@ -1,8 +1,24 @@
 import { useEffect, useMemo, useState } from "react";
 import hljs from "highlight.js/lib/core";
+import type { HLJSApi, Language } from "highlight.js";
 import kotlin from "highlight.js/lib/languages/kotlin";
 
-hljs.registerLanguage("kotlin", kotlin);
+// The stock Kotlin grammar only colors keywords, strings, comments and numbers,
+// leaving Compose calls and named arguments plain. Add IDE-like modes for them.
+function kotlinWithCalls(api: HLJSApi): Language {
+  const language = kotlin(api);
+  const keywords = String((language.keywords as Record<string, unknown>).keyword ?? "")
+    .split(/\s+/).filter(Boolean).join("|");
+  language.contains = [
+    ...(language.contains ?? []),
+    { scope: "attr", match: /(?<=(?:^|[(,])\s*)[a-z][A-Za-z0-9_]*(?=\s*=(?!=))/ },
+    { scope: "title.function", match: new RegExp(`\\b(?!(?:${keywords})\\b)[A-Za-z_][A-Za-z0-9_]*(?=\\s*[({])`) },
+    { scope: "title.class", match: /\b[A-Z][A-Za-z0-9_]*\b/ },
+  ];
+  return language;
+}
+
+hljs.registerLanguage("kotlin", kotlinWithCalls);
 
 export function CodeBlock({ children, title }: { children: string; title: string }) {
   const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
