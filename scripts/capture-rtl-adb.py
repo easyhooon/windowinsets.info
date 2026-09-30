@@ -76,7 +76,8 @@ def settings_switch(mode):
     # so select the mode in Settings > Display > Navigation bar like a user would.
     sh("input keyevent KEYCODE_WAKEUP", check=False); sh("wm dismiss-keyguard", check=False)
     sh("am start -W -a android.settings.DISPLAY_SETTINGS"); time.sleep(2)
-    tap_text(r"^Navigation bar$", scroll=6)
+    # The row's summary also opens it when a scroll leaves the title above the screen.
+    tap_text(r"^(Navigation bar|Manage the Home, Back, and Recents buttons.*)$", scroll=6)
     tap_text(r"^Swipe gestures$" if mode == "gesture" else r"^Buttons$")
     sh("input keyevent KEYCODE_HOME", check=False)
 
