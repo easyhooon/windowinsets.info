@@ -24,7 +24,7 @@ html, body { margin:0; background:#f6f8fa; color:#1f2328; color-scheme:light; fo
 button, input, summary { font:inherit; }
 button, summary { cursor:pointer; }
 button:disabled { cursor:default; }
-.code-block { margin-top:8px; overflow:hidden; border:1px solid #d1d9e0; border-radius:8px; background:#fff; }
+.code-block { position:relative; margin-top:8px; overflow:hidden; border:1px solid #d1d9e0; border-radius:8px; background:#fff; }
 .code-block-toolbar { display:flex; align-items:center; justify-content:space-between; padding:4px 12px; border-bottom:1px solid #d1d9e0; background:#f6f8fa; color:#59636e; font-size:12px; font-weight:600; }
 .code-block-toolbar button { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-width:88px; min-height:36px; border:1px solid transparent; border-radius:5px; color:#1f2328; }
 .code-block-toolbar button:hover { border-color:#d1d9e0; background:#fff; }
