@@ -55,6 +55,57 @@ export const galaxyA04: Device = {
     densityDpi: 300,
     cornerRadiiDp: null,
     cornerRadiiPx: null,
+    // Separate captures of rotations 1 and 3; never derived from rotation 0.
+    rotations: {
+      1: {
+        logicalSizePx: { width: 1600, height: 720 },
+        logicalSizeDp: { width: 853.33, height: 384 },
+        insets: {
+          gesture: {
+            systemBars: { top: 24, right: 0, bottom: 14.93, left: 0 },
+            systemBarsPx: { top: 45, right: 0, bottom: 28, left: 0 },
+            displayCutout: { top: 0, right: 0, bottom: 0, left: 24 },
+            displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 45 },
+            cutoutShape: { xDp: 0, yDp: 145.07, widthDp: 24, heightDp: 93.87, rightDp: 829.33, bottomDp: 145.07, xPx: 0, yPx: 272, widthPx: 45, heightPx: 176, rightPx: 1555, bottomPx: 272 },
+            condition: { oneUi: "6.1", android: "14", note: `Samsung RTL Russia/Moscow, SM-A045F-RU3, build UP1A.231005.007.A045FXXU7EXH2 (the same Android 14 / One UI 6.1 release line as the accepted capture), 300 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 1, 1600×720 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A04 (SM-A045F), rotation 1, gesture", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a04/recapture-2026-09-30-rotation/main-landscape-1-gesture.json", retrievedAt: "2026-09-30" }],
+          },
+          threeButton: {
+            systemBars: { top: 24, right: 48, bottom: 0, left: 0 },
+            systemBarsPx: { top: 45, right: 90, bottom: 0, left: 0 },
+            displayCutout: { top: 0, right: 0, bottom: 0, left: 24 },
+            displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 45 },
+            cutoutShape: { xDp: 0, yDp: 145.07, widthDp: 24, heightDp: 93.87, rightDp: 829.33, bottomDp: 145.07, xPx: 0, yPx: 272, widthPx: 45, heightPx: 176, rightPx: 1555, bottomPx: 272 },
+            condition: { oneUi: "6.1", android: "14", note: `Samsung RTL Russia/Moscow, SM-A045F-RU3, build UP1A.231005.007.A045FXXU7EXH2 (the same Android 14 / One UI 6.1 release line as the accepted capture), 300 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 1, 1600×720 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A04 (SM-A045F), rotation 1, 3-button", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a04/recapture-2026-09-30-rotation/main-landscape-1-threeButton.json", retrievedAt: "2026-09-30" }],
+          },
+        },
+      },
+      3: {
+        logicalSizePx: { width: 1600, height: 720 },
+        logicalSizeDp: { width: 853.33, height: 384 },
+        insets: {
+          gesture: {
+            systemBars: { top: 24, right: 0, bottom: 14.93, left: 0 },
+            systemBarsPx: { top: 45, right: 0, bottom: 28, left: 0 },
+            displayCutout: { top: 0, right: 24, bottom: 0, left: 0 },
+            displayCutoutPx: { top: 0, right: 45, bottom: 0, left: 0 },
+            cutoutShape: { xDp: 829.33, yDp: 145.07, widthDp: 24, heightDp: 93.87, rightDp: 0, bottomDp: 145.07, xPx: 1555, yPx: 272, widthPx: 45, heightPx: 176, rightPx: 0, bottomPx: 272 },
+            condition: { oneUi: "6.1", android: "14", note: `Samsung RTL Russia/Moscow, SM-A045F-RU3, build UP1A.231005.007.A045FXXU7EXH2 (the same Android 14 / One UI 6.1 release line as the accepted capture), 300 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 3, 1600×720 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A04 (SM-A045F), rotation 3, gesture", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a04/recapture-2026-09-30-rotation/main-landscape-3-gesture.json", retrievedAt: "2026-09-30" }],
+          },
+          threeButton: {
+            systemBars: { top: 24, right: 0, bottom: 0, left: 48 },
+            systemBarsPx: { top: 45, right: 0, bottom: 0, left: 90 },
+            displayCutout: { top: 0, right: 24, bottom: 0, left: 0 },
+            displayCutoutPx: { top: 0, right: 45, bottom: 0, left: 0 },
+            cutoutShape: { xDp: 829.33, yDp: 145.07, widthDp: 24, heightDp: 93.87, rightDp: 0, bottomDp: 145.07, xPx: 1555, yPx: 272, widthPx: 45, heightPx: 176, rightPx: 0, bottomPx: 272 },
+            condition: { oneUi: "6.1", android: "14", note: `Samsung RTL Russia/Moscow, SM-A045F-RU3, build UP1A.231005.007.A045FXXU7EXH2 (the same Android 14 / One UI 6.1 release line as the accepted capture), 300 dpi and font scale 1, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 3, 1600×720 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A04 (SM-A045F), rotation 3, 3-button", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a04/recapture-2026-09-30-rotation/main-landscape-3-threeButton.json", retrievedAt: "2026-09-30" }],
+          },
+        },
+      },
+    },
     insets: { gesture: measuredInsets("gesture"), threeButton: measuredInsets("threeButton") },
     sources: [samsungSpecs, captureSource("gesture"), captureSource("threeButton")],
   }],
