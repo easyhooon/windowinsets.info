@@ -175,7 +175,7 @@ fill them.
 | Galaxy A73 5G | SM-A736B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a73-5g/recapture-2026-09-30-rotation/`) | None |
 | Galaxy A52s 5G | SM-A528B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a52s-5g/recapture-2026-09-30-rotation/`) | None |
 | Galaxy A34 5G | SM-A346E | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a34-5g/recapture-2026-09-30-rotation/`) | None |
-| Galaxy A33 5G | SM-A336E | Main: natural in both modes; rotation 1 and 3 in 3-button mode (`measurements/galaxy-a/galaxy-a33-5g/recapture-2026-09-30-rotation/`) | Main gesture rotations 1 and 3; the 2026-09-30 gesture captures report no bottom navigation inset and 67 px side gesture insets against the accepted 42 px and 84 px, so they are kept as rejected evidence (`measurements/galaxy-a/galaxy-a33-5g/rejected-2026-09-30/`) |
+| Galaxy A33 5G | SM-A336E | Main: natural, rotation 1 and 3 in both modes (3-button `measurements/galaxy-a/galaxy-a33-5g/recapture-2026-09-30-rotation/`, gesture `recapture-2026-09-30-gesture-rotation/`) | None. The SM-A336E-IN1 gesture captures without a bottom navigation inset stay rejected evidence (`rejected-2026-09-30/`) |
 | Galaxy A32 | SM-A325F | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a32/recapture-2026-09-30-rotation/`) | None |
 | Galaxy A24 | SM-A245F | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a24/recapture-2026-09-30-rotation/`) | None |
 | Galaxy A23 | SM-A235F | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a23-5g/recapture-2026-09-30-rotation/`) | None |

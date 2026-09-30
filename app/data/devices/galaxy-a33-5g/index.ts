@@ -28,7 +28,15 @@ export const galaxyA33: Device = {
         logicalSizePx: { width: 2400, height: 1080 },
         logicalSizeDp: { width: 853.33, height: 384 },
         insets: {
-          gesture: null,
+          gesture: {
+            systemBars: { top: 24.18, right: 0, bottom: 14.93, left: 0 },
+            systemBarsPx: { top: 68, right: 0, bottom: 42, left: 0 },
+            displayCutout: { top: 0, right: 0, bottom: 0, left: 28.44 },
+            displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 80 },
+            cutoutShape: { xDp: 0, yDp: 166.4, widthDp: 28.44, heightDp: 51.2, rightDp: 824.89, bottomDp: 166.4, xPx: 0, yPx: 468, widthPx: 80, heightPx: 144, rightPx: 2320, bottomPx: 468 },
+            condition: { oneUi: "5.1", android: "13", note: `Samsung RTL India/Noida, SM-A336E-IN2, build TP1A.220624.014.A336EDXU7CWG3 (the same Android 13 / One UI 5.1 release line as the accepted capture), 450 dpi and font scale 1, captured over Remote Debug Bridge with gesture navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 file reproduces the accepted gesture capture. Landscape rotation 1, 2400×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A33 5G (SM-A336E), rotation 1, gesture", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a33-5g/recapture-2026-09-30-gesture-rotation/main-landscape-1-gesture.json", retrievedAt: "2026-09-30" }],
+          },
           threeButton: {
             systemBars: { top: 24.18, right: 48, bottom: 0, left: 0 },
             systemBarsPx: { top: 68, right: 135, bottom: 0, left: 0 },
@@ -44,7 +52,15 @@ export const galaxyA33: Device = {
         logicalSizePx: { width: 2400, height: 1080 },
         logicalSizeDp: { width: 853.33, height: 384 },
         insets: {
-          gesture: null,
+          gesture: {
+            systemBars: { top: 24.18, right: 0, bottom: 14.93, left: 0 },
+            systemBarsPx: { top: 68, right: 0, bottom: 42, left: 0 },
+            displayCutout: { top: 0, right: 28.44, bottom: 0, left: 0 },
+            displayCutoutPx: { top: 0, right: 80, bottom: 0, left: 0 },
+            cutoutShape: { xDp: 824.89, yDp: 166.4, widthDp: 28.44, heightDp: 51.2, rightDp: 0, bottomDp: 166.4, xPx: 2320, yPx: 468, widthPx: 80, heightPx: 144, rightPx: 0, bottomPx: 468 },
+            condition: { oneUi: "5.1", android: "13", note: `Samsung RTL India/Noida, SM-A336E-IN2, build TP1A.220624.014.A336EDXU7CWG3 (the same Android 13 / One UI 5.1 release line as the accepted capture), 450 dpi and font scale 1, captured over Remote Debug Bridge with gesture navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 file reproduces the accepted gesture capture. Landscape rotation 3, 2400×1080 px.` },
+            sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy A33 5G (SM-A336E), rotation 3, gesture", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a33-5g/recapture-2026-09-30-gesture-rotation/main-landscape-3-gesture.json", retrievedAt: "2026-09-30" }],
+          },
           threeButton: {
             systemBars: { top: 24.18, right: 0, bottom: 0, left: 48 },
             systemBarsPx: { top: 68, right: 0, bottom: 0, left: 135 },
