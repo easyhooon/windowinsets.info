@@ -186,6 +186,7 @@ fill them.
 | Galaxy A05 | SM-A055F | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a05/recapture-2026-09-30-rotation/`) | None |
 | Galaxy A04 | SM-A045F | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a04/recapture-2026-09-30-rotation/`) | None |
 | Galaxy A56 5G | SM-A566B (natural), SM-A566E (rotations) | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a56-5g/recapture-2026-09-30-rotation/`) | None. An Android 16 / One UI 8.5 sweep on SM-A566B-PL03 reports a 101 px status bar against 92 px and is kept unregistered in `android-16-2026-09-30/` |
+| Galaxy A53 5G | SM-A536B (natural), SM-A536E (rotations) | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a53-5g/recapture-2026-09-30-rotation/`) | None |
 | Galaxy A55 5G | SM-A556S | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a55-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S11 Ultra | SM-X930 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S10 Ultra | SM-X920 | Main: rotation 1 in both modes (accepted). All four rotations in 3-button (`measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation/`, rotation 2 in `recapture-2026-09-29-rotation-in2/`) and in gesture (`recapture-2026-09-29-rotation-vn1/`) | None |
@@ -242,7 +243,7 @@ Note and A.
 | --- | --- | --- |
 | Galaxy Z Flip | original Z Flip (not listed on RTL as of 2026-09-28) | Main (no cover skin) |
 | Galaxy Tab | S9 (no Android 16 unit matching the accepted build is listed on RTL as of 2026-09-30) | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
-| Galaxy A | A53, A32 5G | Main |
+| Galaxy A | A32 5G | Main |
 
 Galaxy A13 LTE (SM-A135F) has natural captures but no registered skin or
 device page. Its 2026-09-30 rotation 1 and 3 captures in both modes
