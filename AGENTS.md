@@ -27,8 +27,9 @@ but prioritize new measurements from RTL-offered models. User-supplied physical
 devices (such as Fold2) can also contribute verified captures. Track RTL catalog status
 separately from per-screen captures. Only a complete, dated reservation inventory
 can establish that a model is not listed; 403 responses and featured-only lists
-leave other models unverified. Preserve historical captures. See
-`docs/RTL_COVERAGE.md` for evidence and comparison status.
+leave other models unverified. Preserve historical captures. RTL catalog status
+lives in `app/data/rtlAvailability.ts`; capture evidence is the raw JSON each
+device `Source` links to.
 
 ## Start here
 

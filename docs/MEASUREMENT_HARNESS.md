@@ -26,7 +26,7 @@ flowchart TB
     Probe["Instrument<br/>InsetsProbe app (sweep + upload)"]
     Api["Vercel Function<br/>POST /api/captures → capture-inbox PR"]
     Checks["Gates<br/>raw-vs-data comparison, typecheck, rendering tests"]
-    Record["Evidence<br/>measurements/ + RTL_COVERAGE.md"]
+    Record["Evidence<br/>measurements/ + device sources"]
   end
 
   subgraph External["External systems"]
@@ -55,7 +55,7 @@ flowchart TB
 | Instrument | InsetsProbe 1.6.0 | Reads real `WindowInsets`, rotates itself (0°/90°/270°), labels the capture, uploads JSON |
 | Input path | `api/captures.ts` (Vercel Function) → `capture-inbox` | Probe POSTs JSON to the deployed API; the function commits each upload unchanged through the GitHub API into one inbox PR |
 | Gates | Comparison script, `pnpm typecheck`, `tests/rendering.test.mjs` | Block wrong screen labels, stale builds and mismatched values |
-| Evidence | `measurements/<series>/<device>/recapture-*/`, coverage notes | Raw files stay immutable; every published value links to one |
+| Evidence | `measurements/<series>/<device>/recapture-*/`, device `Source` links | Raw files stay immutable; every published value links to one |
 
 ## The per-device loop
 
@@ -75,7 +75,7 @@ flowchart TD
   I --> K[Fetch inbox while reservation is live,<br/>validate 6 files: model, build,<br/>display, dpi, mode, rotation 0]
   K -->|mismatch| K1[Stop: record evidence, do not publish]
   K --> J[Exit WebClient with<br/>Return this device → +1 credit]
-  J --> L[Generate rotation records from raw JSON<br/>update queue + coverage docs]
+  J --> L[Generate rotation records from raw JSON<br/>update the queue]
   L --> M[typecheck + rendering tests]
   M --> N[PR → CI → merge]
   N --> A
@@ -104,7 +104,7 @@ flowchart TD
   D --> E[scripts/capture-rtl-adb.py<br/>install Probe, font scale 1,<br/>Settings → Navigation bar via uiautomator,<br/>user-rotation lock per rotation, pull JSON]
   E --> F[scripts/summarize-captures.py<br/>compare with accepted captures]
   F --> G[Exit WebClient with<br/>Return this device → +1 credit]
-  G --> H[Copy files unchanged, register rotations,<br/>update queue + coverage docs]
+  G --> H[Copy files unchanged, register rotations,<br/>update the queue]
 ```
 
 - Connect only works after the device stream has loaded (about 30–40 s); an
@@ -213,5 +213,4 @@ fixed in the harness rather than worked around by hand:
   over Remote Debug Bridge (`scripts/capture-rtl-adb.py`).
 
 See [MEASUREMENT_WORKFLOW.md](MEASUREMENT_WORKFLOW.md) for capture rules,
-[CAPTURE_UPLOAD.md](CAPTURE_UPLOAD.md) for the upload path and
-[RTL_COVERAGE.md](RTL_COVERAGE.md) for per-device evidence.
+[CAPTURE_UPLOAD.md](CAPTURE_UPLOAD.md) for the upload path.

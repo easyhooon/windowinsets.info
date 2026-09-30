@@ -6,7 +6,7 @@ description: "Continue Samsung Remote Test Lab inset collection: choose the next
 # Samsung RTL Insets
 
 Run this workflow from the WindowInsets repository. The authoritative project
-rules are `AGENTS.md`, `docs/RTL_COVERAGE.md`, `docs/MEASUREMENT_WORKFLOW.md`, and
+rules are `AGENTS.md`, `docs/MEASUREMENT_WORKFLOW.md`, `docs/MEASUREMENT_HARNESS.md`, and
 `tools/insets-probe/README.md`; read their current versions before acting.
 
 ## 1. Establish the queue
@@ -316,7 +316,6 @@ identify or clear the earlier report's failing SKU.
 Keep previously validated captures for that model. If 0% recurs, record the exact
 SKU, Android / One UI version, RTL location and APK version/checksum; do not treat
 one device's stalled install as proof that the APK or model is unsupported.
-See the per-model notes in `docs/RTL_COVERAGE.md`.
 
 ### Wake, unlock and normalize
 
@@ -547,8 +546,9 @@ it through `verifiedEntries` without replacing skin-only screens. Record RTL cat
 availability separately from measurements; mark the catalog complete only after an
 unfiltered inventory of every series and region has actually been checked.
 
-Update the measurement and RTL coverage docs with the capture date, model identifier,
-screen classification, navigation modes, and any limitations. Run at least:
+Update the queue in `docs/MEASUREMENT_WORKFLOW.md`. Put the capture date, unit,
+build, screen classification and any limitation in the device's source and
+condition note; do not keep a separate per-device evidence log. Run at least:
 
 ```bash
 pnpm typecheck

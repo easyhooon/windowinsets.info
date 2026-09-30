@@ -35,7 +35,6 @@ Start with this README for the product, data limits, device priorities and local
 | Match the reference UI and understand intentional Android differences | [Reference parity](docs/REFERENCE_PARITY.md) |
 | Capture insets, check data quality and find the remaining measurement queue | [Measurement workflow](docs/MEASUREMENT_WORKFLOW.md) |
 | Check which models and official skins belong in the catalogue | [Device coverage](docs/DEVICE_COVERAGE.md) |
-| Check Samsung RTL availability and per-model capture evidence | [RTL coverage](docs/RTL_COVERAGE.md) and its [skin comparison table](docs/RTL_SKIN_COMPARISON.csv) |
 | Check RTL credit policy and reservation budget | [RTL credits](docs/RTL_CREDITS.md) |
 | Compare physical Pixel Test Lab captures with emulator data | [Pixel hardware validation](docs/PIXEL_HARDWARE_VALIDATION.md) |
 | Set up the probe's capture inbox | [Capture upload](docs/CAPTURE_UPLOAD.md) |
@@ -119,7 +118,7 @@ flowchart LR
 2. Preserve the JSON and emulator manifest under `measurements/pixel/<pixel-slug>/emulator-<date>/`.
 3. Run `scripts/import-emulator-captures.py <pixel-slug>`. The importer validates rotation-0 identity, navigation mode and published display resolution; then it copies the AOSP skin with provenance and generates the Pixel device entry.
 
-These captures do not enter the real-device Capture inbox. See [Pixel emulator coverage and limits](docs/DEVICE_COVERAGE.md#google-pixel-issue-23) and the [measurement workflow](docs/MEASUREMENT_WORKFLOW.md#pixel-emulator-captures-issue-23-2026-09-27).
+These captures do not enter the real-device Capture inbox. See [Pixel emulator coverage and limits](docs/DEVICE_COVERAGE.md#google-pixel-issue-23) and the [measurement workflow](docs/MEASUREMENT_WORKFLOW.md#pixel-emulator-captures).
 
 ### Pixel hardware spot checks
 
@@ -248,7 +247,7 @@ See [release evidence and archive policy](docs/DEVICE_COVERAGE.md).
 
 Galaxy Z TriFold has official cover/inner artwork and a sequential two-hinge
 3D animation. Main and cover insets are verified in both navigation modes.
-See [TriFold scope](docs/REFERENCE_PARITY.md#trifold-support--2026-09-24).
+See [TriFold scope](docs/REFERENCE_PARITY.md#intentional-differences).
 
 An official skin permits an artwork preview, not a claim of verified inset data.
 Devices without captures remain marked **Skin preview / pending** until measured.

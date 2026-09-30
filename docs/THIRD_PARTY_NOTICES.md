@@ -24,4 +24,4 @@ identifies the devices and does not imply endorsement.
 
 Galaxy artwork under `public/skins/` comes from Samsung's
 [Galaxy Emulator Skin](https://developer.samsung.com/galaxy-emulator-skin)
-downloads; see `docs/REFERENCE_PARITY.md` for provenance.
+downloads; see `public/skins/README.md` for provenance.
