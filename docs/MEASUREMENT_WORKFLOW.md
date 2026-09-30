@@ -228,6 +228,7 @@ fill them.
 | Galaxy Z Flip7 | SM-F766N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip7/recapture-2026-09-27-rotation/`). Cover: natural in both modes on display 1 at 948×1048 px (`recapture-2026-09-28-flexwindow/`) | None. The cover does not rotate, so rotation 0 is its only layout |
 | Galaxy Z Flip7 FE | SM-F761B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip7-fe/recapture-2026-09-28-rotation/`) | None |
 | Galaxy Z Flip3 | SM-F711B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip3/recapture-2026-09-28-rotation/`) | None |
+| Galaxy Z Flip | SM-F700F | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip/recapture-2026-09-30-rotation/`) | None |
 | Galaxy Z Flip4 | SM-F721B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip4/recapture-2026-09-28-rotation/`) | None |
 | Galaxy Z Flip6 | SM-F741U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip6/recapture-2026-09-27-rotation/`) | None |
 | Galaxy Z Flip5 | SM-F731B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-flip/galaxy-z-flip5/recapture-2026-09-27-rotation/`) | None |
@@ -241,7 +242,6 @@ Note and A.
 
 | Series | Devices | Screens |
 | --- | --- | --- |
-| Galaxy Z Flip | original Z Flip (not listed on RTL as of 2026-09-28) | Main (no cover skin) |
 | Galaxy Tab | S9 (no Android 16 unit matching the accepted build is listed on RTL as of 2026-09-30) | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
 | Galaxy A | A32 5G | Main |
 

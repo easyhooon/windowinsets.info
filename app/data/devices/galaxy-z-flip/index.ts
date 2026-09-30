@@ -48,6 +48,57 @@ export const galaxyZFlip: Device = {
       densityDpi: 480,
       cornerRadiiDp,
       cornerRadiiPx,
+      // Separate captures of rotations 1 and 3; never derived from rotation 0.
+      rotations: {
+        1: {
+          logicalSizePx: { width: 2636, height: 1080 },
+          logicalSizeDp: { width: 878.67, height: 360 },
+          insets: {
+            gesture: {
+              systemBars: { top: 24, right: 0, bottom: 15, left: 0 },
+              systemBarsPx: { top: 72, right: 0, bottom: 45, left: 0 },
+              displayCutout: { top: 0, right: 0, bottom: 0, left: 30.33 },
+              displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 91 },
+              cutoutShape: { xDp: 0, yDp: 164.67, widthDp: 30.33, heightDp: 30.33, rightDp: 848.34, bottomDp: 165, xPx: 0, yPx: 494, widthPx: 91, heightPx: 91, rightPx: 2545, bottomPx: 495 },
+              condition: { oneUi: "5.1.1", android: "13", note: `Samsung RTL India/Noida, SM-F700F-IN5, same build TP1A.220624.014.F700FXXUDKWI6, 480 dpi and font scale 1, main display unfolded, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 1, 2636×1080 px.` },
+              sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy Z Flip (SM-F700F), rotation 1, gesture", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip/recapture-2026-09-30-rotation/main-landscape-1-gesture.json", retrievedAt: "2026-09-30" }],
+            },
+            threeButton: {
+              systemBars: { top: 24, right: 48, bottom: 0, left: 0 },
+              systemBarsPx: { top: 72, right: 144, bottom: 0, left: 0 },
+              displayCutout: { top: 0, right: 0, bottom: 0, left: 30.33 },
+              displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 91 },
+              cutoutShape: { xDp: 0, yDp: 164.67, widthDp: 30.33, heightDp: 30.33, rightDp: 848.34, bottomDp: 165, xPx: 0, yPx: 494, widthPx: 91, heightPx: 91, rightPx: 2545, bottomPx: 495 },
+              condition: { oneUi: "5.1.1", android: "13", note: `Samsung RTL India/Noida, SM-F700F-IN5, same build TP1A.220624.014.F700FXXUDKWI6, 480 dpi and font scale 1, main display unfolded, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 1, 2636×1080 px.` },
+              sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy Z Flip (SM-F700F), rotation 1, 3-button", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip/recapture-2026-09-30-rotation/main-landscape-1-threeButton.json", retrievedAt: "2026-09-30" }],
+            },
+          },
+        },
+        3: {
+          logicalSizePx: { width: 2636, height: 1080 },
+          logicalSizeDp: { width: 878.67, height: 360 },
+          insets: {
+            gesture: {
+              systemBars: { top: 24, right: 0, bottom: 15, left: 0 },
+              systemBarsPx: { top: 72, right: 0, bottom: 45, left: 0 },
+              displayCutout: { top: 0, right: 30.33, bottom: 0, left: 0 },
+              displayCutoutPx: { top: 0, right: 91, bottom: 0, left: 0 },
+              cutoutShape: { xDp: 848.33, yDp: 165, widthDp: 30.33, heightDp: 30.33, rightDp: 0, bottomDp: 164.67, xPx: 2545, yPx: 495, widthPx: 91, heightPx: 91, rightPx: 0, bottomPx: 494 },
+              condition: { oneUi: "5.1.1", android: "13", note: `Samsung RTL India/Noida, SM-F700F-IN5, same build TP1A.220624.014.F700FXXUDKWI6, 480 dpi and font scale 1, main display unfolded, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 3, 2636×1080 px.` },
+              sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy Z Flip (SM-F700F), rotation 3, gesture", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip/recapture-2026-09-30-rotation/main-landscape-3-gesture.json", retrievedAt: "2026-09-30" }],
+            },
+            threeButton: {
+              systemBars: { top: 24, right: 0, bottom: 0, left: 48 },
+              systemBarsPx: { top: 72, right: 0, bottom: 0, left: 144 },
+              displayCutout: { top: 0, right: 30.33, bottom: 0, left: 0 },
+              displayCutoutPx: { top: 0, right: 91, bottom: 0, left: 0 },
+              cutoutShape: { xDp: 848.33, yDp: 165, widthDp: 30.33, heightDp: 30.33, rightDp: 0, bottomDp: 164.67, xPx: 2545, yPx: 495, widthPx: 91, heightPx: 91, rightPx: 0, bottomPx: 494 },
+              condition: { oneUi: "5.1.1", android: "13", note: `Samsung RTL India/Noida, SM-F700F-IN5, same build TP1A.220624.014.F700FXXUDKWI6, 480 dpi and font scale 1, main display unfolded, captured over Remote Debug Bridge with navigation selected in Settings and the rotation locked. The Android navigation setting and configuration agree, and the same session's rotation 0 files reproduce the accepted captures. Landscape rotation 3, 2636×1080 px.` },
+              sources: [{ kind: "measured", label: "InsetsProbe 1.6.0 on Samsung RTL Galaxy Z Flip (SM-F700F), rotation 3, 3-button", url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-flip/galaxy-z-flip/recapture-2026-09-30-rotation/main-landscape-3-threeButton.json", retrievedAt: "2026-09-30" }],
+            },
+          },
+        },
+      },
       insets: {
         gesture: {
           systemBars: { top: 30.67, right: 0, bottom: 15, left: 0 },
