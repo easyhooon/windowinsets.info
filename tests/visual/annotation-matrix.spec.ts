@@ -43,6 +43,11 @@ for(const slug of ['galaxy-z-fold2','galaxy-z-fold7','galaxy-z-fold8','galaxy-z-
      for(const orientation of ['Portrait','Landscape Left','Landscape Right']) {
       await choose(page,'Orientation',orientation);
       await page.waitForTimeout(250);
+      // A Flip cover keeps its portrait layout, so a turned closed view shows a notice instead of rulers.
+      if (slug === 'galaxy-z-flip8' && pose === 'Closed' && orientation !== 'Portrait') {
+       await expect(page.locator('.pending-notice')).toContainText('This screen does not rotate');
+       continue;
+      }
       await assertBadges(page,`${slug} ${navigation} ${units} ${pose} ${orientation}`);
      }
     }

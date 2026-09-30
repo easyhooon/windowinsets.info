@@ -238,7 +238,8 @@ test("S23+ landscape uses its own measured insets", async ({ page }) => {
 test("Galaxy Tab keeps the upside-down portrait option", async ({ page }) => {
   await page.goto("/galaxy-tab-s10-plus");
   await chooseDropdown(page, "Orientation", "Portrait Upside Down");
-  await expect(page.locator(".canvas-footer .pending-notice")).toContainText("insets are not measured yet");
+  // Rotation 2 has its own capture, so the measured insets show without a pending notice.
+  await expect(page.locator(".canvas-footer .pending-notice")).toHaveCount(0);
   await expect(page).toHaveScreenshot("galaxy-tab-s10-plus-upside-down.png", { fullPage: true });
 });
 
