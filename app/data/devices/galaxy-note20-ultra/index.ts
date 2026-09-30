@@ -51,10 +51,29 @@ const landscapeThreeButton = (rotation: 1 | 3): InsetsMeasurement => ({
   }],
 });
 
+// Gesture rotations come from the 2026-09-30 sweep, whose navigation setting and configuration agree.
+const landscapeGesture = (rotation: 1 | 3): InsetsMeasurement => ({
+  systemBars: { top: 24, right: 0, bottom: 14.86, left: 0 },
+  systemBarsPx: { top: 63, right: 0, bottom: 39, left: 0 },
+  displayCutout: { top: 0, right: rotation === 3 ? 25.52 : 0, bottom: 0, left: rotation === 1 ? 25.52 : 0 },
+  displayCutoutPx: { top: 0, right: rotation === 3 ? 67 : 0, bottom: 0, left: rotation === 1 ? 67 : 0 },
+  condition: {
+    oneUi: "5.1",
+    android: "13",
+    note: `Samsung RTL Russia/Moscow, SM-N985F-RU1, build TP1A.220624.014.N985FXXSIHYH3. Separate landscape rotation ${rotation} capture at 2316×1080 px, 420 dpi and font scale 1, driven over Remote Debug Bridge with gesture navigation selected in Settings and the rotation locked. Secure navigation mode 2 and config_navBarInteractionMode=2 agree, and the same session's rotation 0 file reproduces the accepted gesture capture. The cutout rectangle is off-centre, so only its safe inset is registered.`,
+  },
+  sources: [{
+    kind: "measured",
+    label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy Note20 Ultra, rotation ${rotation}, gesture (SM-N985F)`,
+    url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-note/galaxy-note20-ultra/recapture-2026-09-30-gesture-rotation/main-landscape-${rotation}-gesture.json`,
+    retrievedAt: "2026-09-30",
+  }],
+});
+
 const landscape = (rotation: 1 | 3) => ({
   logicalSizePx: { width: 2316, height: 1080 },
   logicalSizeDp: { width: 882.29, height: 411.43 },
-  insets: { gesture: null, threeButton: landscapeThreeButton(rotation) },
+  insets: { gesture: landscapeGesture(rotation), threeButton: landscapeThreeButton(rotation) },
 });
 
 export const galaxyNote20Ultra: Device = {

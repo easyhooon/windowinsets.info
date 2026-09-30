@@ -160,7 +160,7 @@ fill them.
 | Galaxy S20 Ultra | SM-G988B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s20-ultra/recapture-2026-09-29-rotation/`) | Cutout shape stays unregistered; raw bounds are off-center in every rotation |
 | Galaxy S20+ | SM-G985F | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s20-plus/rtl-2026-09-30/`) | Cutout shape stays unregistered; raw bounds are off-center in every rotation |
 | Galaxy S20 FE | SM-G780G | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s20-fe/recapture-2026-09-29-rotation/`) | None |
-| Galaxy Note20 Ultra | SM-N985F | Main: natural in both modes; rotation 1 and 3 in 3-button mode (`measurements/galaxy-note/galaxy-note20-ultra/recapture-2026-09-29-rotation/`) | Main gesture rotations 1 and 3; the 2026-09-29 gesture sweep is rejected because its navigation setting disagrees with the configuration and portrait inset |
+| Galaxy Note20 Ultra | SM-N985F | Main: natural, rotation 1 and 3 in both modes (3-button `measurements/galaxy-note/galaxy-note20-ultra/recapture-2026-09-29-rotation/`, gesture `recapture-2026-09-30-gesture-rotation/`) | None. The 2026-09-29 gesture sweep stays rejected evidence |
 | Galaxy Note20 | SM-N981U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-note/galaxy-note20/recapture-2026-09-29-rotation/`) | None |
 | Galaxy A57 5G | SM-A576S | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a57-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy A36 5G | SM-A366N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a36-5g/recapture-2026-09-29-rotation/`) | None |
