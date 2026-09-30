@@ -60,7 +60,7 @@ def tap_text(pattern, scroll=0):
         panes = [tuple(map(int, b)) for b in re.findall(r'scrollable="true"[^>]*?bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', xml)]
         if not panes:
             # A first-run tip (e.g. the taskbar's "Show multiple apps together") owns the window.
-            close = re.search(r'content-desc="Close[^"]*"[^>]*?bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', xml)
+            close = re.search(r'content-desc="(?i:close)[^"]*"[^>]*?bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', xml)
             if not close: break
             x1, y1, x2, y2 = map(int, close.groups())
             sh(f"input tap {(x1 + x2) // 2} {(y1 + y2) // 2}"); time.sleep(1)
