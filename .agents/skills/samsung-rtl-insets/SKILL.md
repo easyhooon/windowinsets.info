@@ -308,6 +308,25 @@ whenever it connects, and keep the visible WebClient steps above as fallback.
 5. Exit with **Return this device**, then copy the files without the `rot<N>-`
    prefix into a dated `recapture-*-rotation/` directory and register them.
 
+Notes from the 2026-09-30 RDB sessions:
+
+- The device list opens the WebClient with `window.open`, which can land outside
+  the agent's tab group. Replace `window.open` with a same-tab navigation before
+  pressing **Start** so the WebClient stays in the controlled tab.
+- The script starts Probe before locking a rotation and relaunches it with a
+  cleared task; a force-stop first shows the portrait-only launcher and the
+  capture then reports rotation 0. It flags any file whose rotation differs.
+- The script resets a leftover display-density override and dismisses launcher
+  tip overlays by view id, because their labels follow the device language.
+- A foldable can carry a `CLOSE` device-state override from an earlier user;
+  `cmd device_state state reset` restores the physical posture.
+- A unit whose natural-rotation file differs from the accepted capture (seen
+  in gesture mode on SM-A336E-IN1 and SM-X706N-KR1, and on a newer OS for
+  SM-A566B) is not a source for that entry's rotations. Keep the files as
+  rejected or unregistered evidence and try another unit of the same OS line.
+- If a restarted adb server loses the device, `adb connect localhost:<port>`
+  re-attaches to the running `rdb`.
+
 If the WebClient later returns `400 Request Header Or Cookie Too Large` or the
 device list returns 403, stop and hand the browser to the user; do not clear
 cookies or sign in.
