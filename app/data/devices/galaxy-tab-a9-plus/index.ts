@@ -30,6 +30,24 @@ const measurement = (source: Source): InsetsMeasurement => ({
   sources: [source],
 });
 
+const rotationBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab/galaxy-tab-a9-plus/recapture-2026-09-30-rotation";
+const rotationNote = "Samsung RTL Russia/Moscow, SM-X216B-RU3, same build UP1A.231005.007.X216BXXS3CXG1, 240 dpi and font scale 1. Driven over Remote Debug Bridge (adb): navigation was selected in Settings and each rotation was fixed with `cmd window user-rotation lock`. Rotation 1 from the same session reproduces the accepted font-scale-1.1 captures exactly in both modes; both modes keep the 72 px bottom bar in every rotation.";
+// Every rotation keeps the same bars: the taskbar stays at the bottom and there is no cutout.
+const rotationCapture = (file: string, width: number, height: number) => {
+  const insets = (mode: "gesture" | "threeButton"): InsetsMeasurement => ({
+    ...measurement(mode === "gesture" ? gestureSource : threeButtonSource),
+    condition: { oneUi: "6.1", android: "14", note: rotationNote },
+    sources: [{
+      kind: "measured",
+      label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy Tab A9+ 5G (SM-X216B), ${file}, ${mode}, font scale 1`,
+      url: `${rotationBase}/${file}-${mode}.json`,
+      retrievedAt: "2026-09-30",
+    }],
+  });
+  const dp = (px: number) => Math.round(px / 1.5 * 100) / 100;
+  return { logicalSizePx: { width, height }, logicalSizeDp: { width: dp(width), height: dp(height) }, insets: { gesture: insets("gesture"), threeButton: insets("threeButton") } };
+};
+
 export const galaxyTabA9Plus: Device = {
   slug: "galaxy-tab-a9-plus",
   name: "Galaxy Tab A9 Plus",
@@ -53,6 +71,11 @@ export const galaxyTabA9Plus: Device = {
     insets: {
       gesture: measurement(gestureSource),
       threeButton: measurement(threeButtonSource),
+    },
+    rotations: {
+      0: rotationCapture("main", 1200, 1920),
+      2: rotationCapture("portrait-2", 1200, 1920),
+      3: rotationCapture("landscape-3", 1920, 1200),
     },
     sources: [samsungSpecs, gestureSource, threeButtonSource],
   }],

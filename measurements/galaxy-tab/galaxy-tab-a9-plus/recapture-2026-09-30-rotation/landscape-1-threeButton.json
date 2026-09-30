@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 2,
+  "capturedAt": "2026-09-30T03:38:48.655134Z",
+  "screen": "phone",
+  "screenLabelSource": "manual",
+  "probeVersion": "1.6.0",
+  "device": {
+    "manufacturer": "samsung",
+    "brand": "samsung",
+    "model": "SM-X216B",
+    "device": "gta9p",
+    "android": "14",
+    "sdkInt": 34,
+    "securityPatch": "2024-07-01",
+    "buildId": "UP1A.231005.007.X216BXXS3CXG1",
+    "oneUi": "6.1",
+    "oneUiProperty": 60100,
+    "oneUiSource": "ro.build.version.oneui",
+    "semPlatformInt": 150100
+  },
+  "display": {
+    "id": 0,
+    "name": "Built-in Screen",
+    "rotation": 1,
+    "isInMultiWindowMode": false,
+    "rootViewPx": {
+      "width": 1920,
+      "height": 1200
+    },
+    "refreshRate": 90,
+    "widthPx": 1920,
+    "heightPx": 1200,
+    "sizeSource": "currentWindowMetrics",
+    "appMetricsPx": {
+      "width": 1920,
+      "height": 1128
+    },
+    "xdpi": 207.35,
+    "ydpi": 206.64,
+    "densityDpi": 240,
+    "density": 1.5,
+    "defaultDensityDpi": 240,
+    "fontScale": 1,
+    "orientation": "landscape",
+    "screenWidthDp": 1280,
+    "screenHeightDp": 728,
+    "smallestScreenWidthDp": 800,
+    "currentWindowPx": {
+      "width": 1920,
+      "height": 1200
+    },
+    "maximumWindowPx": {
+      "width": 1920,
+      "height": 1200
+    },
+    "maximumWindowDp": {
+      "width": 1280,
+      "height": 800
+    }
+  },
+  "navigation": {
+    "mode": "threeButton",
+    "modeSource": "insetsWithSettingFallback",
+    "modeFromInsets": "threeButton",
+    "modeFromSetting": "threeButton",
+    "settingAgreesWithInsets": true,
+    "settingsSecureNavigationMode": 0,
+    "configNavBarInteractionMode": 0
+  },
+  "insets": {
+    "statusBars": {
+      "px": {
+        "top": 36,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dp": {
+        "top": 24,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      }
+    },
+    "navigationBars": {
+      "px": {
+        "top": 0,
+        "right": 0,
+        "bottom": 72,
+        "left": 0
+      },
+      "dp": {
+        "top": 0,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    },
+    "systemBars": {
+      "px": {
+        "top": 36,
+        "right": 0,
+        "bottom": 72,
+        "left": 0
+      },
+      "dp": {
+        "top": 24,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    },
+    "displayCutout": {
+      "px": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dp": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      }
+    },
+    "captionBar": {
+      "px": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dp": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      }
+    },
+    "systemGestures": {
+      "px": {
+        "top": 36,
+        "right": 0,
+        "bottom": 72,
+        "left": 0
+      },
+      "dp": {
+        "top": 24,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    },
+    "mandatorySystemGestures": {
+      "px": {
+        "top": 36,
+        "right": 0,
+        "bottom": 72,
+        "left": 0
+      },
+      "dp": {
+        "top": 24,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    },
+    "tappableElement": {
+      "px": {
+        "top": 36,
+        "right": 0,
+        "bottom": 72,
+        "left": 0
+      },
+      "dp": {
+        "top": 24,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    }
+  },
+  "insetsIgnoringVisibility": {
+    "statusBars": {
+      "px": {
+        "top": 36,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dp": {
+        "top": 24,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      }
+    },
+    "navigationBars": {
+      "px": {
+        "top": 0,
+        "right": 0,
+        "bottom": 72,
+        "left": 0
+      },
+      "dp": {
+        "top": 0,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    },
+    "systemBars": {
+      "px": {
+        "top": 36,
+        "right": 0,
+        "bottom": 72,
+        "left": 0
+      },
+      "dp": {
+        "top": 24,
+        "right": 0,
+        "bottom": 48,
+        "left": 0
+      }
+    }
+  },
+  "displayCutout": null,
+  "roundedCorners": {
+    "windowInsets": {
+      "topLeft": {
+        "radiusPx": 20,
+        "radiusDp": 13.33,
+        "centerPx": {
+          "x": 20,
+          "y": 20
+        }
+      },
+      "topRight": {
+        "radiusPx": 20,
+        "radiusDp": 13.33,
+        "centerPx": {
+          "x": 1900,
+          "y": 20
+        }
+      },
+      "bottomRight": {
+        "radiusPx": 20,
+        "radiusDp": 13.33,
+        "centerPx": {
+          "x": 1900,
+          "y": 1180
+        }
+      },
+      "bottomLeft": {
+        "radiusPx": 20,
+        "radiusDp": 13.33,
+        "centerPx": {
+          "x": 20,
+          "y": 1180
+        }
+      }
+    },
+    "display": {
+      "topLeft": {
+        "radiusPx": 20,
+        "radiusDp": 13.33,
+        "centerPx": {
+          "x": 20,
+          "y": 20
+        }
+      },
+      "topRight": {
+        "radiusPx": 20,
+        "radiusDp": 13.33,
+        "centerPx": {
+          "x": 1900,
+          "y": 20
+        }
+      },
+      "bottomRight": {
+        "radiusPx": 20,
+        "radiusDp": 13.33,
+        "centerPx": {
+          "x": 1900,
+          "y": 1180
+        }
+      },
+      "bottomLeft": {
+        "radiusPx": 20,
+        "radiusDp": 13.33,
+        "centerPx": {
+          "x": 20,
+          "y": 1180
+        }
+      }
+    }
+  },
+  "hinge": {
+    "angleDegrees": null,
+    "foldingFeatures": []
+  }
+}
