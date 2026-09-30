@@ -32,7 +32,6 @@ function rotationEase(t: number) {
 const SEGMENTS = 96; // vertices along the fold axis — higher = smoother curve
 const DEFAULT_THICKNESS = 0.065; // Preview fallback when no published chassis dimensions exist.
 
-const INK = DIAGRAM_COLORS.ink;
 const INSET_COLOR = DIAGRAM_COLORS.inset;
 const RADIUS_COLOR = DIAGRAM_COLORS.radius;
 const SAFE_FILL = DIAGRAM_COLORS.safeFill;

@@ -1,5 +1,5 @@
 export type PoseGlyph = `${"book" | "flip" | "trifold"}-${"closed" | "partial" | "open"}`;
-export type IconName = "chevron" | "settings" | "search" | "check" | "zoom-in" | "zoom-out" | "zoom-fit" | "rotate-ccw" | "rotate-cw" | PoseGlyph;
+export type IconName = "chevron" | "settings" | "sun" | "moon" | "search" | "check" | "zoom-in" | "zoom-out" | "zoom-fit" | "rotate-ccw" | "rotate-cw" | PoseGlyph;
 
 // Pose glyphs follow each hinge: a Fold folds about a vertical hinge, a Flip about
 // a horizontal one, and a TriFold about two vertical hinges. Flip closed and
@@ -23,6 +23,8 @@ export function Icon({ name }: { name: IconName }) {
     {name === "search" && <><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></>}
     {name === "check" && <path d="m5 12 4 4 10-10" />}
     {name === "settings" && <><path d="m9 3-.6 3-2 .9-2.7-.9-2 3.5 2.2 2v2.3l-2.2 2 2 3.5 2.7-.9 2 .9.6 3h4l.6-3 2-.9 2.7.9 2-3.5-2.2-2v-2.3l2.2-2-2-3.5-2.7.9-2-.9-.6-3z" /><circle cx="11" cy="12.7" r="3" /></>}
+    {name === "sun" && <><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></>}
+    {name === "moon" && <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z" />}
     {name.startsWith("zoom-") && <><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" /></>}
     {name === "zoom-in" && <path d="M8 10.5h5M10.5 8v5" />}
     {name === "zoom-out" && <path d="M8 10.5h5" />}

@@ -27,7 +27,7 @@ export function MeasurementRulers({ measurements, onCopy }: {
           style={{ pointerEvents: 'auto', cursor: 'copy', transformBox: 'view-box', transformOrigin: `${ruler.x}px ${ruler.y}px` }}>
           <title>{`${ruler.secondaryValue === undefined ? ruler.equivalentNames?.join(", ") ?? ruler.name : ruler.name}: ${ruler.text} ${units}. Copy recorded measurement.`}</title>
           <rect data-badge="true" x={ruler.x - ruler.width / 2} y={ruler.y - ruler.height / 2} width={ruler.width} height={ruler.height} rx={2 * scale} fill={color} stroke="none" />
-          <text x={ruler.x} y={ruler.y} fill="white" stroke="none" textAnchor="middle" dominantBaseline="central" fontFamily={DIAGRAM_FONT} fontWeight="500" fontSize={12 * scale}>{ruler.text}</text>
+          <text x={ruler.x} y={ruler.y} fill={ruler.kind === 'size' ? DIAGRAM_COLORS.inkText : 'white'} stroke="none" textAnchor="middle" dominantBaseline="central" fontFamily={DIAGRAM_FONT} fontWeight="500" fontSize={12 * scale}>{ruler.text}</text>
         </g>
       </g>;
     })}

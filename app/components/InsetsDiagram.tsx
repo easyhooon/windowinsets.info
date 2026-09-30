@@ -12,7 +12,6 @@ import { CLASH_COLOR, PREVIEW_INSET_OPACITY, appMockShapes, type AppPreview, typ
 
 const MAX_W = 260;
 const BASE_HEIGHT = 700;
-const INK = DIAGRAM_COLORS.ink;
 const INSET_COLOR = DIAGRAM_COLORS.inset;
 const RADIUS_COLOR = DIAGRAM_COLORS.radius;
 const SAFE_FILL = DIAGRAM_COLORS.safeFill;
@@ -200,7 +199,7 @@ export function InsetsDiagram({
         </g>}
         {/* Device bezel */}
         {showFrame && !skin && (
-          <rect x={0} y={0} width={W} height={H} rx={rPx} fill="#ffffff" stroke="#0f172a" strokeWidth={3} />
+          <rect x={0} y={0} width={W} height={H} rx={rPx} fill="#ffffff" stroke={DIAGRAM_COLORS.bezel} strokeWidth={3} />
         )}
 
         {showRegions && (

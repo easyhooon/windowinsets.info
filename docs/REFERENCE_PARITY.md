@@ -72,7 +72,8 @@ viewport. A parity change is complete only when:
 | Orientation | Portrait, left/right landscape, upside down | Phones and foldables offer three orientations because Galaxy devices leave 180° out of auto-rotation; tablets keep all four. Flat devices re-lay out upright in the chosen orientation with a 300 ms turn; 3D foldables roll the model while the display texture draws the upright screen. The canvas itself is never CSS-rotated |
 | Fold | Closed/partial/open, arbitrary hinge | Presets and slider, eased three.js hinge, rigid outer panels, closed solid shell, reduced-motion support |
 | Layers | Safe area / insets / reserved / corners | Independent legend toggles; the Android cutout bounding region replaces iOS reserved regions |
-| Settings | Frame, regions, dimensions, units | All switches plus Android dp/px; navigation mode is in the top pill |
+| Settings | Theme (System/Light/Dark), dimension units, canvas switches | Same groups in the same order with Android dp/px; navigation mode is in the top pill |
+| Dark mode | Primer dark palette; the device screen and region fills stay light, size rulers turn white with black text | Same palette and diagram treatment. The choice is stored in `localStorage` and applied before first paint |
 | Measurements | Labels and clickable metrics | Whole metric rows and 2D/3D labels copy values; exact captured px is kept separately from rounded dp |
 | Display metadata | Logical size, panel resolution, physical density and scale | Adds Captured Window and Android Density so WindowMetrics are not mislabeled as panel resolution or physical PPI |
 | Reserved regions | Size and four directional offsets | Android cutout bounds expose Size plus Left/Top/Right/Bottom in the same hierarchy |
@@ -107,6 +108,11 @@ projection, so labels stay flat and outside the projected body.
 
 ## Intentional differences
 
+- **Lighter dark canvas.** In dark mode the grid canvas is `#2a313c` instead of
+  the reference's `#0d1117`, so black Samsung chassis artwork stays visible.
+- **Header theme toggle.** A sun/moon button sits left of the settings gear and
+  switches between Light and Dark in one click. The reference only offers the
+  theme inside its settings menu; that menu entry stays for the System option.
 - **Symmetric values appear once.** Equal lengths in a symmetric group (corner
   radii, opposing insets, opposing cutout offsets) share one badge; unequal
   lengths all remain. Comparison uses unrounded geometry. Interior TOP/BOTTOM

@@ -21,6 +21,7 @@ import { getRtlAvailability } from "../data/rtlAvailability";
 import { formatLength, hasExactPx, safeInsets, safeInsetsPx } from "../data/measurementUnits";
 import { deviceExportPath, downloadDeviceExport } from "../data/deviceExport";
 import { trackFoldPoseChange, trackJsonExport, trackUnitChange } from "../lib/analytics";
+import { useTheme } from "../lib/theme";
 
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
   const [status, setStatus] = useState("");
@@ -183,6 +184,7 @@ export function DeviceView({ device }: { device: Device }) {
   const [units, setUnits] = useState<"dp" | "px">("dp");
   const [appPreview, setAppPreview] = useState<AppPreview>("off");
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [theme, setTheme] = useTheme();
   const [metricsOpen, setMetricsOpen] = useState(false);
   const [exportStatus, setExportStatus] = useState("");
   const settings = useRef<HTMLDivElement>(null);
@@ -549,12 +551,20 @@ export function DeviceView({ device }: { device: Device }) {
       </footer>
       <div className="canvas-toggles">{displayOptions}</div>
     </section>
-    <div className="dropdown settings canvas-settings" ref={settings}><button className="toolbar-button" aria-label="View settings" aria-expanded={settingsOpen} onClick={() => setSettingsOpen(!settingsOpen)}><Icon name="settings" /></button>
+    <div className="dropdown settings canvas-settings" ref={settings}>
+      <button className="toolbar-button theme-toggle" aria-label="Toggle dark mode" onClick={() => {
+        const dark = theme === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches : theme === "dark";
+        setTheme(dark ? "light" : "dark");
+      }}><span className="theme-icon-light"><Icon name="moon" /></span><span className="theme-icon-dark"><Icon name="sun" /></span></button>
+      <button className="toolbar-button" aria-label="View settings" aria-expanded={settingsOpen} onClick={() => setSettingsOpen(!settingsOpen)}><Icon name="settings" /></button>
       {settingsOpen && <div className="dropdown-panel settings-panel">
-        <label><input type="checkbox" checked={showFrame} onChange={e => setShowFrame(e.target.checked)} />Show Frame</label>
-        <label><input type="checkbox" checked={showRegions} onChange={e => setShowRegions(e.target.checked)} />Show Regions</label>
-        <label><input type="checkbox" checked={showDimensions} onChange={e => setShowDimensions(e.target.checked)} />Show Dimensions</label>
+        <fieldset><legend>Theme</legend>{(["system", "light", "dark"] as const).map(t => <label key={t}><input type="radio" name="theme" checked={theme === t} onChange={() => setTheme(t)} />{t[0].toUpperCase() + t.slice(1)}</label>)}</fieldset>
         <fieldset><legend>Dimension units</legend>{(["dp","px"] as const).map(u => <label key={u}><input type="radio" name="units" checked={units === u} disabled={u === "px" && !exactPxAvailable} onChange={() => { if (u !== units) { setUnits(u); trackUnitChange(device, u); } }} />{u}</label>)}</fieldset>
+        <fieldset><legend>Canvas</legend>
+          <label><input type="checkbox" checked={showFrame} onChange={e => setShowFrame(e.target.checked)} />Show Frame</label>
+          <label><input type="checkbox" checked={showRegions} onChange={e => setShowRegions(e.target.checked)} />Show Regions</label>
+          <label><input type="checkbox" checked={showDimensions} onChange={e => setShowDimensions(e.target.checked)} />Show Dimensions</label>
+        </fieldset>
       </div>}
     </div>
   </article>;
