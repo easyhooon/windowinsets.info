@@ -199,7 +199,7 @@ fill them.
 | Galaxy Tab S9 FE | SM-X516N | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s9-fe/recapture-2026-09-30-rotation/`) | None |
 | Galaxy Tab S8 Ultra | SM-X906B | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s8-ultra/recapture-2026-09-30-rotation/`) | None |
 | Galaxy Tab S8+ | SM-X806B | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s8-plus/recapture-2026-09-30-rotation/`) | None |
-| Galaxy Tab S8 | SM-X706N | Main: natural rotation 1 in both modes; rotations 0, 2 and 3 in 3-button mode (`measurements/galaxy-tab/galaxy-tab-s8/recapture-2026-09-30-rotation/`) | Main gesture rotations 0, 2 and 3; the 2026-09-30 gesture sweep on the same build is rejected because it reports a 102 px bottom navigation inset in every rotation (also with `task_bar` 0) against the accepted 32 px (`rejected-2026-09-30-gesture/`) |
+| Galaxy Tab S8 | SM-X706N | Main: rotations 0, 1, 2 and 3 in both modes (3-button `measurements/galaxy-tab/galaxy-tab-s8/recapture-2026-09-30-rotation/`, gesture `recapture-2026-09-30-gesture-rotation/`) | None. The SM-X706N-KR1 gesture sweep with a 102 px bottom inset stays rejected evidence (`rejected-2026-09-30-gesture/`) |
 | Galaxy Tab S7+ | SM-T970 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s7-plus/recapture-2026-09-30-rotation/`) | None |
 | Galaxy Tab S7 FE | SM-T735 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s7-fe/recapture-2026-09-30-rotation/`) | None |
 | Galaxy Tab A11 | SM-X135F | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-a11/recapture-2026-09-30-rotation/`) | None |

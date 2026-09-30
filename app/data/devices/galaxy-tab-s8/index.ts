@@ -35,15 +35,25 @@ const measuredInsets = (mode: "gesture" | "threeButton"): InsetsMeasurement => m
 
 const rotationBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab/galaxy-tab-s8/recapture-2026-09-30-rotation";
 const rotationNote = "Samsung RTL Korea/Gumi, SM-X706N-KR1, same build BP2A.250605.031.A3.X706NKOSBJZE1, 340 dpi and font scale 1. Driven over Remote Debug Bridge (adb): 3-button navigation was selected in Settings and each rotation was fixed with `cmd window user-rotation lock`. Rotation 1 from the same session reproduces the accepted 3-button capture exactly.";
-// Gesture rotations stay pending: the 2026-09-30 gesture sweep reported a 102 px bottom
-// navigation inset in every rotation, unlike the accepted 32 px, and is kept as rejected evidence.
+// Gesture rotations come from SM-X706N-KR4, which reproduces the accepted 32 px bottom inset;
+// the SM-X706N-KR1 gesture sweep with 102 px stays rejected evidence.
+const gestureRotationNote = "Samsung RTL Korea/Gumi, SM-X706N-KR4, same build BP2A.250605.031.A3.X706NKOSBJZE1, 340 dpi and font scale 1. Driven over Remote Debug Bridge (adb): gesture navigation was selected in Settings and each rotation was fixed with `cmd window user-rotation lock`. Secure navigation mode 2 and config_navBarInteractionMode=2 agree, and rotation 1 from the same session reproduces the accepted gesture capture exactly.";
 const rotationCapture = (file: string, width: number, height: number) => {
   const dp = (px: number) => Math.round(px / 2.125 * 100) / 100;
   return {
     logicalSizePx: { width, height },
     logicalSizeDp: { width: dp(width), height: dp(height) },
     insets: {
-      gesture: null,
+      gesture: {
+        ...measuredInsets("gesture"),
+        condition: { oneUi: "8.0", android: "16", note: gestureRotationNote },
+        sources: [{
+          kind: "measured" as const,
+          label: `InsetsProbe 1.6.0 on Samsung RTL Galaxy Tab S8 (SM-X706N), ${file}, gesture, font scale 1`,
+          url: `${rotationBase.replace("recapture-2026-09-30-rotation", "recapture-2026-09-30-gesture-rotation")}/${file}-gesture.json`,
+          retrievedAt: "2026-09-30",
+        }],
+      },
       threeButton: {
         ...measuredInsets("threeButton"),
         condition: { oneUi: "8.0", android: "16", note: rotationNote },
