@@ -170,6 +170,7 @@ fill them.
 | Galaxy A17 | SM-A175N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a17-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy A16 | SM-A165N | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a16-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy A27 5G | SM-A276K | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a27-5g/recapture-2026-09-29-rotation/`) | None |
+| Galaxy A26 5G | SM-A266B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a26-5g/rtl-2026-09-30/`) | None |
 | Galaxy A55 5G | SM-A556S | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a55-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S11 Ultra | SM-X930 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S10 Ultra | SM-X920 | Main: rotation 1 in both modes (accepted). All four rotations in 3-button (`measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation/`, rotation 2 in `recapture-2026-09-29-rotation-in2/`) and in gesture (`recapture-2026-09-29-rotation-vn1/`) | None |
