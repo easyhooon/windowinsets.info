@@ -175,6 +175,7 @@ fill them.
 | Galaxy A73 5G | SM-A736B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a73-5g/recapture-2026-09-30-rotation/`) | None |
 | Galaxy A52s 5G | SM-A528B | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a52s-5g/recapture-2026-09-30-rotation/`) | None |
 | Galaxy A34 5G | SM-A346E | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a34-5g/recapture-2026-09-30-rotation/`) | None |
+| Galaxy A33 5G | SM-A336E | Main: natural in both modes; rotation 1 and 3 in 3-button mode (`measurements/galaxy-a/galaxy-a33-5g/recapture-2026-09-30-rotation/`) | Main gesture rotations 1 and 3; the 2026-09-30 gesture captures report no bottom navigation inset and 67 px side gesture insets against the accepted 42 px and 84 px, so they are kept as rejected evidence (`measurements/galaxy-a/galaxy-a33-5g/rejected-2026-09-30/`) |
 | Galaxy A55 5G | SM-A556S | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a55-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S11 Ultra | SM-X930 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S10 Ultra | SM-X920 | Main: rotation 1 in both modes (accepted). All four rotations in 3-button (`measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation/`, rotation 2 in `recapture-2026-09-29-rotation-in2/`) and in gesture (`recapture-2026-09-29-rotation-vn1/`) | None |
@@ -231,4 +232,4 @@ Note and A.
 | --- | --- | --- |
 | Galaxy Z Flip | original Z Flip (not listed on RTL as of 2026-09-28) | Main (no cover skin) |
 | Galaxy Tab | S9 (no Android 16 unit matching the accepted build is listed on RTL as of 2026-09-30) | Main, all four rotations in both modes (natural rotation is landscape on most tablets) |
-| Galaxy A | A56, A53, A33, A32 5G, A32, A24, A23, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
+| Galaxy A | A56, A53, A32 5G, A32, A24, A23, A15, A14 5G, A13 LTE, A07, A06, A05, A04 | Main |
