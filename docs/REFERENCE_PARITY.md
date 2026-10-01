@@ -108,6 +108,14 @@ projection, so labels stay flat and outside the projected body.
 
 ## Intentional differences
 
+- **Gesture Zones and Tappable layers.** Two extra region-legend toggles, off by
+  default, overlay `systemGestures` (hatched, with the non-excludable
+  `mandatorySystemGestures` part solid) and `tappableElement` (teal dots with a
+  solid edge, distinct from the app preview's red dashed clash outline). iOS has
+  no equivalent; values come from the raw InsetsProbe capture each measurement
+  cites and the toggles only appear when that capture resolves. Metrics lists
+  the same types plus status and navigation bars.
+
 - **Lighter dark canvas.** In dark mode the grid canvas is `#2a313c` instead of
   the reference's `#0d1117`, so black Samsung chassis artwork stays visible.
 - **Header theme toggle.** A sun/moon button sits left of the settings gear and
