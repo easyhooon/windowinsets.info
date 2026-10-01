@@ -90,7 +90,7 @@ runtime hardware measurements.
 The catalog checked on 2026-09-28 offers physical Pixel 10 Pro XL (`mustang`)
 and Pixel 10 Pro Fold (`rango`) on API 36, Pixel Tablet (`tangorpro`) on API 33
 and 36, and Pixel Watch (`r11`) on API 30. The FTL catalog includes physical
-models for 20 of the 22 public Pixel entries; Pixel
+models for 20 of the 22 public Pixel entries at the time; Pixel
 6 Pro and Pixel 4a are absent from this snapshot. Requesting those models or
 using a supplied physical device is needed for their hardware measurements.
 The published local Pixel emulator captures use API 37, so an FTL difference
@@ -257,7 +257,27 @@ versus 136 px in the AVD, and the gesture navigation bar 44 px versus 66 px.
 Cutout path and corner radii could not be compared on API 30. These remain
 findings; the published emulator values are unchanged.
 
-That brings the physical spot check to **20 of 22 public Pixel models**. Pixel
+### Pixel 10a and a Robo change (2026-10-01)
+
+Pixel 10a (`stallion`, API 36, build `CP1A.260505.005`) was added from the
+AVD the same day. Its first run with `phone-portrait.robo.json`
+(`matrix-2adqpl4s5g8rg`) also stopped at the first ADB shell step, although the
+same script passed on API 32–36 devices on 2026-09-28. Robo shell steps
+therefore no longer run reliably, independent of API level. A rerun with
+`phone-portrait-launch-only.robo.json` (`matrix-23sw6o4bhn4ez`) passed; the
+capture is in `measurements/pixel/pixel-10a/testlab-2026-10-01/`.
+
+It matches the API 37 AVD on window size (1080×2424 px), density (420 dpi) and
+the gesture navigation bar (63 px). The top cutout inset and status bar are
+152 px versus 142 px, the cutout bounds 484–596 × 0–152 px versus 485–595 ×
+0–142 px, and the corner radius 115 px (43.81 dp) versus 132 px (50.29 dp),
+the same corner difference recorded for Pixel 9a. These remain findings.
+
+Use the launch-only script for phone captures until shell steps work again.
+Scripts that need extras (Fold inner, tablet labels) still depend on shell
+steps and should be retried before a batch.
+
+That brings the physical spot check to **21 of 23 public Pixel models**. Pixel
 6 Pro and Pixel 4a were still absent from the FTL physical catalog checked on
 2026-10-01. The remaining blockers are tracked in
 [issue #46](https://github.com/easyhooon/windowinsets.info/issues/46).

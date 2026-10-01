@@ -80,7 +80,7 @@ Raw capture JSON is committed to this repository. Published Pixel values still u
 
 **Limits:** Each rotation needs its own capture. Rotating the site diagram does not create landscape measurements. Pixel site entries currently use rotation-0 emulator captures; other rotations remain raw evidence.
 
-Physical FTL spot checks cover 20 of 22 Pixel models in gesture mode, including matched landscape captures for Pixel Fold's inner display and Pixel Tablet. Android 16 and 17 can report different cutout safe insets for the same camera contour. Physical rounded corners on Fold and Tablet are absent from their AVD captures.
+Physical FTL spot checks cover 21 of 23 Pixel models in gesture mode, including matched landscape captures for Pixel Fold's inner display and Pixel Tablet. Android 16 and 17 can report different cutout safe insets for the same camera contour. Physical rounded corners on Fold and Tablet are absent from their AVD captures.
 
 OS updates can change values. Multi-window is not covered yet, and an app's own padding or window flags can change the insets it sees.
 
@@ -126,7 +126,7 @@ The keyless probe also runs on physical Pixel devices in Firebase Test Lab (FTL)
 
 A passed FTL run confirms that the app exported data; it does not establish that every published emulator value matches hardware. The [validation log](docs/PIXEL_HARDWARE_VALIDATION.md) contains the raw JSON, result links and the first run's complete Robo crawl graph.
 
-As of 2026-10-01, two-minute Robo runs had spot-checked **20 of 22** public Pixel models in gesture mode. Pixel 5 runs only API 30 on FTL, so its check lacks cutout path and corner radii. Pixel 6 Pro and Pixel 4a are absent from the physical FTL catalog. [Issue #46](https://github.com/easyhooon/windowinsets.info/issues/46) tracks the remaining three models and their next capture paths. Other navigation modes, rotations and Fold cover states remain unverified.
+As of 2026-10-01, two-minute Robo runs had spot-checked **21 of 23** public Pixel models in gesture mode. Pixel 5 runs only API 30 on FTL, so its check lacks cutout path and corner radii. Pixel 6 Pro and Pixel 4a are absent from the physical FTL catalog. [Issue #46](https://github.com/easyhooon/windowinsets.info/issues/46) tracks the remaining two models and their next capture paths. Other navigation modes, rotations and Fold cover states remain unverified.
 
 The dedicated `windowinsets-testlab-2026` project used Spark for its first five physical runs, then switched to Blaze on 2026-09-28. Blaze includes 30 physical-device test minutes per project per day, then charges $5 per device-hour in one-minute increments; see [FTL quota and pricing](https://firebase.google.com/docs/test-lab/usage-quotas-pricing).
 
@@ -294,12 +294,12 @@ and Android's [Wear OS screen-shape guidance](https://developer.android.com/trai
    existing preview slug. Its screens override preview data; additional skin-only
    screens stay pending. Routes, sitemap and prerendering use the merged catalogue.
 
-Current public catalogue: **142 models** — 120 Galaxy (29 S, 29 Tab, 9 Fold,
-8 Flip, 1 TriFold, 3 Note, 41 A) and 22 Pixel. Of the Galaxy models, 78 have
+Current public catalogue: **143 models** — 120 Galaxy (29 S, 29 Tab, 9 Fold,
+8 Flip, 1 TriFold, 3 Note, 41 A) and 23 Pixel. Of the Galaxy models, 78 have
 verified real-device or RTL insets (21 S, 14 Tab, 8 Fold, 8 Flip, 1 TriFold,
 2 Note, 24 A).
 
-All 22 Pixel entries have emulator captures. Physical FTL spot checks remain
+All 23 Pixel entries have emulator captures. Physical FTL spot checks remain
 separate evidence and do not change their published source. The Samsung skin
 archive retains 126 models; seven pre-2020 models stay outside the public
 catalogue. Galaxy A52s 5G is public from RTL captures without an official skin.
