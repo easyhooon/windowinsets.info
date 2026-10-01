@@ -1,18 +1,7 @@
 import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 
-export const FOLD_CAMERA_FOV = 32;
-export const FOLD_CAMERA_DISTANCE = 11;
-/** Frustum height at the z=0 display plane shared by every fold pose, in world units per 700 px canvas. */
-export const FOLD_FRUSTUM_HEIGHT = 2 * Math.tan(THREE.MathUtils.degToRad(FOLD_CAMERA_FOV / 2)) * FOLD_CAMERA_DISTANCE;
-/** World size of the inner display's longer padded edge. */
-export const FOLD_DISPLAY_TARGET = 5.2;
-
-/** Canvas px per inner-display dp at 100% canvas scale. */
-export function foldCanvasPxPerDp(widthDp: number, heightDp: number) {
-  const margin = widthDp * .25;
-  return FOLD_DISPLAY_TARGET / Math.max(widthDp + margin, heightDp + margin) * 700 / FOLD_FRUSTUM_HEIGHT;
-}
+import { triFoldAngles } from "./foldMath.ts";
 
 export function verticalHinge(axis: "vertical" | "horizontal", artworkRotation: number) {
   return (axis === "vertical") !== (artworkRotation % 2 === 1);
@@ -117,20 +106,6 @@ export function bendPoint(x: number, y: number, z: number, angle: number, vertic
   const along = sign * (radius * Math.sin(phi) + beyond * Math.cos(phi) - z * Math.sin(phi));
   const depth = radius * (1 - Math.cos(phi)) + beyond * Math.sin(phi) + z * Math.cos(phi);
   return vertical ? [along, y, depth] as const : [x, along, depth] as const;
-}
-
-/** One coordinated sequence: close the left wing first, then the right wing.
- * The control is a sequence position, not a measured Android hinge angle. */
-export function triFoldAngles(sequence: number) {
-  return { left: Math.max(0, Math.min(180, sequence * 2 - 180)),
-    right: Math.max(0, Math.min(180, sequence * 2)) };
-}
-
-/** Face the inner display while both wings fold so each bend stays visible,
- * then turn to the middle panel's rear cover only as the right wing closes. */
-export function triFoldViewTurn(sequence: number, revealEnd: number) {
-  const reveal = Math.max(0, 1 - sequence / revealEnd);
-  return reveal * reveal * (3 - 2 * reveal) * Math.PI;
 }
 
 /** Illustrative unequal hinge strips leave room for the nested left housing. */

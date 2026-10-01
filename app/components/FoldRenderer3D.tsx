@@ -5,7 +5,8 @@ import { InsetsDiagram } from "./InsetsDiagram";
 import { DIAGRAM_FONT, DIAGRAM_COLORS, GESTURE_COLOR, TAPPABLE_COLOR } from "./diagramStyle";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { FOLD_CAMERA_DISTANCE, FOLD_CAMERA_FOV, FOLD_DISPLAY_TARGET, FOLD_FRUSTUM_HEIGHT, bendPoint, createChassis, createFoldHousings, hingeHalfWidth, rigidPanelPoint, verticalHinge, coverPoint, coverSide, triFoldPoint, triFoldAngles, triFoldViewTurn, createTriFoldDisplay, createTriFoldHousings, createTriFoldHingeStrips } from "./foldGeometry";
+import { COVER_REVEAL_ANGLE, FOLD_CAMERA_DISTANCE, FOLD_CAMERA_FOV, FOLD_DISPLAY_TARGET, FOLD_FRUSTUM_HEIGHT, coverRevealAngle, triFoldAngles, triFoldViewTurn } from "./foldMath";
+import { bendPoint, createChassis, createFoldHousings, hingeHalfWidth, rigidPanelPoint, verticalHinge, coverPoint, coverSide, triFoldPoint, createTriFoldDisplay, createTriFoldHousings, createTriFoldHingeStrips } from "./foldGeometry";
 import type { DeviceSkin } from "../data/skins";
 import { skinAssetUrl } from "../data/skinAssetUrl";
 import type { CutoutShape, Screen, InsetsMeasurement } from "../data/types";
@@ -13,11 +14,6 @@ import { viewQuarter } from "../data/orientation";
 import { cutoutPairs, cornerPairs, formatLengthFromPairs, insetPairs, safeInsets, safeInsetsPx } from "../data/measurementUnits";
 import { CLASH_COLOR, PREVIEW_INSET_OPACITY, appMockShapes, type AppPreview } from "./appPreview";
 
-export const COVER_REVEAL_ANGLE = 60; // Illustrative primary surface, not a measured hinge state.
-/** TriFold turns over the same span but faces its rear cover only past the half turn. */
-export function coverRevealAngle(triFold: boolean) {
-  return triFold ? COVER_REVEAL_ANGLE / 2 : COVER_REVEAL_ANGLE;
-}
 
 // Matches the flat diagram's One UI-like orientation turn (DiagramViewport).
 const ROTATION_MS = 300;
