@@ -29,7 +29,11 @@ const threeButton: InsetsMeasurement = {
   displayCutoutPx: gesture.displayCutoutPx,
   cutoutShape: gesture.cutoutShape,
   condition: { oneUi: "7.0", android: "15", note: "Samsung RTL, Galaxy A73 5G (SM-A736B), build AP3A.240905.015.A2.A736BXXUAFYE6, captured 2026-09-27. Portrait rotation 0, 1080×2400 px full-screen capture, 450 dpi, font scale 1. 3-button mode agrees with Android Settings and InsetsProbe. The earlier 3-button file dated 2025-05-15 is retained as historical evidence." },
-  sources: [recapture],
+  sources: [{
+    ...recapture,
+    label: "InsetsProbe 1.3.0 on Samsung RTL Galaxy A73 5G (SM-A736B), main 3-button recapture",
+    url: "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-a/galaxy-a73-5g/recapture-2026-09-27/main-threeButton.json",
+  }],
 };
 
 export const galaxyA73: Device = {

@@ -68,6 +68,9 @@ export interface PublicMeasurement {
   evidence: Evidence;
   raw: {
     systemBars: MeasuredUnitPair<Insets>;
+    /** From the cited raw capture; null when it cannot be resolved. */
+    statusBars: MeasuredUnitPair<Insets> | null;
+    navigationBars: MeasuredUnitPair<Insets> | null;
     displayCutoutInsets: MeasuredUnitPair<Insets>;
     displayCutoutBounds: MeasuredUnitPair<{
       left: number;
@@ -158,11 +161,19 @@ function hasCompletePxBounds(shape: InsetsMeasurement["cutoutShape"]): boolean {
     .every(value => value != null);
 }
 
+/** Resolves per-type bar insets; the build passes a raw-capture reader, browsers have none. */
+export type BarInsetsLookup = (measurement: InsetsMeasurement) => {
+  statusBars: MeasuredUnitPair<Insets>;
+  navigationBars: MeasuredUnitPair<Insets>;
+} | null;
+
 function exportMeasurement(
   measurement: InsetsMeasurement,
   logicalSizeDp: Size,
   logicalSizePx: Size | null,
+  barInsets: BarInsetsLookup,
 ): PublicMeasurement {
+  const bars = barInsets(measurement);
   const safeDp = safeInsets(measurement);
   const safePx = safeInsetsPx(measurement);
   const shape = measurement.cutoutShape;
@@ -179,6 +190,8 @@ function exportMeasurement(
     evidence: evidenceOf(measurement.sources),
     raw: {
       systemBars: { dp: measurement.systemBars, px: measurement.systemBarsPx ?? null },
+      statusBars: bars?.statusBars ?? null,
+      navigationBars: bars?.navigationBars ?? null,
       displayCutoutInsets: { dp: measurement.displayCutout, px: measurement.displayCutoutPx ?? null },
       displayCutoutBounds: shape ? {
         dp: {
@@ -222,7 +235,7 @@ function exportMeasurement(
   };
 }
 
-export function createDeviceExport(device: Device): PublicDeviceExport {
+export function createDeviceExport(device: Device, barInsets: BarInsetsLookup = () => null): PublicDeviceExport {
   return {
     schema: DEVICE_EXPORT_SCHEMA,
     schemaVersion: DEVICE_EXPORT_SCHEMA_VERSION,
@@ -240,7 +253,7 @@ export function createDeviceExport(device: Device): PublicDeviceExport {
         const measurement = screen.insets[navMode];
         return measurement && screen.logicalSizeDp ? {
           status: "measured" as const,
-          value: exportMeasurement(measurement, screen.logicalSizeDp, screen.logicalSizePx ?? null),
+          value: exportMeasurement(measurement, screen.logicalSizeDp, screen.logicalSizePx ?? null, barInsets),
         } : { status: "pending" as const, value: null };
       };
       const capture = screen.logicalSizeDp !== null && screen.densityDpi !== null ? {
@@ -284,12 +297,13 @@ export function deviceExportPath(device: Pick<Device, "slug">): string {
   return `/data/${device.slug}.json`;
 }
 
-export function serializeDeviceExport(device: Device): string {
-  return `${JSON.stringify(createDeviceExport(device), null, 2)}\n`;
+export function serializeDeviceExport(device: Device, barInsets?: BarInsetsLookup): string {
+  return `${JSON.stringify(createDeviceExport(device, barInsets), null, 2)}\n`;
 }
 
-export function downloadDeviceExport(device: Device): void {
-  const blob = new Blob([serializeDeviceExport(device)], { type: "application/json;charset=utf-8" });
+/** Saves `json` (the published export, so it carries build-only fields) as a file. */
+export function downloadDeviceExport(device: Device, json: string = serializeDeviceExport(device)): void {
+  const blob = new Blob([json], { type: "application/json;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   let anchor: HTMLAnchorElement | null = null;
   try {

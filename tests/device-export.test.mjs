@@ -36,9 +36,10 @@ test('every public device export validates against the published schema', async 
   const schema = JSON.parse(readFileSync('public/schemas/device-window-insets-v1.schema.json', 'utf8'));
   const validate = new Ajv2020({ allErrors: true, validateFormats: false }).compile(schema);
   const { module: { devices } } = await runnerImport('./app/data/devices.ts', { root: process.cwd() });
+  const { module: { rawBarInsets } } = await runnerImport('./app/data/rawBarInsets.server.ts', { root: process.cwd() });
   for (const device of devices) {
     assert.notEqual(device.releaseYear, null, `${device.slug}: public release year is missing`);
-    const exported = createDeviceExport(device);
+    const exported = createDeviceExport(device, rawBarInsets);
     assert.equal(validate(exported), true, `${device.slug}: ${JSON.stringify(validate.errors)}`);
     if (device.formFactor === 'foldable-book' || device.formFactor === 'foldable-flip' || device.formFactor === 'foldable-trifold') {
       assert.equal(exported.device.foldAnimation, true, `${device.slug}: fold animation must be available`);
@@ -137,4 +138,26 @@ test('download cleanup removes the anchor and defers object URL revocation even 
     URL.createObjectURL = originalCreate;
     URL.revokeObjectURL = originalRevoke;
   }
+});
+
+test('status and navigation bars come from the cited raw capture and add up to systemBars', async () => {
+  const { module: { rawBarInsets } } = await runnerImport('./app/data/rawBarInsets.server.ts', { root: process.cwd() });
+  const { galaxyS25Ultra } = await import('../app/data/devices/galaxy-s25-ultra/index.ts');
+  const raw = createDeviceExport(galaxyS25Ultra, rawBarInsets).screens[0].navigationModes.gesture.value.raw;
+  assert.deepEqual(raw.statusBars, { dp: { top: 34.13, right: 0, bottom: 0, left: 0 }, px: { top: 96, right: 0, bottom: 0, left: 0 } });
+  assert.deepEqual(raw.navigationBars, { dp: { top: 0, right: 0, bottom: 14.93, left: 0 }, px: { top: 0, right: 0, bottom: 42, left: 0 } });
+  for (const edge of ['top', 'right', 'bottom', 'left']) {
+    assert.equal(Math.max(raw.statusBars.px[edge], raw.navigationBars.px[edge]), raw.systemBars.px[edge]);
+  }
+  // Without the build-time reader (browsers), the fields stay explicitly unresolved.
+  assert.equal(createDeviceExport(galaxyS25Ultra).screens[0].navigationModes.gesture.value.raw.statusBars, null);
+});
+
+test('a source that does not back the measurement yields no bar insets', async () => {
+  const { module: { rawBarInsets } } = await runnerImport('./app/data/rawBarInsets.server.ts', { root: process.cwd() });
+  const { galaxyS25Ultra } = await import('../app/data/devices/galaxy-s25-ultra/index.ts');
+  const measurement = galaxyS25Ultra.screens[0].insets.gesture;
+  assert.ok(rawBarInsets(measurement));
+  assert.equal(rawBarInsets({ ...measurement, systemBarsPx: { ...measurement.systemBarsPx, bottom: 1 } }), null);
+  assert.equal(rawBarInsets({ ...measurement, sources: [] }), null);
 });

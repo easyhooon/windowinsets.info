@@ -253,6 +253,8 @@
           "required": ["systemBars", "displayCutoutInsets", "displayCutoutBounds"],
           "properties": {
             "systemBars": { "$ref": "#/$defs/measuredInsetsPair" },
+            "statusBars": { "oneOf": [{ "$ref": "#/$defs/measuredInsetsPair" }, { "type": "null" }] },
+            "navigationBars": { "oneOf": [{ "$ref": "#/$defs/measuredInsetsPair" }, { "type": "null" }] },
             "displayCutoutInsets": { "$ref": "#/$defs/measuredInsetsPair" },
             "displayCutoutBounds": { "oneOf": [{ "$ref": "#/$defs/measuredBoundsPair" }, { "type": "null" }] }
           }

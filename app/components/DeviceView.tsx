@@ -365,9 +365,12 @@ export function DeviceView({ device }: { device: Device }) {
     <span className="pill-divider" />
     <Dropdown label="App insets" value={safe ? appPreview : "off"} valueWidthCh={7} options={[{ value: "off", label: "Off" }, { value: "ignored", label: "Ignored", disabled: !safe }, { value: "applied", label: "Applied", disabled: !safe }]} onChange={v => setAppPreview(v as AppPreview)} />
   </fieldset>;
-  const exportJson = () => {
+  const exportJson = async () => {
     try {
-      downloadDeviceExport(device);
+      // The published file carries values only the build can read from raw captures.
+      const response = await fetch(deviceExportPath(device));
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      downloadDeviceExport(device, await response.text());
       trackJsonExport(device);
       setExportStatus("JSON downloaded");
     } catch {

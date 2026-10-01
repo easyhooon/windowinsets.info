@@ -310,6 +310,9 @@ hinges.forEach { hinge ->
           registered screen and both Android navigation modes. The versioned export keeps raw
           dp and px separate, labels safe-area calculations as derived, includes capture
           conditions and sources, and leaves unmeasured values explicitly pending.
+          Each measurement also splits <code>systemBars</code> into <code>statusBars</code> and{" "}
+          <code>navigationBars</code>, read from the raw InsetsProbe capture it cites
+          (<code>null</code> when that capture cannot be resolved).
         </p>
         <p>
           Choose <b>JSON link</b> to open a shareable URL. Scripts can fetch the same data at{" "}
