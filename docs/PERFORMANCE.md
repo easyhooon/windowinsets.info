@@ -104,5 +104,7 @@ check the network panel for `FoldRenderer3D-*.js`.
   page renders or paginates older entries.
 - Lazy-load `CodeBlock` and highlight.js (9.9 kB gzip) on the developer guide
   and the Metrics panel's test fixture.
-- Prefetch the 3D chunk from changelog device links, which have no form factor
-  in their loader data today.
+- Negligible: prefetch the 3D chunk from the device-name links in `/changelog`
+  entries. The changelog loader sends names without a form factor today. Visitors
+  rarely open a device from there, the sidebar links already prefetch, and a miss
+  only delays the 3D view by one chunk download.
