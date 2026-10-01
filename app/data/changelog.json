@@ -1,6 +1,15 @@
 {
   "entries": [
     {
+      "hash": "20b232854e74be9777431a397cb83a91d1f44df2",
+      "date": "2026-10-01",
+      "area": "site",
+      "kind": "added",
+      "summary": "Track site changes alongside data",
+      "devices": [],
+      "pr": 136
+    },
+    {
       "hash": "485052d7ba462da85b573cf857be9747dd93a414",
       "date": "2026-10-01",
       "area": "site",
