@@ -1,12 +1,12 @@
-import { foldCanvasPxPerDp, triFoldAngles } from "./foldGeometry";
+import { coverRevealAngle, foldCanvasPxPerDp, triFoldAngles } from "./foldMath";
 import { flatCanvasPxPerDp, flatDiagramSize } from "./diagramAnnotations";
 import { preciseScreen } from "../data/measurementUnits";
 import { orientationName, orientScreen, skinDp, viewQuarter } from "../data/orientation";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import type { Device, Insets, InsetsMeasurement, NavMode, Source } from "../data/types";
 import { Dropdown } from "./Dropdown";
-import { FoldRenderer3D, coverRevealAngle, type GestureInsets } from "./FoldRenderer3D";
+import type { GestureInsets } from "./FoldRenderer3D";
 import { InsetsDiagram } from "./InsetsDiagram";
 import { GESTURE_COLOR, TAPPABLE_COLOR } from "./diagramStyle";
 import { CodeBlock } from "./CodeBlock";
@@ -16,6 +16,13 @@ import { aospSkins } from "../data/aospSkins";
 import { skins as samsungSkins } from "../data/skins";
 
 const skins = { ...samsungSkins, ...aospSkins };
+// three.js only ships to pages that show a 3D foldable.
+const FoldRenderer3D = lazy(() => import("./FoldRenderer3D").then(module => ({ default: module.FoldRenderer3D })));
+/** Suspense commits this with the renderer, so a fit that ran over the placeholder can rerun. */
+function OnMount({ effect }: { effect: () => void }) {
+  useEffect(effect, []); // eslint-disable-line react-hooks/exhaustive-deps
+  return null;
+}
 import { ResizeHandle } from "./ResizeHandle";
 import { Icon } from "./Icon";
 import { getRtlAvailability } from "../data/rtlAvailability";
@@ -581,7 +588,7 @@ export function DeviceView({ device, rawInsets = {} }: { device: Device; rawInse
         onUserTransform={() => { setZoom(viewport.current?.effectiveZoom() ?? zoom); setAutoFit(false); }} onFit={() => setAutoFit(true)}
         baseWidth={diagramWidth}
         baseHeight={700} dpScale={dpScale} fitWidth={useFold ? triFold ? 780 : 1000 : diagramWidth} fitHeight={useFold && !triFold ? 1000 : diagramHeight}>
-        {useFold ? <FoldRenderer3D triFold={triFold} angle={angle} axis={device.formFactor === "foldable-flip" ? "horizontal" : "vertical"}
+        {useFold ? <Suspense fallback={<div style={{ width: 700, height: 700 }} />}><FoldRenderer3D triFold={triFold} angle={angle} axis={device.formFactor === "foldable-flip" ? "horizontal" : "vertical"}
           widthDp={mainWidthDp} heightDp={mainHeightDp}
           safe={mainSafe} safePx={mainSafePx} logicalSizePx={orientedMain.logicalSizePx} cornerRadiiDp={orientedMain.cornerRadiiDp} cornerRadiiPx={orientedMain.cornerRadiiPx} cutoutShape={mainMeasurement?.cutoutShape}
           zoom={zoom} showFrame={showFrame} showRegions={showRegions} showDimensions={showDimensions} units={units} layers={layers} appPreview={appPreview} gestureInsets={gesturesFor(mainMeasurement)} skin={mainSkin} skinRotation={main.captureRotation ?? 0} viewRotation={rotation} measured={!!main.logicalSizeDp} cover={outerScreen && orientedOuter && outerSkin ? { screen: outerScreen, oriented: orientedOuter, measurement: orientedOuter.insets[navMode], skin: outerSkin, gestureInsets: gesturesFor(orientedOuter.insets[navMode]) } : undefined}
@@ -595,6 +602,7 @@ export function DeviceView({ device, rawInsets = {} }: { device: Device; rawInse
             return viewport.current?.effectiveZoom();
           }}
           onTransitionEnd={() => { viewport.current?.refitFold(); if (transitionTarget) { setScreenId(transitionTarget); setTransitionTarget(null); } }} />
+          <OnMount effect={() => { if (autoFit) setFitKey(key => key + 1); }} /></Suspense>
           : <InsetsDiagram screen={screen} measurement={measurement} pendingOrientation={rotationPending ? orientationName(screen) : undefined} zoom={zoom} showFrame={showFrame} showRegions={showRegions} showDimensions={showDimensions} units={units} layers={layers} appPreview={appPreview} skin={skin} gestureInsets={gestureInsets} />}
       </DiagramViewport>
       </div>
