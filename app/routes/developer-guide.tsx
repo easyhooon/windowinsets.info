@@ -315,6 +315,12 @@ hinges.forEach { hinge ->
           Choose <b>JSON link</b> to open a shareable URL. Scripts can fetch the same data at{" "}
           <code>https://windowinsets.info/data/&lt;device-slug&gt;.json</code>.
         </p>
+        <p>
+          To discover devices, fetch <code>https://windowinsets.info/data/index.json</code>. It
+          lists every public device with its measurement status (<code>complete</code>,{" "}
+          <code>partial</code> or <code>pending</code>), the navigation modes and rotations
+          captured per screen, and the URL of its full export.
+        </p>
       </Section>
 
       <Section title="Found an issue or want to contribute?">

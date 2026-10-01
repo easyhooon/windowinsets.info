@@ -306,3 +306,68 @@ export function downloadDeviceExport(device: Device): void {
     setTimeout(() => URL.revokeObjectURL(url), 0);
   }
 }
+
+export const DEVICE_INDEX_SCHEMA = "https://windowinsets.info/schemas/device-index-v1.schema.json";
+export const DEVICE_INDEX_PATH = "/data/index.json";
+
+export interface PublicDeviceIndex {
+  schema: typeof DEVICE_INDEX_SCHEMA;
+  schemaVersion: 1;
+  deviceCount: number;
+  devices: Array<{
+    slug: string;
+    name: string;
+    brand: Device["brand"];
+    series: string;
+    formFactor: Device["formFactor"];
+    releaseYear: number | null;
+    /** Kind of evidence behind the captures; null while nothing is captured. */
+    evidence: Evidence | null;
+    /** Natural orientation, both navigation modes, every screen. */
+    measurementStatus: "complete" | "partial" | "pending";
+    screens: Array<{
+      id: Screen["id"];
+      measuredModes: NavMode[];
+      /** Surface.ROTATION_* values with a separate capture in at least one navigation mode. */
+      measuredRotations: Array<0 | 1 | 2 | 3>;
+    }>;
+    export: string;
+    page: string;
+  }>;
+}
+
+const NAV_MODES: NavMode[] = ["gesture", "threeButton"];
+
+/** Lists every public device with its capture coverage and export URL. */
+export function createDeviceIndex(devices: Device[], siteUrl: string): PublicDeviceIndex {
+  return {
+    schema: DEVICE_INDEX_SCHEMA,
+    schemaVersion: 1,
+    deviceCount: devices.length,
+    devices: devices.map(device => {
+      const screens = device.screens.map(screen => ({
+        id: screen.id,
+        measuredModes: NAV_MODES.filter(mode => screen.insets[mode] !== null),
+        measuredRotations: Object.entries(screen.rotations ?? {})
+          .filter(([, capture]) => capture && NAV_MODES.some(mode => capture.insets[mode] !== null))
+          .map(([rotation]) => Number(rotation) as 0 | 1 | 2 | 3)
+          .sort(),
+      }));
+      const measured = screens.reduce((count, screen) => count + screen.measuredModes.length, 0);
+      const sources = device.screens.flatMap(screen => NAV_MODES.flatMap(mode => screen.insets[mode]?.sources ?? []));
+      return {
+        slug: device.slug,
+        name: device.name,
+        brand: device.brand,
+        series: device.series,
+        formFactor: device.formFactor,
+        releaseYear: device.releaseYear,
+        evidence: sources.length ? evidenceOf(sources) : null,
+        measurementStatus: measured === 0 ? "pending" : measured === screens.length * NAV_MODES.length ? "complete" : "partial",
+        screens,
+        export: `${siteUrl}${deviceExportPath(device)}`,
+        page: `${siteUrl}/${device.slug}`,
+      };
+    }),
+  };
+}
