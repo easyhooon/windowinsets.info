@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { areaLabel, changelog, CHANGELOG_FEED_PATH, CHANGELOG_PATH, entryUrl } from "../data/changelog";
+import { areaLabel, changelog, CHANGELOG_FEED_PATH, CHANGELOG_PATH, changelogRows, commitUrl, entryUrl } from "../data/changelog";
 import { changelogDeviceName } from "../data/changelog.server";
 import { SITE_URL } from "../data/site";
 import { pageMeta } from "../lib/seo";
@@ -23,7 +23,8 @@ export function loader() {
 }
 
 export default function Changelog({ loaderData: { names } }: Route.ComponentProps) {
-  const days = [...new Set(changelog.map(entry => entry.date))];
+  const rows = changelogRows();
+  const days = [...new Set(rows.map(row => row.date))];
   return (
     <article className="mx-auto max-w-2xl p-4 md:p-8">
       <h1 className="text-2xl font-semibold">Changelog</h1>
@@ -37,7 +38,7 @@ export default function Changelog({ loaderData: { names } }: Route.ComponentProp
             <time dateTime={day}>{day}</time>
           </h2>
           <ul className="mt-2 divide-y divide-line">
-            {changelog.filter(entry => entry.date === day).map(entry => (
+            {rows.filter(entry => entry.date === day).map(entry => (
               <li key={entry.hash} className="changelog-entry py-2.5 text-[15px] leading-relaxed">
                 <span className={`changelog-kind ${entry.area}`}>{areaLabel(entry)}</span>
                 <span className="text-fg">{entry.summary}</span>
@@ -50,7 +51,17 @@ export default function Changelog({ loaderData: { names } }: Route.ComponentProp
                     return <span key={slug}>{i > 0 && ", "}{name ? <Link to={`/${slug}`} className="text-accent underline">{name}</Link> : slug}</span>;
                   })}
                   {" · "}
-                  <a href={entryUrl(entry)} className="font-mono underline">{entry.hash.slice(0, 7)}</a>
+                  {entry.commits ? <details className="changelog-commits inline">
+                    <summary className="cursor-pointer underline">{entry.commits.length} commits</summary>
+                    <ul className="mt-1 space-y-0.5">
+                      {entry.commits.map(commit => (
+                        <li key={commit.hash}>
+                          {commit.summary}{" · "}
+                          <a href={commitUrl(commit.hash)} className="font-mono underline">{commit.hash.slice(0, 7)}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </details> : <a href={entryUrl(entry)} className="font-mono underline">{entry.hash.slice(0, 7)}</a>}
                 </span>}
               </li>
             ))}

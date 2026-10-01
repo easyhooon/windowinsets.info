@@ -51,3 +51,16 @@ test('site entries are merged pull requests or direct commits that touched the s
     assert.ok(files.split('\n').some(f => /^(app|public)\//.test(f)), entry.hash);
   }
 });
+
+test('consecutive data entries of one day and kind share a row', async () => {
+  const { module: { changelogRows } } = await runnerImport('./app/data/changelog.ts', { root: process.cwd() });
+  const rows = changelogRows();
+  assert.equal(rows.reduce((sum, row) => sum + (row.commits?.length ?? 1), 0), entries.length);
+  for (const [i, row] of rows.entries()) {
+    const next = rows[i + 1];
+    if (next) assert.ok(!(row.area === 'data' && next.area === 'data' && row.date === next.date && row.kind === next.kind), row.hash);
+    if (!row.commits) continue;
+    assert.equal(row.hash, row.commits[0].hash);
+    assert.deepEqual(row.devices, [...new Set(row.commits.flatMap(c => c.devices))].sort());
+  }
+});

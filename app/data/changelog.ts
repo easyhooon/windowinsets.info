@@ -24,3 +24,25 @@ export const areaLabel = (entry: ChangelogEntry) => entry.area === "site" ? "Sit
 /** Pull request page for merged site work, otherwise the commit. */
 export const entryUrl = (entry: ChangelogEntry) => entry.pr ? pullUrl(entry.pr) : commitUrl(entry.hash);
 
+/** One changelog row: a single entry, or a run of data commits shown together. */
+export interface ChangelogRow extends ChangelogEntry {
+  /** The grouped data commits, newest first; absent for a single entry. */
+  commits?: ChangelogEntry[];
+}
+
+/** Merges consecutive data entries of the same day and kind into one row. */
+export function changelogRows(entries: ChangelogEntry[] = changelog): ChangelogRow[] {
+  const rows: ChangelogRow[] = [];
+  for (const entry of entries) {
+    const last = rows.at(-1);
+    if (last && entry.area === "data" && last.area === "data" && last.date === entry.date && last.kind === entry.kind) {
+      const commits = [...(last.commits ?? [last]), entry];
+      const devices = [...new Set(commits.flatMap(commit => commit.devices))].sort();
+      const verb = entry.kind === "corrected" ? "Correct" : "Add";
+      rows[rows.length - 1] = { ...commits[0], summary: `${verb} measurements for ${devices.length} device${devices.length === 1 ? "" : "s"}`, devices, commits };
+    } else {
+      rows.push(entry);
+    }
+  }
+  return rows;
+}

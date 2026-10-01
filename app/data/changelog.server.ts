@@ -1,5 +1,5 @@
 import { devices } from "./devices";
-import { areaLabel, changelog, CHANGELOG_FEED_PATH, CHANGELOG_PATH, entryUrl } from "./changelog";
+import { areaLabel, changelog, CHANGELOG_FEED_PATH, CHANGELOG_PATH, changelogRows, commitUrl, entryUrl } from "./changelog";
 import { SITE_URL } from "./site";
 
 const nameBySlug = new Map(devices.map(device => [device.slug, device.name]));
@@ -10,7 +10,7 @@ const escapeXml = (text: string) => text.replace(/[<>&'"]/g, c => ({ "<": "&lt;"
 
 /** RSS 2.0 feed of the latest entries. */
 export function changelogFeed(limit = 50): string {
-  const items = changelog.slice(0, limit).map(entry => {
+  const items = changelogRows().slice(0, limit).map(entry => {
     const names = entry.devices.map(slug => changelogDeviceName(slug) ?? slug).join(", ");
     const link = entry.devices.length === 1 && changelogDeviceName(entry.devices[0]) ? `${SITE_URL}/${entry.devices[0]}` : `${SITE_URL}${CHANGELOG_PATH}`;
     return `    <item>
@@ -19,7 +19,7 @@ export function changelogFeed(limit = 50): string {
       <guid isPermaLink="false">${entry.hash}</guid>
       <pubDate>${new Date(`${entry.date}T00:00:00Z`).toUTCString()}</pubDate>
       <category>${areaLabel(entry)}</category>
-      <description>${escapeXml(`${areaLabel(entry)}${names ? ` · ${names}` : ""}. ${entry.pr ? "Pull request" : "Commit"}: ${entryUrl(entry)}`)}</description>
+      <description>${escapeXml(`${areaLabel(entry)}${names ? ` · ${names}` : ""}. ${entry.commits ? `Commits: ${entry.commits.map(commit => commitUrl(commit.hash)).join(" ")}` : `${entry.pr ? "Pull request" : "Commit"}: ${entryUrl(entry)}`}`)}</description>
     </item>`;
   }).join("\n");
   const updated = changelog[0] ? new Date(`${changelog[0].date}T00:00:00Z`).toUTCString() : new Date(0).toUTCString();
