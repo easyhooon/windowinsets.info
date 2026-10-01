@@ -5,9 +5,13 @@ import { devices, REPO_URL, SITE_URL } from "./devices";
 export interface ChangelogEntry {
   hash: string;
   date: string;
+  /** "data": measurement commits; "site": merged pull requests and direct site changes. */
+  area: "data" | "site";
   kind: "added" | "corrected";
   summary: string;
   devices: string[];
+  /** Pull request number for merged site work. */
+  pr?: number;
 }
 
 export const changelog = data.entries as ChangelogEntry[];
@@ -18,6 +22,10 @@ const nameBySlug = new Map(devices.map(device => [device.slug, device.name]));
 /** Public device name, or null for archived entries that have no page. */
 export const changelogDeviceName = (slug: string) => nameBySlug.get(slug) ?? null;
 export const commitUrl = (hash: string) => `${REPO_URL}/commit/${hash}`;
+export const pullUrl = (pr: number) => `${REPO_URL}/pull/${pr}`;
+export const areaLabel = (entry: ChangelogEntry) => entry.area === "site" ? "Site" : "Data";
+/** Pull request page for merged site work, otherwise the commit. */
+export const entryUrl = (entry: ChangelogEntry) => entry.pr ? pullUrl(entry.pr) : commitUrl(entry.hash);
 
 const escapeXml = (text: string) => text.replace(/[<>&'"]/g, c => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;" })[c]!);
 
@@ -31,18 +39,18 @@ export function changelogFeed(limit = 50): string {
       <link>${escapeXml(link)}</link>
       <guid isPermaLink="false">${entry.hash}</guid>
       <pubDate>${new Date(`${entry.date}T00:00:00Z`).toUTCString()}</pubDate>
-      <category>${entry.kind === "corrected" ? "Corrected" : "Added"}</category>
-      <description>${escapeXml(`${entry.kind === "corrected" ? "Corrected" : "Added"} · ${names}. Commit: ${commitUrl(entry.hash)}`)}</description>
+      <category>${areaLabel(entry)}</category>
+      <description>${escapeXml(`${areaLabel(entry)}${names ? ` · ${names}` : ""}. ${entry.pr ? "Pull request" : "Commit"}: ${entryUrl(entry)}`)}</description>
     </item>`;
   }).join("\n");
   const updated = changelog[0] ? new Date(`${changelog[0].date}T00:00:00Z`).toUTCString() : new Date(0).toUTCString();
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>windowinsets.info data changelog</title>
+    <title>windowinsets.info changelog</title>
     <link>${SITE_URL}${CHANGELOG_PATH}</link>
     <atom:link href="${SITE_URL}${CHANGELOG_FEED_PATH}" rel="self" type="application/rss+xml" />
-    <description>New and corrected Android window inset measurements.</description>
+    <description>New and corrected Android window inset measurements and site changes.</description>
     <language>en</language>
     <lastBuildDate>${updated}</lastBuildDate>
 ${items}

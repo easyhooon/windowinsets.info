@@ -331,9 +331,11 @@ and implementation details.
 - Pixel artwork: AOSP emulator skins and `app/data/aospSkins.ts` (Apache 2.0;
   see [third-party notices](docs/THIRD_PARTY_NOTICES.md)).
 - Geometry and asset tests: `node --test tests/rendering.test.mjs`.
-- Data changelog (`/changelog`, `/changelog.xml`): generated from `feat`/`fix`
-  commits (scope none, `data` or `devices`) that touch `app/data/devices/`.
-  `pnpm build` refreshes it; run `pnpm changelog` and commit
-  `app/data/changelog.json` after data work so shallow deploy clones keep
+- Changelog (`/changelog`, `/changelog.xml`): **Data** entries come from
+  `feat`/`fix` commits (scope none, `data` or `devices`) that touch
+  `app/data/devices/`; **Site** entries come from `main`'s first-parent history
+  (merged PRs by title, direct `feat` commits) that touch
+  `app/` or `public/`. `pnpm build` refreshes it; run `pnpm changelog` on
+  `main` and commit `app/data/changelog.json` so shallow deploy clones keep
   older entries. Hide or reword an entry by hash in
   `app/data/changelog-overrides.json`.
