@@ -114,6 +114,7 @@ export default function Shell() {
         <nav className="sidebar-footer">
           <NavLink to="/developer-guide" onClick={() => setMobileOpen(false)}>Developer guide</NavLink>
           <NavLink to="/methodology" onClick={() => setMobileOpen(false)}>How I measure</NavLink>
+          <NavLink to="/changelog" onClick={() => setMobileOpen(false)}>Changelog</NavLink>
           <a href={`${REPO_URL}/issues/new/choose`} target="_blank" rel="noreferrer" aria-label="Send feedback or report an issue on GitHub (opens in a new tab)">Send feedback ↗</a>
           <p className="sidebar-footer-support">
             <span>Found this useful?</span>
