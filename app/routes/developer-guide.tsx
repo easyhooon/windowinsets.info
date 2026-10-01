@@ -3,7 +3,7 @@ import { CodeBlock } from "../components/CodeBlock";
 import { insetRanges } from "../data/insetRanges.server";
 import { insetsAnatomy } from "../data/insetsAnatomy.server";
 import { AnatomyNumber, InsetsAnatomy } from "../components/InsetsAnatomy";
-import { REPO_URL, SITE_URL } from "../data/devices";
+import { REPO_URL, SITE_URL } from "../data/site";
 import { pageMeta } from "../lib/seo";
 import type { Route } from "./+types/developer-guide";
 

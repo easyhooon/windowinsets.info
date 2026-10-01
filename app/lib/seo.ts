@@ -1,4 +1,4 @@
-import { SITE_URL } from "../data/devices";
+import { SITE_URL } from "../data/site";
 
 export const SITE_NAME = "windowinsets.info";
 
