@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink, Outlet, useLocation, useParams } from "react-router";
 import { devices, featuredDevice, REPO_URL } from "../data/devices";
 import { ResizeHandle } from "../components/ResizeHandle";
@@ -35,6 +35,25 @@ export default function Shell() {
   const [sidebarWidth, setSidebarWidth] = useState(240);
   const [query, setQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const searchInput = useRef<HTMLInputElement>(null);
+  // Platform-specific hint is client-only, so the prerendered HTML stays identical.
+  const [searchHint, setSearchHint] = useState<string | null>(null);
+  useEffect(() => {
+    setSearchHint(/Mac|iPhone|iPad/.test(navigator.platform) ? "⌘K" : "Ctrl K");
+    // ⌘K / Ctrl+K anywhere, or "/" outside text fields, jumps to device search (docs-site convention).
+    const onKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      const typing = !!target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName));
+      const command = (e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && e.key.toLowerCase() === "k";
+      if (!command && !(e.key === "/" && !typing && !e.metaKey && !e.ctrlKey && !e.altKey)) return;
+      e.preventDefault();
+      // The sidebar is a collapsed drawer on phones; open it so the field can take focus.
+      if (window.matchMedia("(max-width: 767px)").matches) setMobileOpen(true);
+      requestAnimationFrame(() => { searchInput.current?.focus(); searchInput.current?.select(); });
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
   const location = useLocation();
   const { slug } = useParams();
   const current = devices.find(d => d.slug === slug) ?? featuredDevice;
@@ -84,7 +103,7 @@ export default function Shell() {
     <div className="app-content">
       <aside className={`device-sidebar ${mobileOpen ? "is-open" : ""}`} aria-label="Devices">
         <div className="sidebar-heading"><strong>Devices</strong><span>{devices.length}</span></div>
-        <label className="device-search"><Icon name="search" /><input type="search" aria-label="Search devices" value={query} onChange={e => setQuery(e.target.value)} placeholder="Search devices…" /></label>
+        <label className="device-search"><Icon name="search" /><input ref={searchInput} type="search" aria-label="Search devices" aria-keyshortcuts="Meta+K Control+K /" value={query} onChange={e => setQuery(e.target.value)} onKeyDown={e => { if (e.key === "Escape") e.currentTarget.blur(); }} placeholder="Search devices…" />{searchHint && !query && <kbd className="search-shortcut" aria-hidden="true">{searchHint}</kbd>}</label>
         <div className="device-brand-tabs" role="group" aria-label="Brand">
           {brands.map(option => <button key={option} type="button" aria-pressed={brand === option} onClick={() => selectFamily("All", option)}>{option}</button>)}
         </div>
