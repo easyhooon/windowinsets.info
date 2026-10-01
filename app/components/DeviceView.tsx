@@ -9,7 +9,6 @@ import { Dropdown } from "./Dropdown";
 import type { GestureInsets } from "./FoldRenderer3D";
 import { InsetsDiagram } from "./InsetsDiagram";
 import { GESTURE_COLOR, TAPPABLE_COLOR } from "./diagramStyle";
-import { CodeBlock } from "./CodeBlock";
 import type { AppPreview } from "./appPreview";
 import { DiagramViewport, type DiagramViewportHandle } from "./DiagramViewport";
 import type { DeviceSkin } from "../data/skins";
@@ -30,6 +29,14 @@ const FoldRenderer3D = lazy(() => loadFoldRenderer().then(module => ({ default: 
 function OnMount({ effect }: { effect: () => void }) {
   useEffect(effect, []); // eslint-disable-line react-hooks/exhaustive-deps
   return null;
+}
+
+// highlight.js loads only once a snippet is shown; until then the plain code stands in.
+const LazyCodeBlock = lazy(() => import("./CodeBlock").then(module => ({ default: module.CodeBlock })));
+function CodeBlock(props: { children: string; title: string }) {
+  return <Suspense fallback={<div className="code-block"><div className="code-block-toolbar"><span>Kotlin</span></div><pre><code className="hljs">{props.children}</code></pre></div>}>
+    <LazyCodeBlock {...props} />
+  </Suspense>;
 }
 
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
@@ -200,6 +207,7 @@ export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; 
   const [layers, setLayers] = useState({ safe: true, insets: true, cutout: true, corners: true, gestures: false, tappable: false });
   const [units, setUnits] = useState<"dp" | "px">("dp");
   const [appPreview, setAppPreview] = useState<AppPreview>("off");
+  const [fixtureOpen, setFixtureOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [theme, setTheme] = useTheme();
   const [metricsOpen, setMetricsOpen] = useState(false);
@@ -531,12 +539,12 @@ export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; 
             <SectionLabel>{label}</SectionLabel>
             <dl>{insetsRows(raw[type].dp, raw[type].px, units, fmt)}</dl>
           </div>)}
-          {fixture && <details className="fixture-details">
+          {fixture && <details className="fixture-details" onToggle={event => setFixtureOpen(event.currentTarget.open)}>
             <summary>Test fixture · WindowInsetsCompat</summary>
             <p className="mb-2 text-xs leading-relaxed text-muted">
               Exact px of this capture for JVM UI tests (Robolectric, Paparazzi, Roborazzi).
             </p>
-            <CodeBlock title="Tests · WindowInsetsCompat">{fixture}</CodeBlock>
+            {fixtureOpen && <CodeBlock title="Tests · WindowInsetsCompat">{fixture}</CodeBlock>}
           </details>}
           {emulatorOnly ? <>
             <SectionLabel>Captured On</SectionLabel>
