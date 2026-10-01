@@ -338,6 +338,11 @@ export function DeviceView({ device }: { device: Device }) {
     }
     if (restored.rotation !== undefined || restored.hinge !== undefined) setFitKey(key => key + 1);
     viewRestored.current = true;
+    // Reveal the canvas once the restored view has painted; a restored hinge waits
+    // for the fold to settle instead of showing it opening.
+    const reveal = () => { delete document.documentElement.dataset.viewRestore; };
+    const timer = setTimeout(reveal, restored.hinge !== undefined && useFoldRef.current ? 500 : 50);
+    return () => { clearTimeout(timer); reveal(); };
   }, []);
   useEffect(() => {
     if (!viewRestored.current) return;

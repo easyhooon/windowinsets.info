@@ -15,6 +15,10 @@ export interface ViewState {
 
 const KEYS = ["nav", "rotate", "hinge", "unit", "app"] as const;
 
+/** Runs in <head>: hides the canvas until DeviceView applies a shared view, so the
+ * prerendered default view never flashes before it. */
+export const VIEW_RESTORE_SCRIPT = `try{if(/[?&](${KEYS.join("|")})=/.test(location.search))document.documentElement.dataset.viewRestore=""}catch(e){}`;
+
 export function parseViewState(search: string, options: { rotations: number[]; foldable: boolean }): Partial<ViewState> {
   const params = new URLSearchParams(search);
   const state: Partial<ViewState> = {};
