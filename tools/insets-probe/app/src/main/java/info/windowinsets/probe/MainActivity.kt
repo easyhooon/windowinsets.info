@@ -111,6 +111,16 @@ class MainActivity : ComponentActivity(), SensorEventListener {
         refresh()
     }
 
+    /**
+     * Firebase Test Lab sets the "firebase.test.lab" system setting. Robo scripts cannot run
+     * ADB shell commands on every device (Pixel 5 runs API 30 there), so a plain launcher start
+     * on Test Lab exports once with the default "phone" label. Scripted starts pass extras and
+     * keep their own behaviour; the API 31+ scripts also delete earlier exports first.
+     */
+    private fun launchedPlainOnTestLab(): Boolean =
+        (intent.extras?.isEmpty ?: true) &&
+            android.provider.Settings.System.getString(contentResolver, "firebase.test.lab") == "true"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -124,7 +134,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
         screenLabelSource = FlexWindowContract.screenLabelSource(
             intent.getStringExtra(FlexWindowContract.EXTRA_SCREEN_LABEL_SOURCE),
         )
-        autoExport = intent.getBooleanExtra("export", false)
+        autoExport = intent.getBooleanExtra("export", false) || launchedPlainOnTestLab()
         // Automation: ... --ez sweep true  (records every orientation the display allows)
         tabletReversePortrait = intent.getBooleanExtra("tablet", false)
         if (intent.getBooleanExtra("sweep", false)) root.post { startSweep() }

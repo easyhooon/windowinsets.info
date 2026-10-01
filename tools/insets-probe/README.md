@@ -189,7 +189,7 @@ See [Android inset definitions](https://developer.android.com/develop/ui/compose
 
 ## Version 1.3.0: optional cutout contour capture
 
-`displayCutout.path` records `getCutoutPath()` when returned by Android (API 31+).
+`displayCutout.path` records `getCutoutPath()` when returned by Android (API 31+). On API 30, `displayCutout.path` and `roundedCorners` are `null` and the capture lists them in `apiLimits`; on Firebase Test Lab a plain launch exports once with the default `phone` label, since Robo ADB shell steps do not run there.
 It contains `coordinateSpace: display`, `units: px`, the Android `fillType`,
 `approximationTolerancePx: 0.25`, and `approximation` entries with `fraction`, `x`,
 and `y`. These are `Path.approximate` samples, not exact Bézier commands. Preserve

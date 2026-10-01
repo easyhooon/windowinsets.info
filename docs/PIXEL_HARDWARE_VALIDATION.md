@@ -236,14 +236,31 @@ is rotation 0; the display orientation and dimensions match, but the OS build
 and rotation index still differ. The earlier portrait physical capture remains
 separate evidence.
 
-Three public models still lack this physical spot check. Pixel 6 Pro and Pixel
-4a were absent from the FTL physical catalog checked on 2026-09-28. Pixel 5
-was offered only on API 30, below the probe APK's `minSdk 31`; moreover,
-Android 11 does not expose the cutout path and rounded-corner APIs used for
-this geometry comparison. An API-30-compatible probe could collect its cutout
-bounds and safe insets, but would not complete the same path/corner check.
-The model-specific blockers, next capture paths and completion criteria are
-tracked in [issue #46](https://github.com/easyhooon/windowinsets.info/issues/46).
+### Pixel 5 on API 30 (2026-10-01)
+
+FTL offers Pixel 5 (`redfin`) only on API 30. InsetsProbe 1.7.0 lowers
+`minSdk` to 30: on API 30 it records `displayCutout.path` and `roundedCorners`
+as `null` and lists them in `apiLimits`, because `getCutoutPath()` and
+`RoundedCorner` arrived in API 31. Robo ADB shell steps did not run on this
+device (the first attempt stopped at `am force-stop`), so the probe exports
+once on a plain launch when the `firebase.test.lab` system setting is `true`,
+using its default `phone` label, and
+`tools/insets-probe/testlab/phone-portrait-launch-only.robo.json` only waits.
+The passing run is preserved in
+`measurements/pixel/pixel-5/testlab-2026-10-01/` with its manifest and hashes.
+
+The physical capture (Android 11, build `RQ3A.211001.001`, gesture mode, both
+detectors agreeing) matches the API 37 AVD on window size (1080×2340 px),
+density (440 dpi) and the top-left cutout (inset 136 px, bounds
+0,0–136,136 px). System bars differ with the OS version: status bar 145 px
+versus 136 px in the AVD, and the gesture navigation bar 44 px versus 66 px.
+Cutout path and corner radii could not be compared on API 30. These remain
+findings; the published emulator values are unchanged.
+
+That brings the physical spot check to **20 of 22 public Pixel models**. Pixel
+6 Pro and Pixel 4a were still absent from the FTL physical catalog checked on
+2026-10-01. The remaining blockers are tracked in
+[issue #46](https://github.com/easyhooon/windowinsets.info/issues/46).
 
 Blaze billing is active for the dedicated FTL project. The 30-minute daily
 allowance and $5/device-hour overage are service pricing, not a confirmed

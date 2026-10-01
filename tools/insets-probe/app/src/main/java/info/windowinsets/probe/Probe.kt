@@ -153,8 +153,8 @@ object Probe {
                     )
                     .put("boundingRects", JSONArray().also { a -> cutout.boundingRects.forEach { a.put(rectJson(it)) } })
                     .put("waterfallInsets", insetsJson(cutout.waterfallInsets))
-                    .put("path", insets.toWindowInsets()?.displayCutout?.cutoutPath?.let { path ->
-                        // API 31 (our minSdk). Preserve fractions as well as coordinates:
+                    .put("path", (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) insets.toWindowInsets()?.displayCutout?.cutoutPath else null)?.let { path ->
+                        // API 31+; null on API 30, recorded in apiLimits. Preserve fractions as well as coordinates:
                         // equal adjacent fractions can indicate a move between contours.
                         // This is OS cutout geometry, not individual physical lens geometry.
                         val tolerancePx = 0.25f
@@ -176,35 +176,43 @@ object Probe {
             },
         )
 
-        val platformInsets = insets.toWindowInsets()
-        val positions = linkedMapOf(
-            "topLeft" to RoundedCorner.POSITION_TOP_LEFT,
-            "topRight" to RoundedCorner.POSITION_TOP_RIGHT,
-            "bottomRight" to RoundedCorner.POSITION_BOTTOM_RIGHT,
-            "bottomLeft" to RoundedCorner.POSITION_BOTTOM_LEFT,
-        )
-        fun cornersJson(get: (Int) -> RoundedCorner?): JSONObject {
-            val o = JSONObject()
-            positions.forEach { (name, pos) ->
-                val c = get(pos)
-                o.put(
-                    name,
-                    if (c == null) {
-                        JSONObject.NULL
-                    } else {
-                        JSONObject().put("radiusPx", c.radius).put("radiusDp", dp(c.radius))
-                            .put("centerPx", JSONObject().put("x", c.center.x).put("y", c.center.y))
-                    },
-                )
+        // RoundedCorner and DisplayCutout.getCutoutPath() arrived in API 31. On API 30
+        // these fields stay null and apiLimits names them, so they read as unavailable,
+        // never as "no rounded corners" or "no cutout shape".
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val platformInsets = insets.toWindowInsets()
+            val positions = linkedMapOf(
+                "topLeft" to RoundedCorner.POSITION_TOP_LEFT,
+                "topRight" to RoundedCorner.POSITION_TOP_RIGHT,
+                "bottomRight" to RoundedCorner.POSITION_BOTTOM_RIGHT,
+                "bottomLeft" to RoundedCorner.POSITION_BOTTOM_LEFT,
+            )
+            fun cornersJson(get: (Int) -> RoundedCorner?): JSONObject {
+                val o = JSONObject()
+                positions.forEach { (name, pos) ->
+                    val c = get(pos)
+                    o.put(
+                        name,
+                        if (c == null) {
+                            JSONObject.NULL
+                        } else {
+                            JSONObject().put("radiusPx", c.radius).put("radiusDp", dp(c.radius))
+                                .put("centerPx", JSONObject().put("x", c.center.x).put("y", c.center.y))
+                        },
+                    )
+                }
+                return o
             }
-            return o
+            json.put(
+                "roundedCorners",
+                JSONObject()
+                    .put("windowInsets", cornersJson { platformInsets?.getRoundedCorner(it) })
+                    .put("display", cornersJson { display?.getRoundedCorner(it) }),
+            )
+        } else {
+            json.put("roundedCorners", JSONObject.NULL)
+            json.put("apiLimits", JSONArray().put("displayCutout.path").put("roundedCorners"))
         }
-        json.put(
-            "roundedCorners",
-            JSONObject()
-                .put("windowInsets", cornersJson { platformInsets?.getRoundedCorner(it) })
-                .put("display", cornersJson { display?.getRoundedCorner(it) }),
-        )
 
         json.put("hinge", hingeJson(hingeAngle, foldingFeatures, ::rectJson))
         return json
