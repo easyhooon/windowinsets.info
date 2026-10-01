@@ -1,8 +1,72 @@
 {
   "entries": [
     {
+      "hash": "485052d7ba462da85b573cf857be9747dd93a414",
+      "date": "2026-10-01",
+      "area": "site",
+      "kind": "added",
+      "summary": "Focus device search with Cmd/Ctrl+K or slash",
+      "devices": [],
+      "pr": 135
+    },
+    {
+      "hash": "6e6ddccc485ccc1a786c47cde51de7d681e1623c",
+      "date": "2026-10-01",
+      "area": "site",
+      "kind": "corrected",
+      "summary": "Default the insets figure to 3-button navigation",
+      "devices": [],
+      "pr": 134
+    },
+    {
+      "hash": "27e2f63189d8524297c7ba3f63523718163f13be",
+      "date": "2026-10-01",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add a test fixture snippet per capture",
+      "devices": [],
+      "pr": 133
+    },
+    {
+      "hash": "7cab398bbb28afffa6eef52205a53ace29f26c98",
+      "date": "2026-10-01",
+      "area": "site",
+      "kind": "added",
+      "summary": "Measured inset ranges and an insets anatomy figure",
+      "devices": [],
+      "pr": 132
+    },
+    {
+      "hash": "7bcfe1264cd97aaa4321d2137ab9363692a6c95c",
+      "date": "2026-10-01",
+      "area": "site",
+      "kind": "added",
+      "summary": "Generate a data changelog page and RSS feed",
+      "devices": [],
+      "pr": 131
+    },
+    {
+      "hash": "06aaa9d4e85d2626e661055b9bb6a724913b4dcd",
+      "date": "2026-10-01",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add gesture zone and tappable layers",
+      "devices": [],
+      "pr": 130
+    },
+    {
+      "hash": "71c078a174d77ea9d69567c6c7532d704353de5c",
+      "date": "2026-10-01",
+      "area": "site",
+      "kind": "added",
+      "summary": "Split systemBars into status and navigation bars",
+      "devices": [],
+      "pr": 129
+    },
+    {
       "hash": "c3ac72945e9337689e3b62d83d154c4868dce689",
       "date": "2026-10-01",
+      "area": "data",
       "kind": "corrected",
       "summary": "Cite the Galaxy A73 5G 3-button raw capture file",
       "devices": [
@@ -10,8 +74,35 @@
       ]
     },
     {
+      "hash": "e1644db2d4095c4a0e1a9966f057ee5700000bea",
+      "date": "2026-10-01",
+      "area": "site",
+      "kind": "added",
+      "summary": "Publish a device index at /data/index.json",
+      "devices": [],
+      "pr": 128
+    },
+    {
+      "hash": "731985dc85100a9c27ad3d8abd8c45d6554ab1df",
+      "date": "2026-10-01",
+      "area": "site",
+      "kind": "added",
+      "summary": "Encode view state in the URL",
+      "devices": [],
+      "pr": 117
+    },
+    {
+      "hash": "17ed0a1e0f5b98892ba1536803b18f9fdb5b988a",
+      "date": "2026-09-30",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add dark mode with a header toggle",
+      "devices": []
+    },
+    {
       "hash": "d0eab7746d3bb3b7e632c21fa5210bd2e16ac80c",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S9 rotation captures from Android 15",
       "devices": [
@@ -21,6 +112,7 @@
     {
       "hash": "312e9d0d03ae007ef38af8f3484b2958495a58d4",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S8 gesture rotation captures",
       "devices": [
@@ -30,6 +122,7 @@
     {
       "hash": "49a88a996e6ffec46e7d7142e39b471379dd4e38",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A33 5G gesture rotation captures",
       "devices": [
@@ -39,6 +132,7 @@
     {
       "hash": "b54614f69e119fea6d5a79f86bf362854cd987d0",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Z Flip rotation captures",
       "devices": [
@@ -48,6 +142,7 @@
     {
       "hash": "1b34a696878fb55644786ee37cb1f84f244fb348",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A53 5G rotation captures",
       "devices": [
@@ -57,6 +152,7 @@
     {
       "hash": "1780ef2b033caa47a92312c0222ccff074b6ac50",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A56 5G rotation captures",
       "devices": [
@@ -66,6 +162,7 @@
     {
       "hash": "1f7c2b617b82a086c9336465a7ff16f09fb68915",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Note20 Ultra gesture rotation captures",
       "devices": [
@@ -75,6 +172,7 @@
     {
       "hash": "9f55654262bd73effd304d23a836a1f967058e66",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A04 rotation captures",
       "devices": [
@@ -84,6 +182,7 @@
     {
       "hash": "32151d7c30be5ebba06e55031af2b5d4b567eb69",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A05 rotation captures",
       "devices": [
@@ -93,6 +192,7 @@
     {
       "hash": "b9445d8d4127df5e9d677aed497893113a842814",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A06 rotation captures",
       "devices": [
@@ -102,6 +202,7 @@
     {
       "hash": "56172530913f9bc9f7e2bdb450724d4c4dbe76a6",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A07 5G rotation captures",
       "devices": [
@@ -111,6 +212,7 @@
     {
       "hash": "57c096648953ecaa0484475b61f245fddc738422",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A14 rotation captures",
       "devices": [
@@ -120,6 +222,7 @@
     {
       "hash": "fe2b379c687605e1e999de1b57610dd1727a75bb",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A15 rotation captures",
       "devices": [
@@ -129,6 +232,7 @@
     {
       "hash": "b90e54c2878029de7547ddd326210de8c8459c6f",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A23 rotation captures",
       "devices": [
@@ -138,6 +242,7 @@
     {
       "hash": "ca2192bc96369938b71ceeb03b1a46f5ebc206da",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A24 rotation captures",
       "devices": [
@@ -147,6 +252,7 @@
     {
       "hash": "42252e08463448a4aa28284b3cb5358d562a01e1",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A32 rotation captures",
       "devices": [
@@ -156,6 +262,7 @@
     {
       "hash": "583c8e34fb3f8a9710c4efa8bc35623079464a9f",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A33 5G 3-button rotation captures",
       "devices": [
@@ -165,6 +272,7 @@
     {
       "hash": "b343b7483defe4a52b30c97ecb8c78d4c832102e",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A34 5G rotation captures",
       "devices": [
@@ -174,6 +282,7 @@
     {
       "hash": "493275d4b9ca9edbaca77f8a235f1869e5333fc8",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A52s 5G rotation captures",
       "devices": [
@@ -183,6 +292,7 @@
     {
       "hash": "087f58d3187614f310289d8739b36a508c7c2b8b",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A73 5G rotation captures",
       "devices": [
@@ -192,6 +302,7 @@
     {
       "hash": "bc2af7ce133302ffcb88b778d019d6d055cf87d7",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab A7 Lite rotation captures",
       "devices": [
@@ -201,6 +312,7 @@
     {
       "hash": "dfe59da25d31a43de0a15a98e9288653e3a2c4ed",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab A9+ rotation captures",
       "devices": [
@@ -210,6 +322,7 @@
     {
       "hash": "55c0204cc9a28a8cc1fe3c476f4d4150390ee018",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab A11 rotation captures",
       "devices": [
@@ -219,6 +332,7 @@
     {
       "hash": "df9fb31058a1bde22fad46c761d32e5c49e35f95",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S7 FE rotation captures",
       "devices": [
@@ -228,6 +342,7 @@
     {
       "hash": "4e6175bd0d5683b559af23dc65b17c5223e83e05",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S7+ rotation captures",
       "devices": [
@@ -237,6 +352,7 @@
     {
       "hash": "07a394558c62411f0a8084290a9fa5cd923340cf",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S8 3-button rotation captures",
       "devices": [
@@ -246,6 +362,7 @@
     {
       "hash": "797da263f510fb7140b8d83380315d7b4faf8e6d",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S8+ rotation captures",
       "devices": [
@@ -255,6 +372,7 @@
     {
       "hash": "ed13ee04c25b5b5a9e9b9b92799d2db405afa105",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S8 Ultra rotation captures",
       "devices": [
@@ -264,6 +382,7 @@
     {
       "hash": "1de1fd722d252d219ff3997e4c45e228a70b0526",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S9 FE rotation captures",
       "devices": [
@@ -273,6 +392,7 @@
     {
       "hash": "f7d420e7dffddf001d0f290bde7cf42d12a85a28",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S9+ rotation captures",
       "devices": [
@@ -282,6 +402,7 @@
     {
       "hash": "10a2e07d923ae4ffe70284e57eef8a013f6781f0",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S9 Ultra rotation captures",
       "devices": [
@@ -291,6 +412,7 @@
     {
       "hash": "5a6d48fee741d085a99f88c84a3e8b9639cba7eb",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S10 Lite rotation captures",
       "devices": [
@@ -300,6 +422,7 @@
     {
       "hash": "5ee08bfef39fb139623e22970fa60b2a48274168",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add measured Galaxy A13 5G insets",
       "devices": [
@@ -309,6 +432,7 @@
     {
       "hash": "136a80b8a6dca7362bfc3ddfc0c5631185ffaa1d",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add measured Galaxy A26 5G insets",
       "devices": [
@@ -318,6 +442,7 @@
     {
       "hash": "c164ed7d715692559fc7bf6b06704a957d4f8f9c",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add measured Galaxy S20+ insets",
       "devices": [
@@ -325,8 +450,17 @@
       ]
     },
     {
+      "hash": "2c0d9c508fba803968658bdd49b9840384bc39cc",
+      "date": "2026-09-30",
+      "area": "site",
+      "kind": "added",
+      "summary": "List S20+, A13 5G, A26 5G and A72 as offered on RTL",
+      "devices": []
+    },
+    {
       "hash": "322be988728f1800afa48c0caf21e4bc9885daae",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S9 FE+ rotation captures",
       "devices": [
@@ -336,6 +470,7 @@
     {
       "hash": "69fdef7724d4d5283047ec22da0823811e8e364b",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S10 FE rotation captures",
       "devices": [
@@ -345,6 +480,7 @@
     {
       "hash": "d7fd828ceba5a0621a3e4aa12c0cd9b457413d82",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S10 FE+ rotation captures",
       "devices": [
@@ -354,6 +490,7 @@
     {
       "hash": "7464881e564672218794cbc7e212c7736fb19cdc",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S10 Ultra gesture rotation captures",
       "devices": [
@@ -363,6 +500,7 @@
     {
       "hash": "a3f85e47d277371b00e3199422f6cc8577365224",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S10+ 3-button rotation captures",
       "devices": [
@@ -372,6 +510,7 @@
     {
       "hash": "37c68ba7eb892170e705afc2353c6af3a271d933",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S10 Ultra 3-button rotation 2 capture",
       "devices": [
@@ -381,6 +520,7 @@
     {
       "hash": "72bbc42e82be056423141b3ff30705052bae72f4",
       "date": "2026-09-30",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Tab S10 Ultra 3-button rotation captures",
       "devices": [
@@ -388,8 +528,17 @@
       ]
     },
     {
+      "hash": "57dba268d8a16fc666ff336e2faeb8ea88eaa1bf",
+      "date": "2026-09-29",
+      "area": "site",
+      "kind": "added",
+      "summary": "Show non-rotating Flip covers turned with the device",
+      "devices": []
+    },
+    {
       "hash": "3cd0b16e262ece7895c9e3f8b9268b08a6ffeebc",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy A55 rotation captures",
       "devices": [
@@ -399,6 +548,7 @@
     {
       "hash": "b43bf7cda4237dec912cf10cfe9fe9c1f4fde32e",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy A27 rotation captures",
       "devices": [
@@ -408,6 +558,7 @@
     {
       "hash": "32cbda5107f20432e8d028a5d43c35d60f59bc78",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy A16 rotation captures",
       "devices": [
@@ -417,6 +568,7 @@
     {
       "hash": "7f6241b84f9803c553c51948307c34b2c8b7e992",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy A17 rotation captures",
       "devices": [
@@ -426,6 +578,7 @@
     {
       "hash": "c62495f2b7bfa0b3deb2b9c2e7a191aeb87b4f8e",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy A37 rotation captures",
       "devices": [
@@ -435,6 +588,7 @@
     {
       "hash": "cd8341513562d1bcc9839cd1838636a9fa1f49da",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy A35 rotation captures",
       "devices": [
@@ -444,6 +598,7 @@
     {
       "hash": "41475501d2eab8a0fba47a8d73a0a4507801e077",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy A36 rotation captures",
       "devices": [
@@ -453,6 +608,7 @@
     {
       "hash": "e0c4ed2dadd1f70ae4860455e4fcccead36950bf",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "corrected",
       "summary": "Fill missing device release years",
       "devices": [
@@ -460,8 +616,17 @@
       ]
     },
     {
+      "hash": "2a4433d8e41e1a2662e665f0c30459d634ecc85c",
+      "date": "2026-09-29",
+      "area": "site",
+      "kind": "added",
+      "summary": "Label only incomplete inset coverage in device list",
+      "devices": []
+    },
+    {
       "hash": "42a87dd5aa45ab8ec893210170e2261f6b63395a",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy A57 rotation captures",
       "devices": [
@@ -471,6 +636,7 @@
     {
       "hash": "e723b0bc7a7d40f47102a52f47f6e67857e2de25",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Note20 rotation captures",
       "devices": [
@@ -480,6 +646,7 @@
     {
       "hash": "19b53e2c43e3252c3014546022a2b714bb9b0c2b",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Tab S11 rotation measurements",
       "devices": [
@@ -489,6 +656,7 @@
     {
       "hash": "f61654446676fc76e6e5c15a0cf90cc987a5f016",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Tab S11 Ultra portrait rotations (#92)",
       "devices": [
@@ -498,6 +666,7 @@
     {
       "hash": "6447c02725b89bf9884a6931b7957f7a807d14a8",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Note20 Ultra button rotations (#91)",
       "devices": [
@@ -507,6 +676,7 @@
     {
       "hash": "ea849cc7bca4129eed5449f3a31ccfe423bd0467",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S20 FE rotation captures",
       "devices": [
@@ -516,6 +686,7 @@
     {
       "hash": "b72c3824af26803c76f5330a818fd59ca3b73fd2",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S20 Ultra rotation captures",
       "devices": [
@@ -525,6 +696,7 @@
     {
       "hash": "499ab9b2853f272ca83f319ce98f523357bb1014",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S21 rotation captures",
       "devices": [
@@ -534,6 +706,7 @@
     {
       "hash": "724e70b77074fd00a6b872940b135a5be9e2b4a3",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S21 FE rotation captures",
       "devices": [
@@ -543,6 +716,7 @@
     {
       "hash": "49fc4467da303a0cd6d1f0906df95b9391daad84",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S21+ rotation captures",
       "devices": [
@@ -552,6 +726,7 @@
     {
       "hash": "59d03e884ae4e94e28a430bb2ccf1acac1f9a81e",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S21 Ultra rotation captures",
       "devices": [
@@ -559,8 +734,18 @@
       ]
     },
     {
+      "hash": "7d19726fe867cf328e033b4366f9d8eb06cb2779",
+      "date": "2026-09-29",
+      "area": "site",
+      "kind": "corrected",
+      "summary": "Stabilize fold hinge drags and align visual tests",
+      "devices": [],
+      "pr": 84
+    },
+    {
       "hash": "101e1bf2c88a5e0eba49fd5aeed69113c20ac252",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S22 rotation captures",
       "devices": [
@@ -570,6 +755,7 @@
     {
       "hash": "6d9970b8b70df75ed97550e13dab776e58982a0f",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S22+ rotation captures",
       "devices": [
@@ -577,8 +763,18 @@
       ]
     },
     {
+      "hash": "b7f0bf2ff07d96bd806e22213dabc2e1e2353c02",
+      "date": "2026-09-29",
+      "area": "site",
+      "kind": "added",
+      "summary": "Float canvas controls as reference-shaped pills",
+      "devices": [],
+      "pr": 80
+    },
+    {
       "hash": "20eed4304bd1b250749576acc1ae92d7b4e5e5a8",
       "date": "2026-09-29",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S22 Ultra rotation captures",
       "devices": [
@@ -588,6 +784,7 @@
     {
       "hash": "2dc03a0751429667ce40bf3934a7b36d0178c9f8",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S23 FE rotation captures",
       "devices": [
@@ -597,6 +794,7 @@
     {
       "hash": "f3c07860f816fddb2350147bb6ab110abf4f6ea6",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S23 Ultra rotation measurements",
       "devices": [
@@ -606,6 +804,7 @@
     {
       "hash": "b593de26b3c0a85feb7567a9d426573ebb83e0ad",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S24 rotation measurements",
       "devices": [
@@ -615,6 +814,7 @@
     {
       "hash": "e821af47639a7d94511b75a72a36526f69f831f8",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S24 FE rotation measurements",
       "devices": [
@@ -624,6 +824,7 @@
     {
       "hash": "8469a9807dc8d3abd4b62654b399b8cc4a371b55",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S24 Ultra rotation captures",
       "devices": [
@@ -633,6 +834,7 @@
     {
       "hash": "aa4cd9fad2b6ce35ee828e2bc98dcf5daacbd148",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S24+ rotation captures",
       "devices": [
@@ -642,6 +844,7 @@
     {
       "hash": "fb6358065cecc363ca03d4c86e9f706741286cbe",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S25 rotation captures",
       "devices": [
@@ -651,6 +854,7 @@
     {
       "hash": "aab601abedf4ee31ddac63b4da3ea6e338544c12",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S25 FE rotation captures",
       "devices": [
@@ -660,6 +864,7 @@
     {
       "hash": "919ad1caba52b201519af2f9c55e679b60f93806",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S25 Edge rotation captures",
       "devices": [
@@ -669,6 +874,7 @@
     {
       "hash": "cebb5e4a499642ee2b6fa517dd57457a8f25a358",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S25+ rotation captures",
       "devices": [
@@ -678,6 +884,7 @@
     {
       "hash": "b183fa3a8e1956e67ab813250cdbaa8eae9943ca",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S25 Ultra rotation captures",
       "devices": [
@@ -687,6 +894,7 @@
     {
       "hash": "1eacfc608060dc3dd3c11ba587e97fd52fce6632",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "corrected",
       "summary": "Register Fold7, Fold8 and Fold8 Ultra rotation captures",
       "devices": [
@@ -697,6 +905,7 @@
     {
       "hash": "108cd5218049f3217db930b786d86950ef99d910",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S26+ rotation captures",
       "devices": [
@@ -704,8 +913,18 @@
       ]
     },
     {
+      "hash": "5c0d4e61d74ae40f0cbcc0b22cfd1c66dd00beef",
+      "date": "2026-09-28",
+      "area": "site",
+      "kind": "added",
+      "summary": "Feature Galaxy Z Flip8 on homepage",
+      "devices": [],
+      "pr": 61
+    },
+    {
       "hash": "8a45b712a115b793298ca5aeec1840e315d1092c",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S26 rotation captures",
       "devices": [
@@ -715,6 +934,7 @@
     {
       "hash": "6d29a08f0f0bc9a68301b5659724c88b0484478a",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Z Flip4 rotation captures",
       "devices": [
@@ -724,6 +944,7 @@
     {
       "hash": "5dac9326895184bafb68a3ec735447989fd4e386",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Z Flip3 rotation captures",
       "devices": [
@@ -733,6 +954,7 @@
     {
       "hash": "ce79260305a20fc765d888d10a4d8de88ed48df6",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Z Flip7 FE rotation captures",
       "devices": [
@@ -740,8 +962,18 @@
       ]
     },
     {
+      "hash": "446796a36b2d604e2869c009e5a7b21154e431e5",
+      "date": "2026-09-28",
+      "area": "site",
+      "kind": "corrected",
+      "summary": "Keep foldable content upright across orientation turns",
+      "devices": [],
+      "pr": 51
+    },
+    {
       "hash": "82f05584fd97a48eef493144cf5d8ce11a1f2b1c",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register existing Z-series rotation captures",
       "devices": [
@@ -756,6 +988,7 @@
     {
       "hash": "aae367f064172f8bf49641ebc4afe148609319d4",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register S26 Ultra landscape captures",
       "devices": [
@@ -765,6 +998,7 @@
     {
       "hash": "49436c207bff79381969efe5b1d76f50f5a8bf14",
       "date": "2026-09-28",
+      "area": "data",
       "kind": "added",
       "summary": "Register Fold6 rotation captures",
       "devices": [
@@ -772,8 +1006,53 @@
       ]
     },
     {
+      "hash": "f1f29426d32a21c2ebe3394e6804ad3bf617b098",
+      "date": "2026-09-28",
+      "area": "site",
+      "kind": "corrected",
+      "summary": "Match reference ruler behavior during rotation",
+      "devices": [],
+      "pr": 48
+    },
+    {
+      "hash": "bc0835fd0c8b9d73e86bb40b518e5c3e495d4535",
+      "date": "2026-09-28",
+      "area": "site",
+      "kind": "corrected",
+      "summary": "Clarify Pixel Tablet frame edge",
+      "devices": [],
+      "pr": 42
+    },
+    {
+      "hash": "88d21d01e2a1bdcd89b73fc2392da62a7cbb7040",
+      "date": "2026-09-28",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add Ko-fi support link (#41)",
+      "devices": []
+    },
+    {
+      "hash": "cd8ab4a9123cc7f2b12873245bb45bf17df12e9f",
+      "date": "2026-09-27",
+      "area": "site",
+      "kind": "added",
+      "summary": "Complete Pixel emulator profile coverage",
+      "devices": [],
+      "pr": 37
+    },
+    {
+      "hash": "521439e2d9a229abba272f23b0916b2b9294bea9",
+      "date": "2026-09-27",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add first Pixel devices from Android Emulator captures",
+      "devices": [],
+      "pr": 36
+    },
+    {
       "hash": "9c807f45e5e60fd1849a5c0a8a0e9c6270a0196d",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy Z Fold7 rotation sweep captures",
       "devices": [
@@ -783,6 +1062,7 @@
     {
       "hash": "9f2e6b7b17ba2ba43c5f12af8ad3a8f7e74127e2",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy A54 5G RTL measurements",
       "devices": [
@@ -790,8 +1070,17 @@
       ]
     },
     {
+      "hash": "3308c5b531767c3080246d25f6eeecb385d2b88b",
+      "date": "2026-09-27",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add GitHub star prompt to sidebar footer (#25)",
+      "devices": []
+    },
+    {
       "hash": "419f4ffbaa8cc845cc04ea746f476d9f9c6122b0",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S21 FE captures",
       "devices": [
@@ -801,6 +1090,7 @@
     {
       "hash": "84434cac597ce98fb736a550fab412bdeffec42a",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S23 captures",
       "devices": [
@@ -810,6 +1100,7 @@
     {
       "hash": "9961f216d25b19ea563e179842e4438bc4c61d43",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S23+ captures",
       "devices": [
@@ -819,6 +1110,7 @@
     {
       "hash": "ec14da49233686c9ddc2b0fbb4195042bafc1c32",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S23 Ultra captures",
       "devices": [
@@ -828,6 +1120,7 @@
     {
       "hash": "10d9e67caea2eee5093f5f8635e0fd13a96dfa97",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Tab A11 captures",
       "devices": [
@@ -837,6 +1130,7 @@
     {
       "hash": "4458a4dff6c57af075e5e506c17764ec441be753",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Tab S7+ captures",
       "devices": [
@@ -846,6 +1140,7 @@
     {
       "hash": "6cbe9fbd11584ea686634b899ad79f1c14956996",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Tab S10 Lite captures",
       "devices": [
@@ -855,6 +1150,7 @@
     {
       "hash": "26679f56fcf62d06014e9eb74ad71f7bc5ee562f",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Tab S10+ captures",
       "devices": [
@@ -864,6 +1160,7 @@
     {
       "hash": "f5e639e67fd4caad2bd9f471c95c7bc59cbc27dc",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Publish Galaxy Tab S10 FE font scale 1 baseline",
       "devices": [
@@ -874,6 +1171,7 @@
     {
       "hash": "a8e0ee4912e8731123924375ac9f265a5c3af365",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Record Galaxy Tab S10 FE reproduction captures",
       "devices": [
@@ -883,6 +1181,7 @@
     {
       "hash": "7582cdfa56ca5bca1112a97c698427ee2145ba33",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Record Galaxy Tab S10 FE+ reproduction captures",
       "devices": [
@@ -892,6 +1191,7 @@
     {
       "hash": "5d2dabbc2ef41d4c9cdc6cda486dd80ea3c3a5b3",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Tab S10 Ultra captures",
       "devices": [
@@ -901,6 +1201,7 @@
     {
       "hash": "e438c4a86cd45d3ca7c48886940970187ddbeb06",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Tab S7 FE captures",
       "devices": [
@@ -910,6 +1211,7 @@
     {
       "hash": "4508a34e85ce8d4447a27fb2e495c0579376eb8b",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Tab S9 FE 3-button recapture",
       "devices": [
@@ -919,6 +1221,7 @@
     {
       "hash": "2c2f9af7d62beddcf7dc6b8743c47fe51e031ec9",
       "date": "2026-09-27",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy A73 3-button recapture",
       "devices": [
@@ -926,8 +1229,18 @@
       ]
     },
     {
+      "hash": "680fd82f7aef6a52ef1c69e10980d150d94fccc9",
+      "date": "2026-09-26",
+      "area": "site",
+      "kind": "added",
+      "summary": "Preview Compose safeDrawing before and after on device pages",
+      "devices": [],
+      "pr": 20
+    },
+    {
       "hash": "67b923275625ee7fc902ee613ef020e69a3af247",
       "date": "2026-09-26",
+      "area": "data",
       "kind": "corrected",
       "summary": "Align Fold6 and Flip8 inner resolutions with official skins",
       "devices": [
@@ -938,6 +1251,7 @@
     {
       "hash": "2545fbe9a949117ab31e9b8fd0dbb65b8bdb04c4",
       "date": "2026-09-26",
+      "area": "data",
       "kind": "corrected",
       "summary": "Publish upright Fold5 inner recapture",
       "devices": [
@@ -947,6 +1261,7 @@
     {
       "hash": "a4a596d6a336b6da11389f5f3aad0591fabcc783",
       "date": "2026-09-26",
+      "area": "data",
       "kind": "corrected",
       "summary": "Publish upright Fold7 inner recapture",
       "devices": [
@@ -954,8 +1269,25 @@
       ]
     },
     {
+      "hash": "1c8cfb9e198159ba968c6ba29ccda15a541c65b8",
+      "date": "2026-09-25",
+      "area": "site",
+      "kind": "added",
+      "summary": "Group skin previews by measurement coverage",
+      "devices": []
+    },
+    {
+      "hash": "9356f860478a04cc261183436ebed0b13417e344",
+      "date": "2026-09-25",
+      "area": "site",
+      "kind": "added",
+      "summary": "Track device feature interactions in GA4",
+      "devices": []
+    },
+    {
       "hash": "f6dcc949aa9d2938b05ca422927882faf6de5e3b",
       "date": "2026-09-25",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy A measurement batch",
       "devices": [
@@ -983,6 +1315,7 @@
     {
       "hash": "cd4b4607dbefe25c712e767530d2b6656b38ee61",
       "date": "2026-09-25",
+      "area": "data",
       "kind": "added",
       "summary": "Complete A37 navigation captures",
       "devices": [
@@ -992,6 +1325,7 @@
     {
       "hash": "07c62bd35d5dc074c8c7c2340b8228ecf59c31fa",
       "date": "2026-09-25",
+      "area": "data",
       "kind": "added",
       "summary": "Register September 25 Galaxy captures",
       "devices": [
@@ -1007,6 +1341,7 @@
     {
       "hash": "1a2022833c89c0bccd09eeeca2947ffeb6948c55",
       "date": "2026-09-25",
+      "area": "data",
       "kind": "added",
       "summary": "Register recent Galaxy RTL captures",
       "devices": [
@@ -1020,6 +1355,7 @@
     {
       "hash": "cbf39201096247f2edd66be31afaa06f7b71e5b2",
       "date": "2026-09-25",
+      "area": "data",
       "kind": "added",
       "summary": "Register Samsung S20-S23 inset captures",
       "devices": [
@@ -1038,6 +1374,7 @@
     {
       "hash": "fd375b5e73837340c47ff2cece490cde39c611e7",
       "date": "2026-09-25",
+      "area": "data",
       "kind": "added",
       "summary": "Register Samsung tablet inset captures",
       "devices": [
@@ -1050,6 +1387,7 @@
     {
       "hash": "394a738377a4c0772d611c23aefae424ffebccdd",
       "date": "2026-09-25",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Tab RTL measurements",
       "devices": [
@@ -1063,6 +1401,7 @@
     {
       "hash": "39d4e4a37f7a6a9076f1614a2b13b03b62c294c2",
       "date": "2026-09-25",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Z Flip7 FE insets",
       "devices": [
@@ -1072,6 +1411,7 @@
     {
       "hash": "4766d33314985977338507c88887408036cdc4f5",
       "date": "2026-09-25",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Z Fold3 insets",
       "devices": [
@@ -1081,6 +1421,7 @@
     {
       "hash": "0c70cf2c76e008a359e771daeed67faa7f8047db",
       "date": "2026-09-25",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Z Flip4 measurements",
       "devices": [
@@ -1088,8 +1429,25 @@
       ]
     },
     {
+      "hash": "fe4b7c2e074cb687f597541fc673030cf7e4648e",
+      "date": "2026-09-25",
+      "area": "site",
+      "kind": "added",
+      "summary": "Explain sw600dp metric",
+      "devices": []
+    },
+    {
+      "hash": "92834cad40a379dbad5a0ede82e2c9b10de6dc57",
+      "date": "2026-09-25",
+      "area": "site",
+      "kind": "added",
+      "summary": "Show display aspect ratio and sw600dp",
+      "devices": []
+    },
+    {
       "hash": "1977bcef32f3f3010da66adec8ee287955769853",
       "date": "2026-09-25",
+      "area": "data",
       "kind": "added",
       "summary": "Add Galaxy S24 FE inset measurements",
       "devices": [
@@ -1097,8 +1455,17 @@
       ]
     },
     {
+      "hash": "aa6dae611f946df80cb48caad9848491d46b7b55",
+      "date": "2026-09-25",
+      "area": "site",
+      "kind": "added",
+      "summary": "Complete Galaxy Z TriFold inset coverage",
+      "devices": []
+    },
+    {
       "hash": "4a7a256aa17d91adc61d89666fed3b74358bd717",
       "date": "2026-09-24",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S24+ gesture insets",
       "devices": [
@@ -1106,8 +1473,17 @@
       ]
     },
     {
+      "hash": "17a4fa1f26b4e515514408e73741bcb28698ae28",
+      "date": "2026-09-24",
+      "area": "site",
+      "kind": "added",
+      "summary": "Register TriFold captures with RTL log recovery",
+      "devices": []
+    },
+    {
       "hash": "55130b4a2cd4b23b087b95826b955762308d6967",
       "date": "2026-09-24",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy S24 and S25 RTL measurements",
       "devices": [
@@ -1120,8 +1496,25 @@
       ]
     },
     {
+      "hash": "16750598a3b7d9dba7f6d720a495c750364c2d88",
+      "date": "2026-09-24",
+      "area": "site",
+      "kind": "added",
+      "summary": "Support Galaxy Z TriFold with two-hinge animation",
+      "devices": []
+    },
+    {
+      "hash": "ec3f6507534c072a82d2d1fd132753b934ad27ac",
+      "date": "2026-09-24",
+      "area": "site",
+      "kind": "added",
+      "summary": "Cover all Galaxy Fold and Flip models",
+      "devices": []
+    },
+    {
       "hash": "fc68f838c420962497a0ae9b764391c60ed89983",
       "date": "2026-09-24",
+      "area": "data",
       "kind": "added",
       "summary": "Register original Galaxy Z Flip measurements",
       "devices": [
@@ -1131,6 +1524,7 @@
     {
       "hash": "ca868ffe3aae1733e8a6a46b85142911bc6ede0d",
       "date": "2026-09-24",
+      "area": "data",
       "kind": "added",
       "summary": "Register verified Galaxy Z Flip3 main insets",
       "devices": [
@@ -1138,8 +1532,42 @@
       ]
     },
     {
+      "hash": "ee0891fbfdbab32bfde26cdb4c71629572836859",
+      "date": "2026-09-24",
+      "area": "site",
+      "kind": "added",
+      "summary": "Register Galaxy S10 Lite and Tab S8 Ultra skins",
+      "devices": []
+    },
+    {
+      "hash": "58494cd1f7cb6ef72f24454fafc2c244481b4fe4",
+      "date": "2026-09-24",
+      "area": "site",
+      "kind": "corrected",
+      "summary": "Correct foldable depth and refresh measurement demos",
+      "devices": [],
+      "pr": 10
+    },
+    {
+      "hash": "8435eb7506cdc6b63a9943c837e4cfff2e5ab00f",
+      "date": "2026-09-23",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add device family filters and collapsible groups",
+      "devices": []
+    },
+    {
+      "hash": "3f7d480e2b835c2e37eedb714a0782d7fec59b42",
+      "date": "2026-09-23",
+      "area": "site",
+      "kind": "added",
+      "summary": "Import Galaxy Note and A artwork",
+      "devices": []
+    },
+    {
       "hash": "f6fb45434e8ae4fa176c8bc26f04b06eb51c46f7",
       "date": "2026-09-23",
+      "area": "data",
       "kind": "added",
       "summary": "Register Galaxy Z Flip5 main measurements",
       "devices": [
@@ -1149,6 +1577,7 @@
     {
       "hash": "c5a00967a13e1711d47156bfe5da90efe88567ae",
       "date": "2026-09-23",
+      "area": "data",
       "kind": "added",
       "summary": "Register measured Galaxy Z Flip6 main insets",
       "devices": [
@@ -1156,8 +1585,17 @@
       ]
     },
     {
+      "hash": "143adfe5eb16aedc81d294e53c67691d3b3dcfb0",
+      "date": "2026-09-23",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add Galaxy Z Fold3 official skin preview",
+      "devices": []
+    },
+    {
       "hash": "8994feceea7a6eccd1685ebfe6ebd1eca0967a77",
       "date": "2026-09-23",
+      "area": "data",
       "kind": "added",
       "summary": "Register measured Galaxy Z Fold4 insets",
       "devices": [
@@ -1167,6 +1605,7 @@
     {
       "hash": "2e77810339e3fd57f37ba5e9596e3ff6cee68054",
       "date": "2026-09-23",
+      "area": "data",
       "kind": "added",
       "summary": "Register measured Galaxy Z Fold5 insets",
       "devices": [
@@ -1176,6 +1615,7 @@
     {
       "hash": "4c65d4712ae3785022c8457ed3a2f730c78420c3",
       "date": "2026-09-23",
+      "area": "data",
       "kind": "added",
       "summary": "Complete Galaxy Z Fold6 inner three-button capture",
       "devices": [
@@ -1185,6 +1625,7 @@
     {
       "hash": "eda4fd0b41bcec63f0b0ae82893b1d06801ce376",
       "date": "2026-09-23",
+      "area": "data",
       "kind": "added",
       "summary": "Register verified Galaxy Z Fold6 insets",
       "devices": [
@@ -1194,6 +1635,7 @@
     {
       "hash": "99dae04fa443c0fe0bb2c6cf2fe79849814ab093",
       "date": "2026-09-23",
+      "area": "data",
       "kind": "added",
       "summary": "Publish verified Galaxy S26 and foldable captures",
       "devices": [
@@ -1204,6 +1646,7 @@
     {
       "hash": "5af1cc290e4251afb6327f1bbf6c38f6176a1fba",
       "date": "2026-09-23",
+      "area": "data",
       "kind": "corrected",
       "summary": "Restore fold diagram visibility on mobile (#7)",
       "devices": [
@@ -1215,6 +1658,7 @@
     {
       "hash": "161944c62e297c43e6192754ffd21ca12fd46622",
       "date": "2026-09-23",
+      "area": "data",
       "kind": "added",
       "summary": "Add verified Galaxy S26 Ultra insets",
       "devices": [
@@ -1222,8 +1666,41 @@
       ]
     },
     {
+      "hash": "dfbbf2e3673f4f2b09488f066588a7b420d431a2",
+      "date": "2026-09-23",
+      "area": "site",
+      "kind": "added",
+      "summary": "Measure device views and selections with GA4",
+      "devices": []
+    },
+    {
+      "hash": "4f56b912915da002532e9d45684a82ce80d69f3a",
+      "date": "2026-09-23",
+      "area": "site",
+      "kind": "added",
+      "summary": "Highlight and copy developer guide code examples",
+      "devices": []
+    },
+    {
+      "hash": "c1496884b253234a6d4c640be1d3c8136c37d1f0",
+      "date": "2026-09-23",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add GitHub inquiry workflow",
+      "devices": []
+    },
+    {
+      "hash": "272604f0c899f3dc405466b3b31e4d2e8730c60b",
+      "date": "2026-09-23",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add per-device JSON exports",
+      "devices": []
+    },
+    {
       "hash": "fd8e5873cf52774ebf43a30af9ec636de60241da",
       "date": "2026-09-23",
+      "area": "data",
       "kind": "added",
       "summary": "Add verified Galaxy Z Flip8 cover measurements",
       "devices": [
@@ -1233,6 +1710,7 @@
     {
       "hash": "4b2eaff54dcd256874e60b43bb3b3d2c1a9f5788",
       "date": "2026-09-23",
+      "area": "data",
       "kind": "added",
       "summary": "Add verified Galaxy Z Fold7 measurements",
       "devices": [
@@ -1242,6 +1720,7 @@
     {
       "hash": "a0f4d3f14da92cf6e4de80b5ca31ce4191f1f59a",
       "date": "2026-09-23",
+      "area": "data",
       "kind": "added",
       "summary": "Align inset diagrams with exact Android measurements",
       "devices": [
@@ -1254,6 +1733,7 @@
     {
       "hash": "cc50d60f8755e5b582a051d96b4398a2286ff048",
       "date": "2026-09-22",
+      "area": "data",
       "kind": "added",
       "summary": "Complete Galaxy Z Fold8 inset coverage",
       "devices": [
@@ -1261,14 +1741,159 @@
       ]
     },
     {
+      "hash": "c88831f5c22228ca2ec5bb090ed4d12d2114fc70",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add Fold2 gesture captures and verify display transitions",
+      "devices": []
+    },
+    {
+      "hash": "232670cbeab15c4ce3c307925d6217a9a5016862",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add Fold2 cover capture and document display transition",
+      "devices": []
+    },
+    {
+      "hash": "896325bdc1c88f98291f089d07dc6849ed140c65",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Register physical Galaxy Z Fold2 inner display measurements",
+      "devices": []
+    },
+    {
+      "hash": "49287bafb4fd8d57add63d5685389f256ffe00ab",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Distinguish RTL availability from measured device data",
+      "devices": []
+    },
+    {
+      "hash": "03ba77b7660ce7058addfa1a569cb9c4ee895406",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Refresh social previews and brand metadata",
+      "devices": []
+    },
+    {
+      "hash": "37615734b6ff7dd0ae5ed182a6c8fa4242ff137e",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Improve responsive diagrams and foldable rendering",
+      "devices": []
+    },
+    {
       "hash": "1533c6bd177ec997dabda852280850bd9b9f426f",
       "date": "2026-09-22",
+      "area": "data",
       "kind": "added",
       "summary": "Register official Samsung skins and devices from 2020 onward",
       "devices": [
         "galaxy-z-flip8",
         "galaxy-z-fold8"
       ]
+    },
+    {
+      "hash": "b2b12a4e3a8b43a9ad051f9004cb7135f281ef47",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Show safe area's own size inside the diagram (safearea.info parity)",
+      "devices": []
+    },
+    {
+      "hash": "01925346d49e78cd89c7d595f73cd792b779840e",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Unify diagram+toolbar with three.js, fix Fold8 aspect ratio, add S25+ gesture data",
+      "devices": []
+    },
+    {
+      "hash": "de3bbeb058b215260bccc0e72e47d9dc52ed0f78",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Diagram show/hide + unit toggles, flatten sidebar to 3 category tabs",
+      "devices": []
+    },
+    {
+      "hash": "b7dfbd04d7047060db5a0d2f1c5bc640d9e2097a",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add mouse-wheel zoom to InsetsDiagram, matching safearea.info",
+      "devices": []
+    },
+    {
+      "hash": "02bc87d7306f974c021d0d043a87f5292c574300",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add hand-crafted favicon and OG share image",
+      "devices": []
+    },
+    {
+      "hash": "3fae19654ad34615014dabb27c1ecc71ffb0998d",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Sidebar category tabs + landing page shows newest device directly",
+      "devices": []
+    },
+    {
+      "hash": "569ea9395034a5cb4a9ba1feec5f1cd59f949158",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Draw the real camera cutout at its measured position + fix diagram sizing",
+      "devices": []
+    },
+    {
+      "hash": "816d1b188060898c971370cd91ff34acc07f3364",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add Galaxy Z Fold8 + Flip8 real measurements, fix fold render, add OG tags",
+      "devices": []
+    },
+    {
+      "hash": "b3c294be60c45073db7e21872bf419a118b5a597",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Replace side-profile fold diagram with real 3D hinge animation",
+      "devices": []
+    },
+    {
+      "hash": "fe8c2bbfb0145735e945ae3c37c0ca413e211e6d",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Rebuild insets diagram and metrics panel to match safearea.info style",
+      "devices": []
+    },
+    {
+      "hash": "58890cd3a82d6e65f98a2b06c3d95f680d654403",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add featured device section to home page (newest first)",
+      "devices": []
+    },
+    {
+      "hash": "db57428575e451b3722d44471b185f8ba7d3f828",
+      "date": "2026-09-22",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add detailed insets diagram with dimension labels (safearea.info style)",
+      "devices": []
     }
   ]
 }
