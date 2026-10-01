@@ -347,7 +347,10 @@ export function DeviceView({ device }: { device: Device }) {
   useEffect(() => {
     if (!viewRestored.current) return;
     // Debounced: hinge drags change state every frame and browsers rate-limit replaceState.
+    const pathname = window.location.pathname;
     const timer = setTimeout(() => {
+      // A link may have navigated away before the timer fired; never rewrite another page's URL.
+      if (window.location.pathname !== pathname) return;
       const search = serializeViewState(window.location.search, { navMode, rotation, hinge: angle, units, appPreview }, defaultView);
       if (search === window.location.search) return;
       // Keep React Router's history entry state so back/forward still work.
