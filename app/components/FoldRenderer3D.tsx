@@ -2,7 +2,7 @@ import { ProjectedRulers } from "./ProjectedRulers";
 import { layoutMeasurementRulers, type RulerMeasurements, type Point } from "./measurementLayout";
 import { visibleDiagramRulers, diagramAnnotations } from "./diagramAnnotations";
 import { InsetsDiagram } from "./InsetsDiagram";
-import { DIAGRAM_FONT, DIAGRAM_COLORS } from "./diagramStyle";
+import { DIAGRAM_FONT, DIAGRAM_COLORS, GESTURE_COLOR, TAPPABLE_COLOR } from "./diagramStyle";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { FOLD_CAMERA_DISTANCE, FOLD_CAMERA_FOV, FOLD_DISPLAY_TARGET, FOLD_FRUSTUM_HEIGHT, bendPoint, createChassis, createFoldHousings, hingeHalfWidth, rigidPanelPoint, verticalHinge, coverPoint, coverSide, triFoldPoint, triFoldAngles, triFoldViewTurn, createTriFoldDisplay, createTriFoldHousings, createTriFoldHingeStrips } from "./foldGeometry";
@@ -88,6 +88,27 @@ function drawForeground(
   ctx.restore();
 }
 
+export type GestureInsets = { systemGestures: Insets; mandatorySystemGestures: Insets; tappableElement: Insets };
+
+/** Hatched gesture-zone and dotted tappable fills, matching the flat diagram's SVG patterns. */
+function overlayPattern(ctx: CanvasRenderingContext2D, kind: "gesture" | "tappable", scale: number) {
+  const size = Math.max(4, Math.round((kind === "gesture" ? 6 : 5) * scale));
+  const tile = document.createElement("canvas");
+  tile.width = tile.height = size;
+  const t = tile.getContext("2d");
+  if (!t) return null;
+  const color = kind === "gesture" ? GESTURE_COLOR : TAPPABLE_COLOR;
+  t.fillStyle = color; t.globalAlpha = kind === "gesture" ? .18 : .12; t.fillRect(0, 0, size, size);
+  t.globalAlpha = kind === "gesture" ? .55 : .7;
+  if (kind === "gesture") {
+    t.strokeStyle = color; t.lineWidth = size / 3;
+    t.beginPath(); t.moveTo(-size, size); t.lineTo(size, -size); t.moveTo(0, 2 * size); t.lineTo(2 * size, 0); t.moveTo(-size, 2 * size); t.lineTo(2 * size, -size); t.stroke();
+  } else {
+    t.fillStyle = color; t.beginPath(); t.arc(size / 2, size / 2, size * .18, 0, Math.PI * 2); t.fill();
+  }
+  return ctx.createPattern(tile, "repeat");
+}
+
 /** Draws the full flat measurement diagram (bezel, safe/inset regions, real
  * cutout and region labels) onto a 2D canvas —
  * this canvas becomes the WebGL texture, so every pixel (including the
@@ -103,8 +124,9 @@ function drawDiagram(
     cutoutShape?: CutoutShape;
     showFrame: boolean; showRegions: boolean; showDimensions: boolean;
     fmt: (v: number) => string;
-    layers: { safe: boolean; insets: boolean; cutout: boolean; corners: boolean };
+    layers: { safe: boolean; insets: boolean; cutout: boolean; corners: boolean; gestures?: boolean; tappable?: boolean };
     appPreview: AppPreview;
+    gestureInsets?: GestureInsets | null;
     skin?: DeviceSkin;
     skinRotation?: QuarterTurns;
     artwork?: HTMLImageElement;
@@ -267,6 +289,32 @@ function drawDiagram(
     }
     ctx.restore();
   }
+  const gestures = opts.gestureInsets;
+  if (opts.showRegions && gestures && (opts.layers.gestures || opts.layers.tappable)) {
+    ctx.save();
+    roundedRectPath(0, 0, W, H, r);
+    ctx.clip();
+    const bands = (insets: Insets) => [
+      insets.top > 0 && [0, 0, W, insets.top * px],
+      insets.bottom > 0 && [0, H - insets.bottom * px, W, insets.bottom * px],
+      insets.left > 0 && [0, 0, insets.left * px, H],
+      insets.right > 0 && [W - insets.right * px, 0, insets.right * px, H],
+    ].filter(Boolean) as Array<[number, number, number, number]>;
+    const k = labelScale * px;
+    if (opts.layers.gestures) {
+      ctx.fillStyle = overlayPattern(ctx, "gesture", k) ?? GESTURE_COLOR;
+      for (const band of bands(gestures.systemGestures)) ctx.fillRect(...band);
+      ctx.globalAlpha = .22; ctx.fillStyle = GESTURE_COLOR;
+      for (const band of bands(gestures.mandatorySystemGestures)) ctx.fillRect(...band);
+      ctx.globalAlpha = 1;
+    }
+    if (opts.layers.tappable) {
+      ctx.fillStyle = overlayPattern(ctx, "tappable", k) ?? TAPPABLE_COLOR;
+      ctx.strokeStyle = TAPPABLE_COLOR; ctx.lineWidth = 1.2 * k;
+      for (const band of bands(gestures.tappableElement)) { ctx.fillRect(...band); ctx.strokeRect(...band); }
+    }
+    ctx.restore();
+  }
   ctx.restore();
 
   if (opts.showFrame && opts.foreground?.complete && opts.foreground.naturalWidth) {
@@ -336,6 +384,7 @@ export function FoldRenderer3D({
   viewRotation = 0,
   measured = true,
   cover,
+  gestureInsets = null,
   fallbackMain,
   chassisMm,
   onTransitionEnd,
@@ -361,8 +410,10 @@ export function FoldRenderer3D({
   showRegions: boolean;
   showDimensions: boolean;
   units: Units;
-  layers: { safe: boolean; insets: boolean; cutout: boolean; corners: boolean };
+  layers: { safe: boolean; insets: boolean; cutout: boolean; corners: boolean; gestures?: boolean; tappable?: boolean };
   appPreview?: AppPreview;
+  /** Main-display gesture and tappable insets from the raw capture; null when unresolved. */
+  gestureInsets?: GestureInsets | null;
   skin?: DeviceSkin;
   skinRotation?: QuarterTurns;
   /** Orientation control (CSS degrees). The device turns; its screen content is
@@ -370,7 +421,7 @@ export function FoldRenderer3D({
   viewRotation?: number;
   measured?: boolean;
   /** `screen` is the recorded cover (geometry); `oriented` and `measurement` follow viewRotation. */
-  cover?: { screen: Screen; oriented: Screen; measurement: InsetsMeasurement | null; skin: DeviceSkin };
+  cover?: { screen: Screen; oriented: Screen; measurement: InsetsMeasurement | null; skin: DeviceSkin; gestureInsets?: GestureInsets | null };
   fallbackMain?: { screen: Screen; measurement: InsetsMeasurement | null };
   chassisMm?: { unfoldedWidth: number; unfoldedDepth: number; foldedDepth: number };
   onMeasurementBounds?: (bounds: { left: number; top: number; right: number; bottom: number }, body: { left: number; top: number; right: number; bottom: number }, angle: number) => number | undefined;
@@ -382,8 +433,8 @@ export function FoldRenderer3D({
   const mountRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
 
-  const stateRef = useRef({ angle, viewRotation, safe, safePx, logicalSizePx, cornerRadiiDp: cornerRadiiDp ?? null, cornerRadiiPx: cornerRadiiPx ?? null, cutoutShape, showFrame, showRegions, showDimensions, units, zoom, layers, appPreview, cover, onTransitionEnd, onDisplayedAngle, onMeasurementBounds });
-  stateRef.current = { angle, viewRotation, safe, safePx, logicalSizePx, cornerRadiiDp: cornerRadiiDp ?? null, cornerRadiiPx: cornerRadiiPx ?? null, cutoutShape, showFrame, showRegions, showDimensions, units, zoom, layers, appPreview, cover, onTransitionEnd, onDisplayedAngle, onMeasurementBounds };
+  const stateRef = useRef({ angle, viewRotation, safe, safePx, logicalSizePx, cornerRadiiDp: cornerRadiiDp ?? null, cornerRadiiPx: cornerRadiiPx ?? null, cutoutShape, showFrame, showRegions, showDimensions, units, zoom, layers, appPreview, gestureInsets, cover, onTransitionEnd, onDisplayedAngle, onMeasurementBounds });
+  stateRef.current = { angle, viewRotation, safe, safePx, logicalSizePx, cornerRadiiDp: cornerRadiiDp ?? null, cornerRadiiPx: cornerRadiiPx ?? null, cutoutShape, showFrame, showRegions, showDimensions, units, zoom, layers, appPreview, gestureInsets, cover, onTransitionEnd, onDisplayedAngle, onMeasurementBounds };
 
   useEffect(() => {
     if (webglUnavailable) return;
@@ -558,7 +609,7 @@ export function FoldRenderer3D({
       const data = st.cover;
       coverHits.length = 0;
       if (!data) { coverMesh.visible = false; return; }
-      const { screen, oriented, measurement, skin: outerSkin } = data;
+      const { screen, oriented, measurement, skin: outerSkin, gestureInsets: outerGestures } = data;
       const size = screen.logicalSizeDp ?? { width: outerSkin.screen.width / 3, height: outerSkin.screen.height / 3 };
       // The original Fold's small outer display leaves much more chassis above
       // and below it than later covers. Include the entire official body clip.
@@ -608,7 +659,7 @@ export function FoldRenderer3D({
           ...cornerPairs(oriented.cornerRadiiDp, oriented.cornerRadiiPx),
           ...cutoutPairs(measurement?.cutoutShape),
         ]), layers: st.layers, skin: outerSkin, skinRotation: screen.captureRotation ?? 0,
-        appPreview: st.appPreview, artwork: coverArtwork, foreground: coverForeground, hits: coverHits, paddingDp: { x: padX, y: padY },
+        appPreview: st.appPreview, gestureInsets: outerGestures, artwork: coverArtwork, foreground: coverForeground, hits: coverHits, paddingDp: { x: padX, y: padY },
         annotationScale: worldPerCssPixel / (panelW / (size.width + padX * 2)) * 100 / annotationZoom,
       });
       coverTexture.needsUpdate = true;
@@ -636,7 +687,7 @@ export function FoldRenderer3D({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawDiagram(ctx, dpW, dpH, px, {
         safe: st.safe, cornerRadiiDp: st.cornerRadiiDp, cutoutShape: st.cutoutShape, content: frame,
-        showFrame: st.showFrame, showRegions: st.showRegions, showDimensions: st.showDimensions && measured, fmt, layers: st.layers, appPreview: st.appPreview, skin, skinRotation, artwork, foreground, hits, paddingDp: margin / 2, annotationScale: worldPerCssPixel / (worldW / (dpW + margin)) * 100 / annotationZoom,
+        showFrame: st.showFrame, showRegions: st.showRegions, showDimensions: st.showDimensions && measured, fmt, layers: st.layers, appPreview: st.appPreview, gestureInsets: st.gestureInsets, skin, skinRotation, artwork, foreground, hits, paddingDp: margin / 2, annotationScale: worldPerCssPixel / (worldW / (dpW + margin)) * 100 / annotationZoom,
       });
       ctx.restore();
       texture.needsUpdate = true;
@@ -884,7 +935,7 @@ export function FoldRenderer3D({
   useEffect(() => {
     const mount = mountRef.current as (HTMLDivElement & { __update?: () => void }) | null;
     mount?.__update?.();
-  }, [viewRotation, angle, safe, safePx, logicalSizePx, cornerRadiiDp, cornerRadiiPx, cutoutShape, showFrame, showRegions, showDimensions, units, zoom, layers, appPreview, cover, onTransitionEnd]);
+  }, [viewRotation, angle, safe, safePx, logicalSizePx, cornerRadiiDp, cornerRadiiPx, cutoutShape, showFrame, showRegions, showDimensions, units, zoom, layers, appPreview, gestureInsets, cover, onTransitionEnd]);
 
   if (!widthDp || !heightDp) {
     return (

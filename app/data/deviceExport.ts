@@ -71,6 +71,9 @@ export interface PublicMeasurement {
     /** From the cited raw capture; null when it cannot be resolved. */
     statusBars: MeasuredUnitPair<Insets> | null;
     navigationBars: MeasuredUnitPair<Insets> | null;
+    systemGestures: MeasuredUnitPair<Insets> | null;
+    mandatorySystemGestures: MeasuredUnitPair<Insets> | null;
+    tappableElement: MeasuredUnitPair<Insets> | null;
     displayCutoutInsets: MeasuredUnitPair<Insets>;
     displayCutoutBounds: MeasuredUnitPair<{
       left: number;
@@ -161,11 +164,9 @@ function hasCompletePxBounds(shape: InsetsMeasurement["cutoutShape"]): boolean {
     .every(value => value != null);
 }
 
-/** Resolves per-type bar insets; the build passes a raw-capture reader, browsers have none. */
-export type BarInsetsLookup = (measurement: InsetsMeasurement) => {
-  statusBars: MeasuredUnitPair<Insets>;
-  navigationBars: MeasuredUnitPair<Insets>;
-} | null;
+type RawInsetsType = "statusBars" | "navigationBars" | "systemGestures" | "mandatorySystemGestures" | "tappableElement";
+/** Resolves per-type insets; the build passes a raw-capture reader, browsers have none. */
+export type BarInsetsLookup = (measurement: InsetsMeasurement) => Record<RawInsetsType, MeasuredUnitPair<Insets>> | null;
 
 function exportMeasurement(
   measurement: InsetsMeasurement,
@@ -192,6 +193,9 @@ function exportMeasurement(
       systemBars: { dp: measurement.systemBars, px: measurement.systemBarsPx ?? null },
       statusBars: bars?.statusBars ?? null,
       navigationBars: bars?.navigationBars ?? null,
+      systemGestures: bars?.systemGestures ?? null,
+      mandatorySystemGestures: bars?.mandatorySystemGestures ?? null,
+      tappableElement: bars?.tappableElement ?? null,
       displayCutoutInsets: { dp: measurement.displayCutout, px: measurement.displayCutoutPx ?? null },
       displayCutoutBounds: shape ? {
         dp: {

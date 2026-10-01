@@ -6,3 +6,7 @@ export const DIAGRAM_COLORS = {
   inset: "#bc4c00", radius: "#bf3989", safe: "#2da44e",
   safeFill: "#b7ebc6", insetFill: "#ffddb0",
 };
+
+/** Gesture zones (hatched; mandatory part solid) and tappable system UI (dotted). */
+export const GESTURE_COLOR = "#2f6fde";
+export const TAPPABLE_COLOR = "#0f8b7d";

@@ -2,7 +2,7 @@ import { useId, useState } from "react";
 import { diagramAnnotations, visibleDiagramRulers } from "./diagramAnnotations";
 import { MeasurementRulers } from "./MeasurementRulers";
 import type { RulerMeasurements } from "./measurementLayout";
-import { DIAGRAM_FONT, DIAGRAM_COLORS } from "./diagramStyle";
+import { DIAGRAM_FONT, DIAGRAM_COLORS, GESTURE_COLOR, TAPPABLE_COLOR } from "./diagramStyle";
 import type { DeviceSkin } from "../data/skins";
 import { skinAssetUrl } from "../data/skinAssetUrl";
 import { skinDp } from "../data/orientation";
@@ -97,6 +97,7 @@ export function InsetsDiagram({
   skin,
   appPreview = "off",
   pendingOrientation,
+  gestureInsets,
 }: {
   screen: Screen;
   measurement: InsetsMeasurement | null;
@@ -106,11 +107,13 @@ export function InsetsDiagram({
   showRegions: boolean;
   showDimensions: boolean;
   units: Units;
-  layers: { safe: boolean; insets: boolean; cutout: boolean; corners: boolean };
+  layers: { safe: boolean; insets: boolean; cutout: boolean; corners: boolean; gestures?: boolean; tappable?: boolean };
   skin?: DeviceSkin;
   appPreview?: AppPreview;
   /** Set when this orientation has no capture: e.g. "Landscape". Insets stay empty. */
   pendingOrientation?: string;
+  /** dp insets from the raw capture backing `measurement`; null when it did not resolve. */
+  gestureInsets?: { systemGestures: Insets; mandatorySystemGestures: Insets; tappableElement: Insets } | null;
 }) {
   const id = useId().replace(/:/g, "");
   const [copyStatus, setCopyStatus] = useState("");
@@ -267,6 +270,29 @@ export function InsetsDiagram({
                 })()}
               </>
             )}
+            {gestureInsets && !pendingOrientation && (layers.gestures || layers.tappable) && (() => {
+              const bands = (insets: Insets) => [
+                insets.top > 0 && { x: 0, y: 0, width: W, height: insets.top * s },
+                insets.bottom > 0 && { x: 0, y: H - insets.bottom * s, width: W, height: insets.bottom * s },
+                insets.left > 0 && { x: 0, y: 0, width: insets.left * s, height: H },
+                insets.right > 0 && { x: W - insets.right * s, y: 0, width: insets.right * s, height: H },
+              ].filter(Boolean) as Array<{ x: number; y: number; width: number; height: number }>;
+              return <g data-layer="gesture-insets">
+                <defs>
+                  <pattern id={`${id}-gesture`} width={6 * labelScale} height={6 * labelScale} patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                    <rect width={6 * labelScale} height={6 * labelScale} fill={GESTURE_COLOR} fillOpacity={.18} />
+                    <line x1={0} y1={0} x2={0} y2={6 * labelScale} stroke={GESTURE_COLOR} strokeWidth={2 * labelScale} strokeOpacity={.55} />
+                  </pattern>
+                  <pattern id={`${id}-tappable`} width={5 * labelScale} height={5 * labelScale} patternUnits="userSpaceOnUse">
+                    <rect width={5 * labelScale} height={5 * labelScale} fill={TAPPABLE_COLOR} fillOpacity={.12} />
+                    <circle cx={2.5 * labelScale} cy={2.5 * labelScale} r={.9 * labelScale} fill={TAPPABLE_COLOR} fillOpacity={.7} />
+                  </pattern>
+                </defs>
+                {layers.gestures && bands(gestureInsets.systemGestures).map((b, i) => <rect key={`g${i}`} {...b} fill={`url(#${id}-gesture)`} />)}
+                {layers.gestures && bands(gestureInsets.mandatorySystemGestures).map((b, i) => <rect key={`m${i}`} {...b} fill={GESTURE_COLOR} fillOpacity={.22} />)}
+                {layers.tappable && bands(gestureInsets.tappableElement).map((b, i) => <rect key={`t${i}`} {...b} fill={`url(#${id}-tappable)`} stroke={TAPPABLE_COLOR} strokeWidth={1.2 * labelScale} />)}
+              </g>;
+            })()}
           </g>
           </g>
         )}

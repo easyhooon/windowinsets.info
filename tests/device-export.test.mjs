@@ -36,7 +36,7 @@ test('every public device export validates against the published schema', async 
   const schema = JSON.parse(readFileSync('public/schemas/device-window-insets-v1.schema.json', 'utf8'));
   const validate = new Ajv2020({ allErrors: true, validateFormats: false }).compile(schema);
   const { module: { devices } } = await runnerImport('./app/data/devices.ts', { root: process.cwd() });
-  const { module: { rawBarInsets } } = await runnerImport('./app/data/rawBarInsets.server.ts', { root: process.cwd() });
+  const { module: { rawInsets: rawBarInsets } } = await runnerImport('./app/data/rawInsets.server.ts', { root: process.cwd() });
   for (const device of devices) {
     assert.notEqual(device.releaseYear, null, `${device.slug}: public release year is missing`);
     const exported = createDeviceExport(device, rawBarInsets);
@@ -141,7 +141,7 @@ test('download cleanup removes the anchor and defers object URL revocation even 
 });
 
 test('status and navigation bars come from the cited raw capture and add up to systemBars', async () => {
-  const { module: { rawBarInsets } } = await runnerImport('./app/data/rawBarInsets.server.ts', { root: process.cwd() });
+  const { module: { rawInsets: rawBarInsets } } = await runnerImport('./app/data/rawInsets.server.ts', { root: process.cwd() });
   const { galaxyS25Ultra } = await import('../app/data/devices/galaxy-s25-ultra/index.ts');
   const raw = createDeviceExport(galaxyS25Ultra, rawBarInsets).screens[0].navigationModes.gesture.value.raw;
   assert.deepEqual(raw.statusBars, { dp: { top: 34.13, right: 0, bottom: 0, left: 0 }, px: { top: 96, right: 0, bottom: 0, left: 0 } });
@@ -154,10 +154,24 @@ test('status and navigation bars come from the cited raw capture and add up to s
 });
 
 test('a source that does not back the measurement yields no bar insets', async () => {
-  const { module: { rawBarInsets } } = await runnerImport('./app/data/rawBarInsets.server.ts', { root: process.cwd() });
+  const { module: { rawInsets: rawBarInsets } } = await runnerImport('./app/data/rawInsets.server.ts', { root: process.cwd() });
   const { galaxyS25Ultra } = await import('../app/data/devices/galaxy-s25-ultra/index.ts');
   const measurement = galaxyS25Ultra.screens[0].insets.gesture;
   assert.ok(rawBarInsets(measurement));
   assert.equal(rawBarInsets({ ...measurement, systemBarsPx: { ...measurement.systemBarsPx, bottom: 1 } }), null);
   assert.equal(rawBarInsets({ ...measurement, sources: [] }), null);
+});
+
+test('gesture and tappable insets are exported and keyed by capture for the page', async () => {
+  const { module: { rawInsets, deviceRawInsets } } = await runnerImport('./app/data/rawInsets.server.ts', { root: process.cwd() });
+  const { galaxyS25Ultra } = await import('../app/data/devices/galaxy-s25-ultra/index.ts');
+  const modes = createDeviceExport(galaxyS25Ultra, rawInsets).screens[0].navigationModes;
+  assert.deepEqual(modes.gesture.value.raw.systemGestures.px, { top: 130, right: 84, bottom: 90, left: 84 });
+  assert.deepEqual(modes.gesture.value.raw.mandatorySystemGestures.px, { top: 130, right: 0, bottom: 90, left: 0 });
+  assert.deepEqual(modes.gesture.value.raw.tappableElement.px, { top: 96, right: 0, bottom: 0, left: 0 });
+  assert.deepEqual(modes.threeButton.value.raw.tappableElement.px, { top: 96, right: 0, bottom: 135, left: 0 });
+  const byCapture = deviceRawInsets(galaxyS25Ultra);
+  assert.deepEqual(byCapture['measurements/galaxy-s/galaxy-s25-ultra/main-gesture.json'].systemGestures.px, { top: 130, right: 84, bottom: 90, left: 84 });
+  // Rotation captures are keyed too, so a turned device shows its own capture.
+  assert.ok(Object.keys(byCapture).some(path => path.includes('landscape-1-gesture')));
 });

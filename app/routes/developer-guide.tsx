@@ -311,8 +311,9 @@ hinges.forEach { hinge ->
           dp and px separate, labels safe-area calculations as derived, includes capture
           conditions and sources, and leaves unmeasured values explicitly pending.
           Each measurement also splits <code>systemBars</code> into <code>statusBars</code> and{" "}
-          <code>navigationBars</code>, read from the raw InsetsProbe capture it cites
-          (<code>null</code> when that capture cannot be resolved).
+          <code>navigationBars</code>, and adds <code>systemGestures</code>,{" "}
+          <code>mandatorySystemGestures</code> and <code>tappableElement</code>, all read from the
+          raw InsetsProbe capture it cites (<code>null</code> when that capture cannot be resolved).
         </p>
         <p>
           Choose <b>JSON link</b> to open a shareable URL. Scripts can fetch the same data at{" "}

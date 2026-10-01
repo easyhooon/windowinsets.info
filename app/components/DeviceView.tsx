@@ -4,10 +4,11 @@ import { preciseScreen } from "../data/measurementUnits";
 import { orientationName, orientScreen, skinDp, viewQuarter } from "../data/orientation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-import type { Device, Insets, NavMode, Source } from "../data/types";
+import type { Device, Insets, InsetsMeasurement, NavMode, Source } from "../data/types";
 import { Dropdown } from "./Dropdown";
-import { FoldRenderer3D, coverRevealAngle } from "./FoldRenderer3D";
+import { FoldRenderer3D, coverRevealAngle, type GestureInsets } from "./FoldRenderer3D";
 import { InsetsDiagram } from "./InsetsDiagram";
+import { GESTURE_COLOR, TAPPABLE_COLOR } from "./diagramStyle";
 import { CodeBlock } from "./CodeBlock";
 import type { AppPreview } from "./appPreview";
 import { DiagramViewport, type DiagramViewportHandle } from "./DiagramViewport";
@@ -163,7 +164,15 @@ const landscapeOrientations = [
   { value: "-90", label: "Portrait Upside Down" }, { value: "180", label: "Landscape Right" },
 ];
 
-export function DeviceView({ device }: { device: Device }) {
+type RawInsetType = "statusBars" | "navigationBars" | "systemGestures" | "mandatorySystemGestures" | "tappableElement";
+type RawInsetsMap = Record<string, Record<RawInsetType, { dp: Insets; px: Insets | null }>>;
+const RAW_PATH = /\/blob\/main\/(measurements\/.+\.json)$/;
+const RAW_SECTIONS: Array<[RawInsetType, string]> = [
+  ["statusBars", "Status Bars"], ["navigationBars", "Navigation Bars"], ["systemGestures", "System Gestures"],
+  ["mandatorySystemGestures", "Mandatory System Gestures"], ["tappableElement", "Tappable Element"],
+];
+
+export function DeviceView({ device, rawInsets = {} }: { device: Device; rawInsets?: RawInsetsMap }) {
   const initialHasCover = device.screens.some(screen => screen.id === "cover");
   const [metricsWidth, setMetricsWidth] = useState(292);
   const [navMode, setNavMode] = useState<NavMode>("threeButton");
@@ -181,7 +190,7 @@ export function DeviceView({ device }: { device: Device }) {
   const [showFrame, setShowFrame] = useState(true);
   const [showRegions, setShowRegions] = useState(true);
   const [showDimensions, setShowDimensions] = useState(true);
-  const [layers, setLayers] = useState({ safe: true, insets: true, cutout: true, corners: true });
+  const [layers, setLayers] = useState({ safe: true, insets: true, cutout: true, corners: true, gestures: false, tappable: false });
   const [units, setUnits] = useState<"dp" | "px">("dp");
   const [appPreview, setAppPreview] = useState<AppPreview>("off");
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -222,6 +231,14 @@ export function DeviceView({ device }: { device: Device }) {
   const pendingNotice = emulatorOnly ? "Emulator artwork preview · No capture for this screen and navigation mode" : rtl.previewNotice;
   const skin = skins[`${device.slug}/${screen.id}`];
   const safe = measurement ? safeInsets(measurement) : null;
+  // Per-type insets come from the raw capture a measurement cites (resolved at build).
+  const rawFor = (m: InsetsMeasurement | null | undefined) => m?.sources.map(source => rawInsets[source.url?.match(RAW_PATH)?.[1] ?? ""]).find(Boolean) ?? null;
+  const gesturesFor = (m: InsetsMeasurement | null | undefined): GestureInsets | null => {
+    const r = rawFor(m);
+    return r ? { systemGestures: r.systemGestures.dp, mandatorySystemGestures: r.mandatorySystemGestures.dp, tappableElement: r.tappableElement.dp } : null;
+  };
+  const raw = rawFor(measurement);
+  const gestureInsets = gesturesFor(measurement);
   const safePx = measurement ? safeInsetsPx(measurement) : null;
   const snippetContext = [foldable ? `${device.name} · ${screen.id === "cover" ? "Outer" : "Inner"}` : device.name,
     navMode === "gesture" ? "Gesture" : "3-button"] as const;
@@ -347,7 +364,10 @@ export function DeviceView({ device }: { device: Device }) {
   useEffect(() => {
     if (!viewRestored.current) return;
     // Debounced: hinge drags change state every frame and browsers rate-limit replaceState.
+    const pathname = window.location.pathname;
     const timer = setTimeout(() => {
+      // A link may have navigated away before the timer fired; never rewrite another page's URL.
+      if (window.location.pathname !== pathname) return;
       const search = serializeViewState(window.location.search, { navMode, rotation, hinge: angle, units, appPreview }, defaultView);
       if (search === window.location.search) return;
       // Keep React Router's history entry state so back/forward still work.
@@ -493,6 +513,10 @@ export function DeviceView({ device }: { device: Device }) {
           <dl>{measurement ? insetsRows(measurement.systemBars, measurement.systemBarsPx, units, fmt) : pendingInsetsRows}</dl>
           <SectionLabel>Display Cutout Insets</SectionLabel>
           <dl>{measurement ? insetsRows(measurement.displayCutout, measurement.displayCutoutPx, units, fmt) : pendingInsetsRows}</dl>
+          {raw && RAW_SECTIONS.map(([type, label]) => <div key={type}>
+            <SectionLabel>{label}</SectionLabel>
+            <dl>{insetsRows(raw[type].dp, raw[type].px, units, fmt)}</dl>
+          </div>)}
           {emulatorOnly ? <>
             <SectionLabel>Captured On</SectionLabel>
             <dl>
@@ -541,7 +565,7 @@ export function DeviceView({ device }: { device: Device }) {
         {useFold ? <FoldRenderer3D triFold={triFold} angle={angle} axis={device.formFactor === "foldable-flip" ? "horizontal" : "vertical"}
           widthDp={mainWidthDp} heightDp={mainHeightDp}
           safe={mainSafe} safePx={mainSafePx} logicalSizePx={orientedMain.logicalSizePx} cornerRadiiDp={orientedMain.cornerRadiiDp} cornerRadiiPx={orientedMain.cornerRadiiPx} cutoutShape={mainMeasurement?.cutoutShape}
-          zoom={zoom} showFrame={showFrame} showRegions={showRegions} showDimensions={showDimensions} units={units} layers={layers} appPreview={appPreview} skin={mainSkin} skinRotation={main.captureRotation ?? 0} viewRotation={rotation} measured={!!main.logicalSizeDp} cover={outerScreen && orientedOuter && outerSkin ? { screen: outerScreen, oriented: orientedOuter, measurement: orientedOuter.insets[navMode], skin: outerSkin } : undefined}
+          zoom={zoom} showFrame={showFrame} showRegions={showRegions} showDimensions={showDimensions} units={units} layers={layers} appPreview={appPreview} gestureInsets={gesturesFor(mainMeasurement)} skin={mainSkin} skinRotation={main.captureRotation ?? 0} viewRotation={rotation} measured={!!main.logicalSizeDp} cover={outerScreen && orientedOuter && outerSkin ? { screen: outerScreen, oriented: orientedOuter, measurement: orientedOuter.insets[navMode], skin: outerSkin, gestureInsets: gesturesFor(orientedOuter.insets[navMode]) } : undefined}
           fallbackMain={{ screen: orientedMain, measurement: mainMeasurement }}
           chassisMm={device.chassisMm}
           onMeasurementBounds={(bounds, body) => viewport.current?.fitFoldBounds(bounds, body)}
@@ -552,7 +576,7 @@ export function DeviceView({ device }: { device: Device }) {
             return viewport.current?.effectiveZoom();
           }}
           onTransitionEnd={() => { viewport.current?.refitFold(); if (transitionTarget) { setScreenId(transitionTarget); setTransitionTarget(null); } }} />
-          : <InsetsDiagram screen={screen} measurement={measurement} pendingOrientation={rotationPending ? orientationName(screen) : undefined} zoom={zoom} showFrame={showFrame} showRegions={showRegions} showDimensions={showDimensions} units={units} layers={layers} appPreview={appPreview} skin={skin} />}
+          : <InsetsDiagram screen={screen} measurement={measurement} pendingOrientation={rotationPending ? orientationName(screen) : undefined} zoom={zoom} showFrame={showFrame} showRegions={showRegions} showDimensions={showDimensions} units={units} layers={layers} appPreview={appPreview} skin={skin} gestureInsets={gestureInsets} />}
       </DiagramViewport>
       </div>
       <footer className="canvas-footer">
@@ -562,7 +586,7 @@ export function DeviceView({ device }: { device: Device }) {
         : rotationPending ? <p className="pending-notice">{orientationName(screen)} insets are not measured yet.</p>
           : !measurement ? <p className="pending-notice">{pendingNotice}</p> : emulatorOnly && <p className="pending-notice">Android Emulator capture · Not measured on Pixel hardware</p>}
       {(measurement || screen.cornerRadiiDp || useFold) && <div className="region-legend" aria-label="Region legend">
-        {([{ key: "safe", label: "Safe Area", color: "#ade7bc" }, { key: "insets", label: "Insets", color: "#ffdab0" }, { key: "cutout", label: "Display Cutout", color: "#c4a0f1" }, { key: "corners", label: "Corner Radius", color: "#e4a6cc" }] as const).map(item => <button key={item.key} disabled={item.key === "corners" ? !screen.cornerRadiiDp : item.key === "cutout" ? !measurement?.cutoutShape : !measurement} aria-pressed={layers[item.key]} onClick={() => setLayers(v => ({ ...v, [item.key]: !v[item.key] }))}><i style={{ background: item.color }} />{item.label}</button>)}
+        {([{ key: "safe", label: "Safe Area", color: "#ade7bc" }, { key: "insets", label: "Insets", color: "#ffdab0" }, { key: "cutout", label: "Display Cutout", color: "#c4a0f1" }, { key: "corners", label: "Corner Radius", color: "#e4a6cc" }, { key: "gestures", label: "Gesture Zones", color: `repeating-linear-gradient(45deg, ${GESTURE_COLOR} 0 2px, ${GESTURE_COLOR}33 2px 4px)` }, { key: "tappable", label: "Tappable", color: `radial-gradient(${TAPPABLE_COLOR} 30%, ${TAPPABLE_COLOR}22 35%) 0 0 / 4px 4px` }] as const).filter(item => !(item.key === "gestures" || item.key === "tappable") || gestureInsets).map(item => <button key={item.key} disabled={item.key === "corners" ? !screen.cornerRadiiDp : item.key === "cutout" ? !measurement?.cutoutShape : !measurement} aria-pressed={layers[item.key]} onClick={() => setLayers(v => ({ ...v, [item.key]: !v[item.key] }))}><i style={{ background: item.color }} />{item.label}</button>)}
       </div>}
       <div className="canvas-toggles-inline">{displayOptions}</div>
       <div className="canvas-controls" aria-label="Canvas controls">

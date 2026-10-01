@@ -255,6 +255,9 @@
             "systemBars": { "$ref": "#/$defs/measuredInsetsPair" },
             "statusBars": { "oneOf": [{ "$ref": "#/$defs/measuredInsetsPair" }, { "type": "null" }] },
             "navigationBars": { "oneOf": [{ "$ref": "#/$defs/measuredInsetsPair" }, { "type": "null" }] },
+            "systemGestures": { "oneOf": [{ "$ref": "#/$defs/measuredInsetsPair" }, { "type": "null" }] },
+            "mandatorySystemGestures": { "oneOf": [{ "$ref": "#/$defs/measuredInsetsPair" }, { "type": "null" }] },
+            "tappableElement": { "oneOf": [{ "$ref": "#/$defs/measuredInsetsPair" }, { "type": "null" }] },
             "displayCutoutInsets": { "$ref": "#/$defs/measuredInsetsPair" },
             "displayCutoutBounds": { "oneOf": [{ "$ref": "#/$defs/measuredBoundsPair" }, { "type": "null" }] }
           }
