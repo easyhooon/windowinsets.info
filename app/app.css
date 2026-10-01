@@ -247,3 +247,7 @@ html[data-theme="dark"] .theme-toggle>.theme-icon-dark { display:flex; }
 .hljs-comment,.hljs-code,.hljs-formula { color:light-dark(#6a737d,#8b949e); }
 .hljs-name,.hljs-quote,.hljs-selector-tag,.hljs-selector-pseudo { color:light-dark(#22863a,#7ee787); }
 .hljs-subst { color:light-dark(#24292e,#c9d1d9); }
+
+.changelog-kind { display:inline-block; margin-right:8px; padding:0 6px; border-radius:4px; font-size:11px; font-weight:600; line-height:18px; vertical-align:1px; }
+.changelog-kind.added { background:light-dark(#dafbe1,#12361f); color:light-dark(#1a7f37,#56d364); }
+.changelog-kind.corrected { background:light-dark(#fff1e5,#3d2410); color:light-dark(#bc4c00,#f0883e); }

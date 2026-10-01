@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "react-router build && node scripts/prepare-deployment-assets.mjs",
+    "build": "node scripts/generate-changelog.mjs && react-router build && node scripts/prepare-deployment-assets.mjs",
+    "changelog": "node scripts/generate-changelog.mjs",
     "skins:optimize": "node scripts/optimize-skins.mjs",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",

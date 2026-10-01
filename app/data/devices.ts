@@ -122,7 +122,7 @@ export const SITE_URL = "https://windowinsets.info";
 export const REPO_URL = "https://github.com/easyhooon/windowinsets.info";
 
 /** Non-device pages that are prerendered and listed in the sitemap. */
-export const STATIC_PATHS = ["/", "/methodology"];
+export const STATIC_PATHS = ["/", "/methodology", "/changelog"];
 
 export const allPaths = () => [...STATIC_PATHS, ...devices.map((d) => `/${d.slug}`)];
 
