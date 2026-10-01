@@ -1,5 +1,8 @@
 import type { ReactNode } from "react";
 import { CodeBlock } from "../components/CodeBlock";
+import { insetRanges } from "../data/insetRanges.server";
+import { insetsAnatomy } from "../data/insetsAnatomy.server";
+import { AnatomyNumber, InsetsAnatomy } from "../components/InsetsAnatomy";
 import { REPO_URL, SITE_URL } from "../data/devices";
 import { pageMeta } from "../lib/seo";
 import type { Route } from "./+types/developer-guide";
@@ -24,7 +27,12 @@ function Section({ id, title, children }: { id?: string; title: string; children
   );
 }
 
-export default function DeveloperGuide() {
+/** Runs at prerender: measured spread across Galaxy devices, from the cited raw captures. */
+export function loader() {
+  return { ranges: insetRanges(), anatomy: insetsAnatomy() };
+}
+
+export default function DeveloperGuide({ loaderData }: Route.ComponentProps) {
   return (
     <article className="mx-auto max-w-2xl p-4 md:p-8">
       <h1 className="text-2xl font-semibold">How to handle window insets in your app</h1>
@@ -38,27 +46,61 @@ export default function DeveloperGuide() {
           Window insets describe how much screen space is reserved by the system and cannot be
           used by your app:
         </p>
+        <div className="anatomy-layout">
         <ul>
           <li>
-            <b>Status bar:</b> Clock, signal, battery at the top. Inset: <code>statusBars()</code>
+            {loaderData.anatomy && <AnatomyNumber n={1} />}<b>Status bar:</b> Clock, signal, battery at the top. Inset: <code>statusBars()</code>
           </li>
           <li>
-            <b>Navigation bar:</b> Back, home, recent apps at the bottom (or side). Inset:{" "}
+            {loaderData.anatomy && <AnatomyNumber n={2} />}<b>Navigation bar:</b> Back, home, recent apps at the bottom (or side). Inset:{" "}
             <code>navigationBars()</code>
           </li>
           <li>
-            <b>Display cutout:</b> Camera holes, notches, waterfalls. Inset:{" "}
+            {loaderData.anatomy && <AnatomyNumber n={3} />}<b>Display cutout:</b> Camera holes, notches, waterfalls. Inset:{" "}
             <code>displayCutout()</code>
           </li>
           <li>
-            <b>System gestures:</b> Swipe areas at screen edges that trigger the system back or
+            {loaderData.anatomy && <AnatomyNumber n={4} />}<b>System gestures:</b> Swipe areas at screen edges that trigger the system back or
             recents. Inset: <code>systemGestures()</code>
           </li>
           <li>
-            <b>Corner radii:</b> How rounded the screen corners are. API:{" "}
+            {loaderData.anatomy && <AnatomyNumber n={5} />}<b>Corner radii:</b> How rounded the screen corners are. API:{" "}
             <code>Display.getRoundedCorner()</code>
           </li>
         </ul>
+          {loaderData.anatomy && <InsetsAnatomy anatomy={loaderData.anatomy} />}
+        </div>
+      </Section>
+
+      <Section title="Why you can't hardcode insets">
+        <p>
+          Measured Galaxy values differ by device, so a fixed status bar or navigation bar height
+          will be wrong somewhere. Ranges below are portrait captures in dp, computed from this
+          site's raw InsetsProbe captures at build time.
+        </p>
+        {loaderData.ranges.map(group => (
+          <div key={group.label}>
+            <p><b>{group.label}</b> ({group.ranges[0].count} devices)</p>
+            <table className="inset-ranges">
+              <tbody>
+                {group.ranges.map(range => (
+                  <tr key={range.label}>
+                    <th scope="row">{range.label}</th>
+                    <td>{range.min.value === range.max.value
+                      ? <>{range.min.value} dp on every device</>
+                      : <>{range.min.value} dp <span>({range.min.device})</span> – {range.max.value} dp <span>({range.max.device})</span></>}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ))}
+        <p>
+          The status bar varies most: a layout padded by a hardcoded value is either cut off or
+          leaves a gap. Read the insets at runtime with <code>WindowInsets</code> (Compose) or{" "}
+          <code>WindowInsetsCompat</code> (Views) as shown below. Flip and TriFold cover screens
+          use different system UI and are not mixed into these ranges.
+        </p>
       </Section>
 
       <Section id="jetpack-compose" title="Jetpack Compose">

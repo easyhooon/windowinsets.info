@@ -175,3 +175,15 @@ test('gesture and tappable insets are exported and keyed by capture for the page
   // Rotation captures are keyed too, so a turned device shows its own capture.
   assert.ok(Object.keys(byCapture).some(path => path.includes('landscape-1-gesture')));
 });
+
+test('guide inset ranges come from portrait captures and keep cover kinds apart', async () => {
+  const { module: { insetRanges } } = await runnerImport('./app/data/insetRanges.server.ts', { root: process.cwd() });
+  const groups = insetRanges();
+  assert.deepEqual(groups.map(g => g.label), ['Galaxy phones', 'Galaxy Z Fold cover screens']);
+  for (const group of groups) for (const range of group.ranges) {
+    assert.ok(range.count > 0 && range.min.value <= range.max.value, `${group.label} ${range.label}`);
+  }
+  const status = groups[0].ranges.find(r => r.label === 'Status bar height');
+  assert.ok(status.max.value - status.min.value > 10, 'phone status bars should span a wide range');
+  assert.ok(groups[1].ranges[0].min.value > 0, 'Flip covers (0 dp status bar) must not be mixed in');
+});
