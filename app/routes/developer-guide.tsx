@@ -319,8 +319,9 @@ hinges.forEach { hinge ->
         </p>
         <ul>
           <li>
-            <b>Test layouts locally:</b> Hardcode or mock the inset values from here in your
-            emulator/device tests.
+            <b>Test layouts locally:</b> Each device's Metrics panel has a collapsed{" "}
+            <b>Test fixture</b> block: a <code>WindowInsetsCompat</code> with the capture's exact px for every inset
+            type, ready to dispatch to the view under test in Robolectric, Paparazzi or Roborazzi.
           </li>
           <li>
             <b>Debug device-specific issues:</b> If your app behaves differently on a Galaxy

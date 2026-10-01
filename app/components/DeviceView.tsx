@@ -21,6 +21,7 @@ import { Icon } from "./Icon";
 import { getRtlAvailability } from "../data/rtlAvailability";
 import { formatLength, hasExactPx, safeInsets, safeInsetsPx } from "../data/measurementUnits";
 import { deviceExportPath, downloadDeviceExport } from "../data/deviceExport";
+import { testFixtureSnippet } from "../data/testFixture";
 import { trackFoldPoseChange, trackJsonExport, trackUnitChange } from "../lib/analytics";
 import { useTheme } from "../lib/theme";
 import { parseViewState, serializeViewState, type ViewState } from "../lib/viewState";
@@ -240,7 +241,8 @@ export function DeviceView({ device, rawInsets = {} }: { device: Device; rawInse
   const raw = rawFor(measurement);
   const gestureInsets = gesturesFor(measurement);
   const safePx = measurement ? safeInsetsPx(measurement) : null;
-  const snippetContext = [foldable ? `${device.name} · ${screen.id === "cover" ? "Outer" : "Inner"}` : device.name,
+  const snippetDevice = foldable ? `${device.name} · ${screen.id === "cover" ? "Outer" : "Inner"}` : device.name;
+  const snippetContext = [snippetDevice,
     navMode === "gesture" ? "Gesture" : "3-button"] as const;
   const fmt = (v: number, px?: number | null) => formatLength({ dp: v, px, units });
   const mainSkin = skins[`${device.slug}/main`];
@@ -299,6 +301,12 @@ export function DeviceView({ device, rawInsets = {} }: { device: Device; rawInse
   // neither the folded nor unfolded display turns upside down); tablets do (REFERENCE_PARITY.md).
   const allowsUpsideDown = device.formFactor === "tablet";
   const allOrientationOptions = orientationsFor(baseScreen);
+  const fixture = raw && measurement?.displayCutoutPx && RAW_SECTIONS.every(([type]) => raw[type].px)
+    ? testFixtureSnippet({
+      statusBars: raw.statusBars.px!, navigationBars: raw.navigationBars.px!, displayCutout: measurement.displayCutoutPx,
+      systemGestures: raw.systemGestures.px!, mandatorySystemGestures: raw.mandatorySystemGestures.px!, tappableElement: raw.tappableElement.px!,
+    }, { device: snippetDevice, mode: navMode === "gesture" ? "Gesture" : "3-button", orientation: allOrientationOptions.find(o => Number(o.value) === rotation)?.label ?? orientationName(screen) })
+    : null;
   // A hinge drag can switch between cover and landscape-native inner screens,
   // renaming the current rotation. Reserve each name so the centred pills keep
   // their positions and the slider stays under the pointer.
@@ -517,6 +525,13 @@ export function DeviceView({ device, rawInsets = {} }: { device: Device; rawInse
             <SectionLabel>{label}</SectionLabel>
             <dl>{insetsRows(raw[type].dp, raw[type].px, units, fmt)}</dl>
           </div>)}
+          {fixture && <details className="fixture-details">
+            <summary>Test fixture · WindowInsetsCompat</summary>
+            <p className="mb-2 text-xs leading-relaxed text-muted">
+              Exact px of this capture for JVM UI tests (Robolectric, Paparazzi, Roborazzi).
+            </p>
+            <CodeBlock title="Tests · WindowInsetsCompat">{fixture}</CodeBlock>
+          </details>}
           {emulatorOnly ? <>
             <SectionLabel>Captured On</SectionLabel>
             <dl>
@@ -538,7 +553,11 @@ export function DeviceView({ device, rawInsets = {} }: { device: Device; rawInse
               : emulatorOnly ? "AOSP emulator artwork preview. No emulator capture exists for this navigation mode." : "Official artwork preview. Android insets have not been measured for this navigation mode."}</p>
           {triFold && <p className="mb-3 text-xs text-muted">Two-hinge animation is illustrative. Partial poses do not represent measured Android window states.</p>}
           {measurement?.condition.note && <p className="mb-3 text-xs text-muted">{measurement.condition.note}</p>}
-          <SourceList sources={Array.from(new Map((measurement?.sources ?? []).concat(screen.sources).map(s => [`${s.label}|${s.url ?? ""}`, s])).values())} />
+          {/* A measured selection lists its own captures; the screen's other captures (the other
+           * navigation mode, other rotations) share labels and would read as duplicates. */}
+          <SourceList sources={Array.from(new Map((measurement?.sources ?? [])
+            .concat(screen.sources.filter(s => !measurement || (s.kind !== "measured" && s.kind !== "emulator")))
+            .map(s => [`${s.label}|${s.url ?? ""}`, s])).values())} />
           <Link to="/methodology" className="mt-3 block text-accent underline">How these values are measured →</Link>
           {safe && appPreview !== "off" && <>
             <SectionLabel>App Preview · Insets {appPreview}</SectionLabel>

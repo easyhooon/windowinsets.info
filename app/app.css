@@ -267,3 +267,5 @@ html[data-theme="dark"] .theme-toggle>.theme-icon-dark { display:flex; }
 @media (min-width: 768px) { .anatomy-layout { flex-direction:row; align-items:flex-start; } .insets-anatomy { width:220px; margin:0; } }
 .anatomy-layout > ul > li { list-style:none; margin-left:0; }
 .anatomy-modes { display:flex; justify-content:center; margin-bottom:8px; }
+.fixture-details { margin-top:20px; }
+.fixture-details summary { cursor:pointer; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.025em; color:var(--color-subtle); padding:4px 0; }
