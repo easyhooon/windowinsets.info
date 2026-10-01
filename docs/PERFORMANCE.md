@@ -9,21 +9,22 @@ between the server and client bundles.
 
 Initial JavaScript is every `/assets/*.js` file a prerendered page references
 (entry, route modules and `modulepreload` links), each gzip-compressed at level 9
-and summed. Baseline is `6905afb` (before the work). After is `dfc5785` (main
-with #140, #141 and #143 merged).
+and summed. Baseline is `6905afb` (before the work). After is main
+with #140, #141, #143 and the CodeBlock change for #144 merged.
 
 | Page | Baseline | After | Change |
 |---|---:|---:|---:|
-| Home (featured Flip8) | 350.9 kB | 152.9 kB | −198.0 kB (−56%) |
-| Flat device (Galaxy S25 Ultra) | 351.0 kB | 153.0 kB | −198.0 kB (−56%) |
-| Foldable device (Galaxy Z Fold7) | 351.0 kB | 153.0 kB + 139.1 kB lazy | −58.9 kB (−17%) total |
+| Home (featured Flip8) | 350.9 kB | 143.3 kB | −207.6 kB (−59%) |
+| Flat device (Galaxy S25 Ultra) | 351.0 kB | 143.3 kB | −207.7 kB (−59%) |
+| Foldable device (Galaxy Z Fold7) | 351.0 kB | 143.3 kB + 139.1 kB lazy | −68.6 kB (−20%) total |
 | Methodology | 176.4 kB | 122.4 kB | −54.0 kB (−31%) |
 | Changelog | 182.9 kB | 129.2 kB | −53.7 kB (−29%) |
-| Developer guide | 189.3 kB | 135.8 kB | −53.5 kB (−28%) |
+| Developer guide | 189.3 kB | 135.9 kB | −53.4 kB (−28%) |
 
 | Chunk | Baseline | After |
 |---|---:|---:|
-| `DeviceView` | 167.6 kB (with three.js) | 15.8 kB |
+| `DeviceView` | 167.6 kB (with three.js) | 16.0 kB |
+| `CodeBlock` (highlight.js, lazy on device pages) | every device page | 10.0 kB, when a snippet opens |
 | `FoldRenderer3D` (three.js, lazy) | in `DeviceView` | 139.1 kB, foldable pages only |
 | `devices` (full catalog) | 54.5 kB, every page | removed from the client |
 | `galaxy-s25-ultra.data` (per navigation) | 0.8 kB | 5.1 kB |
@@ -69,6 +70,16 @@ React Router's `prefetch="intent"` was tried and rejected. It downloads
 `<slug>.data?_routes=…` on hover, but navigation then fetches `<slug>.data`
 without the query, so each hovered page's data was transferred twice.
 
+### Lazy code blocks on device pages (#144)
+
+Device pages show no code on first paint: the Compose and Views snippets appear
+only with App Preview on, and the test fixture sits in a collapsed disclosure.
+`DeviceView` loads `CodeBlock` and highlight.js through `React.lazy`, renders the
+fixture only after its disclosure opens, and shows the plain code as the
+Suspense fallback until highlighting arrives. The developer guide keeps a static
+import because its code is visible on first paint. The prerendered device HTML no
+longer contains the fixture code.
+
 ## Rules that keep the gains
 
 - Never import `app/data/devices.ts`, `skins.ts` or `aospSkins.ts` from a
@@ -80,6 +91,8 @@ without the query, so each hovered page's data was transferred twice.
   shared with flat pages belongs in `foldMath.ts`.
 - Load `FoldRenderer3D` only through `loadFoldRenderer()`, so prefetch and lazy
   mount share one request.
+- Keep `CodeBlock` out of static imports in modules every device page loads;
+  use the lazy wrapper in `DeviceView`.
 - Relative imports used by `node --test` need explicit `.ts` extensions
   (`allowImportingTsExtensions` is on).
 
@@ -102,8 +115,6 @@ check the network panel for `FoldRenderer3D-*.js`.
   into the loader alone saves almost nothing, because loader data is inlined in
   the HTML. It pays off only if the loader trims the entries to the fields the
   page renders or paginates older entries.
-- Lazy-load `CodeBlock` and highlight.js (9.9 kB gzip) on the developer guide
-  and the Metrics panel's test fixture.
 - Negligible: prefetch the 3D chunk from the device-name links in `/changelog`
   entries. The changelog loader sends names without a form factor today. Visitors
   rarely open a device from there, the sidebar links already prefetch, and a miss
