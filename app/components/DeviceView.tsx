@@ -22,6 +22,7 @@ import { formatLength, hasExactPx, safeInsets, safeInsetsPx } from "../data/meas
 import { deviceExportPath, downloadDeviceExport } from "../data/deviceExport";
 import { trackFoldPoseChange, trackJsonExport, trackUnitChange } from "../lib/analytics";
 import { useTheme } from "../lib/theme";
+import { parseViewState, serializeViewState, type ViewState } from "../lib/viewState";
 
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
   const [status, setStatus] = useState("");
@@ -320,6 +321,40 @@ export function DeviceView({ device }: { device: Device }) {
     while (!orientationOptions.some(o => Number(o.value) === next));
     rotateTo(next);
   };
+  // Shareable view state: restore it from the query string after hydration (the
+  // page is prerendered without it), then mirror changes back without adding history.
+  const defaultView: ViewState = { navMode: "threeButton", rotation: 0, hinge: initialHasCover ? 0 : 180, units: "dp", appPreview: "off" };
+  const viewRestored = useRef(false);
+  useEffect(() => {
+    const restored = parseViewState(window.location.search, { rotations: orientationOptions.map(o => Number(o.value)), foldable });
+    if (restored.navMode) setNavMode(restored.navMode);
+    if (restored.units) setUnits(restored.units);
+    if (restored.appPreview) setAppPreview(restored.appPreview);
+    if (restored.rotation !== undefined) setRotation(restored.rotation);
+    if (restored.hinge !== undefined) {
+      setAngle(restored.hinge);
+      lastCommittedAngle.current = restored.hinge;
+      setScreenId(restored.hinge < coverRevealAngle(triFold) && initialHasCover ? "cover" : "main");
+    }
+    if (restored.rotation !== undefined || restored.hinge !== undefined) setFitKey(key => key + 1);
+    viewRestored.current = true;
+    // Reveal the canvas once the restored view has painted; a restored hinge waits
+    // for the fold to settle instead of showing it opening.
+    const reveal = () => { delete document.documentElement.dataset.viewRestore; };
+    const timer = setTimeout(reveal, restored.hinge !== undefined && useFoldRef.current ? 500 : 50);
+    return () => { clearTimeout(timer); reveal(); };
+  }, []);
+  useEffect(() => {
+    if (!viewRestored.current) return;
+    // Debounced: hinge drags change state every frame and browsers rate-limit replaceState.
+    const timer = setTimeout(() => {
+      const search = serializeViewState(window.location.search, { navMode, rotation, hinge: angle, units, appPreview }, defaultView);
+      if (search === window.location.search) return;
+      // Keep React Router's history entry state so back/forward still work.
+      window.history.replaceState(window.history.state, "", `${window.location.pathname}${search}${window.location.hash}`);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [navMode, rotation, angle, units, appPreview]);
   const poseGlyph = triFold ? "trifold" : device.formFactor === "foldable-flip" ? "flip" : "book";
   // Phones show these in the bottom stack, where the open Metrics disclosure cannot cover them.
   const displayOptions = <fieldset className="control-pill" aria-label="Display options">

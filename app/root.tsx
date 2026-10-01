@@ -10,6 +10,7 @@ import {
 import type { Route } from "./+types/root";
 import { Analytics } from "./components/Analytics";
 import { THEME_SCRIPT } from "./lib/theme";
+import { VIEW_RESTORE_SCRIPT } from "./lib/viewState";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -27,6 +28,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light dark" />
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: VIEW_RESTORE_SCRIPT }} />
         <Meta />
         <Links />
       </head>
