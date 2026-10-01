@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://windowinsets.info/schemas/device-index-v1.schema.json",
+  "title": "windowinsets.info device index v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schemaVersion", "deviceCount", "devices"],
+  "properties": {
+    "schema": { "const": "https://windowinsets.info/schemas/device-index-v1.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "deviceCount": { "type": "integer", "minimum": 0 },
+    "devices": { "type": "array", "items": { "$ref": "#/$defs/device" } }
+  },
+  "$defs": {
+    "device": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slug", "name", "brand", "series", "formFactor", "releaseYear", "evidence", "measurementStatus", "screens", "export", "page"],
+      "properties": {
+        "slug": { "type": "string" },
+        "name": { "type": "string" },
+        "brand": { "enum": ["Samsung", "Google"] },
+        "series": { "type": "string" },
+        "formFactor": { "enum": ["bar", "tablet", "foldable-book", "foldable-flip", "foldable-trifold"] },
+        "releaseYear": { "type": ["integer", "null"] },
+        "evidence": { "enum": ["measured", "emulator", null] },
+        "measurementStatus": { "enum": ["complete", "partial", "pending"] },
+        "screens": { "type": "array", "items": { "$ref": "#/$defs/screen" } },
+        "export": { "type": "string", "format": "uri" },
+        "page": { "type": "string", "format": "uri" }
+      }
+    },
+    "screen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "measuredModes", "measuredRotations"],
+      "properties": {
+        "id": { "enum": ["cover", "main"] },
+        "measuredModes": { "type": "array", "uniqueItems": true, "items": { "enum": ["gesture", "threeButton"] } },
+        "measuredRotations": { "type": "array", "uniqueItems": true, "items": { "enum": [0, 1, 2, 3] } }
+      }
+    }
+  }
+}
