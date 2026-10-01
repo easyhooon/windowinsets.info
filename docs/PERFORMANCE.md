@@ -96,8 +96,12 @@ check the network panel for `FoldRenderer3D-*.js`.
 
 ## Candidates not done yet
 
-- `app/data/changelog.json` still ships in the 10.4 kB gzip client
-  changelog route chunk; the changelog loader could send only the rendered rows.
+- Low priority: `app/data/changelog.json` (about 9 kB gzip) is bundled into the
+  10.4 kB gzip changelog route chunk, which loads only on `/changelog`. That page
+  carries the entries twice, in the JS and in the rendered HTML. Moving the JSON
+  into the loader alone saves almost nothing, because loader data is inlined in
+  the HTML. It pays off only if the loader trims the entries to the fields the
+  page renders or paginates older entries.
 - Lazy-load `CodeBlock` and highlight.js (9.9 kB gzip) on the developer guide
   and the Metrics panel's test fixture.
 - Prefetch the 3D chunk from changelog device links, which have no form factor
