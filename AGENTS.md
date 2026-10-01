@@ -82,6 +82,11 @@ device `Source` links to.
   links plus the new desktop/mobile preview. Skip automated test suites,
   typecheck, and build for this case; run them when application or
   importer behavior changes or a concrete failure needs diagnosis.
+- Run the Playwright visual suite (`pnpm test:visual`) only when the canvas,
+  diagram, legend, controls or page layout change. For panel text, data,
+  export or docs changes, unit tests plus a browser check of the affected
+  screen are enough. When the full suite reports timeouts, rerun those tests
+  alone before treating them as failures.
 - Keep motion reduced when requested by the OS; dispose GPU resources on unmount.
 
 ## Working conventions
