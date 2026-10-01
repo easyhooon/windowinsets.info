@@ -293,6 +293,17 @@ hinges.forEach { hinge ->
           All values are linked to their source (official specs, raw probe JSON, or community
           reports), so you can always trace where a number came from.
         </p>
+        <h3>Sharing a specific view</h3>
+        <p>
+          A device page's URL follows its controls, so you can paste it into an issue or PR
+          as-is. For example,{" "}
+          <code>/galaxy-z-fold7?nav=gesture&amp;rotate=90&amp;hinge=180&amp;unit=px</code> opens the
+          inner display in gesture navigation, turned clockwise, in pixels. Supported keys
+          are <code>nav</code> (<code>gesture</code>, <code>3-button</code>),{" "}
+          <code>rotate</code> (clockwise degrees), <code>hinge</code> (0–180, foldables),{" "}
+          <code>unit</code> (<code>dp</code>, <code>px</code>) and <code>app</code>{" "}
+          (<code>ignored</code>, <code>applied</code>). Defaults are left out of the URL.
+        </p>
         <h3>Exporting a complete device</h3>
         <p>
           Choose <b>Export JSON</b> at the top of a device's Metrics panel to download every
