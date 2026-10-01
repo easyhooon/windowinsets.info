@@ -1,0 +1,25 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "deviceModelId": "redfin",
+  "deviceName": "Pixel 5",
+  "androidApi": 30,
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-10-01_17:33:12.105914_HFKj/redfin-30-en-portrait/",
+  "probe": {
+    "version": "1.7.0",
+    "minSdk": 30,
+    "apkSha256": "29a5f5ce893940a028cd21ac129eff7b831e8da1e908202a4ae7e7740e51f1a3",
+    "roboScript": "tools/insets-probe/testlab/phone-portrait-launch-only.robo.json"
+  },
+  "note": "Physical device (matrix ID not captured; the result bucket identifies the run), portrait, existing (gesture) navigation mode, Android 11 build RQ3A.211001.001. FTL Robo ADB shell steps do not run on this API 30 device, so the probe auto-exported on a plain Test Lab launch with its default phone label. API 30 has no DisplayCutout path or RoundedCorner API; those fields are null and listed in apiLimits, not measured as absent. Compare with the API 37 emulator with the OS difference noted; do not replace emulator values.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "123c762c1d9eb95dbcc21fe382a6d0b9505143056013af5126f1738232f25170"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "1986db6c59e86d8dee97195986d3285baee85e9bc6e01035f9ba7b2d90ead365"
+    }
+  ]
+}

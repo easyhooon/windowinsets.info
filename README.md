@@ -80,7 +80,7 @@ Raw capture JSON is committed to this repository. Published Pixel values still u
 
 **Limits:** Each rotation needs its own capture. Rotating the site diagram does not create landscape measurements. Pixel site entries currently use rotation-0 emulator captures; other rotations remain raw evidence.
 
-Physical FTL spot checks cover 19 of 22 Pixel models in gesture mode, including matched landscape captures for Pixel Fold's inner display and Pixel Tablet. Android 16 and 17 can report different cutout safe insets for the same camera contour. Physical rounded corners on Fold and Tablet are absent from their AVD captures.
+Physical FTL spot checks cover 20 of 22 Pixel models in gesture mode, including matched landscape captures for Pixel Fold's inner display and Pixel Tablet. Android 16 and 17 can report different cutout safe insets for the same camera contour. Physical rounded corners on Fold and Tablet are absent from their AVD captures.
 
 OS updates can change values. Multi-window is not covered yet, and an app's own padding or window flags can change the insets it sees.
 
@@ -126,7 +126,7 @@ The keyless probe also runs on physical Pixel devices in Firebase Test Lab (FTL)
 
 A passed FTL run confirms that the app exported data; it does not establish that every published emulator value matches hardware. The [validation log](docs/PIXEL_HARDWARE_VALIDATION.md) contains the raw JSON, result links and the first run's complete Robo crawl graph.
 
-As of 2026-09-28, two-minute Robo runs had spot-checked **19 of 22** public Pixel models in gesture mode. Pixel 6 Pro and Pixel 4a were absent from the physical FTL catalog. Its Pixel 5 runs API 30, below the probe's minimum API 31. [Issue #46](https://github.com/easyhooon/windowinsets.info/issues/46) tracks the remaining three models and their next capture paths. Other navigation modes, rotations and Fold cover states remain unverified.
+As of 2026-10-01, two-minute Robo runs had spot-checked **20 of 22** public Pixel models in gesture mode. Pixel 5 runs only API 30 on FTL, so its check lacks cutout path and corner radii. Pixel 6 Pro and Pixel 4a are absent from the physical FTL catalog. [Issue #46](https://github.com/easyhooon/windowinsets.info/issues/46) tracks the remaining three models and their next capture paths. Other navigation modes, rotations and Fold cover states remain unverified.
 
 The dedicated `windowinsets-testlab-2026` project used Spark for its first five physical runs, then switched to Blaze on 2026-09-28. Blaze includes 30 physical-device test minutes per project per day, then charges $5 per device-hour in one-minute increments; see [FTL quota and pricing](https://firebase.google.com/docs/test-lab/usage-quotas-pricing).
 
@@ -134,7 +134,7 @@ The Pixel Tablet artwork contrast issue [#35](https://github.com/easyhooon/windo
 
 ### What InsetsProbe records
 
-The probe targets Android 12+ (`minSdk 31`, `targetSdk 36`) and calls `enableEdgeToEdge()`.
+The probe targets Android 11+ (`minSdk 30`, `targetSdk 36`); on API 30 the cutout path and rounded corners are `null` and listed in `apiLimits`. It calls `enableEdgeToEdge()`.
 It reads insets in the content root's `OnApplyWindowInsetsListener` without
 consuming them, so it sees what an edge-to-edge app's root receives.
 
