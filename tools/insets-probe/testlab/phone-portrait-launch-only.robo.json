@@ -1,0 +1,9 @@
+[
+  {
+    "eventType": "WAIT",
+    "delayTime": 8000
+  },
+  {
+    "eventType": "TERMINATE_CRAWL"
+  }
+]

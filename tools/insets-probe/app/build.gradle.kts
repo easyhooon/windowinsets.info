@@ -12,10 +12,10 @@ extensions.configure<ApplicationExtension> {
     defaultConfig {
         applicationId = "info.windowinsets.probe"
         // RoundedCorner / Display.getRoundedCorner need API 31.
-        minSdk = 31
+        minSdk = 30
         targetSdk = 36
-        versionCode = 10
-        versionName = "1.6.1"
+        versionCode = 11
+        versionName = "1.7.0"
         // Uploads go to windowinsets.info (issue #28). Set insetsProbeUploadKey in
         // ~/.gradle/gradle.properties or pass -PinsetsProbeUploadKey=...; blank disables upload.
         val uploadKey = providers.gradleProperty("insetsProbeUploadKey").orElse("").get()
