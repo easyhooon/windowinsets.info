@@ -5,6 +5,7 @@ import { summarizeDevice, type DeviceSummary } from "../data/deviceSummary";
 import { FEATURED_SLUG, REPO_URL } from "../data/site";
 import { ResizeHandle } from "../components/ResizeHandle";
 import { Icon } from "../components/Icon";
+import { prefetchFoldRenderer } from "../components/foldRendererChunk";
 import { trackDeviceSelection, trackSupportClick } from "../lib/analytics";
 
 type Device = DeviceSummary;
@@ -102,7 +103,7 @@ export default function Shell() {
     if (next.has(group)) next.delete(group); else next.add(group);
     return next;
   });
-  const deviceLink = (d: Device) => <NavLink key={d.slug} to={`/${d.slug}`} onClick={() => { trackDeviceSelection(d); setQuery(""); setMobileOpen(false); }} onAuxClick={e => { if (e.button === 1) trackDeviceSelection(d); }} className={`device-link ${current.slug === d.slug ? "selected" : ""}`}>
+  const deviceLink = (d: Device) => <NavLink key={d.slug} to={`/${d.slug}`} onMouseEnter={() => prefetchFoldRenderer(d.formFactor)} onFocus={() => prefetchFoldRenderer(d.formFactor)} onTouchStart={() => prefetchFoldRenderer(d.formFactor)} onClick={() => { trackDeviceSelection(d); setQuery(""); setMobileOpen(false); }} onAuxClick={e => { if (e.button === 1) trackDeviceSelection(d); }} className={`device-link ${current.slug === d.slug ? "selected" : ""}`}>
     <span className={`device-thumbnail ${d.formFactor}`} /><span>{d.name}<small>{deviceCaption(d)}</small></span>
   </NavLink>;
   return <div style={{ "--sidebar-width": `${sidebarWidth}px` } as React.CSSProperties} className="app-shell" data-build-commit={__BUILD_COMMIT__}>

@@ -13,6 +13,7 @@ import { CodeBlock } from "./CodeBlock";
 import type { AppPreview } from "./appPreview";
 import { DiagramViewport, type DiagramViewportHandle } from "./DiagramViewport";
 import type { DeviceSkin } from "../data/skins";
+import { loadFoldRenderer } from "./foldRendererChunk";
 import { ResizeHandle } from "./ResizeHandle";
 import { Icon } from "./Icon";
 import { getRtlAvailability } from "../data/rtlAvailability";
@@ -24,7 +25,7 @@ import { useTheme } from "../lib/theme";
 import { parseViewState, serializeViewState, type ViewState } from "../lib/viewState";
 
 // three.js only ships to pages that show a 3D foldable.
-const FoldRenderer3D = lazy(() => import("./FoldRenderer3D").then(module => ({ default: module.FoldRenderer3D })));
+const FoldRenderer3D = lazy(() => loadFoldRenderer().then(module => ({ default: module.FoldRenderer3D })));
 /** Suspense commits this with the renderer, so a fit that ran over the placeholder can rerun. */
 function OnMount({ effect }: { effect: () => void }) {
   useEffect(effect, []); // eslint-disable-line react-hooks/exhaustive-deps
