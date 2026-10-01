@@ -553,7 +553,11 @@ export function DeviceView({ device, rawInsets = {} }: { device: Device; rawInse
               : emulatorOnly ? "AOSP emulator artwork preview. No emulator capture exists for this navigation mode." : "Official artwork preview. Android insets have not been measured for this navigation mode."}</p>
           {triFold && <p className="mb-3 text-xs text-muted">Two-hinge animation is illustrative. Partial poses do not represent measured Android window states.</p>}
           {measurement?.condition.note && <p className="mb-3 text-xs text-muted">{measurement.condition.note}</p>}
-          <SourceList sources={Array.from(new Map((measurement?.sources ?? []).concat(screen.sources).map(s => [`${s.label}|${s.url ?? ""}`, s])).values())} />
+          {/* A measured selection lists its own captures; the screen's other captures (the other
+           * navigation mode, other rotations) share labels and would read as duplicates. */}
+          <SourceList sources={Array.from(new Map((measurement?.sources ?? [])
+            .concat(screen.sources.filter(s => !measurement || (s.kind !== "measured" && s.kind !== "emulator")))
+            .map(s => [`${s.label}|${s.url ?? ""}`, s])).values())} />
           <Link to="/methodology" className="mt-3 block text-accent underline">How these values are measured →</Link>
           {safe && appPreview !== "off" && <>
             <SectionLabel>App Preview · Insets {appPreview}</SectionLabel>
