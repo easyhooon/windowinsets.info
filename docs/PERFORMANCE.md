@@ -1,0 +1,104 @@
+# Frontend performance
+
+This page records the client bundle optimizations, their measured effect, the
+rules that keep the gains, and the candidates not done yet. Re-measure with the
+method below before and after any change that adds a dependency or moves data
+between the server and client bundles.
+
+## Results (2026-10-01)
+
+Initial JavaScript is every `/assets/*.js` file a prerendered page references
+(entry, route modules and `modulepreload` links), each gzip-compressed at level 9
+and summed. Baseline is `6905afb` (before the work). After is `dfc5785` (main
+with #140, #141 and #143 merged).
+
+| Page | Baseline | After | Change |
+|---|---:|---:|---:|
+| Home (featured Flip8) | 350.9 kB | 152.9 kB | −198.0 kB (−56%) |
+| Flat device (Galaxy S25 Ultra) | 351.0 kB | 153.0 kB | −198.0 kB (−56%) |
+| Foldable device (Galaxy Z Fold7) | 351.0 kB | 153.0 kB + 139.1 kB lazy | −58.9 kB (−17%) total |
+| Methodology | 176.4 kB | 122.4 kB | −54.0 kB (−31%) |
+| Changelog | 182.9 kB | 129.2 kB | −53.7 kB (−29%) |
+| Developer guide | 189.3 kB | 135.8 kB | −53.5 kB (−28%) |
+
+| Chunk | Baseline | After |
+|---|---:|---:|
+| `DeviceView` | 167.6 kB (with three.js) | 15.8 kB |
+| `FoldRenderer3D` (three.js, lazy) | in `DeviceView` | 139.1 kB, foldable pages only |
+| `devices` (full catalog) | 54.5 kB, every page | removed from the client |
+| `galaxy-s25-ultra.data` (per navigation) | 0.8 kB | 5.1 kB |
+
+Each client navigation now fetches the target device and its skins (about
+5 kB) instead of shipping all 140+ devices up front. Prerendered HTML is
+unchanged.
+
+## What changed
+
+### Lazy three.js renderer (#140)
+
+`FoldRenderer3D` and three.js load through `React.lazy` only when a page shows a
+3D foldable. Hinge and camera math that flat pages also need moved to the
+three.js-free `app/components/foldMath.ts`. An `OnMount` helper inside the
+`Suspense` boundary reruns the diagram fit once the renderer replaces the
+placeholder.
+
+### Per-page device data (#141)
+
+Route loaders run at prerender and emit `<slug>.data` files, so the client gets
+only what the page shows:
+
+- `routes/shell.tsx` sends `DeviceSummary[]` for the sidebar and analytics and
+  never revalidates.
+- `routes/device.tsx` and `routes/home.tsx` send one device, its skins
+  (`deviceSkins`) and its raw insets.
+- `routes/methodology.tsx` sends counts; `routes/changelog.tsx` sends the device
+  names its entries mention.
+- Site constants live in `app/data/site.ts`. Changelog name lookup and the RSS
+  feed live in `app/data/changelog.server.ts`.
+
+### Prefetch the 3D chunk on intent (#143)
+
+Hovering, focusing or touching a foldable link in the sidebar calls
+`prefetchFoldRenderer`, which starts the same `import()` that `React.lazy` uses
+(`app/components/foldRendererChunk.ts`). In a production build check, the chunk
+arrived about 1.5 s before the click and was not requested again on mount. Flat
+devices and Save-Data connections skip it. Non-device pages pay about 1.7 kB for
+the shared chunk that holds the loader.
+
+React Router's `prefetch="intent"` was tried and rejected. It downloads
+`<slug>.data?_routes=…` on hover, but navigation then fetches `<slug>.data`
+without the query, so each hovered page's data was transferred twice.
+
+## Rules that keep the gains
+
+- Never import `app/data/devices.ts`, `skins.ts` or `aospSkins.ts` from a
+  component, client module or route component. Read device data in a route
+  `loader` (or a `*.server.ts` module) and pass the result through loader data.
+  A top-level `new Map(devices.map(...))` in a client module pulls the whole
+  catalog back into the bundle.
+- Import three.js only from `FoldRenderer3D.tsx` and its private helpers. Math
+  shared with flat pages belongs in `foldMath.ts`.
+- Load `FoldRenderer3D` only through `loadFoldRenderer()`, so prefetch and lazy
+  mount share one request.
+- Relative imports used by `node --test` need explicit `.ts` extensions
+  (`allowImportingTsExtensions` is on).
+
+## Measuring
+
+```bash
+pnpm build
+```
+
+Then sum the gzip size of each `/assets/*.js` file that the page's prerendered
+`index.html` references. Restore the regenerated `app/data/changelog.json`
+before committing. For the lazy chunk, open a foldable page in the built site and
+check the network panel for `FoldRenderer3D-*.js`.
+
+## Candidates not done yet
+
+- `app/data/changelog.json` still ships in the 10.4 kB gzip client
+  changelog route chunk; the changelog loader could send only the rendered rows.
+- Lazy-load `CodeBlock` and highlight.js (9.9 kB gzip) on the developer guide
+  and the Metrics panel's test fixture.
+- Prefetch the 3D chunk from changelog device links, which have no form factor
+  in their loader data today.

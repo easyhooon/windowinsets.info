@@ -41,6 +41,7 @@ Start with this README for the product, data limits, device priorities and local
 | Launch the probe on a Flip cover display | [Probe FlexWindow guide](tools/insets-probe/FLEXWINDOW_README.md) |
 | Consume the downloadable device data | [JSON export format](docs/JSON_EXPORT.md) |
 | Configure and interpret site analytics | [Analytics](docs/ANALYTICS.md) |
+| Keep the client bundle small and re-measure it | [Frontend performance](docs/PERFORMANCE.md) |
 | Check asset attribution | [Third-party notices](docs/THIRD_PARTY_NOTICES.md) |
 
 The [InsetsProbe guide](tools/insets-probe/README.md) covers the Android app itself. Asset and test instructions stay next to their files in [`public/skins/`](public/skins/README.md), [`public/fonts/`](public/fonts/README.md), [`design/brand/`](design/brand/README.md), [`docs/media/`](docs/media/README.md) and [`tests/`](tests/README.md).
