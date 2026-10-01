@@ -1,4 +1,6 @@
+import { useState } from "react";
 import type { InsetsAnatomy as Anatomy } from "../data/insetsAnatomy.server";
+import type { NavMode } from "../data/types";
 import { skinAssetUrl } from "../data/skinAssetUrl";
 import { DIAGRAM_COLORS, GESTURE_COLOR } from "./diagramStyle";
 
@@ -11,9 +13,11 @@ export function AnatomyNumber({ n }: { n: number }) {
 
 /** Where each inset type sits on a real device: a measured Galaxy S25 capture on its official skin. */
 export function InsetsAnatomy({ anatomy }: { anatomy: Anatomy }) {
-  const { skin, px } = anatomy;
+  const [nav, setNav] = useState<NavMode>("gesture");
+  const { skin, cutout } = anatomy;
+  const px = anatomy.modes[nav];
   const { x: sx, y: sy, width: W, height: H } = skin.screen;
-  const r = px.cornerRadius;
+  const r = anatomy.cornerRadius;
   const marker = (n: number, x: number, y: number) => (
     <g key={n}>
       <circle cx={x} cy={y} r={88} fill="#1f2328" stroke="#fff" strokeWidth={14} />
@@ -22,6 +26,10 @@ export function InsetsAnatomy({ anatomy }: { anatomy: Anatomy }) {
   );
   return (
     <figure className="insets-anatomy">
+      <div className="segmented anatomy-modes" role="group" aria-label="Navigation">
+        {([["gesture", "Gesture"], ["threeButton", "3-button"]] as const).map(([value, label]) =>
+          <button key={value} type="button" className="pill-button" aria-pressed={nav === value} onClick={() => setNav(value)}>{label}</button>)}
+      </div>
       <svg viewBox={`0 0 ${skin.width} ${skin.height}`} role="img" aria-label={`${anatomy.device}: status bar, navigation bar, display cutout, gesture zones and corner radius`}>
         <defs>
           <pattern id="anatomy-gesture" width={36} height={36} patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
@@ -35,20 +43,23 @@ export function InsetsAnatomy({ anatomy }: { anatomy: Anatomy }) {
           <rect x={sx} y={sy} width={W} height={H} fill="#fff" />
           <rect x={sx} y={sy} width={W} height={px.statusTop} fill={DIAGRAM_COLORS.insetFill} />
           <rect x={sx} y={sy + H - px.navBottom} width={W} height={px.navBottom} fill={DIAGRAM_COLORS.insetFill} />
-          <rect x={sx} y={sy} width={px.gestureLeft} height={H} fill="url(#anatomy-gesture)" />
-          <rect x={sx + W - px.gestureRight} y={sy} width={px.gestureRight} height={H} fill="url(#anatomy-gesture)" />
-          <rect x={sx + px.cutout.x} y={sy + px.cutout.y} width={px.cutout.width} height={px.cutout.height} fill={CUTOUT_FILL} stroke="#8950e8" strokeWidth={6} />
+          {px.gestureLeft > 0 && <rect x={sx} y={sy} width={px.gestureLeft} height={H} fill="url(#anatomy-gesture)" />}
+          {px.gestureRight > 0 && <rect x={sx + W - px.gestureRight} y={sy} width={px.gestureRight} height={H} fill="url(#anatomy-gesture)" />}
+          <rect x={sx + cutout.x} y={sy + cutout.y} width={cutout.width} height={cutout.height} fill={CUTOUT_FILL} stroke="#8950e8" strokeWidth={6} />
         </g>
         {skin.foreground && <image href={skinAssetUrl(skin.foreground)} x={sx} y={sy} width={W} height={H} preserveAspectRatio="none" />}
         {/* Corner radius: the rounded display edge at the top-right corner. */}
         <path d={`M ${sx + W - r} ${sy} A ${r} ${r} 0 0 1 ${sx + W} ${sy + r}`} fill="none" stroke={DIAGRAM_COLORS.radius} strokeWidth={16} strokeLinecap="round" />
         {marker(1, sx + W * .27, sy + px.statusTop / 2)}
         {marker(2, sx + W * .5, sy + H - px.navBottom / 2)}
-        {marker(3, sx + px.cutout.x + px.cutout.width / 2, sy + px.cutout.height + 150)}
-        {marker(4, sx + px.gestureLeft / 2 + 40, sy + H * .5)}
+        {marker(3, sx + cutout.x + cutout.width / 2, sy + cutout.height + 150)}
+        {px.gestureLeft > 0 && marker(4, sx + px.gestureLeft / 2 + 40, sy + H * .5)}
         {marker(5, sx + W - r * .55, sy + r * 1.9)}
       </svg>
-      <figcaption>{anatomy.device}, gesture navigation, measured</figcaption>
+      <figcaption>
+        {anatomy.device}, {nav === "gesture" ? "gesture navigation" : "3-button navigation"}, measured
+        {nav === "threeButton" && <span className="block">No side back-swipe zones (4) in 3-button mode.</span>}
+      </figcaption>
     </figure>
   );
 }
