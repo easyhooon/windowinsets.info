@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { devices, hasVerifiedInsets, REPO_URL, SITE_URL } from "../data/devices";
+import { devices, hasVerifiedInsets } from "../data/devices";
+import { REPO_URL, SITE_URL } from "../data/site";
 import { pageMeta } from "../lib/seo";
 import type { Route } from "./+types/methodology";
 
@@ -23,9 +24,16 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   );
 }
 
-export default function Methodology() {
-  const measured = devices.filter((d) => d.brand === "Samsung" && hasVerifiedInsets(d)).length;
-  const emulated = devices.filter((d) => d.brand === "Google" && hasVerifiedInsets(d)).length;
+/** Runs at prerender: catalog counts, without shipping the catalog. */
+export function loader() {
+  return {
+    measured: devices.filter((d) => d.brand === "Samsung" && hasVerifiedInsets(d)).length,
+    emulated: devices.filter((d) => d.brand === "Google" && hasVerifiedInsets(d)).length,
+    total: devices.length,
+  };
+}
+
+export default function Methodology({ loaderData: { measured, emulated, total } }: Route.ComponentProps) {
 
   return (
     <article className="mx-auto max-w-2xl p-4 md:p-8">
@@ -36,7 +44,7 @@ export default function Methodology() {
       </p>
 
       <p className="mt-4 rounded-[10px] border border-line bg-surface p-3 text-sm shadow-card">
-        <b>Current status:</b> {measured} of {devices.length} devices have measured inset
+        <b>Current status:</b> {measured} of {total} devices have measured inset
         values from real hardware, and {emulated} Pixel devices have Android Emulator
         values. Everything else is shown as <i>pending</i>.
       </p>

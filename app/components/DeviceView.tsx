@@ -12,17 +12,7 @@ import { GESTURE_COLOR, TAPPABLE_COLOR } from "./diagramStyle";
 import { CodeBlock } from "./CodeBlock";
 import type { AppPreview } from "./appPreview";
 import { DiagramViewport, type DiagramViewportHandle } from "./DiagramViewport";
-import { aospSkins } from "../data/aospSkins";
-import { skins as samsungSkins } from "../data/skins";
-
-const skins = { ...samsungSkins, ...aospSkins };
-// three.js only ships to pages that show a 3D foldable.
-const FoldRenderer3D = lazy(() => import("./FoldRenderer3D").then(module => ({ default: module.FoldRenderer3D })));
-/** Suspense commits this with the renderer, so a fit that ran over the placeholder can rerun. */
-function OnMount({ effect }: { effect: () => void }) {
-  useEffect(effect, []); // eslint-disable-line react-hooks/exhaustive-deps
-  return null;
-}
+import type { DeviceSkin } from "../data/skins";
 import { ResizeHandle } from "./ResizeHandle";
 import { Icon } from "./Icon";
 import { getRtlAvailability } from "../data/rtlAvailability";
@@ -32,6 +22,14 @@ import { testFixtureSnippet } from "../data/testFixture";
 import { trackFoldPoseChange, trackJsonExport, trackUnitChange } from "../lib/analytics";
 import { useTheme } from "../lib/theme";
 import { parseViewState, serializeViewState, type ViewState } from "../lib/viewState";
+
+// three.js only ships to pages that show a 3D foldable.
+const FoldRenderer3D = lazy(() => import("./FoldRenderer3D").then(module => ({ default: module.FoldRenderer3D })));
+/** Suspense commits this with the renderer, so a fit that ran over the placeholder can rerun. */
+function OnMount({ effect }: { effect: () => void }) {
+  useEffect(effect, []); // eslint-disable-line react-hooks/exhaustive-deps
+  return null;
+}
 
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
   const [status, setStatus] = useState("");
@@ -180,7 +178,7 @@ const RAW_SECTIONS: Array<[RawInsetType, string]> = [
   ["mandatorySystemGestures", "Mandatory System Gestures"], ["tappableElement", "Tappable Element"],
 ];
 
-export function DeviceView({ device, rawInsets = {} }: { device: Device; rawInsets?: RawInsetsMap }) {
+export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; skins: Record<string, DeviceSkin>; rawInsets?: RawInsetsMap }) {
   const initialHasCover = device.screens.some(screen => screen.id === "cover");
   const [metricsWidth, setMetricsWidth] = useState(292);
   const [navMode, setNavMode] = useState<NavMode>("threeButton");
@@ -237,7 +235,7 @@ export function DeviceView({ device, rawInsets = {} }: { device: Device; rawInse
   // Pixel entries come from the Android Emulator, never from Samsung RTL.
   const emulatorOnly = device.brand === "Google";
   const pendingNotice = emulatorOnly ? "Emulator artwork preview · No capture for this screen and navigation mode" : rtl.previewNotice;
-  const skin = skins[`${device.slug}/${screen.id}`];
+  const skin = skins[screen.id];
   const safe = measurement ? safeInsets(measurement) : null;
   // Per-type insets come from the raw capture a measurement cites (resolved at build).
   const rawFor = (m: InsetsMeasurement | null | undefined) => m?.sources.map(source => rawInsets[source.url?.match(RAW_PATH)?.[1] ?? ""]).find(Boolean) ?? null;
@@ -252,8 +250,8 @@ export function DeviceView({ device, rawInsets = {} }: { device: Device; rawInse
   const snippetContext = [snippetDevice,
     navMode === "gesture" ? "Gesture" : "3-button"] as const;
   const fmt = (v: number, px?: number | null) => formatLength({ dp: v, px, units });
-  const mainSkin = skins[`${device.slug}/main`];
-  const outerSkin = skins[`${device.slug}/cover`];
+  const mainSkin = skins.main;
+  const outerSkin = skins.cover;
   const outerSource = device.screens.find(s => s.id === "cover");
   const outerScreen = outerSource ? preciseScreen(outerSource) : undefined;
   const orientedOuter = outerScreen ? orientScreen(outerScreen, turns) : undefined;
@@ -299,7 +297,7 @@ export function DeviceView({ device, rawInsets = {} }: { device: Device; rawInse
     recordPose(value, source);
   };
   const orientationsFor = (target: typeof baseScreen) => {
-    const targetSkin = skins[`${device.slug}/${target.id}`];
+    const targetSkin = skins[target.id];
     const recorded = target.logicalSizeDp ?? (targetSkin ? { width: targetSkin.screen.width, height: targetSkin.screen.height } : null);
     return recorded && recorded.width > recorded.height ? landscapeOrientations : orientations;
   };

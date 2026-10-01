@@ -1,7 +1,9 @@
 import { DeviceView } from "../components/DeviceView";
-import { featuredDevice, SITE_URL } from "../data/devices";
+import { featuredDevice } from "../data/devices";
+import { SITE_URL } from "../data/site";
 import { pageMeta } from "../lib/seo";
 import { deviceRawInsets } from "../data/rawInsets.server";
+import { deviceSkins } from "../data/deviceSkins";
 import type { Route } from "./+types/home";
 
 export function meta(_: Route.MetaArgs) {
@@ -17,10 +19,9 @@ export function meta(_: Route.MetaArgs) {
  * safearea.info does the same with iPhone Duo — instead of a separate
  * list-only summary page. Pick any other device from the sidebar. */
 export function loader() {
-  return { rawInsets: deviceRawInsets(featuredDevice) };
+  return { device: featuredDevice, skins: deviceSkins(featuredDevice), rawInsets: deviceRawInsets(featuredDevice) };
 }
 
-export default function Home({ loaderData }: Route.ComponentProps) {
-  const featured = featuredDevice;
-  return <DeviceView key={featured.slug} device={featured} rawInsets={loaderData.rawInsets} />;
+export default function Home({ loaderData: { device, skins, rawInsets } }: Route.ComponentProps) {
+  return <DeviceView key={device.slug} device={device} skins={skins} rawInsets={rawInsets} />;
 }

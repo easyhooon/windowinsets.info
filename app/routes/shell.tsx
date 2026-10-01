@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { NavLink, Outlet, useLocation, useParams } from "react-router";
-import { devices, featuredDevice, REPO_URL } from "../data/devices";
+import { NavLink, Outlet, useLoaderData, useLocation, useParams } from "react-router";
+import { devices as catalog } from "../data/devices";
+import { summarizeDevice, type DeviceSummary } from "../data/deviceSummary";
+import { FEATURED_SLUG, REPO_URL } from "../data/site";
 import { ResizeHandle } from "../components/ResizeHandle";
 import { Icon } from "../components/Icon";
 import { trackDeviceSelection, trackSupportClick } from "../lib/analytics";
 
-type Device = typeof devices[number];
+type Device = DeviceSummary;
 type Brand = "Galaxy" | "Pixel";
 type Family = "All" | "Z" | "S" | "Tab" | "Note" | "A" | "Fold" | "Phone" | "Tablet";
 const brands: Brand[] = ["Galaxy", "Pixel"];
@@ -19,19 +21,28 @@ const familyOf = (device: Device): Family => device.brand === "Google"
   : device.formFactor === "tablet" ? "Tab"
   : device.series.startsWith("Galaxy Z") ? "Z" : device.series.startsWith("Galaxy Note") ? "Note"
   : device.series === "Galaxy A" ? "A" : "S";
-const measurementCount = (device: Device) => device.screens.reduce((count, screen) =>
-  count + Number(screen.insets.gesture !== null) + Number(screen.insets.threeButton !== null), 0);
-const hasMeasurements = (device: Device) => measurementCount(device) > 0;
+const hasMeasurements = (device: Device) => device.measurementCount > 0;
 const measurementLabel = (device: Device) => {
-  const count = measurementCount(device);
+  const count = device.measurementCount;
   if (!count) return device.brand === "Google" ? "No emulator capture" : "No inset measurements";
-  if (device.brand === "Google") return count === device.screens.length * 2 ? "Emulator insets" : "Some emulator insets";
+  if (device.brand === "Google") return count === device.screenCount * 2 ? "Emulator insets" : "Some emulator insets";
   // Complete measurements are the expected state, so only exceptions get a label.
-  return count === device.screens.length * 2 ? null : "Some insets measured";
+  return count === device.screenCount * 2 ? null : "Some insets measured";
 };
 const deviceCaption = (device: Device) => [device.releaseYear, measurementLabel(device)].filter(Boolean).join(" · ");
 
+/** Runs at prerender: the sidebar gets summaries, and each page loads only its own device. */
+export function loader() {
+  return { devices: catalog.map(summarizeDevice) };
+}
+
+/** The catalog is fixed per build, so client navigation never refetches it. */
+export function shouldRevalidate() {
+  return false;
+}
+
 export default function Shell() {
+  const { devices } = useLoaderData<typeof loader>();
   const [sidebarWidth, setSidebarWidth] = useState(240);
   const [query, setQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -56,7 +67,7 @@ export default function Shell() {
   }, []);
   const location = useLocation();
   const { slug } = useParams();
-  const current = devices.find(d => d.slug === slug) ?? featuredDevice;
+  const current = devices.find(d => d.slug === slug) ?? devices.find(d => d.slug === FEATURED_SLUG)!;
   const [brand, setBrand] = useState<Brand>(() => brandOf(current));
   const [family, setFamily] = useState<Family>(() => familyOf(current));
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(() => new Set([groupOf(current)]));

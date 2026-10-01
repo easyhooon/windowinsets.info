@@ -32,11 +32,11 @@ test('every entry is a real data commit that touched the devices it names', { sk
 });
 
 test('RSS feed escapes text and links measured devices', async () => {
-  const { module: { changelogFeed, changelog } } = await runnerImport('./app/data/changelog.ts', { root: process.cwd() });
+  const { module: { changelogFeed } } = await runnerImport('./app/data/changelog.server.ts', { root: process.cwd() });
   const xml = changelogFeed(5);
   assert.match(xml, /^<\?xml version="1.0" encoding="UTF-8"\?>\n<rss version="2.0"/);
-  assert.equal((xml.match(/<item>/g) ?? []).length, Math.min(5, changelog.length));
-  assert.ok(xml.includes(`<guid isPermaLink="false">${changelog[0].hash}</guid>`));
+  assert.equal((xml.match(/<item>/g) ?? []).length, Math.min(5, entries.length));
+  assert.ok(xml.includes(`<guid isPermaLink="false">${entries[0].hash}</guid>`));
   assert.doesNotMatch(xml.replace(/<[^>]+>/g, ''), /[<>]/);
 });
 
@@ -49,5 +49,18 @@ test('site entries are merged pull requests or direct commits that touched the s
     }
     const files = merged ? git('diff', '--name-only', `${base}...${merged}`) : git('show', '--name-only', '--format=', entry.hash);
     assert.ok(files.split('\n').some(f => /^(app|public)\//.test(f)), entry.hash);
+  }
+});
+
+test('consecutive data entries of one day and kind share a row', async () => {
+  const { module: { changelogRows } } = await runnerImport('./app/data/changelog.ts', { root: process.cwd() });
+  const rows = changelogRows();
+  assert.equal(rows.reduce((sum, row) => sum + (row.commits?.length ?? 1), 0), entries.length);
+  for (const [i, row] of rows.entries()) {
+    const next = rows[i + 1];
+    if (next) assert.ok(!(row.area === 'data' && next.area === 'data' && row.date === next.date && row.kind === next.kind), row.hash);
+    if (!row.commits) continue;
+    assert.equal(row.hash, row.commits[0].hash);
+    assert.deepEqual(row.devices, [...new Set(row.commits.flatMap(c => c.devices))].sort());
   }
 });

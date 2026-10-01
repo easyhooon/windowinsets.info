@@ -1,5 +1,8 @@
 import type { Device } from "../data/types";
 
+/** Analytics reads only catalog fields, so a sidebar summary works as well as full data. */
+type TrackedDevice = Pick<Device, "slug" | "name" | "series" | "formFactor">;
+
 type Parameters = Record<string, string | number | boolean>;
 type Gtag = (...args: unknown[]) => void;
 
@@ -35,7 +38,7 @@ export function initializeAnalytics(measurementId: string | undefined, productio
   ready = true;
 }
 
-function deviceParameters(device: Device): Parameters {
+function deviceParameters(device: TrackedDevice): Parameters {
   return {
     device_slug: device.slug,
     device_name: device.name,
@@ -45,7 +48,7 @@ function deviceParameters(device: Device): Parameters {
 }
 
 /** This means an explicit link activation, including keyboard and new-tab clicks. */
-export function trackDeviceSelection(device: Device) {
+export function trackDeviceSelection(device: TrackedDevice) {
   if (!ready) return;
   window.gtag?.("event", "device_select", {
     ...deviceParameters(device),
@@ -84,7 +87,7 @@ export function trackFoldPoseChange(device: Device, angle: number, controlSource
 }
 
 /** Path-only tracking avoids search text / URL fragments and rerender duplicates. */
-export function trackPageView(pathname: string, device?: Device) {
+export function trackPageView(pathname: string, device?: TrackedDevice) {
   if (!ready || pathname === lastPath) return;
   const pageLocation = `${window.location.origin}${pathname}`;
   const page = {
