@@ -32,11 +32,11 @@ test('every entry is a real data commit that touched the devices it names', { sk
 });
 
 test('RSS feed escapes text and links measured devices', async () => {
-  const { module: { changelogFeed, changelog } } = await runnerImport('./app/data/changelog.ts', { root: process.cwd() });
+  const { module: { changelogFeed } } = await runnerImport('./app/data/changelog.server.ts', { root: process.cwd() });
   const xml = changelogFeed(5);
   assert.match(xml, /^<\?xml version="1.0" encoding="UTF-8"\?>\n<rss version="2.0"/);
-  assert.equal((xml.match(/<item>/g) ?? []).length, Math.min(5, changelog.length));
-  assert.ok(xml.includes(`<guid isPermaLink="false">${changelog[0].hash}</guid>`));
+  assert.equal((xml.match(/<item>/g) ?? []).length, Math.min(5, entries.length));
+  assert.ok(xml.includes(`<guid isPermaLink="false">${entries[0].hash}</guid>`));
   assert.doesNotMatch(xml.replace(/<[^>]+>/g, ''), /[<>]/);
 });
 

@@ -1,6 +1,7 @@
 import { Link } from "react-router";
-import { areaLabel, changelog, CHANGELOG_FEED_PATH, CHANGELOG_PATH, changelogDeviceName, entryUrl } from "../data/changelog";
-import { SITE_URL } from "../data/devices";
+import { areaLabel, changelog, CHANGELOG_FEED_PATH, CHANGELOG_PATH, entryUrl } from "../data/changelog";
+import { changelogDeviceName } from "../data/changelog.server";
+import { SITE_URL } from "../data/site";
 import { pageMeta } from "../lib/seo";
 import type { Route } from "./+types/changelog";
 
@@ -15,7 +16,13 @@ export function meta(_: Route.MetaArgs) {
   ];
 }
 
-export default function Changelog() {
+/** Runs at prerender: device names for the slugs entries mention, without shipping the catalog. */
+export function loader() {
+  const slugs = [...new Set(changelog.flatMap(entry => entry.devices))];
+  return { names: Object.fromEntries(slugs.map(slug => [slug, changelogDeviceName(slug)])) };
+}
+
+export default function Changelog({ loaderData: { names } }: Route.ComponentProps) {
   const days = [...new Set(changelog.map(entry => entry.date))];
   return (
     <article className="mx-auto max-w-2xl p-4 md:p-8">
@@ -39,7 +46,7 @@ export default function Changelog() {
                   {" "}<a href={entryUrl(entry)} className="font-mono text-xs text-muted underline">{entry.pr ? `#${entry.pr}` : entry.hash.slice(0, 7)}</a>
                 </> : <span className="mt-0.5 block text-xs text-muted">
                   {entry.devices.map((slug, i) => {
-                    const name = changelogDeviceName(slug);
+                    const name = names[slug];
                     return <span key={slug}>{i > 0 && ", "}{name ? <Link to={`/${slug}`} className="text-accent underline">{name}</Link> : slug}</span>;
                   })}
                   {" · "}

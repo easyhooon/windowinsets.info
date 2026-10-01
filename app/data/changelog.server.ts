@@ -1,0 +1,39 @@
+import { devices } from "./devices";
+import { areaLabel, changelog, CHANGELOG_FEED_PATH, CHANGELOG_PATH, entryUrl } from "./changelog";
+import { SITE_URL } from "./site";
+
+const nameBySlug = new Map(devices.map(device => [device.slug, device.name]));
+/** Public device name, or null for archived entries that have no page. */
+export const changelogDeviceName = (slug: string) => nameBySlug.get(slug) ?? null;
+
+const escapeXml = (text: string) => text.replace(/[<>&'"]/g, c => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;" })[c]!);
+
+/** RSS 2.0 feed of the latest entries. */
+export function changelogFeed(limit = 50): string {
+  const items = changelog.slice(0, limit).map(entry => {
+    const names = entry.devices.map(slug => changelogDeviceName(slug) ?? slug).join(", ");
+    const link = entry.devices.length === 1 && changelogDeviceName(entry.devices[0]) ? `${SITE_URL}/${entry.devices[0]}` : `${SITE_URL}${CHANGELOG_PATH}`;
+    return `    <item>
+      <title>${escapeXml(entry.summary)}</title>
+      <link>${escapeXml(link)}</link>
+      <guid isPermaLink="false">${entry.hash}</guid>
+      <pubDate>${new Date(`${entry.date}T00:00:00Z`).toUTCString()}</pubDate>
+      <category>${areaLabel(entry)}</category>
+      <description>${escapeXml(`${areaLabel(entry)}${names ? ` · ${names}` : ""}. ${entry.pr ? "Pull request" : "Commit"}: ${entryUrl(entry)}`)}</description>
+    </item>`;
+  }).join("\n");
+  const updated = changelog[0] ? new Date(`${changelog[0].date}T00:00:00Z`).toUTCString() : new Date(0).toUTCString();
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>windowinsets.info changelog</title>
+    <link>${SITE_URL}${CHANGELOG_PATH}</link>
+    <atom:link href="${SITE_URL}${CHANGELOG_FEED_PATH}" rel="self" type="application/rss+xml" />
+    <description>New and corrected Android window inset measurements and site changes.</description>
+    <language>en</language>
+    <lastBuildDate>${updated}</lastBuildDate>
+${items}
+  </channel>
+</rss>
+`;
+}
