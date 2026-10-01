@@ -117,6 +117,25 @@ export const aospSkins: Record<string, DeviceSkin> = {
       "radius": 60
     }
   },
+  "pixel-10a/main": {
+    "image": "/skins/pixel-10a/main/back.webp",
+    "foreground": "/skins/pixel-10a/main/mask.webp",
+    "width": 1218,
+    "height": 2553,
+    "screen": {
+      "x": 65,
+      "y": 64,
+      "width": 1080,
+      "height": 2424
+    },
+    "body": {
+      "x": 1,
+      "y": 1,
+      "width": 1216,
+      "height": 2550,
+      "radius": 208
+    }
+  },
   "pixel-10-pro-xl/main": {
     "image": "/skins/pixel-10-pro-xl/main/back.webp",
     "foreground": "/skins/pixel-10-pro-xl/main/mask.webp",
