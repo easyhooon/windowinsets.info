@@ -251,3 +251,18 @@ html[data-theme="dark"] .theme-toggle>.theme-icon-dark { display:flex; }
 .changelog-kind { display:inline-block; margin-right:8px; padding:0 6px; border-radius:4px; font-size:11px; font-weight:600; line-height:18px; vertical-align:1px; }
 .changelog-kind.added { background:light-dark(#dafbe1,#12361f); color:light-dark(#1a7f37,#56d364); }
 .changelog-kind.corrected { background:light-dark(#fff1e5,#3d2410); color:light-dark(#bc4c00,#f0883e); }
+
+.inset-ranges { width:100%; border-collapse:collapse; font-size:14px; margin-top:4px; }
+.inset-ranges th, .inset-ranges td { border-top:1px solid var(--color-line); padding:6px 0; text-align:left; vertical-align:top; }
+.inset-ranges th { font-weight:500; color:var(--color-fg); width:46%; padding-right:12px; }
+.inset-ranges td { font-variant-numeric:tabular-nums; color:var(--color-fg); }
+.inset-ranges td span { color:var(--color-muted); }
+
+.anatomy-layout { display:flex; flex-direction:column; gap:16px; }
+.anatomy-layout > ul { flex:1; }
+.insets-anatomy { margin:0 auto; width:min(240px, 72%); flex:none; }
+.insets-anatomy svg { width:100%; height:auto; display:block; }
+.insets-anatomy figcaption { margin-top:6px; text-align:center; font-size:12px; color:var(--color-muted); }
+.anatomy-number { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; margin-right:6px; border-radius:50%; background:#1f2328; color:#fff; font-size:11px; font-weight:700; vertical-align:1px; }
+@media (min-width: 768px) { .anatomy-layout { flex-direction:row; align-items:flex-start; } .insets-anatomy { width:220px; margin:0; } }
+.anatomy-layout > ul > li { list-style:none; margin-left:0; }
