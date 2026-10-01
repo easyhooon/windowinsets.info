@@ -13,7 +13,8 @@ export function AnatomyNumber({ n }: { n: number }) {
 
 /** Where each inset type sits on a real device: a measured Galaxy S25 capture on its official skin. */
 export function InsetsAnatomy({ anatomy }: { anatomy: Anatomy }) {
-  const [nav, setNav] = useState<NavMode>("gesture");
+  // 3-button first and by default, matching the device page navigation control.
+  const [nav, setNav] = useState<NavMode>("threeButton");
   const { skin, cutout } = anatomy;
   const px = anatomy.modes[nav];
   const { x: sx, y: sy, width: W, height: H } = skin.screen;
@@ -27,7 +28,7 @@ export function InsetsAnatomy({ anatomy }: { anatomy: Anatomy }) {
   return (
     <figure className="insets-anatomy">
       <div className="segmented anatomy-modes" role="group" aria-label="Navigation">
-        {([["gesture", "Gesture"], ["threeButton", "3-button"]] as const).map(([value, label]) =>
+        {([["threeButton", "3-button"], ["gesture", "Gesture"]] as const).map(([value, label]) =>
           <button key={value} type="button" className="pill-button" aria-pressed={nav === value} onClick={() => setNav(value)}>{label}</button>)}
       </div>
       <svg viewBox={`0 0 ${skin.width} ${skin.height}`} role="img" aria-label={`${anatomy.device}: status bar, navigation bar, display cutout, gesture zones and corner radius`}>
