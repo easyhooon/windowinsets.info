@@ -34,14 +34,17 @@ export default function Changelog() {
               <li key={entry.hash} className="changelog-entry py-2.5 text-[15px] leading-relaxed">
                 <span className={`changelog-kind ${entry.area}`}>{areaLabel(entry)}</span>
                 <span className="text-fg">{entry.summary}</span>
-                <span className="mt-0.5 block text-xs text-muted">
+                {/* Site entries have no device line, so their link trails the summary. */}
+                {entry.devices.length === 0 ? <>
+                  {" "}<a href={entryUrl(entry)} className="font-mono text-xs text-muted underline">{entry.pr ? `#${entry.pr}` : entry.hash.slice(0, 7)}</a>
+                </> : <span className="mt-0.5 block text-xs text-muted">
                   {entry.devices.map((slug, i) => {
                     const name = changelogDeviceName(slug);
                     return <span key={slug}>{i > 0 && ", "}{name ? <Link to={`/${slug}`} className="text-accent underline">{name}</Link> : slug}</span>;
                   })}
-                  {entry.devices.length > 0 && " · "}
-                  <a href={entryUrl(entry)} className="font-mono underline">{entry.pr ? `#${entry.pr}` : entry.hash.slice(0, 7)}</a>
-                </span>
+                  {" · "}
+                  <a href={entryUrl(entry)} className="font-mono underline">{entry.hash.slice(0, 7)}</a>
+                </span>}
               </li>
             ))}
           </ul>
