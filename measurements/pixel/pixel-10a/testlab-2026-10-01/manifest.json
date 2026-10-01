@@ -1,0 +1,26 @@
+{
+  "source": "firebase-test-lab-physical",
+  "projectId": "windowinsets-testlab-2026",
+  "matrixId": "matrix-23sw6o4bhn4ez",
+  "deviceModelId": "stallion",
+  "deviceName": "Pixel 10a",
+  "androidApi": 36,
+  "resultUrl": "https://console.firebase.google.com/project/windowinsets-testlab-2026/testlab/histories/bh.72510f2109b9f626/matrices/5608043083540240382",
+  "resultBucket": "gs://test-lab-3v9v9w8axt44q-ikkzw7d48vpa4/2026-10-01_18:05:25.006256_NTsU/stallion-36-en-portrait/",
+  "probe": {
+    "version": "1.7.0",
+    "apkSha256": "29a5f5ce893940a028cd21ac129eff7b831e8da1e908202a4ae7e7740e51f1a3",
+    "roboScript": "tools/insets-probe/testlab/phone-portrait-launch-only.robo.json"
+  },
+  "note": "Physical device, portrait, existing (gesture) navigation mode, build CP1A.260505.005. The earlier phone-portrait.robo.json run on this model (matrix-2adqpl4s5g8rg) stopped at its first ADB shell step, so this run used the plain-launch Test Lab export with the default phone label. Compare with the API 37 emulator with the OS difference noted; do not replace emulator values.",
+  "files": [
+    {
+      "file": "actions.json",
+      "sha256": "bc3ec80c2d83429ee2f13f5b3aea43377a2ceac6041d774e0db3e983fcb7802d"
+    },
+    {
+      "file": "main-gesture.json",
+      "sha256": "88b44022f96daedc1417922677fd0f27b7c0a059a68b8b094d1f8eb33093c98b"
+    }
+  ]
+}

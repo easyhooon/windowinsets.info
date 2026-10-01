@@ -10,6 +10,11 @@
       "url": "https://support.google.com/pixelphone/answer/16043605?hl=en",
       "retrievedAt": "2026-09-27"
     },
+    "current-2026-10-01": {
+      "label": "Google Pixel phone hardware tech specs",
+      "url": "https://support.google.com/pixelphone/answer/7158570?hl=en",
+      "retrievedAt": "2026-10-01"
+    },
     "tablet": {
       "label": "Google Pixel Tablet hardware tech specs",
       "url": "https://support.google.com/googlepixeltablet/answer/13555146?hl=en",
@@ -27,6 +32,8 @@
     { "slug": "pixel-fold", "name": "Pixel Fold", "profile": "pixel_fold", "series": "Pixel Fold", "formFactor": "foldable-book", "releaseYear": 2023, "spec": "current",
       "chassisMm": { "unfoldedWidth": 158.7, "unfoldedDepth": 5.8, "foldedDepth": 12.1 },
       "screens": { "cover": { "diagonalInch": 5.8, "resolutionPx": [1080, 2092], "ppi": 408 }, "main": { "diagonalInch": 7.6, "resolutionPx": [2208, 1840], "ppi": 380 } } },
+    { "slug": "pixel-10a", "name": "Pixel 10a", "profile": "pixel_10a", "series": "Pixel", "formFactor": "bar", "releaseYear": 2026, "spec": "current-2026-10-01",
+      "screens": { "main": { "diagonalInch": 6.3, "resolutionPx": [1080, 2424], "ppi": 422 } } },
     { "slug": "pixel-10-pro-xl", "name": "Pixel 10 Pro XL", "profile": "pixel_10_pro_xl", "series": "Pixel", "formFactor": "bar", "releaseYear": 2025, "spec": "current",
       "screens": { "main": { "diagonalInch": 6.8, "resolutionPx": [1344, 2992], "ppi": 486 } } },
     { "slug": "pixel-10-pro", "name": "Pixel 10 Pro", "profile": "pixel_10_pro", "series": "Pixel", "formFactor": "bar", "releaseYear": 2025, "spec": "current",

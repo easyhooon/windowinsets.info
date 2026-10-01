@@ -153,8 +153,11 @@ evidence `emulator`). Skin attribution is in
 Registered on 2026-09-27: Pixel 10 Pro Fold, Pixel 9 Pro Fold, Pixel Fold,
 Pixel 10 Pro XL, Pixel 10 Pro, Pixel 10, Pixel 9 Pro XL, Pixel 9 Pro, Pixel 9,
 Pixel 9a, Pixel 8 Pro, Pixel 8, Pixel 8a, Pixel 7 Pro, Pixel 7, Pixel 7a,
-Pixel 6 Pro, Pixel 6, Pixel 6a, Pixel 5, Pixel 4a and Pixel Tablet. No
-in-scope models with SDK emulator skins are pending capture.
+Pixel 6 Pro, Pixel 6, Pixel 6a, Pixel 5, Pixel 4a and Pixel Tablet. Pixel 10a
+was registered on 2026-10-01 from its `pixel_10a` profile and AOSP skin. No
+in-scope models with SDK emulator skins are pending capture. Pixel 11, 11 Pro,
+11 Pro XL and 11 Pro Fold are on the FTL catalog but have no SDK emulator
+profile or AOSP skin yet (checked 2026-10-01), so they stay out of scope.
 `scripts/pixel-devices.json` lists every in-scope model with its Google spec
 source.
 
@@ -171,6 +174,6 @@ provenance separate rather than changing the published emulator values.
 Pixel 5 was checked on 2026-10-01 on its only offered API (30) with
 InsetsProbe 1.7.0, without cutout path or corner radii. Pixel 6 Pro and Pixel
 4a are absent from the FTL physical catalog. [Issue #46](https://github.com/easyhooon/windowinsets.info/issues/46)
-tracks these two models. The spot checks
+tracks these two models. Pixel 10a was spot-checked on 2026-10-01 (API 36). The spot checks
 do not validate both navigation modes, every rotation, or Fold cover states.
 See [the FTL validation log](PIXEL_HARDWARE_VALIDATION.md).

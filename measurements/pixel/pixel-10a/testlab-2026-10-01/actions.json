@@ -1,0 +1,28 @@
+{
+  "events": [{
+    "sourceScreenId": "0",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 1.8639999999999999,
+    "endTimeSeconds": 3.885,
+    "executionResult": "SUCCESS",
+    "launch": {
+    }
+  }, {
+    "sequence": 1,
+    "sourceScreenId": "1",
+    "destinationScreenId": "1",
+    "startTimeSeconds": 4.793,
+    "endTimeSeconds": 12.852,
+    "executionResult": "SUCCESS",
+    "isRoboscriptActive": true,
+    "wait": {
+      "durationSeconds": 8.0
+    }
+  }, {
+    "startTimeSeconds": 12.852,
+    "endTimeSeconds": 12.852,
+    "roboscriptFinished": {
+      "reason": "END_OF_SCRIPT"
+    }
+  }]
+}

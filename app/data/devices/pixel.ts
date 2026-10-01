@@ -3,6 +3,7 @@ import type { Device } from "../types";
 import { pixel10ProFold } from "./pixel-10-pro-fold";
 import { pixel9ProFold } from "./pixel-9-pro-fold";
 import { pixelFold } from "./pixel-fold";
+import { pixel10a } from "./pixel-10a";
 import { pixel10ProXl } from "./pixel-10-pro-xl";
 import { pixel10Pro } from "./pixel-10-pro";
 import { pixel10 } from "./pixel-10";
@@ -23,4 +24,4 @@ import { pixel5 } from "./pixel-5";
 import { pixel4a } from "./pixel-4a";
 import { pixelTablet } from "./pixel-tablet";
 
-export const pixelDevices: Device[] = [pixel10ProFold, pixel9ProFold, pixelFold, pixel10ProXl, pixel10Pro, pixel10, pixel9ProXl, pixel9Pro, pixel9, pixel9a, pixel8Pro, pixel8, pixel8a, pixel7Pro, pixel7, pixel7a, pixel6Pro, pixel6, pixel6a, pixel5, pixel4a, pixelTablet];
+export const pixelDevices: Device[] = [pixel10ProFold, pixel9ProFold, pixelFold, pixel10a, pixel10ProXl, pixel10Pro, pixel10, pixel9ProXl, pixel9Pro, pixel9, pixel9a, pixel8Pro, pixel8, pixel8a, pixel7Pro, pixel7, pixel7a, pixel6Pro, pixel6, pixel6a, pixel5, pixel4a, pixelTablet];
