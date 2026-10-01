@@ -103,6 +103,42 @@ export default function DeveloperGuide({ loaderData }: Route.ComponentProps) {
         </p>
       </Section>
 
+      <Section id="gestures-vs-tappable" title="Gesture zones vs. tappable elements">
+        <p>
+          A device page's <b>Gesture Zones</b> and <b>Tappable</b> layers answer different
+          questions, so they can look alike in one navigation mode and diverge in the other:
+        </p>
+        <ul>
+          <li>
+            <code>systemGestures()</code> (Gesture Zones): where the system may take a swipe
+            for back, home or the notification shade. Keep drag handles, sliders and swipeable
+            rows out of it.
+          </li>
+          <li>
+            <code>mandatorySystemGestures()</code>: the part of those zones apps can never
+            reclaim with <code>setSystemGestureExclusionRects()</code>, such as the home swipe at
+            the bottom.
+          </li>
+          <li>
+            <code>tappableElement()</code> (Tappable): where visible system controls receive
+            taps. Keep buttons and other tap targets out of it.
+          </li>
+        </ul>
+        <p>
+          <b>Gesture navigation:</b> the two differ on almost every captured device.
+          Gesture zones add back-swipe strips on the left and right edges and a band at the
+          bottom, while the tappable inset is zero on the sides and at the bottom (unless a
+          taskbar is shown). A button may sit in the bottom gesture band, but a horizontal
+          slider there competes with the home gesture.
+        </p>
+        <p>
+          <b>3-button navigation:</b> the sides have no back swipe, so both insets usually
+          equal the status bar and the navigation bar. Many Galaxy devices still report a
+          gesture zone at the top that extends past the status bar, where a swipe opens the
+          notification shade.
+        </p>
+      </Section>
+
       <Section id="jetpack-compose" title="Jetpack Compose">
         <p>
           Compose is Android's recommended UI toolkit, so its examples come first. If your app
