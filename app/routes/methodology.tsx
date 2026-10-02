@@ -89,7 +89,7 @@ export default function Methodology({ loaderData: { measured, emulated, total } 
 
       <Section title="3. What InsetsProbe reads">
         <p>
-          <a href={`${REPO_URL}/tree/main/tools/insets-probe`}>InsetsProbe</a> is a small,
+          <a href={`${REPO_URL}/tree/main/tools/insets-probe`} target="_blank" rel="noreferrer">InsetsProbe</a> is a small,
           open-source Android app in this repository. It records:
         </p>
         <ul>
@@ -121,28 +121,28 @@ export default function Methodology({ loaderData: { measured, emulated, total } 
         <p>
           The same probe runs in two collection harnesses. Both feed the same pipeline: raw
           JSON, then validation, then the published device records. The{" "}
-          <a href={`${REPO_URL}/blob/main/docs/MEASUREMENT_HARNESS.md`}>measurement harness overview</a>{" "}
+          <a href={`${REPO_URL}/blob/main/docs/MEASUREMENT_HARNESS.md`} target="_blank" rel="noreferrer">measurement harness overview</a>{" "}
           explains how they fit together.
         </p>
         <ul>
           <li>
             <b>Samsung (real devices):</b> Galaxy units reserved in Samsung Remote Test Lab, or
             owner-supplied devices. Captures run over Remote Debug Bridge with{" "}
-            <a href={`${REPO_URL}/blob/main/scripts/capture-rtl-adb.py`}>capture-rtl-adb.py</a>.
+            <a href={`${REPO_URL}/blob/main/scripts/capture-rtl-adb.py`} target="_blank" rel="noreferrer">capture-rtl-adb.py</a>.
             See the{" "}
-            <a href={`${REPO_URL}/blob/main/.agents/skills/samsung-rtl-insets/SKILL.md`}>Samsung RTL procedure</a>{" "}
+            <a href={`${REPO_URL}/blob/main/.agents/skills/samsung-rtl-insets/SKILL.md`} target="_blank" rel="noreferrer">Samsung RTL procedure</a>{" "}
             and the{" "}
-            <a href={`${REPO_URL}/blob/main/docs/MEASUREMENT_WORKFLOW.md`}>measurement workflow</a>.
+            <a href={`${REPO_URL}/blob/main/docs/MEASUREMENT_WORKFLOW.md`} target="_blank" rel="noreferrer">measurement workflow</a>.
           </li>
           <li>
             <b>Pixel (emulator):</b> Android Emulator AVD profiles captured with{" "}
-            <a href={`${REPO_URL}/blob/main/scripts/capture-emulator.py`}>capture-emulator.py</a>{" "}
+            <a href={`${REPO_URL}/blob/main/scripts/capture-emulator.py`} target="_blank" rel="noreferrer">capture-emulator.py</a>{" "}
             and imported with{" "}
-            <a href={`${REPO_URL}/blob/main/scripts/import-emulator-captures.py`}>import-emulator-captures.py</a>.
+            <a href={`${REPO_URL}/blob/main/scripts/import-emulator-captures.py`} target="_blank" rel="noreferrer">import-emulator-captures.py</a>.
             See the{" "}
-            <a href={`${REPO_URL}/blob/main/.agents/skills/pixel-emulator-insets/SKILL.md`}>Pixel emulator procedure</a>{" "}
+            <a href={`${REPO_URL}/blob/main/.agents/skills/pixel-emulator-insets/SKILL.md`} target="_blank" rel="noreferrer">Pixel emulator procedure</a>{" "}
             and the{" "}
-            <a href={`${REPO_URL}/blob/main/docs/PIXEL_HARDWARE_VALIDATION.md`}>physical Pixel spot checks</a>.
+            <a href={`${REPO_URL}/blob/main/docs/PIXEL_HARDWARE_VALIDATION.md`} target="_blank" rel="noreferrer">physical Pixel spot checks</a>.
             Emulator values stay labelled as emulator evidence and are never mixed with
             real-device captures.
           </li>
@@ -164,7 +164,7 @@ export default function Methodology({ loaderData: { measured, emulated, total } 
             it does not identify each lens or the gap between lenses.
           </p>
           <p>
-            <a href="https://developer.android.com/reference/android/view/DisplayCutout#getCutoutPath()">Android 12+ also exposes a cutout path</a>.
+            <a href="https://developer.android.com/reference/android/view/DisplayCutout#getCutoutPath()" target="_blank" rel="noreferrer">Android 12+ also exposes a cutout path</a>.
             Probe 1.3.0+ saves it when returned, with display coordinates and a 0.25 px
             polyline approximation tolerance, and current raw captures include it. The site
             does not draw or measure the path yet: the diagram and exports use the bounding
@@ -238,7 +238,7 @@ export default function Methodology({ loaderData: { measured, emulated, total } 
             Pixel values come from emulator device profiles. A profile can reuse cutout or
             corner geometry across models, so it may differ from the shipping phone. 19 of 22
             Pixel models were{" "}
-            <a href={`${REPO_URL}/blob/main/docs/PIXEL_HARDWARE_VALIDATION.md`}>spot-checked on physical devices</a>{" "}
+            <a href={`${REPO_URL}/blob/main/docs/PIXEL_HARDWARE_VALIDATION.md`} target="_blank" rel="noreferrer">spot-checked on physical devices</a>{" "}
             in Firebase Test Lab (one screen and navigation mode each, on older Android
             versions). Those results are documented, and published Pixel values stay labelled
             as emulator evidence.
@@ -252,7 +252,7 @@ export default function Methodology({ loaderData: { measured, emulated, total } 
 
       <Section title="7. Found a mistake, or want to add a device?">
         <p>
-          Open an <a href={`${REPO_URL}/issues`}>issue</a> or a pull request with your
+          Open an <a href={`${REPO_URL}/issues`} target="_blank" rel="noreferrer">issue</a> or a pull request with your
           InsetsProbe JSON. A capture that reproduces (or contradicts) an existing one is just
           as valuable as a new device.
         </p>

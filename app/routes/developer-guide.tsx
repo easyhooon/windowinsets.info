@@ -1,6 +1,7 @@
 import { useEffect, type ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { CodeBlock } from "../components/CodeBlock";
+import { FoldStateVideo } from "../components/FoldStateVideo";
 import { insetRanges } from "../data/insetRanges.server";
 import { insetsAnatomy } from "../data/insetsAnatomy.server";
 import { AnatomyNumber, InsetsAnatomy } from "../components/InsetsAnatomy";
@@ -153,7 +154,7 @@ const CONTENT: Record<string, (props: { loaderData: LoaderData }) => ReactNode> 
         </p>
         <p>
           In Compose,{" "}
-          <a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/package-summary#(androidx.compose.foundation.layout.WindowInsets.Companion).safeDrawing()">
+          <a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/package-summary#(androidx.compose.foundation.layout.WindowInsets.Companion).safeDrawing()" target="_blank" rel="noreferrer">
             WindowInsets.safeDrawing
           </a>{" "}
           is the union of <code>systemBars</code>, <code>displayCutout</code> and{" "}
@@ -235,7 +236,7 @@ val startDp = padding.calculateStartPadding(layoutDirection)`}</CodeBlock>
         <h3>With ViewCompat (Jetpack, recommended)</h3>
         <p>
           Use{" "}
-          <a href="https://developer.android.com/reference/androidx/core/view/ViewCompat#setOnApplyWindowInsetsListener(android.view.View,androidx.core.view.OnApplyWindowInsetsListener)">
+          <a href="https://developer.android.com/reference/androidx/core/view/ViewCompat#setOnApplyWindowInsetsListener(android.view.View,androidx.core.view.OnApplyWindowInsetsListener)" target="_blank" rel="noreferrer">
             ViewCompat.setOnApplyWindowInsetsListener
           </a>
           :
@@ -256,7 +257,7 @@ val startDp = padding.calculateStartPadding(layoutDirection)`}</CodeBlock>
         <h3>Direct API access</h3>
         <p>
           On API 29+, use{" "}
-          <a href="https://developer.android.com/reference/android/view/WindowInsets#getInsets(int)">
+          <a href="https://developer.android.com/reference/android/view/WindowInsets#getInsets(int)" target="_blank" rel="noreferrer">
             WindowInsets.getInsets()
           </a>
           . On newer APIs (31+), also check <code>Display.getRoundedCorner()</code>.
@@ -284,11 +285,11 @@ val safe = Insets.of(
       <Section title="How Android reports a fold">
         <p>
           A Galaxy Z Fold or Flip reports its hinge as a{" "}
-          <a href="https://developer.android.com/reference/androidx/window/layout/FoldingFeature">
+          <a href="https://developer.android.com/reference/androidx/window/layout/FoldingFeature" target="_blank" rel="noreferrer">
             FoldingFeature
           </a>
           , one of the display features in{" "}
-          <a href="https://developer.android.com/reference/androidx/window/layout/WindowLayoutInfo">
+          <a href="https://developer.android.com/reference/androidx/window/layout/WindowLayoutInfo" target="_blank" rel="noreferrer">
             WindowLayoutInfo
           </a>{" "}
           from Jetpack WindowManager. It is not a window inset: the fold never changes{" "}
@@ -321,17 +322,30 @@ val safe = Insets.of(
           which is a separate screen with its own insets. On this site, choose <b>Cover</b> or{" "}
           <b>Main</b> on a foldable's page to see each one.
         </p>
+        <p>
+          The recordings below show what each posture reports as the hinge moves through
+          0°, the partly open range and 180°:
+        </p>
+        <div className="fold-state-grid">
+          <FoldStateVideo src="/media/guide/galaxy-z-fold8-hinge.mp4" name="Galaxy Z Fold8" orientation="VERTICAL" />
+          <FoldStateVideo src="/media/guide/galaxy-z-flip8-hinge.mp4" name="Galaxy Z Flip8" orientation="HORIZONTAL" />
+        </div>
+        <p className="text-[13px]">
+          Recorded from this site's 3D renderer with the measured cover and inner displays.
+          The angle where the animation turns from the cover to the inner display is
+          illustrative; real devices switch displays at their own angle.
+        </p>
       </Section>
 
       <Section title="Jetpack Compose">
         <p>
-          <a href="https://developer.android.com/reference/kotlin/androidx/compose/material3/adaptive/package-summary">
+          <a href="https://developer.android.com/reference/kotlin/androidx/compose/material3/adaptive/package-summary" target="_blank" rel="noreferrer">
             Compose Material 3 Adaptive
           </a>{" "}
           (<code>androidx.compose.material3.adaptive:adaptive</code>) provides{" "}
           <code>collectFoldingFeaturesAsState()</code>, which recomposes whenever the fold
           changes. The posture checks below follow Android's{" "}
-          <a href="https://developer.android.com/develop/ui/compose/layouts/adaptive/foldables/make-your-app-fold-aware">
+          <a href="https://developer.android.com/develop/ui/compose/layouts/adaptive/foldables/make-your-app-fold-aware" target="_blank" rel="noreferrer">
             Make your app fold aware
           </a>{" "}
           guide.
@@ -361,7 +375,7 @@ fun FoldAwareScreen() {
       <Section title="Views">
         <p>
           With Views, collect{" "}
-          <a href="https://developer.android.com/reference/androidx/window/layout/WindowInfoTracker">
+          <a href="https://developer.android.com/reference/androidx/window/layout/WindowInfoTracker" target="_blank" rel="noreferrer">
             WindowInfoTracker
           </a>{" "}
           (<code>androidx.window:window</code>) while the activity is started:
@@ -386,7 +400,7 @@ fun FoldAwareScreen() {
       <Section title="Hinge angle">
         <p>
           <code>FoldingFeature</code> does not expose the angle. If you need it, read{" "}
-          <a href="https://developer.android.com/reference/android/hardware/Sensor#TYPE_HINGE_ANGLE">
+          <a href="https://developer.android.com/reference/android/hardware/Sensor#TYPE_HINGE_ANGLE" target="_blank" rel="noreferrer">
             Sensor.TYPE_HINGE_ANGLE
           </a>{" "}
           (API 30+) through <code>SensorManager</code>. Reporting ranges and accuracy vary by
@@ -396,11 +410,11 @@ fun FoldAwareScreen() {
         </p>
         <p>
           For design guidance on cover and inner screens, see Samsung's{" "}
-          <a href="https://developer.samsung.com/one-ui/largescreen-and-foldable/designing_for_foldable.html">
+          <a href="https://developer.samsung.com/one-ui/largescreen-and-foldable/designing_for_foldable.html" target="_blank" rel="noreferrer">
             Designing for foldables
           </a>
           , and for app-level patterns, Android's{" "}
-          <a href="https://developer.android.com/develop/ui/compose/layouts/adaptive/foldables/learn-about-foldables">
+          <a href="https://developer.android.com/develop/ui/compose/layouts/adaptive/foldables/learn-about-foldables" target="_blank" rel="noreferrer">
             Learn about foldables
           </a>
           .
@@ -410,24 +424,111 @@ fun FoldAwareScreen() {
   ),
   patterns: () => (
     <>
-      <Section>
-        <h3>Keeping content off the cutout</h3>
+      <Section title="Edge to edge is the default">
         <p>
-          Apply the <code>displayCutout()</code> inset as padding to your root view. Status bar
-          is usually separate; combine both for full safety.
+          Apps that target Android 15 (SDK 35) draw edge to edge by default, and on Android 15
+          devices <code>LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS</code> is the only cutout mode for
+          non-floating windows. Content can therefore sit under every bar and cutout, so each
+          pattern below decides which inset to respect. Start with Android's{" "}
+          <a href="https://developer.android.com/develop/ui/compose/system/setup-e2e" target="_blank" rel="noreferrer">edge-to-edge setup for Compose</a>{" "}
+          or the{" "}
+          <a href="https://developer.android.com/develop/ui/views/layout/edge-to-edge" target="_blank" rel="noreferrer">Views edge-to-edge guide</a>.
         </p>
+      </Section>
 
-        <h3>Full-screen video or images</h3>
+      <Section title="Keeping content off the cutout">
         <p>
-          Use <code>systemGestures()</code> to avoid covering the back swipe zones, but let
-          content go behind cutouts if you want the full-screen look. Give users a way to peek
-          at the status bar (swipe down).
+          Let backgrounds and images fill the screen, and pad text and controls with{" "}
+          <code>WindowInsets.safeDrawing</code>, which covers the status bar, navigation bar and
+          cutout together. Use <code>displayCutout</code> alone only when the bars are handled
+          elsewhere. Don't hardcode a status bar height: in landscape the cutout moves to a
+          side edge, which a device page shows when you rotate it. See{" "}
+          <a href="https://developer.android.com/develop/ui/compose/system/cutouts" target="_blank" rel="noreferrer">Display cutouts in Compose</a>{" "}
+          and{" "}
+          <a href="https://developer.android.com/develop/ui/views/layout/display-cutout" target="_blank" rel="noreferrer">Support display cutouts</a>{" "}
+          for Views.
         </p>
+      </Section>
 
-        <h3>Custom navigation UI</h3>
+      <Section title="Lists and bottom bars">
         <p>
-          If you draw your own navigation bar instead of using the system one, account for both
-          the navigation bar inset and system gesture zones.
+          A list should scroll behind the navigation bar while its first and last items stay
+          reachable. Pass the insets as content padding instead of padding the list itself.
+          Material components such as <code>TopAppBar</code> and <code>NavigationBar</code>{" "}
+          apply their own insets, and <code>Scaffold</code> hands the rest to your content (see{" "}
+          <a href="https://developer.android.com/develop/ui/compose/system/material-insets" target="_blank" rel="noreferrer">Material insets in Compose</a>
+          ):
+        </p>
+        <CodeBlock title="List content padding inside Scaffold">{`Scaffold { innerPadding ->
+  LazyColumn(
+    // Scaffold does not consume the insets it passes down.
+    modifier = Modifier.consumeWindowInsets(innerPadding),
+    contentPadding = innerPadding,
+  ) {
+    // Items scroll behind the bars; the first and last stay clear of them.
+  }
+}`}</CodeBlock>
+        <p>
+          In Views, apply the bottom inset as the RecyclerView's padding and set{" "}
+          <code>clipToPadding="false"</code> for the same effect.
+        </p>
+      </Section>
+
+      <Section title="Full-screen video or images">
+        <p>
+          Hide the system bars with{" "}
+          <a href="https://developer.android.com/reference/androidx/core/view/WindowInsetsControllerCompat" target="_blank" rel="noreferrer">
+            WindowInsetsControllerCompat
+          </a>{" "}
+          and let users swipe them back temporarily, as described in{" "}
+          <a href="https://developer.android.com/develop/ui/views/layout/immersive" target="_blank" rel="noreferrer">Hide system bars for immersive mode</a>
+          :
+        </p>
+        <CodeBlock title="Immersive mode">{`val controller = WindowCompat.getInsetsController(window, window.decorView)
+controller.systemBarsBehavior =
+  WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+controller.hide(WindowInsetsCompat.Type.systemBars())`}</CodeBlock>
+        <p>
+          Hidden bars report zero insets, but the cutout and gesture zones remain. Keep playback
+          controls inside <code>displayCutout</code> and out of the side gesture zones.
+        </p>
+      </Section>
+
+      <Section title="Swipes near the screen edge">
+        <p>
+          In gesture navigation, a swipe from the left or right edge goes back. A seek bar,
+          carousel or drawing canvas that starts at the edge competes with it. Move it inside
+          the <code>systemGestures</code> inset, or opt a small area out with{" "}
+          <code>Modifier.systemGestureExclusion()</code> in{" "}
+          <a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/package-summary" target="_blank" rel="noreferrer">Compose Foundation</a>{" "}
+          or{" "}
+          <a href="https://developer.android.com/reference/android/view/View#setSystemGestureExclusionRects(java.util.List%3Candroid.graphics.Rect%3E)" target="_blank" rel="noreferrer">
+            View.setSystemGestureExclusionRects()
+          </a>
+          . The system limits how much of an edge can be excluded, and{" "}
+          <code>mandatorySystemGestures</code>, such as the home swipe, can never be excluded. See{" "}
+          <a href="https://developer.android.com/develop/ui/views/touch-and-input/gestures/gesturenav" target="_blank" rel="noreferrer">Gesture navigation</a>{" "}
+          and{" "}
+          <Link to="/developer-guide#gestures-vs-tappable">Gesture zones vs. tappable elements</Link>.
+        </p>
+      </Section>
+
+      <Section title="Custom bottom controls">
+        <p>
+          If you draw your own bottom bar or floating controls, keep tap targets above the{" "}
+          <code>tappableElement</code> inset and drag handles out of <code>systemGestures</code>.
+          The bottom navigation inset is small in gesture mode and much taller with 3-button
+          navigation, so check both modes on a device page before shipping a fixed height.
+        </p>
+      </Section>
+
+      <Section title="The keyboard">
+        <p>
+          The on-screen keyboard is an inset too. Add <code>Modifier.imePadding()</code> to the
+          screen or field container so text inputs stay visible, as shown in{" "}
+          <a href="https://developer.android.com/develop/ui/compose/system/keyboard-animations" target="_blank" rel="noreferrer">Keyboard animations in Compose</a>
+          . <code>safeDrawing</code> already includes the IME, so a container padded with it
+          needs no extra padding.
         </p>
       </Section>
     </>
@@ -495,7 +596,7 @@ fun FoldAwareScreen() {
         <h3>From the command line</h3>
         <p>
           The{" "}
-          <a href="https://www.npmjs.com/package/windowinsets-info">
+          <a href="https://www.npmjs.com/package/windowinsets-info" target="_blank" rel="noreferrer">
             <code>windowinsets-info</code>
           </a>{" "}
           CLI reads the same data with no install (Node.js 18.3 or later):
@@ -517,7 +618,7 @@ fun FoldAwareScreen() {
         </ul>
         <p>
           Unmeasured modes print "not measured yet" and are left out of fixtures; nothing is
-          estimated. AI tools can start from <a href="/llms.txt">/llms.txt</a>.
+          estimated. AI tools can start from <a href="/llms.txt" target="_blank" rel="noreferrer">/llms.txt</a>.
         </p>
       </Section>
     </>
@@ -527,32 +628,32 @@ fun FoldAwareScreen() {
       <Section>
         <ul>
           <li>
-            <a href="https://developer.android.com/develop/ui/views/system-ui/window-insets">
+            <a href="https://developer.android.com/develop/ui/views/system-ui/window-insets" target="_blank" rel="noreferrer">
               Android Developers: System gestures and window insets
             </a>
           </li>
           <li>
-            <a href="https://developer.android.com/reference/androidx/core/view/WindowInsetsCompat">
+            <a href="https://developer.android.com/reference/androidx/core/view/WindowInsetsCompat" target="_blank" rel="noreferrer">
               WindowInsetsCompat (Jetpack Core)
             </a>
           </li>
           <li>
-            <a href="https://developer.android.com/reference/androidx/window/layout/FoldingFeature">
+            <a href="https://developer.android.com/reference/androidx/window/layout/FoldingFeature" target="_blank" rel="noreferrer">
               FoldingFeature (Jetpack Window Manager)
             </a>
           </li>
           <li>
-            <a href="https://developer.android.com/reference/android/view/RoundedCorner">
+            <a href="https://developer.android.com/reference/android/view/RoundedCorner" target="_blank" rel="noreferrer">
               RoundedCorner API (Android 12+)
             </a>
           </li>
           <li>
-            <a href="https://developer.android.com/training/system-ui/edge-to-edge">
+            <a href="https://developer.android.com/training/system-ui/edge-to-edge" target="_blank" rel="noreferrer">
               Edge-to-edge and inset handling
             </a>
           </li>
           <li>
-            <a href="https://developer.samsung.com/one-ui/largescreen-and-foldable/designing_for_foldable.html">
+            <a href="https://developer.samsung.com/one-ui/largescreen-and-foldable/designing_for_foldable.html" target="_blank" rel="noreferrer">
               Samsung: Designing for foldables
             </a>
           </li>
@@ -605,11 +706,11 @@ export default function DeveloperGuide({ loaderData, params }: Route.ComponentPr
       <Section title="Found an issue or want to contribute?">
         <p>
           Open an{" "}
-          <a href={`${REPO_URL}/issues`}>
+          <a href={`${REPO_URL}/issues`} target="_blank" rel="noreferrer">
             issue or pull request on GitHub
           </a>
           . If you have a device and want to add insets data, use{" "}
-          <a href={`${REPO_URL}/tree/main/tools/insets-probe`}>InsetsProbe</a> and share your
+          <a href={`${REPO_URL}/tree/main/tools/insets-probe`} target="_blank" rel="noreferrer">InsetsProbe</a> and share your
           JSON.
         </p>
       </Section>

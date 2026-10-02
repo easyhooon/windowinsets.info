@@ -23,7 +23,7 @@ export const GUIDE_PAGES = [
     slug: "patterns",
     nav: "Patterns",
     title: "Common window inset patterns",
-    description: "Keeping content off the cutout, full-screen media and custom navigation UI.",
+    description: "Edge-to-edge defaults, cutouts, lists under the navigation bar, immersive media, edge swipes, custom bottom controls and the keyboard.",
   },
   {
     slug: "data",
