@@ -262,6 +262,13 @@ html[data-theme="dark"] .theme-toggle>.theme-icon-dark { display:flex; }
 .guide-pager a[rel="next"] { grid-column:2; text-align:right; }
 .guide-pager a span { color:var(--color-muted); font-size:12px; font-weight:400; }
 
+.fold-state-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px; }
+.fold-state { margin:0; border:1px solid var(--color-line); border-radius:8px; overflow:hidden; background:var(--color-surface); }
+.fold-state video { display:block; width:100%; height:auto; aspect-ratio:640 / 612; background:#f6f8fa; }
+.fold-state figcaption { display:flex; flex-direction:column; gap:2px; min-height:84px; padding:8px 10px; border-top:1px solid var(--color-line-muted); font-size:13px; line-height:1.4; }
+.fold-state-angle { color:var(--color-muted); font-size:12px; font-variant-numeric:tabular-nums; }
+.fold-state figcaption b { color:var(--color-fg); }
+
 .inset-ranges { width:100%; border-collapse:collapse; font-size:14px; margin-top:4px; }
 .inset-ranges th, .inset-ranges td { border-top:1px solid var(--color-line); padding:6px 0; text-align:left; vertical-align:top; }
 .inset-ranges th { font-weight:500; color:var(--color-fg); width:46%; padding-right:12px; }
