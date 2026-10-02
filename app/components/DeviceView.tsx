@@ -482,7 +482,7 @@ export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; 
             {safe && <p className="mt-2 text-xs leading-relaxed text-muted">
               With the keyboard hidden, Compose's <code>WindowInsets.safeDrawing</code> and a View's
               {" "}<code>systemBars() or displayCutout()</code> insets resolve to these values.
-              <Link to="/developer-guide" className="mt-2 block whitespace-nowrap text-accent underline">Compose · Views guide →</Link>
+              <Link to="/developer-guide/code" className="mt-2 block whitespace-nowrap text-accent underline">Compose · Views guide →</Link>
             </p>}
 
             {measurement?.cutoutShape && <>
