@@ -228,11 +228,12 @@ test("S23+ landscape uses its own measured insets", async ({ page }) => {
   }
   await expect(page).toHaveScreenshot("galaxy-s23-plus-measured-landscape-left.png", { fullPage: true });
 
+  // Gesture rotation 3 has its own capture since 2026-10-02, so no pending notice remains.
   await chooseDropdown(page, "Navigation", "Gesture");
   await chooseDropdown(page, "Orientation", "Landscape Right");
   await chooseDropdown(page, "Orientation", "Landscape Left");
-  await expect(page.locator(".canvas-footer .pending-notice")).toContainText("insets are not measured yet");
-  await expect(page).toHaveScreenshot("galaxy-s23-plus-pending-landscape-right.png", { fullPage: true });
+  await expect(page.locator(".canvas-footer .pending-notice")).toHaveCount(0);
+  await expect(page).toHaveScreenshot("galaxy-s23-plus-gesture-landscape-left.png", { fullPage: true });
 });
 
 test("Galaxy Tab keeps the upside-down portrait option", async ({ page }) => {
@@ -412,7 +413,7 @@ test("cover cutout bounds distinguish OS geometry from unmeasured lenses", async
   await page.getByRole("link", { name: "Cutout measurement limits →" }).click();
   await expect(page).toHaveURL(/methodology#camera-cutouts$/);
   await expect(page.getByRole("heading", { name: "Camera cutouts: what can be measured" })).toBeVisible();
-  await expect(page.locator("#camera-cutouts")).toContainText("pending a new, verified capture");
+  await expect(page.locator("#camera-cutouts")).toContainText("detailed contour dimensions remain pending");
 });
 
 test("foldables roll the device and lay out upright content in the new orientation", async ({ page }) => {
