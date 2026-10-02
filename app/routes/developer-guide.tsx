@@ -582,7 +582,13 @@ controller.hide(WindowInsetsCompat.Type.systemBars())`}</CodeBlock>
           raw InsetsProbe capture it cites (<code>null</code> when that capture cannot be resolved).
         </p>
         <p>
-          Choose <b>JSON link</b> to open a shareable URL. Scripts can fetch the same data at{" "}
+          Choose <b>Markdown</b> to open the same values as a readable reference at{" "}
+          <code>https://windowinsets.info/&lt;device-slug&gt;.md</code>: one table per screen,
+          rotation and navigation mode, with the raw capture behind each. It is convenient to
+          paste into an issue or give to an AI assistant.
+        </p>
+        <p>
+          Choose <b>JSON</b> to open a shareable URL. Scripts can fetch the same data at{" "}
           <code>https://windowinsets.info/data/&lt;device-slug&gt;.json</code>.
         </p>
         <p>

@@ -133,9 +133,13 @@ projection, so labels stay flat and outside the projected body.
   evidence panel shows the emulator manifest, profile and build and states that
   values were not measured on Pixel hardware. The light Pixel Tablet frame gets
   a subtle outline so its edge stays visible.
-- **Export JSON and JSON link.** Android consumers need exact dp/px, navigation
-  mode, display and provenance outside the visual tool. The actions stay
-  secondary in the Metrics header; the v1 contract is in
+- **Markdown, JSON and Export JSON.** The Markdown action matches safearea.info's
+  per-device `.md` reference (`/<slug>.md`, also advertised with
+  `<link rel="alternate" type="text/markdown">`; every page links `/llms.txt`
+  with `rel="describedby"`). Android consumers also need exact dp/px,
+  navigation mode, display and provenance outside the visual tool, so JSON stays
+  next to it. safearea.info's Markdown actions dropdown is not cloned; the
+  actions stay secondary in the Metrics header, and the JSON v1 contract is in
   [JSON_EXPORT.md](JSON_EXPORT.md).
 - **Aspect Ratio and sw600dp** are owner-requested Android metrics in the
   Dimensions section. Aspect Ratio derives from panel resolution; sw600dp reports

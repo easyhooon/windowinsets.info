@@ -60,7 +60,7 @@ test("sidebar inquiry opens the GitHub issue template chooser", async ({ page },
 
 test("per-device JSON export downloads the complete versioned device payload", async ({ page }) => {
   await page.goto("/galaxy-z-flip8");
-  const link = page.getByRole("link", { name: "JSON link" });
+  const link = page.getByRole("link", { name: "JSON", exact: true });
   await expect(link).toHaveAttribute("href", "/data/galaxy-z-flip8.json");
   const button = page.getByRole("button", { name: "Export JSON" });
   await expect(button).toBeVisible();

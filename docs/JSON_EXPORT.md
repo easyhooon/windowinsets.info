@@ -5,7 +5,7 @@ Every device page exposes an **Export JSON** action. It downloads
 mode currently selected in the UI.
 
 Each public device also has a shareable URL at
-`https://windowinsets.info/data/<slug>.json`. The **JSON link** action opens it
+`https://windowinsets.info/data/<slug>.json`. The **JSON** link opens it
 directly; copy the link address to share it or fetch it from a script:
 
 ```sh
