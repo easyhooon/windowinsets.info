@@ -12,6 +12,12 @@ directly; copy the link address to share it or fetch it from a script:
 curl https://windowinsets.info/data/galaxy-z-flip8.json
 ```
 
+For bulk use, `https://windowinsets.info/data/all.json` holds every device export
+in one `devices` array (schema `device-bundle-v1`), and
+`https://windowinsets.info/data/index.json` lists every device with its
+measurement status. The [`windowinsets-info`](../cli/README.md) CLI reads these
+files, for example `npx windowinsets-info fixtures --series fold`.
+
 Both actions return the same versioned payload. The link follows the current
 published data, so save a copy if a particular measurement revision matters.
 

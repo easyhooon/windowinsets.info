@@ -26,6 +26,19 @@ Apps targeting Android 15 (SDK 35) draw edge to edge by default, and apps target
 
 **"Why not use Remote Test Lab or buy the devices?"** Each RTL session costs credits and minutes per device, screen, rotation and navigation mode. This project has done that work once and published the results for everyone.
 
+## Use the data
+
+[![npm](https://img.shields.io/npm/v/windowinsets-info)](https://www.npmjs.com/package/windowinsets-info)
+
+Look up any device from the terminal, or pull measured values into your tests, with the [`windowinsets-info`](cli/README.md) CLI (Node.js 18.3+):
+
+```sh
+npx windowinsets-info get s26-ultra --nav gesture
+npx windowinsets-info fixtures --series fold > insets.json
+```
+
+The same data is plain JSON: `/data/<slug>.json` per device, `/data/index.json` for the list and `/data/all.json` for everything at once (see [JSON export format](docs/JSON_EXPORT.md)). AI tools can start from [`/llms.txt`](https://windowinsets.info/llms.txt).
+
 ## Documentation
 
 Start with this README for the product, data limits, device priorities and local development. The other documents have narrower purposes:
