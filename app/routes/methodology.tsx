@@ -17,7 +17,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="mt-8">
       <h2 className="text-lg font-semibold">{title}</h2>
-      <div className="mt-2 space-y-3 text-[15px] leading-relaxed text-muted [&_b]:text-fg [&_code]:rounded [&_code]:bg-canvas [&_code]:px-1 [&_code]:font-mono [&_code]:text-[13px] [&_code]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_a]:text-accent [&_a]:underline">
+      <div className="mt-2 space-y-3 text-[15px] leading-relaxed text-muted [&_b]:text-fg [&_code]:rounded [&_code]:bg-canvas [&_code]:px-1 [&_code]:font-mono [&_code]:text-[13px] [&_code]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_a]:text-accent [&_a]:underline [&_h3]:mt-4 [&_h3]:font-medium [&_h3]:text-fg">
         {children}
       </div>
     </section>
@@ -117,6 +117,36 @@ export default function Methodology({ loaderData: { measured, emulated, total } 
           It prints the raw values as JSON. I do not edit these files by hand. You can build
           the app yourself and reproduce any number.
         </p>
+        <h3>How captures are collected</h3>
+        <p>
+          The same probe runs in two collection harnesses. Both feed the same pipeline: raw
+          JSON, then validation, then the published device records. The{" "}
+          <a href={`${REPO_URL}/blob/main/docs/MEASUREMENT_HARNESS.md`}>measurement harness overview</a>{" "}
+          explains how they fit together.
+        </p>
+        <ul>
+          <li>
+            <b>Samsung (real devices):</b> Galaxy units reserved in Samsung Remote Test Lab, or
+            owner-supplied devices. Captures run over Remote Debug Bridge with{" "}
+            <a href={`${REPO_URL}/blob/main/scripts/capture-rtl-adb.py`}>capture-rtl-adb.py</a>.
+            See the{" "}
+            <a href={`${REPO_URL}/blob/main/.agents/skills/samsung-rtl-insets/SKILL.md`}>Samsung RTL procedure</a>{" "}
+            and the{" "}
+            <a href={`${REPO_URL}/blob/main/docs/MEASUREMENT_WORKFLOW.md`}>measurement workflow</a>.
+          </li>
+          <li>
+            <b>Pixel (emulator):</b> Android Emulator AVD profiles captured with{" "}
+            <a href={`${REPO_URL}/blob/main/scripts/capture-emulator.py`}>capture-emulator.py</a>{" "}
+            and imported with{" "}
+            <a href={`${REPO_URL}/blob/main/scripts/import-emulator-captures.py`}>import-emulator-captures.py</a>.
+            See the{" "}
+            <a href={`${REPO_URL}/blob/main/.agents/skills/pixel-emulator-insets/SKILL.md`}>Pixel emulator procedure</a>{" "}
+            and the{" "}
+            <a href={`${REPO_URL}/blob/main/docs/PIXEL_HARDWARE_VALIDATION.md`}>physical Pixel spot checks</a>.
+            Emulator values stay labelled as emulator evidence and are never mixed with
+            real-device captures.
+          </li>
+        </ul>
       </Section>
 
       <div id="camera-cutouts">
@@ -136,9 +166,10 @@ export default function Methodology({ loaderData: { measured, emulated, total } 
           <p>
             <a href="https://developer.android.com/reference/android/view/DisplayCutout#getCutoutPath()">Android 12+ also exposes a cutout path</a>.
             Probe 1.3.0+ saves it when returned, with display coordinates and a 0.25 px
-            polyline approximation tolerance. Published captures do not yet contain this path;
-            detailed contour dimensions remain pending a new, verified capture. A returned
-            path still describes the OS cutout and is not guaranteed to separate physical lenses.
+            polyline approximation tolerance, and current raw captures include it. The site
+            does not draw or measure the path yet: the diagram and exports use the bounding
+            rectangle, and detailed contour dimensions remain pending. A returned path still
+            describes the OS cutout and is not guaranteed to separate physical lenses.
           </p>
           <p>
             A missing path in an older JSON means it was not collected. A null path in a new
@@ -153,8 +184,11 @@ export default function Methodology({ loaderData: { measured, emulated, total } 
         <ul>
           <li>
             A recorded display rotation, app in full screen (no split-screen or pop-up window).
-            Each rotation is its own capture; InsetsProbe turns itself through portrait,
-            landscape and reverse landscape.
+            Each rotation is its own capture: phones and foldables are captured at their
+            natural orientation, rotation 1 and rotation 3, and tablets also in reverse
+            portrait. InsetsProbe turns itself, or the capture script locks each rotation with{" "}
+            <code>cmd window user-rotation lock</code> when a large screen ignores app
+            orientation requests.
           </li>
           <li>
             Default <b>Display size</b>, <b>Font size</b> and, on Samsung, default{" "}
@@ -167,8 +201,8 @@ export default function Methodology({ loaderData: { measured, emulated, total } 
             heights and gesture insets differ between them.
           </li>
           <li>
-            Foldables: cover and main screens are captured separately, and the hinge angle is
-            recorded.
+            Foldables: cover and main screens are captured separately, with the fold state and,
+            when the sensor reports one, the hinge angle.
           </li>
         </ul>
         <p>
@@ -202,8 +236,12 @@ export default function Methodology({ loaderData: { measured, emulated, total } 
           </li>
           <li>
             Pixel values come from emulator device profiles. A profile can reuse cutout or
-            corner geometry across models, so it may differ from the shipping phone until a
-            real-device capture confirms it.
+            corner geometry across models, so it may differ from the shipping phone. 19 of 22
+            Pixel models were{" "}
+            <a href={`${REPO_URL}/blob/main/docs/PIXEL_HARDWARE_VALIDATION.md`}>spot-checked on physical devices</a>{" "}
+            in Firebase Test Lab (one screen and navigation mode each, on older Android
+            versions). Those results are documented, and published Pixel values stay labelled
+            as emulator evidence.
           </li>
           <li>
             Apps can add their own padding or use different window flags, so a real app may
