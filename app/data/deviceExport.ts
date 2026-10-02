@@ -301,6 +301,11 @@ export function deviceExportPath(device: Pick<Device, "slug">): string {
   return `/data/${device.slug}.json`;
 }
 
+/** Per-device Markdown reference, linked like safearea.info's /<device>.md pages. */
+export function deviceMarkdownPath(device: Pick<Device, "slug">): string {
+  return `/${device.slug}.md`;
+}
+
 export function serializeDeviceExport(device: Device, barInsets?: BarInsetsLookup): string {
   return `${JSON.stringify(createDeviceExport(device, barInsets), null, 2)}\n`;
 }

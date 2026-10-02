@@ -23,7 +23,7 @@ export function createLlmsTxt(devices: Device[], siteUrl: string): string {
         device.evidence === "emulator" ? "Android Emulator evidence" : device.evidence === "measured" ? "physical-device capture" : null,
         rotations.length ? `separately captured rotations ${rotations.join(", ")}` : null,
       ].filter(Boolean).join("; ");
-      return `- [${device.name}](${device.page}): ${STATUS_LABEL[device.measurementStatus]}${extra ? ` (${extra})` : ""}. JSON: ${device.export}`;
+      return `- [${device.name}](${device.page}): ${STATUS_LABEL[device.measurementStatus]}${extra ? ` (${extra})` : ""}. Markdown: ${device.page}.md. JSON: ${device.export}`;
     }),
     "",
   ].join("\n"));
@@ -32,7 +32,7 @@ export function createLlmsTxt(devices: Device[], siteUrl: string): string {
 
 > Measured Android WindowInsets, display cutouts, corner radii and foldable states for ${index.deviceCount} Samsung Galaxy and Google Pixel devices. Every published value comes from a raw InsetsProbe capture linked as its source; values that were not captured are null, never estimated.
 
-Use this site to answer questions such as "how tall is the status bar on Galaxy S26 Ultra?" or "what are the Fold7 cover screen's gesture navigation insets?". Prefer the JSON exports below over scraping the HTML pages.
+Use this site to answer questions such as "how tall is the status bar on Galaxy S26 Ultra?" or "what are the Fold7 cover screen's gesture navigation insets?". Prefer each device's Markdown reference (\`<page>.md\`) or JSON export over scraping the HTML pages.
 
 Rules for using the data:
 

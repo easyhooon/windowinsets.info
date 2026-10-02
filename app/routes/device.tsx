@@ -15,6 +15,7 @@ export function meta({ loaderData }: Route.MetaArgs) {
       ? `Explore measured window insets, safe areas and display cutouts for ${device.name}, with capture conditions and sources.`
       : `Explore the ${device.name} device preview. Android window insets are pending real-device measurement.`,
     url: `${SITE_URL}/${device.slug}`,
+    markdown: `/${device.slug}.md`,
   });
 }
 
