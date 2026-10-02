@@ -21,15 +21,34 @@ async function openMetricsIfCollapsed(page: Page) {
 }
 
 async function waitForFoldTransition(page: Page) {
-  const metrics = page.locator(".metrics-panel");
-  await expect(metrics).toHaveAttribute("aria-busy", "true");
-  await expect(metrics).toHaveAttribute("aria-busy", "false", { timeout: 5_000 });
+  // A quick transition can start and finish between polls, so waiting to observe
+  // aria-busy="true" races it. Wait instead until the hinge stops moving and the panel is idle.
+  const read = () => page.evaluate(() => ({
+    angle: document.querySelector<HTMLElement>("[data-displayed-angle]")?.dataset.displayedAngle,
+    busy: document.querySelector(".metrics-panel")?.getAttribute("aria-busy"),
+  }));
+  let previous = await read();
+  await expect.poll(async () => {
+    await page.waitForTimeout(200);
+    const current = await read();
+    const settled = current.busy === "false" && current.angle === previous.angle;
+    previous = current;
+    return settled;
+  }, { timeout: 10_000 }).toBe(true);
 }
 
 async function chooseDropdown(page: Page, label: string, option: string) {
   // Pose and navigation are always-visible buttons; the rest open a menu.
-  if (label !== "Pose" && label !== "Navigation") await page.getByRole("button", { name: new RegExp(`^${label}:`) }).click();
-  await page.getByRole("button", { name: option, exact: true }).click();
+  if (label === "Pose" || label === "Navigation") {
+    await page.getByRole("button", { name: option, exact: true }).click();
+    return;
+  }
+  // A click that lands before hydration does not open the menu; open it again until the option shows.
+  await expect(async () => {
+    const choice = page.getByRole("button", { name: option, exact: true });
+    if (!await choice.isVisible()) await page.getByRole("button", { name: new RegExp(`^${label}:`) }).click();
+    await choice.click({ timeout: 2_000 });
+  }).toPass({ timeout: 20_000 });
 }
 
 async function chooseUnits(page: Page, units: "dp" | "px") {
@@ -269,10 +288,21 @@ test("screen content and measurement numbers stay upright while the frame turns"
     const content = wrap.querySelector("[data-screen-content]")!;
     const badge = wrap.querySelector("[data-ruler-label]")!;
     const rulers = wrap.querySelector("[data-measurement-rulers]")!;
-    for (const animation of document.getAnimations()) {
-      animation.pause();
-      animation.currentTime = 150;
-    }
+    // Pause the turn animations at 150 ms. The zoom/pan fit eases with CSS transitions
+    // that restart from wherever the previous pass was, so jump those to their end:
+    // the screenshot then shows the converged fit at a fixed point of the turn.
+    const frozen = new WeakSet<Animation>();
+    const freeze = () => {
+      for (const animation of document.getAnimations()) {
+        if (animation instanceof CSSTransition) { animation.finish(); continue; }
+        if (frozen.has(animation)) continue;
+        frozen.add(animation);
+        animation.pause();
+        animation.currentTime = 150;
+      }
+    };
+    freeze();
+    (window as typeof window & { freezeTimer?: number }).freezeTimer = window.setInterval(freeze, 16);
     const angle = (element: Element) => {
       const m = new DOMMatrix(getComputedStyle(element).transform);
       return Math.atan2(m.b, m.a) * 180 / Math.PI;
@@ -283,6 +313,8 @@ test("screen content and measurement numbers stay upright while the frame turns"
   expect(Math.abs(angles.frame + angles.content)).toBeLessThan(2);
   expect(Math.abs(angles.frame + angles.badge)).toBeLessThan(2);
   expect(angles.rulersOpacity).toBeLessThan(.1);
+  // Let the fit passes run (and finish) before capturing.
+  await page.waitForTimeout(800);
   await expect(page.locator(".canvas-panel")).toHaveScreenshot("galaxy-s23-plus-mid-turn-upright.png", { animations: "allow" });
 });
 
