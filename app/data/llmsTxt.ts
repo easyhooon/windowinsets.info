@@ -1,6 +1,6 @@
 import type { Device } from "./types";
 import { REPO_URL } from "./site";
-import { createDeviceIndex, DEVICE_EXPORT_SCHEMA, DEVICE_INDEX_PATH, DEVICE_INDEX_SCHEMA } from "./deviceExport";
+import { createDeviceIndex, DEVICE_BUNDLE_PATH, DEVICE_BUNDLE_SCHEMA, DEVICE_EXPORT_SCHEMA, DEVICE_INDEX_PATH, DEVICE_INDEX_SCHEMA } from "./deviceExport";
 
 export const LLMS_TXT_PATH = "/llms.txt";
 
@@ -47,6 +47,8 @@ Rules for using the data:
 
 - [Device index](${siteUrl}${DEVICE_INDEX_PATH}): every device with measurement status, measured modes and rotations, and links to its export. Schema: ${DEVICE_INDEX_SCHEMA}
 - Per-device export: \`${siteUrl}/data/<slug>.json\`. Schema: ${DEVICE_EXPORT_SCHEMA}
+- [All devices in one file](${siteUrl}${DEVICE_BUNDLE_PATH}): every per-device export in a \`devices\` array, for bulk use. Schema: ${DEVICE_BUNDLE_SCHEMA}
+- CLI: \`npx windowinsets-info get <device>\` prints a device's insets; \`npx windowinsets-info fixtures --series fold > insets.json\` writes measured values for tests. See ${REPO_URL}/tree/main/cli
 - [Raw captures on GitHub](${REPO_URL}/tree/main/measurements): immutable InsetsProbe JSON behind every value.
 
 ## Docs

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://windowinsets.info/schemas/device-bundle-v1.schema.json",
+  "title": "windowinsets.info device bundle v1",
+  "description": "Every public device export in one file. Each item is a device-window-insets-v1 export.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schemaVersion", "deviceCount", "devices"],
+  "properties": {
+    "schema": { "const": "https://windowinsets.info/schemas/device-bundle-v1.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "deviceCount": { "type": "integer", "minimum": 0 },
+    "devices": { "type": "array", "items": { "$ref": "https://windowinsets.info/schemas/device-window-insets-v1.schema.json" } }
+  }
+}

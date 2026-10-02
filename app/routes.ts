@@ -12,5 +12,6 @@ export default [
   route("llms.txt", "routes/llms-txt.ts"),
   route("changelog.xml", "routes/changelog-feed.ts"),
   route("data/index.json", "routes/device-index.ts"),
+  route("data/all.json", "routes/device-bundle.ts"),
   route("data/:slug.json", "routes/device-data.ts"),
 ] satisfies RouteConfig;
