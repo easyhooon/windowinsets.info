@@ -36,12 +36,16 @@ const measuredInsets = (mode: "gesture" | "threeButton"): InsetsMeasurement => (
 // Landscape captures (issue #22): separate RTL captures of the same unit, not rotated portrait values.
 const DENSITY = 450 / 160;
 const dp = (px: Insets): Insets => ({ top: px.top / DENSITY, right: px.right / DENSITY, bottom: px.bottom / DENSITY, left: px.left / DENSITY });
-const landscapeSource = (rotation: 1 | 3, mode: "gesture" | "threeButton"): Source => ({
-  kind: "measured",
-  label: `InsetsProbe 1.3.0 on Samsung RTL Galaxy S23+ (SM-S916U), landscape rotation ${rotation} ${mode === "gesture" ? "gesture" : "3-button"}`,
-  url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s23-plus/landscape-${rotation}-${mode}.json`,
-  retrievedAt: "2026-09-27",
-});
+const landscapeSource = (rotation: 1 | 3, mode: "gesture" | "threeButton"): Source => {
+  // Rotation 3 gesture comes from the 2026-10-02 RDB sweep; the rest are the 2026-09-27 captures.
+  const recapture = rotation === 3 && mode === "gesture";
+  return {
+    kind: "measured",
+    label: `InsetsProbe ${recapture ? "1.7.0" : "1.3.0"} on Samsung RTL Galaxy S23+ (SM-S916U), landscape rotation ${rotation} ${mode === "gesture" ? "gesture" : "3-button"}`,
+    url: `https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-s/galaxy-s23-plus/${recapture ? "recapture-2026-10-02-rotation/" : ""}landscape-${rotation}-${mode}.json`,
+    retrievedAt: recapture ? "2026-10-02" : "2026-09-27",
+  };
+};
 const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton", systemBarsPx: Insets): InsetsMeasurement => {
   // Rotation 1: cutout on the left edge; rotation 3: on the right edge.
   const displayCutoutPx = rotation === 1 ? { top: 0, right: 0, bottom: 0, left: 74 } : { top: 0, right: 74, bottom: 0, left: 0 };
@@ -59,7 +63,7 @@ const landscapeInsets = (rotation: 1 | 3, mode: "gesture" | "threeButton", syste
     condition: {
       oneUi: "8.0",
       android: "16",
-      note: `Samsung RTL, SM-S916U, build BP2A.250605.031.A3.S916USQS6EYK3. Landscape rotation ${rotation}, 2340×1080 px full-screen capture, 450 dpi, font scale 1. The status bar is 84 px here versus 74 px in portrait.`,
+      note: `Samsung RTL, SM-S916U${rotation === 3 && mode === "gesture" ? " (USA/TX unit US01, captured over Remote Debug Bridge; the same sweep's other five files reproduce the accepted captures exactly)" : ""}, build BP2A.250605.031.A3.S916USQS6EYK3. Landscape rotation ${rotation}, 2340×1080 px full-screen capture, 450 dpi, font scale 1. The status bar is 84 px here versus 74 px in portrait.`,
     },
     sources: [landscapeSource(rotation, mode)],
   };
@@ -92,9 +96,8 @@ export const galaxyS23Plus: Device = {
         gesture: landscapeInsets(1, "gesture", { top: 84, right: 0, bottom: 42, left: 0 }),
         threeButton: landscapeInsets(1, "threeButton", { top: 84, right: 135, bottom: 0, left: 0 }),
       } },
-      // Rotation 3 gesture has not been captured.
       3: { ...landscapeSize, insets: {
-        gesture: null,
+        gesture: landscapeInsets(3, "gesture", { top: 84, right: 0, bottom: 42, left: 0 }),
         threeButton: landscapeInsets(3, "threeButton", { top: 84, right: 0, bottom: 0, left: 135 }),
       } },
     },

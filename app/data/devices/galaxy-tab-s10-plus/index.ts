@@ -33,11 +33,13 @@ const measuredInsets = (mode: "gesture" | "threeButton"): InsetsMeasurement => (
 });
 
 const rotationBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab/galaxy-tab-s10-plus/recapture-2026-09-29-rotation";
+const gestureRotationBase = "https://github.com/easyhooon/windowinsets.info/blob/main/measurements/galaxy-tab/galaxy-tab-s10-plus/recapture-2026-10-02-rotation";
 
 const rotationFiles = { 0: "main", 2: "portrait-2", 3: "landscape-3" } as const;
 
-// Only 3-button rotations were captured before the RTL session stopped accepting input; gesture stays pending.
-// The unit ran build X820XXU1AXI9, but its rotation 1 file reproduces the accepted AYB3 capture exactly.
+// 3-button comes from the 2026-09-29 RU1 sweep. The unit ran build X820XXU1AXI9, but its rotation 1 file
+// reproduces the accepted AYB3 capture exactly. Gesture comes from the 2026-10-02 IN1 sweep on AYB3, whose
+// 3-button files reproduce RU1 and whose rotation 1 files reproduce both accepted captures exactly.
 const rotationCapture = (rotation: 0 | 2 | 3) => {
   const portrait = rotation !== 3;
   const sizePx = portrait ? { width: 1752, height: 2800 } : { width: 2800, height: 1752 };
@@ -59,7 +61,24 @@ const rotationCapture = (rotation: 0 | 2 | 3) => {
       retrievedAt: "2026-09-29",
     }],
   };
-  return { logicalSizePx: sizePx, logicalSizeDp: sizeDp, insets: { gesture: null, threeButton } };
+  const gesture: InsetsMeasurement = {
+    systemBars: { top: 24, right: 0, bottom: 64, left: 0 },
+    systemBarsPx: { top: 48, right: 0, bottom: 128, left: 0 },
+    displayCutout: { top: 0, right: 0, bottom: 0, left: 0 },
+    displayCutoutPx: { top: 0, right: 0, bottom: 0, left: 0 },
+    condition: {
+      oneUi: "6.1.1",
+      android: "14",
+      note: `Samsung RTL India/Noida, SM-X820-IN1, build UP1A.231005.007.X820XXS2AYB3, captured over Remote Debug Bridge. Separate rotation ${rotation} capture at ${sizePx.width}×${sizePx.height} px, 320 dpi and font scale 1. Gesture mode is confirmed by Settings secure navigation mode 2, config_navBarInteractionMode=2 and left/right system-gesture insets 60/60 px. The 128 px bottom inset matches the accepted gesture capture's persistent tablet taskbar.`,
+    },
+    sources: [{
+      kind: "measured",
+      label: `InsetsProbe 1.7.0 on Samsung RTL Galaxy Tab S10+, rotation ${rotation}, gesture`,
+      url: `${gestureRotationBase}/${rotationFiles[rotation]}-gesture.json`,
+      retrievedAt: "2026-10-02",
+    }],
+  };
+  return { logicalSizePx: sizePx, logicalSizeDp: sizeDp, insets: { gesture, threeButton } };
 };
 
 export const galaxyTabS10Plus: Device = {

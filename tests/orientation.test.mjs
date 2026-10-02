@@ -43,8 +43,8 @@ import { galaxyS23Plus } from '../app/data/devices/galaxy-s23-plus/index.ts';
 
 test('S23+ landscape rotations come from their own raw captures', () => {
   const screen = galaxyS23Plus.screens[0];
-  for (const [rotation, mode] of [[1, 'gesture'], [1, 'threeButton'], [3, 'threeButton']]) {
-    const raw = JSON.parse(readFileSync(`measurements/galaxy-s/galaxy-s23-plus/landscape-${rotation}-${mode}.json`, 'utf8'));
+  for (const [rotation, mode, dir] of [[1, 'gesture', ''], [1, 'threeButton', ''], [3, 'threeButton', ''], [3, 'gesture', 'recapture-2026-10-02-rotation/']]) {
+    const raw = JSON.parse(readFileSync(`measurements/galaxy-s/galaxy-s23-plus/${dir}landscape-${rotation}-${mode}.json`, 'utf8'));
     assert.equal(raw.display.rotation, rotation);
     assert.equal(raw.navigation.mode, mode);
     const turned = orientScreen(screen, rotation);
@@ -57,5 +57,4 @@ test('S23+ landscape rotations come from their own raw captures', () => {
       [rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top]);
     assert.deepEqual(turned.logicalSizePx, { width: raw.display.widthPx, height: raw.display.heightPx });
   }
-  assert.equal(orientScreen(screen, 3).insets.gesture, null, 'rotation 3 gesture was not captured');
 });
