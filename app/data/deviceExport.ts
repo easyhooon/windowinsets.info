@@ -389,3 +389,23 @@ export function createDeviceIndex(devices: Device[], siteUrl: string): PublicDev
     }),
   };
 }
+
+export const DEVICE_BUNDLE_SCHEMA = "https://windowinsets.info/schemas/device-bundle-v1.schema.json";
+export const DEVICE_BUNDLE_PATH = "/data/all.json";
+
+export interface PublicDeviceBundle {
+  schema: typeof DEVICE_BUNDLE_SCHEMA;
+  schemaVersion: 1;
+  deviceCount: number;
+  devices: PublicDeviceExport[];
+}
+
+/** Every device export in one file, for bulk use (tests, CLI) without one request per device. */
+export function createDeviceBundle(devices: Device[], barInsets?: BarInsetsLookup): PublicDeviceBundle {
+  return {
+    schema: DEVICE_BUNDLE_SCHEMA,
+    schemaVersion: 1,
+    deviceCount: devices.length,
+    devices: devices.map(device => createDeviceExport(device, barInsets)),
+  };
+}

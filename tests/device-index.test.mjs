@@ -42,3 +42,18 @@ test('measurement status and rotations come only from captures', async () => {
     if (device.brand === 'Google' && measured) assert.equal(entry.evidence, 'emulator', entry.slug);
   }
 });
+
+test('device bundle carries every public device export and validates against its schema', async () => {
+  const { devices } = await load();
+  const { module: { rawInsets } } = await runnerImport('./app/data/rawInsets.server.ts', { root: process.cwd() });
+  const { createDeviceBundle, createDeviceExport, DEVICE_BUNDLE_SCHEMA } = await import('../app/data/deviceExport.ts');
+  const bundle = JSON.parse(JSON.stringify(createDeviceBundle(devices, rawInsets)));
+  const schema = JSON.parse(readFileSync('public/schemas/device-bundle-v1.schema.json', 'utf8'));
+  const ajv = new Ajv2020({ strict: false, validateFormats: false });
+  ajv.addSchema(JSON.parse(readFileSync('public/schemas/device-window-insets-v1.schema.json', 'utf8')));
+  const validate = ajv.compile(schema);
+  assert.equal(validate(bundle), true, JSON.stringify(validate.errors?.slice(0, 3)));
+  assert.equal(schema.$id, DEVICE_BUNDLE_SCHEMA);
+  assert.equal(bundle.deviceCount, devices.length);
+  assert.deepEqual(bundle.devices[0], JSON.parse(JSON.stringify(createDeviceExport(devices[0], rawInsets))));
+});
