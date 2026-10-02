@@ -16,8 +16,8 @@ export const GUIDE_PAGES = [
   {
     slug: "foldables",
     nav: "Foldables",
-    title: "Foldables: detecting the hinge",
-    description: "Detecting fold state and hinge bounds with Jetpack WindowManager.",
+    title: "Foldables: detecting the fold",
+    description: "Reading FoldingFeature state, orientation and bounds in Compose and Views, tabletop and book postures, and the hinge angle sensor.",
   },
   {
     slug: "patterns",
@@ -32,9 +32,9 @@ export const GUIDE_PAGES = [
     description: "Shareable view URLs, JSON exports, the device index and bundle, and the windowinsets-info CLI.",
   },
   {
-    slug: "resources",
-    nav: "Resources",
-    title: "Official documentation & resources",
+    slug: "references",
+    nav: "References",
+    title: "Official references",
     description: "Android and Samsung documentation on window insets, edge-to-edge and foldables.",
   },
 ] as const;
