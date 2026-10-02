@@ -143,14 +143,16 @@ export default function Shell() {
           {!filtered.length && <p className="p-3 text-sm text-muted">No devices found.</p>}
         </nav>
         <nav className="sidebar-footer">
-          <NavLink to="/developer-guide" onClick={() => setMobileOpen(false)}>Developer guide</NavLink>
-          <NavLink to="/methodology" onClick={() => setMobileOpen(false)}>How I measure</NavLink>
-          <NavLink to="/changelog" onClick={() => setMobileOpen(false)}>Changelog</NavLink>
-          <a href={`${REPO_URL}/issues/new/choose`} target="_blank" rel="noreferrer" aria-label="Send feedback or report an issue on GitHub (opens in a new tab)">Send feedback ↗</a>
-          <p className="sidebar-footer-support">
+          <div className="sidebar-footer-row">
+            <NavLink to="/developer-guide" onClick={() => setMobileOpen(false)}>Developer guide</NavLink>
+            <NavLink to="/methodology" onClick={() => setMobileOpen(false)}>How I measure</NavLink>
+            <NavLink to="/changelog" onClick={() => setMobileOpen(false)}>Changelog</NavLink>
+            <a href={`${REPO_URL}/issues/new/choose`} target="_blank" rel="noreferrer" aria-label="Send feedback or report an issue on GitHub (opens in a new tab)">Send feedback ↗</a>
+          </div>
+          <p className="sidebar-footer-row">
             <span>Found this useful?</span>
-            <a href={REPO_URL} target="_blank" rel="noreferrer" aria-label="Star windowinsets.info on GitHub (opens in a new tab)">★ Star it on GitHub</a>
-            <a href="https://ko-fi.com/easyhooon" target="_blank" rel="noopener noreferrer" onClick={trackSupportClick} onAuxClick={e => { if (e.button === 1) trackSupportClick(); }} aria-label="Support windowinsets.info on Ko-fi (opens in a new tab)">☕ Support on Ko-fi ↗</a>
+            <a href={REPO_URL} target="_blank" rel="noreferrer" aria-label="Star windowinsets.info on GitHub (opens in a new tab)">★ Star on GitHub</a>
+            <a href="https://ko-fi.com/easyhooon" target="_blank" rel="noopener noreferrer" onClick={trackSupportClick} onAuxClick={e => { if (e.button === 1) trackSupportClick(); }} aria-label="Support windowinsets.info on Ko-fi (opens in a new tab)">☕ Ko-fi ↗</a>
           </p>
           <a href="https://safearea.info" target="_blank" rel="noreferrer">Inspired by safearea.info ↗</a>
         </nav>

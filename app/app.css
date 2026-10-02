@@ -88,8 +88,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .device-thumbnail.foldable-book { width:23px; height:28px; background:linear-gradient(90deg,#789fad 48%,#344b5a 50%,#9bd4e4 53%,#5b91b4); }
 .device-thumbnail.foldable-trifold { width:30px; height:24px; background:linear-gradient(90deg,#789fad 31%,#344b5a 33%,#9bd4e4 35%,#9bd4e4 64%,#344b5a 66%,#5b91b4 68%); }
 .device-thumbnail.foldable-flip { background:linear-gradient(#bfb4ce 48%,#736980 50%,#c6b6d3 53%); }
-.sidebar-footer { padding:12px 8px; border-top:1px solid var(--color-line); display:grid; gap:7px; color:var(--color-muted); font-size:11px; }
-.sidebar-footer-support { display:grid; gap:3px; margin:0; line-height:1.4; }
+/* Inline, wrapping rows keep the footer short so the device list keeps its height. */
+.sidebar-footer { padding:10px 8px; border-top:1px solid var(--color-line); display:grid; gap:6px; color:var(--color-muted); font-size:11px; line-height:1.4; }
+.sidebar-footer-row { display:flex; flex-wrap:wrap; gap:2px 12px; margin:0; }
+.sidebar-footer-row>span { flex-basis:100%; }
 .workspace { min-width:0; flex:1; overflow:auto; }
 .device-workspace { height:100%; min-height:0; display:grid; grid-template-columns:auto 11px minmax(0,1fr); position:relative; background:var(--color-workspace); background-image:radial-gradient(var(--color-grid) .8px,transparent .8px); background-size:10px 10px; }
 .metrics-panel { width:292px; flex-shrink:0; margin:16px 0 16px 16px; background:light-dark(#ffffffee,#0d1117ee); border:1px solid var(--color-line); border-radius:9px; box-shadow:var(--shadow-card); overflow:auto; }
