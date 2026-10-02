@@ -145,7 +145,7 @@ fill them.
 | Galaxy A54 5G | SM-A546B | Main: natural, rotation 1 and 3 in both modes | None |
 | Galaxy Z Fold7 | SM-F966U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold7/recapture-2026-09-27-rotation/`) | None |
 | Galaxy Z Fold8 Ultra | SM-F976U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold8-ultra/recapture-2026-09-27-rotation/`) | None |
-| Galaxy S23+ | SM-S916U | Main: 3-button rotation 1 and 3; gesture rotation 1 (pilot, captured by hand rotation) | Main gesture rotation 3 |
+| Galaxy S23+ | SM-S916U | Main: natural, rotation 1 and 3 in both modes (2026-09-27 pilot files in `measurements/galaxy-s/galaxy-s23-plus/`; gesture rotation 3 from `recapture-2026-10-02-rotation/`, whose other five files reproduce the pilot) | None |
 | Galaxy Z Fold8 | SM-F971N | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold8/recapture-2026-09-27-rotation/`) | None |
 | Galaxy Z Fold6 | SM-F956U | Cover and inner: natural, rotation 1 and 3 in both modes (`measurements/galaxy-fold/galaxy-z-fold6/recapture-2026-09-27-rotation/`) | None |
 | Galaxy S26 Ultra | SM-S948U | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-s/galaxy-s26-ultra/recapture-2026-09-27-rotation/`) | None |
@@ -190,7 +190,7 @@ fill them.
 | Galaxy A55 5G | SM-A556S | Main: natural, rotation 1 and 3 in both modes (`measurements/galaxy-a/galaxy-a55-5g/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S11 Ultra | SM-X930 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s11-ultra/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S10 Ultra | SM-X920 | Main: rotation 1 in both modes (accepted). All four rotations in 3-button (`measurements/galaxy-tab/galaxy-tab-s10-ultra/recapture-2026-09-29-rotation/`, rotation 2 in `recapture-2026-09-29-rotation-in2/`) and in gesture (`recapture-2026-09-29-rotation-vn1/`) | None |
-| Galaxy Tab S10+ | SM-X820 | Main: rotation 1 in both modes (accepted). All four rotations in 3-button (`measurements/galaxy-tab/galaxy-tab-s10-plus/recapture-2026-09-29-rotation/`) | Rotations 0, 2 and 3 in gesture |
+| Galaxy Tab S10+ | SM-X820 | Main: rotation 1 in both modes (accepted). All four rotations in 3-button (`measurements/galaxy-tab/galaxy-tab-s10-plus/recapture-2026-09-29-rotation/`) and in gesture (`recapture-2026-10-02-rotation/`, SM-X820-IN1) | None |
 | Galaxy Tab S10 FE+ | SM-X620 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s10-fe-plus/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S10 FE | SM-X520 | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s10-fe/recapture-2026-09-29-rotation/`) | None |
 | Galaxy Tab S10 Lite | SM-X406B | Main: rotations 0, 1, 2 and 3 in both modes (`measurements/galaxy-tab/galaxy-tab-s10-lite/recapture-2026-09-30-rotation/`) | None |
