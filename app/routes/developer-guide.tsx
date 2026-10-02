@@ -1,26 +1,30 @@
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import { CodeBlock } from "../components/CodeBlock";
 import { insetRanges } from "../data/insetRanges.server";
 import { insetsAnatomy } from "../data/insetsAnatomy.server";
 import { AnatomyNumber, InsetsAnatomy } from "../components/InsetsAnatomy";
 import { REPO_URL, SITE_URL } from "../data/site";
+import { GUIDE_PAGES, guidePath, MOVED_GUIDE_ANCHORS } from "../data/guidePages";
 import { pageMeta } from "../lib/seo";
 import type { Route } from "./+types/developer-guide";
 
-export function meta(_: Route.MetaArgs) {
+const findPage = (topic: string | undefined) => GUIDE_PAGES.find(page => page.slug === (topic ?? ""));
+
+export function meta({ params }: Route.MetaArgs) {
+  const page = findPage(params.topic) ?? GUIDE_PAGES[0];
   return pageMeta({
-    title: "How to use window insets in your app | windowinsets.info",
-    description:
-      "Reading and using window insets, display cutouts, and corner radii in Android apps. Code examples, official docs, and best practices.",
-    url: `${SITE_URL}/developer-guide`,
+    title: `${page.title} | windowinsets.info`,
+    description: page.description,
+    url: `${SITE_URL}${guidePath(page.slug)}`,
   });
 }
 
-function Section({ id, title, children }: { id?: string; title: string; children: ReactNode }) {
+function Section({ id, title, children }: { id?: string; title?: string; children: ReactNode }) {
   return (
     <section id={id} className="mt-8 scroll-mt-4">
-      <h2 className="text-lg font-semibold">{title}</h2>
-      <div className="mt-2 space-y-3 text-[15px] leading-relaxed text-muted [&_b]:text-fg [&_code:not(.hljs)]:rounded [&_code:not(.hljs)]:bg-canvas [&_code:not(.hljs)]:px-1.5 [&_code:not(.hljs)]:font-mono [&_code:not(.hljs)]:text-[13px] [&_code:not(.hljs)]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_a]:text-accent [&_a]:underline [&_h3]:mt-4 [&_h3]:font-medium [&_h3]:text-fg">
+      {title && <h2 className="text-lg font-semibold">{title}</h2>}
+      <div className={`${title ? "mt-2" : "mt-6"} space-y-3 text-[15px] leading-relaxed text-muted [&_b]:text-fg [&_code:not(.hljs)]:rounded [&_code:not(.hljs)]:bg-canvas [&_code:not(.hljs)]:px-1.5 [&_code:not(.hljs)]:font-mono [&_code:not(.hljs)]:text-[13px] [&_code:not(.hljs)]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_a]:text-accent [&_a]:underline [&_h3]:mt-4 [&_h3]:font-medium [&_h3]:text-fg`}>
         {children}
       </div>
     </section>
@@ -28,19 +32,18 @@ function Section({ id, title, children }: { id?: string; title: string; children
 }
 
 /** Runs at prerender: measured spread across Galaxy devices, from the cited raw captures. */
-export function loader() {
-  return { ranges: insetRanges(), anatomy: insetsAnatomy() };
+export function loader({ params }: Route.LoaderArgs) {
+  const page = findPage(params.topic);
+  if (!page) throw new Response("Not Found", { status: 404 });
+  return page.slug === "" ? { ranges: insetRanges(), anatomy: insetsAnatomy() } : { ranges: [], anatomy: null };
 }
 
-export default function DeveloperGuide({ loaderData }: Route.ComponentProps) {
-  return (
-    <article className="mx-auto max-w-2xl p-4 md:p-8">
-      <h1 className="text-2xl font-semibold">How to handle window insets in your app</h1>
-      <p className="mt-2 text-muted">
-        windowinsets.info shows you the insets on each device. This guide tells you what they
-        mean and how to use them in code.
-      </p>
 
+type LoaderData = Route.ComponentProps["loaderData"];
+
+const CONTENT: Record<string, (props: { loaderData: LoaderData }) => ReactNode> = {
+  "": ({ loaderData }) => (
+    <>
       <Section title="What are window insets?">
         <p>
           Window insets describe how much screen space is reserved by the system and cannot be
@@ -98,7 +101,8 @@ export default function DeveloperGuide({ loaderData }: Route.ComponentProps) {
         <p>
           The status bar varies most: a layout padded by a hardcoded value is either cut off or
           leaves a gap. Read the insets at runtime with <code>WindowInsets</code> (Compose) or{" "}
-          <code>WindowInsetsCompat</code> (Views) as shown below. Flip and TriFold cover screens
+          <code>WindowInsetsCompat</code> (Views) as shown in the{" "}
+          <Link to="/developer-guide/code">Compose and Views guide</Link>. Flip and TriFold cover screens
           use different system UI and are not mixed into these ranges.
         </p>
       </Section>
@@ -138,7 +142,10 @@ export default function DeveloperGuide({ loaderData }: Route.ComponentProps) {
           notification shade.
         </p>
       </Section>
-
+    </>
+  ),
+  code: () => (
+    <>
       <Section id="jetpack-compose" title="Jetpack Compose">
         <p>
           Compose is Android's recommended UI toolkit, so its examples come first. If your app
@@ -270,8 +277,11 @@ val safe = Insets.of(
   max(systemBars.bottom, cutout.bottom)
 )`}</CodeBlock>
       </Section>
-
-      <Section title="Foldables: detecting the hinge">
+    </>
+  ),
+  foldables: () => (
+    <>
+      <Section>
         <p>
           On foldable devices, use{" "}
           <a href="https://developer.android.com/reference/androidx/window/layout/FoldingFeature">
@@ -291,43 +301,11 @@ hinges.forEach { hinge ->
   // hinge.bounds: pixel coordinates of the fold
 }`}</CodeBlock>
       </Section>
-
-      <Section title="Official documentation & resources">
-        <ul>
-          <li>
-            <a href="https://developer.android.com/develop/ui/views/system-ui/window-insets">
-              Android Developers: System gestures and window insets
-            </a>
-          </li>
-          <li>
-            <a href="https://developer.android.com/reference/androidx/core/view/WindowInsetsCompat">
-              WindowInsetsCompat (Jetpack Core)
-            </a>
-          </li>
-          <li>
-            <a href="https://developer.android.com/reference/androidx/window/layout/FoldingFeature">
-              FoldingFeature (Jetpack Window Manager)
-            </a>
-          </li>
-          <li>
-            <a href="https://developer.android.com/reference/android/view/RoundedCorner">
-              RoundedCorner API (Android 12+)
-            </a>
-          </li>
-          <li>
-            <a href="https://developer.android.com/training/system-ui/edge-to-edge">
-              Edge-to-edge and inset handling
-            </a>
-          </li>
-          <li>
-            <a href="https://developer.samsung.com/one-ui/largescreen-and-foldable/designing_for_foldable.html">
-              Samsung: Designing for foldables
-            </a>
-          </li>
-        </ul>
-      </Section>
-
-      <Section title="Common patterns">
+    </>
+  ),
+  patterns: () => (
+    <>
+      <Section>
         <h3>Keeping content off the cutout</h3>
         <p>
           Apply the <code>displayCutout()</code> inset as padding to your root view. Status bar
@@ -347,8 +325,11 @@ hinges.forEach { hinge ->
           the navigation bar inset and system gesture zones.
         </p>
       </Section>
-
-      <Section title="Using windowinsets.info in your code">
+    </>
+  ),
+  data: () => (
+    <>
+      <Section>
         <p>
           This site's <b>measured</b> values (from real devices or Samsung RTL) show what Android
           actually returns on that model and OS version. Use them to:
@@ -434,6 +415,87 @@ hinges.forEach { hinge ->
           estimated. AI tools can start from <a href="/llms.txt">/llms.txt</a>.
         </p>
       </Section>
+    </>
+  ),
+  resources: () => (
+    <>
+      <Section>
+        <ul>
+          <li>
+            <a href="https://developer.android.com/develop/ui/views/system-ui/window-insets">
+              Android Developers: System gestures and window insets
+            </a>
+          </li>
+          <li>
+            <a href="https://developer.android.com/reference/androidx/core/view/WindowInsetsCompat">
+              WindowInsetsCompat (Jetpack Core)
+            </a>
+          </li>
+          <li>
+            <a href="https://developer.android.com/reference/androidx/window/layout/FoldingFeature">
+              FoldingFeature (Jetpack Window Manager)
+            </a>
+          </li>
+          <li>
+            <a href="https://developer.android.com/reference/android/view/RoundedCorner">
+              RoundedCorner API (Android 12+)
+            </a>
+          </li>
+          <li>
+            <a href="https://developer.android.com/training/system-ui/edge-to-edge">
+              Edge-to-edge and inset handling
+            </a>
+          </li>
+          <li>
+            <a href="https://developer.samsung.com/one-ui/largescreen-and-foldable/designing_for_foldable.html">
+              Samsung: Designing for foldables
+            </a>
+          </li>
+        </ul>
+      </Section>
+    </>
+  ),
+};
+
+export default function DeveloperGuide({ loaderData, params }: Route.ComponentProps) {
+  const index = GUIDE_PAGES.findIndex(page => page.slug === (params.topic ?? ""));
+  const page = GUIDE_PAGES[index];
+  const Content = CONTENT[page.slug];
+  const previous = GUIDE_PAGES[index - 1];
+  const next = GUIDE_PAGES[index + 1];
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Links to the former single-page guide used anchors for sections that now have their own page.
+  useEffect(() => {
+    const moved = page.slug === "" ? MOVED_GUIDE_ANCHORS[location.hash.slice(1)] : undefined;
+    if (moved !== undefined) navigate(`${guidePath(moved)}${location.hash}`, { replace: true });
+  }, [page.slug, location.hash, navigate]);
+
+  return (
+    <article className="mx-auto max-w-2xl p-4 md:p-8">
+      <p className="text-sm font-medium text-muted">Developer guide</p>
+      <h1 className="mt-1 text-2xl font-semibold">{page.title}</h1>
+      <nav aria-label="Developer guide pages" className="guide-nav">
+        {GUIDE_PAGES.map(item => (
+          <Link key={item.slug} to={guidePath(item.slug)} aria-current={item.slug === page.slug ? "page" : undefined}>
+            {item.nav}
+          </Link>
+        ))}
+      </nav>
+      {page.slug === "" && (
+        <p className="mt-4 text-muted">
+          windowinsets.info shows you the insets on each device. This guide tells you what they
+          mean and how to use them in code.
+        </p>
+      )}
+
+      <Content loaderData={loaderData} />
+
+      <nav aria-label="Previous and next guide pages" className="guide-pager">
+        {previous ? <Link to={guidePath(previous.slug)} rel="prev"><span>Previous</span>{previous.title}</Link> : <span />}
+        {next && <Link to={guidePath(next.slug)} rel="next"><span>Next</span>{next.title}</Link>}
+      </nav>
 
       <Section title="Found an issue or want to contribute?">
         <p>

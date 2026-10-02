@@ -1,5 +1,6 @@
 import type { Device } from "./types";
 import { REPO_URL } from "./site";
+import { GUIDE_PAGES, guidePath } from "./guidePages";
 import { createDeviceIndex, DEVICE_BUNDLE_PATH, DEVICE_BUNDLE_SCHEMA, DEVICE_EXPORT_SCHEMA, DEVICE_INDEX_PATH, DEVICE_INDEX_SCHEMA } from "./deviceExport";
 
 export const LLMS_TXT_PATH = "/llms.txt";
@@ -53,7 +54,7 @@ Rules for using the data:
 
 ## Docs
 
-- [Developer guide](${siteUrl}/developer-guide): how insets work on Android and how to apply them in Compose and Views.
+${GUIDE_PAGES.map(page => `- [Developer guide: ${page.title}](${siteUrl}${guidePath(page.slug)}): ${page.description}`).join("\n")}
 - [Methodology](${siteUrl}/methodology): how captures are made and validated.
 - [Changelog](${siteUrl}/changelog): data and site changes. RSS: ${siteUrl}/changelog.xml
 
