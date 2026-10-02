@@ -10,6 +10,7 @@ export default [
   ]),
   route("sitemap.xml", "routes/sitemap.ts"),
   route("llms.txt", "routes/llms-txt.ts"),
+  route(":slug.md", "routes/device-markdown.ts"),
   route("changelog.xml", "routes/changelog-feed.ts"),
   route("data/index.json", "routes/device-index.ts"),
   route("data/all.json", "routes/device-bundle.ts"),

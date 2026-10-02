@@ -37,7 +37,7 @@ npx windowinsets-info get s26-ultra --nav gesture
 npx windowinsets-info fixtures --series fold > insets.json
 ```
 
-The same data is plain JSON: `/data/<slug>.json` per device, `/data/index.json` for the list and `/data/all.json` for everything at once (see [JSON export format](docs/JSON_EXPORT.md)). AI tools can start from [`/llms.txt`](https://windowinsets.info/llms.txt).
+Each device also has a Markdown reference at `/<slug>.md` (the **Markdown** button in the Metrics panel). The same data is plain JSON: `/data/<slug>.json` per device, `/data/index.json` for the list and `/data/all.json` for everything at once (see [JSON export format](docs/JSON_EXPORT.md)). AI tools can start from [`/llms.txt`](https://windowinsets.info/llms.txt).
 
 ## Documentation
 

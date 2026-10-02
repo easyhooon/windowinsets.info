@@ -96,7 +96,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .metrics-bar { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:12px 16px 0; }
 .metrics-heading { font-size:14px; font-weight:600; }
 .metrics-actions { display:flex; align-items:center; gap:2px; }
-.export-json-button { display:inline-flex; align-items:center; min-height:30px; border:1px solid transparent; border-radius:5px; background:transparent; padding:5px 8px; color:var(--color-muted); font-size:11px; font-weight:500; white-space:nowrap; }
+.export-json-button { display:inline-flex; align-items:center; min-height:30px; border:1px solid transparent; border-radius:5px; background:transparent; padding:5px 6px; color:var(--color-muted); font-size:11px; font-weight:500; white-space:nowrap; }
 .export-json-button:hover { background:var(--color-hover); }
 .metrics-content { padding:12px 16px 16px; }
 .metrics-content>h3 { margin:38px 0 10px; font-size:13px; text-transform:none; letter-spacing:0; color:var(--color-fg); }

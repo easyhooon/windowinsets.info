@@ -13,10 +13,13 @@ export function pageMeta({
   title,
   description,
   url,
+  markdown,
 }: {
   title: string;
   description: string;
   url: string;
+  /** Markdown version of this page, advertised to tools as text/markdown. */
+  markdown?: string;
 }) {
   return [
     { title },
@@ -37,5 +40,8 @@ export function pageMeta({
     { name: "twitter:image", content: OG_IMAGE },
     { name: "twitter:image:alt", content: OG_IMAGE_ALT },
     { tagName: "link", rel: "canonical", href: url },
+    // Invisible to readers; lets agents find the site's llms.txt from any page.
+    { tagName: "link", rel: "describedby", href: "/llms.txt" },
+    ...(markdown ? [{ tagName: "link", rel: "alternate", type: "text/markdown", href: markdown }] : []),
   ];
 }

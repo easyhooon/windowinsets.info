@@ -17,7 +17,7 @@ import { ResizeHandle } from "./ResizeHandle";
 import { Icon } from "./Icon";
 import { getRtlAvailability } from "../data/rtlAvailability";
 import { formatLength, hasExactPx, safeInsets, safeInsetsPx } from "../data/measurementUnits";
-import { deviceExportPath, downloadDeviceExport } from "../data/deviceExport";
+import { deviceExportPath, deviceMarkdownPath, downloadDeviceExport } from "../data/deviceExport";
 import { testFixtureSnippet } from "../data/testFixture";
 import { trackFoldPoseChange, trackJsonExport, trackUnitChange } from "../lib/analytics";
 import { useTheme } from "../lib/theme";
@@ -428,7 +428,8 @@ export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; 
         <h2 className="metrics-heading">Metrics</h2>
         <button className="metrics-toggle" aria-expanded={metricsOpen} onClick={() => setMetricsOpen(!metricsOpen)}>Metrics<Icon name="chevron" /></button>
         <div className="metrics-actions">
-          <a className="export-json-button" href={deviceExportPath(device)}>JSON link</a>
+          <a className="export-json-button" href={deviceMarkdownPath(device)} target="_blank" rel="noreferrer">Markdown</a>
+          <a className="export-json-button" href={deviceExportPath(device)}>JSON</a>
           <button type="button" className="export-json-button" onClick={exportJson}>Export JSON</button>
         </div>
         <span className="sr-only" role="status">{exportStatus}</span>
