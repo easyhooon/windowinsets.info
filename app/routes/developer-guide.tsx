@@ -281,25 +281,130 @@ val safe = Insets.of(
   ),
   foldables: () => (
     <>
-      <Section>
+      <Section title="How Android reports a fold">
         <p>
-          On foldable devices, use{" "}
+          A Galaxy Z Fold or Flip reports its hinge as a{" "}
           <a href="https://developer.android.com/reference/androidx/window/layout/FoldingFeature">
             FoldingFeature
+          </a>
+          , one of the display features in{" "}
+          <a href="https://developer.android.com/reference/androidx/window/layout/WindowLayoutInfo">
+            WindowLayoutInfo
           </a>{" "}
-          to detect the hinge and adapt your layout. The hinge angle sensor (API 31+) gives
-          real-time rotation:
+          from Jetpack WindowManager. It is not a window inset: the fold never changes{" "}
+          <code>systemBars</code> or <code>displayCutout</code>, so pad for insets and lay out
+          around the fold separately. Each feature has:
         </p>
-        <CodeBlock title="Detecting the hinge">{`val hinges = windowLayoutInfo.displayFeatures
-  .filterIsInstance<FoldingFeature>()
+        <ul>
+          <li>
+            <code>state</code>: <code>FLAT</code> (fully open) or <code>HALF_OPENED</code>{" "}
+            (partly folded).
+          </li>
+          <li>
+            <code>orientation</code>: <code>VERTICAL</code> for a book fold such as Galaxy Z Fold,{" "}
+            <code>HORIZONTAL</code> for a clamshell such as Galaxy Z Flip.
+          </li>
+          <li>
+            <code>isSeparating</code>: whether the fold splits the window into two logical areas.
+            It is always <code>true</code> while <code>HALF_OPENED</code>.
+          </li>
+          <li>
+            <code>occlusionType</code>: <code>NONE</code> or <code>FULL</code>, whether the fold
+            hides part of the display.
+          </li>
+          <li>
+            <code>bounds</code>: the fold's rectangle in window coordinates (px).
+          </li>
+        </ul>
+        <p>
+          A closed device reports no folding feature. The app then runs on the cover display,
+          which is a separate screen with its own insets. On this site, choose <b>Cover</b> or{" "}
+          <b>Main</b> on a foldable's page to see each one.
+        </p>
+      </Section>
 
-hinges.forEach { hinge ->
-  when (hinge.state) {
-    FoldingFeature.State.FLAT -> /* opened flat */
-    FoldingFeature.State.HALF_OPENED -> /* tent mode */
+      <Section title="Jetpack Compose">
+        <p>
+          <a href="https://developer.android.com/reference/kotlin/androidx/compose/material3/adaptive/package-summary">
+            Compose Material 3 Adaptive
+          </a>{" "}
+          (<code>androidx.compose.material3.adaptive:adaptive</code>) provides{" "}
+          <code>collectFoldingFeaturesAsState()</code>, which recomposes whenever the fold
+          changes. The posture checks below follow Android's{" "}
+          <a href="https://developer.android.com/develop/ui/compose/layouts/adaptive/foldables/make-your-app-fold-aware">
+            Make your app fold aware
+          </a>{" "}
+          guide.
+        </p>
+        <CodeBlock title="Tabletop and book postures">{`@Composable
+fun FoldAwareScreen() {
+  val foldingFeatures by collectFoldingFeaturesAsState()
+  val fold = foldingFeatures.firstOrNull()
+
+  val isTabletop = fold?.state == FoldingFeature.State.HALF_OPENED &&
+    fold.orientation == FoldingFeature.Orientation.HORIZONTAL
+  val isBook = fold?.state == FoldingFeature.State.HALF_OPENED &&
+    fold.orientation == FoldingFeature.Orientation.VERTICAL
+
+  when {
+    isTabletop -> TabletopLayout(foldBounds = fold!!.bounds) // content above, controls below
+    isBook -> TwoPaneLayout(foldBounds = fold!!.bounds)      // one pane on each side
+    else -> SinglePaneLayout()
   }
-  // hinge.bounds: pixel coordinates of the fold
 }`}</CodeBlock>
+        <p>
+          If you only need the posture, <code>currentWindowAdaptiveInfoV2().windowPosture</code>{" "}
+          exposes it directly, for example <code>windowPosture.isTabletop</code>.
+        </p>
+      </Section>
+
+      <Section title="Views">
+        <p>
+          With Views, collect{" "}
+          <a href="https://developer.android.com/reference/androidx/window/layout/WindowInfoTracker">
+            WindowInfoTracker
+          </a>{" "}
+          (<code>androidx.window:window</code>) while the activity is started:
+        </p>
+        <CodeBlock title="Observing the fold in an Activity">{`override fun onCreate(savedInstanceState: Bundle?) {
+  super.onCreate(savedInstanceState)
+  lifecycleScope.launch {
+    repeatOnLifecycle(Lifecycle.State.STARTED) {
+      WindowInfoTracker.getOrCreate(this@MainActivity)
+        .windowLayoutInfo(this@MainActivity)
+        .collect { layoutInfo ->
+          val fold = layoutInfo.displayFeatures
+            .filterIsInstance<FoldingFeature>()
+            .firstOrNull()
+          updateLayoutForFold(fold) // null when flat without a fold or closed
+        }
+    }
+  }
+}`}</CodeBlock>
+      </Section>
+
+      <Section title="Hinge angle">
+        <p>
+          <code>FoldingFeature</code> does not expose the angle. If you need it, read{" "}
+          <a href="https://developer.android.com/reference/android/hardware/Sensor#TYPE_HINGE_ANGLE">
+            Sensor.TYPE_HINGE_ANGLE
+          </a>{" "}
+          (API 30+) through <code>SensorManager</code>. Reporting ranges and accuracy vary by
+          device, so prefer <code>state</code> and <code>orientation</code> for layout
+          decisions. The hinge slider on this site's foldable pages is a visualization; the
+          measured insets come from captures of the open and closed displays.
+        </p>
+        <p>
+          For design guidance on cover and inner screens, see Samsung's{" "}
+          <a href="https://developer.samsung.com/one-ui/largescreen-and-foldable/designing_for_foldable.html">
+            Designing for foldables
+          </a>
+          , and for app-level patterns, Android's{" "}
+          <a href="https://developer.android.com/develop/ui/compose/layouts/adaptive/foldables/learn-about-foldables">
+            Learn about foldables
+          </a>
+          .
+        </p>
       </Section>
     </>
   ),
@@ -417,7 +522,7 @@ hinges.forEach { hinge ->
       </Section>
     </>
   ),
-  resources: () => (
+  references: () => (
     <>
       <Section>
         <ul>
