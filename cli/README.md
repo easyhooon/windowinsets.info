@@ -66,3 +66,8 @@ The CLI reads the public JSON exports: `/data/index.json`, `/data/<slug>.json`
 and `/data/all.json` (schemas under `https://windowinsets.info/schemas/`). Use
 `--base-url` or `WINDOWINSETS_BASE_URL` to point it at another copy, including a
 local directory.
+
+## License
+
+The CLI code is MIT licensed. Measurement data and Samsung artwork are not part of
+this package; see [windowinsets.info](https://windowinsets.info) for their sources.

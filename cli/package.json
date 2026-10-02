@@ -2,15 +2,37 @@
   "name": "windowinsets-info",
   "version": "0.1.0",
   "description": "Measured Android WindowInsets, display cutouts and safe areas for Samsung Galaxy and Google Pixel devices, from windowinsets.info",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "windowinsets-info": "bin/windowinsets.js",
     "windowinsets": "bin/windowinsets.js"
   },
-  "files": ["bin", "README.md"],
-  "engines": { "node": ">=18.3" },
-  "keywords": ["android", "windowinsets", "window-insets", "safe-area", "display-cutout", "galaxy", "pixel", "foldable", "compose", "cli"],
+  "files": [
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.3"
+  },
+  "keywords": [
+    "android",
+    "windowinsets",
+    "window-insets",
+    "safe-area",
+    "display-cutout",
+    "galaxy",
+    "pixel",
+    "foldable",
+    "compose",
+    "cli"
+  ],
   "homepage": "https://windowinsets.info",
-  "repository": { "type": "git", "url": "git+https://github.com/easyhooon/windowinsets.info.git", "directory": "cli" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/easyhooon/windowinsets.info.git",
+    "directory": "cli"
+  },
   "bugs": "https://github.com/easyhooon/windowinsets.info/issues"
 }
