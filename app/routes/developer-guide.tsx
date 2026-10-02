@@ -402,7 +402,36 @@ hinges.forEach { hinge ->
           To discover devices, fetch <code>https://windowinsets.info/data/index.json</code>. It
           lists every public device with its measurement status (<code>complete</code>,{" "}
           <code>partial</code> or <code>pending</code>), the navigation modes and rotations
-          captured per screen, and the URL of its full export.
+          captured per screen, and the URL of its full export. For bulk use,{" "}
+          <code>https://windowinsets.info/data/all.json</code> holds every device export in one
+          file.
+        </p>
+        <h3>From the command line</h3>
+        <p>
+          The{" "}
+          <a href="https://www.npmjs.com/package/windowinsets-info">
+            <code>windowinsets-info</code>
+          </a>{" "}
+          CLI reads the same data with no install (Node.js 18.3 or later):
+        </p>
+        <ul>
+          <li>
+            <code>npx windowinsets-info get s26-ultra --nav gesture</code> prints a device's
+            insets per screen. Add <code>--unit px</code>, <code>--screen cover</code> or{" "}
+            <code>--json</code> as needed.
+          </li>
+          <li>
+            <code>npx windowinsets-info list --series fold</code> lists devices and their
+            measurement status.
+          </li>
+          <li>
+            <code>npx windowinsets-info fixtures --series fold &gt; insets.json</code> writes every
+            measured screen and navigation mode as compact JSON for screenshot and layout tests.
+          </li>
+        </ul>
+        <p>
+          Unmeasured modes print "not measured yet" and are left out of fixtures; nothing is
+          estimated. AI tools can start from <a href="/llms.txt">/llms.txt</a>.
         </p>
       </Section>
 
