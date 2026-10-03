@@ -16,6 +16,7 @@ import { loadFoldRenderer } from "./foldRendererChunk";
 import { ResizeHandle } from "./ResizeHandle";
 import { CodeBlock } from "./LazyCodeBlock";
 import { DevelopmentDetails } from "./DevelopmentDetails";
+import { ShortcutsDialog, useViewShortcuts, type ViewShortcut } from "./KeyboardShortcuts";
 import type { DevCapture } from "../data/devTools";
 import { Icon } from "./Icon";
 import { getRtlAvailability } from "../data/rtlAvailability";
@@ -399,6 +400,17 @@ export function DeviceView({ device, skins, rawInsets = {}, devCaptures = [] }: 
     }, 250);
     return () => clearTimeout(timer);
   }, [navMode, rotation, angle, units, appPreview]);
+  const shortcuts: ViewShortcut[] = [
+    { key: "n", label: "Switch navigation mode", run: () => setNavMode(mode => mode === "gesture" ? "threeButton" : "gesture") },
+    { key: "r", label: "Rotate clockwise", run: () => rotateBy(90), available: orientationOptions.length > 1 },
+    { key: "R", label: "Rotate counterclockwise", run: () => rotateBy(-90), available: orientationOptions.length > 1 },
+    { key: "s", label: "Switch outer / inner display", run: () => selectPose(screen.id === "cover" ? "180" : "0", "display_tab"), available: foldable && device.screens.length > 1 },
+    { key: "u", label: "Switch dp / px", run: () => { const next = units === "dp" ? "px" : "dp"; setUnits(next); trackUnitChange(device, next); }, available: exactPxAvailable },
+    { key: "f", label: "Show frame", run: () => setShowFrame(v => !v) },
+    { key: "g", label: "Show regions", run: () => setShowRegions(v => !v) },
+    { key: "d", label: "Show dimensions", run: () => setShowDimensions(v => !v) },
+  ];
+  const shortcutState = useViewShortcuts(shortcuts);
   const poseGlyph = triFold ? "trifold" : device.formFactor === "foldable-flip" ? "flip" : "book";
   // Phones show these in the bottom stack, where the open Metrics disclosure cannot cover them.
   const displayOptions = <fieldset className="control-pill" aria-label="Display options">
@@ -658,7 +670,7 @@ export function DeviceView({ device, skins, rawInsets = {}, devCaptures = [] }: 
           <output className="hinge-readout" aria-label="Hinge angle"><span>{triFold ? `${hinges.left}°/${hinges.right}°` : `${angle}°`}</span><span className="dropdown-value-reserve" aria-hidden="true">{triFold ? "180°/180°" : "180°"}</span></output>
         </fieldset>}
       </div>
-      <p className="canvas-help">Scroll or drag to pan · Pinch to zoom · + / − to zoom · 0 to fit</p>
+      <p className="canvas-help">Scroll or drag to pan · Pinch to zoom · + / − to zoom · 0 to fit · ? for shortcuts</p>
       </footer>
       <div className="canvas-toggles">{displayOptions}</div>
     </section>
@@ -677,7 +689,10 @@ export function DeviceView({ device, skins, rawInsets = {}, devCaptures = [] }: 
           <label><input type="checkbox" checked={showRegions} onChange={e => setShowRegions(e.target.checked)} />Show Regions</label>
           <label><input type="checkbox" checked={showDimensions} onChange={e => setShowDimensions(e.target.checked)} />Show Dimensions</label>
         </fieldset>
+        <button type="button" className="settings-shortcuts" aria-keyshortcuts="?" onClick={() => { setSettingsOpen(false); shortcutState.setHelpOpen(true); }}>Keyboard shortcuts<kbd>?</kbd></button>
       </div>}
     </div>
+    <ShortcutsDialog open={shortcutState.helpOpen} onClose={() => shortcutState.setHelpOpen(false)} shortcuts={shortcuts}
+      enabled={shortcutState.enabled} onEnabledChange={shortcutState.setEnabled} />
   </article>;
 }
