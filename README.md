@@ -22,6 +22,8 @@ Apps targeting Android 15 (SDK 35) draw edge to edge by default, and apps target
 
 **"Can't I just read insets at runtime?"** Yes, and your code should. The API tells your app what it receives on the device it is running on. It cannot tell you, before release, what it will receive on devices you never tested. Use this site for design, test planning and reproducing reports, not as a replacement for the API.
 
+**"If insets are handled correctly, why do the numbers matter?"** Your code may not need them. The people you build with often do: designers and frontend developers find safe areas and insets hard to picture from a description. A diagram of a real device, with its status bar, navigation bar, cutout and corners in place, gives everyone the same picture to point at.
+
 **"Can't an AI answer this?"** An AI can explain `WindowInsets` and write the handling code. It cannot reliably tell you the navigation bar inset on a specific Galaxy cover screen in rotation 3 with three-button navigation. Nobody publishes that number; it has to be measured, and a model asked for it will give a plausible guess. Every value here links to a raw capture you can check, and missing values stay **pending** instead of being guessed. AI tools can use the [JSON export](docs/JSON_EXPORT.md) as ground truth too.
 
 **"Why not use Remote Test Lab or buy the devices?"** Each RTL session costs credits and minutes per device, screen, rotation and navigation mode. This project has done that work once and published the results for everyone.
