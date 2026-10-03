@@ -118,7 +118,7 @@ and Android Emulator profiles. See its [README](tools/insets-probe/README.md).
 3. Upload captures to one rolling **Capture inbox PR**. If upload is unavailable, use RTL File Browser or `adb pull`.
 4. The user decides when to merge the batch. Site entries are maintained separately from the raw inbox.
 
-The Production upload path was confirmed with a replayed S24+ JSON and live Fold8/Flip8 Probe captures in [PR #30](https://github.com/easyhooon/windowinsets.info/pull/30). See [capture upload and setup](docs/CAPTURE_UPLOAD.md) for API, branch and token details.
+The Production upload path is verified with replayed and live Probe captures. See [capture upload and setup](docs/CAPTURE_UPLOAD.md) for API, branch and token details.
 
 ```mermaid
 flowchart LR
@@ -141,13 +141,11 @@ These captures do not enter the real-device Capture inbox. See [Pixel emulator c
 
 The keyless probe also runs on physical Pixel devices in Firebase Test Lab (FTL). Robo scripts export raw JSON to the result bucket. Each run is preserved under a dated `testlab-<date>/` directory and compared with its matching emulator capture.
 
-A passed FTL run confirms that the app exported data; it does not establish that every published emulator value matches hardware. The [validation log](docs/PIXEL_HARDWARE_VALIDATION.md) contains the raw JSON, result links and the first run's complete Robo crawl graph.
+A passed FTL run confirms that the app exported data; it does not establish that every published emulator value matches hardware. The [validation log](docs/PIXEL_HARDWARE_VALIDATION.md) records the comparisons, result links and the first run's complete Robo crawl graph; the raw JSON stays under `measurements/pixel/<pixel-slug>/testlab-<date>/`.
 
 As of 2026-10-01, two-minute Robo runs had spot-checked **21 of 23** public Pixel models in gesture mode. Pixel 5 runs only API 30 on FTL, so its check lacks cutout path and corner radii. Pixel 6 Pro and Pixel 4a are absent from the physical FTL catalog. [Issue #46](https://github.com/easyhooon/windowinsets.info/issues/46) tracks the remaining two models and their next capture paths. Other navigation modes, rotations and Fold cover states remain unverified.
 
 The dedicated `windowinsets-testlab-2026` project used Spark for its first five physical runs, then switched to Blaze on 2026-09-28. Blaze includes 30 physical-device test minutes per project per day, then charges $5 per device-hour in one-minute increments; see [FTL quota and pricing](https://firebase.google.com/docs/test-lab/usage-quotas-pricing).
-
-The Pixel Tablet artwork contrast issue [#35](https://github.com/easyhooon/windowinsets.info/issues/35) was fixed separately in [PR #42](https://github.com/easyhooon/windowinsets.info/pull/42).
 
 ### What InsetsProbe records
 

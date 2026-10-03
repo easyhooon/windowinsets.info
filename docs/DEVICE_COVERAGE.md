@@ -97,34 +97,6 @@ and Flip6 remain main-only until cover artwork is imported. A physical cover
 display without a corresponding registered skin does not create a product
 measurement target.
 
-## Galaxy Watch limitation
-
-The Samsung Galaxy Emulator Skin downloads checked on 2026-09-25 contain no
-Galaxy Watch skin. Galaxy Watch4 and later use Wear OS Powered by Samsung and
-can expose Android `WindowInsets`, but the current device model requires gesture
-or 3-button measurements and does not model watch-specific round-screen safe
-areas. Keep Galaxy Watch outside the public device catalogue until traceable
-watch artwork and a dedicated Wear OS capture/data path are available; do not
-derive screen geometry or inset values from product images. See Samsung's
-[Galaxy Watch platform notice](https://developer.samsung.com/galaxy-watch-tizen/notice.html)
-and Android's [Wear OS screen-shape guide](https://developer.android.com/training/wearables/views/layouts).
-
-The user-supplied `Galaxy_S10_Lite.zip` and `Galaxy_Tab_S8_Ultra.zip` were imported
-on 2026-09-24 as main-screen artwork previews. Their official release years meet
-the coverage cutoff; inset measurements remain pending.
-
-The user-supplied `Galaxy_Z_Fold3.zip` was imported on 2026-09-23 with its
-folded cover and unfolded main layouts. InsetsProbe 1.3.0 measurements for
-cover and main in both navigation modes were registered on 2026-09-25.
-The user-supplied `Galaxy_Z_Flip5.zip` was imported on 2026-09-23 with its
-1080×2640 main display layout. The ZIP has no cover layout; both inset modes
-were measured on RTL on 2026-09-23; cover artwork remains unavailable.
-
-The user supplied 48 Galaxy Note and A ZIPs on 2026-09-23. Their original
-layouts and referenced official artwork were imported as main-screen previews.
-Five pre-2020 Note models (FE, 8, 9, 10 and 10+) remain in the asset archive
-without public routes. The 2020 Note and earliest A models have release-year
-evidence above; the later A models are also kept as artwork-only previews.
 The Galaxy A22 5G ZIP's layout names a missing Black background image; the
 importer retains that layout unchanged and uses its included Gray image for
 the preview, recording the selected asset in `source.json`.
@@ -138,6 +110,18 @@ eligibility.
 Artwork-only models continue to show pending measurements. A supported release
 year or an official skin does not establish WindowInsets values or measured 3D
 geometry. Raw captures and downloaded originals remain unchanged.
+
+## Galaxy Watch limitation
+
+The Samsung Galaxy Emulator Skin downloads checked on 2026-09-25 contain no
+Galaxy Watch skin. Galaxy Watch4 and later use Wear OS Powered by Samsung and
+can expose Android `WindowInsets`, but the current device model requires gesture
+or 3-button measurements and does not model watch-specific round-screen safe
+areas. Keep Galaxy Watch outside the public device catalogue until traceable
+watch artwork and a dedicated Wear OS capture/data path are available; do not
+derive screen geometry or inset values from product images. See Samsung's
+[Galaxy Watch platform notice](https://developer.samsung.com/galaxy-watch-tizen/notice.html)
+and Android's [Wear OS screen-shape guide](https://developer.android.com/training/wearables/views/layouts).
 
 ## Google Pixel (issue #23)
 
@@ -161,19 +145,4 @@ profile or AOSP skin yet (checked 2026-10-01), so they stay out of scope.
 `scripts/pixel-devices.json` lists every in-scope model with its Google spec
 source.
 
-Physical Firebase Test Lab spot checks on 2026-09-28 covered 19 of the 22
-public Pixel models, using the existing gesture navigation mode and one
-physical screen/orientation per model. Raw captures stay in separate dated
-`testlab-2026-09-28/` folders. Camera paths and corner radii match or nearly
-match AVD data for most checked phones, but Pixel 10 Pro, Pixel 10 and Pixel
-9a have material corner or path differences. Matched landscape captures of
-Pixel Fold's inner display and Pixel Tablet report physical rounded corners
-where the API 37 AVD reports `null`. Some top safe insets also differ even when
-camera paths match. The FTL devices used API 32–36, so keep OS and source
-provenance separate rather than changing the published emulator values.
-Pixel 5 was checked on 2026-10-01 on its only offered API (30) with
-InsetsProbe 1.7.0, without cutout path or corner radii. Pixel 6 Pro and Pixel
-4a are absent from the FTL physical catalog. [Issue #46](https://github.com/easyhooon/windowinsets.info/issues/46)
-tracks these two models. Pixel 10a was spot-checked on 2026-10-01 (API 36). The spot checks
-do not validate both navigation modes, every rotation, or Fold cover states.
-See [the FTL validation log](PIXEL_HARDWARE_VALIDATION.md).
+Physical Firebase Test Lab spot checks and their status are in [the FTL validation log](PIXEL_HARDWARE_VALIDATION.md).

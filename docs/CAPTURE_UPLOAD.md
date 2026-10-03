@@ -1,4 +1,4 @@
-# Capture upload (issue #28)
+# Capture upload
 
 InsetsProbe can upload captures straight from an RTL or physical device instead of
 the RTL File Browser download round trip.

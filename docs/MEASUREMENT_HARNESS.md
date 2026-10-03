@@ -182,13 +182,10 @@ The loop still needs a person at these points:
 
 | Limitation | Effect | Possible fix |
 | --- | --- | --- |
-| Coordinates come from screenshots | Resolved 2026-09-30: capture runs over Remote Debug Bridge; screenshots remain only for reservation, Connect and exit | — |
-| Settings navigation is manual | Resolved 2026-09-30: `capture-rtl-adb.py` finds "Navigation bar" and the mode through `uiautomator` | A verified Samsung deep link would remove the text lookup |
 | RDB Connect depends on the stream | Clicking Connect before the device stream loads fails silently | Wait for the stream, then retry until the button reads Disconnect |
 | Browser session can break mid-reservation | On 2026-09-30 the WebClient returned `400 Request Header Or Cookie Too Large` and the device list 403 after capture, so the return option was unreachable | Hand the browser back to the owner; the agent does not clear Samsung cookies |
 | Registration code is hand-assembled per model | Each device file has its own shape | Generate rotation records from inbox JSON with one script (already done for Fold7/Fold8/Fold8 Ultra) and make it the default path |
 | Uploads can time out (seen on Russia units) | A sweep finishes but the inbox stays incomplete | Retry automatically inside Probe with backoff and show a persistent "not uploaded" state |
-| Covers that never rotate | Resolved 2026-09-29: RTL's Rotate control confirmed Flip covers stay portrait | Mark such screens `fixedOrientation` instead of queueing landscape captures |
 | Session state lives in chat | A reset or lost tab group loses context | Keep a machine-readable queue (JSON) and a per-device run log so any agent can resume |
 
 The RTL skill already permits overlapping reservations in separate WebClient
