@@ -32,6 +32,7 @@ test('analytics gates collection and tracks interest independently from default 
 
     analytics.initializeAnalytics('G-TEST123', true);
     analytics.initializeAnalytics('G-TEST123', true);
+    window.location.search = '?utm_source=threads&q=private&utm_medium=social';
     assert.equal(scripts.length, 1);
     assert.equal(scripts[0].async, true);
     const commands = () => window.dataLayer.map(args => Array.from(args));
@@ -53,6 +54,9 @@ test('analytics gates collection and tracks interest independently from default 
     analytics.trackPageView('/galaxy-z-fold8', model); // browser Back
     const events = commands().filter(c => c[0] === 'event');
     assert.equal(events.filter(c => c[1] === 'page_view').length, 4);
+    const pageViews = events.filter(c => c[1] === 'page_view');
+    assert.equal(pageViews[0][2].page_location, 'https://windowinsets.info/?utm_source=threads&utm_medium=social');
+    assert.equal(pageViews[1][2].page_location, 'https://windowinsets.info/galaxy-z-fold8');
     const views = events.filter(c => c[1] === 'device_view');
     assert.equal(views.length, 3);
     assert.equal(views[0][2].view_source, 'home_default');

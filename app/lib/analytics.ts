@@ -86,12 +86,27 @@ export function trackFoldPoseChange(device: Device, angle: number, controlSource
   });
 }
 
-/** Path-only tracking avoids search text / URL fragments and rerender duplicates. */
+const CAMPAIGN_PARAMETERS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+
+/** Keeps only campaign tags from the landing URL so GA4 can attribute the session. */
+function campaignQuery() {
+  const search = new URLSearchParams(window.location.search ?? "");
+  const campaign = new URLSearchParams();
+  for (const name of CAMPAIGN_PARAMETERS) {
+    const value = search.get(name);
+    if (value) campaign.set(name, value);
+  }
+  const query = campaign.toString();
+  return query ? `?${query}` : "";
+}
+
+/** Path-only tracking avoids search text / URL fragments and rerender duplicates;
+ * the first page view keeps utm_* tags only. */
 export function trackPageView(pathname: string, device?: TrackedDevice) {
   if (!ready || pathname === lastPath) return;
   const pageLocation = `${window.location.origin}${pathname}`;
   const page = {
-    page_location: pageLocation,
+    page_location: previousLocation === undefined ? `${pageLocation}${campaignQuery()}` : pageLocation,
     page_title: document.title,
     page_referrer: previousLocation ?? document.referrer,
   };

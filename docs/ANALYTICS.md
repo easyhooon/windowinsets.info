@@ -104,7 +104,8 @@ at run time, so late events may appear in GA4 but not in the report.
 
 No account IDs, custom user identifiers, search input, session recordings or
 crash reports are sent by this integration. Custom page locations exclude query
-strings and fragments; the initial referrer comes from the browser. GA4 still
+strings and fragments, except `utm_*` campaign tags on the landing page so
+shared links can be attributed; the initial referrer comes from the browser. GA4 still
 uses its standard analytics cookies and browser/network metadata. Google Signals
 and advertising personalization signals are disabled. This implementation does
 not include a consent UI; configure the site's privacy notice and consent handling
