@@ -79,7 +79,8 @@ every intermediate angle. No precise hinge angle is sent.
 manual dispatch. It reads yesterday's data (in the property's time zone) through
 the GA4 Data API and posts one plain-text Discord message (in Korean, at the
 maintainer's request, for a private channel): active/new users,
-sessions, page views, total events, device selections and JSON exports, then
+sessions, page views, total events, device selections, JSON exports and
+support-link clicks split by `support_platform` (Ko-fi / GitHub Sponsors), then
 activity by platform (device category), the top events, the most viewed devices
 and the most viewed pages.
 

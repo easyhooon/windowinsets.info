@@ -11,6 +11,7 @@ if (!GA4_PROPERTY_ID || !GA4_SERVICE_ACCOUNT_KEY) {
 }
 
 const PLATFORM_LABELS = { desktop: "데스크톱", mobile: "모바일", tablet: "태블릿" };
+const SUPPORT_LABELS = { ko_fi: "Ko-fi", github_sponsors: "GitHub Sponsors" };
 const YESTERDAY = [{ startDate: "yesterday", endDate: "yesterday" }];
 const QUERY_FAILED = "⚠️ 조회 실패 (워크플로 로그 확인)";
 
@@ -101,6 +102,12 @@ const queries = {
     orderBys: [{ metric: { metricName: "eventCount" }, desc: true }],
     limit: 5,
   },
+  // Needs the registered support_platform custom dimension.
+  support: {
+    dimensions: [{ name: "customEvent:support_platform" }],
+    metrics: [{ name: "eventCount" }],
+    dimensionFilter: { filter: { fieldName: "eventName", stringFilter: { value: "support_click" } } },
+  },
   pages: {
     dimensions: [{ name: "pagePath" }],
     metrics: [{ name: "screenPageViews" }],
@@ -134,7 +141,16 @@ function overview() {
     `활성 사용자 **${number(users)}명** · 신규 사용자 **${number(newUsers)}명** · 세션 **${number(sessions)}회**`,
     `페이지 조회 **${number(views)}회** · 전체 이벤트 **${number(events)}건**`,
     `기기 선택 **${number(eventCount("device_select"))}회** · JSON 내보내기 **${number(eventCount("json_export"))}회**`,
+    supportClicks(),
   ].join("\n");
+}
+
+// Always lists both platforms so a zero day is explicit.
+function supportClicks() {
+  if (!reports.support) return `후원 링크 클릭 ${QUERY_FAILED}`;
+  const count = (platform) => reports.support.find((row) => row.dimensions[0] === platform)?.metrics[0];
+  const parts = Object.entries(SUPPORT_LABELS).map(([platform, label]) => `${label} **${number(count(platform))}회**`);
+  return `후원 링크 클릭 — ${parts.join(" · ")}`;
 }
 
 function section(title, report, format) {
