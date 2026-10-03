@@ -56,6 +56,7 @@ Start with this README for the product, data limits, device priorities and local
 | Launch the probe on a Flip cover display | [Probe FlexWindow guide](tools/insets-probe/FLEXWINDOW_README.md) |
 | Consume the downloadable device data | [JSON export format](docs/JSON_EXPORT.md) |
 | Configure and interpret site analytics and the daily Discord report | [Analytics](docs/ANALYTICS.md) |
+| Set up search indexing, analytics consoles and funding for a site launch | [Web operations](docs/WEB_OPERATIONS.md) |
 | Keep the client bundle small and re-measure it | [Frontend performance](docs/PERFORMANCE.md) |
 | Check asset attribution | [Third-party notices](docs/THIRD_PARTY_NOTICES.md) |
 
