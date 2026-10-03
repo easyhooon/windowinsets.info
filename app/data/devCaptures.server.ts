@@ -1,5 +1,10 @@
 import { existsSync, readFileSync } from "node:fs";
-import type { DevCapture, FoldingFeatureCapture } from "./devTools";
+import type { PublicDevelopment, PublicWindowSizeClass } from "./deviceExport";
+import {
+  extendedWidthClass, heightClass, previewSpec, sizeClassRows, widthClass,
+  type DevCapture, type FoldingFeatureCapture,
+} from "./devTools";
+import { REPO_URL } from "./site";
 import type { Device, InsetsMeasurement, NavMode } from "./types";
 
 const RAW_URL = /\/blob\/main\/(measurements\/.+\.json)$/;
@@ -36,7 +41,8 @@ function fromMeasurement(screen: "cover" | "main", nav: NavMode, measurement: In
       cutout: (raw.displayCutout?.boundingRects?.length ?? 0) > 0,
       hingeAngle: raw.hinge?.angleDegrees ?? null,
       foldingFeatures: (raw.hinge?.foldingFeatures ?? []).map(f => ({
-        state: f.state, orientation: f.orientation, isSeparating: f.isSeparating, occlusionType: f.occlusionType, boundsDp: f.bounds.dp,
+        state: f.state, orientation: f.orientation, isSeparating: f.isSeparating, occlusionType: f.occlusionType,
+        boundsDp: { left: f.bounds.dp.left, top: f.bounds.dp.top, right: f.bounds.dp.right, bottom: f.bounds.dp.bottom },
       })),
       capturedAt: source.retrievedAt,
     };
@@ -55,4 +61,40 @@ export function deviceDevCaptures(device: Device): DevCapture[] {
     }
   }
   return captures;
+}
+
+function windowSizeClass(window: DevCapture["windowDp"]): PublicWindowSizeClass {
+  return { width: widthClass(window.width), widthExtended: extendedWidthClass(window.width), height: heightClass(window.height) };
+}
+
+/** The published export's development section: per-capture Preview specs and size classes. */
+export function deviceDevelopment(device: Device): PublicDevelopment {
+  const captures = deviceDevCaptures(device);
+  return {
+    captures: captures.map(capture => ({
+      screen: capture.screen,
+      rotation: capture.rotation,
+      navigation: capture.nav,
+      displaySizePx: { width: capture.widthPx, height: capture.heightPx },
+      densityDpi: capture.densityDpi,
+      windowSizeDp: capture.windowDp,
+      windowSizeClass: windowSizeClass(capture.windowDp),
+      displayCutout: capture.cutout,
+      hingeAngleDegrees: capture.hingeAngle,
+      foldingFeatures: capture.foldingFeatures,
+      composePreview: previewSpec(capture),
+      capturedAt: capture.capturedAt,
+      rawCapture: `${REPO_URL}/blob/main/${capture.path}`,
+    })),
+    windowSizeClasses: sizeClassRows(device, captures).map(row => ({
+      screen: row.screen,
+      rotation: row.rotation,
+      status: row.windowDp ? "measured" as const : "pending" as const,
+      windowSizeDp: row.windowDp,
+      windowSizeClass: row.windowDp ? windowSizeClass(row.windowDp) : null,
+      hingeAngleDegrees: row.hingeAngle,
+      foldingFeatures: row.foldingFeatures,
+      capturedAt: row.capturedAt,
+    })),
+  };
 }

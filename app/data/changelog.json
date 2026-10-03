@@ -1,6 +1,157 @@
 {
   "entries": [
     {
+      "hash": "8a386e832f2bb12c75083fa2bfb7e89d1d256687",
+      "date": "2026-10-03",
+      "area": "site",
+      "kind": "added",
+      "summary": "Compose Preview spec, WindowSizeClass and AVD profile per capture",
+      "devices": [],
+      "pr": 160
+    },
+    {
+      "hash": "05128149f1fcf8ad5cafb8a8f20406f227540c9d",
+      "date": "2026-10-03",
+      "area": "site",
+      "kind": "added",
+      "summary": "Move the star prompt into the header GitHub link",
+      "devices": []
+    },
+    {
+      "hash": "5bcb5793776110cdf7a8aaa30f3568e9589ded35",
+      "date": "2026-10-03",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add GitHub Star button to top-right controls",
+      "devices": []
+    },
+    {
+      "hash": "c0d7e8f9dcf781c2329178dfb87f9d886b8c220b",
+      "date": "2026-10-03",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add a GitHub Sponsors link to the sidebar footer",
+      "devices": []
+    },
+    {
+      "hash": "711e3fc2c4b7455179f9d6dd81bb041a0ce0257d",
+      "date": "2026-10-03",
+      "area": "site",
+      "kind": "added",
+      "summary": "Show a one-time Ko-fi note after the first JSON export",
+      "devices": [],
+      "pr": 158
+    },
+    {
+      "hash": "aa4ef3f2dc618c1b7577c20f6db49fb8955fbcf8",
+      "date": "2026-10-03",
+      "area": "site",
+      "kind": "added",
+      "summary": "Serve robots.txt that advertises the sitemap",
+      "devices": []
+    },
+    {
+      "hash": "bf267f121a41bac3c0a22f88877a6557182175e8",
+      "date": "2026-10-03",
+      "area": "site",
+      "kind": "corrected",
+      "summary": "Reveal device skins together with the display content",
+      "devices": [],
+      "pr": 157
+    },
+    {
+      "hash": "662403b9e49547d095db15f021a6f0a9366b1125",
+      "date": "2026-10-02",
+      "area": "site",
+      "kind": "added",
+      "summary": "Markdown reference per device",
+      "devices": [],
+      "pr": 154
+    },
+    {
+      "hash": "c8eade560a486d6c61a1413448919768f83b5b46",
+      "date": "2026-10-02",
+      "area": "site",
+      "kind": "corrected",
+      "summary": "Darken the safe area label for legibility",
+      "devices": [],
+      "pr": 153
+    },
+    {
+      "hash": "51d8aa2830c86ed0fd2b51dcfa64ac2d3673c07f",
+      "date": "2026-10-02",
+      "area": "site",
+      "kind": "added",
+      "summary": "Fill Patterns, animate fold states, open external links in new tabs",
+      "devices": [],
+      "pr": 152
+    },
+    {
+      "hash": "6d30e0ec4385770299b6aa18e7a271b16af4d217",
+      "date": "2026-10-02",
+      "area": "site",
+      "kind": "added",
+      "summary": "Split the developer guide into pages",
+      "devices": [],
+      "pr": 150
+    },
+    {
+      "hash": "540a21dfd1f127c207645744820603e65006cb4a",
+      "date": "2026-10-02",
+      "area": "site",
+      "kind": "added",
+      "summary": "Document the CLI and bulk JSON in the developer guide",
+      "devices": [],
+      "pr": 149
+    },
+    {
+      "hash": "e1b4e60307eb91e71ae3cf1f1e33e3b54b491d99",
+      "date": "2026-10-02",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add /data/all.json and the windowinsets-info CLI",
+      "devices": [],
+      "pr": 148
+    },
+    {
+      "hash": "c270d21073af4ed9e32fe91106186c14a1a642de",
+      "date": "2026-10-02",
+      "area": "site",
+      "kind": "added",
+      "summary": "Publish /llms.txt for AI agents",
+      "devices": [],
+      "pr": 147
+    },
+    {
+      "hash": "59ceb8143b51956e3f7ce1beb7328667b0b06855",
+      "date": "2026-10-02",
+      "area": "data",
+      "kind": "added",
+      "summary": "Complete S23+ and Tab S10+ gesture rotations",
+      "devices": [
+        "galaxy-s23-plus",
+        "galaxy-tab-s10-plus"
+      ]
+    },
+    {
+      "hash": "6905afba4f8461601a69d5d4c91558789df0789f",
+      "date": "2026-10-01",
+      "area": "site",
+      "kind": "added",
+      "summary": "Add Pixel 10a",
+      "devices": [],
+      "pr": 139
+    },
+    {
+      "hash": "96ae42eeb0827e6e0363fbafcfd7c338f3d4fecd",
+      "date": "2026-10-01",
+      "area": "site",
+      "kind": "corrected",
+      "summary": "Trail site entries with their pull request link",
+      "devices": [],
+      "pr": 137
+    },
+    {
       "hash": "20b232854e74be9777431a397cb83a91d1f44df2",
       "date": "2026-10-01",
       "area": "site",

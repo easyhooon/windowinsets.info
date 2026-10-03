@@ -5,7 +5,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { parseArgs } from "node:util";
 
-const VERSION = "0.1.0";
+const VERSION = "0.2.0";
 const DEFAULT_BASE = "https://windowinsets.info";
 const NAV_ALIASES = { gesture: "gesture", threebutton: "threeButton", "3-button": "threeButton", "3button": "threeButton", buttons: "threeButton" };
 const INSET_TYPES = ["statusBars", "navigationBars", "systemBars", "displayCutoutInsets", "systemGestures", "mandatorySystemGestures", "tappableElement"];
@@ -16,9 +16,13 @@ Usage:
   windowinsets-info list [--series <text>] [--status complete|partial|pending] [--json]
   windowinsets-info get <device> [--screen main|cover] [--nav gesture|3-button] [--unit dp|px] [--json]
   windowinsets-info fixtures [<device>...] [--series <text>] [--screen main|cover] [--nav gesture|3-button] [--unit dp|px]
+  windowinsets-info preview <device> [--screen main|cover] [--nav gesture|3-button] [--json]
+  windowinsets-info sizeclass <device> [--screen main|cover] [--json]
 
 <device> is a slug or part of one, e.g. galaxy-s26-ultra, s26-ultra, fold7.
 "fixtures" prints compact JSON of measured screens for tests; unmeasured screens are skipped, never estimated.
+"preview" prints a Compose @Preview spec per captured screen, rotation and navigation mode.
+"sizeclass" prints the WindowSizeClass and FoldingFeature of every captured rotation.
 
 Options:
   --base-url <url|dir>  Data source (default ${DEFAULT_BASE}; env WINDOWINSETS_BASE_URL). A local directory works too.
@@ -122,6 +126,28 @@ function rows(exported, { screen, nav, unit: u }) {
   return out;
 }
 
+const ROTATION_NAMES = ["ROTATION_0", "ROTATION_90", "ROTATION_180", "ROTATION_270"];
+const screenLabel = (exported, id) => (exported.screens.length > 1 ? `${id === "cover" ? "Cover" : "Main"} · ` : "");
+const sizeClassLabel = c => `${c.width}${c.widthExtended ? ` (${c.widthExtended})` : ""} / ${c.height}`;
+const featureLabel = f => [f.state, f.orientation, f.isSeparating ? "separating" : null,
+  f.orientation === "VERTICAL" ? `x=${fmt(f.boundsDp.left)}dp` : `y=${fmt(f.boundsDp.top)}dp`].filter(Boolean).join(" · ");
+const postureLabel = row => (row.foldingFeatures.length
+  ? `${row.foldingFeatures.map(featureLabel).join("; ")}${row.hingeAngleDegrees !== null ? ` · hinge sensor ${row.hingeAngleDegrees}°` : ""}` : null);
+
+/** Development values are only in published exports; older copies of the data have none. */
+function development(exported) {
+  if (exported.development) return exported.development;
+  throw new Error(`${exported.device.slug}: this data source has no development section yet.`);
+}
+
+/** Unique per capture, so every printed preview can be pasted into one file. */
+function composeName(exported, capture) {
+  const screen = exported.screens.length > 1 ? capture.screen : "";
+  const nav = capture.navigation === "threeButton" ? "three button" : "gesture";
+  const words = `${exported.device.name.replace(/^Galaxy\s+/, "")} ${screen} ${nav} rotation ${capture.rotation * 90} preview`;
+  return words.split(/[^A-Za-z0-9]+/).filter(Boolean).map(w => w[0].toUpperCase() + w.slice(1)).join("");
+}
+
 const pad = (text, width) => String(text).padEnd(width);
 const fmt = value => (value === null || value === undefined ? "-" : Number.isInteger(value) ? String(value) : value.toFixed(2));
 
@@ -183,6 +209,42 @@ async function main() {
     }
     if (opts.series) exports = exports.filter(e => `${e.device.series} ${e.device.name}`.toLowerCase().includes(opts.series.toLowerCase()));
     return console.log(JSON.stringify(exports.flatMap(e => rows(e, { screen, nav, unit: u })), null, 2));
+  }
+
+  if (command === "preview" || command === "sizeclass") {
+    if (args.length !== 1) throw new UsageError(`Usage: windowinsets-info ${command} <device>`);
+    const entry = resolveDevice(await load("/data/index.json"), args[0]);
+    const exported = await load(`/data/${entry.slug}.json`);
+    const dev = development(exported);
+    const source = `\nSource: ${pageBase}/${exported.device.slug}`;
+
+    if (command === "preview") {
+      const captures = dev.captures.filter(c => (!screen || c.screen === screen) && (!nav || c.navigation === nav));
+      if (opts.json) return console.log(JSON.stringify(captures.map(c => ({ device: exported.device.slug, ...c })), null, 2));
+      console.log(`${exported.device.name} (${exported.device.slug})`);
+      if (!captures.length) return console.log(`\nNo capture matches, so no Preview spec is offered.${source}`);
+      for (const c of captures) {
+        console.log(`\n// ${screenLabel(exported, c.screen)}${navLabel(c.navigation)} · ${ROTATION_NAMES[c.rotation]} (captured ${c.capturedAt})`);
+        console.log(`${c.composePreview}\n@Composable\nfun ${composeName(exported, c)}() {\n    // Your screen here\n}`);
+      }
+      console.log("\nSize and density match each capture. Compose Preview draws generic system bars and cutout, not One UI's.");
+      return console.log(source);
+    }
+
+    const rows = dev.windowSizeClasses.filter(row => !screen || row.screen === screen);
+    if (opts.json) return console.log(JSON.stringify(rows.map(row => ({ device: exported.device.slug, ...row })), null, 2));
+    console.log(`${exported.device.name} (${exported.device.slug})\n`);
+    const labels = rows.map(row => `${screenLabel(exported, row.screen)}${ROTATION_NAMES[row.rotation]}`);
+    const width = Math.max(...labels.map(l => l.length), 8) + 2;
+    rows.forEach((row, i) => {
+      const size = row.windowSizeDp ? `${fmt(row.windowSizeDp.width)} × ${fmt(row.windowSizeDp.height)} dp` : "";
+      console.log(`${pad(labels[i], width)}${pad(row.windowSizeClass ? sizeClassLabel(row.windowSizeClass) : "not measured yet", 28)}${size}`);
+      const posture = postureLabel(row);
+      if (posture) console.log(`${pad("", width)}${posture}`);
+    });
+    console.log("\nFrom WindowMetrics' maximum window in each capture (width 600 / 840 dp, height 480 / 900 dp; Large ≥ 1200 dp).");
+    console.log("Rotations without a capture are never derived by swapping width and height.");
+    return console.log(source);
   }
 
   throw new UsageError(`Unknown command "${command}".\n\n${HELP}`);
