@@ -86,7 +86,7 @@ export function DevelopmentDetails({ device, captures, measurement }: {
     {capture && <>
       <CodeBlock title="Emulator · adb" language="bash">{adbCommands(device, capture)}</CodeBlock>
       <p className="text-muted">
-        Runs your app at this capture's window size and density in the selected navigation mode and rotation.
+        Runs your app at this capture's window size and density in the selected navigation mode and rotation; open your app first, since a portrait-locked launcher keeps the display upright.
         The cutout is AOSP's generic punch hole and the system bars stay the emulator's own, so the measured insets above are not reproduced.
       </p>
     </>}

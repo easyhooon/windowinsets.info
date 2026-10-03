@@ -104,7 +104,9 @@ adb shell settings put system user_rotation ${capture.rotation}
 # Restore the emulator's defaults
 adb shell wm size reset
 adb shell wm density reset
+adb shell cmd overlay enable-exclusive --category com.android.internal.systemui.navbar.gestural
 adb shell cmd overlay disable com.android.internal.display.cutout.emulation.hole
+adb shell settings put system user_rotation 0
 adb shell settings put system accelerometer_rotation 1`;
 }
 
