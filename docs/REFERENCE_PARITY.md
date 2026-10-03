@@ -184,6 +184,16 @@ projection, so labels stay flat and outside the projected body.
   displayCutout())` with the IME hidden. The preview is a simulation, not a
   measurement, and is disabled on pending screens. Metrics adds Compose (dp)
   and View (px) snippets for the selected screen and mode.
+- **Use in development** (issue #159). A collapsed Metrics section above
+  "Android details & sources" turns the cited raw capture into a Compose
+  `@Preview(device = "spec:…")` line (exact px and dpi; Preview's bars and
+  cutout are generic, as the section says), the WindowSizeClass of every
+  captured screen and rotation from WindowMetrics' maximum window with the
+  `FoldingFeature` that capture reported, and an Android Studio hardware
+  profile. Uncaptured rotations read "not measured yet". The profile needs the
+  official diagonal (probe xdpi gives wrong physical sizes) and a density
+  Studio accepts; otherwise it is not offered. Pixel entries point to Studio's
+  built-in device profile.
 - **Support link.** Low-key Ko-fi and GitHub Sponsors links sit in the sidebar
   footer. After the first successful JSON export in a browser, a
   dismissible one-line note under the Metrics header repeats the Ko-fi link once;

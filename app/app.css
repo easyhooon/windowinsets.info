@@ -129,6 +129,15 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .source-kind.is-emulator { outline:1px dashed var(--color-muted); outline-offset:-1px; }
 .sources-details summary { font-weight:600; padding:8px 0; }
 .sources-details ul,.sources-details p { font-size:11px; line-height:1.6; }
+.dev-details + .sources-details { margin-top:0; }
+.dev-details p { margin:6px 0; }
+.dev-details .metric-row { cursor:default; }
+.size-class-list { margin-top:8px; font-size:12px; font-variant-numeric:tabular-nums; }
+.size-class-list li { list-style:none; padding:5px 0; border-bottom:1px solid var(--color-line-muted); }
+.size-class-list li > div { display:flex; justify-content:space-between; gap:8px; }
+.size-class-list strong { font-weight:600; text-align:right; }
+.size-class-list small { display:block; color:var(--color-muted); font-size:11px; line-height:1.5; }
+.dev-download { width:100%; justify-content:center; margin:6px 0 2px; padding:6px 10px; border:1px solid var(--color-line); border-radius:6px; font-size:12px; font-weight:600; }
 .canvas-panel { position:relative; min-width:0; min-height:0; display:flex; flex-direction:column; }
 [data-view-restore] .canvas-panel { visibility:hidden; }
 .canvas-stage { position:relative; min-height:0; flex:1; transition:opacity .15s ease-out; }

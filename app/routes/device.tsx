@@ -3,6 +3,7 @@ import { findDevice, hasVerifiedInsets } from "../data/devices";
 import { SITE_URL } from "../data/site";
 import { pageMeta } from "../lib/seo";
 import { deviceRawInsets } from "../data/rawInsets.server";
+import { deviceDevCaptures } from "../data/devCaptures.server";
 import { deviceSkins } from "../data/deviceSkins";
 import type { Route } from "./+types/device";
 
@@ -19,13 +20,13 @@ export function meta({ loaderData }: Route.MetaArgs) {
   });
 }
 
-/** Runs at prerender: the page's device, plus gesture and tappable insets read from the cited raw captures. */
+/** Runs at prerender: the page's device, plus gesture and tappable insets and developer facts read from the cited raw captures. */
 export function loader({ params }: Route.LoaderArgs) {
   const device = findDevice(params.slug);
   if (!device) throw new Response("Not Found", { status: 404 });
-  return { device, verified: hasVerifiedInsets(device), skins: deviceSkins(device), rawInsets: deviceRawInsets(device) };
+  return { device, verified: hasVerifiedInsets(device), skins: deviceSkins(device), rawInsets: deviceRawInsets(device), devCaptures: deviceDevCaptures(device) };
 }
 
-export default function DevicePage({ loaderData: { device, skins, rawInsets } }: Route.ComponentProps) {
-  return <DeviceView key={device.slug} device={device} skins={skins} rawInsets={rawInsets} />;
+export default function DevicePage({ loaderData: { device, skins, rawInsets, devCaptures } }: Route.ComponentProps) {
+  return <DeviceView key={device.slug} device={device} skins={skins} rawInsets={rawInsets} devCaptures={devCaptures} />;
 }
