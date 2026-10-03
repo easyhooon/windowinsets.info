@@ -123,7 +123,8 @@ projection, so labels stay flat and outside the projected body.
   theme inside its settings menu; that menu entry stays for the System option.
 - **Header GitHub link.** Like the reference, a GitHub repository link sits in the
   top-right controls, left of the theme toggle: GitHub mark plus "GitHub" on
-  desktop, the mark alone on phones. The sidebar footer keeps its star prompt.
+  desktop, the mark alone on phones; its tooltip asks for a star. It replaces the
+  former sidebar star prompt.
 - **Symmetric values appear once.** Equal lengths in a symmetric group (corner
   radii, opposing insets, opposing cutout offsets) share one badge; unequal
   lengths all remain. Comparison uses unrounded geometry. Interior TOP/BOTTOM
@@ -183,8 +184,8 @@ projection, so labels stay flat and outside the projected body.
   displayCutout())` with the IME hidden. The preview is a simulation, not a
   measurement, and is disabled on pending screens. Metrics adds Compose (dp)
   and View (px) snippets for the selected screen and mode.
-- **Support link.** Low-key Ko-fi and GitHub Sponsors links sit next to the GitHub
-  star prompt in the sidebar footer. After the first successful JSON export in a browser, a
+- **Support link.** Low-key Ko-fi and GitHub Sponsors links sit in the sidebar
+  footer. After the first successful JSON export in a browser, a
   dismissible one-line note under the Metrics header repeats the Ko-fi link once;
   there is no popup or recurring banner. Clicks emit `support_click`.
 - **Branding.** The OG image and favicon are generated Android inset artwork

@@ -153,7 +153,6 @@ export default function Shell() {
           </div>
           <p className="sidebar-footer-row">
             <span>Found this useful?</span>
-            <a href={REPO_URL} target="_blank" rel="noreferrer" aria-label="Star windowinsets.info on GitHub (opens in a new tab)">★ GitHub Star</a>
             <a href={KO_FI_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackSupportClick("ko_fi", "sidebar_footer")} onAuxClick={e => { if (e.button === 1) trackSupportClick("ko_fi", "sidebar_footer"); }} aria-label="Support windowinsets.info on Ko-fi (opens in a new tab)">☕ Ko-fi</a>
             <a href={SPONSORS_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackSupportClick("github_sponsors", "sidebar_footer")} onAuxClick={e => { if (e.button === 1) trackSupportClick("github_sponsors", "sidebar_footer"); }} aria-label="Sponsor windowinsets.info on GitHub Sponsors (opens in a new tab)">♥ Sponsor</a>
           </p>

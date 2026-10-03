@@ -666,7 +666,7 @@ export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; 
       <div className="canvas-toggles">{displayOptions}</div>
     </section>
     <div className="dropdown settings canvas-settings" ref={settings}>
-      <a className="toolbar-button github-star" href={REPO_URL} target="_blank" rel="noreferrer" aria-label="windowinsets.info on GitHub (opens in a new tab)"><Icon name="github" /><span>GitHub</span></a>
+      <a className="toolbar-button github-star" href={REPO_URL} title="Star on GitHub ★" target="_blank" rel="noreferrer" aria-label="windowinsets.info on GitHub (opens in a new tab)"><Icon name="github" /><span>GitHub</span></a>
       <button className="toolbar-button theme-toggle" aria-label="Toggle dark mode" onClick={() => {
         const dark = theme === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches : theme === "dark";
         setTheme(dark ? "light" : "dark");
