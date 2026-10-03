@@ -1,0 +1,40 @@
+name: Publish CLI
+
+# Publishes cli/ to npm with npm Trusted Publishing (OIDC): no npm token or 2FA
+# prompt. Release by pushing a tag that matches cli/package.json, e.g.
+#   git tag cli-v0.2.0 && git push origin cli-v0.2.0
+# One-time setup on npmjs.com: windowinsets-info > Settings > Trusted Publisher >
+# GitHub Actions, repository easyhooon/windowinsets.info, workflow publish-cli.yml.
+
+on:
+  push:
+    tags:
+      - "cli-v*"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: cli
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          # Node 24 ships npm 11, which Trusted Publishing requires (11.5.1+).
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - name: Check the tag, package and CLI versions agree
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if [ "cli-v$version" != "$GITHUB_REF_NAME" ] || [ "$(node bin/windowinsets.js --version)" != "$version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME, cli/package.json ($version) and the CLI's VERSION must match"
+            exit 1
+          fi
+      - run: npm install -g npm@latest
+      - run: npm publish --access public
