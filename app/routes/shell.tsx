@@ -104,6 +104,14 @@ export default function Shell() {
     if (next.has(group)) next.delete(group); else next.add(group);
     return next;
   });
+  // Enter opens the first listed match; ↓ moves focus into the results.
+  const searchKeys = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") { e.currentTarget.blur(); return; }
+    const first = e.currentTarget.closest(".device-sidebar")?.querySelector<HTMLAnchorElement>(".device-list a.device-link");
+    if (!first || !search) return;
+    if (e.key === "Enter") { e.preventDefault(); first.click(); }
+    else if (e.key === "ArrowDown") { e.preventDefault(); first.focus(); }
+  };
   const prefetchDevice = (d: Device) => { prefetchFoldRenderer(d.formFactor); prefetchSkinImages(d.skinImages); };
   const deviceLink = (d: Device) => <NavLink key={d.slug} to={`/${d.slug}`} onMouseEnter={() => prefetchDevice(d)} onFocus={() => prefetchDevice(d)} onTouchStart={() => prefetchDevice(d)} onClick={() => { trackDeviceSelection(d); setQuery(""); setMobileOpen(false); }} onAuxClick={e => { if (e.button === 1) trackDeviceSelection(d); }} className={`device-link ${current.slug === d.slug ? "selected" : ""}`}>
     <span className={`device-thumbnail ${d.formFactor}`} /><span>{d.name}<small>{deviceCaption(d)}</small></span>
@@ -117,7 +125,7 @@ export default function Shell() {
     <div className="app-content">
       <aside className={`device-sidebar ${mobileOpen ? "is-open" : ""}`} aria-label="Devices">
         <div className="sidebar-heading"><strong>Devices</strong><span>{devices.length}</span></div>
-        <label className="device-search"><Icon name="search" /><input ref={searchInput} type="search" aria-label="Search devices" aria-keyshortcuts="Meta+K Control+K /" value={query} onChange={e => setQuery(e.target.value)} onKeyDown={e => { if (e.key === "Escape") e.currentTarget.blur(); }} placeholder="Search devices…" />{searchHint && !query && <kbd className="search-shortcut" aria-hidden="true">{searchHint}</kbd>}</label>
+        <label className="device-search"><Icon name="search" /><input ref={searchInput} type="search" aria-label="Search devices" aria-keyshortcuts="Meta+K Control+K /" value={query} onChange={e => setQuery(e.target.value)} onKeyDown={searchKeys} placeholder="Search devices…" />{searchHint && !query && <kbd className="search-shortcut" aria-hidden="true">{searchHint}</kbd>}</label>
         <div className="device-brand-tabs" role="group" aria-label="Brand">
           {brands.map(option => <button key={option} type="button" aria-pressed={brand === option} onClick={() => selectFamily("All", option)}>{option}</button>)}
         </div>
