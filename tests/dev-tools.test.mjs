@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { runnerImport } from 'vite';
-import { avdProfile, extendedWidthClass, heightClass, previewSpec, sizeClassRows, widthClass } from '../app/data/devTools.ts';
+import { adbCommands, avdProfile, extendedWidthClass, heightClass, previewSpec, sizeClassRows, widthClass } from '../app/data/devTools.ts';
 
 const load = async () => {
   const { module: { devices } } = await runnerImport('./app/data/devices.ts', { root: process.cwd() });
@@ -50,4 +50,15 @@ test('hardware profiles use the official diagonal and portrait dimensions', asyn
   const diagonal = s26.screens.find(s => s.id === 'main').diagonalInch;
   assert.match(profile.xml, new RegExp(`<d:diagonal-length>${diagonal}</d:diagonal-length>`));
   assert.ok(Number(profile.xml.match(/<d:x-dimension>(\d+)/)[1]) < Number(profile.xml.match(/<d:y-dimension>(\d+)/)[1]));
+});
+
+test('adb commands use natural dimensions and the capture rotation', async () => {
+  const { devices, deviceDevCaptures } = await load();
+  const s26 = devices.find(d => d.slug === 'galaxy-s26-ultra');
+  const landscape = deviceDevCaptures(s26).find(c => c.screen === 'main' && c.rotation === 1 && c.nav === 'threeButton');
+  const commands = adbCommands(s26, landscape);
+  assert.match(commands, new RegExp(`wm size ${landscape.heightPx}x${landscape.widthPx}\n`));
+  assert.match(commands, new RegExp(`wm density ${landscape.densityDpi}\n`));
+  assert.match(commands, /navbar\.threebutton\n/);
+  assert.match(commands, /user_rotation 1\n/);
 });
