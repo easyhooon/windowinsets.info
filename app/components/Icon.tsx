@@ -1,5 +1,5 @@
 export type PoseGlyph = `${"book" | "flip" | "trifold"}-${"closed" | "partial" | "open"}`;
-export type IconName = "chevron" | "settings" | "sun" | "moon" | "search" | "check" | "zoom-in" | "zoom-out" | "zoom-fit" | "rotate-ccw" | "rotate-cw" | PoseGlyph;
+export type IconName = "chevron" | "settings" | "sun" | "moon" | "search" | "check" | "zoom-in" | "zoom-out" | "zoom-fit" | "rotate-ccw" | "rotate-cw" | "github" | PoseGlyph;
 
 // Pose glyphs follow each hinge: a Fold folds about a vertical hinge, a Flip about
 // a horizontal one, and a TriFold about two vertical hinges. Flip closed and
@@ -31,6 +31,7 @@ export function Icon({ name }: { name: IconName }) {
     {name === "zoom-fit" && <rect x="8.5" y="8.5" width="4" height="4" rx=".5" />}
     {name === "rotate-cw" && <><rect x="7" y="7" width="10" height="10" rx="1.5" /><path d="M3 8V6a3 3 0 0 1 3-3h2M6 1l2 2-2 2M21 16v2a3 3 0 0 1-3 3h-2m2-2-2 2 2 2" /></>}
     {name === "rotate-ccw" && <><rect x="7" y="7" width="10" height="10" rx="1.5" /><path d="M21 8V6a3 3 0 0 0-3-3h-2m2-2-2 2 2 2M3 16v2a3 3 0 0 0 3 3h2m-2-2 2 2-2 2" /></>}
+    {name === "github" && <path fill="currentColor" stroke="none" d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.53.1.72-.23.72-.5v-1.8c-2.92.63-3.54-1.4-3.54-1.4-.48-1.22-1.17-1.54-1.17-1.54-.95-.65.07-.64.07-.64 1.06.07 1.61 1.09 1.61 1.09.94 1.6 2.46 1.14 3.06.87.1-.68.37-1.14.66-1.4-2.33-.27-4.78-1.17-4.78-5.18 0-1.15.41-2.08 1.08-2.82-.1-.27-.47-1.33.1-2.78 0 0 .88-.28 2.89 1.08a10 10 0 0 1 5.26 0c2-1.36 2.88-1.08 2.88-1.08.58 1.45.21 2.51.1 2.78.68.74 1.08 1.67 1.08 2.82 0 4.02-2.45 4.9-4.79 5.16.38.33.71.97.71 1.96v2.9c0 .28.19.61.73.5A10.5 10.5 0 0 0 12 1.5z" />}
     {name in poses && poses[name as PoseGlyph]}
   </svg>;
 }

@@ -121,6 +121,9 @@ projection, so labels stay flat and outside the projected body.
 - **Header theme toggle.** A sun/moon button sits left of the settings gear and
   switches between Light and Dark in one click. The reference only offers the
   theme inside its settings menu; that menu entry stays for the System option.
+- **Header GitHub Star.** Like the reference, a GitHub link sits in the top-right
+  controls, left of the theme toggle: GitHub mark plus "Star" on desktop, the
+  mark alone on phones. The sidebar footer keeps its star prompt.
 - **Symmetric values appear once.** Equal lengths in a symmetric group (corner
   radii, opposing insets, opposing cutout offsets) share one badge; unequal
   lengths all remain. Comparison uses unrounded geometry. Interior TOP/BOTTOM

@@ -19,7 +19,7 @@ import { getRtlAvailability } from "../data/rtlAvailability";
 import { formatLength, hasExactPx, safeInsets, safeInsetsPx } from "../data/measurementUnits";
 import { deviceExportPath, deviceMarkdownPath, downloadDeviceExport } from "../data/deviceExport";
 import { testFixtureSnippet } from "../data/testFixture";
-import { KO_FI_URL } from "../data/site";
+import { KO_FI_URL, REPO_URL } from "../data/site";
 import { trackFoldPoseChange, trackJsonExport, trackSupportClick, trackUnitChange } from "../lib/analytics";
 import { useTheme } from "../lib/theme";
 import { skinImagePaths, useSkinImagesReady } from "../lib/skinImages";
@@ -666,6 +666,7 @@ export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; 
       <div className="canvas-toggles">{displayOptions}</div>
     </section>
     <div className="dropdown settings canvas-settings" ref={settings}>
+      <a className="toolbar-button github-star" href={REPO_URL} target="_blank" rel="noreferrer" aria-label="Star windowinsets.info on GitHub (opens in a new tab)"><Icon name="github" /><span>Star</span></a>
       <button className="toolbar-button theme-toggle" aria-label="Toggle dark mode" onClick={() => {
         const dark = theme === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches : theme === "dark";
         setTheme(dark ? "light" : "dark");

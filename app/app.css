@@ -152,6 +152,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .pill-button,.control-pill .toolbar-button { height:28px; min-height:28px; display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:0 8px; border:0; border-radius:14px; background:transparent; font-size:12px; white-space:nowrap; color:var(--color-fg); }
 .pill-button.icon { width:32px; padding:0; }
 .pill-button:hover,.control-pill .toolbar-button:hover { background:var(--color-hover); }
+.github-star { color:var(--color-fg); text-decoration:none; }
 .pill-button[aria-pressed=true] { background:var(--color-accent-subtle); color:var(--color-accent); }
 .segmented { display:flex; gap:2px; }
 .segmented .pill-button[aria-pressed=true] { background:var(--color-neutral); color:var(--color-fg); font-weight:600; }
@@ -225,6 +226,7 @@ html[data-theme="dark"] .theme-toggle>.theme-icon-dark { display:flex; }
   .dropdown.canvas-settings { top:8px; }
   .canvas-settings .toolbar-button { width:44px; min-height:40px; }
   .canvas-settings .toolbar-button svg { width:24px; height:24px; }
+  .github-star>span { display:none; }
   .dropdown-panel { max-width:calc(100vw - 24px); }
   .canvas-toggles { display:none; }
   .canvas-toggles-inline { display:flex; justify-content:center; max-width:100%; }

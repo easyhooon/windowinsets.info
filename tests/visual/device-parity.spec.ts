@@ -70,7 +70,8 @@ test("sidebar inquiry opens the GitHub issue template chooser", async ({ page },
     "https://github.com/easyhooon/windowinsets.info/issues/new/choose",
   );
   await expect(page.locator('.sidebar-footer a[href="https://github.com/easyhooon/windowinsets.info"]')).toHaveCount(1);
-  await expect(page.getByRole("link", { name: "Star windowinsets.info on GitHub (opens in a new tab)" })).toBeVisible();
+  await expect(page.locator(".sidebar-footer").getByRole("link", { name: "Star windowinsets.info on GitHub (opens in a new tab)" })).toBeVisible();
+  await expect(page.locator(".canvas-settings").getByRole("link", { name: "Star windowinsets.info on GitHub (opens in a new tab)" })).toHaveAttribute("href", "https://github.com/easyhooon/windowinsets.info");
   const support = page.getByRole("link", { name: "Support windowinsets.info on Ko-fi (opens in a new tab)" });
   await expect(support).toBeVisible();
   await expect(support).toHaveAttribute("href", "https://ko-fi.com/easyhooon");
