@@ -21,6 +21,7 @@ import { deviceExportPath, deviceMarkdownPath, downloadDeviceExport } from "../d
 import { testFixtureSnippet } from "../data/testFixture";
 import { trackFoldPoseChange, trackJsonExport, trackUnitChange } from "../lib/analytics";
 import { useTheme } from "../lib/theme";
+import { skinImagePaths, useSkinImagesReady } from "../lib/skinImages";
 import { parseViewState, serializeViewState, type ViewState } from "../lib/viewState";
 
 // three.js only ships to pages that show a 3D foldable.
@@ -280,6 +281,8 @@ export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; 
   const mainSafe = mainMeasurement ? safeInsets(mainMeasurement) : null;
   const mainSafePx = mainMeasurement ? safeInsetsPx(mainMeasurement) : null;
   const useFold = foldable && !!mainSkin;
+  // Hold the canvas until the visible artwork decodes, so the skin never pops in after the content.
+  const skinsReady = useSkinImagesReady(!showFrame ? [] : useFold ? [...skinImagePaths(mainSkin), ...skinImagePaths(outerSkin)] : skinImagePaths(skin));
   useFoldRef.current = useFold;
   const exactPxAvailable = hasExactPx(screen, measurement);
   useEffect(() => { if (units === "px" && !exactPxAvailable) setUnits("dp"); }, [exactPxAvailable, units]);
@@ -590,7 +593,7 @@ export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; 
     </div>
     <ResizeHandle label="Metrics width" value={metricsWidth} onChange={setMetricsWidth} min={250} max={400} />
     <section className="canvas-panel" aria-label="Device visualization">
-      <div className="canvas-stage">
+      <div className={`canvas-stage ${skinsReady ? "" : "skins-loading"}`}>
       <DiagramViewport viewportRef={viewport} autoFit={autoFit}
         zoom={zoom} setZoom={setZoom} rotation={0} fitKey={fitKey}
         onUserTransform={() => { setZoom(viewport.current?.effectiveZoom() ?? zoom); setAutoFit(false); }} onFit={() => setAutoFit(true)}
