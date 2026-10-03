@@ -8,6 +8,7 @@ import type {
   Screen,
   Source,
 } from "./types";
+import type { FoldingFeatureCapture, HeightClass, WidthClass } from "./devTools";
 
 /** "emulator" marks Android Emulator captures; they are never physical-device evidence. */
 type Evidence = "measured" | "emulator";
@@ -142,6 +143,48 @@ export interface PublicDeviceExport {
     sources: PublicSource[];
   }>;
   sources: PublicSource[];
+  /** Build-only: present in the published file, absent from browser-side exports. */
+  development?: PublicDevelopment;
+}
+
+export interface PublicWindowSizeClass {
+  width: WidthClass;
+  /** androidx.window 1.5 Large / Extra-large width classes; null below 1200dp. */
+  widthExtended: "Large" | "Extra-large" | null;
+  height: HeightClass;
+}
+
+/** Developer-facing values read from each raw capture the device page cites. */
+export interface PublicDevelopment {
+  captures: Array<{
+    screen: "cover" | "main";
+    /** Surface.ROTATION_* recorded by the probe. */
+    rotation: 0 | 1 | 2 | 3;
+    navigation: NavMode;
+    displaySizePx: Size;
+    densityDpi: number;
+    /** WindowMetrics maximum window, the size WindowSizeClass is computed from. */
+    windowSizeDp: Size;
+    windowSizeClass: PublicWindowSizeClass;
+    displayCutout: boolean;
+    hingeAngleDegrees: number | null;
+    foldingFeatures: FoldingFeatureCapture[];
+    /** Compose `@Preview` annotation matching this display; Preview draws generic system bars. */
+    composePreview: string;
+    capturedAt: string;
+    rawCapture: string;
+  }>;
+  /** One row per screen, rotation and folding feature; rotations without a capture are pending, never derived. */
+  windowSizeClasses: Array<{
+    screen: "cover" | "main";
+    rotation: 0 | 1 | 2 | 3;
+    status: "measured" | "pending";
+    windowSizeDp: Size | null;
+    windowSizeClass: PublicWindowSizeClass | null;
+    hingeAngleDegrees: number | null;
+    foldingFeatures: FoldingFeatureCapture[];
+    capturedAt: string | null;
+  }>;
 }
 
 function publicSource(source: Source): PublicSource {
@@ -239,7 +282,14 @@ function exportMeasurement(
   };
 }
 
-export function createDeviceExport(device: Device, barInsets: BarInsetsLookup = () => null): PublicDeviceExport {
+/** Builds the development section from raw captures; the build passes one, browsers have none. */
+export type DevelopmentLookup = (device: Device) => PublicDevelopment;
+
+export function createDeviceExport(
+  device: Device,
+  barInsets: BarInsetsLookup = () => null,
+  development?: DevelopmentLookup,
+): PublicDeviceExport {
   return {
     schema: DEVICE_EXPORT_SCHEMA,
     schemaVersion: DEVICE_EXPORT_SCHEMA_VERSION,
@@ -290,6 +340,7 @@ export function createDeviceExport(device: Device, barInsets: BarInsetsLookup = 
       };
     }),
     sources: device.sources.map(publicSource),
+    ...(development ? { development: development(device) } : {}),
   };
 }
 
@@ -306,8 +357,8 @@ export function deviceMarkdownPath(device: Pick<Device, "slug">): string {
   return `/${device.slug}.md`;
 }
 
-export function serializeDeviceExport(device: Device, barInsets?: BarInsetsLookup): string {
-  return `${JSON.stringify(createDeviceExport(device, barInsets), null, 2)}\n`;
+export function serializeDeviceExport(device: Device, barInsets?: BarInsetsLookup, development?: DevelopmentLookup): string {
+  return `${JSON.stringify(createDeviceExport(device, barInsets, development), null, 2)}\n`;
 }
 
 /** Saves `json` (the published export, so it carries build-only fields) as a file. */
@@ -406,11 +457,11 @@ export interface PublicDeviceBundle {
 }
 
 /** Every device export in one file, for bulk use (tests, CLI) without one request per device. */
-export function createDeviceBundle(devices: Device[], barInsets?: BarInsetsLookup): PublicDeviceBundle {
+export function createDeviceBundle(devices: Device[], barInsets?: BarInsetsLookup, development?: DevelopmentLookup): PublicDeviceBundle {
   return {
     schema: DEVICE_BUNDLE_SCHEMA,
     schemaVersion: 1,
     deviceCount: devices.length,
-    devices: devices.map(device => createDeviceExport(device, barInsets)),
+    devices: devices.map(device => createDeviceExport(device, barInsets, development)),
   };
 }

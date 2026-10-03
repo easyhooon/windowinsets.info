@@ -64,5 +64,16 @@ label `emulator` instead of `measured`. Their `condition.oneUi` is `null` and
 fingerprint, emulator version and manifest URL; Samsung captures export
 `condition.emulator: null`.
 
+Published files (the `/data/` URLs and the **Export JSON** download) also carry
+an optional `development` object, read at build time from every raw capture the
+device page cites. `development.captures` lists each capture's screen,
+`Surface.ROTATION_*` value, navigation mode, display size in px, density,
+WindowMetrics maximum window in dp, its `WindowSizeClass`, whether a cutout was
+reported, the hinge sensor angle, the `FoldingFeature`s and a matching Compose
+`@Preview` annotation. `development.windowSizeClasses` has one row per screen,
+rotation and folding feature; rotations a screen can take but no capture
+recorded are `"status": "pending"` with null sizes, never derived by swapping
+axes. The `windowinsets-info preview` and `sizeclass` commands read this object.
+
 Schema additions will remain backward-compatible within version 1. Any breaking
 field or meaning change requires a new `schemaVersion`.

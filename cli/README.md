@@ -60,6 +60,35 @@ evidence kind and source page.
 Values describe the screen in its capture orientation. Separately captured
 rotations are shown on the device page.
 
+### Compose Preview specs
+
+`preview` prints a Compose `@Preview(device = "spec:…")` for every captured
+screen, rotation and navigation mode, with the exact pixel size and density of
+the capture:
+
+```bash
+npx windowinsets-info preview s26-ultra --nav gesture
+npx windowinsets-info preview z-fold8 --screen cover --json
+```
+
+Each `@Composable` gets a unique name, so the output can be pasted into one file.
+Compose Preview draws its own generic system bars and cutout, not One UI's;
+check layouts against the measured insets from `get`.
+
+### Window size classes
+
+`sizeclass` lists the `WindowSizeClass` of every captured rotation, computed from
+WindowMetrics' maximum window (width 600 / 840 dp, height 480 / 900 dp; Large
+≥ 1200 dp), and the `FoldingFeature` each capture reported:
+
+```bash
+npx windowinsets-info sizeclass z-fold8
+npx windowinsets-info sizeclass tab-s10-plus --json
+```
+
+Rotations without a capture read "not measured yet"; they are never derived by
+swapping width and height.
+
 ## Data source
 
 The CLI reads the public JSON exports: `/data/index.json`, `/data/<slug>.json`

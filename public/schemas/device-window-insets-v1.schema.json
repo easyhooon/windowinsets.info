@@ -10,7 +10,17 @@
     "schemaVersion": { "const": 1 },
     "device": { "$ref": "#/$defs/device" },
     "screens": { "type": "array", "items": { "$ref": "#/$defs/screen" } },
-    "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } }
+    "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } },
+    "development": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["captures", "windowSizeClasses"],
+      "description": "Present in published files only. Values read from each raw capture the device page cites; rotations without a capture are pending, never derived.",
+      "properties": {
+        "captures": { "type": "array", "items": { "$ref": "#/$defs/developmentCapture" } },
+        "windowSizeClasses": { "type": "array", "items": { "$ref": "#/$defs/windowSizeClassRow" } }
+      }
+    }
   },
   "$defs": {
     "size": {
@@ -347,6 +357,102 @@
           }
         },
         "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } }
+      }
+    },
+    "windowSizeClass": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "widthExtended", "height"],
+      "properties": {
+        "width": { "enum": ["Compact", "Medium", "Expanded"] },
+        "widthExtended": { "enum": ["Large", "Extra-large", null] },
+        "height": { "enum": ["Compact", "Medium", "Expanded"] }
+      }
+    },
+    "foldingFeature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "orientation", "isSeparating", "occlusionType", "boundsDp"],
+      "properties": {
+        "state": { "enum": ["FLAT", "HALF_OPENED"] },
+        "orientation": { "enum": ["VERTICAL", "HORIZONTAL"] },
+        "isSeparating": { "type": "boolean" },
+        "occlusionType": { "type": "string" },
+        "boundsDp": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["left", "top", "right", "bottom"],
+          "properties": {
+            "left": { "type": "number" },
+            "top": { "type": "number" },
+            "right": { "type": "number" },
+            "bottom": { "type": "number" }
+          }
+        }
+      }
+    },
+    "developmentCapture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "screen",
+        "rotation",
+        "navigation",
+        "displaySizePx",
+        "densityDpi",
+        "windowSizeDp",
+        "windowSizeClass",
+        "displayCutout",
+        "hingeAngleDegrees",
+        "foldingFeatures",
+        "composePreview",
+        "capturedAt",
+        "rawCapture"
+      ],
+      "properties": {
+        "screen": { "enum": ["cover", "main"] },
+        "rotation": { "enum": [0, 1, 2, 3], "description": "Surface.ROTATION_* recorded by the probe." },
+        "navigation": { "enum": ["gesture", "threeButton"] },
+        "displaySizePx": { "$ref": "#/$defs/size" },
+        "densityDpi": { "type": "integer", "minimum": 1 },
+        "windowSizeDp": {
+          "$ref": "#/$defs/size",
+          "description": "WindowMetrics maximum window, the size WindowSizeClass is computed from."
+        },
+        "windowSizeClass": { "$ref": "#/$defs/windowSizeClass" },
+        "displayCutout": { "type": "boolean" },
+        "hingeAngleDegrees": { "type": ["number", "null"] },
+        "foldingFeatures": { "type": "array", "items": { "$ref": "#/$defs/foldingFeature" } },
+        "composePreview": {
+          "type": "string",
+          "description": "Compose @Preview annotation matching this display. Preview draws generic system bars and cutout."
+        },
+        "capturedAt": { "type": "string", "format": "date" },
+        "rawCapture": { "type": "string" }
+      }
+    },
+    "windowSizeClassRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "screen",
+        "rotation",
+        "status",
+        "windowSizeDp",
+        "windowSizeClass",
+        "hingeAngleDegrees",
+        "foldingFeatures",
+        "capturedAt"
+      ],
+      "properties": {
+        "screen": { "enum": ["cover", "main"] },
+        "rotation": { "enum": [0, 1, 2, 3], "description": "Surface.ROTATION_* recorded by the probe." },
+        "status": { "enum": ["measured", "pending"] },
+        "windowSizeDp": { "oneOf": [{ "$ref": "#/$defs/size" }, { "type": "null" }] },
+        "windowSizeClass": { "oneOf": [{ "$ref": "#/$defs/windowSizeClass" }, { "type": "null" }] },
+        "hingeAngleDegrees": { "type": ["number", "null"] },
+        "foldingFeatures": { "type": "array", "items": { "$ref": "#/$defs/foldingFeature" } },
+        "capturedAt": { "type": ["string", "null"], "format": "date" }
       }
     }
   }

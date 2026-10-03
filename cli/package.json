@@ -1,6 +1,6 @@
 {
   "name": "windowinsets-info",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Measured Android WindowInsets, display cutouts and safe areas for Samsung Galaxy and Google Pixel devices, from windowinsets.info",
   "license": "MIT",
   "type": "module",
