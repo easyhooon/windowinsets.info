@@ -19,7 +19,8 @@ import { getRtlAvailability } from "../data/rtlAvailability";
 import { formatLength, hasExactPx, safeInsets, safeInsetsPx } from "../data/measurementUnits";
 import { deviceExportPath, deviceMarkdownPath, downloadDeviceExport } from "../data/deviceExport";
 import { testFixtureSnippet } from "../data/testFixture";
-import { trackFoldPoseChange, trackJsonExport, trackUnitChange } from "../lib/analytics";
+import { KO_FI_URL } from "../data/site";
+import { trackFoldPoseChange, trackJsonExport, trackSupportClick, trackUnitChange } from "../lib/analytics";
 import { useTheme } from "../lib/theme";
 import { skinImagePaths, useSkinImagesReady } from "../lib/skinImages";
 import { parseViewState, serializeViewState, type ViewState } from "../lib/viewState";
@@ -62,6 +63,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return <h3 className="mt-5 mb-1 text-xs font-semibold uppercase tracking-wide text-subtle first:mt-0">{children}</h3>;
 }
 
+const SUPPORT_NOTICE_KEY = "windowinsets.supportNoticeShown";
 const PENDING = <span className="text-subtle">pending</span>;
 
 function gcd(a: number, b: number): number {
@@ -213,6 +215,7 @@ export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; 
   const [theme, setTheme] = useTheme();
   const [metricsOpen, setMetricsOpen] = useState(false);
   const [exportStatus, setExportStatus] = useState("");
+  const [supportNotice, setSupportNotice] = useState(false);
   const settings = useRef<HTMLDivElement>(null);
   const exportTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   useEffect(() => () => clearTimeout(exportTimer.current), []);
@@ -418,6 +421,13 @@ export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; 
       downloadDeviceExport(device, await response.text());
       trackJsonExport(device);
       setExportStatus("JSON downloaded");
+      // One thank-you per browser, right after the export actually helped.
+      try {
+        if (!localStorage.getItem(SUPPORT_NOTICE_KEY)) {
+          localStorage.setItem(SUPPORT_NOTICE_KEY, "1");
+          setSupportNotice(true);
+        }
+      } catch { /* Storage can be blocked; skip the notice then. */ }
     } catch {
       setExportStatus("Download unavailable");
     }
@@ -437,6 +447,10 @@ export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; 
         </div>
         <span className="sr-only" role="status">{exportStatus}</span>
       </div>
+      {supportNotice && <p className="support-notice">
+        <span>JSON saved. If this saved you time, <a href={KO_FI_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackSupportClick("export_notice")} onAuxClick={e => { if (e.button === 1) trackSupportClick("export_notice"); }} aria-label="Support windowinsets.info on Ko-fi (opens in a new tab)">☕ support it on Ko-fi ↗</a></span>
+        <button type="button" className="support-notice-close" aria-label="Dismiss support note" onClick={() => setSupportNotice(false)}>×</button>
+      </p>}
       <div className="metrics-content">
         {foldable && <div className="screen-tabs" aria-label="Display">{device.screens.map(s => <button key={s.id} aria-pressed={screen.id === s.id} onClick={() => selectPose(s.id === "cover" ? "0" : "180", "display_tab")}>{s.label === "Main" ? "Inner" : "Outer"}</button>)}</div>}
             <SectionLabel>Dimensions</SectionLabel>
