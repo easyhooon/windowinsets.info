@@ -72,6 +72,33 @@ every intermediate angle. No precise hinge angle is sent.
   activations on the site; Ko-fi handles donation completion separately. The
   README link is outside site analytics.
 
+## Daily Discord report
+
+`.github/workflows/analytics-daily-report.yml` runs
+`scripts/analytics-daily-report.mjs` every day at 00:00 UTC (09:00 KST) and on
+manual dispatch. It reads yesterday's data (in the property's time zone) through
+the GA4 Data API and posts one plain-text Discord message (in Korean, at the
+maintainer's request, for a private channel): active/new users,
+sessions, page views, total events, device selections and JSON exports, then
+activity by platform (device category), the top events, the most viewed devices
+and the most viewed pages.
+
+1. In Google Cloud, enable the **Google Analytics Data API**, create a service
+   account and download a JSON key.
+2. In GA4 Admin → Property access management, add the service account email
+   with the **Viewer** role. Copy the numeric **Property ID** from Property details.
+3. In Discord, open Channel settings → Integrations → Webhooks and copy a
+   webhook URL.
+4. Add repository secrets `GA4_PROPERTY_ID`, `GA4_SERVICE_ACCOUNT_KEY` (the
+   whole JSON key) and `DISCORD_WEBHOOK_URL`, then run the workflow manually
+   once from the Actions tab.
+
+Without `DISCORD_WEBHOOK_URL` the script prints the payload instead, which is
+useful for a local dry run. Each section queries separately; a failing section
+(for example an unregistered custom dimension) is marked in the message and
+fails the run after posting. Data for the previous day can still be processing
+at run time, so late events may appear in GA4 but not in the report.
+
 ## Collection scope
 
 No account IDs, custom user identifiers, search input, session recordings or
