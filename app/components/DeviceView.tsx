@@ -14,6 +14,9 @@ import { DiagramViewport, type DiagramViewportHandle } from "./DiagramViewport";
 import type { DeviceSkin } from "../data/skins";
 import { loadFoldRenderer } from "./foldRendererChunk";
 import { ResizeHandle } from "./ResizeHandle";
+import { CodeBlock } from "./LazyCodeBlock";
+import { DevelopmentDetails } from "./DevelopmentDetails";
+import type { DevCapture } from "../data/devTools";
 import { Icon } from "./Icon";
 import { getRtlAvailability } from "../data/rtlAvailability";
 import { formatLength, hasExactPx, safeInsets, safeInsetsPx } from "../data/measurementUnits";
@@ -33,13 +36,6 @@ function OnMount({ effect }: { effect: () => void }) {
   return null;
 }
 
-// highlight.js loads only once a snippet is shown; until then the plain code stands in.
-const LazyCodeBlock = lazy(() => import("./CodeBlock").then(module => ({ default: module.CodeBlock })));
-function CodeBlock(props: { children: string; title: string }) {
-  return <Suspense fallback={<div className="code-block"><div className="code-block-toolbar"><span>Kotlin</span></div><pre><code className="hljs">{props.children}</code></pre></div>}>
-    <LazyCodeBlock {...props} />
-  </Suspense>;
-}
 
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
   const [status, setStatus] = useState("");
@@ -189,7 +185,7 @@ const RAW_SECTIONS: Array<[RawInsetType, string]> = [
   ["mandatorySystemGestures", "Mandatory System Gestures"], ["tappableElement", "Tappable Element"],
 ];
 
-export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; skins: Record<string, DeviceSkin>; rawInsets?: RawInsetsMap }) {
+export function DeviceView({ device, skins, rawInsets = {}, devCaptures = [] }: { device: Device; skins: Record<string, DeviceSkin>; rawInsets?: RawInsetsMap; devCaptures?: DevCapture[] }) {
   const initialHasCover = device.screens.some(screen => screen.id === "cover");
   const [metricsWidth, setMetricsWidth] = useState(292);
   const [navMode, setNavMode] = useState<NavMode>("threeButton");
@@ -539,6 +535,7 @@ export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; 
               </>
             )}
 
+        <DevelopmentDetails device={device} captures={devCaptures} measurement={measurement} />
         <details className="sources-details"><summary>Android details & sources</summary>
           {emulatorOnly ? <section className="rtl-status emulator-status" aria-label="Capture provenance">
             {measurement?.condition.emulator ? <a href={measurement.condition.emulator.manifestUrl} target="_blank" rel="noreferrer">Android Emulator capture ↗</a> : <strong>Android Emulator capture</strong>}
