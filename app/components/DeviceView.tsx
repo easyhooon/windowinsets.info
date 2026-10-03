@@ -448,7 +448,7 @@ export function DeviceView({ device, skins, rawInsets = {} }: { device: Device; 
         <span className="sr-only" role="status">{exportStatus}</span>
       </div>
       {supportNotice && <p className="support-notice">
-        <span>JSON saved. If this saved you time, <a href={KO_FI_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackSupportClick("export_notice")} onAuxClick={e => { if (e.button === 1) trackSupportClick("export_notice"); }} aria-label="Support windowinsets.info on Ko-fi (opens in a new tab)">☕ support it on Ko-fi ↗</a></span>
+        <span>JSON saved. If this saved you time, <a href={KO_FI_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackSupportClick("ko_fi", "export_notice")} onAuxClick={e => { if (e.button === 1) trackSupportClick("ko_fi", "export_notice"); }} aria-label="Support windowinsets.info on Ko-fi (opens in a new tab)">☕ support it on Ko-fi ↗</a></span>
         <button type="button" className="support-notice-close" aria-label="Dismiss support note" onClick={() => setSupportNotice(false)}>×</button>
       </p>}
       <div className="metrics-content">

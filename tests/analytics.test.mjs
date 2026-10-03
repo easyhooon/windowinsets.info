@@ -26,7 +26,7 @@ test('analytics gates collection and tracks interest independently from default 
     analytics.trackJsonExport(model);
     analytics.trackUnitChange(model, 'px');
     analytics.trackFoldPoseChange(model, 90, 'hinge_slider');
-    analytics.trackSupportClick();
+    analytics.trackSupportClick('ko_fi', 'sidebar_footer');
     assert.equal(scripts.length, 0);
     assert.equal(window.dataLayer, undefined);
 
@@ -46,7 +46,8 @@ test('analytics gates collection and tracks interest independently from default 
     analytics.trackUnitChange(model, 'px');
     analytics.trackFoldPoseChange(model, 90, 'hinge_slider');
     analytics.trackFoldPoseChange(model, 180, 'pose_menu');
-    analytics.trackSupportClick();
+    analytics.trackSupportClick('ko_fi', 'sidebar_footer');
+    analytics.trackSupportClick('github_sponsors', 'sidebar_footer');
     analytics.trackPageView('/galaxy-z-fold8', model);
     analytics.trackPageView('/methodology');
     analytics.trackPageView('/galaxy-z-fold8', model); // browser Back
@@ -75,8 +76,9 @@ test('analytics gates collection and tracks interest independently from default 
     assert.equal(poseChanges[1][2].fold_pose, 'open');
     assert.equal(poseChanges[1][2].control_source, 'pose_menu');
     const supportClicks = events.filter(c => c[1] === 'support_click');
-    assert.equal(supportClicks.length, 1);
+    assert.equal(supportClicks.length, 2);
     assert.deepEqual(supportClicks[0][2], { support_platform: 'ko_fi', link_location: 'sidebar_footer' });
+    assert.deepEqual(supportClicks[1][2], { support_platform: 'github_sponsors', link_location: 'sidebar_footer' });
   } finally {
     delete globalThis.window;
     delete globalThis.document;

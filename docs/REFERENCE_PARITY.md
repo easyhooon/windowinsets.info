@@ -180,9 +180,9 @@ projection, so labels stay flat and outside the projected body.
   displayCutout())` with the IME hidden. The preview is a simulation, not a
   measurement, and is disabled on pending screens. Metrics adds Compose (dp)
   and View (px) snippets for the selected screen and mode.
-- **Support link.** A low-key Ko-fi link sits next to the GitHub star prompt in
-  the sidebar footer. After the first successful JSON export in a browser, a
-  dismissible one-line note under the Metrics header repeats the link once;
+- **Support link.** Low-key Ko-fi and GitHub Sponsors links sit next to the GitHub
+  star prompt in the sidebar footer. After the first successful JSON export in a browser, a
+  dismissible one-line note under the Metrics header repeats the Ko-fi link once;
   there is no popup or recurring banner. Clicks emit `support_click`.
 - **Branding.** The OG image and favicon are generated Android inset artwork
   documented in `design/brand/README.md`.

@@ -40,7 +40,7 @@ Without that ID the site works normally and analytics remains disabled.
 | `json_export` | Export JSON click after the browser download action returns without error | Device parameters; does not confirm the file was saved to disk |
 | `unit_change` | User changes the Metrics dimension unit | Device parameters plus `dimension_unit=dp` or `px`; automatic fallback to dp is excluded |
 | `fold_pose_change` | User changes a foldable's display tab or pose menu, or finishes a hinge-slider adjustment | Device parameters plus `fold_pose=closed`, `partially_open`, or `open`, and `control_source=display_tab`, `pose_menu`, or `hinge_slider`; unchanged selections are excluded |
-| `support_click` | User activates a Ko-fi link | `support_platform=ko_fi`, `link_location=sidebar_footer` or `export_notice` (the one-time note after the first JSON export); counts an outbound click, not a completed donation |
+| `support_click` | User activates a Ko-fi or GitHub Sponsors link | `support_platform=ko_fi` or `github_sponsors`, `link_location=sidebar_footer` or `export_notice` (the one-time note after the first JSON export); counts an outbound click, not a completed donation |
 
 `form_factor` is the **viewed model's** category: `bar`, `foldable-book`,
 `foldable-flip`, `foldable-trifold`, or `tablet`. It is not the visitor's hardware.
@@ -69,7 +69,7 @@ every intermediate angle. No precise hinge angle is sent.
   `fold_pose_change`. Break down unit changes by `dimension_unit` and pose
   changes by `fold_pose` or `control_source`; these are actions, not unique users.
 - **Support interest:** Filter Event name to `support_click`, split by
-  `link_location`. This counts link activations on the site; Ko-fi handles donation completion separately. The
+  `support_platform` and `link_location`. This counts link activations on the site; Ko-fi and GitHub Sponsors handle donation completion separately. The
   README link is outside site analytics.
 
 ## Daily Discord report

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink, Outlet, useLoaderData, useLocation, useParams } from "react-router";
 import { devices as catalog } from "../data/devices";
 import { summarizeDevice, type DeviceSummary } from "../data/deviceSummary";
-import { FEATURED_SLUG, KO_FI_URL, REPO_URL } from "../data/site";
+import { FEATURED_SLUG, KO_FI_URL, REPO_URL, SPONSORS_URL } from "../data/site";
 import { ResizeHandle } from "../components/ResizeHandle";
 import { Icon } from "../components/Icon";
 import { prefetchFoldRenderer } from "../components/foldRendererChunk";
@@ -153,8 +153,9 @@ export default function Shell() {
           </div>
           <p className="sidebar-footer-row">
             <span>Found this useful?</span>
-            <a href={REPO_URL} target="_blank" rel="noreferrer" aria-label="Star windowinsets.info on GitHub (opens in a new tab)">★ Star on GitHub</a>
-            <a href={KO_FI_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackSupportClick("sidebar_footer")} onAuxClick={e => { if (e.button === 1) trackSupportClick("sidebar_footer"); }} aria-label="Support windowinsets.info on Ko-fi (opens in a new tab)">☕ Ko-fi ↗</a>
+            <a href={REPO_URL} target="_blank" rel="noreferrer" aria-label="Star windowinsets.info on GitHub (opens in a new tab)">★ GitHub Star</a>
+            <a href={KO_FI_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackSupportClick("ko_fi", "sidebar_footer")} onAuxClick={e => { if (e.button === 1) trackSupportClick("ko_fi", "sidebar_footer"); }} aria-label="Support windowinsets.info on Ko-fi (opens in a new tab)">☕ Ko-fi</a>
+            <a href={SPONSORS_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackSupportClick("github_sponsors", "sidebar_footer")} onAuxClick={e => { if (e.button === 1) trackSupportClick("github_sponsors", "sidebar_footer"); }} aria-label="Sponsor windowinsets.info on GitHub Sponsors (opens in a new tab)">♥ Sponsor</a>
           </p>
           <a href="https://safearea.info" target="_blank" rel="noreferrer">Inspired by safearea.info ↗</a>
         </nav>

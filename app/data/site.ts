@@ -3,4 +3,5 @@
 export const SITE_URL = "https://windowinsets.info";
 export const REPO_URL = "https://github.com/easyhooon/windowinsets.info";
 export const KO_FI_URL = "https://ko-fi.com/easyhooon";
+export const SPONSORS_URL = "https://github.com/sponsors/easyhooon";
 export const FEATURED_SLUG = "galaxy-z-flip8";

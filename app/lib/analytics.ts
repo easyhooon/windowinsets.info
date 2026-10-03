@@ -61,10 +61,10 @@ export function trackJsonExport(device: Device) {
   window.gtag?.("event", "json_export", deviceParameters(device));
 }
 
-export function trackSupportClick(linkLocation: "sidebar_footer" | "export_notice") {
+export function trackSupportClick(platform: "ko_fi" | "github_sponsors", linkLocation: "sidebar_footer" | "export_notice") {
   if (!ready) return;
   window.gtag?.("event", "support_click", {
-    support_platform: "ko_fi",
+    support_platform: platform,
     link_location: linkLocation,
   });
 }

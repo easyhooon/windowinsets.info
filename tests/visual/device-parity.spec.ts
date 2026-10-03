@@ -74,6 +74,9 @@ test("sidebar inquiry opens the GitHub issue template chooser", async ({ page },
   const support = page.getByRole("link", { name: "Support windowinsets.info on Ko-fi (opens in a new tab)" });
   await expect(support).toBeVisible();
   await expect(support).toHaveAttribute("href", "https://ko-fi.com/easyhooon");
+  const sponsor = page.getByRole("link", { name: "Sponsor windowinsets.info on GitHub Sponsors (opens in a new tab)" });
+  await expect(sponsor).toBeVisible();
+  await expect(sponsor).toHaveAttribute("href", "https://github.com/sponsors/easyhooon");
   await expect(page.locator(".sidebar-footer")).toHaveScreenshot("sidebar-footer-inquiry.png");
 });
 
