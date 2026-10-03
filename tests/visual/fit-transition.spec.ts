@@ -106,7 +106,7 @@ for (const slug of ["galaxy-z-fold8", "galaxy-z-flip8"]) {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(`/${slug}`);
     await settled(page, 0);
-    const closed = await sample(page);
+    const closed = await stableSample(page);
     for (const [pose, angle] of [["Open", 180], ["Partially Folded", 90], ["Closed", 0]] as const) {
       await choose(page, "Pose", pose);
       await settled(page, angle);
