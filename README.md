@@ -39,6 +39,8 @@ npx windowinsets-info fixtures --series fold > insets.json
 
 Each device also has a Markdown reference at `/<slug>.md` (the **Markdown** button in the Metrics panel). The same data is plain JSON: `/data/<slug>.json` per device, `/data/index.json` for the list and `/data/all.json` for everything at once (see [JSON export format](docs/JSON_EXPORT.md)). AI tools can start from [`/llms.txt`](https://windowinsets.info/llms.txt).
 
+New to insets? The [developer guide](https://windowinsets.info/developer-guide) covers the basics, Compose and View code, [foldables](https://windowinsets.info/developer-guide/foldables), common patterns and [using this data in your code](https://windowinsets.info/developer-guide/data). Data and site updates are listed in the [changelog](https://windowinsets.info/changelog) ([RSS](https://windowinsets.info/changelog.xml)).
+
 ## Documentation
 
 Start with this README for the product, data limits, device priorities and local development. The other documents have narrower purposes:
@@ -53,7 +55,7 @@ Start with this README for the product, data limits, device priorities and local
 | Set up the probe's capture inbox | [Capture upload](docs/CAPTURE_UPLOAD.md) |
 | Launch the probe on a Flip cover display | [Probe FlexWindow guide](tools/insets-probe/FLEXWINDOW_README.md) |
 | Consume the downloadable device data | [JSON export format](docs/JSON_EXPORT.md) |
-| Configure and interpret site analytics | [Analytics](docs/ANALYTICS.md) |
+| Configure and interpret site analytics and the daily Discord report | [Analytics](docs/ANALYTICS.md) |
 | Keep the client bundle small and re-measure it | [Frontend performance](docs/PERFORMANCE.md) |
 | Check asset attribution | [Third-party notices](docs/THIRD_PARTY_NOTICES.md) |
 
@@ -335,6 +337,12 @@ Keep emulator provenance separate from real-device evidence; missing measurement
 stay pending. For a hardware comparison, preserve the raw Test Lab result under
 `testlab-<date>/` and record the physical model, build, screen and test matrix.
 See [Pixel hardware validation](docs/PIXEL_HARDWARE_VALIDATION.md).
+
+## Support
+
+If this saved you a device purchase or an RTL session, you can star the
+repository, [buy me a coffee on Ko-fi](https://ko-fi.com/easyhooon) or
+[sponsor on GitHub](https://github.com/sponsors/easyhooon).
 
 ## Development
 
