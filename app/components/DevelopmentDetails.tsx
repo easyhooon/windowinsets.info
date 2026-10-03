@@ -1,6 +1,6 @@
 import { CodeBlock } from "./LazyCodeBlock";
 import {
-  avdProfile, extendedWidthClass, foldingFeatureLabel, heightClass, previewSnippet, ROTATION_NAMES, sizeClassRows, widthClass,
+  adbCommands, avdProfile, extendedWidthClass, foldingFeatureLabel, heightClass, previewSnippet, ROTATION_NAMES, sizeClassRows, widthClass,
   type DevCapture, type FoldingFeatureCapture,
 } from "../data/devTools";
 import type { Device, InsetsMeasurement } from "../data/types";
@@ -83,6 +83,13 @@ export function DevelopmentDetails({ device, captures, measurement }: {
           {foldable && " Android Studio profiles describe a single screen; each display gets its own profile."}
         </p>
       </> : <p className="text-muted">{profile?.reason ?? "No capture for this selection."}</p>}
+    {capture && <>
+      <CodeBlock title="Emulator · adb" language="bash">{adbCommands(device, capture)}</CodeBlock>
+      <p className="text-muted">
+        Runs your app at this capture's window size and density in the selected navigation mode and rotation.
+        The cutout is AOSP's generic punch hole and the system bars stay the emulator's own, so the measured insets above are not reproduced.
+      </p>
+    </>}
     {device.brand === "Samsung" && <a href={SAMSUNG_SKINS_URL} className="block text-accent underline" target="_blank" rel="noreferrer">Official Samsung emulator skins ↗</a>}
   </details>;
 }

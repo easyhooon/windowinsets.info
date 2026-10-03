@@ -82,6 +82,32 @@ function composableName(device: Device, capture: DevCapture): string {
   return words.split(/[^A-Za-z0-9]+/).filter(Boolean).map(w => w[0].toUpperCase() + w.slice(1)).join("");
 }
 
+/**
+ * adb commands that put an emulator into this capture's display size, density,
+ * navigation mode and rotation. Window size and density are exact; the cutout is
+ * AOSP's generic punch-hole simulation, and status and navigation bars stay the
+ * emulator's own, so the measured insets are not reproduced.
+ */
+export function adbCommands(device: Device, capture: DevCapture): string {
+  // wm size takes the natural (rotation 0) dimensions; user_rotation turns the display.
+  const [width, height] = capture.rotation % 2 === 0 ? [capture.widthPx, capture.heightPx] : [capture.heightPx, capture.widthPx];
+  const screen = device.screens.length > 1 ? ` · ${capture.screen}` : "";
+  const nav = capture.nav === "gesture" ? "gestural" : "threebutton";
+  return `# ${device.name}${screen} · ${capture.nav === "gesture" ? "gesture" : "3-button"} · ${ROTATION_NAMES[capture.rotation]} (captured ${capture.capturedAt})
+adb shell wm size ${width}x${height}
+adb shell wm density ${capture.densityDpi}
+adb shell cmd overlay enable-exclusive --category com.android.internal.systemui.navbar.${nav}
+${capture.cutout ? "adb shell cmd overlay enable-exclusive --category com.android.internal.display.cutout.emulation.hole" : "adb shell cmd overlay disable com.android.internal.display.cutout.emulation.hole"}
+adb shell settings put system accelerometer_rotation 0
+adb shell settings put system user_rotation ${capture.rotation}
+
+# Restore the emulator's defaults
+adb shell wm size reset
+adb shell wm density reset
+adb shell cmd overlay disable com.android.internal.display.cutout.emulation.hole
+adb shell settings put system accelerometer_rotation 1`;
+}
+
 /** Densities Android Studio's hardware profile format accepts (com.android.resources.Density). */
 export const AVD_DENSITIES = [120, 140, 160, 180, 200, 213, 220, 240, 260, 280, 300, 320, 340, 360, 390, 400, 420, 440, 450, 480, 520, 560, 600, 640];
 

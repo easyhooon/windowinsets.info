@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import hljs from "highlight.js/lib/core";
 import type { HLJSApi, Language } from "highlight.js";
 import kotlin from "highlight.js/lib/languages/kotlin";
+import bash from "highlight.js/lib/languages/bash";
 
 // The stock Kotlin grammar only colors keywords, strings, comments and numbers,
 // leaving Compose calls and named arguments plain. Add IDE-like modes for them.
@@ -19,12 +20,16 @@ function kotlinWithCalls(api: HLJSApi): Language {
 }
 
 hljs.registerLanguage("kotlin", kotlinWithCalls);
+hljs.registerLanguage("bash", bash);
 
-export function CodeBlock({ children, title }: { children: string; title: string }) {
+export type CodeLanguage = "kotlin" | "bash";
+export const LANGUAGE_LABELS: Record<CodeLanguage, string> = { kotlin: "Kotlin", bash: "Shell" };
+
+export function CodeBlock({ children, title, language = "kotlin" }: { children: string; title: string; language?: CodeLanguage }) {
   const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
   const highlighted = useMemo(
-    () => hljs.highlight(children, { language: "kotlin" }).value,
-    [children],
+    () => hljs.highlight(children, { language }).value,
+    [children, language],
   );
 
   useEffect(() => {
@@ -45,7 +50,7 @@ export function CodeBlock({ children, title }: { children: string; title: string
   return (
     <div className="code-block">
       <div className="code-block-toolbar">
-        <span>Kotlin</span>
+        <span>{LANGUAGE_LABELS[language]}</span>
         <button type="button" onClick={copy} aria-label={`Copy ${title} code`}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
             {status === "copied" ? <path d="m5 12 4 4L19 6" /> : <>
@@ -56,8 +61,8 @@ export function CodeBlock({ children, title }: { children: string; title: string
           {status === "copied" ? "Copied!" : "Copy"}
         </button>
       </div>
-      <pre tabIndex={0} aria-label={`${title} — Kotlin code`}>
-        <code className="hljs language-kotlin" dangerouslySetInnerHTML={{ __html: highlighted }} />
+      <pre tabIndex={0} aria-label={`${title} — ${LANGUAGE_LABELS[language]} code`}>
+        <code className={`hljs language-${language}`} dangerouslySetInnerHTML={{ __html: highlighted }} />
       </pre>
       <p role="status" className={status === "error" ? "code-block-error" : "sr-only"}>
         {status === "copied" ? "Code copied to clipboard." : status === "error" ? "Could not copy. Select the code and copy it manually." : ""}
