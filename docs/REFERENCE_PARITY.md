@@ -181,7 +181,9 @@ projection, so labels stay flat and outside the projected body.
   measurement, and is disabled on pending screens. Metrics adds Compose (dp)
   and View (px) snippets for the selected screen and mode.
 - **Support link.** A low-key Ko-fi link sits next to the GitHub star prompt in
-  the sidebar footer; there is no popup or banner. Clicks emit `support_click`.
+  the sidebar footer. After the first successful JSON export in a browser, a
+  dismissible one-line note under the Metrics header repeats the link once;
+  there is no popup or recurring banner. Clicks emit `support_click`.
 - **Branding.** The OG image and favicon are generated Android inset artwork
   documented in `design/brand/README.md`.
 
