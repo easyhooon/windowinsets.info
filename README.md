@@ -1,3 +1,4 @@
+[Featured in Android Weekly #747](https://androidweekly.net/issues/issue-747)
 # windowinsets.info
 
 Window insets, display cutouts, corner radii and foldable hinge states for Samsung Galaxy and Google Pixel devices. The site shows where its measurements came from.
