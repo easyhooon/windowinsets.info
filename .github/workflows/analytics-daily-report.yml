@@ -18,8 +18,27 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-      - run: node scripts/analytics-daily-report.mjs
+      - name: Restore GitHub stars snapshots
+        id: stars-cache
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/cache/restore@v4
+        with:
+          path: .analytics/github-stars.json
+          key: github-stars-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: github-stars-${{ github.repository }}-
+      - id: report
+        run: node scripts/analytics-daily-report.mjs
         env:
           GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
           GA4_SERVICE_ACCOUNT_KEY: ${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Save GitHub stars snapshots
+        if: always() && steps.report.outputs.stars_snapshot_saved == 'true'
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/cache/save@v4
+        with:
+          path: .analytics/github-stars.json
+          key: github-stars-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}

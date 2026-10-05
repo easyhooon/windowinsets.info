@@ -84,6 +84,28 @@ support-link clicks split by `support_platform` (Ko-fi / GitHub Sponsors), then
 activity by platform (device category), the top events, the most viewed devices
 and the most viewed pages.
 
+It also reports the current GitHub star total and the net change from the previous
+KST collection day's saved total. Unstars are included because the comparison uses
+repository totals, not a count of star notifications. Stars are sampled when the
+report runs, separately from GA4's previous-day activity. The existing real-time
+GitHub-to-Discord webhook is independent and remains unchanged.
+
+The workflow uses the automatic `GITHUB_TOKEN` with the existing `contents: read`
+permission to read the repository total. Successful samples are saved in an Actions
+cache; no new secret or repository-write permission is needed. Same-day manual
+reruns update that day's total while preserving the previous-day baseline. The first
+run, a missed previous day, or a missing/evicted cache shows the total only. An older
+snapshot is never labelled as a previous-day comparison. A star lookup failure is
+marked in the message without recording zero, overwriting the snapshot, or stopping
+the other statistics. Cache failures also leave the other statistics running.
+
+After this workflow change reaches `main`, its next scheduled or manually dispatched
+run starts collecting star snapshots. The first successful collection establishes
+the baseline; a following KST day with a saved preceding-day sample can show the net
+change. A website build or hosting redeploy is not required. The schedule remains
+00:00 UTC, but Actions scheduling can be delayed; it is not an exact delivery-time
+guarantee. See [GitHub's schedule documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+
 1. In Google Cloud, enable the **Google Analytics Data API**, create a service
    account and download a JSON key.
 2. In GA4 Admin → Property access management, add the service account email

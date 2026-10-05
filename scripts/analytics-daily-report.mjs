@@ -3,6 +3,8 @@
 // DISCORD_WEBHOOK_URL (optional; without it the message is printed instead).
 // "yesterday" follows the GA4 property's reporting time zone.
 import { createSign } from "node:crypto";
+import { appendFile } from "node:fs/promises";
+import { collectGithubStars } from "./github-stars-report.mjs";
 
 const { GA4_PROPERTY_ID, GA4_SERVICE_ACCOUNT_KEY, DISCORD_WEBHOOK_URL } = process.env;
 if (!GA4_PROPERTY_ID || !GA4_SERVICE_ACCOUNT_KEY) {
@@ -118,7 +120,18 @@ const queries = {
 
 // Each query fails independently so one bad dimension does not hide the rest.
 const names = Object.keys(queries);
-const settled = await Promise.allSettled(names.map((name) => runReport(token, queries[name])));
+const [settled, stars] = await Promise.all([
+  Promise.allSettled(names.map((name) => runReport(token, queries[name]))),
+  collectGithubStars({
+    repository: process.env.GITHUB_REPOSITORY || "easyhooon/windowinsets.info",
+    token: process.env.GITHUB_TOKEN,
+    statePath: process.env.GITHUB_STARS_STATE_PATH || ".analytics/github-stars.json",
+  }),
+]);
+if (stars.snapshotSaved && process.env.GITHUB_OUTPUT) {
+  await appendFile(process.env.GITHUB_OUTPUT, "stars_snapshot_saved=true\n")
+    .catch(() => console.error("Could not mark the GitHub stars snapshot for caching."));
+}
 const reports = {};
 settled.forEach((result, i) => {
   if (result.status === "fulfilled") reports[names[i]] = rows(result.value);
@@ -160,6 +173,7 @@ function section(title, report, format) {
 const content = [
   `📊 **WindowInsets 일일 활동 — ${headerDate()}**`,
   overview(),
+  stars.line,
   "",
   section("플랫폼별 활동", reports.platforms, ({ dimensions: [category], metrics: [users, views] }) =>
     `• ${PLATFORM_LABELS[category] ?? escape(category)}: 활성 ${number(users)}명 · 페이지 조회 ${number(views)}회`),
@@ -172,7 +186,7 @@ const content = [
   "",
   section("많이 본 페이지", reports.pages, ({ dimensions: [path], metrics: [count] }) =>
     `• ${escape(path)}: ${number(count)}회`),
-  "_Google Analytics 전날 집계이며 추후 보정될 수 있습니다._",
+  "_Google Analytics 전날 집계이며 추후 보정될 수 있습니다. Stars는 조회 시점의 총개수입니다._",
 ].join("\n");
 
 if (!DISCORD_WEBHOOK_URL) {
