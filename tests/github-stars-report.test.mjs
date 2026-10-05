@@ -94,57 +94,80 @@ test('snapshot write failure still returns the real total without marking it sav
   });
 });
 
+async function runDailyReport(f, { starsFail = false, total = 123, discordFail = false } = {}) {
+  const payloadPath = join(f.dir, 'discord.json');
+  const outputPath = join(f.dir, 'github-output');
+  await writeFile(outputPath, '');
+  const entry = new URL('../scripts/analytics-daily-report.mjs', import.meta.url).href;
+  // Stub signing in this child process; no service-account key or network is used.
+  const source = `
+    import crypto from 'node:crypto';
+    import { syncBuiltinESMExports } from 'node:module';
+    import { writeFile } from 'node:fs/promises';
+    crypto.createSign = () => ({ update() { return this; }, sign() { return 'test-signature'; } });
+    syncBuiltinESMExports();
+    globalThis.fetch = async (url, options) => {
+      if (url === 'https://oauth2.googleapis.com/token') return { ok: true, json: async () => ({ access_token: 'test-access-token' }) };
+      if (url === 'https://api.github.com/repos/${repository}') return ${starsFail ? '{ ok: false, status: 503 }' : `{ ok: true, json: async () => ({ stargazers_count: ${total} }) }`};
+      if (url.startsWith('https://analyticsdata.googleapis.com/')) {
+        const body = JSON.parse(options.body);
+        const dimensions = (body.dimensions ?? []).map(d => ({ value: ({ date: '20261004', deviceCategory: 'desktop', eventName: 'device_select', pageTitle: 'Galaxy Z Fold8 Window Insets', pagePath: '/galaxy-z-fold8', 'customEvent:support_platform': 'ko_fi' })[d.name] }));
+        return { ok: true, json: async () => ({ rows: [{ dimensionValues: dimensions, metricValues: body.metrics.map(() => ({ value: '10' })) }] }) };
+      }
+      if (url === 'https://discord.example.invalid/test-hook') {
+        await writeFile(${JSON.stringify(payloadPath)}, options.body);
+        return ${discordFail ? "{ ok: false, status: 503, text: async () => 'mock delivery failure' }" : '{ ok: true }'};
+      }
+      throw new Error('Unexpected network request');
+    };
+    await import(${JSON.stringify(entry)});
+  `;
+  const child = spawnSync(process.execPath, ['--input-type=module', '--eval', source], {
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      GA4_PROPERTY_ID: 'test-property',
+      GA4_SERVICE_ACCOUNT_KEY: JSON.stringify({ client_email: 'test@example.invalid', private_key: 'unused-signing-stub' }),
+      DISCORD_WEBHOOK_URL: 'https://discord.example.invalid/test-hook',
+      GITHUB_REPOSITORY: repository,
+      GITHUB_TOKEN: 'test-secret',
+      GITHUB_STARS_STATE_PATH: f.statePath,
+      GITHUB_OUTPUT: outputPath,
+    },
+  });
+  const payload = JSON.parse(await readFile(payloadPath, 'utf8'));
+  return { child, payload, output: await readFile(outputPath, 'utf8') };
+}
+
 for (const starsFail of [false, true]) {
   test(`the real daily-report entry point posts other statistics when stars ${starsFail ? 'fail' : 'succeed'}`, async t => {
     const f = await fixture(t);
-    const payloadPath = join(f.dir, 'discord.json');
-    const outputPath = join(f.dir, 'github-output');
-    await writeFile(outputPath, '');
-    const entry = new URL('../scripts/analytics-daily-report.mjs', import.meta.url).href;
-    // Stub signing in this child process; no service-account key or network is used.
-    const source = `
-      import crypto from 'node:crypto';
-      import { syncBuiltinESMExports } from 'node:module';
-      import { writeFile } from 'node:fs/promises';
-      crypto.createSign = () => ({ update() { return this; }, sign() { return 'test-signature'; } });
-      syncBuiltinESMExports();
-      globalThis.fetch = async (url, options) => {
-        if (url === 'https://oauth2.googleapis.com/token') return { ok: true, json: async () => ({ access_token: 'test-access-token' }) };
-        if (url === 'https://api.github.com/repos/${repository}') return ${starsFail ? '{ ok: false, status: 503 }' : '{ ok: true, json: async () => ({ stargazers_count: 123 }) }'};
-        if (url.startsWith('https://analyticsdata.googleapis.com/')) {
-          const body = JSON.parse(options.body);
-          const dimensions = (body.dimensions ?? []).map(d => ({ value: ({ date: '20261004', deviceCategory: 'desktop', eventName: 'device_select', pageTitle: 'Galaxy Z Fold8 Window Insets', pagePath: '/galaxy-z-fold8', 'customEvent:support_platform': 'ko_fi' })[d.name] }));
-          return { ok: true, json: async () => ({ rows: [{ dimensionValues: dimensions, metricValues: body.metrics.map(() => ({ value: '10' })) }] }) };
-        }
-        if (url === 'https://discord.example.invalid/test-hook') {
-          await writeFile(${JSON.stringify(payloadPath)}, options.body);
-          return { ok: true };
-        }
-        throw new Error('Unexpected network request');
-      };
-      await import(${JSON.stringify(entry)});
-    `;
-    const child = spawnSync(process.execPath, ['--input-type=module', '--eval', source], {
-      encoding: 'utf8',
-      env: {
-        ...process.env,
-        GA4_PROPERTY_ID: 'test-property',
-        GA4_SERVICE_ACCOUNT_KEY: JSON.stringify({ client_email: 'test@example.invalid', private_key: 'unused-signing-stub' }),
-        DISCORD_WEBHOOK_URL: 'https://discord.example.invalid/test-hook',
-        GITHUB_REPOSITORY: repository,
-        GITHUB_TOKEN: 'test-secret',
-        GITHUB_STARS_STATE_PATH: f.statePath,
-        GITHUB_OUTPUT: outputPath,
-      },
-    });
+    const { child, payload, output } = await runDailyReport(f, { starsFail });
     assert.equal(child.status, 0, child.stderr);
-    const payload = JSON.parse(await readFile(payloadPath, 'utf8'));
     assert.match(payload.content, /활성 사용자 \*\*10명\*\*/);
     assert.match(payload.content, /플랫폼별 활동/);
     assert.match(payload.content, starsFail ? /GitHub Stars: ⚠️ 조회 실패/ : /GitHub Stars: 총 \*\*123개\*\*/);
     assert.equal(payload.username, 'WindowInsets Stats');
     assert.deepEqual(payload.allowed_mentions, { parse: [] });
-    assert.equal(await readFile(outputPath, 'utf8'), starsFail ? '' : 'stars_snapshot_saved=true\n');
+    assert.equal(output, starsFail ? '' : 'stars_snapshot_saved=true\n');
     assert.ok(!child.stdout.includes('test-secret') && !child.stderr.includes('test-secret'));
   });
 }
+
+test('failed Discord delivery and its retry retain the cached previous-day baseline', async t => {
+  const { today, yesterday } = snapshotDates(new Date());
+  const f = await fixture(t, { [yesterday]: 116 });
+  const failed = await runDailyReport(f, { total: 123, discordFail: true });
+  assert.notEqual(failed.child.status, 0);
+  assert.match(failed.child.stderr, /Discord webhook failed: 503/);
+  assert.match(failed.payload.content, /전일 대비 \*\*\+7\*\*/);
+  assert.equal(failed.output, 'stars_snapshot_saved=true\n');
+  assert.deepEqual((await f.state()).snapshots, { [yesterday]: 116, [today]: 123 });
+
+  const retried = await runDailyReport(f, { total: 124 });
+  assert.equal(retried.child.status, 0, retried.child.stderr);
+  assert.match(retried.payload.content, /전일 대비 \*\*\+8\*\*/);
+  assert.match(retried.payload.content, /활성 사용자 \*\*10명\*\*/);
+  assert.equal(retried.output, 'stars_snapshot_saved=true\n');
+  assert.deepEqual((await f.state()).snapshots, { [yesterday]: 116, [today]: 124 });
+});
