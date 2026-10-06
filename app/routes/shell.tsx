@@ -153,7 +153,7 @@ export default function Shell() {
           {!filtered.length && <p className="p-3 text-sm text-muted">No devices found.</p>}
         </nav>
         <nav className="sidebar-footer">
-          <div className="sidebar-footer-row">
+          <div className="sidebar-footer-row sidebar-footer-links">
             <NavLink to="/developer-guide" onClick={() => setMobileOpen(false)}>Developer guide</NavLink>
             <NavLink to="/methodology" onClick={() => setMobileOpen(false)}>How I measure</NavLink>
             <NavLink to="/changelog" onClick={() => setMobileOpen(false)}>Changelog</NavLink>

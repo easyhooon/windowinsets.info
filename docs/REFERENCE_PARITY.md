@@ -125,6 +125,9 @@ projection, so labels stay flat and outside the projected body.
   top-right controls, left of the theme toggle: GitHub mark plus "GitHub" on
   desktop, the mark alone on phones; its tooltip asks for a star. It replaces the
   former sidebar star prompt.
+- **Sidebar footer links.** On desktop the footer lists one link per line at
+  13px, since the tall device list leaves room; phones keep the compact wrapped
+  row inside the picker.
 - **Symmetric values appear once.** Equal lengths in a symmetric group (corner
   radii, opposing insets, opposing cutout offsets) share one badge; unequal
   lengths all remain. Comparison uses unrounded geometry. Interior TOP/BOTTOM
