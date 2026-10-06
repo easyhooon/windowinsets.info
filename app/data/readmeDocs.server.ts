@@ -26,6 +26,13 @@ const marked = new Marked({
     if (token.type === "link" || token.type === "image") token.href = rewrite(token.href, token.type === "image");
   },
   renderer: {
+    /** A one-row table of images (the hinge GIFs) becomes captioned figures that can stack on phones. */
+    table({ header, rows }) {
+      const cells = rows.length === 1 ? rows[0].map(cell => this.parser.parseInline(cell.tokens)) : [];
+      if (!cells.length || !cells.every(cell => cell.includes("<img"))) return false;
+      const figures = cells.map((cell, i) => `<figure>${cell}<figcaption>${this.parser.parseInline(header[i].tokens)}</figcaption></figure>`);
+      return `<div class="docs-gallery">${figures.join("")}</div>\n`;
+    },
     heading({ tokens, depth }) {
       const html = this.parser.parseInline(tokens);
       return `<h${depth} id="${slugify(html)}">${html}</h${depth}>\n`;
