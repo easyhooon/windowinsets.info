@@ -39,8 +39,11 @@ Completion criterion: name the AVD, the screens (`main,cover` for foldables,
 
 ## 2. Prepare the host
 
-- Free disk space before booting; an AVD needs several GB. Unused
-  `system-images/` can be removed with the user's standing permission.
+- Free disk space before booting; an AVD needs several GB. If space is short,
+  list `system-images/` entries that no AVD's `config.ini` references, with
+  their sizes, and ask the user before deleting each one. Ask every time — a
+  past approval does not carry over, and a re-download costs several GB and
+  minutes the user did not agree to spend.
 - Use only the SDK `adb` (`~/Library/Android/sdk/platform-tools/adb`). A second
   adb on `PATH` (Homebrew 33.x) fights over the daemon on port 5037 and makes
   commands fail intermittently.
