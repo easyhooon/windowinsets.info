@@ -110,6 +110,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .docs-content :is(th,td) { padding:6px 10px; border:1px solid var(--color-line); text-align:left; vertical-align:top; }
 .docs-content th { color:var(--color-fg); background:var(--color-surface); }
 .docs-content img { max-width:100%; height:auto; }
+.docs-gallery { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:0 0 12px; }
+.docs-gallery figure { margin:0; text-align:center; }
+.docs-gallery img { display:block; width:100%; border-radius:8px; }
+.docs-gallery figcaption { margin-top:6px; color:var(--color-fg); font-size:13px; }
+@media(max-width:767px) { .docs-gallery { grid-template-columns:minmax(0,1fr); gap:20px; } }
 /* Desktop has room below the device list: one prominent link per line. */
 @media(min-width:768px) { .sidebar-footer-links { flex-direction:column; gap:6px; font-size:13px; } }
 .workspace { min-width:0; flex:1; overflow:auto; }
