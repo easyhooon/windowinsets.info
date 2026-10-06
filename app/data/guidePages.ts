@@ -23,7 +23,7 @@ export const GUIDE_PAGES = [
     slug: "patterns",
     nav: "Patterns",
     title: "Common window inset patterns",
-    description: "Edge-to-edge defaults, cutouts, lists under the navigation bar, immersive media, edge swipes, custom bottom controls and the keyboard.",
+    description: "Edge-to-edge defaults, cutouts, lists under the navigation bar, immersive media, edge swipes, custom bottom controls, the keyboard and WebViews.",
   },
   {
     slug: "data",
@@ -35,7 +35,7 @@ export const GUIDE_PAGES = [
     slug: "references",
     nav: "References",
     title: "Official references",
-    description: "Android and Samsung documentation on window insets, edge-to-edge and foldables.",
+    description: "Android and Samsung documentation on window insets, edge-to-edge, foldables and WebViews.",
   },
 ] as const;
 

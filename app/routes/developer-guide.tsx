@@ -531,6 +531,66 @@ controller.hide(WindowInsetsCompat.Type.systemBars())`}</CodeBlock>
           needs no extra padding.
         </p>
       </Section>
+
+      <Section id="webview" title="WebViews">
+        <p>
+          A full-screen <code>WebView</code> is edge to edge too, and Android 16 removes the
+          opt-out. How to handle it depends on whether your app owns the web content, as
+          described in Android Developers'{" "}
+          <a href="https://medium.com/androiddevelopers/make-webviews-edge-to-edge-a6ef319adfac" target="_blank" rel="noreferrer">Make WebViews edge-to-edge</a>
+          .
+        </p>
+        <h3>Content you don't own</h3>
+        <p>
+          Pad the WebView's container instead of the page: in Compose, apply{" "}
+          <code>Modifier.windowInsetsPadding(WindowInsets.safeDrawing)</code> to the{" "}
+          <code>AndroidView</code>; in Views, wrap it in a <code>FrameLayout</code> and pad that
+          for <code>systemBars</code>, <code>displayCutout</code> and <code>ime</code>. Set the
+          window background close to the page's so the padded strips don't stand out.
+        </p>
+        <h3>Content you own</h3>
+        <p>
+          Let the page draw edge to edge and pad it in CSS. Add{" "}
+          <code>viewport-fit=cover</code> to the viewport meta tag. Android WebView may report{" "}
+          <code>env(safe-area-inset-*)</code> as <code>0px</code>, so pass the insets in from
+          the app as CSS variables, converted from px to dp (one dp is one CSS px at{" "}
+          <code>initial-scale=1</code>):
+        </p>
+        <CodeBlock title="Injecting safe-area insets into the page">{`ViewCompat.setOnApplyWindowInsetsListener(webView) { view, insets ->
+  val safe = insets.getInsets(Type.systemBars() or Type.displayCutout() or Type.ime())
+  val metrics = view.resources.displayMetrics
+  fun dp(px: Int) = TypedValueCompat.pxToDp(px.toFloat(), metrics)
+  webView.evaluateJavascript(
+    """
+    const s = document.documentElement.style;
+    s.setProperty('--safe-area-inset-top', '${"${dp(safe.top)}"}px');
+    s.setProperty('--safe-area-inset-right', '${"${dp(safe.right)}"}px');
+    s.setProperty('--safe-area-inset-bottom', '${"${dp(safe.bottom)}"}px');
+    s.setProperty('--safe-area-inset-left', '${"${dp(safe.left)}"}px');
+    """, null)
+  insets
+}
+webView.webViewClient = object : WebViewClient() {
+  override fun onPageFinished(view: WebView, url: String) {
+    view.requestApplyInsets() // re-send insets to the loaded page
+  }
+}`}</CodeBlock>
+        <CodeBlock title="Using the variables in the page" language="xml">{`<meta name="viewport" content="viewport-fit=cover, initial-scale=1">
+<style>
+  body {
+    padding: var(--safe-area-inset-top) var(--safe-area-inset-right)
+             var(--safe-area-inset-bottom) var(--safe-area-inset-left);
+  }
+</style>`}</CodeBlock>
+        <p>
+          Keep <code>ime()</code> in the mask: without it, a text field focused near the bottom
+          stays behind the keyboard and the page cannot scroll it into view. In Compose, read{" "}
+          <code>WindowInsets.safeDrawing</code> and inject the values from the{" "}
+          <code>AndroidView</code> <code>update</code> block so they follow the keyboard.
+          With the keyboard hidden, the values match the <b>Safe Area Insets</b> on each
+          device page.
+        </p>
+      </Section>
     </>
   ),
   data: () => (
@@ -661,6 +721,11 @@ controller.hide(WindowInsetsCompat.Type.systemBars())`}</CodeBlock>
           <li>
             <a href="https://developer.samsung.com/one-ui/largescreen-and-foldable/designing_for_foldable.html" target="_blank" rel="noreferrer">
               Samsung: Designing for foldables
+            </a>
+          </li>
+          <li>
+            <a href="https://medium.com/androiddevelopers/make-webviews-edge-to-edge-a6ef319adfac" target="_blank" rel="noreferrer">
+              Android Developers blog: Make WebViews edge-to-edge
             </a>
           </li>
         </ul>

@@ -3,6 +3,8 @@ import hljs from "highlight.js/lib/core";
 import type { HLJSApi, Language } from "highlight.js";
 import kotlin from "highlight.js/lib/languages/kotlin";
 import bash from "highlight.js/lib/languages/bash";
+import css from "highlight.js/lib/languages/css";
+import xml from "highlight.js/lib/languages/xml";
 
 // The stock Kotlin grammar only colors keywords, strings, comments and numbers,
 // leaving Compose calls and named arguments plain. Add IDE-like modes for them.
@@ -21,9 +23,11 @@ function kotlinWithCalls(api: HLJSApi): Language {
 
 hljs.registerLanguage("kotlin", kotlinWithCalls);
 hljs.registerLanguage("bash", bash);
+hljs.registerLanguage("css", css);
+hljs.registerLanguage("xml", xml);
 
-export type CodeLanguage = "kotlin" | "bash";
-export const LANGUAGE_LABELS: Record<CodeLanguage, string> = { kotlin: "Kotlin", bash: "Shell" };
+export type CodeLanguage = "kotlin" | "bash" | "xml";
+export const LANGUAGE_LABELS: Record<CodeLanguage, string> = { kotlin: "Kotlin", bash: "Shell", xml: "HTML" };
 
 export function CodeBlock({ children, title, language = "kotlin" }: { children: string; title: string; language?: CodeLanguage }) {
   const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
