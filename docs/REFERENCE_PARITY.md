@@ -125,6 +125,14 @@ projection, so labels stay flat and outside the projected body.
   top-right controls, left of the theme toggle: GitHub mark plus "GitHub" on
   desktop, the mark alone on phones; its tooltip asks for a star. It replaces the
   former sidebar star prompt.
+- **Header Docs link.** A borderless "Docs" text link, styled as site navigation
+  rather than a tool button, sits left of the GitHub link and opens
+  `/docs`, the README rendered at build time without the sections the How I
+  measure page covers. Phones keep three header buttons so the wordmark fits, and
+  reach Docs from the settings menu instead. The reference has no docs page.
+- **Sidebar footer links.** On desktop the footer lists one link per line at
+  13px, since the tall device list leaves room; phones keep the compact wrapped
+  row inside the picker.
 - **Symmetric values appear once.** Equal lengths in a symmetric group (corner
   radii, opposing insets, opposing cutout offsets) share one badge; unequal
   lengths all remain. Comparison uses unrounded geometry. Interior TOP/BOTTOM

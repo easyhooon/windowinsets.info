@@ -123,7 +123,7 @@ export const featuredDevice = devices.find(device => device.slug === FEATURED_SL
 export { REPO_URL, SITE_URL };
 
 /** Non-device pages that are prerendered and listed in the sitemap. */
-export const STATIC_PATHS = ["/", "/methodology", ...GUIDE_PAGES.map(page => guidePath(page.slug)), "/changelog"];
+export const STATIC_PATHS = ["/", "/methodology", ...GUIDE_PAGES.map(page => guidePath(page.slug)), "/docs", "/changelog"];
 
 export const allPaths = () => [...STATIC_PATHS, ...devices.map((d) => `/${d.slug}`)];
 
