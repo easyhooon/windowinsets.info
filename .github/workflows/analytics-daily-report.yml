@@ -78,6 +78,7 @@ jobs:
           sparse-checkout: |
             scripts/send-daily-report.mjs
             scripts/report-delivery.mjs
+            api/_lib/donations/
       - uses: actions/setup-node@v5
         with:
           node-version: 22
@@ -86,6 +87,8 @@ jobs:
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ github.token }}
+          # Read-only private ledger access; aggregates never enter prepare outputs.
+          DONATIONS_LEDGER_READ_TOKEN: ${{ secrets.DONATIONS_LEDGER_READ_TOKEN }}
           REPORT_JSON: ${{ needs.prepare.outputs.report }}
           # Oct 6 was sent by legacy run 37406226305 without a message-ID receipt.
           # A delayed transition-day run must not post again against an empty ledger.

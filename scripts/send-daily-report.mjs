@@ -1,6 +1,8 @@
 // The isolated sender accepts data-only JSON and needs no GA4 key or dependencies.
 import { readFile } from "node:fs/promises";
 import { createDeliveryStore, deliverReport, deliveryWindowOpen } from "./report-delivery.mjs";
+import { githubLedgerStore } from "../api/_lib/donations/receiver.mjs";
+import { appendDonationSection, collectDonationSection } from "../api/_lib/donations/collect.mjs";
 
 // The migration-day legacy send has no durable receipt. Avoid a second send without inventing one.
 if (!deliveryWindowOpen({ notBefore: process.env.DELIVERY_NOT_BEFORE })) {
@@ -21,6 +23,15 @@ if (report?.version !== 1 || !/^\d{4}-\d{2}-\d{2}$/.test(report.reportDate)
   || typeof report.content !== "string" || !report.content
   || typeof report.partial !== "boolean") {
   throw new Error("The prepared daily report is invalid; refusing delivery.");
+}
+// Financial aggregates stay in sender memory: the public prepare output/env must
+// contain only the existing GA4/Stars report. Missing configuration preserves it.
+if (process.env.DONATIONS_LEDGER_READ_TOKEN) {
+  const section = await collectDonationSection({
+    store: githubLedgerStore({ token: process.env.DONATIONS_LEDGER_READ_TOKEN }),
+    now: new Date().toISOString(),
+  });
+  report = appendDonationSection(report, section);
 }
 await deliverReport({
   reportDate: report.reportDate,
