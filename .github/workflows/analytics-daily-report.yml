@@ -2,19 +2,37 @@ name: Analytics daily report
 
 on:
   schedule:
-    # 00:00 UTC = 09:00 KST. GitHub may start scheduled runs late.
-    - cron: "0 0 * * *"
+    # UTC 00:07 / 00:27 = 09:07 primary / 09:27 recovery in Asia/Seoul.
+    # Both use GitHub's scheduler and can be delayed or dropped.
+    - cron: "7 0 * * *"
+    - cron: "27 0 * * *"
   workflow_dispatch:
+    inputs:
+      report_date:
+        description: "Optional completed GA4 reporting date (YYYY-MM-DD); empty uses yesterday"
+        required: false
+        type: string
+
+# A queued/manual run must finish its delivery record before another sender starts.
+concurrency:
+  group: analytics-daily-report
+  cancel-in-progress: false
+  queue: max
 
 permissions:
   contents: read
 
 jobs:
-  report:
+  prepare:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    outputs:
+      report: ${{ steps.report.outputs.daily_report }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v5
         with:
           node-version: 22
@@ -32,8 +50,8 @@ jobs:
         env:
           GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
           GA4_SERVICE_ACCOUNT_KEY: ${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ github.token }}
+          REPORT_DATE: ${{ inputs.report_date }}
       - name: Save GitHub stars snapshots
         if: always() && steps.report.outputs.stars_snapshot_saved == 'true'
         continue-on-error: true
@@ -42,3 +60,33 @@ jobs:
         with:
           path: .analytics/github-stars.json
           key: github-stars-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+
+  deliver:
+    needs: prepare
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      # Only this isolated sender gets Contents write; the token is still repo-wide.
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts/send-daily-report.mjs
+            scripts/report-delivery.mjs
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Claim, send, and save the Discord receipt
+        run: node scripts/send-daily-report.mjs
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ github.token }}
+          REPORT_JSON: ${{ needs.prepare.outputs.report }}
+          # Oct 6 was sent by legacy run 37406226305 without a message-ID receipt.
+          # A delayed transition-day run must not post again against an empty ledger.
+          DELIVERY_NOT_BEFORE: "2026-10-07"

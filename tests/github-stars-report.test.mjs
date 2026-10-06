@@ -94,33 +94,74 @@ test('snapshot write failure still returns the real total without marking it sav
   });
 });
 
-async function runDailyReport(f, { starsFail = false, total = 123, discordFail = false } = {}) {
+async function runDailyReport(f, { starsFail = false, total = 123, discordFail = false, supportFail = false, prepareOnly = false, artifactOverride, notBefore = '' } = {}) {
   const payloadPath = join(f.dir, 'discord.json');
+  const artifactPath = join(f.dir, 'daily-report.json');
   const outputPath = join(f.dir, 'github-output');
   await writeFile(outputPath, '');
   const entry = new URL('../scripts/analytics-daily-report.mjs', import.meta.url).href;
+  const sender = new URL('../scripts/send-daily-report.mjs', import.meta.url).href;
   // Stub signing in this child process; no service-account key or network is used.
   const source = `
     import crypto from 'node:crypto';
     import { syncBuiltinESMExports } from 'node:module';
-    import { writeFile } from 'node:fs/promises';
+    import { readFile, writeFile } from 'node:fs/promises';
     crypto.createSign = () => ({ update() { return this; }, sign() { return 'test-signature'; } });
     syncBuiltinESMExports();
-    globalThis.fetch = async (url, options) => {
-      if (url === 'https://oauth2.googleapis.com/token') return { ok: true, json: async () => ({ access_token: 'test-access-token' }) };
-      if (url === 'https://api.github.com/repos/${repository}') return ${starsFail ? '{ ok: false, status: 503 }' : `{ ok: true, json: async () => ({ stargazers_count: ${total} }) }`};
-      if (url.startsWith('https://analyticsdata.googleapis.com/')) {
-        const body = JSON.parse(options.body);
-        const dimensions = (body.dimensions ?? []).map(d => ({ value: ({ date: '20261004', deviceCategory: 'desktop', eventName: 'device_select', pageTitle: 'Galaxy Z Fold8 Window Insets', pagePath: '/galaxy-z-fold8', 'customEvent:support_platform': 'ko_fi' })[d.name] }));
-        return { ok: true, json: async () => ({ rows: [{ dimensionValues: dimensions, metricValues: body.metrics.map(() => ({ value: '10' })) }] }) };
+    const ledgerPath = ${JSON.stringify(join(f.dir, 'deliveries.json'))};
+    let ledger = await readFile(ledgerPath, 'utf8').then(JSON.parse).catch(() => ({ branch: false, revision: 0 }));
+    let phase = 'prepare';
+    globalThis.fetch = async (url, options = {}) => {
+      if (url === 'https://oauth2.googleapis.com/token') {
+        if (phase !== 'prepare') throw new Error('Sender must not authenticate with GA4');
+        return { ok: true, json: async () => ({ access_token: 'test-access-token' }) };
       }
-      if (url === 'https://discord.example.invalid/test-hook') {
+      if (url === 'https://api.github.com/repos/${repository}') {
+        if (phase !== 'prepare' || process.env.GITHUB_TOKEN !== 'test-read-secret') throw new Error('Stars must use the read-only preparation token');
+        return ${starsFail ? '{ ok: false, status: 503 }' : `{ ok: true, json: async () => ({ stargazers_count: ${total} }) }`};
+      }
+      if (url.startsWith('https://api.github.com/repos/${repository}/')) {
+        if (phase !== 'deliver' || process.env.GITHUB_TOKEN !== 'test-write-secret') throw new Error('Preparation must not access delivery state');
+        const reply = (status, data = {}) => ({ ok: status < 400, status, json: async () => data });
+        if (url.endsWith('/git/ref/heads/analytics-report-state')) return reply(ledger.branch ? 200 : 404, { object: { sha: 'head' } });
+        if (url.endsWith('/git/ref/heads/main')) return reply(200, { object: { sha: 'main' } });
+        if (url.endsWith('/git/refs')) { ledger.branch = true; await writeFile(ledgerPath, JSON.stringify(ledger)); return reply(201); }
+        if (url.includes('/contents/.analytics/deliveries/')) {
+          if (options.method !== 'PUT') return ledger.record ? reply(200, { content: Buffer.from(JSON.stringify(ledger.record)).toString('base64'), sha: ledger.sha }) : reply(404);
+          const body = JSON.parse(options.body);
+          if (ledger.record && body.sha !== ledger.sha) return reply(409);
+          ledger.record = JSON.parse(Buffer.from(body.content, 'base64').toString('utf8'));
+          ledger.sha = String(++ledger.revision);
+          await writeFile(ledgerPath, JSON.stringify(ledger));
+          return reply(201, { content: { sha: ledger.sha } });
+        }
+        throw new Error('Unexpected GitHub state request');
+      }
+      if (url.startsWith('https://analyticsdata.googleapis.com/')) {
+        if (phase !== 'prepare') throw new Error('Sender must not query GA4');
+        const body = JSON.parse(options.body);
+        if (${supportFail} && body.dimensions?.some(d => d.name === 'customEvent:support_platform')) return { ok: false, status: 400, text: async () => 'mock unsupported dimension' };
+        const dimensions = (body.dimensions ?? []).map(d => ({ value: ({ date: '20261004', deviceCategory: 'desktop', eventName: 'device_select', pageTitle: 'Galaxy Z Fold8 Window Insets', pagePath: '/galaxy-z-fold8', 'customEvent:support_platform': 'ko_fi' })[d.name] }));
+        return { ok: true, json: async () => ({ metadata: { timeZone: 'Asia/Seoul' }, rows: [{ dimensionValues: dimensions, metricValues: body.metrics.map(() => ({ value: '10' })) }] }) };
+      }
+      if (url === 'https://discord.example.invalid/test-hook?wait=true') {
+        if (phase !== 'deliver') throw new Error('Preparation must not post to Discord');
         await writeFile(${JSON.stringify(payloadPath)}, options.body);
-        return ${discordFail ? "{ ok: false, status: 503, text: async () => 'mock delivery failure' }" : '{ ok: true }'};
+        return ${discordFail ? "{ ok: false, status: 429 }" : "{ ok: true, json: async () => ({ id: '1234567890' }) }"};
       }
       throw new Error('Unexpected network request');
     };
     await import(${JSON.stringify(entry)});
+    ${artifactOverride === undefined ? '' : `await writeFile(${JSON.stringify(artifactPath)}, ${JSON.stringify(JSON.stringify(artifactOverride))});`}
+    if (!${prepareOnly}) {
+      phase = 'deliver';
+      delete process.env.GA4_PROPERTY_ID;
+      delete process.env.GA4_SERVICE_ACCOUNT_KEY;
+      process.env.GITHUB_TOKEN = 'test-write-secret';
+      process.env.DISCORD_WEBHOOK_URL = 'https://discord.example.invalid/test-hook';
+      process.env.REPORT_JSON = await readFile(${JSON.stringify(artifactPath)}, 'utf8');
+      await import(${JSON.stringify(sender)});
+    }
   `;
   const child = spawnSync(process.execPath, ['--input-type=module', '--eval', source], {
     encoding: 'utf8',
@@ -128,16 +169,61 @@ async function runDailyReport(f, { starsFail = false, total = 123, discordFail =
       ...process.env,
       GA4_PROPERTY_ID: 'test-property',
       GA4_SERVICE_ACCOUNT_KEY: JSON.stringify({ client_email: 'test@example.invalid', private_key: 'unused-signing-stub' }),
-      DISCORD_WEBHOOK_URL: 'https://discord.example.invalid/test-hook',
+      DISCORD_WEBHOOK_URL: '',
       GITHUB_REPOSITORY: repository,
-      GITHUB_TOKEN: 'test-secret',
+      GITHUB_TOKEN: 'test-read-secret',
       GITHUB_STARS_STATE_PATH: f.statePath,
       GITHUB_OUTPUT: outputPath,
+      REPORT_OUTPUT_PATH: artifactPath,
+      REPORT_INPUT_PATH: artifactPath,
+      REPORT_JSON: '',
+      DELIVERY_NOT_BEFORE: notBefore,
     },
   });
-  const payload = JSON.parse(await readFile(payloadPath, 'utf8'));
-  return { child, payload, output: await readFile(outputPath, 'utf8') };
+  const payload = await readFile(payloadPath, 'utf8').then(JSON.parse).catch(() => null);
+  const artifact = JSON.parse(await readFile(artifactPath, 'utf8'));
+  const outputs = (await readFile(outputPath, 'utf8')).split('\n');
+  const preparedOutput = JSON.parse(outputs.find(line => line.startsWith('daily_report=')).slice('daily_report='.length));
+  return { child, payload, artifact, preparedOutput, output: outputs.includes('stars_snapshot_saved=true') ? 'stars_snapshot_saved=true\n' : '' };
 }
+
+test('preparation produces a data-only report without a webhook, delivery-state access or write token', async t => {
+  const f = await fixture(t);
+  const { child, payload, artifact, preparedOutput } = await runDailyReport(f, { prepareOnly: true });
+  assert.equal(child.status, 0, child.stderr);
+  assert.equal(payload, null);
+  assert.equal(artifact.version, 1);
+  assert.equal(artifact.partial, false);
+  assert.deepEqual(preparedOutput, artifact);
+  assert.match(artifact.reportDate, /^\d{4}-\d{2}-\d{2}$/);
+  assert.match(artifact.content, /GitHub Stars: 총 \*\*123개\*\*/);
+  await assert.rejects(readFile(join(f.dir, 'deliveries.json')), { code: 'ENOENT' });
+  assert.ok(!JSON.stringify(artifact).includes('secret') && !JSON.stringify(artifact).includes('test-hook'));
+});
+
+test('a transition-day sender skips before any delivery-state or webhook request', async t => {
+  const f = await fixture(t);
+  const { child, payload } = await runDailyReport(f, { notBefore: '9999-01-01' });
+  assert.equal(child.status, 0, child.stderr);
+  assert.equal(payload, null);
+  assert.match(child.stdout, /Skipped daily delivery before the configured KST cutover day/);
+  await assert.rejects(readFile(join(f.dir, 'deliveries.json')), { code: 'ENOENT' });
+});
+
+test('the isolated sender rejects malformed report artifacts before creating state or posting', async t => {
+  const f = await fixture(t);
+  for (const artifactOverride of [
+    null,
+    { version: 1, reportDate: '2026-02-30', content: 'test', partial: false },
+    { version: 1, reportDate: '2026-10-05', content: 'test' },
+  ]) {
+    const { child, payload } = await runDailyReport(f, { artifactOverride });
+    assert.notEqual(child.status, 0);
+    assert.match(child.stderr, /prepared daily report is invalid/);
+    assert.equal(payload, null);
+    await assert.rejects(readFile(join(f.dir, 'deliveries.json')), { code: 'ENOENT' });
+  }
+});
 
 for (const starsFail of [false, true]) {
   test(`the real daily-report entry point posts other statistics when stars ${starsFail ? 'fail' : 'succeed'}`, async t => {
@@ -150,7 +236,7 @@ for (const starsFail of [false, true]) {
     assert.equal(payload.username, 'WindowInsets Stats');
     assert.deepEqual(payload.allowed_mentions, { parse: [] });
     assert.equal(output, starsFail ? '' : 'stars_snapshot_saved=true\n');
-    assert.ok(!child.stdout.includes('test-secret') && !child.stderr.includes('test-secret'));
+    assert.ok(!child.stdout.includes('secret') && !child.stderr.includes('secret'));
   });
 }
 
@@ -159,7 +245,7 @@ test('failed Discord delivery and its retry retain the cached previous-day basel
   const f = await fixture(t, { [yesterday]: 116 });
   const failed = await runDailyReport(f, { total: 123, discordFail: true });
   assert.notEqual(failed.child.status, 0);
-  assert.match(failed.child.stderr, /Discord webhook failed: 503/);
+  assert.match(failed.child.stderr, /Discord webhook rejected daily report: HTTP 429/);
   assert.match(failed.payload.content, /전일 대비 \*\*\+7\*\*/);
   assert.equal(failed.output, 'stars_snapshot_saved=true\n');
   assert.deepEqual((await f.state()).snapshots, { [yesterday]: 116, [today]: 123 });
@@ -170,4 +256,16 @@ test('failed Discord delivery and its retry retain the cached previous-day basel
   assert.match(retried.payload.content, /활성 사용자 \*\*10명\*\*/);
   assert.equal(retried.output, 'stars_snapshot_saved=true\n');
   assert.deepEqual((await f.state()).snapshots, { [yesterday]: 116, [today]: 124 });
+});
+
+test('a real entry-point rerun skips a delivered date even when the first run failed after posting partial statistics', async t => {
+  const f = await fixture(t);
+  const first = await runDailyReport(f, { supportFail: true });
+  assert.notEqual(first.child.status, 0);
+  assert.match(first.child.stdout, /Discord confirmed daily report/);
+  assert.match(first.payload.content, /조회 실패/);
+  const second = await runDailyReport(f);
+  assert.equal(second.child.status, 0, second.child.stderr);
+  assert.match(second.child.stdout, /Skipped already delivered daily report/);
+  assert.ok(!second.child.stdout.includes('Discord confirmed'));
 });

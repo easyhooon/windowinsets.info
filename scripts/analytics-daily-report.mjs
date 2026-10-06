@@ -1,12 +1,14 @@
-// Posts yesterday's GA4 summary to a Discord webhook as a plain-text message.
+// Prepares yesterday's GA4 summary without delivery credentials or Git writes.
 // Env: GA4_PROPERTY_ID, GA4_SERVICE_ACCOUNT_KEY (service account JSON),
-// DISCORD_WEBHOOK_URL (optional; without it the message is printed instead).
+// GITHUB_OUTPUT or REPORT_OUTPUT_PATH (optional; otherwise prints a local preview).
 // "yesterday" follows the GA4 property's reporting time zone.
 import { createSign } from "node:crypto";
-import { appendFile } from "node:fs/promises";
+import { appendFile, mkdir, writeFile } from "node:fs/promises";
+import { dirname } from "node:path";
 import { collectGithubStars } from "./github-stars-report.mjs";
+import { reportDateForZone } from "./report-delivery.mjs";
 
-const { GA4_PROPERTY_ID, GA4_SERVICE_ACCOUNT_KEY, DISCORD_WEBHOOK_URL } = process.env;
+const { GA4_PROPERTY_ID, GA4_SERVICE_ACCOUNT_KEY, REPORT_OUTPUT_PATH } = process.env;
 if (!GA4_PROPERTY_ID || !GA4_SERVICE_ACCOUNT_KEY) {
   console.error("GA4_PROPERTY_ID and GA4_SERVICE_ACCOUNT_KEY are required.");
   process.exit(1);
@@ -14,7 +16,8 @@ if (!GA4_PROPERTY_ID || !GA4_SERVICE_ACCOUNT_KEY) {
 
 const PLATFORM_LABELS = { desktop: "데스크톱", mobile: "모바일", tablet: "태블릿" };
 const SUPPORT_LABELS = { ko_fi: "Ko-fi", github_sponsors: "GitHub Sponsors" };
-const YESTERDAY = [{ startDate: "yesterday", endDate: "yesterday" }];
+const reportStartedAt = new Date();
+let dateRanges = [{ startDate: "yesterday", endDate: "yesterday" }];
 const QUERY_FAILED = "⚠️ 조회 실패 (워크플로 로그 확인)";
 
 const base64url = (value) => Buffer.from(value).toString("base64url");
@@ -51,7 +54,7 @@ async function runReport(token, body) {
     {
       method: "POST",
       headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
-      body: JSON.stringify({ dateRanges: YESTERDAY, ...body }),
+      body: JSON.stringify({ ...body, dateRanges }),
     },
   );
   if (!response.ok) throw new Error(`runReport failed: ${response.status} ${await response.text()}`);
@@ -67,6 +70,15 @@ const rows = (report) =>
 const bullets = (items) => (items.length === 0 ? "• 데이터 없음" : items.join("\n"));
 
 const token = await accessToken();
+// Bootstrap the property's reporting zone, then freeze one explicit date for every query.
+// Metadata contains the zone even when the property has no activity that day.
+const calendar = await runReport(token, { dimensions: [{ name: "date" }], metrics: [{ name: "eventCount" }], limit: 1 });
+const reportDate = reportDateForZone({
+  now: reportStartedAt,
+  timeZone: calendar.metadata?.timeZone,
+  requestedDate: process.env.REPORT_DATE,
+});
+dateRanges = [{ startDate: reportDate, endDate: reportDate }];
 const queries = {
   totals: {
     metrics: [
@@ -77,7 +89,6 @@ const queries = {
       { name: "eventCount" },
     ],
   },
-  date: { dimensions: [{ name: "date" }], metrics: [{ name: "eventCount" }] },
   platforms: {
     dimensions: [{ name: "deviceCategory" }],
     metrics: [{ name: "activeUsers" }, { name: "screenPageViews" }],
@@ -139,11 +150,8 @@ settled.forEach((result, i) => {
 });
 
 function headerDate() {
-  const raw = reports.date?.[0]?.dimensions[0];
-  const date = raw
-    ? new Date(`${raw.slice(0, 4)}-${raw.slice(4, 6)}-${raw.slice(6, 8)}T00:00:00Z`)
-    : new Date(Date.now() - 86_400_000);
-  return date.toLocaleDateString("ko-KR", { month: "long", day: "numeric", timeZone: raw ? "UTC" : "Asia/Seoul" });
+  return new Date(`${reportDate}T00:00:00Z`)
+    .toLocaleDateString("ko-KR", { month: "long", day: "numeric", timeZone: "UTC" });
 }
 
 function overview() {
@@ -189,21 +197,20 @@ const content = [
   "_Google Analytics 전날 집계이며 추후 보정될 수 있습니다. Stars는 조회 시점의 총개수입니다._",
 ].join("\n");
 
-if (!DISCORD_WEBHOOK_URL) {
-  console.log(content);
-} else {
-  const response = await fetch(DISCORD_WEBHOOK_URL, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      username: "WindowInsets Stats",
-      avatar_url: "https://windowinsets.info/apple-touch-icon-v2.png",
-      content,
-      allowed_mentions: { parse: [] },
-    }),
-  });
-  if (!response.ok) throw new Error(`Discord webhook failed: ${response.status} ${await response.text()}`);
-  console.log("Posted daily report to Discord.");
+const partial = settled.some((result) => result.status === "rejected");
+const prepared = JSON.stringify({ version: 1, reportDate, content, partial });
+if (process.env.GITHUB_OUTPUT) {
+  // JSON escapes any newlines in content; it stays one output value, never shell code.
+  await appendFile(process.env.GITHUB_OUTPUT, `daily_report=${prepared}\n`);
 }
-
-if (settled.some((result) => result.status === "rejected")) process.exitCode = 1;
+if (REPORT_OUTPUT_PATH) {
+  await mkdir(dirname(REPORT_OUTPUT_PATH), { recursive: true });
+  await writeFile(REPORT_OUTPUT_PATH, `${prepared}\n`, { mode: 0o600 });
+}
+if (!REPORT_OUTPUT_PATH && !process.env.GITHUB_OUTPUT) {
+  console.log(content);
+  if (partial) process.exitCode = 1;
+} else {
+  // A partial report still proceeds to delivery; the isolated sender marks its job failed afterward.
+  console.log(`Prepared daily report for ${reportDate}${partial ? " with failed sections" : ""}.`);
+}
