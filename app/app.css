@@ -92,6 +92,24 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .sidebar-footer { padding:10px 8px; border-top:1px solid var(--color-line); display:grid; gap:6px; color:var(--color-muted); font-size:11px; line-height:1.4; }
 .sidebar-footer-row { display:flex; flex-wrap:wrap; gap:2px 12px; margin:0; }
 .sidebar-footer-row>span { flex-basis:100%; }
+/* Phones reach Docs from the settings menu instead of the header. */
+.settings-docs { display:none; width:100%; margin-top:5px; padding:7px; border-top:1px solid var(--color-line); color:var(--color-fg); font-size:12px; text-decoration:none; }
+/* README rendered on /docs. */
+.docs-content :is(h2,h3) { color:var(--color-fg); font-weight:600; scroll-margin-top:16px; }
+.docs-content h2 { margin:32px 0 8px; font-size:18px; }
+.docs-content h3 { margin:20px 0 6px; font-size:15px; }
+.docs-content :is(p,ul,ol,table,pre) { margin:0 0 12px; }
+.docs-content :is(ul,ol) { padding-left:20px; list-style:disc; }
+.docs-content ol { list-style:decimal; }
+.docs-content :is(b,strong) { color:var(--color-fg); }
+.docs-content a { color:var(--color-accent); text-decoration:underline; }
+.docs-content code { padding:0 4px; border-radius:4px; background:var(--color-canvas); color:var(--color-fg); font-family:var(--font-mono); font-size:13px; }
+.docs-content pre { overflow-x:auto; padding:10px 12px; border:1px solid var(--color-line); border-radius:8px; background:var(--color-canvas); }
+.docs-content pre code { padding:0; }
+.docs-content table { display:block; overflow-x:auto; border-collapse:collapse; font-size:14px; }
+.docs-content :is(th,td) { padding:6px 10px; border:1px solid var(--color-line); text-align:left; vertical-align:top; }
+.docs-content th { color:var(--color-fg); background:var(--color-surface); }
+.docs-content img { max-width:100%; height:auto; }
 /* Desktop has room below the device list: one prominent link per line. */
 @media(min-width:768px) { .sidebar-footer-links { flex-direction:column; gap:6px; font-size:13px; } }
 .workspace { min-width:0; flex:1; overflow:auto; }
@@ -163,7 +181,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .pill-button,.control-pill .toolbar-button { height:28px; min-height:28px; display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:0 8px; border:0; border-radius:14px; background:transparent; font-size:12px; white-space:nowrap; color:var(--color-fg); }
 .pill-button.icon { width:32px; padding:0; }
 .pill-button:hover,.control-pill .toolbar-button:hover { background:var(--color-hover); }
-.github-star { color:var(--color-fg); text-decoration:none; }
+.github-star,.docs-link { color:var(--color-fg); text-decoration:none; }
+/* Docs is site navigation, not a tool: a borderless text link before the buttons. */
+.canvas-settings .docs-link { border-color:transparent; background:transparent; margin-right:4px; font-size:13px; font-weight:500; }
+.canvas-settings .docs-link:hover { background:var(--color-hover); }
 .pill-button[aria-pressed=true] { background:var(--color-accent-subtle); color:var(--color-accent); }
 .segmented { display:flex; gap:2px; }
 .segmented .pill-button[aria-pressed=true] { background:var(--color-neutral); color:var(--color-fg); font-weight:600; }
@@ -249,6 +270,9 @@ html[data-theme="dark"] .theme-toggle>.theme-icon-dark { display:flex; }
   .canvas-settings .toolbar-button { width:44px; min-height:40px; }
   .canvas-settings .toolbar-button svg { width:24px; height:24px; }
   .github-star>span { display:none; }
+  /* A fourth header button clips the wordmark; the settings menu links Docs instead. */
+  .canvas-settings .docs-link { display:none; }
+  .settings-docs { display:block; }
   .dropdown-panel { max-width:calc(100vw - 24px); }
   .canvas-toggles { display:none; }
   .canvas-toggles-inline { display:flex; justify-content:center; max-width:100%; }
