@@ -116,15 +116,16 @@ guarantee. See [GitHub's schedule documentation](https://docs.github.com/en/acti
    whole JSON key) and `DISCORD_WEBHOOK_URL`, then run the workflow manually
    once from the Actions tab.
 
-Without `DISCORD_WEBHOOK_URL` the script prints the payload instead, which is
-useful for a local dry run. Each section queries separately; a failing section
+Running the preparation script without `GITHUB_OUTPUT` or `REPORT_OUTPUT_PATH`
+prints a local preview and never posts to Discord. Each section queries separately;
+a failing section
 (for example an unregistered custom dimension) is marked in the message and
 fails the run after posting. Data for the previous day can still be processing
 at run time, so late events may appear in GA4 but not in the report.
 
 ### Delivery records and retries
 
-The sender first reads the reporting zone from GA4 response metadata and freezes
+The preparation job reads the reporting zone from GA4 response metadata and freezes
 one explicit completed date for all section queries and the heading. The optional
 manual `report_date` input supports a missed date without changing the current day
 or Stars' separate KST collection date. Missing zone metadata stops delivery rather
@@ -142,10 +143,29 @@ the state branch and this draft implementation branch are disabled in `vercel.js
 The state files are retained in Git history rather than relying on cache retention.
 Do not delete the branch or its records: an absent record authorizes a new attempt.
 
-The workflow's automatic token needs `contents: write` for these records; this is
-an increase from the original read-only reporting permission. It uses no new PAT,
-database or paid service. Review that permission and any branch rules before
-activation. A missing permission or failed state request stops before sending.
+The workflow defaults to `contents: read`. Its `prepare` job has that read-only
+token for GA4/Stars collection, cache operations and report preparation. It has
+the GA4 service-account key but no Discord webhook. It passes the prepared date,
+message content and partial-query flag as JSON through a job output. The sender
+receives it through an environment variable, parses/validates it as data, and never
+interpolates the content into shell commands. Missing or invalid output stops
+before a claim or send. There are no package installation steps in either job.
+
+Only the isolated `deliver` job overrides the token to `contents: write`. It checks
+out the two sender scripts at the workflow's exact commit, sets up Node, and performs
+the claim, Discord request and receipt write. Its checkout does not persist credentials;
+it has no GA4 key or Stars/cache collection. All steps/actions in this job can still
+access its write token. This job isolation reduces the code given write authority,
+but GitHub does not restrict Contents write to a branch or path: the token can modify
+repository contents/refs and releases where repository rules permit. The code writes
+only the state branch. Main was unprotected at the October 6 review. This is a remaining
+repository-wide permission limit, not a state-only token.
+
+This permission increase uses no new PAT, database or paid service. Merging the
+workflow itself changes the automatic token permission for later eligible sender jobs;
+there is no separate credential activation. Review the job permission and applicable
+branch rules before merging. A missing permission or failed state request stops
+before sending.
 Non-main dispatches are skipped. This guard becomes active only after the change
 is reviewed and merged; a draft PR does not protect the current production workflow
 or seed receipts for reports already sent by the previous implementation.
@@ -183,6 +203,8 @@ triggers near 09:20 and 09:30 KST could check the same dated record and recover
 confirmed rejections or earlier failures. They use the same platform and can all
 be delayed/dropped during an Actions scheduling incident. They must be reviewed
 as a separate schedule change; do not treat job failure alone as permission to resend.
+Moving the primary trigger away from the start of the hour can reduce exposure to
+the busy period described by GitHub, but does not give either trigger an arrival SLA.
 Standard GitHub-hosted runners for this public repository are free under
 [GitHub's Actions billing rules](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
 
@@ -207,6 +229,17 @@ an external watchdog needs its own authenticated invocation and overdue-state ch
 No scheduler, alert channel, new secret or hosting-plan change is implemented by
 this delivery-guard proposal. Daily confirmed arrival is the intended reliability
 measure; tighter clock precision alone does not establish it.
+
+Keep this draft until an end-to-end recovery decision is reviewed. The recommended
+next step is to pair the isolated sender/ledger with an independently invoked overdue
+check using the existing Vercel Hobby project. Such a check can dispatch only absent
+or confirmed-rejected dates; `pending` needs inspection, and `delivered` needs no action.
+That extension requires its own protected endpoint, dedicated cron authentication,
+and verification of the existing dispatch token's usable scope/expiry. Those are
+separate authorization decisions; no endpoint or credential is added here. A free
+same-GitHub 09:20/09:30 pair is a weaker fallback if the new authentication is declined:
+it can recover individual missed attempts, but cannot independently detect a scheduler
+outage or guarantee daily arrival. The draft guard alone does not fix missing triggers.
 
 ## Collection scope
 

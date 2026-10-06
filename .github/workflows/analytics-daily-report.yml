@@ -18,16 +18,19 @@ concurrency:
   queue: max
 
 permissions:
-  # The automatic token records claims/receipts on analytics-report-state.
-  contents: write
+  contents: read
 
 jobs:
-  report:
+  prepare:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    outputs:
+      report: ${{ steps.report.outputs.daily_report }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v5
         with:
           node-version: 22
@@ -45,7 +48,6 @@ jobs:
         env:
           GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
           GA4_SERVICE_ACCOUNT_KEY: ${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ github.token }}
           REPORT_DATE: ${{ inputs.report_date }}
       - name: Save GitHub stars snapshots
@@ -56,3 +58,30 @@ jobs:
         with:
           path: .analytics/github-stars.json
           key: github-stars-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+
+  deliver:
+    needs: prepare
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      # Only this isolated sender gets Contents write; the token is still repo-wide.
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts/send-daily-report.mjs
+            scripts/report-delivery.mjs
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Claim, send, and save the Discord receipt
+        run: node scripts/send-daily-report.mjs
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ github.token }}
+          REPORT_JSON: ${{ needs.prepare.outputs.report }}

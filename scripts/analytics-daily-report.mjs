@@ -1,13 +1,14 @@
-// Posts yesterday's GA4 summary to a Discord webhook as a plain-text message.
+// Prepares yesterday's GA4 summary without delivery credentials or Git writes.
 // Env: GA4_PROPERTY_ID, GA4_SERVICE_ACCOUNT_KEY (service account JSON),
-// DISCORD_WEBHOOK_URL (optional; without it the message is printed instead).
+// GITHUB_OUTPUT or REPORT_OUTPUT_PATH (optional; otherwise prints a local preview).
 // "yesterday" follows the GA4 property's reporting time zone.
 import { createSign } from "node:crypto";
-import { appendFile } from "node:fs/promises";
+import { appendFile, mkdir, writeFile } from "node:fs/promises";
+import { dirname } from "node:path";
 import { collectGithubStars } from "./github-stars-report.mjs";
-import { createDeliveryStore, deliverReport, reportDateForZone } from "./report-delivery.mjs";
+import { reportDateForZone } from "./report-delivery.mjs";
 
-const { GA4_PROPERTY_ID, GA4_SERVICE_ACCOUNT_KEY, DISCORD_WEBHOOK_URL } = process.env;
+const { GA4_PROPERTY_ID, GA4_SERVICE_ACCOUNT_KEY, REPORT_OUTPUT_PATH } = process.env;
 if (!GA4_PROPERTY_ID || !GA4_SERVICE_ACCOUNT_KEY) {
   console.error("GA4_PROPERTY_ID and GA4_SERVICE_ACCOUNT_KEY are required.");
   process.exit(1);
@@ -196,24 +197,20 @@ const content = [
   "_Google Analytics 전날 집계이며 추후 보정될 수 있습니다. Stars는 조회 시점의 총개수입니다._",
 ].join("\n");
 
-if (!DISCORD_WEBHOOK_URL) {
-  console.log(content);
-} else {
-  await deliverReport({
-    reportDate,
-    webhookURL: DISCORD_WEBHOOK_URL,
-    runId: process.env.GITHUB_RUN_ID ?? "local",
-    store: createDeliveryStore({
-      repository: process.env.GITHUB_REPOSITORY || "easyhooon/windowinsets.info",
-      token: process.env.GITHUB_TOKEN,
-    }),
-    payload: {
-      username: "WindowInsets Stats",
-      avatar_url: "https://windowinsets.info/apple-touch-icon-v2.png",
-      content,
-      allowed_mentions: { parse: [] },
-    },
-  });
+const partial = settled.some((result) => result.status === "rejected");
+const prepared = JSON.stringify({ version: 1, reportDate, content, partial });
+if (process.env.GITHUB_OUTPUT) {
+  // JSON escapes any newlines in content; it stays one output value, never shell code.
+  await appendFile(process.env.GITHUB_OUTPUT, `daily_report=${prepared}\n`);
 }
-
-if (settled.some((result) => result.status === "rejected")) process.exitCode = 1;
+if (REPORT_OUTPUT_PATH) {
+  await mkdir(dirname(REPORT_OUTPUT_PATH), { recursive: true });
+  await writeFile(REPORT_OUTPUT_PATH, `${prepared}\n`, { mode: 0o600 });
+}
+if (!REPORT_OUTPUT_PATH && !process.env.GITHUB_OUTPUT) {
+  console.log(content);
+  if (partial) process.exitCode = 1;
+} else {
+  // A partial report still proceeds to delivery; the isolated sender marks its job failed afterward.
+  console.log(`Prepared daily report for ${reportDate}${partial ? " with failed sections" : ""}.`);
+}
