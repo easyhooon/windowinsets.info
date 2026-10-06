@@ -542,9 +542,8 @@ controller.hide(WindowInsetsCompat.Type.systemBars())`}</CodeBlock>
         </p>
         <h3>Content you don't own</h3>
         <p>
-          Pad the WebView's container instead of the page: in Compose, apply{" "}
-          <code>Modifier.windowInsetsPadding(WindowInsets.safeDrawing)</code> to the{" "}
-          <code>AndroidView</code>; in Views, wrap it in a <code>FrameLayout</code> and pad that
+          Pad the WebView's container instead of the page: in Compose, pad the{" "}
+          <code>AndroidView</code> with <code>WindowInsets.safeDrawing</code>; in Views, wrap it in a <code>FrameLayout</code> and pad that
           for <code>systemBars</code>, <code>displayCutout</code> and <code>ime</code>. Set the
           window background close to the page's so the padded strips don't stand out.
         </p>
