@@ -44,6 +44,22 @@ Each device also has a Markdown reference at `/<slug>.md` (the **Markdown** butt
 
 New to insets? The [developer guide](https://windowinsets.info/developer-guide) covers the basics, Compose and View code, [foldables](https://windowinsets.info/developer-guide/foldables), common patterns and [using this data in your code](https://windowinsets.info/developer-guide/data). Data and site updates are listed in the [changelog](https://windowinsets.info/changelog) ([RSS](https://windowinsets.info/changelog.xml)).
 
+## Fold it. Measure it.
+
+Explore Galaxy Fold, Flip and TriFold hinge states in **real-time 3D, built with Three.js and WebGL**. Rigid housings and articulated hinges show the folded depth. Official Samsung display artwork and exterior SVG rulers follow the fold.
+
+| Galaxy Z Flip8 · clamshell fold | Galaxy Z Fold8 · book fold | Galaxy Z TriFold · two-hinge fold |
+| :---: | :---: | :---: |
+| [![Galaxy Z Flip8 opening from 0 to 180 degrees and closing, with projected inset dimensions](docs/media/galaxy-z-flip8-hinge.gif)](https://windowinsets.info/galaxy-z-flip8) | [![Galaxy Z Fold8 opening from 0 to 180 degrees and closing, with projected inset dimensions](docs/media/galaxy-z-fold8-hinge.gif)](https://windowinsets.info/galaxy-z-fold8) | [![Galaxy Z TriFold opening its two hinges in sequence and closing at a fixed camera scale](docs/media/galaxy-z-trifold-hinge.gif)](https://windowinsets.info/galaxy-z-trifold) |
+
+**0° → 180° → 0°** · These recordings use a fixed perspective camera and zoom throughout each fold. The Flip cover sits on the upper half's rear; the Fold cover sits on the left half's rear.
+
+TriFold opens the right hinge first, then the left. Closing reverses that order: the inner display faces forward until the right wing nearly closes, then the middle panel's rear cover faces forward.
+
+Try the hinge slider, drag to pan, or pinch to zoom on [windowinsets.info](https://windowinsets.info).
+
+The animation illustrates device geometry. Insets remain the recorded Android measurements for the selected cover or inner display; moving the hinge does not create new measurements.
+
 ## Documentation
 
 Start with this README for the product, data limits, device priorities and local development. The other documents have narrower purposes:
@@ -64,22 +80,6 @@ Start with this README for the product, data limits, device priorities and local
 | Check asset attribution | [Third-party notices](docs/THIRD_PARTY_NOTICES.md) |
 
 The [InsetsProbe guide](tools/insets-probe/README.md) covers the Android app itself. Asset and test instructions stay next to their files in [`public/skins/`](public/skins/README.md), [`public/fonts/`](public/fonts/README.md), [`design/brand/`](design/brand/README.md), [`docs/media/`](docs/media/README.md) and [`tests/`](tests/README.md).
-
-## Fold it. Measure it.
-
-Explore Galaxy Fold, Flip and TriFold hinge states in **real-time 3D, built with Three.js and WebGL**. Rigid housings and articulated hinges show the folded depth. Official Samsung display artwork and exterior SVG rulers follow the fold.
-
-| Galaxy Z Flip8 · clamshell fold | Galaxy Z Fold8 · book fold | Galaxy Z TriFold · two-hinge fold |
-| :---: | :---: | :---: |
-| [![Galaxy Z Flip8 opening from 0 to 180 degrees and closing, with projected inset dimensions](docs/media/galaxy-z-flip8-hinge.gif)](https://windowinsets.info/galaxy-z-flip8) | [![Galaxy Z Fold8 opening from 0 to 180 degrees and closing, with projected inset dimensions](docs/media/galaxy-z-fold8-hinge.gif)](https://windowinsets.info/galaxy-z-fold8) | [![Galaxy Z TriFold opening its two hinges in sequence and closing at a fixed camera scale](docs/media/galaxy-z-trifold-hinge.gif)](https://windowinsets.info/galaxy-z-trifold) |
-
-**0° → 180° → 0°** · These recordings use a fixed perspective camera and zoom throughout each fold. The Flip cover sits on the upper half's rear; the Fold cover sits on the left half's rear.
-
-TriFold opens the right hinge first, then the left. Closing reverses that order: the inner display faces forward until the right wing nearly closes, then the middle panel's rear cover faces forward.
-
-Try the hinge slider, drag to pan, or pinch to zoom on [windowinsets.info](https://windowinsets.info).
-
-The animation illustrates device geometry. Insets remain the recorded Android measurements for the selected cover or inner display; moving the hinge does not create new measurements.
 
 ## How I measure
 
