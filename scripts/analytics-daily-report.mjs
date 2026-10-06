@@ -5,6 +5,7 @@
 import { createSign } from "node:crypto";
 import { appendFile } from "node:fs/promises";
 import { collectGithubStars } from "./github-stars-report.mjs";
+import { createDeliveryStore, deliverReport, reportDateForZone } from "./report-delivery.mjs";
 
 const { GA4_PROPERTY_ID, GA4_SERVICE_ACCOUNT_KEY, DISCORD_WEBHOOK_URL } = process.env;
 if (!GA4_PROPERTY_ID || !GA4_SERVICE_ACCOUNT_KEY) {
@@ -14,7 +15,8 @@ if (!GA4_PROPERTY_ID || !GA4_SERVICE_ACCOUNT_KEY) {
 
 const PLATFORM_LABELS = { desktop: "데스크톱", mobile: "모바일", tablet: "태블릿" };
 const SUPPORT_LABELS = { ko_fi: "Ko-fi", github_sponsors: "GitHub Sponsors" };
-const YESTERDAY = [{ startDate: "yesterday", endDate: "yesterday" }];
+const reportStartedAt = new Date();
+let dateRanges = [{ startDate: "yesterday", endDate: "yesterday" }];
 const QUERY_FAILED = "⚠️ 조회 실패 (워크플로 로그 확인)";
 
 const base64url = (value) => Buffer.from(value).toString("base64url");
@@ -51,7 +53,7 @@ async function runReport(token, body) {
     {
       method: "POST",
       headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
-      body: JSON.stringify({ dateRanges: YESTERDAY, ...body }),
+      body: JSON.stringify({ ...body, dateRanges }),
     },
   );
   if (!response.ok) throw new Error(`runReport failed: ${response.status} ${await response.text()}`);
@@ -67,6 +69,15 @@ const rows = (report) =>
 const bullets = (items) => (items.length === 0 ? "• 데이터 없음" : items.join("\n"));
 
 const token = await accessToken();
+// Bootstrap the property's reporting zone, then freeze one explicit date for every query.
+// Metadata contains the zone even when the property has no activity that day.
+const calendar = await runReport(token, { dimensions: [{ name: "date" }], metrics: [{ name: "eventCount" }], limit: 1 });
+const reportDate = reportDateForZone({
+  now: reportStartedAt,
+  timeZone: calendar.metadata?.timeZone,
+  requestedDate: process.env.REPORT_DATE,
+});
+dateRanges = [{ startDate: reportDate, endDate: reportDate }];
 const queries = {
   totals: {
     metrics: [
@@ -77,7 +88,6 @@ const queries = {
       { name: "eventCount" },
     ],
   },
-  date: { dimensions: [{ name: "date" }], metrics: [{ name: "eventCount" }] },
   platforms: {
     dimensions: [{ name: "deviceCategory" }],
     metrics: [{ name: "activeUsers" }, { name: "screenPageViews" }],
@@ -139,11 +149,8 @@ settled.forEach((result, i) => {
 });
 
 function headerDate() {
-  const raw = reports.date?.[0]?.dimensions[0];
-  const date = raw
-    ? new Date(`${raw.slice(0, 4)}-${raw.slice(4, 6)}-${raw.slice(6, 8)}T00:00:00Z`)
-    : new Date(Date.now() - 86_400_000);
-  return date.toLocaleDateString("ko-KR", { month: "long", day: "numeric", timeZone: raw ? "UTC" : "Asia/Seoul" });
+  return new Date(`${reportDate}T00:00:00Z`)
+    .toLocaleDateString("ko-KR", { month: "long", day: "numeric", timeZone: "UTC" });
 }
 
 function overview() {
@@ -192,18 +199,21 @@ const content = [
 if (!DISCORD_WEBHOOK_URL) {
   console.log(content);
 } else {
-  const response = await fetch(DISCORD_WEBHOOK_URL, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
+  await deliverReport({
+    reportDate,
+    webhookURL: DISCORD_WEBHOOK_URL,
+    runId: process.env.GITHUB_RUN_ID ?? "local",
+    store: createDeliveryStore({
+      repository: process.env.GITHUB_REPOSITORY || "easyhooon/windowinsets.info",
+      token: process.env.GITHUB_TOKEN,
+    }),
+    payload: {
       username: "WindowInsets Stats",
       avatar_url: "https://windowinsets.info/apple-touch-icon-v2.png",
       content,
       allowed_mentions: { parse: [] },
-    }),
+    },
   });
-  if (!response.ok) throw new Error(`Discord webhook failed: ${response.status} ${await response.text()}`);
-  console.log("Posted daily report to Discord.");
 }
 
 if (settled.some((result) => result.status === "rejected")) process.exitCode = 1;

@@ -5,7 +5,9 @@
   "outputDirectory": "build/client",
   "git": {
     "deploymentEnabled": {
-      "capture-inbox": false
+      "capture-inbox": false,
+      "analytics-report-state": false,
+      "codex/daily-report-delivery-guard": false
     }
   }
 }

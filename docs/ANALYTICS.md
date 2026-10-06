@@ -90,9 +90,9 @@ repository totals, not a count of star notifications. Stars are sampled when the
 report runs, separately from GA4's previous-day activity. The existing real-time
 GitHub-to-Discord webhook is independent and remains unchanged.
 
-The workflow uses the automatic `GITHUB_TOKEN` with the existing `contents: read`
-permission to read the repository total. Successful samples are saved in an Actions
-cache; no new secret or repository-write permission is needed. Same-day manual
+The workflow uses the automatic `GITHUB_TOKEN` to read the repository total.
+Successful samples are saved in an Actions cache; Stars collection needs no new
+secret. The delivery ledger described below separately needs Contents write. Same-day manual
 reruns update that day's total while preserving the previous-day baseline. The first
 run, a missed previous day, or a missing/evicted cache shows the total only. An older
 snapshot is never labelled as a previous-day comparison. A star lookup failure is
@@ -121,6 +121,92 @@ useful for a local dry run. Each section queries separately; a failing section
 (for example an unregistered custom dimension) is marked in the message and
 fails the run after posting. Data for the previous day can still be processing
 at run time, so late events may appear in GA4 but not in the report.
+
+### Delivery records and retries
+
+The sender first reads the reporting zone from GA4 response metadata and freezes
+one explicit completed date for all section queries and the heading. The optional
+manual `report_date` input supports a missed date without changing the current day
+or Stars' separate KST collection date. Missing zone metadata stops delivery rather
+than guessing the property date. A delayed trigger that first starts after the
+property's midnight defaults to its new yesterday; use an explicit backfill date
+to recover the older report.
+
+All report runs on `main` share one concurrency group, retain queued runs up to
+GitHub's queue limit, and do not cancel an active sender. A separate Git branch,
+`analytics-report-state`, holds `.analytics/deliveries/YYYY-MM-DD.json`. Each file
+has a version, report date, run ID, status, and, after confirmation, Discord message
+ID. No GA4 statistics, message body, webhook URL or credentials are committed.
+The branch is initialized from `main` on the first claim; Vercel deployments for
+the state branch and this draft implementation branch are disabled in `vercel.json`.
+The state files are retained in Git history rather than relying on cache retention.
+Do not delete the branch or its records: an absent record authorizes a new attempt.
+
+The workflow's automatic token needs `contents: write` for these records; this is
+an increase from the original read-only reporting permission. It uses no new PAT,
+database or paid service. Review that permission and any branch rules before
+activation. A missing permission or failed state request stops before sending.
+Non-main dispatches are skipped. This guard becomes active only after the change
+is reviewed and merged; a draft PR does not protect the current production workflow
+or seed receipts for reports already sent by the previous implementation.
+Activate for a fresh reporting date, or reconcile an existing message into its
+receipt before dispatching that date with the new sender.
+
+The sender creates a durable `pending` claim using the Contents API's file SHA
+before contacting Discord. Competing claims cannot both succeed. A `delivered`
+record skips repeated sends, even if the earlier job failed after posting a partial
+GA4 report. Discord requests enforce `wait=true` and require a returned message ID;
+the safe ID is logged before the final record update.
+
+Confirmed client rejections, including HTTP 429, are recorded as `rejected` and
+permit another attempt. Honor Discord's retry interval before retrying rate limits;
+configuration/authorization errors need fixing first. Timeouts, server errors,
+missing message receipts, a crash with a pending claim, or failed record saving
+after acceptance remain pending and block automatic reposting. Discord delivery
+and a Git commit are separate operations, so this is **not exactly-once delivery**.
+The conservative choice can delay a report that never arrived. Inspect the recorded
+run and Discord channel: mark the record delivered with the confirmed message ID,
+or rejected only after confirming there was no delivery, before retrying. The log's
+message ID allows reconciliation when Discord succeeded but the Git write failed.
+
+Validate without real credentials or network:
+
+```sh
+node --test tests/report-delivery.test.mjs tests/github-stars-report.test.mjs
+```
+
+### Free scheduling options (proposal; current cron unchanged)
+
+The current `0 0 * * *` cron remains the only automatic trigger. The guard creates
+safe retry conditions but does not itself wake a missing run. Extra daily GitHub
+triggers near 09:20 and 09:30 KST could check the same dated record and recover
+confirmed rejections or earlier failures. They use the same platform and can all
+be delayed/dropped during an Actions scheduling incident. They must be reviewed
+as a separate schedule change; do not treat job failure alone as permission to resend.
+Standard GitHub-hosted runners for this public repository are free under
+[GitHub's Actions billing rules](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
+
+Live read-only metadata on October 6, 2026 showed the existing Vercel `windowinsets`
+project on active Hobby, with no cron definitions. A Vercel daily watchdog would
+provide an independent trigger: check the date's record and request a dated
+`repository_dispatch` reconciliation if missing. The documented capture-inbox PAT
+has Contents write, which [repository dispatch requires](https://docs.github.com/en/rest/repos/repos#create-a-repository-dispatch-event);
+direct workflow dispatch would need Actions write. Its live presence, expiry and
+scope were not inspected. This option also requires a reviewed workflow event,
+a protected endpoint and a dedicated `CRON_SECRET`; none is added here.
+
+[Hobby cron](https://vercel.com/docs/cron-jobs/usage-and-pricing) is included but
+each job is individually daily and may run anywhere within its scheduled hour.
+Thus a 09:20 watchdog may run at 10:19. Normal function usage limits apply.
+[Vercel does not automatically retry failed cron requests](https://vercel.com/docs/cron-jobs/manage-cron-jobs),
+and missed/duplicate invocations are possible. Separate individually daily rescue
+jobs and dated reconciliation improve coverage but cannot promise arrival by 09:30.
+This option still depends on GitHub's API and runners for actual report execution.
+A same-platform extra cron cannot independently detect a platform-wide missing run;
+an external watchdog needs its own authenticated invocation and overdue-state check.
+No scheduler, alert channel, new secret or hosting-plan change is implemented by
+this delivery-guard proposal. Daily confirmed arrival is the intended reliability
+measure; tighter clock precision alone does not establish it.
 
 ## Collection scope
 

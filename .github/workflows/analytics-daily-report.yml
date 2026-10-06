@@ -5,12 +5,25 @@ on:
     # 00:00 UTC = 09:00 KST. GitHub may start scheduled runs late.
     - cron: "0 0 * * *"
   workflow_dispatch:
+    inputs:
+      report_date:
+        description: "Optional completed GA4 reporting date (YYYY-MM-DD); empty uses yesterday"
+        required: false
+        type: string
+
+# A queued/manual run must finish its delivery record before another sender starts.
+concurrency:
+  group: analytics-daily-report
+  cancel-in-progress: false
+  queue: max
 
 permissions:
-  contents: read
+  # The automatic token records claims/receipts on analytics-report-state.
+  contents: write
 
 jobs:
   report:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -34,6 +47,7 @@ jobs:
           GA4_SERVICE_ACCOUNT_KEY: ${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ github.token }}
+          REPORT_DATE: ${{ inputs.report_date }}
       - name: Save GitHub stars snapshots
         if: always() && steps.report.outputs.stars_snapshot_saved == 'true'
         continue-on-error: true
