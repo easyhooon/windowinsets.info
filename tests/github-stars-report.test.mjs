@@ -94,7 +94,7 @@ test('snapshot write failure still returns the real total without marking it sav
   });
 });
 
-async function runDailyReport(f, { starsFail = false, total = 123, discordFail = false, supportFail = false, prepareOnly = false, artifactOverride } = {}) {
+async function runDailyReport(f, { starsFail = false, total = 123, discordFail = false, supportFail = false, prepareOnly = false, artifactOverride, notBefore = '' } = {}) {
   const payloadPath = join(f.dir, 'discord.json');
   const artifactPath = join(f.dir, 'daily-report.json');
   const outputPath = join(f.dir, 'github-output');
@@ -177,6 +177,7 @@ async function runDailyReport(f, { starsFail = false, total = 123, discordFail =
       REPORT_OUTPUT_PATH: artifactPath,
       REPORT_INPUT_PATH: artifactPath,
       REPORT_JSON: '',
+      DELIVERY_NOT_BEFORE: notBefore,
     },
   });
   const payload = await readFile(payloadPath, 'utf8').then(JSON.parse).catch(() => null);
@@ -198,6 +199,15 @@ test('preparation produces a data-only report without a webhook, delivery-state 
   assert.match(artifact.content, /GitHub Stars: 총 \*\*123개\*\*/);
   await assert.rejects(readFile(join(f.dir, 'deliveries.json')), { code: 'ENOENT' });
   assert.ok(!JSON.stringify(artifact).includes('secret') && !JSON.stringify(artifact).includes('test-hook'));
+});
+
+test('a transition-day sender skips before any delivery-state or webhook request', async t => {
+  const f = await fixture(t);
+  const { child, payload } = await runDailyReport(f, { notBefore: '9999-01-01' });
+  assert.equal(child.status, 0, child.stderr);
+  assert.equal(payload, null);
+  assert.match(child.stdout, /Skipped daily delivery before the configured KST cutover day/);
+  await assert.rejects(readFile(join(f.dir, 'deliveries.json')), { code: 'ENOENT' });
 });
 
 test('the isolated sender rejects malformed report artifacts before creating state or posting', async t => {

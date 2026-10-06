@@ -2,8 +2,10 @@ name: Analytics daily report
 
 on:
   schedule:
-    # 00:00 UTC = 09:00 KST. GitHub may start scheduled runs late.
-    - cron: "0 0 * * *"
+    # UTC 00:07 / 00:27 = 09:07 primary / 09:27 recovery in Asia/Seoul.
+    # Both use GitHub's scheduler and can be delayed or dropped.
+    - cron: "7 0 * * *"
+    - cron: "27 0 * * *"
   workflow_dispatch:
     inputs:
       report_date:
@@ -85,3 +87,6 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ github.token }}
           REPORT_JSON: ${{ needs.prepare.outputs.report }}
+          # Oct 6 was sent by legacy run 37406226305 without a message-ID receipt.
+          # A delayed transition-day run must not post again against an empty ledger.
+          DELIVERY_NOT_BEFORE: "2026-10-07"

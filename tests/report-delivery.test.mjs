@@ -1,6 +1,19 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createDeliveryStore, deliverReport, reportDateForZone } from "../scripts/report-delivery.mjs";
+import { createDeliveryStore, deliverReport, deliveryWindowOpen, reportDateForZone } from "../scripts/report-delivery.mjs";
+
+test("the legacy-send cutover opens at KST midnight and leaves unconfigured callers unchanged", () => {
+  assert.equal(deliveryWindowOpen({ now: new Date("2026-10-06T14:59:59Z"), notBefore: "2026-10-07" }), false);
+  assert.equal(deliveryWindowOpen({ now: new Date("2026-10-06T15:00:00Z"), notBefore: "2026-10-07" }), true);
+  assert.equal(deliveryWindowOpen({ now: new Date("2026-10-07T00:07:00Z"), notBefore: "2026-10-07" }), true);
+  assert.equal(deliveryWindowOpen({ now: new Date("2026-10-06T00:00:00Z") }), true);
+});
+
+test("an invalid delivery cutover fails closed", () => {
+  for (const notBefore of ["2026-02-30", "not-a-date"]) {
+    assert.throws(() => deliveryWindowOpen({ notBefore }), /valid KST date/);
+  }
+});
 
 const reportDate = "2026-10-05";
 const json = (status, data = {}) => new Response(JSON.stringify(data), { status });

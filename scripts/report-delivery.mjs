@@ -1,4 +1,14 @@
 // Delivery claims are durable Git files, not evictable Actions cache entries.
+export function deliveryWindowOpen({ now = new Date(), notBefore } = {}) {
+  if (!notBefore) return true;
+  const date = new Date(`${notBefore}T00:00:00Z`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(notBefore) || Number.isNaN(date.getTime())
+    || date.toISOString().slice(0, 10) !== notBefore) {
+    throw new Error("DELIVERY_NOT_BEFORE must be a valid KST date (YYYY-MM-DD).");
+  }
+  return now.toLocaleDateString("en-CA", { timeZone: "Asia/Seoul" }) >= notBefore;
+}
+
 export function reportDateForZone({ now = new Date(), timeZone, requestedDate } = {}) {
   if (!timeZone) throw new Error("GA4 did not provide its reporting time zone; report date is unknown.");
   const today = now.toLocaleDateString("en-CA", { timeZone });

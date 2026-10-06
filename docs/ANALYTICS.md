@@ -75,8 +75,8 @@ every intermediate angle. No precise hinge angle is sent.
 ## Daily Discord report
 
 `.github/workflows/analytics-daily-report.yml` runs
-`scripts/analytics-daily-report.mjs` every day at 00:00 UTC (09:00 KST) and on
-manual dispatch. It reads yesterday's data (in the property's time zone) through
+`scripts/analytics-daily-report.mjs` every day at 00:07 and 00:27 UTC (09:07 primary
+and 09:27 recovery in `Asia/Seoul`) and on manual dispatch. It reads yesterday's data (in the property's time zone) through
 the GA4 Data API and posts one plain-text Discord message (in Korean, at the
 maintainer's request, for a private channel): active/new users,
 sessions, page views, total events, device selections, JSON exports and
@@ -102,8 +102,8 @@ the other statistics. Cache failures also leave the other statistics running.
 After this workflow change reaches `main`, its next scheduled or manually dispatched
 run starts collecting star snapshots. The first successful collection establishes
 the baseline; a following KST day with a saved preceding-day sample can show the net
-change. A website build or hosting redeploy is not required. The schedule remains
-00:00 UTC, but Actions scheduling can be delayed; it is not an exact delivery-time
+change. A website build or hosting redeploy is not required. Both scheduled attempts
+use GitHub's scheduler and can be delayed or dropped; they are not an exact delivery-time
 guarantee. See [GitHub's schedule documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
 
 1. In Google Cloud, enable the **Google Analytics Data API**, create a service
@@ -139,7 +139,7 @@ GitHub's queue limit, and do not cancel an active sender. A separate Git branch,
 has a version, report date, run ID, status, and, after confirmation, Discord message
 ID. No GA4 statistics, message body, webhook URL or credentials are committed.
 The branch is initialized from `main` on the first claim; Vercel deployments for
-the state branch and this draft implementation branch are disabled in `vercel.json`.
+the state branch and the implementation branch are disabled in `vercel.json`.
 The state files are retained in Git history rather than relying on cache retention.
 Do not delete the branch or its records: an absent record authorizes a new attempt.
 
@@ -166,11 +166,16 @@ workflow itself changes the automatic token permission for later eligible sender
 there is no separate credential activation. Review the job permission and applicable
 branch rules before merging. A missing permission or failed state request stops
 before sending.
-Non-main dispatches are skipped. This guard becomes active only after the change
-is reviewed and merged; a draft PR does not protect the current production workflow
-or seed receipts for reports already sent by the previous implementation.
-Activate for a fresh reporting date, or reconcile an existing message into its
-receipt before dispatching that date with the new sender.
+Non-main dispatches are skipped. The change does not seed receipts for reports
+already sent by the previous implementation. The authorized October 6 manual run
+`37406226305` received webhook acceptance without saving a message ID or its exact
+GA4 reporting date. `DELIVERY_NOT_BEFORE: 2026-10-07` therefore makes the new sender
+skip before any state/webhook request until October 7 in `Asia/Seoul`. It permits
+normal later delivery and does not invent a receipt for that legacy send. Do not
+manually rerun a legacy reporting date against an empty ledger; reconcile its
+existing message first. An old-code run already queued before merge cannot observe
+this guard or the new ledger; check/cancel a pending legacy sender before activation
+and inspect the run list afterward rather than claiming the migration is atomic.
 
 The sender creates a durable `pending` claim using the Contents API's file SHA
 before contacting Discord. Competing claims cannot both succeed. A `delivered`
@@ -195,18 +200,23 @@ Validate without real credentials or network:
 node --test tests/report-delivery.test.mjs tests/github-stars-report.test.mjs
 ```
 
-### Free scheduling options (proposal; current cron unchanged)
+### Free scheduled recovery and its limits
 
-The current `0 0 * * *` cron remains the only automatic trigger. The guard creates
-safe retry conditions but does not itself wake a missing run. Extra daily GitHub
-triggers near 09:20 and 09:30 KST could check the same dated record and recover
-confirmed rejections or earlier failures. They use the same platform and can all
-be delayed/dropped during an Actions scheduling incident. They must be reviewed
-as a separate schedule change; do not treat job failure alone as permission to resend.
-Moving the primary trigger away from the start of the hour can reduce exposure to
-the busy period described by GitHub, but does not give either trigger an arrival SLA.
+The approved primary/recovery pair is `7 0 * * *` and `27 0 * * *`: 09:07 and 09:27
+in `Asia/Seoul` year-round. These UTC schedules need no timezone secret or paid
+service. Each performs the normal daily preparation and checks the same dated
+delivery record. The later attempt can recover an individual missing trigger,
+pre-claim failure or confirmed rejection; it skips a confirmed delivered date.
+It cannot automatically recover an uncertain pending claim. Do not treat job
+failure alone as permission to resend.
+
+Both triggers share GitHub's scheduler and can all be delayed/dropped during an
+Actions scheduling incident. Moving away from the start of the hour reduces exposure
+to the documented busy period; it does not give either trigger an arrival SLA.
 Standard GitHub-hosted runners for this public repository are free under
 [GitHub's Actions billing rules](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
+
+### Independent watchdog (not implemented)
 
 Live read-only metadata on October 6, 2026 showed the existing Vercel `windowinsets`
 project on active Hobby, with no cron definitions. A Vercel daily watchdog would
@@ -226,20 +236,12 @@ jobs and dated reconciliation improve coverage but cannot promise arrival by 09:
 This option still depends on GitHub's API and runners for actual report execution.
 A same-platform extra cron cannot independently detect a platform-wide missing run;
 an external watchdog needs its own authenticated invocation and overdue-state check.
-No scheduler, alert channel, new secret or hosting-plan change is implemented by
-this delivery-guard proposal. Daily confirmed arrival is the intended reliability
+No independent watchdog, alert channel, new secret or hosting-plan change is
+implemented. Daily confirmed arrival is the intended reliability
 measure; tighter clock precision alone does not establish it.
-
-Keep this draft until an end-to-end recovery decision is reviewed. The recommended
-next step is to pair the isolated sender/ledger with an independently invoked overdue
-check using the existing Vercel Hobby project. Such a check can dispatch only absent
-or confirmed-rejected dates; `pending` needs inspection, and `delivered` needs no action.
-That extension requires its own protected endpoint, dedicated cron authentication,
-and verification of the existing dispatch token's usable scope/expiry. Those are
-separate authorization decisions; no endpoint or credential is added here. A free
-same-GitHub 09:20/09:30 pair is a weaker fallback if the new authentication is declined:
-it can recover individual missed attempts, but cannot independently detect a scheduler
-outage or guarantee daily arrival. The draft guard alone does not fix missing triggers.
+Any later independent overdue check should dispatch only absent or confirmed-rejected
+dates, skip delivered dates and surface pending dates for inspection. Its protected
+endpoint, cron authentication and dispatch-token verification need separate review.
 
 ## Collection scope
 

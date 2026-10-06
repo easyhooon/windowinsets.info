@@ -1,6 +1,12 @@
 // The isolated sender accepts data-only JSON and needs no GA4 key or dependencies.
 import { readFile } from "node:fs/promises";
-import { createDeliveryStore, deliverReport } from "./report-delivery.mjs";
+import { createDeliveryStore, deliverReport, deliveryWindowOpen } from "./report-delivery.mjs";
+
+// The migration-day legacy send has no durable receipt. Avoid a second send without inventing one.
+if (!deliveryWindowOpen({ notBefore: process.env.DELIVERY_NOT_BEFORE })) {
+  console.log("Skipped daily delivery before the configured KST cutover day; no state or webhook request made.");
+  process.exit(0);
+}
 
 const { REPORT_JSON, REPORT_INPUT_PATH, DISCORD_WEBHOOK_URL } = process.env;
 if ((!REPORT_JSON && !REPORT_INPUT_PATH) || !DISCORD_WEBHOOK_URL) {
