@@ -146,3 +146,22 @@ profile or AOSP skin yet (checked 2026-10-01), so they stay out of scope.
 source.
 
 Physical Firebase Test Lab spot checks and their status are in [the FTL validation log](PIXEL_HARDWARE_VALIDATION.md).
+
+## Other manufacturers (checked 2026-10-06)
+
+Coverage stays limited to Samsung Galaxy and Google Pixel because no other
+manufacturer publishes official emulator skins. Checked sources:
+
+- The Android SDK add-on repository (`addons_list-5.xml`) lists only Google
+  sites; the former Sony, LG and Motorola add-on sites are gone.
+- Android Studio's bundled `device-art-resources` contain only Nexus, Pixel,
+  Wear OS, TV and Automotive artwork.
+- English and Chinese web searches for Xiaomi, OnePlus, OPPO, Motorola and Sony
+  found no official skin downloads; login-gated Chinese developer portals were
+  not inspected. Motorola and Sony shipped SDK add-on skins around 2012, but
+  only for pre-2020 devices that are no longer downloadable.
+
+The FTL physical catalog does include Xiaomi 14, four OnePlus models, OPPO,
+realme, Motorola, Sony, Nothing, Tecno and Infinix devices, so measurements
+would be possible. Without official artwork they stay out of scope; recheck if
+a manufacturer starts publishing emulator skins.
