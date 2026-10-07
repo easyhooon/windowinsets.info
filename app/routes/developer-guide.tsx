@@ -658,6 +658,31 @@ webView.webViewClient = object : WebViewClient() {
           <code>https://windowinsets.info/data/all.json</code> holds every device export in one
           file.
         </p>
+        <h3>Previewing a device in Android Studio</h3>
+        <p>
+          Open <b>Use in development</b> near the bottom of a device's Metrics panel. It follows
+          the selected screen, rotation and navigation mode, and reads everything from the raw
+          capture behind that view:
+        </p>
+        <ul>
+          <li>
+            A Compose <code>@Preview(device = "spec:…")</code> with the capture's exact pixel size
+            and density. Choose <b>Copy</b> and paste it above a composable.
+          </li>
+          <li>
+            The <code>WindowSizeClass</code> of every captured screen and rotation, with the{" "}
+            <code>FoldingFeature</code> each capture reported.
+          </li>
+          <li>
+            An Android Studio hardware profile for Galaxy devices, and <code>adb</code> commands that
+            set a running emulator to the same window size and density.
+          </li>
+        </ul>
+        <p>
+          Compose Preview and the emulator draw their own generic system bars and cutout, not
+          One UI's, so check layouts against the measured insets. Rotations without a capture read
+          "not measured yet".
+        </p>
         <h3>From the command line</h3>
         <p>
           The{" "}
@@ -679,6 +704,11 @@ webView.webViewClient = object : WebViewClient() {
           <li>
             <code>npx windowinsets-info fixtures --series fold &gt; insets.json</code> writes every
             measured screen and navigation mode as compact JSON for screenshot and layout tests.
+          </li>
+          <li>
+            <code>npx windowinsets-info preview s26-ultra --nav gesture</code> prints a Compose{" "}
+            <code>@Preview</code> spec for every captured screen and rotation;{" "}
+            <code>sizeclass</code> lists their window size classes.
           </li>
         </ul>
         <p>

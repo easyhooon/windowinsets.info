@@ -40,6 +40,14 @@ npx windowinsets-info get s26-ultra --nav gesture
 npx windowinsets-info fixtures --series fold > insets.json
 ```
 
+Building against a specific device? Open **Use in development** in a device's Metrics panel. It follows the selected screen, rotation and navigation mode and gives you, from the raw capture behind that view:
+
+- a copyable Compose `@Preview(device = "spec:…")` with the capture's exact pixel size and density,
+- the `WindowSizeClass` and `FoldingFeature` of every captured screen and rotation,
+- an Android Studio hardware profile (Galaxy devices) and `adb` commands that set an emulator to the same window size and density.
+
+The CLI prints the same specs with `npx windowinsets-info preview <device>` and `npx windowinsets-info sizeclass <device>`. Compose Preview draws generic system bars and cutout, so check layouts against the measured insets.
+
 Each device also has a Markdown reference at `/<slug>.md` (the **Markdown** button in the Metrics panel). The same data is plain JSON: `/data/<slug>.json` per device, `/data/index.json` for the list and `/data/all.json` for everything at once (see [JSON export format](docs/JSON_EXPORT.md)). AI tools can start from [`/llms.txt`](https://windowinsets.info/llms.txt).
 
 New to insets? The [developer guide](https://windowinsets.info/developer-guide) covers the basics, Compose and View code, [foldables](https://windowinsets.info/developer-guide/foldables), common patterns and [using this data in your code](https://windowinsets.info/developer-guide/data). Data and site updates are listed in the [changelog](https://windowinsets.info/changelog) ([RSS](https://windowinsets.info/changelog.xml)).
