@@ -113,10 +113,12 @@ guarantee. See [GitHub's schedule documentation](https://docs.github.com/en/acti
 3. In Discord, open Channel settings → Integrations → Webhooks and copy a
    webhook URL.
 4. Add repository secrets `GA4_PROPERTY_ID`, `GA4_SERVICE_ACCOUNT_KEY` (the
-   whole JSON key) and `DISCORD_WEBHOOK_URL`, then run the workflow manually
-   once from the Actions tab.
+   whole JSON key), `DISCORD_WEBHOOK_URL`, and `REPORT_TRANSFER_KEY`. Generate the
+   transfer key with `openssl rand -base64 32` and store the output only as a
+   repository secret. Confirm the delivery ledger and recent Discord messages
+   before enabling or manually running delivery.
 
-Running the preparation script without `GITHUB_OUTPUT` or `REPORT_OUTPUT_PATH`
+Running the preparation script without `REPORT_OUTPUT_PATH`
 prints a local preview and never posts to Discord. Each section queries separately;
 a failing section
 (for example an unregistered custom dimension) is marked in the message and
@@ -145,14 +147,18 @@ Do not delete the branch or its records: an absent record authorizes a new attem
 
 The workflow defaults to `contents: read`. Its `prepare` job has that read-only
 token for GA4/Stars collection, cache operations and report preparation. It has
-the GA4 service-account key but no Discord webhook. It passes the prepared date,
-message content and partial-query flag as JSON through a job output. The sender
-receives it through an environment variable, parses/validates it as data, and never
-interpolates the content into shell commands. Missing or invalid output stops
-before a claim or send. There are no package installation steps in either job.
+the GA4 service-account key but no Discord webhook. The report is encrypted with
+AES-256-GCM using `REPORT_TRANSFER_KEY` and passed between jobs as a one-day
+Actions artifact. The artifact contains ciphertext, nonce and authentication tag,
+never plaintext report content. The sender decrypts, parses and validates the
+report as data, and never interpolates the content into shell commands. Missing,
+invalid or tampered input stops before a claim or send. Both jobs can access the
+transfer key; neither receives the other's GA4 key or Discord webhook. There are
+no package installation steps in either job.
 
 Only the isolated `deliver` job overrides the token to `contents: write`. It checks
-out the two sender scripts at the workflow's exact commit, sets up Node, and performs
+out the sender and transport scripts at the workflow's exact commit, sets up Node,
+downloads the encrypted artifact, and performs
 the claim, Discord request and receipt write. Its checkout does not persist credentials;
 it has no GA4 key or Stars/cache collection. All steps/actions in this job can still
 access its write token. This job isolation reduces the code given write authority,

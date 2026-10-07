@@ -5,10 +5,12 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { collectGithubStars, snapshotDates } from '../scripts/github-stars-report.mjs';
+import { openReport, sealReport } from '../scripts/report-transport.mjs';
 
 const repository = 'easyhooon/windowinsets.info';
 const now = new Date('2026-10-05T05:00:00Z');
 const response = (total) => ({ ok: true, json: async () => ({ stargazers_count: total }) });
+const transferKey = Buffer.alloc(32, 7).toString('base64');
 
 async function fixture(t, snapshots) {
   const dir = await mkdtemp(join(tmpdir(), 'github-stars-report-'));
@@ -152,14 +154,13 @@ async function runDailyReport(f, { starsFail = false, total = 123, discordFail =
       throw new Error('Unexpected network request');
     };
     await import(${JSON.stringify(entry)});
-    ${artifactOverride === undefined ? '' : `await writeFile(${JSON.stringify(artifactPath)}, ${JSON.stringify(JSON.stringify(artifactOverride))});`}
+    ${artifactOverride === undefined ? '' : `await writeFile(${JSON.stringify(artifactPath)}, ${JSON.stringify(sealReport(JSON.stringify(artifactOverride), transferKey))});`}
     if (!${prepareOnly}) {
       phase = 'deliver';
       delete process.env.GA4_PROPERTY_ID;
       delete process.env.GA4_SERVICE_ACCOUNT_KEY;
       process.env.GITHUB_TOKEN = 'test-write-secret';
       process.env.DISCORD_WEBHOOK_URL = 'https://discord.example.invalid/test-hook';
-      process.env.REPORT_JSON = await readFile(${JSON.stringify(artifactPath)}, 'utf8');
       await import(${JSON.stringify(sender)});
     }
   `;
@@ -176,25 +177,27 @@ async function runDailyReport(f, { starsFail = false, total = 123, discordFail =
       GITHUB_OUTPUT: outputPath,
       REPORT_OUTPUT_PATH: artifactPath,
       REPORT_INPUT_PATH: artifactPath,
-      REPORT_JSON: '',
+      REPORT_TRANSFER_KEY: transferKey,
       DELIVERY_NOT_BEFORE: notBefore,
     },
   });
   const payload = await readFile(payloadPath, 'utf8').then(JSON.parse).catch(() => null);
-  const artifact = JSON.parse(await readFile(artifactPath, 'utf8'));
+  const encrypted = await readFile(artifactPath, 'utf8');
+  const artifact = JSON.parse(openReport(encrypted, transferKey));
   const outputs = (await readFile(outputPath, 'utf8')).split('\n');
-  const preparedOutput = JSON.parse(outputs.find(line => line.startsWith('daily_report=')).slice('daily_report='.length));
-  return { child, payload, artifact, preparedOutput, output: outputs.includes('stars_snapshot_saved=true') ? 'stars_snapshot_saved=true\n' : '' };
+  assert.ok(!outputs.some(line => line.startsWith('daily_report=')));
+  return { child, payload, artifact, encrypted, output: outputs.includes('stars_snapshot_saved=true') ? 'stars_snapshot_saved=true\n' : '' };
 }
 
-test('preparation produces a data-only report without a webhook, delivery-state access or write token', async t => {
+test('preparation produces an encrypted report without a webhook, delivery-state access or write token', async t => {
   const f = await fixture(t);
-  const { child, payload, artifact, preparedOutput } = await runDailyReport(f, { prepareOnly: true });
+  const { child, payload, artifact, encrypted } = await runDailyReport(f, { prepareOnly: true });
   assert.equal(child.status, 0, child.stderr);
   assert.equal(payload, null);
   assert.equal(artifact.version, 1);
   assert.equal(artifact.partial, false);
-  assert.deepEqual(preparedOutput, artifact);
+  assert.ok(!encrypted.includes(artifact.content));
+  assert.ok(!encrypted.includes('GitHub Stars'));
   assert.match(artifact.reportDate, /^\d{4}-\d{2}-\d{2}$/);
   assert.match(artifact.content, /GitHub Stars: 총 \*\*123개\*\*/);
   await assert.rejects(readFile(join(f.dir, 'deliveries.json')), { code: 'ENOENT' });
