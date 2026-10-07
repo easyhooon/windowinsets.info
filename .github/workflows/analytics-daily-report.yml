@@ -23,16 +23,24 @@ permissions:
   contents: read
 
 jobs:
-  prepare:
+  deliver:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-    outputs:
-      report: ${{ steps.report.outputs.daily_report }}
+    timeout-minutes: 10
+    permissions:
+      # Delivery records require write; collection is not passed the repo-wide token.
+      contents: write
     steps:
       - uses: actions/checkout@v5
         with:
+          ref: ${{ github.sha }}
           persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts/analytics-daily-report.mjs
+            scripts/github-stars-report.mjs
+            scripts/send-daily-report.mjs
+            scripts/report-delivery.mjs
       - uses: actions/setup-node@v5
         with:
           node-version: 22
@@ -50,7 +58,8 @@ jobs:
         env:
           GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
           GA4_SERVICE_ACCOUNT_KEY: ${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}
-          GITHUB_TOKEN: ${{ github.token }}
+          # Public Stars lookup needs no token; keep write credentials out of collection.
+          REPORT_OUTPUT_PATH: ${{ runner.temp }}/analytics-daily-report.json
           REPORT_DATE: ${{ inputs.report_date }}
       - name: Save GitHub stars snapshots
         if: always() && steps.report.outputs.stars_snapshot_saved == 'true'
@@ -61,32 +70,17 @@ jobs:
           path: .analytics/github-stars.json
           key: github-stars-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
 
-  deliver:
-    needs: prepare
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      # Only this isolated sender gets Contents write; the token is still repo-wide.
-      contents: write
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          ref: ${{ github.sha }}
-          persist-credentials: false
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            scripts/send-daily-report.mjs
-            scripts/report-delivery.mjs
-      - uses: actions/setup-node@v5
-        with:
-          node-version: 22
       - name: Claim, send, and save the Discord receipt
         run: node scripts/send-daily-report.mjs
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ github.token }}
-          REPORT_JSON: ${{ needs.prepare.outputs.report }}
+          REPORT_INPUT_PATH: ${{ runner.temp }}/analytics-daily-report.json
           # Oct 6 was sent by legacy run 37406226305 without a message-ID receipt.
           # A delayed transition-day run must not post again against an empty ledger.
           DELIVERY_NOT_BEFORE: "2026-10-07"
+      - name: Remove the temporary report
+        if: always()
+        env:
+          REPORT_INPUT_PATH: ${{ runner.temp }}/analytics-daily-report.json
+        run: rm -f -- "$REPORT_INPUT_PATH"

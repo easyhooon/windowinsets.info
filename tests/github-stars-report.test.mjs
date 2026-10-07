@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -94,7 +94,7 @@ test('snapshot write failure still returns the real total without marking it sav
   });
 });
 
-async function runDailyReport(f, { starsFail = false, total = 123, discordFail = false, supportFail = false, prepareOnly = false, artifactOverride, notBefore = '' } = {}) {
+async function runDailyReport(f, { starsFail = false, total = 123, discordFail = false, supportFail = false, prepareOnly = false, artifactOverride, notBefore = '', maskedValue = '', omitReportPath = false } = {}) {
   const payloadPath = join(f.dir, 'discord.json');
   const artifactPath = join(f.dir, 'daily-report.json');
   const outputPath = join(f.dir, 'github-output');
@@ -117,7 +117,7 @@ async function runDailyReport(f, { starsFail = false, total = 123, discordFail =
         return { ok: true, json: async () => ({ access_token: 'test-access-token' }) };
       }
       if (url === 'https://api.github.com/repos/${repository}') {
-        if (phase !== 'prepare' || process.env.GITHUB_TOKEN !== 'test-read-secret') throw new Error('Stars must use the read-only preparation token');
+        if (phase !== 'prepare' || process.env.GITHUB_TOKEN || options.headers.authorization) throw new Error('Preparation must not receive the delivery token');
         return ${starsFail ? '{ ok: false, status: 503 }' : `{ ok: true, json: async () => ({ stargazers_count: ${total} }) }`};
       }
       if (url.startsWith('https://api.github.com/repos/${repository}/')) {
@@ -141,7 +141,7 @@ async function runDailyReport(f, { starsFail = false, total = 123, discordFail =
         if (phase !== 'prepare') throw new Error('Sender must not query GA4');
         const body = JSON.parse(options.body);
         if (${supportFail} && body.dimensions?.some(d => d.name === 'customEvent:support_platform')) return { ok: false, status: 400, text: async () => 'mock unsupported dimension' };
-        const dimensions = (body.dimensions ?? []).map(d => ({ value: ({ date: '20261004', deviceCategory: 'desktop', eventName: 'device_select', pageTitle: 'Galaxy Z Fold8 Window Insets', pagePath: '/galaxy-z-fold8', 'customEvent:support_platform': 'ko_fi' })[d.name] }));
+        const dimensions = (body.dimensions ?? []).map(d => ({ value: ({ date: '20261004', deviceCategory: 'desktop', eventName: 'device_select', pageTitle: 'Galaxy Z Fold8 Window Insets', pagePath: ${JSON.stringify(maskedValue || '/galaxy-z-fold8')}, 'customEvent:support_platform': 'ko_fi' })[d.name] }));
         return { ok: true, json: async () => ({ metadata: { timeZone: 'Asia/Seoul' }, rows: [{ dimensionValues: dimensions, metricValues: body.metrics.map(() => ({ value: '10' })) }] }) };
       }
       if (url === 'https://discord.example.invalid/test-hook?wait=true') {
@@ -159,7 +159,6 @@ async function runDailyReport(f, { starsFail = false, total = 123, discordFail =
       delete process.env.GA4_SERVICE_ACCOUNT_KEY;
       process.env.GITHUB_TOKEN = 'test-write-secret';
       process.env.DISCORD_WEBHOOK_URL = 'https://discord.example.invalid/test-hook';
-      process.env.REPORT_JSON = await readFile(${JSON.stringify(artifactPath)}, 'utf8');
       await import(${JSON.stringify(sender)});
     }
   `;
@@ -167,38 +166,65 @@ async function runDailyReport(f, { starsFail = false, total = 123, discordFail =
     encoding: 'utf8',
     env: {
       ...process.env,
-      GA4_PROPERTY_ID: 'test-property',
+      GA4_PROPERTY_ID: maskedValue || 'test-property',
       GA4_SERVICE_ACCOUNT_KEY: JSON.stringify({ client_email: 'test@example.invalid', private_key: 'unused-signing-stub' }),
       DISCORD_WEBHOOK_URL: '',
       GITHUB_REPOSITORY: repository,
-      GITHUB_TOKEN: 'test-read-secret',
+      GITHUB_TOKEN: '',
       GITHUB_STARS_STATE_PATH: f.statePath,
       GITHUB_OUTPUT: outputPath,
-      REPORT_OUTPUT_PATH: artifactPath,
+      REPORT_OUTPUT_PATH: omitReportPath ? '' : artifactPath,
       REPORT_INPUT_PATH: artifactPath,
       REPORT_JSON: '',
       DELIVERY_NOT_BEFORE: notBefore,
     },
   });
   const payload = await readFile(payloadPath, 'utf8').then(JSON.parse).catch(() => null);
-  const artifact = JSON.parse(await readFile(artifactPath, 'utf8'));
+  const artifact = await readFile(artifactPath, 'utf8').then(JSON.parse).catch(() => null);
   const outputs = (await readFile(outputPath, 'utf8')).split('\n');
-  const preparedOutput = JSON.parse(outputs.find(line => line.startsWith('daily_report=')).slice('daily_report='.length));
-  return { child, payload, artifact, preparedOutput, output: outputs.includes('stars_snapshot_saved=true') ? 'stars_snapshot_saved=true\n' : '' };
+  const reportOutput = outputs.find(line => line.startsWith('daily_report='));
+  return { child, payload, artifact, reportOutput, output: outputs.includes('stars_snapshot_saved=true') ? 'stars_snapshot_saved=true\n' : '' };
 }
 
 test('preparation produces a data-only report without a webhook, delivery-state access or write token', async t => {
   const f = await fixture(t);
-  const { child, payload, artifact, preparedOutput } = await runDailyReport(f, { prepareOnly: true });
+  const { child, payload, artifact, reportOutput } = await runDailyReport(f, { prepareOnly: true });
   assert.equal(child.status, 0, child.stderr);
   assert.equal(payload, null);
   assert.equal(artifact.version, 1);
   assert.equal(artifact.partial, false);
-  assert.deepEqual(preparedOutput, artifact);
+  assert.equal(reportOutput, undefined);
   assert.match(artifact.reportDate, /^\d{4}-\d{2}-\d{2}$/);
   assert.match(artifact.content, /GitHub Stars: 총 \*\*123개\*\*/);
   await assert.rejects(readFile(join(f.dir, 'deliveries.json')), { code: 'ENOENT' });
   assert.ok(!JSON.stringify(artifact).includes('secret') && !JSON.stringify(artifact).includes('test-hook'));
+});
+
+test('a report containing a masked value reaches the sender only through the local file', async t => {
+  const f = await fixture(t);
+  const maskedValue = 'synthetic-sensitive-marker';
+  const { child, payload, artifact, reportOutput } = await runDailyReport(f, { maskedValue });
+  assert.equal(child.status, 0, child.stderr);
+  assert.equal(reportOutput, undefined);
+  assert.equal((await stat(join(f.dir, 'daily-report.json'))).mode & 0o777, 0o600);
+  assert.ok(artifact.content.includes(maskedValue));
+  assert.equal(payload.content, artifact.content);
+  assert.ok(!child.stdout.includes(maskedValue) && !child.stderr.includes(maskedValue));
+  assert.equal((await readFile(join(f.dir, 'github-output'), 'utf8')), 'stars_snapshot_saved=true\n');
+});
+
+test('Actions preparation without a file path fails before outputs, preview logging or delivery', async t => {
+  const f = await fixture(t);
+  const { child, payload, artifact, reportOutput } = await runDailyReport(f, { omitReportPath: true });
+  assert.equal(child.status, 1);
+  assert.match(child.stderr, /REPORT_OUTPUT_PATH is required in Actions/);
+  assert.equal(child.stdout, '');
+  assert.equal(payload, null);
+  assert.equal(artifact, null);
+  assert.equal(reportOutput, undefined);
+  assert.equal(await readFile(join(f.dir, 'github-output'), 'utf8'), '');
+  await assert.rejects(readFile(f.statePath), { code: 'ENOENT' });
+  await assert.rejects(readFile(join(f.dir, 'deliveries.json')), { code: 'ENOENT' });
 });
 
 test('a transition-day sender skips before any delivery-state or webhook request', async t => {
@@ -210,7 +236,7 @@ test('a transition-day sender skips before any delivery-state or webhook request
   await assert.rejects(readFile(join(f.dir, 'deliveries.json')), { code: 'ENOENT' });
 });
 
-test('the isolated sender rejects malformed report artifacts before creating state or posting', async t => {
+test('the sender rejects malformed report files before creating state or posting', async t => {
   const f = await fixture(t);
   for (const artifactOverride of [
     null,
