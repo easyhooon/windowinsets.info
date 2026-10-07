@@ -1,6 +1,7 @@
 // The isolated sender accepts data-only JSON and needs no GA4 key or dependencies.
 import { readFile } from "node:fs/promises";
 import { createDeliveryStore, deliverReport, deliveryWindowOpen } from "./report-delivery.mjs";
+import { openReport } from "./report-transport.mjs";
 
 // The migration-day legacy send has no durable receipt. Avoid a second send without inventing one.
 if (!deliveryWindowOpen({ notBefore: process.env.DELIVERY_NOT_BEFORE })) {
@@ -8,12 +9,12 @@ if (!deliveryWindowOpen({ notBefore: process.env.DELIVERY_NOT_BEFORE })) {
   process.exit(0);
 }
 
-const { REPORT_JSON, REPORT_INPUT_PATH, DISCORD_WEBHOOK_URL } = process.env;
-if ((!REPORT_JSON && !REPORT_INPUT_PATH) || !DISCORD_WEBHOOK_URL) {
-  throw new Error("A prepared report and DISCORD_WEBHOOK_URL are required for delivery.");
+const { REPORT_INPUT_PATH, DISCORD_WEBHOOK_URL, REPORT_TRANSFER_KEY } = process.env;
+if (!REPORT_INPUT_PATH || !DISCORD_WEBHOOK_URL || !REPORT_TRANSFER_KEY) {
+  throw new Error("An encrypted report, REPORT_TRANSFER_KEY and DISCORD_WEBHOOK_URL are required for delivery.");
 }
 let report;
-try { report = JSON.parse(REPORT_JSON || await readFile(REPORT_INPUT_PATH, "utf8")); }
+try { report = JSON.parse(openReport(await readFile(REPORT_INPUT_PATH, "utf8"), REPORT_TRANSFER_KEY)); }
 catch { throw new Error("The prepared daily report could not be read."); }
 const date = new Date(`${report?.reportDate}T00:00:00Z`);
 if (report?.version !== 1 || !/^\d{4}-\d{2}-\d{2}$/.test(report.reportDate)
