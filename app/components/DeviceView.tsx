@@ -548,7 +548,7 @@ export function DeviceView({ device, skins, rawInsets = {}, devCaptures = [] }: 
             )}
 
         <DevelopmentDetails device={device} captures={devCaptures} measurement={measurement} />
-        <details className="sources-details"><summary>Android details & sources</summary>
+        <details className="sources-details"><summary>Android details & sources <span className="details-hint">All insets, test fixture, captures</span></summary>
           {emulatorOnly ? <section className="rtl-status emulator-status" aria-label="Capture provenance">
             {measurement?.condition.emulator ? <a href={measurement.condition.emulator.manifestUrl} target="_blank" rel="noreferrer">Android Emulator capture ↗</a> : <strong>Android Emulator capture</strong>}
             <p>Values reported by the Android framework for the emulator's {device.name} device profile. They are not measured on Pixel hardware and may differ from a physical device.</p>

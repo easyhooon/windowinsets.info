@@ -153,6 +153,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .emulator-status strong { font-weight:600; }
 .source-kind.is-emulator { outline:1px dashed var(--color-muted); outline-offset:-1px; }
 .sources-details summary { font-weight:600; padding:8px 0; }
+.details-hint { display:block; margin:1px 0 0 .86em; font-weight:400; color:var(--color-subtle); }
 .sources-details ul,.sources-details p { font-size:11px; line-height:1.6; }
 .dev-details + .sources-details { margin-top:0; }
 .dev-details p { margin:6px 0; }

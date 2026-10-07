@@ -40,7 +40,7 @@ export function DevelopmentDetails({ device, captures, measurement }: {
   const profile = capture && device.brand === "Samsung" ? avdProfile(device, capture) : null;
   const emulatorProfile = measurement?.condition.emulator?.deviceProfile;
 
-  return <details className="sources-details dev-details"><summary>Use in development</summary>
+  return <details className="sources-details dev-details"><summary>Use in development <span className="details-hint">Preview spec, size class, AVD, adb</span></summary>
     <Label>Compose Preview</Label>
     {capture ? <>
       <CodeBlock title="Compose · @Preview">{previewSnippet(device, capture)}</CodeBlock>
