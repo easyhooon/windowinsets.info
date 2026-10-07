@@ -48,6 +48,8 @@ Building against a specific device? Open **Use in development** in a device's Me
 
 The CLI prints the same specs with `npx windowinsets-info preview <device>` and `npx windowinsets-info sizeclass <device>`. Compose Preview draws generic system bars and cutout, so check layouts against the measured insets.
 
+**Android details & sources**, the other collapsed section, has a ready-made `WindowInsetsCompat` test fixture for Robolectric, Paparazzi and Roborazzi. [What's in the Metrics panel](https://windowinsets.info/developer-guide/data) lists every section.
+
 Each device also has a Markdown reference at `/<slug>.md` (the **Markdown** button in the Metrics panel). The same data is plain JSON: `/data/<slug>.json` per device, `/data/index.json` for the list and `/data/all.json` for everything at once (see [JSON export format](docs/JSON_EXPORT.md)). AI tools can start from [`/llms.txt`](https://windowinsets.info/llms.txt).
 
 New to insets? The [developer guide](https://windowinsets.info/developer-guide) covers the basics, Compose and View code, [foldables](https://windowinsets.info/developer-guide/foldables), common patterns and [using this data in your code](https://windowinsets.info/developer-guide/data). Data and site updates are listed in the [changelog](https://windowinsets.info/changelog) ([RSS](https://windowinsets.info/changelog.xml)).

@@ -618,6 +618,38 @@ webView.webViewClient = object : WebViewClient() {
           All values are linked to their source (official specs, raw probe JSON, or community
           reports), so you can always trace where a number came from.
         </p>
+        <h3>What's in the Metrics panel</h3>
+        <p>
+          Everything follows the selected screen, rotation, navigation mode and unit. From top
+          to bottom:
+        </p>
+        <ul>
+          <li>
+            <b>Markdown</b>, <b>JSON</b> and <b>Export JSON</b>: the whole device as a readable
+            reference, a shareable data URL or a download (see below).
+          </li>
+          <li>
+            <b>Dimensions</b>, <b>Safe Area Insets</b>, <b>Display Cutout Bounds</b> and{" "}
+            <b>Corner Radii</b>: the values drawn on the diagram.
+          </li>
+          <li>
+            <b>Use in development</b> (collapsed): a copyable Compose <code>@Preview</code> spec,
+            window size classes, an Android Studio hardware profile and <code>adb</code> emulator
+            commands.
+          </li>
+          <li>
+            <b>Android details &amp; sources</b> (collapsed): system bar and cutout insets, the
+            separate <code>statusBars</code>, <code>navigationBars</code>, gesture and{" "}
+            <code>tappableElement</code> insets, a <b>Test fixture</b> with a ready-made{" "}
+            <code>WindowInsetsCompat</code>, the One UI or emulator version, and links to every
+            raw capture.
+          </li>
+          <li>
+            <b>App Preview</b> (inside the same section, when <b>App insets</b> is set to{" "}
+            <b>Ignored</b> or <b>Applied</b>): copyable Compose and View padding code for the
+            selected screen.
+          </li>
+        </ul>
         <h3>Sharing a specific view</h3>
         <p>
           A device page's URL follows its controls, so you can paste it into an issue or PR
