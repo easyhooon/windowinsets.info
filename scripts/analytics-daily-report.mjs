@@ -1,6 +1,6 @@
 // Prepares yesterday's GA4 summary without delivery credentials or Git writes.
 // Env: GA4_PROPERTY_ID, GA4_SERVICE_ACCOUNT_KEY (service account JSON),
-// REPORT_OUTPUT_PATH and REPORT_TRANSFER_KEY (optional; otherwise prints a local preview).
+// REPORT_OUTPUT_PATH and REPORT_TRANSFER_KEY (required in Actions; optional for a local preview).
 // "yesterday" follows the GA4 property's reporting time zone.
 import { createSign } from "node:crypto";
 import { appendFile, mkdir, writeFile } from "node:fs/promises";
@@ -13,6 +13,10 @@ const { GA4_PROPERTY_ID, GA4_SERVICE_ACCOUNT_KEY, REPORT_OUTPUT_PATH } = process
 if (!GA4_PROPERTY_ID || !GA4_SERVICE_ACCOUNT_KEY) {
   console.error("GA4_PROPERTY_ID and GA4_SERVICE_ACCOUNT_KEY are required.");
   process.exit(1);
+}
+
+if ((process.env.GITHUB_ACTIONS === "true" || process.env.GITHUB_OUTPUT) && !REPORT_OUTPUT_PATH) {
+  throw new Error("REPORT_OUTPUT_PATH is required in Actions; reports must not enter outputs or logs.");
 }
 
 const PLATFORM_LABELS = { desktop: "데스크톱", mobile: "모바일", tablet: "태블릿" };

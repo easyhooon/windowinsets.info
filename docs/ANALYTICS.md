@@ -118,8 +118,11 @@ guarantee. See [GitHub's schedule documentation](https://docs.github.com/en/acti
    repository secret. Confirm the delivery ledger and recent Discord messages
    before enabling or manually running delivery.
 
-Running the preparation script without `REPORT_OUTPUT_PATH`
-prints a local preview and never posts to Discord. Each section queries separately;
+Outside Actions, running preparation with neither `REPORT_OUTPUT_PATH` nor
+`GITHUB_OUTPUT` prints a local preview and never posts to Discord. In Actions
+(`GITHUB_ACTIONS=true`) or when `GITHUB_OUTPUT` is configured, a missing output
+path fails before collection or preview logging. The sender requires an input
+file and never falls back to `REPORT_JSON`. Each section queries separately;
 a failing section
 (for example an unregistered custom dimension) is marked in the message and
 fails the run after posting. Data for the previous day can still be processing
