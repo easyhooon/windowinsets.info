@@ -152,7 +152,7 @@ interpolates the content into shell commands. Missing or invalid output stops
 before a claim or send. There are no package installation steps in either job.
 
 Only the isolated `deliver` job overrides the token to `contents: write`. It checks
-out the two sender scripts at the workflow's exact commit, sets up Node, and performs
+out the sender scripts and donation helpers at the workflow's exact commit, sets up Node, and performs
 the claim, Discord request and receipt write. Its checkout does not persist credentials;
 it has no GA4 key or Stars/cache collection. All steps/actions in this job can still
 access its write token. This job isolation reduces the code given write authority,
@@ -160,6 +160,17 @@ but GitHub does not restrict Contents write to a branch or path: the token can m
 repository contents/refs and releases where repository rules permit. The code writes
 only the state branch. Main was unprotected at the October 6 review. This is a remaining
 repository-wide permission limit, not a state-only token.
+
+An optional `DONATIONS_LEDGER_READ_TOKEN` gives the final sender step Contents read
+on the separate private donation ledger, while its automatic token retains the
+website-repo Contents write described above. The private token is not available to
+preparation. When configured, the sender fetches only the reduced private ledger,
+computes account-wide KST receipts in memory, and adds that section to the existing
+message. It does not put financial amounts in job outputs, environment values,
+artifacts, public state records or logs. Missing configuration preserves the existing
+message; a failed private read displays unavailable, never zero, and marks the report
+partial after delivery. Its GA4 reporting date and duplicate guard remain unchanged.
+See [donation intake and owner setup](DONATIONS.md).
 
 This permission increase uses no new PAT, database or paid service. Merging the
 workflow itself changes the automatic token permission for later eligible sender jobs;
