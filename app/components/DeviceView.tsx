@@ -675,7 +675,6 @@ export function DeviceView({ device, skins, rawInsets = {}, devCaptures = [] }: 
       <div className="canvas-toggles">{displayOptions}</div>
     </section>
     <div className="dropdown settings canvas-settings" ref={settings}>
-      <Link className="toolbar-button docs-link" to="/docs">Docs</Link>
       <a className="toolbar-button github-star" href={REPO_URL} title="Star on GitHub ★" target="_blank" rel="noreferrer" aria-label="windowinsets.info on GitHub (opens in a new tab)"><Icon name="github" /><span>GitHub</span></a>
       <button className="toolbar-button theme-toggle" aria-label="Toggle dark mode" onClick={() => {
         const dark = theme === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches : theme === "dark";
@@ -690,7 +689,7 @@ export function DeviceView({ device, skins, rawInsets = {}, devCaptures = [] }: 
           <label><input type="checkbox" checked={showRegions} onChange={e => setShowRegions(e.target.checked)} />Show Regions</label>
           <label><input type="checkbox" checked={showDimensions} onChange={e => setShowDimensions(e.target.checked)} />Show Dimensions</label>
         </fieldset>
-        <Link className="settings-docs" to="/docs">Docs</Link>
+        <nav className="settings-links" aria-label="Site"><Link to="/developer-guide">Developer guide</Link><Link to="/docs">Docs</Link><Link to="/changelog">Changelog</Link></nav>
         <button type="button" className="settings-shortcuts" aria-keyshortcuts="?" onClick={() => { setSettingsOpen(false); shortcutState.setHelpOpen(true); }}>Keyboard shortcuts<kbd>?</kbd></button>
       </div>}
     </div>
