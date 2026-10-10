@@ -1,17 +1,5 @@
 import type { ReactNode } from "react";
-import { devices, hasVerifiedInsets } from "../data/devices";
-import { REPO_URL, SITE_URL } from "../data/site";
-import { pageMeta } from "../lib/seo";
-import type { Route } from "./+types/methodology";
-
-export function meta(_: Route.MetaArgs) {
-  return pageMeta({
-    title: "How I measure Android window insets | windowinsets.info",
-    description:
-      "How windowinsets.info captures Android inset data, records its sources and conditions, and explains measurement limits.",
-    url: `${SITE_URL}/methodology`,
-  });
-}
+import { REPO_URL } from "../data/site";
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -24,21 +12,13 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   );
 }
 
-/** Runs at prerender: catalog counts, without shipping the catalog. */
-export function loader() {
-  return {
-    measured: devices.filter((d) => d.brand === "Samsung" && hasVerifiedInsets(d)).length,
-    emulated: devices.filter((d) => d.brand === "Google" && hasVerifiedInsets(d)).length,
-    total: devices.length,
-  };
-}
+export type MethodologyCounts = { measured: number; emulated: number; total: number };
 
-export default function Methodology({ loaderData: { measured, emulated, total } }: Route.ComponentProps) {
-
+/** The How I measure docs page body; counts come from the catalog at prerender. */
+export function Methodology({ counts: { measured, emulated, total } }: { counts: MethodologyCounts }) {
   return (
-    <article className="mx-auto max-w-2xl p-4 md:p-8">
-      <h1 className="text-2xl font-semibold">How I measure</h1>
-      <p className="mt-2 text-muted">
+    <>
+      <p className="mt-4 text-muted">
         This site is only useful if you can trust its numbers, so here is exactly where each
         one comes from and where it stops being reliable.
       </p>
@@ -257,6 +237,6 @@ export default function Methodology({ loaderData: { measured, emulated, total } 
           as valuable as a new device.
         </p>
       </Section>
-    </article>
+    </>
   );
 }

@@ -116,10 +116,18 @@ export default function Shell() {
   const deviceLink = (d: Device) => <NavLink key={d.slug} to={`/${d.slug}`} onMouseEnter={() => prefetchDevice(d)} onFocus={() => prefetchDevice(d)} onTouchStart={() => prefetchDevice(d)} onClick={() => { trackDeviceSelection(d); setQuery(""); setMobileOpen(false); }} onAuxClick={e => { if (e.button === 1) trackDeviceSelection(d); }} className={`device-link ${current.slug === d.slug ? "selected" : ""}`}>
     <span className={`device-thumbnail ${d.formFactor}`} /><span>{d.name}<small>{deviceCaption(d)}</small></span>
   </NavLink>;
+  // Device pages float their GitHub, theme and settings controls over the header's right end.
+  const hasDeviceControls = Boolean(slug) || location.pathname === "/";
+  const siteLinks = <>
+    <NavLink to="/developer-guide" onClick={() => setMobileOpen(false)}>Developer guide</NavLink>
+    <NavLink to="/docs" onClick={() => setMobileOpen(false)}>Docs</NavLink>
+    <NavLink to="/changelog" onClick={() => setMobileOpen(false)}>Changelog</NavLink>
+  </>;
   return <div style={{ "--sidebar-width": `${sidebarWidth}px` } as React.CSSProperties} className="app-shell" data-build-commit={__BUILD_COMMIT__}>
     <a href="#device-canvas" className="skip-link">Skip to device canvas</a>
-    <header className="app-header">
+    <header className={`app-header ${hasDeviceControls ? "has-device-controls" : ""}`}>
       <NavLink to="/" className="brand"><img src="/favicon-v2.svg" width="28" height="28" alt="" />windowinsets.info</NavLink>
+      <nav className="site-nav" aria-label="Site">{siteLinks}</nav>
       <button className="mobile-model" aria-expanded={mobileOpen} onClick={() => setMobileOpen(!mobileOpen)}><span className={`device-thumbnail ${current.formFactor}`} /><span>{current.name}{measurementLabel(current) && <small>{measurementLabel(current)}</small>}</span><Icon name="chevron" /></button>
     </header>
     <div className="app-content">
@@ -153,18 +161,17 @@ export default function Shell() {
           {!filtered.length && <p className="p-3 text-sm text-muted">No devices found.</p>}
         </nav>
         <nav className="sidebar-footer">
-          <div className="sidebar-footer-row sidebar-footer-links">
-            <NavLink to="/developer-guide" onClick={() => setMobileOpen(false)}>Developer guide</NavLink>
-            <NavLink to="/methodology" onClick={() => setMobileOpen(false)}>How I measure</NavLink>
-            <NavLink to="/changelog" onClick={() => setMobileOpen(false)}>Changelog</NavLink>
+          {/* Phones have no room for the header links, so the picker repeats them. */}
+          <div className="sidebar-footer-row sidebar-footer-links">{siteLinks}</div>
+          <p className="sidebar-footer-row">
             <a href={`${REPO_URL}/issues/new/choose`} target="_blank" rel="noreferrer" aria-label="Send feedback or report an issue on GitHub (opens in a new tab)">Send feedback ↗</a>
-          </div>
+            <a href="https://safearea.info" target="_blank" rel="noreferrer">Inspired by safearea.info ↗</a>
+          </p>
           <p className="sidebar-footer-row">
             <span>Found this useful?</span>
             <a href={KO_FI_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackSupportClick("ko_fi", "sidebar_footer")} onAuxClick={e => { if (e.button === 1) trackSupportClick("ko_fi", "sidebar_footer"); }} aria-label="Support windowinsets.info on Ko-fi (opens in a new tab)">☕ Ko-fi</a>
             <a href={SPONSORS_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackSupportClick("github_sponsors", "sidebar_footer")} onAuxClick={e => { if (e.button === 1) trackSupportClick("github_sponsors", "sidebar_footer"); }} aria-label="Sponsor windowinsets.info on GitHub Sponsors (opens in a new tab)">♥ Sponsor</a>
           </p>
-          <a href="https://safearea.info" target="_blank" rel="noreferrer">Inspired by safearea.info ↗</a>
         </nav>
       </aside>
       <ResizeHandle label="Devices width" value={sidebarWidth} onChange={setSidebarWidth} min={190} max={360} />

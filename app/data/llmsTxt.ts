@@ -1,6 +1,7 @@
 import type { Device } from "./types";
 import { REPO_URL } from "./site";
 import { GUIDE_PAGES, guidePath } from "./guidePages";
+import { DOCS_PAGES, docsPath } from "./docsPages";
 import { createDeviceIndex, DEVICE_BUNDLE_PATH, DEVICE_BUNDLE_SCHEMA, DEVICE_EXPORT_SCHEMA, DEVICE_INDEX_PATH, DEVICE_INDEX_SCHEMA } from "./deviceExport";
 
 export const LLMS_TXT_PATH = "/llms.txt";
@@ -55,7 +56,7 @@ Rules for using the data:
 ## Docs
 
 ${GUIDE_PAGES.map(page => `- [Developer guide: ${page.title}](${siteUrl}${guidePath(page.slug)}): ${page.description}`).join("\n")}
-- [Methodology](${siteUrl}/methodology): how captures are made and validated.
+${DOCS_PAGES.map(page => `- [Docs: ${page.title}](${siteUrl}${docsPath(page.slug)}): ${page.description}`).join("\n")}
 - [Changelog](${siteUrl}/changelog): data and site changes. RSS: ${siteUrl}/changelog.xml
 
 ## Devices
