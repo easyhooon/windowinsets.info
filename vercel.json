@@ -10,5 +10,12 @@
       "fix/analytics-private-report-handoff": false,
       "codex/daily-report-delivery-guard": false
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/methodology",
+      "destination": "/docs/methodology",
+      "permanent": true
+    }
+  ]
 }
