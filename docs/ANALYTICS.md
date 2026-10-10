@@ -90,7 +90,7 @@ repository totals, not a count of star notifications. Stars are sampled when the
 report runs, separately from GA4's previous-day activity. The existing real-time
 GitHub-to-Discord webhook is independent and remains unchanged.
 
-The workflow uses the automatic `GITHUB_TOKEN` to read the repository total.
+The preparation step reads the public repository total without a GitHub token.
 Successful samples are saved in an Actions cache; Stars collection needs no new
 secret. The delivery ledger described below separately needs Contents write. Same-day manual
 reruns update that day's total while preserving the previous-day baseline. The first
@@ -116,7 +116,7 @@ guarantee. See [GitHub's schedule documentation](https://docs.github.com/en/acti
    whole JSON key) and `DISCORD_WEBHOOK_URL`, then run the workflow manually
    once from the Actions tab.
 
-Running the preparation script without `GITHUB_OUTPUT` or `REPORT_OUTPUT_PATH`
+Running the preparation script without `GITHUB_OUTPUT` and `REPORT_OUTPUT_PATH`
 prints a local preview and never posts to Discord. Each section queries separately;
 a failing section
 (for example an unregistered custom dimension) is marked in the message and
@@ -125,7 +125,7 @@ at run time, so late events may appear in GA4 but not in the report.
 
 ### Delivery records and retries
 
-The preparation job reads the reporting zone from GA4 response metadata and freezes
+The preparation step reads the reporting zone from GA4 response metadata and freezes
 one explicit completed date for all section queries and the heading. The optional
 manual `report_date` input supports a missed date without changing the current day
 or Stars' separate KST collection date. Missing zone metadata stops delivery rather
@@ -143,26 +143,40 @@ the state branch and the implementation branch are disabled in `vercel.json`.
 The state files are retained in Git history rather than relying on cache retention.
 Do not delete the branch or its records: an absent record authorizes a new attempt.
 
-The workflow defaults to `contents: read`. Its `prepare` job has that read-only
-token for GA4/Stars collection, cache operations and report preparation. It has
-the GA4 service-account key but no Discord webhook. It passes the prepared date,
-message content and partial-query flag as JSON through a job output. The sender
-receives it through an environment variable, parses/validates it as data, and never
-interpolates the content into shell commands. Missing or invalid output stops
-before a claim or send. There are no package installation steps in either job.
-
-Only the isolated `deliver` job overrides the token to `contents: write`. It checks
+The workflow defaults to `contents: read`; its single `deliver` job overrides this
+with only `contents: write` for the durable delivery ledger. Preparation and delivery
+run as separate steps on the same runner, with no package installation. Preparation
+receives the GA4 key and no Discord webhook or GitHub token. Stars uses the public
+repository API without authentication; a rate limit is handled as a Stars lookup
+failure without blocking the remaining report. Only the sender step receives the
+webhook and automatic GitHub token, and it needs no GA4 key. The job checks
 out the two sender scripts at the workflow's exact commit, sets up Node, and performs
-the claim, Discord request and receipt write. Its checkout does not persist credentials;
-it has no GA4 key or Stars/cache collection. All steps/actions in this job can still
-access its write token. This job isolation reduces the code given write authority,
-but GitHub does not restrict Contents write to a branch or path: the token can modify
-repository contents/refs and releases where repository rules permit. The code writes
-only the state branch. Main was unprotected at the October 6 review. This is a remaining
-repository-wide permission limit, not a state-only token.
+the claim, Discord request and receipt write. Its sparse checkout also includes the
+two collection scripts needed for preparation.
+
+Preparation writes the data-only JSON report to a mode-0600 file under `runner.temp`.
+The sender reads it through `REPORT_INPUT_PATH`, parses/validates it as data, and
+never interpolates the content into shell commands. Missing or invalid data stops
+before a claim or send. The last step removes the file even after failure. Reports
+are never uploaded as artifacts, written to job/step outputs or printed in Actions
+logs. `GITHUB_OUTPUT` carries only `stars_snapshot_saved=true` for cache control;
+Actions preparation without a file path fails before collection or preview logging.
+Local runs without Actions outputs can still print a preview.
+
+The earlier two-job handoff failed on October 7: preparation succeeded, but GitHub
+suppressed the report job output as potentially containing a secret, leaving the
+sender with an empty input. A local file avoids that cross-job export entirely;
+it does not encode or bypass masking. No transfer key or new secret is required.
+
+GitHub token permissions apply to the whole job, not individual steps. Checkout
+still does not persist credentials, and preparation is not passed the write token,
+but all actions in the job can access the automatic token. This removes the previous
+job isolation: the permission remains repository-wide Contents write, not restricted
+to the state branch. The code writes only the state branch. Main was unprotected at
+the October 6 review. Review this scope and applicable branch rules before merging.
 
 This permission increase uses no new PAT, database or paid service. Merging the
-workflow itself changes the automatic token permission for later eligible sender jobs;
+workflow itself changes the automatic token permission for later eligible delivery jobs;
 there is no separate credential activation. Review the job permission and applicable
 branch rules before merging. A missing permission or failed state request stops
 before sending.
