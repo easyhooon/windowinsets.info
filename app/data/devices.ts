@@ -96,6 +96,7 @@ import { skinPreviews } from "./skinPreviews";
 import { isInCoverage } from "./coverage";
 import { FEATURED_SLUG, REPO_URL, SITE_URL } from "./site";
 import { GUIDE_PAGES, guidePath } from "./guidePages";
+import { DOCS_PAGES, docsPath } from "./docsPages";
 
 // Explicit entries own all verified data. Skins can add missing screens, never
 // replace a screen's captures. Add a measured entry here as RTL data arrives.
@@ -123,7 +124,7 @@ export const featuredDevice = devices.find(device => device.slug === FEATURED_SL
 export { REPO_URL, SITE_URL };
 
 /** Non-device pages that are prerendered and listed in the sitemap. */
-export const STATIC_PATHS = ["/", "/methodology", ...GUIDE_PAGES.map(page => guidePath(page.slug)), "/docs", "/changelog"];
+export const STATIC_PATHS = ["/", ...GUIDE_PAGES.map(page => guidePath(page.slug)), ...DOCS_PAGES.map(page => docsPath(page.slug)), "/changelog"];
 
 export const allPaths = () => [...STATIC_PATHS, ...devices.map((d) => `/${d.slug}`)];
 

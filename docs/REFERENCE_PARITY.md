@@ -125,14 +125,15 @@ projection, so labels stay flat and outside the projected body.
   top-right controls, left of the theme toggle: GitHub mark plus "GitHub" on
   desktop, the mark alone on phones; its tooltip asks for a star. It replaces the
   former sidebar star prompt.
-- **Header Docs link.** A borderless "Docs" text link, styled as site navigation
-  rather than a tool button, sits left of the GitHub link and opens
-  `/docs`, the README rendered at build time without the sections the How I
-  measure page covers. Phones keep three header buttons so the wordmark fits, and
-  reach Docs from the settings menu instead. The reference has no docs page.
-- **Sidebar footer links.** On desktop the footer lists one link per line at
-  13px, since the tall device list leaves room; phones keep the compact wrapped
-  row inside the picker.
+- **Header site links.** Developer guide, Docs and Changelog are borderless
+  text links in the header on every page, left of the device page's GitHub,
+  theme and settings controls. Docs is paged like the developer guide: the
+  README is split by section at build time into `/docs/<topic>` pages, and How
+  I measure is the `/docs/methodology` page (`/methodology` redirects there).
+  Phones keep three header buttons so the wordmark fits, and reach the links
+  from the settings menu and the picker footer. The reference has no docs pages.
+- **Sidebar footer.** On desktop the footer holds only feedback, attribution
+  and support links in compact rows, so the device list keeps its height.
 - **Symmetric values appear once.** Equal lengths in a symmetric group (corner
   radii, opposing insets, opposing cutout offsets) share one badge; unequal
   lengths all remain. Comparison uses unrounded geometry. Interior TOP/BOTTOM

@@ -3,9 +3,8 @@ import { type RouteConfig, index, layout, route } from "@react-router/dev/routes
 export default [
   layout("routes/shell.tsx", [
     index("routes/home.tsx"),
-    route("methodology", "routes/methodology.tsx"),
     route("developer-guide/:topic?", "routes/developer-guide.tsx"),
-    route("docs", "routes/docs.tsx"),
+    route("docs/:topic?", "routes/docs.tsx"),
     route("changelog", "routes/changelog.tsx"),
     route(":slug", "routes/device.tsx"),
   ]),

@@ -52,7 +52,7 @@ only what the page shows:
   never revalidates.
 - `routes/device.tsx` and `routes/home.tsx` send one device, its skins
   (`deviceSkins`) and its raw insets.
-- `routes/methodology.tsx` sends counts; `routes/changelog.tsx` sends the device
+- `routes/docs.tsx` sends counts for How I measure; `routes/changelog.tsx` sends the device
   names its entries mention.
 - Site constants live in `app/data/site.ts`. Changelog name lookup and the RSS
   feed live in `app/data/changelog.server.ts`.

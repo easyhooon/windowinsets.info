@@ -523,7 +523,7 @@ export function DeviceView({ device, skins, rawInsets = {}, devCaptures = [] }: 
               <p className="mt-2 text-xs leading-relaxed text-muted">
                 Android-reported exclusion rectangle. Camera lenses may share one region;
                 individual lens diameters and spacing are not measured.
-                <Link to="/methodology#camera-cutouts" className="mt-2 block whitespace-nowrap text-accent underline">Cutout measurement limits →</Link>
+                <Link to="/docs/methodology#camera-cutouts" className="mt-2 block whitespace-nowrap text-accent underline">Cutout measurement limits →</Link>
               </p>
             </>}
             {measurement && !measurement.cutoutShape && skin && Object.values(measurement.displayCutout).every(v => !v) && <>
@@ -531,7 +531,7 @@ export function DeviceView({ device, skins, rawInsets = {}, devCaptures = [] }: 
               <p className="text-xs leading-relaxed text-muted">
                 Android reported no display cutout here. Any camera shown in the official
                 artwork is not a measured exclusion, so its edge distances are not shown.
-                <Link to="/methodology#camera-cutouts" className="mt-2 block whitespace-nowrap text-accent underline">Cutout measurement limits →</Link>
+                <Link to="/docs/methodology#camera-cutouts" className="mt-2 block whitespace-nowrap text-accent underline">Cutout measurement limits →</Link>
               </p>
             </>}
 
@@ -599,7 +599,7 @@ export function DeviceView({ device, skins, rawInsets = {}, devCaptures = [] }: 
           <SourceList sources={Array.from(new Map((measurement?.sources ?? [])
             .concat(screen.sources.filter(s => !measurement || (s.kind !== "measured" && s.kind !== "emulator")))
             .map(s => [`${s.label}|${s.url ?? ""}`, s])).values())} />
-          <Link to="/methodology" className="mt-3 block text-accent underline">How these values are measured →</Link>
+          <Link to="/docs/methodology" className="mt-3 block text-accent underline">How these values are measured →</Link>
           {safe && appPreview !== "off" && <>
             <SectionLabel>App Preview · Insets {appPreview}</SectionLabel>
             <p className="text-xs leading-relaxed text-muted">
@@ -675,7 +675,6 @@ export function DeviceView({ device, skins, rawInsets = {}, devCaptures = [] }: 
       <div className="canvas-toggles">{displayOptions}</div>
     </section>
     <div className="dropdown settings canvas-settings" ref={settings}>
-      <Link className="toolbar-button docs-link" to="/docs">Docs</Link>
       <a className="toolbar-button github-star" href={REPO_URL} title="Star on GitHub ★" target="_blank" rel="noreferrer" aria-label="windowinsets.info on GitHub (opens in a new tab)"><Icon name="github" /><span>GitHub</span></a>
       <button className="toolbar-button theme-toggle" aria-label="Toggle dark mode" onClick={() => {
         const dark = theme === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches : theme === "dark";
@@ -690,7 +689,7 @@ export function DeviceView({ device, skins, rawInsets = {}, devCaptures = [] }: 
           <label><input type="checkbox" checked={showRegions} onChange={e => setShowRegions(e.target.checked)} />Show Regions</label>
           <label><input type="checkbox" checked={showDimensions} onChange={e => setShowDimensions(e.target.checked)} />Show Dimensions</label>
         </fieldset>
-        <Link className="settings-docs" to="/docs">Docs</Link>
+        <nav className="settings-links" aria-label="Site"><Link to="/developer-guide">Developer guide</Link><Link to="/docs">Docs</Link><Link to="/changelog">Changelog</Link></nav>
         <button type="button" className="settings-shortcuts" aria-keyshortcuts="?" onClick={() => { setSettingsOpen(false); shortcutState.setHelpOpen(true); }}>Keyboard shortcuts<kbd>?</kbd></button>
       </div>}
     </div>

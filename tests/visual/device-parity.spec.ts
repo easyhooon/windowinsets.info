@@ -446,7 +446,7 @@ test("cover cutout bounds distinguish OS geometry from unmeasured lenses", async
   await expect(page.getByRole("button", { name: "Size 520 × 209 px", exact: true })).toBeVisible();
   await expect(page.getByText("individual lens diameters and spacing are not measured.", { exact: false })).toBeVisible();
   await page.getByRole("link", { name: "Cutout measurement limits →" }).click();
-  await expect(page).toHaveURL(/methodology#camera-cutouts$/);
+  await expect(page).toHaveURL(/docs\/methodology#camera-cutouts$/);
   await expect(page.getByRole("heading", { name: "Camera cutouts: what can be measured" })).toBeVisible();
   await expect(page.locator("#camera-cutouts")).toContainText("detailed contour dimensions remain pending");
 });
