@@ -93,7 +93,7 @@ The [InsetsProbe guide](tools/insets-probe/README.md) covers the Android app its
 
 ## How I measure
 
-The full method is at [/methodology](https://windowinsets.info/methodology) (source: [`app/routes/methodology.tsx`](app/routes/methodology.tsx)). Every published value has a source and a check date:
+The full method is at [/docs/methodology](https://windowinsets.info/docs/methodology) (source: [`app/components/Methodology.tsx`](app/components/Methodology.tsx)). Every published value has a source and a check date:
 
 | Source | Meaning |
 | --- | --- |
@@ -221,7 +221,7 @@ Even a returned path does not guarantee separate physical lens outlines.
 Missing old fields mean not collected; a new null path means not returned, not
 zero geometry. Run the probe on the actual full-screen cover display. Selecting
 its label or rotating an inner-screen capture cannot measure the cover.
-See the [site methodology](https://windowinsets.info/methodology#camera-cutouts).
+See the [site methodology](https://windowinsets.info/docs/methodology#camera-cutouts).
 
 ## Device thickness and artwork limits
 

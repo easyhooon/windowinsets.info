@@ -54,6 +54,12 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .app-shell { height:100dvh; display:flex; flex-direction:column; font-size:13px; }
 .app-header { height:64px; flex-shrink:0; display:flex; align-items:center; padding:0 24px; border-bottom:1px solid var(--color-line); }
 .brand { display:flex; align-items:center; gap:10px; font-size:15px; font-weight:650; }
+/* Site pages share one header nav; device pages leave room for their floating GitHub, theme and settings controls. */
+.site-nav { display:flex; gap:2px; margin-left:auto; }
+.site-nav a { padding:6px 10px; border-radius:6px; color:var(--color-muted); font-size:13px; font-weight:500; text-decoration:none; white-space:nowrap; }
+.site-nav a:hover { background:var(--color-hover); color:var(--color-fg); }
+.site-nav a.active { color:var(--color-fg); }
+.app-header.has-device-controls { padding-right:212px; }
 .app-content { min-height:0; display:flex; flex:1; }
 .device-sidebar { display:flex; flex-direction:column; width:240px; flex-shrink:0; border-right:1px solid var(--color-line); padding:12px 8px 0; }
 .sidebar-heading { display:flex; justify-content:space-between; padding:0 8px 12px; }
@@ -92,8 +98,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .sidebar-footer { padding:10px 8px; border-top:1px solid var(--color-line); display:grid; gap:6px; color:var(--color-muted); font-size:11px; line-height:1.4; }
 .sidebar-footer-row { display:flex; flex-wrap:wrap; gap:2px 12px; margin:0; }
 .sidebar-footer-row>span { flex-basis:100%; }
-/* Phones reach Docs from the settings menu instead of the header. */
-.settings-docs { display:none; width:100%; margin-top:5px; padding:7px; border-top:1px solid var(--color-line); color:var(--color-fg); font-size:12px; text-decoration:none; }
+/* Phones reach the site links from the settings menu instead of the header. */
+.settings-links { display:none; margin-top:5px; padding-top:3px; border-top:1px solid var(--color-line); }
+.settings-links a { display:block; padding:5px 7px; color:var(--color-fg); font-size:12px; text-decoration:none; }
 /* README rendered on /docs. */
 .docs-content :is(h2,h3) { color:var(--color-fg); font-weight:600; scroll-margin-top:16px; }
 .docs-content h2 { margin:32px 0 8px; font-size:18px; }
@@ -116,7 +123,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .docs-gallery figcaption { margin-top:6px; color:var(--color-fg); font-size:13px; }
 @media(max-width:767px) { .docs-gallery { grid-template-columns:minmax(0,1fr); gap:20px; } }
 /* Desktop has room below the device list: one prominent link per line. */
-@media(min-width:768px) { .sidebar-footer-links { flex-direction:column; gap:6px; font-size:13px; } }
+/* The header carries the site links on wider screens, and the support row fits one line. */
+@media(min-width:768px) { .sidebar-footer-links { display:none; } .sidebar-footer-row { column-gap:8px; } .sidebar-footer-row>span { flex-basis:auto; } }
 .workspace { min-width:0; flex:1; overflow:auto; }
 .device-workspace { height:100%; min-height:0; display:grid; grid-template-columns:auto 11px minmax(0,1fr); position:relative; background:var(--color-workspace); background-image:radial-gradient(var(--color-grid) .8px,transparent .8px); background-size:10px 10px; }
 .metrics-panel { width:292px; flex-shrink:0; margin:16px 0 16px 16px; background:light-dark(#ffffffee,#0d1117ee); border:1px solid var(--color-line); border-radius:9px; box-shadow:var(--shadow-card); overflow:auto; }
@@ -187,10 +195,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 .pill-button,.control-pill .toolbar-button { height:28px; min-height:28px; display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:0 8px; border:0; border-radius:14px; background:transparent; font-size:12px; white-space:nowrap; color:var(--color-fg); }
 .pill-button.icon { width:32px; padding:0; }
 .pill-button:hover,.control-pill .toolbar-button:hover { background:var(--color-hover); }
-.github-star,.docs-link { color:var(--color-fg); text-decoration:none; }
+.github-star { color:var(--color-fg); text-decoration:none; }
 /* Docs is site navigation, not a tool: a borderless text link before the buttons. */
-.canvas-settings .docs-link { border-color:transparent; background:transparent; margin-right:4px; font-size:13px; font-weight:500; }
-.canvas-settings .docs-link:hover { background:var(--color-hover); }
 .pill-button[aria-pressed=true] { background:var(--color-accent-subtle); color:var(--color-accent); }
 .segmented { display:flex; gap:2px; }
 .segmented .pill-button[aria-pressed=true] { background:var(--color-neutral); color:var(--color-fg); font-weight:600; }
@@ -277,8 +283,9 @@ html[data-theme="dark"] .theme-toggle>.theme-icon-dark { display:flex; }
   .canvas-settings .toolbar-button svg { width:24px; height:24px; }
   .github-star>span { display:none; }
   /* A fourth header button clips the wordmark; the settings menu links Docs instead. */
-  .canvas-settings .docs-link { display:none; }
-  .settings-docs { display:block; }
+  .site-nav { display:none; }
+  .app-header.has-device-controls { padding-right:16px; }
+  .settings-links { display:block; }
   .dropdown-panel { max-width:calc(100vw - 24px); }
   .canvas-toggles { display:none; }
   .canvas-toggles-inline { display:flex; justify-content:center; max-width:100%; }
