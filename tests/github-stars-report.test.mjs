@@ -17,7 +17,7 @@ async function fixture(t, snapshots) {
   if (snapshots) await writeFile(statePath, JSON.stringify({ repository, snapshots }));
   const logs = [];
   const collect = (total, options = {}) => collectGithubStars({
-    repository, statePath, now, fetchImpl: async () => response(total), log: message => logs.push(message), ...options,
+    repository, statePath, now, fetchImpl: async () => response(total), log: message => logs.push(message), sleep: async () => {}, ...options,
   });
   return { dir, statePath, collect, logs, state: async () => JSON.parse(await readFile(statePath, 'utf8')) };
 }
@@ -76,6 +76,58 @@ test('request failures and invalid counts do not save zero or change the last sn
   }
   assert.ok(f.logs.length);
   assert.ok(f.logs.every(message => !message.includes('test-secret')));
+});
+
+const failing = (status, headers = {}) => ({ ok: false, status, headers: new Headers(headers) });
+const sequence = (...replies) => {
+  const calls = [];
+  return { calls, fetchImpl: async (...args) => { calls.push(args); const reply = replies[Math.min(calls.length - 1, replies.length - 1)]; if (reply instanceof Error) throw reply; return reply; } };
+};
+
+test('transient GitHub failures are retried and the real total is reported', async t => {
+  const timeout = () => Object.assign(new Error('x'), { name: 'TimeoutError' });
+  const cases = [
+    [failing(502), /HTTP 502/],
+    [failing(429, { 'retry-after': '1' }), /HTTP 429 retry-after=1/],
+    [failing(403, { 'x-ratelimit-remaining': '0' }), /HTTP 403 x-ratelimit-remaining=0/],
+    [failing(403, { 'retry-after': '60' }), /HTTP 403 retry-after=60/],
+    [Object.assign(new TypeError('fetch failed'), { cause: { code: 'ECONNRESET' } }), /TypeError \(ECONNRESET\);/],
+    [timeout(), /attempt 1 failed: TimeoutError;/],
+    [{ ok: true, json: async () => { throw new SyntaxError('x'); } }, /invalid JSON response/],
+    [{ ok: true, json: async () => { throw timeout(); } }, /TimeoutError while reading body/],
+  ];
+  for (const [first, logPattern] of cases) {
+    const f = await fixture(t);
+    const s = sequence(first, response(15));
+    const delays = [];
+    const result = await f.collect(undefined, { fetchImpl: s.fetchImpl, sleep: async ms => delays.push(ms) });
+    assert.deepEqual(result, { line: 'GitHub Stars: 총 **15개**', snapshotSaved: true });
+    assert.equal(s.calls.length, 2);
+    assert.deepEqual(delays, [1000]);
+    assert.match(f.logs[0], logPattern);
+  }
+});
+
+test('persistent failures stop after three attempts and log the status and diagnostic headers', async t => {
+  const f = await fixture(t);
+  const s = sequence(failing(503, { 'x-github-request-id': 'ABCD:1234', 'x-ratelimit-remaining': '998' }));
+  const delays = [];
+  const result = await f.collect(undefined, { token: 'test-secret', fetchImpl: s.fetchImpl, sleep: async ms => delays.push(ms) });
+  assert.match(result.line, /조회 실패/);
+  assert.equal(s.calls.length, 3);
+  assert.deepEqual(delays, [1000, 3000]);
+  assert.match(f.logs.at(-1), /after 3 attempt\(s\): HTTP 503 x-ratelimit-remaining=998 x-github-request-id=ABCD:1234/);
+  assert.ok(f.logs.every(message => !message.includes('test-secret')));
+});
+
+test('permanent failures such as 401, 404 and plain 403 are not retried', async t => {
+  for (const status of [401, 403, 404]) {
+    const f = await fixture(t);
+    const s = sequence(failing(status), response(15));
+    assert.match((await f.collect(undefined, { fetchImpl: s.fetchImpl })).line, /조회 실패/);
+    assert.equal(s.calls.length, 1);
+    assert.match(f.logs.at(-1), new RegExp(`after 1 attempt\\(s\\): HTTP ${status}`));
+  }
 });
 
 test('a corrupt snapshot starts a fresh baseline without an invented daily change', async t => {
